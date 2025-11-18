@@ -1,6 +1,6 @@
 """uf - UI Fast: Minimal-boilerplate web UIs for Python functions.
 
-uf bridges functions ’ HTTP services (via qh) ’ Web UI forms (via ju.rjsf),
+uf bridges functions to HTTP services (via qh) to Web UI forms (via ju.rjsf),
 following the "convention over configuration" philosophy.
 
 Basic usage:
@@ -17,15 +17,135 @@ The main entry points are:
 - `mk_rjsf_app`: Create a web app from functions (functional interface)
 - `UfApp`: Object-oriented wrapper with additional conveniences
 - `FunctionSpecStore`: Manage function specifications (advanced usage)
+
+Advanced features:
+- `ui_config`: Decorator for UI metadata
+- `RjsfFieldConfig`: Field configuration class
+- `FunctionGroup`: Group functions for organization
+- `InputTransformRegistry`: Custom type transformations
+- Field dependencies and interactions
+- Testing utilities
 """
 
+# Core functionality
 from uf.base import mk_rjsf_app, UfApp
 from uf.specs import FunctionSpecStore
+
+# RJSF configuration
+from uf.rjsf_config import (
+    RjsfFieldConfig,
+    RjsfConfigBuilder,
+    get_field_config,
+    apply_field_configs,
+    ConditionalFieldConfig,
+)
+
+# Input transformation
+from uf.trans import (
+    InputTransformRegistry,
+    register_type,
+    get_global_registry,
+)
+
+# Organization
+from uf.organization import (
+    FunctionGroup,
+    FunctionOrganizer,
+    mk_grouped_app,
+    auto_group_by_prefix,
+    auto_group_by_module,
+    auto_group_by_tag,
+)
+
+# Decorators
+from uf.decorators import (
+    ui_config,
+    group,
+    hidden,
+    field_config,
+    with_example,
+    deprecated,
+    requires_auth,
+    rate_limit,
+    get_ui_config,
+    get_group,
+    get_field_configs,
+    is_hidden,
+    get_example,
+)
+
+# Field interactions
+from uf.field_interactions import (
+    FieldDependency,
+    DependencyAction,
+    DependencyBuilder,
+    with_dependencies,
+    get_field_dependencies,
+)
+
+# Testing utilities
+from uf.testing import (
+    UfTestClient,
+    UfAppTester,
+    test_ui_function,
+    FormDataBuilder,
+    assert_valid_rjsf_spec,
+    assert_has_field,
+    assert_field_type,
+    assert_field_required,
+)
 
 __version__ = "0.0.1"
 
 __all__ = [
+    # Core
     "mk_rjsf_app",
     "UfApp",
     "FunctionSpecStore",
+    # RJSF Config
+    "RjsfFieldConfig",
+    "RjsfConfigBuilder",
+    "get_field_config",
+    "apply_field_configs",
+    "ConditionalFieldConfig",
+    # Transformation
+    "InputTransformRegistry",
+    "register_type",
+    "get_global_registry",
+    # Organization
+    "FunctionGroup",
+    "FunctionOrganizer",
+    "mk_grouped_app",
+    "auto_group_by_prefix",
+    "auto_group_by_module",
+    "auto_group_by_tag",
+    # Decorators
+    "ui_config",
+    "group",
+    "hidden",
+    "field_config",
+    "with_example",
+    "deprecated",
+    "requires_auth",
+    "rate_limit",
+    "get_ui_config",
+    "get_group",
+    "get_field_configs",
+    "is_hidden",
+    "get_example",
+    # Field Interactions
+    "FieldDependency",
+    "DependencyAction",
+    "DependencyBuilder",
+    "with_dependencies",
+    "get_field_dependencies",
+    # Testing
+    "UfTestClient",
+    "UfAppTester",
+    "test_ui_function",
+    "FormDataBuilder",
+    "assert_valid_rjsf_spec",
+    "assert_has_field",
+    "assert_field_type",
+    "assert_field_required",
 ]
