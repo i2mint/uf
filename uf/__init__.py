@@ -95,6 +95,48 @@ from uf.testing import (
     assert_field_required,
 )
 
+# Result rendering
+from uf.renderers import (
+    ResultRenderer,
+    ResultRendererRegistry,
+    get_global_renderer_registry,
+    register_renderer,
+    render_result,
+    result_renderer,
+    get_result_renderer,
+)
+
+# Async support
+from uf.async_support import (
+    is_async_function,
+    async_to_sync,
+    make_sync_compatible,
+    AsyncFunctionWrapper,
+    timeout_async,
+    retry_async,
+)
+
+# Pydantic integration
+from uf.pydantic_support import (
+    is_pydantic_model,
+    pydantic_model_to_json_schema,
+    function_uses_pydantic,
+    wrap_pydantic_function,
+    pydantic_to_dict,
+    dict_to_pydantic,
+)
+
+# History and presets
+from uf.history import (
+    FunctionCall,
+    CallHistory,
+    Preset,
+    PresetManager,
+    HistoryManager,
+    get_global_history_manager,
+    enable_history,
+)
+
 __version__ = "0.0.1"
 
 __all__ = [
@@ -148,4 +190,34 @@ __all__ = [
     "assert_has_field",
     "assert_field_type",
     "assert_field_required",
+    # Renderers
+    "ResultRenderer",
+    "ResultRendererRegistry",
+    "get_global_renderer_registry",
+    "register_renderer",
+    "render_result",
+    "result_renderer",
+    "get_result_renderer",
+    # Async
+    "is_async_function",
+    "async_to_sync",
+    "make_sync_compatible",
+    "AsyncFunctionWrapper",
+    "timeout_async",
+    "retry_async",
+    # Pydantic
+    "is_pydantic_model",
+    "pydantic_model_to_json_schema",
+    "function_uses_pydantic",
+    "wrap_pydantic_function",
+    "pydantic_to_dict",
+    "dict_to_pydantic",
+    # History
+    "FunctionCall",
+    "CallHistory",
+    "Preset",
+    "PresetManager",
+    "HistoryManager",
+    "get_global_history_manager",
+    "enable_history",
 ]
