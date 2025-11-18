@@ -12,7 +12,13 @@ readme = "README.md"
 requires-python = ">=3.10"
 keywords = []
 authors = []
-dependencies = []
+dependencies = [
+    "qh",  # HTTP service generation
+    "ju",  # RJSF form generation and JSON utilities
+    "i2",  # Signature introspection and manipulation
+    "dol",  # Mapping interfaces and storage abstractions
+    "meshed",  # Function composition and DAG utilities
+]
 
 [project.license]
 text = "mit"
