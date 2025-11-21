@@ -137,6 +137,61 @@ from uf.history import (
     enable_history,
 )
 
+# Authentication
+from uf.auth import (
+    User,
+    AuthBackend,
+    DictAuthBackend,
+    SessionManager,
+    ApiKey,
+    ApiKeyManager,
+    require_auth,
+    get_global_auth_backend,
+)
+
+# Caching
+from uf.caching import (
+    CacheBackend,
+    MemoryCache,
+    DiskCache,
+    cached,
+    get_global_cache_backend,
+)
+
+# Background tasks
+from uf.background import (
+    Task,
+    TaskStatus,
+    TaskQueue,
+    background,
+    get_global_task_queue,
+)
+
+# OpenAPI
+from uf.openapi import (
+    generate_openapi_spec,
+    add_openapi_routes,
+    OpenAPIConfig,
+)
+
+# Webhooks
+from uf.webhooks import (
+    WebhookEvent,
+    WebhookClient,
+    WebhookManager,
+    webhook,
+    get_global_webhook_manager,
+)
+
+# Themes
+from uf.themes import (
+    Theme,
+    ThemeConfig,
+    get_theme,
+    LIGHT_THEME,
+    DARK_THEME,
+)
+
 __version__ = "0.0.1"
 
 __all__ = [
@@ -220,4 +275,41 @@ __all__ = [
     "HistoryManager",
     "get_global_history_manager",
     "enable_history",
+    # Authentication
+    "User",
+    "AuthBackend",
+    "DictAuthBackend",
+    "SessionManager",
+    "ApiKey",
+    "ApiKeyManager",
+    "require_auth",
+    "get_global_auth_backend",
+    # Caching
+    "CacheBackend",
+    "MemoryCache",
+    "DiskCache",
+    "cached",
+    "get_global_cache_backend",
+    # Background
+    "Task",
+    "TaskStatus",
+    "TaskQueue",
+    "background",
+    "get_global_task_queue",
+    # OpenAPI
+    "generate_openapi_spec",
+    "add_openapi_routes",
+    "OpenAPIConfig",
+    # Webhooks
+    "WebhookEvent",
+    "WebhookClient",
+    "WebhookManager",
+    "webhook",
+    "get_global_webhook_manager",
+    # Themes
+    "Theme",
+    "ThemeConfig",
+    "get_theme",
+    "LIGHT_THEME",
+    "DARK_THEME",
 ]
