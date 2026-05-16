@@ -38,21 +38,22 @@ def generate_index_html(
     func_list = []
     for name in function_specs:
         spec = function_specs[name]
-        func_list.append({
-            'name': name,
-            'description': spec.get('description', f"Execute {name}")
-        })
+        func_list.append(
+            {"name": name, "description": spec.get("description", f"Execute {name}")}
+        )
 
     # Generate function list HTML
-    func_list_html = "\n".join([
-        f'''
-        <div class="function-item" onclick="loadFunction('{func['name']}')">
-            <div class="function-name">{func['name']}</div>
-            <div class="function-desc">{func['description'][:100]}</div>
+    func_list_html = "\n".join(
+        [
+            f"""
+        <div class="function-item" onclick="loadFunction('{func["name"]}')">
+            <div class="function-name">{func["name"]}</div>
+            <div class="function-desc">{func["description"][:100]}</div>
         </div>
-        '''
-        for func in func_list
-    ])
+        """
+            for func in func_list
+        ]
+    )
 
     custom_styles = custom_css or ""
 

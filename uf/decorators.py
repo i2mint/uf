@@ -10,10 +10,10 @@ from uf.rjsf_config import RjsfFieldConfig
 
 
 # Attribute names for storing metadata
-_UI_CONFIG_ATTR = '__uf_ui_config__'
-_GROUP_ATTR = '__uf_group__'
-_FIELD_CONFIGS_ATTR = '__uf_field_configs__'
-_HIDDEN_ATTR = '__uf_hidden__'
+_UI_CONFIG_ATTR = "__uf_ui_config__"
+_GROUP_ATTR = "__uf_group__"
+_FIELD_CONFIGS_ATTR = "__uf_field_configs__"
+_HIDDEN_ATTR = "__uf_hidden__"
 
 
 def ui_config(
@@ -55,13 +55,13 @@ def ui_config(
 
     def decorator(func: Callable) -> Callable:
         config = {
-            'title': title,
-            'description': description,
-            'group': group,
-            'fields': fields or {},
-            'hidden': hidden,
-            'icon': icon,
-            'order': order if order is not None else 0,
+            "title": title,
+            "description": description,
+            "group": group,
+            "fields": fields or {},
+            "hidden": hidden,
+            "icon": icon,
+            "order": order if order is not None else 0,
         }
 
         setattr(func, _UI_CONFIG_ATTR, config)
@@ -190,7 +190,7 @@ def get_group(func: Callable) -> Optional[str]:
     """
     config = get_ui_config(func)
     if config:
-        return config.get('group')
+        return config.get("group")
     return getattr(func, _GROUP_ATTR, None)
 
 
@@ -210,7 +210,7 @@ def get_field_configs(func: Callable) -> dict[str, RjsfFieldConfig]:
     """
     config = get_ui_config(func)
     if config:
-        return config.get('fields', {})
+        return config.get("fields", {})
     return getattr(func, _FIELD_CONFIGS_ATTR, {})
 
 
@@ -230,7 +230,7 @@ def is_hidden(func: Callable) -> bool:
     """
     config = get_ui_config(func)
     if config:
-        return config.get('hidden', False)
+        return config.get("hidden", False)
     return getattr(func, _HIDDEN_ATTR, False)
 
 
@@ -253,15 +253,15 @@ def with_example(*example_args, **example_kwargs):
     """
 
     def decorator(func: Callable) -> Callable:
-        setattr(func, '__uf_example_args__', example_args)
-        setattr(func, '__uf_example_kwargs__', example_kwargs)
+        setattr(func, "__uf_example_args__", example_args)
+        setattr(func, "__uf_example_kwargs__", example_kwargs)
 
         @wraps(func)
         def wrapper(*args, **kwargs):
             return func(*args, **kwargs)
 
-        setattr(wrapper, '__uf_example_args__', example_args)
-        setattr(wrapper, '__uf_example_kwargs__', example_kwargs)
+        setattr(wrapper, "__uf_example_args__", example_args)
+        setattr(wrapper, "__uf_example_kwargs__", example_kwargs)
 
         return wrapper
 
@@ -283,8 +283,8 @@ def get_example(func: Callable) -> Optional[tuple[tuple, dict]]:
         ...     args, kwargs = example
         ...     result = my_function(*args, **kwargs)
     """
-    args = getattr(func, '__uf_example_args__', None)
-    kwargs = getattr(func, '__uf_example_kwargs__', None)
+    args = getattr(func, "__uf_example_args__", None)
+    kwargs = getattr(func, "__uf_example_kwargs__", None)
 
     if args is not None or kwargs is not None:
         return (args or (), kwargs or {})
@@ -308,8 +308,8 @@ def deprecated(message: Optional[str] = None):
     """
 
     def decorator(func: Callable) -> Callable:
-        setattr(func, '__uf_deprecated__', True)
-        setattr(func, '__uf_deprecated_message__', message)
+        setattr(func, "__uf_deprecated__", True)
+        setattr(func, "__uf_deprecated_message__", message)
 
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -319,8 +319,8 @@ def deprecated(message: Optional[str] = None):
             warnings.warn(msg, DeprecationWarning, stacklevel=2)
             return func(*args, **kwargs)
 
-        setattr(wrapper, '__uf_deprecated__', True)
-        setattr(wrapper, '__uf_deprecated_message__', message)
+        setattr(wrapper, "__uf_deprecated__", True)
+        setattr(wrapper, "__uf_deprecated_message__", message)
 
         return wrapper
 
@@ -351,17 +351,17 @@ def requires_auth(
     """
 
     def decorator(func: Callable) -> Callable:
-        setattr(func, '__uf_requires_auth__', True)
-        setattr(func, '__uf_required_roles__', roles or [])
-        setattr(func, '__uf_required_permissions__', permissions or [])
+        setattr(func, "__uf_requires_auth__", True)
+        setattr(func, "__uf_required_roles__", roles or [])
+        setattr(func, "__uf_required_permissions__", permissions or [])
 
         @wraps(func)
         def wrapper(*args, **kwargs):
             return func(*args, **kwargs)
 
-        setattr(wrapper, '__uf_requires_auth__', True)
-        setattr(wrapper, '__uf_required_roles__', roles or [])
-        setattr(wrapper, '__uf_required_permissions__', permissions or [])
+        setattr(wrapper, "__uf_requires_auth__", True)
+        setattr(wrapper, "__uf_required_roles__", roles or [])
+        setattr(wrapper, "__uf_required_permissions__", permissions or [])
 
         return wrapper
 
@@ -388,13 +388,13 @@ def rate_limit(calls: int, period: int):
     """
 
     def decorator(func: Callable) -> Callable:
-        setattr(func, '__uf_rate_limit__', {'calls': calls, 'period': period})
+        setattr(func, "__uf_rate_limit__", {"calls": calls, "period": period})
 
         @wraps(func)
         def wrapper(*args, **kwargs):
             return func(*args, **kwargs)
 
-        setattr(wrapper, '__uf_rate_limit__', {'calls': calls, 'period': period})
+        setattr(wrapper, "__uf_rate_limit__", {"calls": calls, "period": period})
 
         return wrapper
 

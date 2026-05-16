@@ -53,16 +53,16 @@ class FunctionCall:
             Dictionary representation
         """
         return {
-            'func_name': self.func_name,
-            'params': self.params,
-            'result': self.result if self.success else None,
-            'timestamp': self.timestamp.isoformat(),
-            'success': self.success,
-            'error': self.error,
+            "func_name": self.func_name,
+            "params": self.params,
+            "result": self.result if self.success else None,
+            "timestamp": self.timestamp.isoformat(),
+            "success": self.success,
+            "error": self.error,
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> 'FunctionCall':
+    def from_dict(cls, data: dict) -> "FunctionCall":
         """Create from dictionary.
 
         Args:
@@ -72,14 +72,14 @@ class FunctionCall:
             FunctionCall instance
         """
         call = cls(
-            func_name=data['func_name'],
-            params=data['params'],
-            result=data.get('result'),
-            success=data.get('success', True),
-            error=data.get('error'),
+            func_name=data["func_name"],
+            params=data["params"],
+            result=data.get("result"),
+            success=data.get("success", True),
+            error=data.get("error"),
         )
-        if 'timestamp' in data:
-            call.timestamp = datetime.fromisoformat(data['timestamp'])
+        if "timestamp" in data:
+            call.timestamp = datetime.fromisoformat(data["timestamp"])
         return call
 
 
@@ -130,7 +130,7 @@ class CallHistory:
 
         # Trim to max size
         if len(self._history[func_name]) > self.max_size:
-            self._history[func_name] = self._history[func_name][-self.max_size:]
+            self._history[func_name] = self._history[func_name][-self.max_size :]
 
     def get_recent(self, func_name: str, limit: int = 10) -> list[FunctionCall]:
         """Get recent calls for a function.
@@ -183,7 +183,7 @@ class CallHistory:
         }
 
     @classmethod
-    def from_dict(cls, data: dict, max_size: int = 100) -> 'CallHistory':
+    def from_dict(cls, data: dict, max_size: int = 100) -> "CallHistory":
         """Create from dictionary.
 
         Args:
@@ -242,15 +242,15 @@ class Preset:
             Dictionary representation
         """
         return {
-            'name': self.name,
-            'func_name': self.func_name,
-            'params': self.params,
-            'description': self.description,
-            'created_at': self.created_at.isoformat(),
+            "name": self.name,
+            "func_name": self.func_name,
+            "params": self.params,
+            "description": self.description,
+            "created_at": self.created_at.isoformat(),
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> 'Preset':
+    def from_dict(cls, data: dict) -> "Preset":
         """Create from dictionary.
 
         Args:
@@ -260,13 +260,13 @@ class Preset:
             Preset instance
         """
         preset = cls(
-            name=data['name'],
-            func_name=data['func_name'],
-            params=data['params'],
-            description=data.get('description', ''),
+            name=data["name"],
+            func_name=data["func_name"],
+            params=data["params"],
+            description=data.get("description", ""),
         )
-        if 'created_at' in data:
-            preset.created_at = datetime.fromisoformat(data['created_at'])
+        if "created_at" in data:
+            preset.created_at = datetime.fromisoformat(data["created_at"])
         return preset
 
 
@@ -358,14 +358,13 @@ class PresetManager:
         """
         return {
             func_name: {
-                preset_name: preset.to_dict()
-                for preset_name, preset in presets.items()
+                preset_name: preset.to_dict() for preset_name, preset in presets.items()
             }
             for func_name, presets in self._presets.items()
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> 'PresetManager':
+    def from_dict(cls, data: dict) -> "PresetManager":
         """Create from dictionary.
 
         Args:
@@ -425,9 +424,7 @@ class HistoryManager:
         """
         self.history.record(func_name, params, result, success, error)
 
-    def get_recent_calls(
-        self, func_name: str, limit: int = 10
-    ) -> list[FunctionCall]:
+    def get_recent_calls(self, func_name: str, limit: int = 10) -> list[FunctionCall]:
         """Get recent calls.
 
         Args:
@@ -489,15 +486,15 @@ class HistoryManager:
             filepath: Path to save to
         """
         data = {
-            'history': self.history.to_dict(),
-            'presets': self.presets.to_dict(),
+            "history": self.history.to_dict(),
+            "presets": self.presets.to_dict(),
         }
 
-        with open(filepath, 'w') as f:
+        with open(filepath, "w") as f:
             json.dump(data, f, indent=2)
 
     @classmethod
-    def load_from_file(cls, filepath: str, max_history: int = 100) -> 'HistoryManager':
+    def load_from_file(cls, filepath: str, max_history: int = 100) -> "HistoryManager":
         """Load from file.
 
         Args:
@@ -507,12 +504,12 @@ class HistoryManager:
         Returns:
             HistoryManager instance
         """
-        with open(filepath, 'r') as f:
+        with open(filepath, "r") as f:
             data = json.load(f)
 
         manager = cls(max_history=max_history)
-        manager.history = CallHistory.from_dict(data.get('history', {}), max_history)
-        manager.presets = PresetManager.from_dict(data.get('presets', {}))
+        manager.history = CallHistory.from_dict(data.get("history", {}), max_history)
+        manager.presets = PresetManager.from_dict(data.get("presets", {}))
 
         return manager
 

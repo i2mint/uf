@@ -55,9 +55,9 @@ class JsonRenderer(ResultRenderer):
     def render(self, result: Any) -> dict:
         """Render as formatted JSON."""
         return {
-            'type': 'json',
-            'data': result,
-            'options': {'indent': 2},
+            "type": "json",
+            "data": result,
+            "options": {"indent": 2},
         }
 
 
@@ -75,16 +75,16 @@ class TableRenderer(ResultRenderer):
     def render(self, result: Any) -> dict:
         """Render as table."""
         if not result:
-            return {'type': 'table', 'data': [], 'columns': []}
+            return {"type": "table", "data": [], "columns": []}
 
         # Extract columns from first item
         columns = list(result[0].keys())
 
         return {
-            'type': 'table',
-            'data': result,
-            'columns': columns,
-            'options': {'sortable': True, 'searchable': True},
+            "type": "table",
+            "data": result,
+            "columns": columns,
+            "options": {"sortable": True, "searchable": True},
         }
 
 
@@ -95,6 +95,7 @@ class DataFrameRenderer(ResultRenderer):
         """Can render pandas DataFrame."""
         try:
             import pandas as pd
+
             return isinstance(result, pd.DataFrame)
         except ImportError:
             return False
@@ -102,17 +103,17 @@ class DataFrameRenderer(ResultRenderer):
     def render(self, result: Any) -> dict:
         """Render DataFrame as table."""
         # Convert to dict records
-        data = result.to_dict('records')
+        data = result.to_dict("records")
         columns = result.columns.tolist()
 
         return {
-            'type': 'dataframe',
-            'data': data,
-            'columns': columns,
-            'options': {
-                'sortable': True,
-                'searchable': True,
-                'index': result.index.tolist(),
+            "type": "dataframe",
+            "data": data,
+            "columns": columns,
+            "options": {
+                "sortable": True,
+                "searchable": True,
+                "index": result.index.tolist(),
             },
         }
 
@@ -131,15 +132,13 @@ class ChartRenderer(ResultRenderer):
 
         # Check if has numeric values
         first = result[0]
-        has_numeric = any(
-            isinstance(v, (int, float)) for v in first.values()
-        )
+        has_numeric = any(isinstance(v, (int, float)) for v in first.values())
         return has_numeric
 
     def render(self, result: Any) -> dict:
         """Render as chart data."""
         if not result:
-            return {'type': 'chart', 'data': []}
+            return {"type": "chart", "data": []}
 
         # Extract labels and datasets
         first = result[0]
@@ -150,20 +149,22 @@ class ChartRenderer(ResultRenderer):
         datasets = []
 
         for value_key in value_keys:
-            datasets.append({
-                'label': value_key,
-                'data': [item[value_key] for item in result],
-            })
+            datasets.append(
+                {
+                    "label": value_key,
+                    "data": [item[value_key] for item in result],
+                }
+            )
 
         return {
-            'type': 'chart',
-            'data': {
-                'labels': labels,
-                'datasets': datasets,
+            "type": "chart",
+            "data": {
+                "labels": labels,
+                "datasets": datasets,
             },
-            'options': {
-                'chart_type': 'bar',  # default, can be overridden
-                'responsive': True,
+            "options": {
+                "chart_type": "bar",  # default, can be overridden
+                "responsive": True,
             },
         }
 
@@ -175,11 +176,11 @@ class ImageRenderer(ResultRenderer):
         """Can render bytes that look like images."""
         if isinstance(result, bytes):
             # Check for common image headers
-            if result.startswith(b'\x89PNG'):
+            if result.startswith(b"\x89PNG"):
                 return True
-            if result.startswith(b'\xff\xd8\xff'):  # JPEG
+            if result.startswith(b"\xff\xd8\xff"):  # JPEG
                 return True
-            if result.startswith(b'GIF8'):
+            if result.startswith(b"GIF8"):
                 return True
         return False
 
@@ -187,22 +188,22 @@ class ImageRenderer(ResultRenderer):
         """Render image as base64."""
         import base64
 
-        b64_data = base64.b64encode(result).decode('utf-8')
+        b64_data = base64.b64encode(result).decode("utf-8")
 
         # Detect format
-        if result.startswith(b'\x89PNG'):
-            mime_type = 'image/png'
-        elif result.startswith(b'\xff\xd8\xff'):
-            mime_type = 'image/jpeg'
-        elif result.startswith(b'GIF8'):
-            mime_type = 'image/gif'
+        if result.startswith(b"\x89PNG"):
+            mime_type = "image/png"
+        elif result.startswith(b"\xff\xd8\xff"):
+            mime_type = "image/jpeg"
+        elif result.startswith(b"GIF8"):
+            mime_type = "image/gif"
         else:
-            mime_type = 'image/png'
+            mime_type = "image/png"
 
         return {
-            'type': 'image',
-            'data': f'data:{mime_type};base64,{b64_data}',
-            'options': {},
+            "type": "image",
+            "data": f"data:{mime_type};base64,{b64_data}",
+            "options": {},
         }
 
 
@@ -346,7 +347,7 @@ def result_renderer(renderer_type: str):
     """
 
     def decorator(func: Callable) -> Callable:
-        setattr(func, '__uf_result_renderer__', renderer_type)
+        setattr(func, "__uf_result_renderer__", renderer_type)
         return func
 
     return decorator
@@ -361,7 +362,7 @@ def get_result_renderer(func: Callable) -> Optional[str]:
     Returns:
         Renderer type string or None
     """
-    return getattr(func, '__uf_result_renderer__', None)
+    return getattr(func, "__uf_result_renderer__", None)
 
 
 # Custom renderer examples
@@ -375,15 +376,15 @@ class MarkdownRenderer(ResultRenderer):
         if not isinstance(result, str):
             return False
         # Simple heuristic: contains markdown-like syntax
-        md_indicators = ['#', '**', '*', '```', '[', '|']
+        md_indicators = ["#", "**", "*", "```", "[", "|"]
         return any(indicator in result for indicator in md_indicators)
 
     def render(self, result: Any) -> dict:
         """Render as markdown."""
         return {
-            'type': 'markdown',
-            'data': result,
-            'options': {},
+            "type": "markdown",
+            "data": result,
+            "options": {},
         }
 
 
@@ -394,14 +395,14 @@ class HtmlRenderer(ResultRenderer):
         """Can render strings that look like HTML."""
         if not isinstance(result, str):
             return False
-        return result.strip().startswith('<') and '>' in result
+        return result.strip().startswith("<") and ">" in result
 
     def render(self, result: Any) -> dict:
         """Render as HTML."""
         return {
-            'type': 'html',
-            'data': result,
-            'options': {'sanitize': True},  # Security: sanitize HTML
+            "type": "html",
+            "data": result,
+            "options": {"sanitize": True},  # Security: sanitize HTML
         }
 
 

@@ -58,15 +58,15 @@ class RjsfFieldConfig:
         patch = {}
 
         if self.format:
-            patch['format'] = self.format
+            patch["format"] = self.format
         if self.enum:
-            patch['enum'] = self.enum
+            patch["enum"] = self.enum
         if self.description:
-            patch['description'] = self.description
+            patch["description"] = self.description
         if self.title:
-            patch['title'] = self.title
+            patch["title"] = self.title
         if self.default is not None:
-            patch['default'] = self.default
+            patch["default"] = self.default
 
         return patch
 
@@ -79,18 +79,18 @@ class RjsfFieldConfig:
         ui_patch = {}
 
         if self.widget:
-            ui_patch['ui:widget'] = self.widget
+            ui_patch["ui:widget"] = self.widget
         if self.placeholder:
-            ui_patch['ui:placeholder'] = self.placeholder
+            ui_patch["ui:placeholder"] = self.placeholder
         if self.disabled:
-            ui_patch['ui:disabled'] = True
+            ui_patch["ui:disabled"] = True
         if self.readonly:
-            ui_patch['ui:readonly'] = True
+            ui_patch["ui:readonly"] = True
         if self.hidden:
-            ui_patch['ui:widget'] = 'hidden'
+            ui_patch["ui:widget"] = "hidden"
 
         if self.ui_options:
-            ui_patch['ui:options'] = self.ui_options
+            ui_patch["ui:options"] = self.ui_options
 
         return ui_patch
 
@@ -114,7 +114,7 @@ class RjsfConfigBuilder:
         self._ui_order: Optional[list[str]] = None
         self._class_names: Optional[str] = None
 
-    def field(self, param_name: str, config: RjsfFieldConfig) -> 'RjsfConfigBuilder':
+    def field(self, param_name: str, config: RjsfFieldConfig) -> "RjsfConfigBuilder":
         """Configure a specific field.
 
         Args:
@@ -127,7 +127,7 @@ class RjsfConfigBuilder:
         self._field_configs[param_name] = config
         return self
 
-    def order(self, field_order: list[str]) -> 'RjsfConfigBuilder':
+    def order(self, field_order: list[str]) -> "RjsfConfigBuilder":
         """Set the order of fields in the form.
 
         Args:
@@ -139,7 +139,7 @@ class RjsfConfigBuilder:
         self._ui_order = field_order
         return self
 
-    def class_names(self, class_names: str) -> 'RjsfConfigBuilder':
+    def class_names(self, class_names: str) -> "RjsfConfigBuilder":
         """Set CSS class names for the form.
 
         Args:
@@ -167,9 +167,9 @@ class RjsfConfigBuilder:
         # Apply field configurations
         for field_name, config in self._field_configs.items():
             # Update schema properties
-            if 'properties' in schema and field_name in schema['properties']:
+            if "properties" in schema and field_name in schema["properties"]:
                 schema_patch = config.to_json_schema_patch()
-                schema['properties'][field_name].update(schema_patch)
+                schema["properties"][field_name].update(schema_patch)
 
             # Update UI schema
             ui_patch = config.to_ui_schema_patch()
@@ -178,56 +178,56 @@ class RjsfConfigBuilder:
 
         # Apply UI order
         if self._ui_order:
-            ui_schema['ui:order'] = self._ui_order
+            ui_schema["ui:order"] = self._ui_order
 
         # Apply class names
         if self._class_names:
-            ui_schema['ui:classNames'] = self._class_names
+            ui_schema["ui:classNames"] = self._class_names
 
         return {
-            'schema': schema,
-            'uiSchema': ui_schema,
+            "schema": schema,
+            "uiSchema": ui_schema,
         }
 
 
 # Predefined field configurations for common use cases
 COMMON_FIELD_CONFIGS = {
-    'email': RjsfFieldConfig(
-        widget='email',
-        format='email',
-        placeholder='user@example.com',
+    "email": RjsfFieldConfig(
+        widget="email",
+        format="email",
+        placeholder="user@example.com",
     ),
-    'password': RjsfFieldConfig(
-        widget='password',
+    "password": RjsfFieldConfig(
+        widget="password",
     ),
-    'url': RjsfFieldConfig(
-        format='uri',
-        placeholder='https://example.com',
+    "url": RjsfFieldConfig(
+        format="uri",
+        placeholder="https://example.com",
     ),
-    'multiline_text': RjsfFieldConfig(
-        widget='textarea',
-        ui_options={'rows': 5},
+    "multiline_text": RjsfFieldConfig(
+        widget="textarea",
+        ui_options={"rows": 5},
     ),
-    'long_text': RjsfFieldConfig(
-        widget='textarea',
-        ui_options={'rows': 10},
+    "long_text": RjsfFieldConfig(
+        widget="textarea",
+        ui_options={"rows": 10},
     ),
-    'date': RjsfFieldConfig(
-        widget='date',
-        format='date',
+    "date": RjsfFieldConfig(
+        widget="date",
+        format="date",
     ),
-    'datetime': RjsfFieldConfig(
-        widget='datetime',
-        format='date-time',
+    "datetime": RjsfFieldConfig(
+        widget="datetime",
+        format="date-time",
     ),
-    'color': RjsfFieldConfig(
-        widget='color',
+    "color": RjsfFieldConfig(
+        widget="color",
     ),
-    'range': RjsfFieldConfig(
-        widget='range',
+    "range": RjsfFieldConfig(
+        widget="range",
     ),
-    'file': RjsfFieldConfig(
-        widget='file',
+    "file": RjsfFieldConfig(
+        widget="file",
     ),
 }
 
@@ -284,7 +284,7 @@ def apply_field_configs(
         builder.field(field_name, config)
 
     result = builder.build(schema, ui_schema)
-    return result['schema'], result['uiSchema']
+    return result["schema"], result["uiSchema"]
 
 
 class ConditionalFieldConfig:
@@ -327,12 +327,12 @@ class ConditionalFieldConfig:
         Returns:
             JSON Schema conditional structure
         """
-        schema = {'if': self.condition}
+        schema = {"if": self.condition}
 
         if self.then_schema:
-            schema['then'] = self.then_schema
+            schema["then"] = self.then_schema
 
         if self.else_schema:
-            schema['else'] = self.else_schema
+            schema["else"] = self.else_schema
 
         return schema

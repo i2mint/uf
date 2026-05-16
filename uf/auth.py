@@ -73,10 +73,10 @@ class PasswordHasher:
             salt = secrets.token_hex(16)
 
         pwd_hash = hashlib.pbkdf2_hmac(
-            'sha256',
-            password.encode('utf-8'),
-            salt.encode('utf-8'),
-            100000  # iterations
+            "sha256",
+            password.encode("utf-8"),
+            salt.encode("utf-8"),
+            100000,  # iterations
         )
 
         return f"{salt}${pwd_hash.hex()}"
@@ -93,7 +93,7 @@ class PasswordHasher:
             True if password matches
         """
         try:
-            salt, stored_hash = password_hash.split('$')
+            salt, stored_hash = password_hash.split("$")
             new_hash = PasswordHasher.hash_password(password, salt)
             return hmac.compare_digest(new_hash, password_hash)
         except ValueError:
@@ -135,7 +135,7 @@ class AuthBackend:
         password: str,
         roles: Optional[list[str]] = None,
         permissions: Optional[list[str]] = None,
-        **metadata
+        **metadata,
     ) -> User:
         """Create a new user.
 
@@ -212,7 +212,7 @@ class DictAuthBackend(AuthBackend):
         password: str,
         roles: Optional[list[str]] = None,
         permissions: Optional[list[str]] = None,
-        **metadata
+        **metadata,
     ) -> User:
         """Create a new user."""
         if username in self._users:
@@ -238,7 +238,7 @@ class DictAuthBackend(AuthBackend):
             return False
 
         for key, value in updates.items():
-            if key == 'password':
+            if key == "password":
                 user.password_hash = self._hasher.hash_password(value)
             elif hasattr(user, key):
                 setattr(user, key, value)
@@ -253,7 +253,7 @@ class DictAuthBackend(AuthBackend):
         return False
 
     @classmethod
-    def from_dict(cls, users_data: dict) -> 'DictAuthBackend':
+    def from_dict(cls, users_data: dict) -> "DictAuthBackend":
         """Create backend from dictionary.
 
         Args:
@@ -269,17 +269,13 @@ class DictAuthBackend(AuthBackend):
         hasher = PasswordHasher()
 
         for username, user_info in users_data.items():
-            password = user_info.pop('password')
-            password_hash = user_info.pop('password_hash', None)
+            password = user_info.pop("password")
+            password_hash = user_info.pop("password_hash", None)
 
             if password_hash is None:
                 password_hash = hasher.hash_password(password)
 
-            user = User(
-                username=username,
-                password_hash=password_hash,
-                **user_info
-            )
+            user = User(username=username, password_hash=password_hash, **user_info)
             backend._users[username] = user
 
         return backend
@@ -318,10 +314,10 @@ class SessionManager:
         session_id = secrets.token_urlsafe(32)
 
         self._sessions[session_id] = {
-            'username': username,
-            'created_at': datetime.now(),
-            'expires_at': datetime.now() + timedelta(seconds=self.session_timeout),
-            'data': data or {},
+            "username": username,
+            "created_at": datetime.now(),
+            "expires_at": datetime.now() + timedelta(seconds=self.session_timeout),
+            "data": data or {},
         }
 
         return session_id
@@ -340,7 +336,7 @@ class SessionManager:
             return None
 
         # Check expiration
-        if datetime.now() > session['expires_at']:
+        if datetime.now() > session["expires_at"]:
             del self._sessions[session_id]
             return None
 
@@ -368,8 +364,9 @@ class SessionManager:
         """
         now = datetime.now()
         expired = [
-            sid for sid, session in self._sessions.items()
-            if now > session['expires_at']
+            sid
+            for sid, session in self._sessions.items()
+            if now > session["expires_at"]
         ]
 
         for sid in expired:
@@ -428,7 +425,7 @@ class ApiKeyManager:
         ...     # Allow access
     """
 
-    def __init__(self, key_prefix: str = 'sk_'):
+    def __init__(self, key_prefix: str = "sk_"):
         """Initialize API key manager.
 
         Args:

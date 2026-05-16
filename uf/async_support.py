@@ -56,11 +56,9 @@ def async_to_sync(async_func: Callable) -> Callable:
             if loop.is_running():
                 # Loop is already running, create a new one in a thread
                 import concurrent.futures
+
                 with concurrent.futures.ThreadPoolExecutor() as executor:
-                    future = executor.submit(
-                        asyncio.run,
-                        async_func(*args, **kwargs)
-                    )
+                    future = executor.submit(asyncio.run, async_func(*args, **kwargs))
                     return future.result()
             else:
                 # Loop exists but not running
@@ -176,10 +174,7 @@ class AsyncFunctionWrapper:
         else:
             # Run sync function in executor to avoid blocking
             loop = asyncio.get_event_loop()
-            return await loop.run_in_executor(
-                None,
-                lambda: self.func(*args, **kwargs)
-            )
+            return await loop.run_in_executor(None, lambda: self.func(*args, **kwargs))
 
     def __call__(self, *args, **kwargs):
         """Call synchronously by default.
@@ -221,13 +216,13 @@ def batch_async_calls(
     if not is_async_function(async_func):
         # Sync function, just call sequentially
         return [
-            async_func(*call.get('args', ()), **call.get('kwargs', {}))
+            async_func(*call.get("args", ()), **call.get("kwargs", {}))
             for call in calls
         ]
 
     async def run_batch():
         tasks = [
-            async_func(*call.get('args', ()), **call.get('kwargs', {}))
+            async_func(*call.get("args", ()), **call.get("kwargs", {}))
             for call in calls
         ]
         return await asyncio.gather(*tasks)
@@ -258,13 +253,11 @@ def timeout_async(seconds: float):
         async def wrapper(*args, **kwargs):
             try:
                 return await asyncio.wait_for(
-                    async_func(*args, **kwargs),
-                    timeout=seconds
+                    async_func(*args, **kwargs), timeout=seconds
                 )
             except asyncio.TimeoutError:
                 raise TimeoutError(
-                    f"Function {async_func.__name__} "
-                    f"timed out after {seconds} seconds"
+                    f"Function {async_func.__name__} timed out after {seconds} seconds"
                 )
 
         return wrapper
@@ -357,6 +350,7 @@ class AsyncContext:
             # Can't run_until_complete on a running loop
             # Use asyncio.run in a thread
             import concurrent.futures
+
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 future = executor.submit(asyncio.run, coro)
                 return future.result()
@@ -375,12 +369,12 @@ def detect_async_framework(app) -> str:
     """
     app_type = type(app).__name__
 
-    if 'FastAPI' in app_type:
-        return 'fastapi'
-    elif 'Bottle' in app_type or hasattr(app, 'route'):
-        return 'bottle'
+    if "FastAPI" in app_type:
+        return "fastapi"
+    elif "Bottle" in app_type or hasattr(app, "route"):
+        return "bottle"
     else:
-        return 'unknown'
+        return "unknown"
 
 
 def is_framework_async_capable(app) -> bool:
@@ -393,4 +387,4 @@ def is_framework_async_capable(app) -> bool:
         True if framework supports async
     """
     framework = detect_async_framework(app)
-    return framework in ['fastapi', 'aiohttp', 'starlette']
+    return framework in ["fastapi", "aiohttp", "starlette"]

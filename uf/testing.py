@@ -30,7 +30,7 @@ class UfTestClient:
             app: The uf application to test
         """
         self.app = app
-        self.function_specs = getattr(app, 'function_specs', None)
+        self.function_specs = getattr(app, "function_specs", None)
 
     def list_functions(self) -> list[str]:
         """Get list of available function names.
@@ -83,26 +83,26 @@ class UfTestClient:
             raise ValueError("App does not have function_specs")
 
         spec = self.function_specs[func_name]
-        func = spec['func']
+        func = spec["func"]
 
         try:
             result = func(**params)
-            response = {'success': True, 'result': result}
+            response = {"success": True, "result": result}
         except Exception as e:
             response = {
-                'success': False,
-                'error': str(e),
-                'error_type': type(e).__name__,
+                "success": False,
+                "error": str(e),
+                "error_type": type(e).__name__,
             }
 
-        if expect_success and not response['success']:
-            raise AssertionError(
-                f"Function call failed: {response['error']}"
-            )
+        if expect_success and not response["success"]:
+            raise AssertionError(f"Function call failed: {response['error']}")
 
         return response
 
-    def validate_params(self, func_name: str, params: dict) -> tuple[bool, Optional[str]]:
+    def validate_params(
+        self, func_name: str, params: dict
+    ) -> tuple[bool, Optional[str]]:
         """Validate parameters against function schema.
 
         Args:
@@ -114,22 +114,22 @@ class UfTestClient:
         """
         try:
             spec = self.get_spec(func_name)
-            schema = spec['schema']
+            schema = spec["schema"]
 
             # Check required parameters
-            required = schema.get('required', [])
+            required = schema.get("required", [])
             for req_param in required:
                 if req_param not in params:
                     return False, f"Missing required parameter: {req_param}"
 
             # Basic type checking
-            properties = schema.get('properties', {})
+            properties = schema.get("properties", {})
             for param_name, value in params.items():
                 if param_name not in properties:
                     return False, f"Unknown parameter: {param_name}"
 
                 param_schema = properties[param_name]
-                expected_type = param_schema.get('type')
+                expected_type = param_schema.get("type")
 
                 if expected_type:
                     if not self._check_type(value, expected_type):
@@ -155,13 +155,13 @@ class UfTestClient:
             True if types match
         """
         type_map = {
-            'string': str,
-            'number': (int, float),
-            'integer': int,
-            'boolean': bool,
-            'array': list,
-            'object': dict,
-            'null': type(None),
+            "string": str,
+            "number": (int, float),
+            "integer": int,
+            "boolean": bool,
+            "array": list,
+            "object": dict,
+            "null": type(None),
         }
 
         expected_types = type_map.get(json_type)
@@ -193,7 +193,7 @@ class UfAppTester:
         self.client = UfTestClient(app)
         self._results_history: list[dict] = []
 
-    def __enter__(self) -> 'UfAppTester':
+    def __enter__(self) -> "UfAppTester":
         """Enter the testing context."""
         return self
 
@@ -226,7 +226,7 @@ class UfAppTester:
             AssertionError: If result is not successful
         """
         msg = message or f"Expected success but got error: {result.get('error')}"
-        assert result.get('success'), msg
+        assert result.get("success"), msg
 
     def assert_failure(self, result: dict, message: str = ""):
         """Assert that a result indicates failure.
@@ -239,7 +239,7 @@ class UfAppTester:
             AssertionError: If result is successful
         """
         msg = message or "Expected failure but got success"
-        assert not result.get('success'), msg
+        assert not result.get("success"), msg
 
     def assert_result_equals(self, result: dict, expected: Any):
         """Assert that result value equals expected.
@@ -252,7 +252,7 @@ class UfAppTester:
             AssertionError: If values don't match
         """
         self.assert_success(result)
-        actual = result.get('result')
+        actual = result.get("result")
         assert actual == expected, f"Expected {expected}, got {actual}"
 
     def assert_error_type(self, result: dict, error_type: str):
@@ -266,7 +266,7 @@ class UfAppTester:
             AssertionError: If error types don't match
         """
         self.assert_failure(result)
-        actual_type = result.get('error_type')
+        actual_type = result.get("error_type")
         assert actual_type == error_type, f"Expected {error_type}, got {actual_type}"
 
     def get_history(self) -> list[dict]:
@@ -308,7 +308,9 @@ def test_ui_function(
     if expected_exception:
         try:
             func(**test_inputs)
-            raise AssertionError(f"Expected {expected_exception.__name__} but no exception was raised")
+            raise AssertionError(
+                f"Expected {expected_exception.__name__} but no exception was raised"
+            )
         except expected_exception:
             return True
         except Exception as e:
@@ -319,7 +321,9 @@ def test_ui_function(
         result = func(**test_inputs)
 
         if expected_output is not None:
-            assert result == expected_output, f"Expected {expected_output}, got {result}"
+            assert result == expected_output, (
+                f"Expected {expected_output}, got {result}"
+            )
 
         return True
 
@@ -344,24 +348,24 @@ def mock_function_response(app, func_name: str, mock_result: Any):
         ...     # Calls to get_user will return {'name': 'Test'}
         ...     result = client.call_function('get_user', {'id': 1})
     """
-    if not hasattr(app, 'function_specs'):
+    if not hasattr(app, "function_specs"):
         raise ValueError("App does not have function_specs")
 
     spec = app.function_specs[func_name]
-    original_func = spec['func']
+    original_func = spec["func"]
 
     # Create mock function
     def mock_func(**kwargs):
         return mock_result
 
     # Replace function
-    spec['func'] = mock_func
+    spec["func"] = mock_func
 
     try:
         yield
     finally:
         # Restore original function
-        spec['func'] = original_func
+        spec["func"] = original_func
 
 
 class FormDataBuilder:
@@ -383,7 +387,7 @@ class FormDataBuilder:
         """Initialize the builder."""
         self._data: dict = {}
 
-    def field(self, name: str, value: Any) -> 'FormDataBuilder':
+    def field(self, name: str, value: Any) -> "FormDataBuilder":
         """Add a field to the form data.
 
         Args:
@@ -396,7 +400,7 @@ class FormDataBuilder:
         self._data[name] = value
         return self
 
-    def fields(self, **kwargs) -> 'FormDataBuilder':
+    def fields(self, **kwargs) -> "FormDataBuilder":
         """Add multiple fields at once.
 
         Args:
@@ -426,13 +430,13 @@ def assert_valid_rjsf_spec(spec: dict):
     Raises:
         AssertionError: If spec is invalid
     """
-    assert 'schema' in spec, "Spec must have 'schema' key"
-    assert isinstance(spec['schema'], dict), "Schema must be a dict"
+    assert "schema" in spec, "Spec must have 'schema' key"
+    assert isinstance(spec["schema"], dict), "Schema must be a dict"
 
-    schema = spec['schema']
-    assert 'type' in schema, "Schema must have 'type'"
-    assert 'properties' in schema, "Schema must have 'properties'"
-    assert isinstance(schema['properties'], dict), "Properties must be a dict"
+    schema = spec["schema"]
+    assert "type" in schema, "Schema must have 'type'"
+    assert "properties" in schema, "Schema must have 'properties'"
+    assert isinstance(schema["properties"], dict), "Properties must be a dict"
 
 
 def assert_has_field(spec: dict, field_name: str):
@@ -446,7 +450,7 @@ def assert_has_field(spec: dict, field_name: str):
         AssertionError: If field not found
     """
     assert_valid_rjsf_spec(spec)
-    properties = spec['schema']['properties']
+    properties = spec["schema"]["properties"]
     assert field_name in properties, f"Field '{field_name}' not found in schema"
 
 
@@ -462,9 +466,11 @@ def assert_field_type(spec: dict, field_name: str, expected_type: str):
         AssertionError: If type doesn't match
     """
     assert_has_field(spec, field_name)
-    field_schema = spec['schema']['properties'][field_name]
-    actual_type = field_schema.get('type')
-    assert actual_type == expected_type, f"Expected type '{expected_type}', got '{actual_type}'"
+    field_schema = spec["schema"]["properties"][field_name]
+    actual_type = field_schema.get("type")
+    assert actual_type == expected_type, (
+        f"Expected type '{expected_type}', got '{actual_type}'"
+    )
 
 
 def assert_field_required(spec: dict, field_name: str):
@@ -478,5 +484,5 @@ def assert_field_required(spec: dict, field_name: str):
         AssertionError: If field is not required
     """
     assert_has_field(spec, field_name)
-    required = spec['schema'].get('required', [])
+    required = spec["schema"].get("required", [])
     assert field_name in required, f"Field '{field_name}' is not required"

@@ -37,7 +37,7 @@ class FunctionGroup:
     order: int = 0
     collapsed: bool = False
 
-    def add_function(self, func: Callable) -> 'FunctionGroup':
+    def add_function(self, func: Callable) -> "FunctionGroup":
         """Add a function to this group.
 
         Args:
@@ -119,7 +119,7 @@ class FunctionOrganizer:
         self._groups.append(func_group)
         return func_group
 
-    def add_to_group(self, group_name: str, func: Callable) -> 'FunctionOrganizer':
+    def add_to_group(self, group_name: str, func: Callable) -> "FunctionOrganizer":
         """Add a function to an existing group.
 
         Args:
@@ -139,7 +139,7 @@ class FunctionOrganizer:
 
         raise ValueError(f"Group '{group_name}' not found")
 
-    def add_ungrouped(self, func: Callable) -> 'FunctionOrganizer':
+    def add_ungrouped(self, func: Callable) -> "FunctionOrganizer":
         """Add a function without a group.
 
         Args:
@@ -194,17 +194,17 @@ class FunctionOrganizer:
             >>> # Can be used in templates or APIs
         """
         return {
-            'groups': [
+            "groups": [
                 {
-                    'name': group.name,
-                    'description': group.description,
-                    'icon': group.icon,
-                    'order': group.order,
-                    'collapsed': group.collapsed,
-                    'functions': [
+                    "name": group.name,
+                    "description": group.description,
+                    "icon": group.icon,
+                    "order": group.order,
+                    "collapsed": group.collapsed,
+                    "functions": [
                         {
-                            'name': func.__name__,
-                            'description': func.__doc__ or '',
+                            "name": func.__name__,
+                            "description": func.__doc__ or "",
                         }
                         for func in group.funcs
                     ],
@@ -273,22 +273,23 @@ def _add_group_routes(app, organizer: FunctionOrganizer):
         organizer: FunctionOrganizer instance
     """
     # Detect framework
-    is_bottle = hasattr(app, 'route')
+    is_bottle = hasattr(app, "route")
 
     if is_bottle:
-        @app.route('/api/groups')
+
+        @app.route("/api/groups")
         def get_groups():
             """Get function group organization."""
             import json
             from bottle import response
 
-            response.content_type = 'application/json'
+            response.content_type = "application/json"
             return json.dumps(organizer.to_dict())
     else:
         # FastAPI
         from fastapi.responses import JSONResponse
 
-        @app.get('/api/groups')
+        @app.get("/api/groups")
         async def get_groups():
             """Get function group organization."""
             return JSONResponse(content=organizer.to_dict())
@@ -328,14 +329,14 @@ def auto_group_by_prefix(
             prefix = name.split(separator)[0]
             groups_dict[prefix].append(func)
         else:
-            groups_dict['other'].append(func)
+            groups_dict["other"].append(func)
 
     # Create organizer
     organizer = FunctionOrganizer()
 
     for group_name, group_funcs in sorted(groups_dict.items()):
         # Capitalize group name
-        display_name = group_name.replace('_', ' ').title()
+        display_name = group_name.replace("_", " ").title()
 
         organizer.group(
             display_name,
@@ -367,8 +368,8 @@ def auto_group_by_module(funcs: Iterable[Callable]) -> FunctionOrganizer:
     for func in funcs:
         module = func.__module__
         # Get last part of module name
-        if '.' in module:
-            module_name = module.split('.')[-1]
+        if "." in module:
+            module_name = module.split(".")[-1]
         else:
             module_name = module
 
@@ -378,7 +379,7 @@ def auto_group_by_module(funcs: Iterable[Callable]) -> FunctionOrganizer:
     organizer = FunctionOrganizer()
 
     for module_name, group_funcs in sorted(groups_dict.items()):
-        display_name = module_name.replace('_', ' ').title()
+        display_name = module_name.replace("_", " ").title()
 
         organizer.group(
             display_name,
@@ -389,7 +390,9 @@ def auto_group_by_module(funcs: Iterable[Callable]) -> FunctionOrganizer:
     return organizer
 
 
-def auto_group_by_tag(funcs: Iterable[Callable], tag_attr: str = '__uf_group__') -> FunctionOrganizer:
+def auto_group_by_tag(
+    funcs: Iterable[Callable], tag_attr: str = "__uf_group__"
+) -> FunctionOrganizer:
     """Automatically group functions by a tag attribute.
 
     Functions can be tagged with a group name using an attribute.
@@ -413,7 +416,7 @@ def auto_group_by_tag(funcs: Iterable[Callable], tag_attr: str = '__uf_group__')
     groups_dict = defaultdict(list)
 
     for func in funcs:
-        tag = getattr(func, tag_attr, 'Other')
+        tag = getattr(func, tag_attr, "Other")
         groups_dict[tag].append(func)
 
     # Create organizer

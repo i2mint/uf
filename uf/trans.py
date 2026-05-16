@@ -66,24 +66,24 @@ class InputTransformRegistry:
             ... )
         """
         handler = {
-            'to_json': to_json or (lambda x: x),
-            'from_json': from_json or (lambda x: x),
+            "to_json": to_json or (lambda x: x),
+            "from_json": from_json or (lambda x: x),
         }
 
         # Build UI config
         if ui_config:
-            handler['ui_config'] = ui_config
+            handler["ui_config"] = ui_config
         else:
             # Build from individual params
             config = RjsfFieldConfig(widget=ui_widget)
             if json_schema_format:
                 config.format = json_schema_format
-            handler['ui_config'] = config
+            handler["ui_config"] = config
 
         if json_schema_type:
-            handler['json_schema_type'] = json_schema_type
+            handler["json_schema_type"] = json_schema_type
         if json_schema_format:
-            handler['json_schema_format'] = json_schema_format
+            handler["json_schema_format"] = json_schema_format
 
         self._type_handlers[py_type] = handler
 
@@ -109,7 +109,7 @@ class InputTransformRegistry:
         """
         handler = self.get_handler(py_type)
         if handler:
-            return handler.get('ui_config')
+            return handler.get("ui_config")
         return None
 
     def to_json(self, value: Any, py_type: Optional[Type] = None) -> Any:
@@ -128,8 +128,8 @@ class InputTransformRegistry:
         target_type = py_type or type(value)
         handler = self.get_handler(target_type)
 
-        if handler and handler['to_json']:
-            return handler['to_json'](value)
+        if handler and handler["to_json"]:
+            return handler["to_json"](value)
 
         return value
 
@@ -148,8 +148,8 @@ class InputTransformRegistry:
 
         handler = self.get_handler(py_type)
 
-        if handler and handler['from_json']:
-            return handler['from_json'](value)
+        if handler and handler["from_json"]:
+            return handler["from_json"](value)
 
         return value
 
@@ -226,8 +226,8 @@ class InputTransformRegistry:
             result_type = type(result)
             handler = self.get_handler(result_type)
 
-            if handler and handler['to_json']:
-                return handler['to_json'](result)
+            if handler and handler["to_json"]:
+                return handler["to_json"](result)
 
             # Handle common collection types
             if isinstance(result, list):
@@ -294,27 +294,27 @@ def register_common_types():
         datetime,
         to_json=lambda dt: dt.isoformat(),
         from_json=lambda s: datetime.fromisoformat(s) if isinstance(s, str) else s,
-        ui_widget='datetime',
-        json_schema_type='string',
-        json_schema_format='date-time',
+        ui_widget="datetime",
+        json_schema_type="string",
+        json_schema_format="date-time",
     )
 
     _global_registry.register_type(
         date,
         to_json=lambda d: d.isoformat(),
         from_json=lambda s: date.fromisoformat(s) if isinstance(s, str) else s,
-        ui_widget='date',
-        json_schema_type='string',
-        json_schema_format='date',
+        ui_widget="date",
+        json_schema_type="string",
+        json_schema_format="date",
     )
 
     _global_registry.register_type(
         time,
         to_json=lambda t: t.isoformat(),
         from_json=lambda s: time.fromisoformat(s) if isinstance(s, str) else s,
-        ui_widget='time',
-        json_schema_type='string',
-        json_schema_format='time',
+        ui_widget="time",
+        json_schema_type="string",
+        json_schema_format="time",
     )
 
     # Path
@@ -322,7 +322,7 @@ def register_common_types():
         Path,
         to_json=str,
         from_json=Path,
-        json_schema_type='string',
+        json_schema_type="string",
     )
 
     # UUID
@@ -330,8 +330,8 @@ def register_common_types():
         UUID,
         to_json=str,
         from_json=lambda s: UUID(s) if isinstance(s, str) else s,
-        json_schema_type='string',
-        json_schema_format='uuid',
+        json_schema_type="string",
+        json_schema_format="uuid",
     )
 
     # Decimal
@@ -339,7 +339,7 @@ def register_common_types():
         Decimal,
         to_json=float,
         from_json=Decimal,
-        json_schema_type='number',
+        json_schema_type="number",
     )
 
 

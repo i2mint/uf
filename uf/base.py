@@ -155,7 +155,7 @@ class UfApp:
         self.app = mk_rjsf_app(list(self.funcs.values()), **mk_rjsf_app_kwargs)
         self.function_specs = self.app.function_specs
 
-    def run(self, host: str = 'localhost', port: int = 8080, **kwargs):
+    def run(self, host: str = "localhost", port: int = 8080, **kwargs):
         """Run the web application.
 
         Args:
@@ -163,7 +163,7 @@ class UfApp:
             port: Port to listen on
             **kwargs: Additional arguments passed to app.run()
         """
-        if hasattr(self.app, 'run'):
+        if hasattr(self.app, "run"):
             # Bottle app
             self.app.run(host=host, port=port, **kwargs)
         else:
@@ -213,5 +213,5 @@ class UfApp:
 
     def __repr__(self):
         """String representation of UfApp."""
-        func_names = ', '.join(self.list_functions())
+        func_names = ", ".join(self.list_functions())
         return f"UfApp({func_names})"

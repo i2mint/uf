@@ -54,12 +54,12 @@ class WebhookEvent:
             Dictionary representation
         """
         return {
-            'event_type': self.event_type,
-            'func_name': self.func_name,
-            'params': self.params,
-            'result': self.result,
-            'error': self.error,
-            'timestamp': self.timestamp.isoformat(),
+            "event_type": self.event_type,
+            "func_name": self.func_name,
+            "params": self.params,
+            "result": self.result,
+            "error": self.error,
+            "timestamp": self.timestamp.isoformat(),
         }
 
 
@@ -127,7 +127,7 @@ class WebhookClient:
         payload = event.to_dict()
         headers = {
             **self.headers,
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         }
 
         for attempt in range(self.retry_count):
@@ -147,7 +147,8 @@ class WebhookClient:
                     return False
                 # Retry with exponential backoff
                 import time
-                time.sleep(2 ** attempt)
+
+                time.sleep(2**attempt)
 
         return False
 
@@ -181,13 +182,15 @@ class WebhookManager:
             headers: Optional HTTP headers
             condition: Optional callable to filter events
         """
-        self._webhooks.append({
-            'url': url,
-            'events': events,
-            'headers': headers or {},
-            'condition': condition,
-            'client': WebhookClient(url, headers),
-        })
+        self._webhooks.append(
+            {
+                "url": url,
+                "events": events,
+                "headers": headers or {},
+                "condition": condition,
+                "client": WebhookClient(url, headers),
+            }
+        )
 
     def remove_webhook(self, url: str) -> bool:
         """Remove a webhook by URL.
@@ -199,7 +202,7 @@ class WebhookManager:
             True if removed
         """
         original_len = len(self._webhooks)
-        self._webhooks = [w for w in self._webhooks if w['url'] != url]
+        self._webhooks = [w for w in self._webhooks if w["url"] != url]
         return len(self._webhooks) < original_len
 
     def trigger(
@@ -227,15 +230,15 @@ class WebhookManager:
         triggered = 0
         for webhook in self._webhooks:
             # Check if this webhook should be triggered
-            if webhook['events'] and event_type not in webhook['events']:
+            if webhook["events"] and event_type not in webhook["events"]:
                 continue
 
             # Check condition if provided
-            if webhook['condition'] and not webhook['condition'](event):
+            if webhook["condition"] and not webhook["condition"](event):
                 continue
 
             # Send webhook
-            webhook['client'].send(event)
+            webhook["client"].send(event)
             triggered += 1
 
         return triggered
@@ -248,8 +251,8 @@ class WebhookManager:
         """
         return [
             {
-                'url': w['url'],
-                'events': w['events'],
+                "url": w["url"],
+                "events": w["events"],
             }
             for w in self._webhooks
         ]
@@ -277,7 +280,7 @@ def webhook(
         ...     return {'status': 'processed'}
     """
     if on is None:
-        on = ['success', 'failure']
+        on = ["success", "failure"]
 
     if manager is None:
         manager = get_global_webhook_manager()
@@ -296,22 +299,22 @@ def webhook(
             params = kwargs.copy()
 
             # Trigger start event if configured
-            if 'start' in on:
-                manager.trigger('start', func.__name__, params)
+            if "start" in on:
+                manager.trigger("start", func.__name__, params)
 
             try:
                 result = func(*args, **kwargs)
 
                 # Trigger success event
-                if 'success' in on:
-                    manager.trigger('success', func.__name__, params, result=result)
+                if "success" in on:
+                    manager.trigger("success", func.__name__, params, result=result)
 
                 return result
 
             except Exception as e:
                 # Trigger failure event
-                if 'failure' in on:
-                    manager.trigger('failure', func.__name__, params, error=str(e))
+                if "failure" in on:
+                    manager.trigger("failure", func.__name__, params, error=str(e))
 
                 raise
 

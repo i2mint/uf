@@ -93,25 +93,22 @@ class FunctionSpecStore(Mapping):
             from ju.rjsf import func_to_form_spec
 
             # Generate form spec
-            form_spec = func_to_form_spec(
-                func,
-                **self._rjsf_config
-            )
+            form_spec = func_to_form_spec(func, **self._rjsf_config)
 
             # Apply custom UI schema factory if provided
             if self._ui_schema_factory:
                 ui_schema = self._ui_schema_factory(func)
-                if 'uiSchema' in form_spec:
-                    form_spec['uiSchema'].update(ui_schema)
+                if "uiSchema" in form_spec:
+                    form_spec["uiSchema"].update(ui_schema)
                 else:
-                    form_spec['uiSchema'] = ui_schema
+                    form_spec["uiSchema"] = ui_schema
 
             return {
-                'schema': form_spec.get('schema', {}),
-                'uiSchema': form_spec.get('uiSchema', {}),
-                'func': func,
-                'name': func_name,
-                'description': func.__doc__ or f"Execute {func_name}",
+                "schema": form_spec.get("schema", {}),
+                "uiSchema": form_spec.get("uiSchema", {}),
+                "func": func,
+                "name": func_name,
+                "description": func.__doc__ or f"Execute {func_name}",
             }
 
         except ImportError:
@@ -154,17 +151,17 @@ class FunctionSpecStore(Mapping):
             properties[param_name] = {"type": param_type}
 
         return {
-            'schema': {
-                'type': 'object',
-                'properties': properties,
-                'required': required,
-                'title': func_name,
-                'description': func.__doc__ or '',
+            "schema": {
+                "type": "object",
+                "properties": properties,
+                "required": required,
+                "title": func_name,
+                "description": func.__doc__ or "",
             },
-            'uiSchema': {},
-            'func': func,
-            'name': func_name,
-            'description': func.__doc__ or f"Execute {func_name}",
+            "uiSchema": {},
+            "func": func,
+            "name": func_name,
+            "description": func.__doc__ or f"Execute {func_name}",
         }
 
     @cached_property
@@ -176,8 +173,8 @@ class FunctionSpecStore(Mapping):
         """
         return [
             {
-                'name': name,
-                'description': func.__doc__ or f"Execute {name}",
+                "name": name,
+                "description": func.__doc__ or f"Execute {name}",
             }
             for name, func in self._funcs.items()
         ]

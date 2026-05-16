@@ -19,6 +19,7 @@ def is_pydantic_model(obj: Any) -> bool:
     """
     try:
         from pydantic import BaseModel
+
         if inspect.isclass(obj):
             return issubclass(obj, BaseModel)
         return isinstance(obj, BaseModel)
@@ -121,37 +122,37 @@ def create_pydantic_spec(func: Callable) -> Optional[dict]:
         schema = pydantic_model_to_json_schema(model_class)
 
         # Clean up schema
-        if '$defs' in schema:
-            schema.pop('$defs')
+        if "$defs" in schema:
+            schema.pop("$defs")
 
         return {
-            'schema': schema,
-            'uiSchema': {},
-            'pydantic_model': model_class,
-            'param_name': param_name,
+            "schema": schema,
+            "uiSchema": {},
+            "pydantic_model": model_class,
+            "param_name": param_name,
         }
 
     # Multiple Pydantic parameters - combine schemas
     combined_schema = {
-        'type': 'object',
-        'properties': {},
-        'required': [],
-        'title': func.__name__,
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "title": func.__name__,
     }
 
     for param_name, model_class in pydantic_params.items():
         model_schema = pydantic_model_to_json_schema(model_class)
-        combined_schema['properties'][param_name] = model_schema
+        combined_schema["properties"][param_name] = model_schema
 
         # Add to required if no default
         sig = inspect.signature(func)
         if sig.parameters[param_name].default == inspect.Parameter.empty:
-            combined_schema['required'].append(param_name)
+            combined_schema["required"].append(param_name)
 
     return {
-        'schema': combined_schema,
-        'uiSchema': {},
-        'pydantic_models': pydantic_params,
+        "schema": combined_schema,
+        "uiSchema": {},
+        "pydantic_models": pydantic_params,
     }
 
 
@@ -236,9 +237,7 @@ def wrap_pydantic_function(func: Callable) -> Callable:
             if param_name in pydantic_params:
                 model_class = pydantic_params[param_name]
                 if isinstance(value, dict):
-                    converted_kwargs[param_name] = dict_to_pydantic(
-                        value, model_class
-                    )
+                    converted_kwargs[param_name] = dict_to_pydantic(value, model_class)
                 else:
                     converted_kwargs[param_name] = value
             else:
@@ -277,24 +276,33 @@ def extract_field_validators(model_class) -> dict:
 
     try:
         # Pydantic v2
-        if hasattr(model_class, 'model_fields'):
+        if hasattr(model_class, "model_fields"):
             for field_name, field_info in model_class.model_fields.items():
                 validator_info = {
-                    'required': field_info.is_required(),
-                    'default': field_info.default if field_info.default is not None else None,
+                    "required": field_info.is_required(),
+                    "default": field_info.default
+                    if field_info.default is not None
+                    else None,
                 }
 
                 # Extract constraints
-                if hasattr(field_info, 'constraints'):
+                if hasattr(field_info, "constraints"):
                     constraints = {}
-                    for constraint in ['gt', 'ge', 'lt', 'le', 'min_length', 'max_length']:
+                    for constraint in [
+                        "gt",
+                        "ge",
+                        "lt",
+                        "le",
+                        "min_length",
+                        "max_length",
+                    ]:
                         if hasattr(field_info, constraint):
                             val = getattr(field_info, constraint)
                             if val is not None:
                                 constraints[constraint] = val
 
                     if constraints:
-                        validator_info['constraints'] = constraints
+                        validator_info["constraints"] = constraints
 
                 validators[field_name] = validator_info
     except Exception:
@@ -316,19 +324,19 @@ def pydantic_error_to_user_friendly(error) -> dict:
     try:
         from pydantic import ValidationError
     except ImportError:
-        return {'error': str(error)}
+        return {"error": str(error)}
 
     if not isinstance(error, ValidationError):
-        return {'error': str(error)}
+        return {"error": str(error)}
 
     field_errors = {}
 
     for err in error.errors():
-        field = '.'.join(str(loc) for loc in err['loc'])
-        message = err['msg']
+        field = ".".join(str(loc) for loc in err["loc"])
+        message = err["msg"]
         field_errors[field] = message
 
-    return {'field_errors': field_errors}
+    return {"field_errors": field_errors}
 
 
 class PydanticRegistry:

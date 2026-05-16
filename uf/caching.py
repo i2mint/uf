@@ -92,11 +92,11 @@ class MemoryCache(CacheBackend):
             return None
 
         # Check expiration
-        if entry['expires_at'] and datetime.now() > entry['expires_at']:
+        if entry["expires_at"] and datetime.now() > entry["expires_at"]:
             del self._cache[key]
             return None
 
-        return entry['value']
+        return entry["value"]
 
     def set(self, key: str, value: Any, ttl: Optional[int] = None) -> None:
         """Set a value in cache."""
@@ -108,9 +108,9 @@ class MemoryCache(CacheBackend):
             expires_at = datetime.now() + timedelta(seconds=ttl)
 
         self._cache[key] = {
-            'value': value,
-            'expires_at': expires_at,
-            'created_at': datetime.now(),
+            "value": value,
+            "expires_at": expires_at,
+            "created_at": datetime.now(),
         }
 
         # Evict oldest entries if over max size
@@ -132,8 +132,7 @@ class MemoryCache(CacheBackend):
         """Evict oldest entries to fit max size."""
         # Sort by created_at and remove oldest 10%
         sorted_keys = sorted(
-            self._cache.keys(),
-            key=lambda k: self._cache[k]['created_at']
+            self._cache.keys(), key=lambda k: self._cache[k]["created_at"]
         )
 
         num_to_remove = max(1, len(self._cache) // 10)
@@ -148,8 +147,9 @@ class MemoryCache(CacheBackend):
         """
         now = datetime.now()
         expired = [
-            key for key, entry in self._cache.items()
-            if entry['expires_at'] and now > entry['expires_at']
+            key
+            for key, entry in self._cache.items()
+            if entry["expires_at"] and now > entry["expires_at"]
         ]
 
         for key in expired:
@@ -166,16 +166,17 @@ class MemoryCache(CacheBackend):
         total = len(self._cache)
         now = datetime.now()
         expired = sum(
-            1 for entry in self._cache.values()
-            if entry['expires_at'] and now > entry['expires_at']
+            1
+            for entry in self._cache.values()
+            if entry["expires_at"] and now > entry["expires_at"]
         )
 
         return {
-            'total_entries': total,
-            'active_entries': total - expired,
-            'expired_entries': expired,
-            'max_size': self.max_size,
-            'utilization': total / self.max_size if self.max_size > 0 else 0,
+            "total_entries": total,
+            "active_entries": total - expired,
+            "expired_entries": expired,
+            "max_size": self.max_size,
+            "utilization": total / self.max_size if self.max_size > 0 else 0,
         }
 
 
@@ -190,7 +191,7 @@ class DiskCache(CacheBackend):
         >>> cache.set('expensive_result', big_data)
     """
 
-    def __init__(self, cache_dir: str = '.uf_cache', default_ttl: int = 3600):
+    def __init__(self, cache_dir: str = ".uf_cache", default_ttl: int = 3600):
         """Initialize disk cache.
 
         Args:
@@ -198,6 +199,7 @@ class DiskCache(CacheBackend):
             default_ttl: Default TTL in seconds
         """
         import os
+
         self.cache_dir = cache_dir
         self.default_ttl = default_ttl
 
@@ -206,6 +208,7 @@ class DiskCache(CacheBackend):
     def _get_path(self, key: str) -> str:
         """Get file path for a key."""
         import os
+
         # Hash the key to create valid filename
         key_hash = hashlib.md5(key.encode()).hexdigest()
         return os.path.join(self.cache_dir, f"{key_hash}.cache")
@@ -219,15 +222,15 @@ class DiskCache(CacheBackend):
             return None
 
         try:
-            with open(path, 'rb') as f:
+            with open(path, "rb") as f:
                 entry = pickle.load(f)
 
             # Check expiration
-            if entry['expires_at'] and datetime.now() > entry['expires_at']:
+            if entry["expires_at"] and datetime.now() > entry["expires_at"]:
                 os.remove(path)
                 return None
 
-            return entry['value']
+            return entry["value"]
         except Exception:
             return None
 
@@ -241,13 +244,13 @@ class DiskCache(CacheBackend):
             expires_at = datetime.now() + timedelta(seconds=ttl)
 
         entry = {
-            'value': value,
-            'expires_at': expires_at,
-            'created_at': datetime.now(),
+            "value": value,
+            "expires_at": expires_at,
+            "created_at": datetime.now(),
         }
 
         path = self._get_path(key)
-        with open(path, 'wb') as f:
+        with open(path, "wb") as f:
             pickle.dump(entry, f)
 
     def delete(self, key: str) -> bool:
@@ -265,7 +268,7 @@ class DiskCache(CacheBackend):
         import os
         import glob
 
-        for file_path in glob.glob(os.path.join(self.cache_dir, '*.cache')):
+        for file_path in glob.glob(os.path.join(self.cache_dir, "*.cache")):
             os.remove(file_path)
 
 
@@ -282,9 +285,9 @@ def make_cache_key(func_name: str, args: tuple, kwargs: dict) -> str:
     """
     # Create a deterministic key from arguments
     key_data = {
-        'func': func_name,
-        'args': args,
-        'kwargs': sorted(kwargs.items()),
+        "func": func_name,
+        "args": args,
+        "kwargs": sorted(kwargs.items()),
     }
 
     # Serialize to JSON for hashing
@@ -445,11 +448,11 @@ class CacheStats:
             Statistics dictionary
         """
         return {
-            'hits': self.hits,
-            'misses': self.misses,
-            'sets': self.sets,
-            'hit_rate': self.hit_rate(),
-            'total_requests': self.hits + self.misses,
+            "hits": self.hits,
+            "misses": self.misses,
+            "sets": self.sets,
+            "hit_rate": self.hit_rate(),
+            "total_requests": self.hits + self.misses,
         }
 
 

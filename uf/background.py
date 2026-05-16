@@ -99,15 +99,17 @@ class Task:
             Dictionary representation
         """
         return {
-            'task_id': self.task_id,
-            'func_name': self.func_name,
-            'status': self.status.value,
-            'result': self.result if self.status == TaskStatus.COMPLETED else None,
-            'error': self.error,
-            'created_at': self.created_at.isoformat(),
-            'started_at': self.started_at.isoformat() if self.started_at else None,
-            'completed_at': self.completed_at.isoformat() if self.completed_at else None,
-            'progress': self.progress,
+            "task_id": self.task_id,
+            "func_name": self.func_name,
+            "status": self.status.value,
+            "result": self.result if self.status == TaskStatus.COMPLETED else None,
+            "error": self.error,
+            "created_at": self.created_at.isoformat(),
+            "started_at": self.started_at.isoformat() if self.started_at else None,
+            "completed_at": self.completed_at.isoformat()
+            if self.completed_at
+            else None,
+            "progress": self.progress,
         }
 
 
@@ -167,11 +169,7 @@ class TaskQueue:
         self._workers.clear()
 
     def submit(
-        self,
-        func: Callable,
-        *args,
-        task_id: Optional[str] = None,
-        **kwargs
+        self, func: Callable, *args, task_id: Optional[str] = None, **kwargs
     ) -> str:
         """Submit a task for execution.
 
@@ -204,7 +202,9 @@ class TaskQueue:
         task = self._tasks.get(task_id)
         return task.status if task else None
 
-    def get_result(self, task_id: str, wait: bool = False, timeout: Optional[float] = None) -> Any:
+    def get_result(
+        self, task_id: str, wait: bool = False, timeout: Optional[float] = None
+    ) -> Any:
         """Get task result.
 
         Args:
@@ -227,6 +227,7 @@ class TaskQueue:
         if wait and task.status not in [TaskStatus.COMPLETED, TaskStatus.FAILED]:
             # Wait for completion
             import time
+
             start_time = time.time()
             while task.status not in [TaskStatus.COMPLETED, TaskStatus.FAILED]:
                 time.sleep(0.1)
@@ -312,15 +313,15 @@ class TaskQueue:
             by_status[status] = by_status.get(status, 0) + 1
 
         return {
-            'total_tasks': total,
-            'queue_size': self.queue_size(),
-            'num_workers': self.num_workers,
-            'by_status': by_status,
+            "total_tasks": total,
+            "queue_size": self.queue_size(),
+            "num_workers": self.num_workers,
+            "by_status": by_status,
         }
 
 
 def background(
-    queue_name: str = 'default',
+    queue_name: str = "default",
     task_queue: Optional[TaskQueue] = None,
 ):
     """Decorator to run function in background.
@@ -364,7 +365,9 @@ def background(
             """Get task status."""
             return task_queue.get_status(task_id)
 
-        def get_result(task_id: str, wait: bool = False, timeout: Optional[float] = None):
+        def get_result(
+            task_id: str, wait: bool = False, timeout: Optional[float] = None
+        ):
             """Get task result."""
             return task_queue.get_result(task_id, wait=wait, timeout=timeout)
 
@@ -389,7 +392,13 @@ class PeriodicTask:
         >>> periodic.stop()
     """
 
-    def __init__(self, func: Callable, interval: float, args: tuple = (), kwargs: Optional[dict] = None):
+    def __init__(
+        self,
+        func: Callable,
+        interval: float,
+        args: tuple = (),
+        kwargs: Optional[dict] = None,
+    ):
         """Initialize periodic task.
 
         Args:
@@ -444,7 +453,7 @@ class PeriodicTask:
 _global_task_queues: dict[str, TaskQueue] = {}
 
 
-def get_global_task_queue(name: str = 'default') -> Optional[TaskQueue]:
+def get_global_task_queue(name: str = "default") -> Optional[TaskQueue]:
     """Get a global task queue by name.
 
     Args:
@@ -466,7 +475,7 @@ def set_global_task_queue(name: str, task_queue: TaskQueue) -> None:
     _global_task_queues[name] = task_queue
 
 
-def get_or_create_task_queue(name: str = 'default', num_workers: int = 2) -> TaskQueue:
+def get_or_create_task_queue(name: str = "default", num_workers: int = 2) -> TaskQueue:
     """Get or create a task queue.
 
     Args:

@@ -334,7 +334,7 @@ class ThemeConfig:
 
     def __init__(
         self,
-        default_theme: str = 'light',
+        default_theme: str = "light",
         allow_toggle: bool = True,
         available_themes: Optional[list[str]] = None,
         custom_theme: Optional[Theme] = None,
@@ -349,7 +349,7 @@ class ThemeConfig:
         """
         self.default_theme = default_theme
         self.allow_toggle = allow_toggle
-        self.available_themes = available_themes or ['light', 'dark']
+        self.available_themes = available_themes or ["light", "dark"]
         self.custom_theme = custom_theme
 
     def get_css(self) -> str:
@@ -361,12 +361,12 @@ class ThemeConfig:
         css_parts = []
 
         # Add light theme as default
-        light = get_theme('light')
+        light = get_theme("light")
         if light:
             css_parts.append(light.to_css())
 
         # Add dark theme
-        dark = get_theme('dark')
+        dark = get_theme("dark")
         if dark:
             css_parts.append(f"\nbody[data-theme='dark'] {{\n")
             css_parts.append(dark.to_css())
@@ -374,7 +374,7 @@ class ThemeConfig:
 
         # Add other themes
         for theme_name in self.available_themes:
-            if theme_name in ['light', 'dark']:
+            if theme_name in ["light", "dark"]:
                 continue
             theme = get_theme(theme_name)
             if theme:

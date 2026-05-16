@@ -37,8 +37,8 @@ def add_ui_routes(
     from uf.templates import generate_index_html, generate_error_page
 
     # Detect framework
-    is_bottle = hasattr(app, 'route')
-    is_fastapi = hasattr(app, 'get')
+    is_bottle = hasattr(app, "route")
+    is_fastapi = hasattr(app, "get")
 
     if is_bottle:
         _add_bottle_routes(
@@ -71,7 +71,7 @@ def _add_bottle_routes(
     """Add routes for Bottle framework."""
     from uf.templates import generate_index_html
 
-    @app.route('/')
+    @app.route("/")
     def index():
         """Serve main UI page."""
         try:
@@ -84,51 +84,54 @@ def _add_bottle_routes(
             return html
         except Exception as e:
             from uf.templates import generate_error_page
+
             return generate_error_page(str(e), 500)
 
-    @app.route('/api/functions')
+    @app.route("/api/functions")
     def list_functions():
         """List all available functions."""
         import json
         from bottle import response
 
-        response.content_type = 'application/json'
+        response.content_type = "application/json"
 
         try:
             func_list = [
                 {
-                    'name': name,
-                    'description': spec.get('description', ''),
+                    "name": name,
+                    "description": spec.get("description", ""),
                 }
                 for name, spec in function_specs.items()
             ]
             return json.dumps(func_list)
         except Exception as e:
             response.status = 500
-            return json.dumps({'error': str(e)})
+            return json.dumps({"error": str(e)})
 
-    @app.route('/api/functions/<func_name>/spec')
+    @app.route("/api/functions/<func_name>/spec")
     def get_function_spec(func_name):
         """Get RJSF specification for a function."""
         import json
         from bottle import response
 
-        response.content_type = 'application/json'
+        response.content_type = "application/json"
 
         try:
             spec = function_specs[func_name]
-            return json.dumps({
-                'schema': spec['schema'],
-                'uiSchema': spec['uiSchema'],
-                'name': spec['name'],
-                'description': spec['description'],
-            })
+            return json.dumps(
+                {
+                    "schema": spec["schema"],
+                    "uiSchema": spec["uiSchema"],
+                    "name": spec["name"],
+                    "description": spec["description"],
+                }
+            )
         except KeyError:
             response.status = 404
-            return json.dumps({'error': f"Function '{func_name}' not found"})
+            return json.dumps({"error": f"Function '{func_name}' not found"})
         except Exception as e:
             response.status = 500
-            return json.dumps({'error': str(e)})
+            return json.dumps({"error": str(e)})
 
 
 def _add_fastapi_routes(
@@ -143,7 +146,7 @@ def _add_fastapi_routes(
     from fastapi.responses import HTMLResponse, JSONResponse
     from uf.templates import generate_index_html
 
-    @app.get('/', response_class=HTMLResponse)
+    @app.get("/", response_class=HTMLResponse)
     async def index():
         """Serve main UI page."""
         try:
@@ -156,50 +159,45 @@ def _add_fastapi_routes(
             return html
         except Exception as e:
             from uf.templates import generate_error_page
+
             return HTMLResponse(
-                content=generate_error_page(str(e), 500),
-                status_code=500
+                content=generate_error_page(str(e), 500), status_code=500
             )
 
-    @app.get('/api/functions')
+    @app.get("/api/functions")
     async def list_functions():
         """List all available functions."""
         try:
             func_list = [
                 {
-                    'name': name,
-                    'description': spec.get('description', ''),
+                    "name": name,
+                    "description": spec.get("description", ""),
                 }
                 for name, spec in function_specs.items()
             ]
             return JSONResponse(content=func_list)
         except Exception as e:
-            return JSONResponse(
-                content={'error': str(e)},
-                status_code=500
-            )
+            return JSONResponse(content={"error": str(e)}, status_code=500)
 
-    @app.get('/api/functions/{func_name}/spec')
+    @app.get("/api/functions/{func_name}/spec")
     async def get_function_spec(func_name: str):
         """Get RJSF specification for a function."""
         try:
             spec = function_specs[func_name]
-            return JSONResponse(content={
-                'schema': spec['schema'],
-                'uiSchema': spec['uiSchema'],
-                'name': spec['name'],
-                'description': spec['description'],
-            })
+            return JSONResponse(
+                content={
+                    "schema": spec["schema"],
+                    "uiSchema": spec["uiSchema"],
+                    "name": spec["name"],
+                    "description": spec["description"],
+                }
+            )
         except KeyError:
             return JSONResponse(
-                content={'error': f"Function '{func_name}' not found"},
-                status_code=404
+                content={"error": f"Function '{func_name}' not found"}, status_code=404
             )
         except Exception as e:
-            return JSONResponse(
-                content={'error': str(e)},
-                status_code=500
-            )
+            return JSONResponse(content={"error": str(e)}, status_code=500)
 
 
 def create_function_handler(func: Callable, func_name: str) -> Callable:
@@ -214,16 +212,17 @@ def create_function_handler(func: Callable, func_name: str) -> Callable:
     Returns:
         A handler function compatible with web frameworks
     """
+
     def handler(**kwargs):
         """Handle function execution from HTTP request."""
         try:
             result = func(**kwargs)
-            return {'result': result, 'success': True}
+            return {"result": result, "success": True}
         except Exception as e:
             return {
-                'error': str(e),
-                'success': False,
-                'error_type': type(e).__name__,
+                "error": str(e),
+                "success": False,
+                "error_type": type(e).__name__,
             }
 
     handler.__name__ = func_name

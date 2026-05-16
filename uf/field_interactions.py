@@ -86,7 +86,7 @@ class FieldDependency:
         if callable(self.condition):
             # For callable conditions, we need to handle specific cases
             # This is a simplified version - complex conditions may need custom handling
-            condition_schema = {'properties': {self.source_field: {}}}
+            condition_schema = {"properties": {self.source_field: {}}}
         else:
             condition_schema = self.condition
 
@@ -96,13 +96,13 @@ class FieldDependency:
             self._action_to_schema(self.else_action) if self.else_action else None
         )
 
-        result = {'if': condition_schema}
+        result = {"if": condition_schema}
 
         if then_schema:
-            result['then'] = then_schema
+            result["then"] = then_schema
 
         if else_schema:
-            result['else'] = else_schema
+            result["else"] = else_schema
 
         return result
 
@@ -121,7 +121,7 @@ class FieldDependency:
         elif action == DependencyAction.HIDE:
             return {}
         elif action == DependencyAction.REQUIRE:
-            return {'required': [self.target_field]}
+            return {"required": [self.target_field]}
         elif action == DependencyAction.OPTIONAL:
             return {}
         else:
@@ -137,9 +137,9 @@ class FieldDependency:
         ui_deps = {}
 
         if self.action == DependencyAction.HIDE:
-            ui_deps[self.target_field] = {'ui:widget': 'hidden'}
+            ui_deps[self.target_field] = {"ui:widget": "hidden"}
         elif self.action == DependencyAction.DISABLE:
-            ui_deps[self.target_field] = {'ui:disabled': True}
+            ui_deps[self.target_field] = {"ui:disabled": True}
 
         return ui_deps
 
@@ -162,7 +162,7 @@ class DependencyBuilder:
         self._current_field: Optional[str] = None
         self._current_condition: Optional[Callable] = None
 
-    def when(self, field_name: str) -> 'DependencyBuilder':
+    def when(self, field_name: str) -> "DependencyBuilder":
         """Start a dependency condition on a field.
 
         Args:
@@ -175,7 +175,7 @@ class DependencyBuilder:
         self._current_condition = None
         return self
 
-    def equals(self, value: Any) -> 'DependencyBuilder':
+    def equals(self, value: Any) -> "DependencyBuilder":
         """Condition: field equals value.
 
         Args:
@@ -187,7 +187,7 @@ class DependencyBuilder:
         self._current_condition = lambda v: v == value
         return self
 
-    def not_equals(self, value: Any) -> 'DependencyBuilder':
+    def not_equals(self, value: Any) -> "DependencyBuilder":
         """Condition: field does not equal value.
 
         Args:
@@ -199,7 +199,7 @@ class DependencyBuilder:
         self._current_condition = lambda v: v != value
         return self
 
-    def greater_than(self, value: Any) -> 'DependencyBuilder':
+    def greater_than(self, value: Any) -> "DependencyBuilder":
         """Condition: field is greater than value.
 
         Args:
@@ -211,7 +211,7 @@ class DependencyBuilder:
         self._current_condition = lambda v: v > value
         return self
 
-    def less_than(self, value: Any) -> 'DependencyBuilder':
+    def less_than(self, value: Any) -> "DependencyBuilder":
         """Condition: field is less than value.
 
         Args:
@@ -223,7 +223,7 @@ class DependencyBuilder:
         self._current_condition = lambda v: v < value
         return self
 
-    def is_truthy(self) -> 'DependencyBuilder':
+    def is_truthy(self) -> "DependencyBuilder":
         """Condition: field is truthy.
 
         Returns:
@@ -232,7 +232,7 @@ class DependencyBuilder:
         self._current_condition = lambda v: bool(v)
         return self
 
-    def is_falsy(self) -> 'DependencyBuilder':
+    def is_falsy(self) -> "DependencyBuilder":
         """Condition: field is falsy.
 
         Returns:
@@ -241,7 +241,7 @@ class DependencyBuilder:
         self._current_condition = lambda v: not bool(v)
         return self
 
-    def in_list(self, values: list) -> 'DependencyBuilder':
+    def in_list(self, values: list) -> "DependencyBuilder":
         """Condition: field value is in list.
 
         Args:
@@ -253,7 +253,7 @@ class DependencyBuilder:
         self._current_condition = lambda v: v in values
         return self
 
-    def custom(self, condition: Callable[[Any], bool]) -> 'DependencyBuilder':
+    def custom(self, condition: Callable[[Any], bool]) -> "DependencyBuilder":
         """Condition: custom callable.
 
         Args:
@@ -265,7 +265,7 @@ class DependencyBuilder:
         self._current_condition = condition
         return self
 
-    def show(self, target_field: str) -> 'DependencyBuilder':
+    def show(self, target_field: str) -> "DependencyBuilder":
         """Action: show target field.
 
         Args:
@@ -276,7 +276,7 @@ class DependencyBuilder:
         """
         return self._add_dependency(target_field, DependencyAction.SHOW)
 
-    def hide(self, target_field: str) -> 'DependencyBuilder':
+    def hide(self, target_field: str) -> "DependencyBuilder":
         """Action: hide target field.
 
         Args:
@@ -287,7 +287,7 @@ class DependencyBuilder:
         """
         return self._add_dependency(target_field, DependencyAction.HIDE)
 
-    def enable(self, target_field: str) -> 'DependencyBuilder':
+    def enable(self, target_field: str) -> "DependencyBuilder":
         """Action: enable target field.
 
         Args:
@@ -298,7 +298,7 @@ class DependencyBuilder:
         """
         return self._add_dependency(target_field, DependencyAction.ENABLE)
 
-    def disable(self, target_field: str) -> 'DependencyBuilder':
+    def disable(self, target_field: str) -> "DependencyBuilder":
         """Action: disable target field.
 
         Args:
@@ -309,7 +309,7 @@ class DependencyBuilder:
         """
         return self._add_dependency(target_field, DependencyAction.DISABLE)
 
-    def require(self, target_field: str) -> 'DependencyBuilder':
+    def require(self, target_field: str) -> "DependencyBuilder":
         """Action: make target field required.
 
         Args:
@@ -320,7 +320,7 @@ class DependencyBuilder:
         """
         return self._add_dependency(target_field, DependencyAction.REQUIRE)
 
-    def make_optional(self, target_field: str) -> 'DependencyBuilder':
+    def make_optional(self, target_field: str) -> "DependencyBuilder":
         """Action: make target field optional.
 
         Args:
@@ -333,7 +333,7 @@ class DependencyBuilder:
 
     def _add_dependency(
         self, target_field: str, action: DependencyAction
-    ) -> 'DependencyBuilder':
+    ) -> "DependencyBuilder":
         """Add a dependency to the list.
 
         Args:
@@ -388,21 +388,24 @@ def add_field_dependencies(
     """
     # This would typically be called during spec generation
     # For now, return a structure that can be merged
-    schema_additions = {'allOf': []}
+    schema_additions = {"allOf": []}
     ui_schema_additions = {}
 
     for dep in dependencies:
         # Add JSON Schema dependencies
         schema_dep = dep.to_json_schema()
         if schema_dep:
-            schema_additions['allOf'].append(schema_dep)
+            schema_additions["allOf"].append(schema_dep)
 
         # Add UI Schema dependencies
         ui_dep = dep.to_ui_schema()
         if ui_dep:
             ui_schema_additions.update(ui_dep)
 
-    return {'schema_additions': schema_additions, 'ui_schema_additions': ui_schema_additions}
+    return {
+        "schema_additions": schema_additions,
+        "ui_schema_additions": ui_schema_additions,
+    }
 
 
 def with_dependencies(*dependencies: FieldDependency):
@@ -426,13 +429,13 @@ def with_dependencies(*dependencies: FieldDependency):
     from functools import wraps
 
     def decorator(func: Callable) -> Callable:
-        setattr(func, '__uf_field_dependencies__', list(dependencies))
+        setattr(func, "__uf_field_dependencies__", list(dependencies))
 
         @wraps(func)
         def wrapper(*args, **kwargs):
             return func(*args, **kwargs)
 
-        setattr(wrapper, '__uf_field_dependencies__', list(dependencies))
+        setattr(wrapper, "__uf_field_dependencies__", list(dependencies))
 
         return wrapper
 
@@ -448,4 +451,4 @@ def get_field_dependencies(func: Callable) -> list[FieldDependency]:
     Returns:
         List of FieldDependency objects
     """
-    return getattr(func, '__uf_field_dependencies__', [])
+    return getattr(func, "__uf_field_dependencies__", [])
