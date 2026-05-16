@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.background &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">uf.background</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uf.background</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Background task execution for uf.</span>
+
+<span class="sd">Provides decorators and utilities for running tasks in the background,</span>
+<span class="sd">with support for queues, scheduling, and progress tracking.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">queue</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+
+
+<div class="viewcode-block" id="TaskStatus">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.TaskStatus">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Status of a background task.&quot;&quot;&quot;</span>
+
+    <span class="n">PENDING</span> <span class="o">=</span> <span class="s2">&quot;pending&quot;</span>
+    <span class="n">RUNNING</span> <span class="o">=</span> <span class="s2">&quot;running&quot;</span>
+    <span class="n">COMPLETED</span> <span class="o">=</span> <span class="s2">&quot;completed&quot;</span>
+    <span class="n">FAILED</span> <span class="o">=</span> <span class="s2">&quot;failed&quot;</span>
+    <span class="n">CANCELLED</span> <span class="o">=</span> <span class="s2">&quot;cancelled&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="Task">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.Task">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Task</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a background task.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        task_id: Unique task identifier</span>
+<span class="sd">        func_name: Name of the function</span>
+<span class="sd">        args: Positional arguments</span>
+<span class="sd">        kwargs: Keyword arguments</span>
+<span class="sd">        status: Current task status</span>
+<span class="sd">        result: Task result (if completed)</span>
+<span class="sd">        error: Error message (if failed)</span>
+<span class="sd">        created_at: When task was created</span>
+<span class="sd">        started_at: When task started running</span>
+<span class="sd">        completed_at: When task completed</span>
+<span class="sd">        progress: Progress percentage (0-100)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+        <span class="n">args</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(),</span>
+        <span class="n">kwargs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">task_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize task.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func: Function to execute</span>
+<span class="sd">            args: Positional arguments</span>
+<span class="sd">            kwargs: Keyword arguments</span>
+<span class="sd">            task_id: Optional task ID (generated if not provided)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task_id</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func_name</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">PENDING</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">created_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">started_at</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">completed_at</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="Task.execute">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.Task.execute">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute the task.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Task result</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If task execution fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">RUNNING</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">started_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">COMPLETED</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="mi">100</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">FAILED</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">raise</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">completed_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Task.to_dict">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.Task.to_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert task to dictionary.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary representation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;task_id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span>
+            <span class="s1">&#39;func_name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_name</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">COMPLETED</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">,</span>
+            <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">created_at</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s1">&#39;started_at&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">started_at</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">started_at</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;completed_at&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">completed_at</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">completed_at</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;progress&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">progress</span><span class="p">,</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="TaskQueue">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.TaskQueue">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskQueue</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;FIFO queue for background tasks.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; task_queue = TaskQueue(num_workers=2)</span>
+<span class="sd">        &gt;&gt;&gt; task_queue.start()</span>
+<span class="sd">        &gt;&gt;&gt; task_id = task_queue.submit(expensive_function, x=10, y=20)</span>
+<span class="sd">        &gt;&gt;&gt; status = task_queue.get_status(task_id)</span>
+<span class="sd">        &gt;&gt;&gt; result = task_queue.get_result(task_id)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">max_queue_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize task queue.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            num_workers: Number of worker threads</span>
+<span class="sd">            max_queue_size: Maximum queue size</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_workers</span> <span class="o">=</span> <span class="n">num_workers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_queue_size</span> <span class="o">=</span> <span class="n">max_queue_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="p">:</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="n">max_queue_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Task</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_workers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_running</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="TaskQueue.start">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.TaskQueue.start">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start worker threads.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_running</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_running</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_workers</span><span class="p">):</span>
+            <span class="n">worker</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span>
+                <span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_worker_loop</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;TaskWorker-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">worker</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_workers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">worker</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TaskQueue.stop">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.TaskQueue.stop">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wait</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stop worker threads.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            wait: Whether to wait for threads to finish</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_running</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="n">wait</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">worker</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_workers</span><span class="p">:</span>
+                <span class="n">worker</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_workers</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TaskQueue.submit">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.TaskQueue.submit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">submit</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="n">task_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Submit a task for execution.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func: Function to execute</span>
+<span class="sd">            *args: Positional arguments</span>
+<span class="sd">            task_id: Optional task ID</span>
+<span class="sd">            **kwargs: Keyword arguments</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Task ID</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            queue.Full: If queue is full</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">task_id</span><span class="o">=</span><span class="n">task_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">task_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">task</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Don&#39;t block</span>
+        <span class="k">return</span> <span class="n">task</span><span class="o">.</span><span class="n">task_id</span></div>
+
+
+<div class="viewcode-block" id="TaskQueue.get_status">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.TaskQueue.get_status">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TaskStatus</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get task status.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            task_id: Task ID</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            TaskStatus or None if not found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="k">if</span> <span class="n">task</span> <span class="k">else</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="TaskQueue.get_result">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.TaskQueue.get_result">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wait</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get task result.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            task_id: Task ID</span>
+<span class="sd">            wait: Whether to wait for completion</span>
+<span class="sd">            timeout: Optional timeout in seconds</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Task result</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If task not found</span>
+<span class="sd">            RuntimeError: If task failed</span>
+<span class="sd">            TimeoutError: If wait times out</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task </span><span class="si">{</span><span class="n">task_id</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">wait</span> <span class="ow">and</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TaskStatus</span><span class="o">.</span><span class="n">COMPLETED</span><span class="p">,</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">FAILED</span><span class="p">]:</span>
+            <span class="c1"># Wait for completion</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+            <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="k">while</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">TaskStatus</span><span class="o">.</span><span class="n">COMPLETED</span><span class="p">,</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">FAILED</span><span class="p">]:</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">timeout</span> <span class="ow">and</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">timeout</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task </span><span class="si">{</span><span class="n">task_id</span><span class="si">}</span><span class="s2"> timed out&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">FAILED</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task failed: </span><span class="si">{</span><span class="n">task</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="o">!=</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">COMPLETED</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">task</span><span class="o">.</span><span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="TaskQueue.get_task">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.TaskQueue.get_task">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get task object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            task_id: Task ID</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Task object or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TaskQueue.cancel_task">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.TaskQueue.cancel_task">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cancel_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Cancel a task.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            task_id: Task ID</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if cancelled</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            Can only cancel pending tasks</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span> <span class="ow">or</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="o">!=</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">PENDING</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">CANCELLED</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_worker_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Worker thread loop.&quot;&quot;&quot;</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_running</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Get task with timeout to allow checking _running</span>
+                <span class="n">task</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">CANCELLED</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">task</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="c1"># Error already recorded in task</span>
+                <span class="k">pass</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
+
+<div class="viewcode-block" id="TaskQueue.queue_size">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.TaskQueue.queue_size">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">queue_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current queue size.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Number of pending tasks</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">qsize</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TaskQueue.stats">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.TaskQueue.stats">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get queue statistics.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary with statistics</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="p">)</span>
+        <span class="n">by_status</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">value</span>
+            <span class="n">by_status</span><span class="p">[</span><span class="n">status</span><span class="p">]</span> <span class="o">=</span> <span class="n">by_status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;total_tasks&#39;</span><span class="p">:</span> <span class="n">total</span><span class="p">,</span>
+            <span class="s1">&#39;queue_size&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue_size</span><span class="p">(),</span>
+            <span class="s1">&#39;num_workers&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_workers</span><span class="p">,</span>
+            <span class="s1">&#39;by_status&#39;</span><span class="p">:</span> <span class="n">by_status</span><span class="p">,</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="background">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.background">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">background</span><span class="p">(</span>
+    <span class="n">queue_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
+    <span class="n">task_queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TaskQueue</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to run function in background.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        queue_name: Name of the queue to use</span>
+<span class="sd">        task_queue: Optional TaskQueue instance</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Decorator function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; @background()</span>
+<span class="sd">        ... def send_email(to: str, subject: str):</span>
+<span class="sd">        ...     # Long-running email sending</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; task_id = send_email(&#39;user@example.com&#39;, &#39;Hello&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; # Returns immediately with task_id</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">task_queue</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">task_queue</span> <span class="o">=</span> <span class="n">get_global_task_queue</span><span class="p">(</span><span class="n">queue_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">task_queue</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">task_queue</span> <span class="o">=</span> <span class="n">TaskQueue</span><span class="p">(</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">task_queue</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="n">set_global_task_queue</span><span class="p">(</span><span class="n">queue_name</span><span class="p">,</span> <span class="n">task_queue</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Submit task and return task ID.&quot;&quot;&quot;</span>
+            <span class="n">task_id</span> <span class="o">=</span> <span class="n">task_queue</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">task_id</span>
+
+        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_background__</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_task_queue__</span> <span class="o">=</span> <span class="n">task_queue</span>
+        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_original_func__</span> <span class="o">=</span> <span class="n">func</span>
+
+        <span class="c1"># Add utility methods</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_status</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Get task status.&quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="n">task_queue</span><span class="o">.</span><span class="n">get_status</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_result</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">wait</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Get task result.&quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="n">task_queue</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="n">wait</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+
+        <span class="n">wrapper</span><span class="o">.</span><span class="n">get_status</span> <span class="o">=</span> <span class="n">get_status</span>
+        <span class="n">wrapper</span><span class="o">.</span><span class="n">get_result</span> <span class="o">=</span> <span class="n">get_result</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+
+<div class="viewcode-block" id="PeriodicTask">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.PeriodicTask">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PeriodicTask</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Task that runs periodically.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; def cleanup():</span>
+<span class="sd">        ...     print(&quot;Cleaning up...&quot;)</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; periodic = PeriodicTask(cleanup, interval=3600)</span>
+<span class="sd">        &gt;&gt;&gt; periodic.start()</span>
+<span class="sd">        &gt;&gt;&gt; # Runs every hour</span>
+<span class="sd">        &gt;&gt;&gt; periodic.stop()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(),</span> <span class="n">kwargs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize periodic task.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func: Function to run</span>
+<span class="sd">            interval: Interval in seconds</span>
+<span class="sd">            args: Positional arguments</span>
+<span class="sd">            kwargs: Keyword arguments</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="n">interval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_running</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="PeriodicTask.start">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.PeriodicTask.start">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start periodic execution.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_running</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_running</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_schedule_next</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PeriodicTask.stop">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.PeriodicTask.stop">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stop periodic execution.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_running</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_schedule_next</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Schedule next execution.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_running</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interval</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the function and schedule next.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="c1"># Log error but continue</span>
+            <span class="k">pass</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_schedule_next</span><span class="p">()</span></div>
+
+
+
+<span class="c1"># Global task queues</span>
+<span class="n">_global_task_queues</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TaskQueue</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+<div class="viewcode-block" id="get_global_task_queue">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.get_global_task_queue">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_global_task_queue</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TaskQueue</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a global task queue by name.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name: Queue name</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TaskQueue or None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_global_task_queues</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="set_global_task_queue">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.set_global_task_queue">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_global_task_queue</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">task_queue</span><span class="p">:</span> <span class="n">TaskQueue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set a global task queue.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name: Queue name</span>
+<span class="sd">        task_queue: TaskQueue instance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_global_task_queues</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">task_queue</span></div>
+
+
+
+<div class="viewcode-block" id="get_or_create_task_queue">
+<a class="viewcode-back" href="../../module_docs/uf/background.html#uf.get_or_create_task_queue">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_or_create_task_queue</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">num_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TaskQueue</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get or create a task queue.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name: Queue name</span>
+<span class="sd">        num_workers: Number of workers if creating</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TaskQueue instance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="n">get_global_task_queue</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">queue</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="n">TaskQueue</span><span class="p">(</span><span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
+        <span class="n">queue</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">set_global_task_queue</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">queue</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">queue</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

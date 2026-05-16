@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.routes &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">uf.routes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uf.routes</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;API routes for uf web interface.</span>
+
+<span class="sd">Provides convenience routes for the web UI, including function listing,</span>
+<span class="sd">spec retrieval, and the main HTML interface.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span>
+
+
+<div class="viewcode-block" id="add_ui_routes">
+<a class="viewcode-back" href="../../module_docs/uf/routes.html#uf.routes.add_ui_routes">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_ui_routes</span><span class="p">(</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">function_specs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">page_title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Function Interface&quot;</span><span class="p">,</span>
+    <span class="n">custom_css</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rjsf_theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add UI routes to a qh app.</span>
+
+<span class="sd">    Adds the following routes:</span>
+<span class="sd">    - GET / : Main UI page (HTML)</span>
+<span class="sd">    - GET /api/functions : List available functions (JSON)</span>
+<span class="sd">    - GET /api/functions/{name}/spec : Get RJSF spec for function (JSON)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        app: The qh/bottle/fastapi app to add routes to</span>
+<span class="sd">        function_specs: FunctionSpecStore with function specifications</span>
+<span class="sd">        page_title: Title for the web interface</span>
+<span class="sd">        custom_css: Optional custom CSS</span>
+<span class="sd">        rjsf_theme: RJSF theme to use</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This function detects whether the app is using Bottle or FastAPI</span>
+<span class="sd">        and adds routes accordingly.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">uf.templates</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_index_html</span><span class="p">,</span> <span class="n">generate_error_page</span>
+
+    <span class="c1"># Detect framework</span>
+    <span class="n">is_bottle</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;route&#39;</span><span class="p">)</span>
+    <span class="n">is_fastapi</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;get&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">is_bottle</span><span class="p">:</span>
+        <span class="n">_add_bottle_routes</span><span class="p">(</span>
+            <span class="n">app</span><span class="p">,</span>
+            <span class="n">function_specs</span><span class="p">,</span>
+            <span class="n">page_title</span><span class="o">=</span><span class="n">page_title</span><span class="p">,</span>
+            <span class="n">custom_css</span><span class="o">=</span><span class="n">custom_css</span><span class="p">,</span>
+            <span class="n">rjsf_theme</span><span class="o">=</span><span class="n">rjsf_theme</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">is_fastapi</span><span class="p">:</span>
+        <span class="n">_add_fastapi_routes</span><span class="p">(</span>
+            <span class="n">app</span><span class="p">,</span>
+            <span class="n">function_specs</span><span class="p">,</span>
+            <span class="n">page_title</span><span class="o">=</span><span class="n">page_title</span><span class="p">,</span>
+            <span class="n">custom_css</span><span class="o">=</span><span class="n">custom_css</span><span class="p">,</span>
+            <span class="n">rjsf_theme</span><span class="o">=</span><span class="n">rjsf_theme</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported app type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">app</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_add_bottle_routes</span><span class="p">(</span>
+    <span class="n">app</span><span class="p">,</span>
+    <span class="n">function_specs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">page_title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">custom_css</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">rjsf_theme</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add routes for Bottle framework.&quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">uf.templates</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_index_html</span>
+
+    <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serve main UI page.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">=</span> <span class="n">generate_index_html</span><span class="p">(</span>
+                <span class="n">function_specs</span><span class="p">,</span>
+                <span class="n">page_title</span><span class="o">=</span><span class="n">page_title</span><span class="p">,</span>
+                <span class="n">custom_css</span><span class="o">=</span><span class="n">custom_css</span><span class="p">,</span>
+                <span class="n">rjsf_theme</span><span class="o">=</span><span class="n">rjsf_theme</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">html</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">uf.templates</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_error_page</span>
+            <span class="k">return</span> <span class="n">generate_error_page</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="mi">500</span><span class="p">)</span>
+
+    <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/functions&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_functions</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List all available functions.&quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">bottle</span><span class="w"> </span><span class="kn">import</span> <span class="n">response</span>
+
+        <span class="n">response</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="s1">&#39;application/json&#39;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">func_list</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                    <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+                <span class="p">}</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">function_specs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">]</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">func_list</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="mi">500</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)})</span>
+
+    <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/functions/&lt;func_name&gt;/spec&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_function_spec</span><span class="p">(</span><span class="n">func_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get RJSF specification for a function.&quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">bottle</span><span class="w"> </span><span class="kn">import</span> <span class="n">response</span>
+
+        <span class="n">response</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="s1">&#39;application/json&#39;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">spec</span> <span class="o">=</span> <span class="n">function_specs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+                <span class="s1">&#39;schema&#39;</span><span class="p">:</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;schema&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;uiSchema&#39;</span><span class="p">:</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;uiSchema&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">],</span>
+            <span class="p">})</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="mi">404</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Function &#39;</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">})</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="mi">500</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)})</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_add_fastapi_routes</span><span class="p">(</span>
+    <span class="n">app</span><span class="p">,</span>
+    <span class="n">function_specs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">page_title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">custom_css</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">rjsf_theme</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add routes for FastAPI framework.&quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.responses</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTMLResponse</span><span class="p">,</span> <span class="n">JSONResponse</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">uf.templates</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_index_html</span>
+
+    <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serve main UI page.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">=</span> <span class="n">generate_index_html</span><span class="p">(</span>
+                <span class="n">function_specs</span><span class="p">,</span>
+                <span class="n">page_title</span><span class="o">=</span><span class="n">page_title</span><span class="p">,</span>
+                <span class="n">custom_css</span><span class="o">=</span><span class="n">custom_css</span><span class="p">,</span>
+                <span class="n">rjsf_theme</span><span class="o">=</span><span class="n">rjsf_theme</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">html</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">uf.templates</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_error_page</span>
+            <span class="k">return</span> <span class="n">HTMLResponse</span><span class="p">(</span>
+                <span class="n">content</span><span class="o">=</span><span class="n">generate_error_page</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="mi">500</span><span class="p">),</span>
+                <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span>
+            <span class="p">)</span>
+
+    <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/api/functions&#39;</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">list_functions</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List all available functions.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">func_list</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                    <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+                <span class="p">}</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">function_specs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">]</span>
+            <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">func_list</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span>
+                <span class="n">content</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)},</span>
+                <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span>
+            <span class="p">)</span>
+
+    <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/api/functions/</span><span class="si">{func_name}</span><span class="s1">/spec&#39;</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_function_spec</span><span class="p">(</span><span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get RJSF specification for a function.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">spec</span> <span class="o">=</span> <span class="n">function_specs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;schema&#39;</span><span class="p">:</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;schema&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;uiSchema&#39;</span><span class="p">:</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;uiSchema&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">],</span>
+            <span class="p">})</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span>
+                <span class="n">content</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Function &#39;</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">},</span>
+                <span class="n">status_code</span><span class="o">=</span><span class="mi">404</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span>
+                <span class="n">content</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)},</span>
+                <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span>
+            <span class="p">)</span>
+
+
+<div class="viewcode-block" id="create_function_handler">
+<a class="viewcode-back" href="../../module_docs/uf/routes.html#uf.routes.create_function_handler">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_function_handler</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a request handler for a function.</span>
+
+<span class="sd">    This wraps the function to handle HTTP requests and responses.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: The function to wrap</span>
+<span class="sd">        func_name: Name of the function</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A handler function compatible with web frameworks</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">handler</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle function execution from HTTP request.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span> <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+                <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s1">&#39;error_type&#39;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="p">}</span>
+
+    <span class="n">handler</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">func_name</span>
+    <span class="n">handler</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="k">return</span> <span class="n">handler</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

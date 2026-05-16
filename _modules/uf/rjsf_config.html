@@ -1,0 +1,500 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.rjsf_config &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">uf.rjsf_config</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uf.rjsf_config</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;RJSF customization layer for uf.</span>
+
+<span class="sd">Provides configuration classes and builders for customizing RJSF form</span>
+<span class="sd">generation beyond the defaults, including field widgets, UI options,</span>
+<span class="sd">and validation rules.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+
+
+<div class="viewcode-block" id="RjsfFieldConfig">
+<a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.RjsfFieldConfig">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RjsfFieldConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for individual form fields.</span>
+
+<span class="sd">    This class allows fine-grained control over how form fields are</span>
+<span class="sd">    rendered in the RJSF interface.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        widget: Widget type (e.g., &#39;textarea&#39;, &#39;select&#39;, &#39;radio&#39;, &#39;date&#39;)</span>
+<span class="sd">        ui_options: Additional UI options for the widget</span>
+<span class="sd">        format: JSON Schema format (e.g., &#39;email&#39;, &#39;uri&#39;, &#39;date-time&#39;)</span>
+<span class="sd">        enum: List of allowed values (for dropdowns)</span>
+<span class="sd">        description: Field description/help text</span>
+<span class="sd">        placeholder: Placeholder text for the input</span>
+<span class="sd">        title: Custom title for the field</span>
+<span class="sd">        disabled: Whether the field is disabled</span>
+<span class="sd">        readonly: Whether the field is read-only</span>
+<span class="sd">        hidden: Whether to hide the field</span>
+<span class="sd">        default: Default value for the field</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; email_config = RjsfFieldConfig(</span>
+<span class="sd">        ...     widget=&#39;email&#39;,</span>
+<span class="sd">        ...     format=&#39;email&#39;,</span>
+<span class="sd">        ...     placeholder=&#39;user@example.com&#39;</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">widget</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">ui_options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">enum</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">placeholder</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">disabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">readonly</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">hidden</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">default</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="RjsfFieldConfig.to_json_schema_patch">
+<a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.RjsfFieldConfig.to_json_schema_patch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_json_schema_patch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert to JSON Schema properties.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary of JSON Schema properties to merge into schema</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">patch</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">:</span>
+            <span class="n">patch</span><span class="p">[</span><span class="s1">&#39;format&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum</span><span class="p">:</span>
+            <span class="n">patch</span><span class="p">[</span><span class="s1">&#39;enum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">:</span>
+            <span class="n">patch</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">:</span>
+            <span class="n">patch</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">patch</span><span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default</span>
+
+        <span class="k">return</span> <span class="n">patch</span></div>
+
+
+<div class="viewcode-block" id="RjsfFieldConfig.to_ui_schema_patch">
+<a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.RjsfFieldConfig.to_ui_schema_patch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_ui_schema_patch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert to RJSF UI Schema properties.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary of UI Schema properties for this field</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ui_patch</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">widget</span><span class="p">:</span>
+            <span class="n">ui_patch</span><span class="p">[</span><span class="s1">&#39;ui:widget&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">widget</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">placeholder</span><span class="p">:</span>
+            <span class="n">ui_patch</span><span class="p">[</span><span class="s1">&#39;ui:placeholder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">placeholder</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">disabled</span><span class="p">:</span>
+            <span class="n">ui_patch</span><span class="p">[</span><span class="s1">&#39;ui:disabled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">readonly</span><span class="p">:</span>
+            <span class="n">ui_patch</span><span class="p">[</span><span class="s1">&#39;ui:readonly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden</span><span class="p">:</span>
+            <span class="n">ui_patch</span><span class="p">[</span><span class="s1">&#39;ui:widget&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;hidden&#39;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_options</span><span class="p">:</span>
+            <span class="n">ui_patch</span><span class="p">[</span><span class="s1">&#39;ui:options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_options</span>
+
+        <span class="k">return</span> <span class="n">ui_patch</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="RjsfConfigBuilder">
+<a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.RjsfConfigBuilder">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RjsfConfigBuilder</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Builder for RJSF configurations with sensible defaults.</span>
+
+<span class="sd">    This class helps construct RJSF specifications by providing a</span>
+<span class="sd">    fluent interface for configuring fields.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; builder = RjsfConfigBuilder()</span>
+<span class="sd">        &gt;&gt;&gt; builder.field(&#39;email&#39;, RjsfFieldConfig(format=&#39;email&#39;))</span>
+<span class="sd">        &gt;&gt;&gt; builder.field(&#39;message&#39;, RjsfFieldConfig(widget=&#39;textarea&#39;))</span>
+<span class="sd">        &gt;&gt;&gt; spec = builder.build(base_schema)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the config builder.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_field_configs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">RjsfFieldConfig</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ui_order</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_class_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="RjsfConfigBuilder.field">
+<a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.RjsfConfigBuilder.field">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;RjsfConfigBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Configure a specific field.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            param_name: Name of the parameter/field</span>
+<span class="sd">            config: Configuration for the field</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Self for method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_field_configs</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="RjsfConfigBuilder.order">
+<a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.RjsfConfigBuilder.order">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_order</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;RjsfConfigBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the order of fields in the form.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            field_order: List of field names in desired order</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Self for method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ui_order</span> <span class="o">=</span> <span class="n">field_order</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="RjsfConfigBuilder.class_names">
+<a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.RjsfConfigBuilder.class_names">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">class_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">class_names</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;RjsfConfigBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set CSS class names for the form.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            class_names: Space-separated CSS class names</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Self for method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_class_names</span> <span class="o">=</span> <span class="n">class_names</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="RjsfConfigBuilder.build">
+<a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.RjsfConfigBuilder.build">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">base_ui_schema</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the final RJSF specification.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            base_schema: Base JSON Schema to augment</span>
+<span class="sd">            base_ui_schema: Optional base UI Schema to augment</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary with &#39;schema&#39; and &#39;uiSchema&#39; keys</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">base_schema</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">ui_schema</span> <span class="o">=</span> <span class="p">(</span><span class="n">base_ui_schema</span> <span class="ow">or</span> <span class="p">{})</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># Apply field configurations</span>
+        <span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_configs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># Update schema properties</span>
+            <span class="k">if</span> <span class="s1">&#39;properties&#39;</span> <span class="ow">in</span> <span class="n">schema</span> <span class="ow">and</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]:</span>
+                <span class="n">schema_patch</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">to_json_schema_patch</span><span class="p">()</span>
+                <span class="n">schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">field_name</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">schema_patch</span><span class="p">)</span>
+
+            <span class="c1"># Update UI schema</span>
+            <span class="n">ui_patch</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">to_ui_schema_patch</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">ui_patch</span><span class="p">:</span>
+                <span class="n">ui_schema</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">ui_schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="p">{}),</span> <span class="o">**</span><span class="n">ui_patch</span><span class="p">}</span>
+
+        <span class="c1"># Apply UI order</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ui_order</span><span class="p">:</span>
+            <span class="n">ui_schema</span><span class="p">[</span><span class="s1">&#39;ui:order&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ui_order</span>
+
+        <span class="c1"># Apply class names</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_class_names</span><span class="p">:</span>
+            <span class="n">ui_schema</span><span class="p">[</span><span class="s1">&#39;ui:classNames&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_class_names</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;schema&#39;</span><span class="p">:</span> <span class="n">schema</span><span class="p">,</span>
+            <span class="s1">&#39;uiSchema&#39;</span><span class="p">:</span> <span class="n">ui_schema</span><span class="p">,</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<span class="c1"># Predefined field configurations for common use cases</span>
+<span class="n">COMMON_FIELD_CONFIGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;email&#39;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;email&#39;</span><span class="p">,</span>
+        <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;password&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;uri&#39;</span><span class="p">,</span>
+        <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;multiline_text&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;textarea&#39;</span><span class="p">,</span>
+        <span class="n">ui_options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;rows&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;long_text&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;textarea&#39;</span><span class="p">,</span>
+        <span class="n">ui_options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;rows&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;date-time&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;range&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="get_field_config">
+<a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.get_field_config">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_field_config</span><span class="p">(</span><span class="n">config_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RjsfFieldConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a predefined field configuration by name.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config_name: Name of the configuration (e.g., &#39;email&#39;, &#39;multiline_text&#39;)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        RjsfFieldConfig instance</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        KeyError: If config_name not found</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; email_config = get_field_config(&#39;email&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; email_config.format</span>
+<span class="sd">        &#39;email&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">config_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">COMMON_FIELD_CONFIGS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Unknown config &#39;</span><span class="si">{</span><span class="n">config_name</span><span class="si">}</span><span class="s2">&#39;. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Available: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">COMMON_FIELD_CONFIGS</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">COMMON_FIELD_CONFIGS</span><span class="p">[</span><span class="n">config_name</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="apply_field_configs">
+<a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.apply_field_configs">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_field_configs</span><span class="p">(</span>
+    <span class="n">schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">ui_schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">field_configs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">RjsfFieldConfig</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply field configurations to existing schemas.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        schema: JSON Schema to modify</span>
+<span class="sd">        ui_schema: UI Schema to modify</span>
+<span class="sd">        field_configs: Mapping of field names to configurations</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple of (modified_schema, modified_ui_schema)</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; configs = {</span>
+<span class="sd">        ...     &#39;email&#39;: get_field_config(&#39;email&#39;),</span>
+<span class="sd">        ...     &#39;bio&#39;: get_field_config(&#39;multiline_text&#39;),</span>
+<span class="sd">        ... }</span>
+<span class="sd">        &gt;&gt;&gt; schema, ui_schema = apply_field_configs(schema, ui_schema, configs)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">builder</span> <span class="o">=</span> <span class="n">RjsfConfigBuilder</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">field_configs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">builder</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">ui_schema</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;schema&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;uiSchema&#39;</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="ConditionalFieldConfig">
+<a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.ConditionalFieldConfig">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ConditionalFieldConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for conditional field display.</span>
+
+<span class="sd">    Allows fields to be shown/hidden based on the values of other fields.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; # Show &#39;other_reason&#39; field only when reason is &#39;other&#39;</span>
+<span class="sd">        &gt;&gt;&gt; config = ConditionalFieldConfig(</span>
+<span class="sd">        ...     &#39;other_reason&#39;,</span>
+<span class="sd">        ...     condition={&#39;reason&#39;: {&#39;const&#39;: &#39;other&#39;}}</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">condition</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">then_schema</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">else_schema</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize conditional field configuration.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            field_name: Name of the field to make conditional</span>
+<span class="sd">            condition: JSON Schema condition (if/then/else style)</span>
+<span class="sd">            then_schema: Schema to apply when condition is true</span>
+<span class="sd">            else_schema: Schema to apply when condition is false</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">field_name</span> <span class="o">=</span> <span class="n">field_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">condition</span> <span class="o">=</span> <span class="n">condition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">then_schema</span> <span class="o">=</span> <span class="n">then_schema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">else_schema</span> <span class="o">=</span> <span class="n">else_schema</span>
+
+<div class="viewcode-block" id="ConditionalFieldConfig.to_json_schema">
+<a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.ConditionalFieldConfig.to_json_schema">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_json_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert to JSON Schema if/then/else structure.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            JSON Schema conditional structure</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="p">}</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">then_schema</span><span class="p">:</span>
+            <span class="n">schema</span><span class="p">[</span><span class="s1">&#39;then&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">then_schema</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">else_schema</span><span class="p">:</span>
+            <span class="n">schema</span><span class="p">[</span><span class="s1">&#39;else&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">else_schema</span>
+
+        <span class="k">return</span> <span class="n">schema</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,566 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.decorators &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">uf.decorators</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uf.decorators</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;UI metadata decorators for uf.</span>
+
+<span class="sd">Provides decorators for annotating functions with UI configuration,</span>
+<span class="sd">grouping, and field specifications.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">uf.rjsf_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">RjsfFieldConfig</span>
+
+
+<span class="c1"># Attribute names for storing metadata</span>
+<span class="n">_UI_CONFIG_ATTR</span> <span class="o">=</span> <span class="s1">&#39;__uf_ui_config__&#39;</span>
+<span class="n">_GROUP_ATTR</span> <span class="o">=</span> <span class="s1">&#39;__uf_group__&#39;</span>
+<span class="n">_FIELD_CONFIGS_ATTR</span> <span class="o">=</span> <span class="s1">&#39;__uf_field_configs__&#39;</span>
+<span class="n">_HIDDEN_ATTR</span> <span class="o">=</span> <span class="s1">&#39;__uf_hidden__&#39;</span>
+
+
+<div class="viewcode-block" id="ui_config">
+<a class="viewcode-back" href="../../module_docs/uf/decorators.html#uf.ui_config">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">ui_config</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">group</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">fields</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">RjsfFieldConfig</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">hidden</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">icon</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">order</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to add UI configuration to functions.</span>
+
+<span class="sd">    This decorator attaches metadata to functions that uf can use to</span>
+<span class="sd">    customize the generated UI.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        title: Custom title for the function in UI</span>
+<span class="sd">        description: Custom description (overrides docstring)</span>
+<span class="sd">        group: Group name for organization</span>
+<span class="sd">        fields: Dictionary mapping parameter names to RjsfFieldConfig</span>
+<span class="sd">        hidden: Whether to hide this function from UI</span>
+<span class="sd">        icon: Icon identifier for the function</span>
+<span class="sd">        order: Display order within group</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Decorator function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; @ui_config(</span>
+<span class="sd">        ...     title=&quot;User Registration&quot;,</span>
+<span class="sd">        ...     group=&quot;Admin&quot;,</span>
+<span class="sd">        ...     fields={&#39;email&#39;: RjsfFieldConfig(format=&#39;email&#39;)}</span>
+<span class="sd">        ... )</span>
+<span class="sd">        ... def register_user(email: str, name: str):</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+            <span class="s1">&#39;group&#39;</span><span class="p">:</span> <span class="n">group</span><span class="p">,</span>
+            <span class="s1">&#39;fields&#39;</span><span class="p">:</span> <span class="n">fields</span> <span class="ow">or</span> <span class="p">{},</span>
+            <span class="s1">&#39;hidden&#39;</span><span class="p">:</span> <span class="n">hidden</span><span class="p">,</span>
+            <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="n">icon</span><span class="p">,</span>
+            <span class="s1">&#39;order&#39;</span><span class="p">:</span> <span class="n">order</span> <span class="k">if</span> <span class="n">order</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">_UI_CONFIG_ATTR</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+        <span class="c1"># Also set group attribute for auto-grouping</span>
+        <span class="k">if</span> <span class="n">group</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">_GROUP_ATTR</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+
+        <span class="c1"># Set hidden attribute</span>
+        <span class="k">if</span> <span class="n">hidden</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">_HIDDEN_ATTR</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Set field configs</span>
+        <span class="k">if</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">_FIELD_CONFIGS_ATTR</span><span class="p">,</span> <span class="n">fields</span><span class="p">)</span>
+
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Copy metadata to wrapper</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="n">_UI_CONFIG_ATTR</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">group</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="n">_GROUP_ATTR</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">hidden</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="n">_HIDDEN_ATTR</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="n">_FIELD_CONFIGS_ATTR</span><span class="p">,</span> <span class="n">fields</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+
+<div class="viewcode-block" id="group">
+<a class="viewcode-back" href="../../module_docs/uf/decorators.html#uf.group">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">group</span><span class="p">(</span><span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to assign a function to a group.</span>
+
+<span class="sd">    Simpler alternative to ui_config when you only need to set the group.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        group_name: Name of the group</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Decorator function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; @group(&quot;Admin&quot;)</span>
+<span class="sd">        ... def delete_user(user_id: int):</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">ui_config</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="n">group_name</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="hidden">
+<a class="viewcode-back" href="../../module_docs/uf/decorators.html#uf.hidden">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">hidden</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to hide a function from the UI.</span>
+
+<span class="sd">    The function will still be callable via the API but won&#39;t appear</span>
+<span class="sd">    in the UI navigation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Function to hide</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Decorated function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; @hidden</span>
+<span class="sd">        ... def internal_function():</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">ui_config</span><span class="p">(</span><span class="n">hidden</span><span class="o">=</span><span class="kc">True</span><span class="p">)(</span><span class="n">func</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="field_config">
+<a class="viewcode-back" href="../../module_docs/uf/decorators.html#uf.field_config">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">field_config</span><span class="p">(</span><span class="o">**</span><span class="n">field_configs</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to configure specific fields of a function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        **field_configs: Keyword arguments mapping parameter names to configs</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Decorator function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from uf.rjsf_config import get_field_config</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; @field_config(</span>
+<span class="sd">        ...     email=get_field_config(&#39;email&#39;),</span>
+<span class="sd">        ...     bio=get_field_config(&#39;multiline_text&#39;)</span>
+<span class="sd">        ... )</span>
+<span class="sd">        ... def create_profile(email: str, bio: str):</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">ui_config</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="n">field_configs</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_ui_config">
+<a class="viewcode-back" href="../../module_docs/uf/decorators.html#uf.get_ui_config">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_ui_config</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get UI configuration from a function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Function to get config from</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Configuration dictionary or None if not configured</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; config = get_ui_config(my_function)</span>
+<span class="sd">        &gt;&gt;&gt; if config:</span>
+<span class="sd">        ...     print(config[&#39;title&#39;])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">_UI_CONFIG_ATTR</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_group">
+<a class="viewcode-back" href="../../module_docs/uf/decorators.html#uf.get_group">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_group</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get group name from a function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Function to get group from</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Group name or None</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; group = get_group(my_function)</span>
+<span class="sd">        &gt;&gt;&gt; if group:</span>
+<span class="sd">        ...     print(f&quot;Function is in group: {group}&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">get_ui_config</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">_GROUP_ATTR</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_field_configs">
+<a class="viewcode-back" href="../../module_docs/uf/decorators.html#uf.get_field_configs">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_field_configs</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">RjsfFieldConfig</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get field configurations from a function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Function to get field configs from</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary mapping parameter names to RjsfFieldConfig</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; field_configs = get_field_configs(my_function)</span>
+<span class="sd">        &gt;&gt;&gt; if &#39;email&#39; in field_configs:</span>
+<span class="sd">        ...     print(field_configs[&#39;email&#39;].format)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">get_ui_config</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fields&#39;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">_FIELD_CONFIGS_ATTR</span><span class="p">,</span> <span class="p">{})</span></div>
+
+
+
+<div class="viewcode-block" id="is_hidden">
+<a class="viewcode-back" href="../../module_docs/uf/decorators.html#uf.is_hidden">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_hidden</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a function is hidden from UI.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Function to check</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        True if function is hidden, False otherwise</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; if not is_hidden(my_function):</span>
+<span class="sd">        ...     # Show in UI</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">get_ui_config</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hidden&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">_HIDDEN_ATTR</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="with_example">
+<a class="viewcode-back" href="../../module_docs/uf/decorators.html#uf.with_example">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">with_example</span><span class="p">(</span><span class="o">*</span><span class="n">example_args</span><span class="p">,</span> <span class="o">**</span><span class="n">example_kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to attach example arguments to a function.</span>
+
+<span class="sd">    This can be used to provide example/test data that appears in the UI.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        *example_args: Example positional arguments</span>
+<span class="sd">        **example_kwargs: Example keyword arguments</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Decorator function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; @with_example(x=10, y=20)</span>
+<span class="sd">        ... def add(x: int, y: int) -&gt; int:</span>
+<span class="sd">        ...     return x + y</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__uf_example_args__&#39;</span><span class="p">,</span> <span class="n">example_args</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__uf_example_kwargs__&#39;</span><span class="p">,</span> <span class="n">example_kwargs</span><span class="p">)</span>
+
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="s1">&#39;__uf_example_args__&#39;</span><span class="p">,</span> <span class="n">example_args</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="s1">&#39;__uf_example_kwargs__&#39;</span><span class="p">,</span> <span class="n">example_kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+
+<div class="viewcode-block" id="get_example">
+<a class="viewcode-back" href="../../module_docs/uf/decorators.html#uf.get_example">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_example</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get example arguments from a function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Function to get example from</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple of (args, kwargs) or None if no example</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; example = get_example(my_function)</span>
+<span class="sd">        &gt;&gt;&gt; if example:</span>
+<span class="sd">        ...     args, kwargs = example</span>
+<span class="sd">        ...     result = my_function(*args, **kwargs)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__uf_example_args__&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__uf_example_kwargs__&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">args</span> <span class="ow">or</span> <span class="p">(),</span> <span class="n">kwargs</span> <span class="ow">or</span> <span class="p">{})</span>
+
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="deprecated">
+<a class="viewcode-back" href="../../module_docs/uf/decorators.html#uf.deprecated">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">deprecated</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to mark a function as deprecated.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        message: Optional deprecation message</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Decorator function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; @deprecated(&quot;Use new_function instead&quot;)</span>
+<span class="sd">        ... def old_function():</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__uf_deprecated__&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__uf_deprecated_message__&#39;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">message</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> is deprecated&quot;</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="s1">&#39;__uf_deprecated__&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="s1">&#39;__uf_deprecated_message__&#39;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+
+<div class="viewcode-block" id="requires_auth">
+<a class="viewcode-back" href="../../module_docs/uf/decorators.html#uf.requires_auth">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">requires_auth</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">roles</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">permissions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to mark a function as requiring authentication.</span>
+
+<span class="sd">    This is metadata-only; actual authentication must be implemented</span>
+<span class="sd">    separately in the application layer.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        roles: List of required roles</span>
+<span class="sd">        permissions: List of required permissions</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Decorator function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; @requires_auth(roles=[&#39;admin&#39;], permissions=[&#39;user:delete&#39;])</span>
+<span class="sd">        ... def delete_user(user_id: int):</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__uf_requires_auth__&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__uf_required_roles__&#39;</span><span class="p">,</span> <span class="n">roles</span> <span class="ow">or</span> <span class="p">[])</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__uf_required_permissions__&#39;</span><span class="p">,</span> <span class="n">permissions</span> <span class="ow">or</span> <span class="p">[])</span>
+
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="s1">&#39;__uf_requires_auth__&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="s1">&#39;__uf_required_roles__&#39;</span><span class="p">,</span> <span class="n">roles</span> <span class="ow">or</span> <span class="p">[])</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="s1">&#39;__uf_required_permissions__&#39;</span><span class="p">,</span> <span class="n">permissions</span> <span class="ow">or</span> <span class="p">[])</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+
+<div class="viewcode-block" id="rate_limit">
+<a class="viewcode-back" href="../../module_docs/uf/decorators.html#uf.rate_limit">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">rate_limit</span><span class="p">(</span><span class="n">calls</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">period</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to mark a function with rate limiting metadata.</span>
+
+<span class="sd">    This is metadata-only; actual rate limiting must be implemented</span>
+<span class="sd">    separately.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        calls: Number of calls allowed</span>
+<span class="sd">        period: Time period in seconds</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Decorator function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; @rate_limit(calls=10, period=60)  # 10 calls per minute</span>
+<span class="sd">        ... def send_email(to: str, subject: str):</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__uf_rate_limit__&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;calls&#39;</span><span class="p">:</span> <span class="n">calls</span><span class="p">,</span> <span class="s1">&#39;period&#39;</span><span class="p">:</span> <span class="n">period</span><span class="p">})</span>
+
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="s1">&#39;__uf_rate_limit__&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;calls&#39;</span><span class="p">:</span> <span class="n">calls</span><span class="p">,</span> <span class="s1">&#39;period&#39;</span><span class="p">:</span> <span class="n">period</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

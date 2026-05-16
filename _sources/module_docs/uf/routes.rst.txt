@@ -1,0 +1,4 @@
+uf.routes
+=========
+.. automodule:: uf.routes
+   :members:

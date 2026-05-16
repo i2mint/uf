@@ -1,0 +1,555 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.templates &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">uf.templates</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uf.templates</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;HTML template generation for uf web interface.</span>
+
+<span class="sd">Provides functions to generate the web UI that lists functions and displays</span>
+<span class="sd">RJSF forms for interacting with them.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span>
+
+
+<div class="viewcode-block" id="generate_index_html">
+<a class="viewcode-back" href="../../module_docs/uf/templates.html#uf.templates.generate_index_html">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_index_html</span><span class="p">(</span>
+    <span class="n">function_specs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">page_title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Function Interface&quot;</span><span class="p">,</span>
+    <span class="n">custom_css</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rjsf_theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">base_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate HTML page with RJSF forms for functions.</span>
+
+<span class="sd">    Creates a single-page application with:</span>
+<span class="sd">    - Function list/navigation sidebar</span>
+<span class="sd">    - RJSF form for selected function</span>
+<span class="sd">    - Result display area</span>
+<span class="sd">    - Uses React and RJSF from CDN (no build step required)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        function_specs: Mapping from function names to their specs</span>
+<span class="sd">        page_title: Title for the HTML page</span>
+<span class="sd">        custom_css: Optional custom CSS to inject</span>
+<span class="sd">        rjsf_theme: RJSF theme to use (&#39;default&#39;, &#39;material-ui&#39;, &#39;semantic-ui&#39;)</span>
+<span class="sd">        base_url: Base URL for API endpoints</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Complete HTML string for the web interface</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get function list for sidebar</span>
+    <span class="n">func_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">function_specs</span><span class="p">:</span>
+        <span class="n">spec</span> <span class="o">=</span> <span class="n">function_specs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">func_list</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Execute </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="p">})</span>
+
+    <span class="c1"># Generate function list HTML</span>
+    <span class="n">func_list_html</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+        <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        &lt;div class=&quot;function-item&quot; onclick=&quot;loadFunction(&#39;</span><span class="si">{</span><span class="n">func</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;)&quot;&gt;</span>
+<span class="s1">            &lt;div class=&quot;function-name&quot;&gt;</span><span class="si">{</span><span class="n">func</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s1">&lt;/div&gt;</span>
+<span class="s1">            &lt;div class=&quot;function-desc&quot;&gt;</span><span class="si">{</span><span class="n">func</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">][:</span><span class="mi">100</span><span class="p">]</span><span class="si">}</span><span class="s1">&lt;/div&gt;</span>
+<span class="s1">        &lt;/div&gt;</span>
+<span class="s1">        &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">func_list</span>
+    <span class="p">])</span>
+
+    <span class="n">custom_styles</span> <span class="o">=</span> <span class="n">custom_css</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="n">html</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;!DOCTYPE html&gt;</span>
+<span class="s2">&lt;html lang=&quot;en&quot;&gt;</span>
+<span class="s2">&lt;head&gt;</span>
+<span class="s2">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span>
+<span class="s2">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span>
+<span class="s2">    &lt;title&gt;</span><span class="si">{</span><span class="n">page_title</span><span class="si">}</span><span class="s2">&lt;/title&gt;</span>
+
+<span class="s2">    &lt;!-- React and ReactDOM --&gt;</span>
+<span class="s2">    &lt;script crossorigin src=&quot;https://unpkg.com/react@18/umd/react.production.min.js&quot;&gt;&lt;/script&gt;</span>
+<span class="s2">    &lt;script crossorigin src=&quot;https://unpkg.com/react-dom@18/umd/react-dom.production.min.js&quot;&gt;&lt;/script&gt;</span>
+
+<span class="s2">    &lt;!-- RJSF and dependencies --&gt;</span>
+<span class="s2">    &lt;script src=&quot;https://unpkg.com/@rjsf/core@5/dist/react-jsonschema-form.js&quot;&gt;&lt;/script&gt;</span>
+<span class="s2">    &lt;script src=&quot;https://unpkg.com/@rjsf/validator-ajv8@5/dist/react-jsonschema-form-validator-ajv8.js&quot;&gt;&lt;/script&gt;</span>
+
+<span class="s2">    &lt;style&gt;</span>
+<span class="s2">        * </span><span class="se">{{</span>
+<span class="s2">            margin: 0;</span>
+<span class="s2">            padding: 0;</span>
+<span class="s2">            box-sizing: border-box;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        body </span><span class="se">{{</span>
+<span class="s2">            font-family: -apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;</span>
+<span class="s2">            display: flex;</span>
+<span class="s2">            height: 100vh;</span>
+<span class="s2">            overflow: hidden;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        #sidebar </span><span class="se">{{</span>
+<span class="s2">            width: 300px;</span>
+<span class="s2">            background: #f5f5f5;</span>
+<span class="s2">            border-right: 1px solid #ddd;</span>
+<span class="s2">            overflow-y: auto;</span>
+<span class="s2">            padding: 20px;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        #main </span><span class="se">{{</span>
+<span class="s2">            flex: 1;</span>
+<span class="s2">            display: flex;</span>
+<span class="s2">            flex-direction: column;</span>
+<span class="s2">            overflow: hidden;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        #header </span><span class="se">{{</span>
+<span class="s2">            background: #fff;</span>
+<span class="s2">            border-bottom: 1px solid #ddd;</span>
+<span class="s2">            padding: 20px 30px;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        #header h1 </span><span class="se">{{</span>
+<span class="s2">            font-size: 24px;</span>
+<span class="s2">            margin-bottom: 5px;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        #header .subtitle </span><span class="se">{{</span>
+<span class="s2">            color: #666;</span>
+<span class="s2">            font-size: 14px;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        #content </span><span class="se">{{</span>
+<span class="s2">            flex: 1;</span>
+<span class="s2">            overflow-y: auto;</span>
+<span class="s2">            padding: 30px;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        .function-item </span><span class="se">{{</span>
+<span class="s2">            background: white;</span>
+<span class="s2">            border: 1px solid #ddd;</span>
+<span class="s2">            border-radius: 6px;</span>
+<span class="s2">            padding: 12px;</span>
+<span class="s2">            margin-bottom: 10px;</span>
+<span class="s2">            cursor: pointer;</span>
+<span class="s2">            transition: all 0.2s;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        .function-item:hover </span><span class="se">{{</span>
+<span class="s2">            background: #f0f0f0;</span>
+<span class="s2">            border-color: #4CAF50;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        .function-item.active </span><span class="se">{{</span>
+<span class="s2">            background: #4CAF50;</span>
+<span class="s2">            color: white;</span>
+<span class="s2">            border-color: #4CAF50;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        .function-name </span><span class="se">{{</span>
+<span class="s2">            font-weight: 600;</span>
+<span class="s2">            margin-bottom: 4px;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        .function-desc </span><span class="se">{{</span>
+<span class="s2">            font-size: 12px;</span>
+<span class="s2">            color: #666;</span>
+<span class="s2">            line-height: 1.4;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        .function-item.active .function-desc </span><span class="se">{{</span>
+<span class="s2">            color: rgba(255, 255, 255, 0.9);</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        #form-container </span><span class="se">{{</span>
+<span class="s2">            max-width: 800px;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        .form-section </span><span class="se">{{</span>
+<span class="s2">            background: white;</span>
+<span class="s2">            border: 1px solid #ddd;</span>
+<span class="s2">            border-radius: 6px;</span>
+<span class="s2">            padding: 20px;</span>
+<span class="s2">            margin-bottom: 20px;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        .form-section h2 </span><span class="se">{{</span>
+<span class="s2">            margin-bottom: 10px;</span>
+<span class="s2">            font-size: 20px;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        .form-section .description </span><span class="se">{{</span>
+<span class="s2">            color: #666;</span>
+<span class="s2">            margin-bottom: 20px;</span>
+<span class="s2">            line-height: 1.6;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        #result </span><span class="se">{{</span>
+<span class="s2">            background: #f9f9f9;</span>
+<span class="s2">            border: 1px solid #ddd;</span>
+<span class="s2">            border-radius: 6px;</span>
+<span class="s2">            padding: 20px;</span>
+<span class="s2">            margin-top: 20px;</span>
+<span class="s2">            display: none;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        #result.success </span><span class="se">{{</span>
+<span class="s2">            background: #e8f5e9;</span>
+<span class="s2">            border-color: #4CAF50;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        #result.error </span><span class="se">{{</span>
+<span class="s2">            background: #ffebee;</span>
+<span class="s2">            border-color: #f44336;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        #result h3 </span><span class="se">{{</span>
+<span class="s2">            margin-bottom: 10px;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        #result pre </span><span class="se">{{</span>
+<span class="s2">            background: white;</span>
+<span class="s2">            padding: 15px;</span>
+<span class="s2">            border-radius: 4px;</span>
+<span class="s2">            overflow-x: auto;</span>
+<span class="s2">            white-space: pre-wrap;</span>
+<span class="s2">            word-wrap: break-word;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        .loading </span><span class="se">{{</span>
+<span class="s2">            display: none;</span>
+<span class="s2">            text-align: center;</span>
+<span class="s2">            padding: 20px;</span>
+<span class="s2">            color: #666;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        .loading.active </span><span class="se">{{</span>
+<span class="s2">            display: block;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        button[type=&quot;submit&quot;] </span><span class="se">{{</span>
+<span class="s2">            background: #4CAF50;</span>
+<span class="s2">            color: white;</span>
+<span class="s2">            border: none;</span>
+<span class="s2">            padding: 12px 24px;</span>
+<span class="s2">            border-radius: 4px;</span>
+<span class="s2">            font-size: 16px;</span>
+<span class="s2">            cursor: pointer;</span>
+<span class="s2">            transition: background 0.2s;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        button[type=&quot;submit&quot;]:hover </span><span class="se">{{</span>
+<span class="s2">            background: #45a049;</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        </span><span class="si">{</span><span class="n">custom_styles</span><span class="si">}</span>
+<span class="s2">    &lt;/style&gt;</span>
+<span class="s2">&lt;/head&gt;</span>
+<span class="s2">&lt;body&gt;</span>
+<span class="s2">    &lt;div id=&quot;sidebar&quot;&gt;</span>
+<span class="s2">        &lt;h2 style=&quot;margin-bottom: 15px;&quot;&gt;Functions&lt;/h2&gt;</span>
+<span class="s2">        </span><span class="si">{</span><span class="n">func_list_html</span><span class="si">}</span>
+<span class="s2">    &lt;/div&gt;</span>
+
+<span class="s2">    &lt;div id=&quot;main&quot;&gt;</span>
+<span class="s2">        &lt;div id=&quot;header&quot;&gt;</span>
+<span class="s2">            &lt;h1&gt;</span><span class="si">{</span><span class="n">page_title</span><span class="si">}</span><span class="s2">&lt;/h1&gt;</span>
+<span class="s2">            &lt;div class=&quot;subtitle&quot;&gt;Select a function from the sidebar to get started&lt;/div&gt;</span>
+<span class="s2">        &lt;/div&gt;</span>
+
+<span class="s2">        &lt;div id=&quot;content&quot;&gt;</span>
+<span class="s2">            &lt;div id=&quot;form-container&quot;&gt;&lt;/div&gt;</span>
+<span class="s2">            &lt;div id=&quot;loading&quot; class=&quot;loading&quot;&gt;Processing...&lt;/div&gt;</span>
+<span class="s2">            &lt;div id=&quot;result&quot;&gt;&lt;/div&gt;</span>
+<span class="s2">        &lt;/div&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+
+<span class="s2">    &lt;script&gt;</span>
+<span class="s2">        const </span><span class="se">{{</span><span class="s2"> useState, useEffect </span><span class="se">}}</span><span class="s2"> = React;</span>
+<span class="s2">        const Form = JSONSchemaForm.default;</span>
+<span class="s2">        const validator = JSONSchemaFormValidator.default;</span>
+
+<span class="s2">        let currentFunction = null;</span>
+
+<span class="s2">        function FunctionForm(</span><span class="se">{{</span><span class="s2"> funcName </span><span class="se">}}</span><span class="s2">) </span><span class="se">{{</span>
+<span class="s2">            const [schema, setSchema] = useState(null);</span>
+<span class="s2">            const [uiSchema, setUiSchema] = useState(</span><span class="se">{{}}</span><span class="s2">);</span>
+<span class="s2">            const [loading, setLoading] = useState(true);</span>
+
+<span class="s2">            useEffect(() =&gt; </span><span class="se">{{</span>
+<span class="s2">                // Load function spec</span>
+<span class="s2">                fetch(`</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/api/functions/$</span><span class="se">{{</span><span class="s2">funcName</span><span class="se">}}</span><span class="s2">/spec`)</span>
+<span class="s2">                    .then(res =&gt; res.json())</span>
+<span class="s2">                    .then(data =&gt; </span><span class="se">{{</span>
+<span class="s2">                        setSchema(data.schema);</span>
+<span class="s2">                        setUiSchema(data.uiSchema || </span><span class="se">{{}}</span><span class="s2">);</span>
+<span class="s2">                        setLoading(false);</span>
+<span class="s2">                    </span><span class="se">}}</span><span class="s2">)</span>
+<span class="s2">                    .catch(err =&gt; </span><span class="se">{{</span>
+<span class="s2">                        console.error(&#39;Error loading spec:&#39;, err);</span>
+<span class="s2">                        setLoading(false);</span>
+<span class="s2">                    </span><span class="se">}}</span><span class="s2">);</span>
+<span class="s2">            </span><span class="se">}}</span><span class="s2">, [funcName]);</span>
+
+<span class="s2">            const handleSubmit = (</span><span class="se">{{</span><span class="s2"> formData </span><span class="se">}}</span><span class="s2">) =&gt; </span><span class="se">{{</span>
+<span class="s2">                const resultDiv = document.getElementById(&#39;result&#39;);</span>
+<span class="s2">                const loadingDiv = document.getElementById(&#39;loading&#39;);</span>
+
+<span class="s2">                resultDiv.style.display = &#39;none&#39;;</span>
+<span class="s2">                loadingDiv.classList.add(&#39;active&#39;);</span>
+
+<span class="s2">                fetch(`</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/$</span><span class="se">{{</span><span class="s2">funcName</span><span class="se">}}</span><span class="s2">`, </span><span class="se">{{</span>
+<span class="s2">                    method: &#39;POST&#39;,</span>
+<span class="s2">                    headers: </span><span class="se">{{</span><span class="s2"> &#39;Content-Type&#39;: &#39;application/json&#39; </span><span class="se">}}</span><span class="s2">,</span>
+<span class="s2">                    body: JSON.stringify(formData)</span>
+<span class="s2">                </span><span class="se">}}</span><span class="s2">)</span>
+<span class="s2">                .then(res =&gt; </span><span class="se">{{</span>
+<span class="s2">                    if (!res.ok) </span><span class="se">{{</span>
+<span class="s2">                        return res.json().then(err =&gt; </span><span class="se">{{</span><span class="s2"> throw err; </span><span class="se">}}</span><span class="s2">);</span>
+<span class="s2">                    </span><span class="se">}}</span>
+<span class="s2">                    return res.json();</span>
+<span class="s2">                </span><span class="se">}}</span><span class="s2">)</span>
+<span class="s2">                .then(data =&gt; </span><span class="se">{{</span>
+<span class="s2">                    loadingDiv.classList.remove(&#39;active&#39;);</span>
+<span class="s2">                    resultDiv.className = &#39;success&#39;;</span>
+<span class="s2">                    resultDiv.innerHTML = `</span>
+<span class="s2">                        &lt;h3&gt;Result&lt;/h3&gt;</span>
+<span class="s2">                        &lt;pre&gt;$</span><span class="se">{{</span><span class="s2">JSON.stringify(data, null, 2)</span><span class="se">}}</span><span class="s2">&lt;/pre&gt;</span>
+<span class="s2">                    `;</span>
+<span class="s2">                    resultDiv.style.display = &#39;block&#39;;</span>
+<span class="s2">                </span><span class="se">}}</span><span class="s2">)</span>
+<span class="s2">                .catch(err =&gt; </span><span class="se">{{</span>
+<span class="s2">                    loadingDiv.classList.remove(&#39;active&#39;);</span>
+<span class="s2">                    resultDiv.className = &#39;error&#39;;</span>
+<span class="s2">                    resultDiv.innerHTML = `</span>
+<span class="s2">                        &lt;h3&gt;Error&lt;/h3&gt;</span>
+<span class="s2">                        &lt;pre&gt;$</span><span class="se">{{</span><span class="s2">JSON.stringify(err, null, 2)</span><span class="se">}}</span><span class="s2">&lt;/pre&gt;</span>
+<span class="s2">                    `;</span>
+<span class="s2">                    resultDiv.style.display = &#39;block&#39;;</span>
+<span class="s2">                </span><span class="se">}}</span><span class="s2">);</span>
+<span class="s2">            </span><span class="se">}}</span><span class="s2">;</span>
+
+<span class="s2">            if (loading) </span><span class="se">{{</span>
+<span class="s2">                return React.createElement(&#39;div&#39;, </span><span class="se">{{</span><span class="s2"> className: &#39;loading active&#39; </span><span class="se">}}</span><span class="s2">, &#39;Loading form...&#39;);</span>
+<span class="s2">            </span><span class="se">}}</span>
+
+<span class="s2">            if (!schema) </span><span class="se">{{</span>
+<span class="s2">                return React.createElement(&#39;div&#39;, null, &#39;Error loading function specification&#39;);</span>
+<span class="s2">            </span><span class="se">}}</span>
+
+<span class="s2">            return React.createElement(&#39;div&#39;, </span><span class="se">{{</span><span class="s2"> className: &#39;form-section&#39; </span><span class="se">}}</span><span class="s2">,</span>
+<span class="s2">                React.createElement(&#39;h2&#39;, null, funcName),</span>
+<span class="s2">                React.createElement(&#39;div&#39;, </span><span class="se">{{</span><span class="s2"> className: &#39;description&#39; </span><span class="se">}}</span><span class="s2">, schema.description || &#39;&#39;),</span>
+<span class="s2">                React.createElement(Form, </span><span class="se">{{</span>
+<span class="s2">                    schema: schema,</span>
+<span class="s2">                    uiSchema: uiSchema,</span>
+<span class="s2">                    validator: validator,</span>
+<span class="s2">                    onSubmit: handleSubmit</span>
+<span class="s2">                </span><span class="se">}}</span><span class="s2">)</span>
+<span class="s2">            );</span>
+<span class="s2">        </span><span class="se">}}</span>
+
+<span class="s2">        function loadFunction(funcName) </span><span class="se">{{</span>
+<span class="s2">            currentFunction = funcName;</span>
+
+<span class="s2">            // Update sidebar active state</span>
+<span class="s2">            document.querySelectorAll(&#39;.function-item&#39;).forEach(item =&gt; </span><span class="se">{{</span>
+<span class="s2">                item.classList.remove(&#39;active&#39;);</span>
+<span class="s2">            </span><span class="se">}}</span><span class="s2">);</span>
+<span class="s2">            event.currentTarget.classList.add(&#39;active&#39;);</span>
+
+<span class="s2">            // Clear previous results</span>
+<span class="s2">            document.getElementById(&#39;result&#39;).style.display = &#39;none&#39;;</span>
+
+<span class="s2">            // Render form</span>
+<span class="s2">            const container = document.getElementById(&#39;form-container&#39;);</span>
+<span class="s2">            const root = ReactDOM.createRoot(container);</span>
+<span class="s2">            root.render(React.createElement(FunctionForm, </span><span class="se">{{</span><span class="s2"> funcName </span><span class="se">}}</span><span class="s2">));</span>
+<span class="s2">        </span><span class="se">}}</span>
+<span class="s2">    &lt;/script&gt;</span>
+<span class="s2">&lt;/body&gt;</span>
+<span class="s2">&lt;/html&gt;&quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">html</span></div>
+
+
+
+<div class="viewcode-block" id="generate_error_page">
+<a class="viewcode-back" href="../../module_docs/uf/templates.html#uf.templates.generate_error_page">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_error_page</span><span class="p">(</span><span class="n">error_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">status_code</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a simple error page.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        error_message: Error message to display</span>
+<span class="sd">        status_code: HTTP status code</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HTML string for error page</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;!DOCTYPE html&gt;</span>
+<span class="s2">&lt;html lang=&quot;en&quot;&gt;</span>
+<span class="s2">&lt;head&gt;</span>
+<span class="s2">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span>
+<span class="s2">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span>
+<span class="s2">    &lt;title&gt;Error </span><span class="si">{</span><span class="n">status_code</span><span class="si">}</span><span class="s2">&lt;/title&gt;</span>
+<span class="s2">    &lt;style&gt;</span>
+<span class="s2">        body </span><span class="se">{{</span>
+<span class="s2">            font-family: -apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, Roboto, sans-serif;</span>
+<span class="s2">            display: flex;</span>
+<span class="s2">            align-items: center;</span>
+<span class="s2">            justify-content: center;</span>
+<span class="s2">            height: 100vh;</span>
+<span class="s2">            margin: 0;</span>
+<span class="s2">            background: #f5f5f5;</span>
+<span class="s2">        </span><span class="se">}}</span>
+<span class="s2">        .error-container </span><span class="se">{{</span>
+<span class="s2">            background: white;</span>
+<span class="s2">            padding: 40px;</span>
+<span class="s2">            border-radius: 8px;</span>
+<span class="s2">            box-shadow: 0 2px 10px rgba(0,0,0,0.1);</span>
+<span class="s2">            text-align: center;</span>
+<span class="s2">            max-width: 500px;</span>
+<span class="s2">        </span><span class="se">}}</span>
+<span class="s2">        h1 </span><span class="se">{{</span>
+<span class="s2">            color: #f44336;</span>
+<span class="s2">            margin-bottom: 20px;</span>
+<span class="s2">        </span><span class="se">}}</span>
+<span class="s2">        p </span><span class="se">{{</span>
+<span class="s2">            color: #666;</span>
+<span class="s2">            line-height: 1.6;</span>
+<span class="s2">        </span><span class="se">}}</span>
+<span class="s2">    &lt;/style&gt;</span>
+<span class="s2">&lt;/head&gt;</span>
+<span class="s2">&lt;body&gt;</span>
+<span class="s2">    &lt;div class=&quot;error-container&quot;&gt;</span>
+<span class="s2">        &lt;h1&gt;Error </span><span class="si">{</span><span class="n">status_code</span><span class="si">}</span><span class="s2">&lt;/h1&gt;</span>
+<span class="s2">        &lt;p&gt;</span><span class="si">{</span><span class="n">error_message</span><span class="si">}</span><span class="s2">&lt;/p&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+<span class="s2">&lt;/body&gt;</span>
+<span class="s2">&lt;/html&gt;&quot;&quot;&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

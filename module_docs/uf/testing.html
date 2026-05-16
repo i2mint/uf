@@ -1,0 +1,537 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.testing &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="uf.themes" href="themes.html" />
+    <link rel="prev" title="uf.templates" href="templates.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">uf.templates</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">uf.testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#uf.testing.FormDataBuilder"><code class="docutils literal notranslate"><span class="pre">FormDataBuilder</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.testing.FormDataBuilder.build"><code class="docutils literal notranslate"><span class="pre">FormDataBuilder.build()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.testing.FormDataBuilder.field"><code class="docutils literal notranslate"><span class="pre">FormDataBuilder.field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.testing.FormDataBuilder.fields"><code class="docutils literal notranslate"><span class="pre">FormDataBuilder.fields()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.testing.UfAppTester"><code class="docutils literal notranslate"><span class="pre">UfAppTester</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.testing.UfAppTester.assert_error_type"><code class="docutils literal notranslate"><span class="pre">UfAppTester.assert_error_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.testing.UfAppTester.assert_failure"><code class="docutils literal notranslate"><span class="pre">UfAppTester.assert_failure()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.testing.UfAppTester.assert_result_equals"><code class="docutils literal notranslate"><span class="pre">UfAppTester.assert_result_equals()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.testing.UfAppTester.assert_success"><code class="docutils literal notranslate"><span class="pre">UfAppTester.assert_success()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.testing.UfAppTester.get_history"><code class="docutils literal notranslate"><span class="pre">UfAppTester.get_history()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.testing.UfAppTester.submit_form"><code class="docutils literal notranslate"><span class="pre">UfAppTester.submit_form()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.testing.UfTestClient"><code class="docutils literal notranslate"><span class="pre">UfTestClient</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.testing.UfTestClient.call_function"><code class="docutils literal notranslate"><span class="pre">UfTestClient.call_function()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.testing.UfTestClient.get_spec"><code class="docutils literal notranslate"><span class="pre">UfTestClient.get_spec()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.testing.UfTestClient.list_functions"><code class="docutils literal notranslate"><span class="pre">UfTestClient.list_functions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.testing.UfTestClient.validate_params"><code class="docutils literal notranslate"><span class="pre">UfTestClient.validate_params()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.testing.assert_field_required"><code class="docutils literal notranslate"><span class="pre">assert_field_required()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.testing.assert_field_type"><code class="docutils literal notranslate"><span class="pre">assert_field_type()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.testing.assert_has_field"><code class="docutils literal notranslate"><span class="pre">assert_has_field()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.testing.assert_valid_rjsf_spec"><code class="docutils literal notranslate"><span class="pre">assert_valid_rjsf_spec()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.testing.mock_function_response"><code class="docutils literal notranslate"><span class="pre">mock_function_response()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.testing.test_ui_function"><code class="docutils literal notranslate"><span class="pre">test_ui_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">uf.testing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/uf/testing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-uf.testing">
+<span id="uf-testing"></span><h1>uf.testing<a class="headerlink" href="#module-uf.testing" title="Link to this heading"></a></h1>
+<p>Testing utilities for uf applications.</p>
+<p>Provides tools for testing uf apps, including test clients, fixtures,
+and assertion helpers.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.testing.FormDataBuilder">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.testing.</span></span><span class="sig-name descname"><span class="pre">FormDataBuilder</span></span><a class="reference internal" href="../../_modules/uf/testing.html#FormDataBuilder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.FormDataBuilder" title="Link to this definition"></a></dt>
+<dd><p>Builder for constructing form data for tests.</p>
+<p>Provides a fluent interface for building test form data.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">form_data</span> <span class="o">=</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="n">FormDataBuilder</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;John Doe&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;john@example.com&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="o">.</span><span class="n">build</span><span class="p">()</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.testing.FormDataBuilder.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/testing.html#FormDataBuilder.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.FormDataBuilder.build" title="Link to this definition"></a></dt>
+<dd><p>Build and return the form data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary of form data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.testing.FormDataBuilder.field">
+<span class="sig-name descname"><span class="pre">field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.testing.FormDataBuilder" title="uf.testing.FormDataBuilder"><span class="pre">FormDataBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/testing.html#FormDataBuilder.field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.FormDataBuilder.field" title="Link to this definition"></a></dt>
+<dd><p>Add a field to the form data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Field name</p></li>
+<li><p><strong>value</strong> – Field value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.testing.FormDataBuilder.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.testing.FormDataBuilder" title="uf.testing.FormDataBuilder"><span class="pre">FormDataBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/testing.html#FormDataBuilder.fields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.FormDataBuilder.fields" title="Link to this definition"></a></dt>
+<dd><p>Add multiple fields at once.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – Field name-value pairs</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.testing.UfAppTester">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.testing.</span></span><span class="sig-name descname"><span class="pre">UfAppTester</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/testing.html#UfAppTester"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.UfAppTester" title="Link to this definition"></a></dt>
+<dd><p>Context manager for testing uf apps.</p>
+<p>Provides a testing context with common utilities and assertions.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">UfAppTester</span><span class="p">(</span><span class="n">app</span><span class="p">)</span> <span class="k">as</span> <span class="n">tester</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">tester</span><span class="o">.</span><span class="n">submit_form</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+<span class="gp">... </span>    <span class="n">tester</span><span class="o">.</span><span class="n">assert_success</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">tester</span><span class="o">.</span><span class="n">assert_result_equals</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.testing.UfAppTester.assert_error_type">
+<span class="sig-name descname"><span class="pre">assert_error_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/testing.html#UfAppTester.assert_error_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.UfAppTester.assert_error_type" title="Link to this definition"></a></dt>
+<dd><p>Assert that error type matches.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result</strong> – Result dictionary</p></li>
+<li><p><strong>error_type</strong> – Expected error type name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>AssertionError</strong> – If error types don’t match</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.testing.UfAppTester.assert_failure">
+<span class="sig-name descname"><span class="pre">assert_failure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/testing.html#UfAppTester.assert_failure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.UfAppTester.assert_failure" title="Link to this definition"></a></dt>
+<dd><p>Assert that a result indicates failure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result</strong> – Result dictionary</p></li>
+<li><p><strong>message</strong> – Optional custom error message</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>AssertionError</strong> – If result is successful</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.testing.UfAppTester.assert_result_equals">
+<span class="sig-name descname"><span class="pre">assert_result_equals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/testing.html#UfAppTester.assert_result_equals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.UfAppTester.assert_result_equals" title="Link to this definition"></a></dt>
+<dd><p>Assert that result value equals expected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result</strong> – Result dictionary</p></li>
+<li><p><strong>expected</strong> – Expected value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>AssertionError</strong> – If values don’t match</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.testing.UfAppTester.assert_success">
+<span class="sig-name descname"><span class="pre">assert_success</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/testing.html#UfAppTester.assert_success"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.UfAppTester.assert_success" title="Link to this definition"></a></dt>
+<dd><p>Assert that a result indicates success.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result</strong> – Result dictionary</p></li>
+<li><p><strong>message</strong> – Optional custom error message</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>AssertionError</strong> – If result is not successful</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.testing.UfAppTester.get_history">
+<span class="sig-name descname"><span class="pre">get_history</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/testing.html#UfAppTester.get_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.UfAppTester.get_history" title="Link to this definition"></a></dt>
+<dd><p>Get history of all results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of result dictionaries</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.testing.UfAppTester.submit_form">
+<span class="sig-name descname"><span class="pre">submit_form</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">form_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/testing.html#UfAppTester.submit_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.UfAppTester.submit_form" title="Link to this definition"></a></dt>
+<dd><p>Simulate form submission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> – Name of the function</p></li>
+<li><p><strong>form_data</strong> – Form data as dictionary</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Result dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.testing.UfTestClient">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.testing.</span></span><span class="sig-name descname"><span class="pre">UfTestClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/testing.html#UfTestClient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.UfTestClient" title="Link to this definition"></a></dt>
+<dd><p>Test client for uf applications.</p>
+<p>Provides a convenient interface for testing uf apps without
+running a web server.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">uf</span><span class="w"> </span><span class="kn">import</span> <span class="n">mk_rjsf_app</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">([</span><span class="n">my_func</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">UfTestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">call_function</span><span class="p">(</span><span class="s1">&#39;my_func&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.testing.UfTestClient.call_function">
+<span class="sig-name descname"><span class="pre">call_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">expect_success</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/testing.html#UfTestClient.call_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.UfTestClient.call_function" title="Link to this definition"></a></dt>
+<dd><p>Call a function with the given parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> – Name of the function to call</p></li>
+<li><p><strong>params</strong> – Dictionary of parameters</p></li>
+<li><p><strong>expect_success</strong> – Whether to expect success (raises on failure)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Result dictionary with ‘success’ and ‘result’ or ‘error’</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>AssertionError</strong> – If expect_success=True and call fails</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.testing.UfTestClient.get_spec">
+<span class="sig-name descname"><span class="pre">get_spec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/testing.html#UfTestClient.get_spec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.UfTestClient.get_spec" title="Link to this definition"></a></dt>
+<dd><p>Get RJSF specification for a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func_name</strong> – Name of the function</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Function specification dict</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>KeyError</strong> – If function not found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.testing.UfTestClient.list_functions">
+<span class="sig-name descname"><span class="pre">list_functions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/testing.html#UfTestClient.list_functions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.UfTestClient.list_functions" title="Link to this definition"></a></dt>
+<dd><p>Get list of available function names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of function name strings</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.testing.UfTestClient.validate_params">
+<span class="sig-name descname"><span class="pre">validate_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/testing.html#UfTestClient.validate_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.UfTestClient.validate_params" title="Link to this definition"></a></dt>
+<dd><p>Validate parameters against function schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> – Name of the function</p></li>
+<li><p><strong>params</strong> – Parameters to validate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple of (is_valid, error_message)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.testing.assert_field_required">
+<span class="sig-prename descclassname"><span class="pre">uf.testing.</span></span><span class="sig-name descname"><span class="pre">assert_field_required</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/testing.html#assert_field_required"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.assert_field_required" title="Link to this definition"></a></dt>
+<dd><p>Assert that a field is required.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spec</strong> – The specification</p></li>
+<li><p><strong>field_name</strong> – Name of the field</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>AssertionError</strong> – If field is not required</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.testing.assert_field_type">
+<span class="sig-prename descclassname"><span class="pre">uf.testing.</span></span><span class="sig-name descname"><span class="pre">assert_field_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/testing.html#assert_field_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.assert_field_type" title="Link to this definition"></a></dt>
+<dd><p>Assert that a field has the expected type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spec</strong> – The specification</p></li>
+<li><p><strong>field_name</strong> – Name of the field</p></li>
+<li><p><strong>expected_type</strong> – Expected JSON Schema type</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>AssertionError</strong> – If type doesn’t match</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.testing.assert_has_field">
+<span class="sig-prename descclassname"><span class="pre">uf.testing.</span></span><span class="sig-name descname"><span class="pre">assert_has_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/testing.html#assert_has_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.assert_has_field" title="Link to this definition"></a></dt>
+<dd><p>Assert that a spec has a specific field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spec</strong> – The specification</p></li>
+<li><p><strong>field_name</strong> – Name of the field to check</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>AssertionError</strong> – If field not found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.testing.assert_valid_rjsf_spec">
+<span class="sig-prename descclassname"><span class="pre">uf.testing.</span></span><span class="sig-name descname"><span class="pre">assert_valid_rjsf_spec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/testing.html#assert_valid_rjsf_spec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.assert_valid_rjsf_spec" title="Link to this definition"></a></dt>
+<dd><p>Assert that a specification is valid RJSF format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>spec</strong> – The specification to validate</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>AssertionError</strong> – If spec is invalid</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.testing.mock_function_response">
+<span class="sig-prename descclassname"><span class="pre">uf.testing.</span></span><span class="sig-name descname"><span class="pre">mock_function_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mock_result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/testing.html#mock_function_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.mock_function_response" title="Link to this definition"></a></dt>
+<dd><p>Context manager to mock a function’s response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>app</strong> – The uf application</p></li>
+<li><p><strong>func_name</strong> – Name of function to mock</p></li>
+<li><p><strong>mock_result</strong> – Value to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">mock_function_response</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;get_user&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test&#39;</span><span class="p">}):</span>
+<span class="gp">... </span>    <span class="c1"># Calls to get_user will return {&#39;name&#39;: &#39;Test&#39;}</span>
+<span class="gp">... </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">call_function</span><span class="p">(</span><span class="s1">&#39;get_user&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.testing.test_ui_function">
+<span class="sig-prename descclassname"><span class="pre">uf.testing.</span></span><span class="sig-name descname"><span class="pre">test_ui_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_exception</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/testing.html#test_ui_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.testing.test_ui_function" title="Link to this definition"></a></dt>
+<dd><p>Test a function with form-like input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> – Function to test</p></li>
+<li><p><strong>test_inputs</strong> – Dictionary of test parameters</p></li>
+<li><p><strong>expected_output</strong> – Expected return value (if any)</p></li>
+<li><p><strong>expected_exception</strong> – Expected exception type (if any)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if test passes</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>AssertionError</strong> – If test fails</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test_ui_function</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span> <span class="n">expected_output</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="templates.html" class="btn btn-neutral float-left" title="uf.templates" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="themes.html" class="btn btn-neutral float-right" title="uf.themes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

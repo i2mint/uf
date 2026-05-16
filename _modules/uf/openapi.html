@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.openapi &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">uf.openapi</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uf.openapi</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;OpenAPI/Swagger integration for uf.</span>
+
+<span class="sd">Automatically generates OpenAPI specifications and provides Swagger UI</span>
+<span class="sd">for API documentation and testing.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+
+
+<div class="viewcode-block" id="function_to_openapi_operation">
+<a class="viewcode-back" href="../../module_docs/uf/openapi.html#uf.function_to_openapi_operation">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">function_to_openapi_operation</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a function to OpenAPI operation spec.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Function to convert</span>
+<span class="sd">        path: Optional API path</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        OpenAPI operation dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getdoc</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="c1"># Parse docstring for description</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">lines</span> <span class="k">else</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">summary</span>
+
+    <span class="c1"># Build parameters from signature</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">request_body</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">type_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nb">int</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
+        <span class="nb">float</span><span class="p">:</span> <span class="s1">&#39;number&#39;</span><span class="p">,</span>
+        <span class="nb">str</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="nb">bool</span><span class="p">:</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
+        <span class="nb">list</span><span class="p">:</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span>
+        <span class="nb">dict</span><span class="p">:</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">param_type</span> <span class="o">=</span> <span class="s1">&#39;string&#39;</span>  <span class="c1"># default</span>
+
+        <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span> <span class="o">!=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Parameter</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">py_type</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span>
+            <span class="c1"># Handle Optional types</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">py_type</span><span class="p">,</span> <span class="s1">&#39;__origin__&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">py_type</span><span class="o">.</span><span class="n">__origin__</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="n">Optional</span><span class="p">):</span>
+                    <span class="n">py_type</span> <span class="o">=</span> <span class="n">py_type</span><span class="o">.</span><span class="n">__args__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="n">param_type</span> <span class="o">=</span> <span class="n">type_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">py_type</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">)</span>
+
+        <span class="n">param_schema</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">param_type</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Check if required</span>
+        <span class="n">required</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">default</span> <span class="o">==</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Parameter</span><span class="o">.</span><span class="n">empty</span>
+
+        <span class="n">parameters</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">param_name</span><span class="p">,</span>
+            <span class="s1">&#39;in&#39;</span><span class="p">:</span> <span class="s1">&#39;query&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="n">required</span><span class="p">,</span>
+            <span class="s1">&#39;schema&#39;</span><span class="p">:</span> <span class="n">param_schema</span><span class="p">,</span>
+        <span class="p">})</span>
+
+    <span class="n">operation</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;summary&#39;</span><span class="p">:</span> <span class="n">summary</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+        <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="n">parameters</span><span class="p">,</span>
+        <span class="s1">&#39;responses&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;200&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Successful response&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;application/json&#39;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s1">&#39;schema&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;object&#39;</span><span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;400&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Bad request&#39;</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;500&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Internal server error&#39;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Add tags if function has group</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__uf_ui_config__&#39;</span><span class="p">):</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">__uf_ui_config__</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">):</span>
+            <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]]</span>
+
+    <span class="k">return</span> <span class="n">operation</span></div>
+
+
+
+<div class="viewcode-block" id="generate_openapi_spec">
+<a class="viewcode-back" href="../../module_docs/uf/openapi.html#uf.generate_openapi_spec">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_openapi_spec</span><span class="p">(</span>
+    <span class="n">funcs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;API&quot;</span><span class="p">,</span>
+    <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">servers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate OpenAPI 3.0 specification.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        funcs: List of functions</span>
+<span class="sd">        title: API title</span>
+<span class="sd">        version: API version</span>
+<span class="sd">        description: API description</span>
+<span class="sd">        servers: Optional list of server configs</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        OpenAPI specification dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">servers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">servers</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="p">}]</span>
+
+    <span class="n">paths</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
+        <span class="n">func_name</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s1">&#39;</span>
+
+        <span class="n">operation</span> <span class="o">=</span> <span class="n">function_to_openapi_operation</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+
+        <span class="c1"># Collect tags</span>
+        <span class="k">if</span> <span class="s1">&#39;tags&#39;</span> <span class="ow">in</span> <span class="n">operation</span><span class="p">:</span>
+            <span class="n">tags</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">operation</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">])</span>
+
+        <span class="n">paths</span><span class="p">[</span><span class="n">path</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;post&#39;</span><span class="p">:</span> <span class="n">operation</span>  <span class="c1"># Use POST for form submissions</span>
+        <span class="p">}</span>
+
+    <span class="n">spec</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;openapi&#39;</span><span class="p">:</span> <span class="s1">&#39;3.0.0&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;info&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+            <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="n">version</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;servers&#39;</span><span class="p">:</span> <span class="n">servers</span><span class="p">,</span>
+        <span class="s1">&#39;paths&#39;</span><span class="p">:</span> <span class="n">paths</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Add tags</span>
+    <span class="k">if</span> <span class="n">tags</span><span class="p">:</span>
+        <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">tag</span><span class="p">}</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tags</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">spec</span></div>
+
+
+
+<div class="viewcode-block" id="swagger_ui_html">
+<a class="viewcode-back" href="../../module_docs/uf/openapi.html#uf.swagger_ui_html">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">swagger_ui_html</span><span class="p">(</span><span class="n">openapi_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;/openapi.json&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate Swagger UI HTML.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        openapi_url: URL to OpenAPI spec</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HTML string for Swagger UI</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;!DOCTYPE html&gt;</span>
+<span class="s2">&lt;html lang=&quot;en&quot;&gt;</span>
+<span class="s2">&lt;head&gt;</span>
+<span class="s2">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span>
+<span class="s2">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span>
+<span class="s2">    &lt;title&gt;API Documentation&lt;/title&gt;</span>
+<span class="s2">    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://unpkg.com/swagger-ui-dist@5/swagger-ui.css&quot;&gt;</span>
+<span class="s2">&lt;/head&gt;</span>
+<span class="s2">&lt;body&gt;</span>
+<span class="s2">    &lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;</span>
+<span class="s2">    &lt;script src=&quot;https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js&quot;&gt;&lt;/script&gt;</span>
+<span class="s2">    &lt;script src=&quot;https://unpkg.com/swagger-ui-dist@5/swagger-ui-standalone-preset.js&quot;&gt;&lt;/script&gt;</span>
+<span class="s2">    &lt;script&gt;</span>
+<span class="s2">        window.onload = function() </span><span class="se">{{</span>
+<span class="s2">            window.ui = SwaggerUIBundle(</span><span class="se">{{</span>
+<span class="s2">                url: &#39;</span><span class="si">{</span><span class="n">openapi_url</span><span class="si">}</span><span class="s2">&#39;,</span>
+<span class="s2">                dom_id: &#39;#swagger-ui&#39;,</span>
+<span class="s2">                presets: [</span>
+<span class="s2">                    SwaggerUIBundle.presets.apis,</span>
+<span class="s2">                    SwaggerUIStandalonePreset</span>
+<span class="s2">                ],</span>
+<span class="s2">                layout: &quot;StandaloneLayout&quot;</span>
+<span class="s2">            </span><span class="se">}}</span><span class="s2">);</span>
+<span class="s2">        </span><span class="se">}}</span><span class="s2">;</span>
+<span class="s2">    &lt;/script&gt;</span>
+<span class="s2">&lt;/body&gt;</span>
+<span class="s2">&lt;/html&gt;&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">html</span></div>
+
+
+
+<div class="viewcode-block" id="redoc_ui_html">
+<a class="viewcode-back" href="../../module_docs/uf/openapi.html#uf.redoc_ui_html">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">redoc_ui_html</span><span class="p">(</span><span class="n">openapi_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;/openapi.json&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate ReDoc UI HTML.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        openapi_url: URL to OpenAPI spec</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HTML string for ReDoc UI</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;!DOCTYPE html&gt;</span>
+<span class="s2">&lt;html lang=&quot;en&quot;&gt;</span>
+<span class="s2">&lt;head&gt;</span>
+<span class="s2">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span>
+<span class="s2">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span>
+<span class="s2">    &lt;title&gt;API Documentation&lt;/title&gt;</span>
+<span class="s2">&lt;/head&gt;</span>
+<span class="s2">&lt;body&gt;</span>
+<span class="s2">    &lt;redoc spec-url=&#39;</span><span class="si">{</span><span class="n">openapi_url</span><span class="si">}</span><span class="s2">&#39;&gt;&lt;/redoc&gt;</span>
+<span class="s2">    &lt;script src=&quot;https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js&quot;&gt;&lt;/script&gt;</span>
+<span class="s2">&lt;/body&gt;</span>
+<span class="s2">&lt;/html&gt;&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">html</span></div>
+
+
+
+<div class="viewcode-block" id="add_openapi_routes">
+<a class="viewcode-back" href="../../module_docs/uf/openapi.html#uf.add_openapi_routes">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_openapi_routes</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">funcs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="o">**</span><span class="n">spec_kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add OpenAPI routes to an app.</span>
+
+<span class="sd">    Adds:</span>
+<span class="sd">    - /openapi.json: OpenAPI specification</span>
+<span class="sd">    - /docs: Swagger UI</span>
+<span class="sd">    - /redoc: ReDoc UI</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        app: Web application</span>
+<span class="sd">        funcs: List of functions</span>
+<span class="sd">        **spec_kwargs: Arguments for generate_openapi_spec</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Generate spec</span>
+    <span class="n">spec</span> <span class="o">=</span> <span class="n">generate_openapi_spec</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="o">**</span><span class="n">spec_kwargs</span><span class="p">)</span>
+
+    <span class="c1"># Detect framework</span>
+    <span class="n">is_bottle</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;route&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">is_bottle</span><span class="p">:</span>
+        <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/openapi.json&#39;</span><span class="p">)</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">openapi_spec</span><span class="p">():</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Return OpenAPI spec.&quot;&quot;&quot;</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">bottle</span><span class="w"> </span><span class="kn">import</span> <span class="n">response</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="s1">&#39;application/json&#39;</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+
+        <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/docs&#39;</span><span class="p">)</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">swagger_ui</span><span class="p">():</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Return Swagger UI.&quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="n">swagger_ui_html</span><span class="p">()</span>
+
+        <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/redoc&#39;</span><span class="p">)</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">redoc_ui</span><span class="p">():</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Return ReDoc UI.&quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="n">redoc_ui_html</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># FastAPI</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.responses</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSONResponse</span><span class="p">,</span> <span class="n">HTMLResponse</span>
+
+        <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/openapi.json&#39;</span><span class="p">)</span>
+        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">openapi_spec</span><span class="p">():</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Return OpenAPI spec.&quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">spec</span><span class="p">)</span>
+
+        <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/docs&#39;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
+        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">swagger_ui</span><span class="p">():</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Return Swagger UI.&quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="n">swagger_ui_html</span><span class="p">()</span>
+
+        <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/redoc&#39;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
+        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">redoc_ui</span><span class="p">():</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Return ReDoc UI.&quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="n">redoc_ui_html</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="OpenAPIConfig">
+<a class="viewcode-back" href="../../module_docs/uf/openapi.html#uf.OpenAPIConfig">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">OpenAPIConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for OpenAPI generation.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; config = OpenAPIConfig(</span>
+<span class="sd">        ...     title=&quot;My API&quot;,</span>
+<span class="sd">        ...     version=&quot;2.0.0&quot;,</span>
+<span class="sd">        ...     description=&quot;API for my application&quot;</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;API&quot;</span><span class="p">,</span>
+        <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">servers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">enable_swagger</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">enable_redoc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize OpenAPI config.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            title: API title</span>
+<span class="sd">            version: API version</span>
+<span class="sd">            description: API description</span>
+<span class="sd">            servers: List of server configurations</span>
+<span class="sd">            enable_swagger: Enable Swagger UI</span>
+<span class="sd">            enable_redoc: Enable ReDoc UI</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">version</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">servers</span> <span class="o">=</span> <span class="n">servers</span> <span class="ow">or</span> <span class="p">[{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="p">}]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enable_swagger</span> <span class="o">=</span> <span class="n">enable_swagger</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enable_redoc</span> <span class="o">=</span> <span class="n">enable_redoc</span>
+
+<div class="viewcode-block" id="OpenAPIConfig.to_dict">
+<a class="viewcode-back" href="../../module_docs/uf/openapi.html#uf.OpenAPIConfig.to_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert to dictionary.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Configuration dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+            <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+            <span class="s1">&#39;servers&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">servers</span><span class="p">,</span>
+            <span class="s1">&#39;enable_swagger&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">enable_swagger</span><span class="p">,</span>
+            <span class="s1">&#39;enable_redoc&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">enable_redoc</span><span class="p">,</span>
+        <span class="p">}</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

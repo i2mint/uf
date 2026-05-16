@@ -1,0 +1,513 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.trans &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">uf.trans</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uf.trans</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Input transformation integration for uf.</span>
+
+<span class="sd">Provides a registry for custom type transformations that bridges between</span>
+<span class="sd">RJSF form data and qh&#39;s input transformation system.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Type</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">uf.rjsf_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">RjsfFieldConfig</span>
+
+
+<div class="viewcode-block" id="InputTransformRegistry">
+<a class="viewcode-back" href="../../module_docs/uf/trans.html#uf.InputTransformRegistry">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">InputTransformRegistry</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Registry for custom type transformations.</span>
+
+<span class="sd">    Integrates with qh&#39;s type registry and extends it for UI needs,</span>
+<span class="sd">    allowing custom types to be properly handled in both the form</span>
+<span class="sd">    interface and the HTTP service layer.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from datetime import datetime</span>
+<span class="sd">        &gt;&gt;&gt; registry = InputTransformRegistry()</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; # Register a custom type</span>
+<span class="sd">        &gt;&gt;&gt; registry.register_type(</span>
+<span class="sd">        ...     datetime,</span>
+<span class="sd">        ...     to_json=lambda dt: dt.isoformat(),</span>
+<span class="sd">        ...     from_json=lambda s: datetime.fromisoformat(s),</span>
+<span class="sd">        ...     ui_widget=&#39;datetime&#39;</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the transformation registry.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type_handlers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Type</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="InputTransformRegistry.register_type">
+<a class="viewcode-back" href="../../module_docs/uf/trans.html#uf.InputTransformRegistry.register_type">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_type</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">py_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">to_json</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">from_json</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ui_widget</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ui_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">RjsfFieldConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">json_schema_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">json_schema_format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Register a type with both qh and UI configuration.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            py_type: Python type to register</span>
+<span class="sd">            to_json: Function to convert Python type to JSON-serializable</span>
+<span class="sd">            from_json: Function to convert JSON to Python type</span>
+<span class="sd">            ui_widget: RJSF widget to use for this type</span>
+<span class="sd">            ui_config: Full RjsfFieldConfig for this type</span>
+<span class="sd">            json_schema_type: JSON Schema type (e.g., &#39;string&#39;, &#39;number&#39;)</span>
+<span class="sd">            json_schema_format: JSON Schema format (e.g., &#39;date-time&#39;, &#39;email&#39;)</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; from pathlib import Path</span>
+<span class="sd">            &gt;&gt;&gt; registry.register_type(</span>
+<span class="sd">            ...     Path,</span>
+<span class="sd">            ...     to_json=str,</span>
+<span class="sd">            ...     from_json=Path,</span>
+<span class="sd">            ...     ui_widget=&#39;text&#39;,</span>
+<span class="sd">            ...     json_schema_type=&#39;string&#39;</span>
+<span class="sd">            ... )</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">handler</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;to_json&#39;</span><span class="p">:</span> <span class="n">to_json</span> <span class="ow">or</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">),</span>
+            <span class="s1">&#39;from_json&#39;</span><span class="p">:</span> <span class="n">from_json</span> <span class="ow">or</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Build UI config</span>
+        <span class="k">if</span> <span class="n">ui_config</span><span class="p">:</span>
+            <span class="n">handler</span><span class="p">[</span><span class="s1">&#39;ui_config&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ui_config</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Build from individual params</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="n">ui_widget</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">json_schema_format</span><span class="p">:</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="n">json_schema_format</span>
+            <span class="n">handler</span><span class="p">[</span><span class="s1">&#39;ui_config&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span>
+
+        <span class="k">if</span> <span class="n">json_schema_type</span><span class="p">:</span>
+            <span class="n">handler</span><span class="p">[</span><span class="s1">&#39;json_schema_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json_schema_type</span>
+        <span class="k">if</span> <span class="n">json_schema_format</span><span class="p">:</span>
+            <span class="n">handler</span><span class="p">[</span><span class="s1">&#39;json_schema_format&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json_schema_format</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type_handlers</span><span class="p">[</span><span class="n">py_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">handler</span></div>
+
+
+<div class="viewcode-block" id="InputTransformRegistry.get_handler">
+<a class="viewcode-back" href="../../module_docs/uf/trans.html#uf.InputTransformRegistry.get_handler">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">py_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get handler for a type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            py_type: Python type to look up</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Handler dict or None if not registered</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type_handlers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">py_type</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="InputTransformRegistry.get_ui_config">
+<a class="viewcode-back" href="../../module_docs/uf/trans.html#uf.InputTransformRegistry.get_ui_config">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ui_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">py_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">RjsfFieldConfig</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get UI configuration for a type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            py_type: Python type to look up</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            RjsfFieldConfig or None if not registered</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_handler</span><span class="p">(</span><span class="n">py_type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ui_config&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="InputTransformRegistry.to_json">
+<a class="viewcode-back" href="../../module_docs/uf/trans.html#uf.InputTransformRegistry.to_json">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">py_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Type</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Transform a Python value to JSON-serializable form.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            value: Value to transform</span>
+<span class="sd">            py_type: Optional type hint (uses type(value) if not provided)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            JSON-serializable value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">target_type</span> <span class="o">=</span> <span class="n">py_type</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_handler</span><span class="p">(</span><span class="n">target_type</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">handler</span> <span class="ow">and</span> <span class="n">handler</span><span class="p">[</span><span class="s1">&#39;to_json&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="p">[</span><span class="s1">&#39;to_json&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="InputTransformRegistry.from_json">
+<a class="viewcode-back" href="../../module_docs/uf/trans.html#uf.InputTransformRegistry.from_json">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">py_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Transform a JSON value to Python type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            value: JSON value to transform</span>
+<span class="sd">            py_type: Target Python type</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Transformed value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_handler</span><span class="p">(</span><span class="n">py_type</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">handler</span> <span class="ow">and</span> <span class="n">handler</span><span class="p">[</span><span class="s1">&#39;from_json&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">handler</span><span class="p">[</span><span class="s1">&#39;from_json&#39;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="InputTransformRegistry.mk_input_trans_for_funcs">
+<a class="viewcode-back" href="../../module_docs/uf/trans.html#uf.InputTransformRegistry.mk_input_trans_for_funcs">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mk_input_trans_for_funcs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">funcs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create input transformation compatible with qh.</span>
+
+<span class="sd">        This creates a transformation function that can be passed to</span>
+<span class="sd">        qh.mk_app as the input_trans parameter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            funcs: List of functions to create transformation for</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Transformation function for qh</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; from uf import mk_rjsf_app</span>
+<span class="sd">            &gt;&gt;&gt; registry = InputTransformRegistry()</span>
+<span class="sd">            &gt;&gt;&gt; # ... register types ...</span>
+<span class="sd">            &gt;&gt;&gt; input_trans = registry.mk_input_trans_for_funcs([my_func])</span>
+<span class="sd">            &gt;&gt;&gt; app = mk_rjsf_app([my_func], input_trans=input_trans)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+
+        <span class="c1"># Build mapping of func_name -&gt; param_name -&gt; type</span>
+        <span class="n">func_type_map</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
+            <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+            <span class="n">param_types</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span> <span class="o">!=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Parameter</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                    <span class="n">param_types</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span>
+            <span class="n">func_type_map</span><span class="p">[</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">param_types</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">input_trans</span><span class="p">(</span><span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Transform input kwargs based on registered types.&quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">func_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">func_type_map</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">kwargs</span>
+
+            <span class="n">param_types</span> <span class="o">=</span> <span class="n">func_type_map</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
+            <span class="n">transformed</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">param_name</span> <span class="ow">in</span> <span class="n">param_types</span><span class="p">:</span>
+                    <span class="n">py_type</span> <span class="o">=</span> <span class="n">param_types</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span>
+                    <span class="n">transformed</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">py_type</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">transformed</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+            <span class="k">return</span> <span class="n">transformed</span>
+
+        <span class="k">return</span> <span class="n">input_trans</span></div>
+
+
+<div class="viewcode-block" id="InputTransformRegistry.mk_output_trans">
+<a class="viewcode-back" href="../../module_docs/uf/trans.html#uf.InputTransformRegistry.mk_output_trans">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mk_output_trans</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create output transformation for qh.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Transformation function for qh output</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; output_trans = registry.mk_output_trans()</span>
+<span class="sd">            &gt;&gt;&gt; app = mk_rjsf_app([my_func], output_trans=output_trans)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">output_trans</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Transform output to JSON-serializable form.&quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+            <span class="c1"># Try to transform using registered handlers</span>
+            <span class="n">result_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="n">handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_handler</span><span class="p">(</span><span class="n">result_type</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">handler</span> <span class="ow">and</span> <span class="n">handler</span><span class="p">[</span><span class="s1">&#39;to_json&#39;</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">handler</span><span class="p">[</span><span class="s1">&#39;to_json&#39;</span><span class="p">](</span><span class="n">result</span><span class="p">)</span>
+
+            <span class="c1"># Handle common collection types</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">output_trans</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">output_trans</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">output_trans</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+
+            <span class="k">return</span> <span class="n">result</span>
+
+        <span class="k">return</span> <span class="n">output_trans</span></div>
+
+
+<div class="viewcode-block" id="InputTransformRegistry.get_all_registered_types">
+<a class="viewcode-back" href="../../module_docs/uf/trans.html#uf.InputTransformRegistry.get_all_registered_types">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_registered_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Type</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get list of all registered types.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of registered Python types</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_type_handlers</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+</div>
+
+
+
+<span class="c1"># Global registry instance for convenience</span>
+<span class="n">_global_registry</span> <span class="o">=</span> <span class="n">InputTransformRegistry</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="register_type">
+<a class="viewcode-back" href="../../module_docs/uf/trans.html#uf.register_type">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_type</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Register a type in the global registry.</span>
+
+<span class="sd">    This is a convenience function that uses the global registry.</span>
+<span class="sd">    See InputTransformRegistry.register_type for full documentation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_global_registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_global_registry">
+<a class="viewcode-back" href="../../module_docs/uf/trans.html#uf.get_global_registry">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_global_registry</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">InputTransformRegistry</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the global transformation registry.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The global InputTransformRegistry instance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_global_registry</span></div>
+
+
+
+<span class="c1"># Register common custom types</span>
+<div class="viewcode-block" id="register_common_types">
+<a class="viewcode-back" href="../../module_docs/uf/trans.html#uf.register_common_types">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_common_types</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Register commonly-used Python types.</span>
+
+<span class="sd">    This includes:</span>
+<span class="sd">    - datetime.datetime</span>
+<span class="sd">    - datetime.date</span>
+<span class="sd">    - datetime.time</span>
+<span class="sd">    - pathlib.Path</span>
+<span class="sd">    - uuid.UUID</span>
+<span class="sd">    - decimal.Decimal</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">time</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">uuid</span><span class="w"> </span><span class="kn">import</span> <span class="n">UUID</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+
+    <span class="c1"># datetime types</span>
+    <span class="n">_global_registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span>
+        <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">to_json</span><span class="o">=</span><span class="k">lambda</span> <span class="n">dt</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+        <span class="n">from_json</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">s</span><span class="p">,</span>
+        <span class="n">ui_widget</span><span class="o">=</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span>
+        <span class="n">json_schema_type</span><span class="o">=</span><span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="n">json_schema_format</span><span class="o">=</span><span class="s1">&#39;date-time&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">_global_registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span>
+        <span class="n">date</span><span class="p">,</span>
+        <span class="n">to_json</span><span class="o">=</span><span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+        <span class="n">from_json</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">date</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">s</span><span class="p">,</span>
+        <span class="n">ui_widget</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span>
+        <span class="n">json_schema_type</span><span class="o">=</span><span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="n">json_schema_format</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">_global_registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span>
+        <span class="n">time</span><span class="p">,</span>
+        <span class="n">to_json</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+        <span class="n">from_json</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">s</span><span class="p">,</span>
+        <span class="n">ui_widget</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span>
+        <span class="n">json_schema_type</span><span class="o">=</span><span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="n">json_schema_format</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Path</span>
+    <span class="n">_global_registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span>
+        <span class="n">Path</span><span class="p">,</span>
+        <span class="n">to_json</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">from_json</span><span class="o">=</span><span class="n">Path</span><span class="p">,</span>
+        <span class="n">json_schema_type</span><span class="o">=</span><span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># UUID</span>
+    <span class="n">_global_registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span>
+        <span class="n">UUID</span><span class="p">,</span>
+        <span class="n">to_json</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">from_json</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">UUID</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">s</span><span class="p">,</span>
+        <span class="n">json_schema_type</span><span class="o">=</span><span class="s1">&#39;string&#39;</span><span class="p">,</span>
+        <span class="n">json_schema_format</span><span class="o">=</span><span class="s1">&#39;uuid&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Decimal</span>
+    <span class="n">_global_registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span>
+        <span class="n">Decimal</span><span class="p">,</span>
+        <span class="n">to_json</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">from_json</span><span class="o">=</span><span class="n">Decimal</span><span class="p">,</span>
+        <span class="n">json_schema_type</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># Auto-register common types on import</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">register_common_types</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="c1"># Some types might not be available, that&#39;s okay</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

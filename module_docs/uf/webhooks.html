@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.webhooks &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="uf.trans" href="trans.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trans.html">uf.trans</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">uf.webhooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#uf.webhooks.WebhookClient"><code class="docutils literal notranslate"><span class="pre">WebhookClient</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.webhooks.WebhookClient.send"><code class="docutils literal notranslate"><span class="pre">WebhookClient.send()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.webhooks.WebhookEvent"><code class="docutils literal notranslate"><span class="pre">WebhookEvent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.webhooks.WebhookEvent.event_type"><code class="docutils literal notranslate"><span class="pre">WebhookEvent.event_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.webhooks.WebhookEvent.func_name"><code class="docutils literal notranslate"><span class="pre">WebhookEvent.func_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.webhooks.WebhookEvent.params"><code class="docutils literal notranslate"><span class="pre">WebhookEvent.params</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.webhooks.WebhookEvent.result"><code class="docutils literal notranslate"><span class="pre">WebhookEvent.result</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.webhooks.WebhookEvent.error"><code class="docutils literal notranslate"><span class="pre">WebhookEvent.error</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.webhooks.WebhookEvent.timestamp"><code class="docutils literal notranslate"><span class="pre">WebhookEvent.timestamp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.webhooks.WebhookEvent.to_dict"><code class="docutils literal notranslate"><span class="pre">WebhookEvent.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.webhooks.WebhookManager"><code class="docutils literal notranslate"><span class="pre">WebhookManager</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.webhooks.WebhookManager.add_webhook"><code class="docutils literal notranslate"><span class="pre">WebhookManager.add_webhook()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.webhooks.WebhookManager.list_webhooks"><code class="docutils literal notranslate"><span class="pre">WebhookManager.list_webhooks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.webhooks.WebhookManager.remove_webhook"><code class="docutils literal notranslate"><span class="pre">WebhookManager.remove_webhook()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.webhooks.WebhookManager.trigger"><code class="docutils literal notranslate"><span class="pre">WebhookManager.trigger()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.webhooks.get_global_webhook_manager"><code class="docutils literal notranslate"><span class="pre">get_global_webhook_manager()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.webhooks.set_global_webhook_manager"><code class="docutils literal notranslate"><span class="pre">set_global_webhook_manager()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.webhooks.webhook"><code class="docutils literal notranslate"><span class="pre">webhook()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">uf.webhooks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/uf/webhooks.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-uf.webhooks">
+<span id="uf-webhooks"></span><h1>uf.webhooks<a class="headerlink" href="#module-uf.webhooks" title="Link to this heading"></a></h1>
+<p>Webhook support for uf.</p>
+<p>Provides functionality to trigger HTTP callbacks when functions complete,
+enabling integration with external services.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookClient">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.webhooks.</span></span><span class="sig-name descname"><span class="pre">WebhookClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">retry_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/webhooks.html#WebhookClient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.webhooks.WebhookClient" title="Link to this definition"></a></dt>
+<dd><p>Client for sending webhooks.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">WebhookClient</span><span class="p">(</span><span class="s1">&#39;https://example.com/webhook&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">WebhookEvent</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="s1">&#39;my_func&#39;</span><span class="p">,</span> <span class="p">{},</span> <span class="n">result</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookClient.send">
+<span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#uf.webhooks.WebhookEvent" title="uf.webhooks.WebhookEvent"><span class="pre">WebhookEvent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">async_send</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/webhooks.html#WebhookClient.send"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.webhooks.WebhookClient.send" title="Link to this definition"></a></dt>
+<dd><p>Send a webhook event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>event</strong> – WebhookEvent to send</p></li>
+<li><p><strong>async_send</strong> – Whether to send asynchronously</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if sent successfully (for sync sends)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookEvent">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.webhooks.</span></span><span class="sig-name descname"><span class="pre">WebhookEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/webhooks.html#WebhookEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.webhooks.WebhookEvent" title="Link to this definition"></a></dt>
+<dd><p>Represents a webhook event.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookEvent.event_type">
+<span class="sig-name descname"><span class="pre">event_type</span></span><a class="headerlink" href="#uf.webhooks.WebhookEvent.event_type" title="Link to this definition"></a></dt>
+<dd><p>Type of event (‘success’, ‘failure’, ‘start’)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookEvent.func_name">
+<span class="sig-name descname"><span class="pre">func_name</span></span><a class="headerlink" href="#uf.webhooks.WebhookEvent.func_name" title="Link to this definition"></a></dt>
+<dd><p>Name of the function</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookEvent.params">
+<span class="sig-name descname"><span class="pre">params</span></span><a class="headerlink" href="#uf.webhooks.WebhookEvent.params" title="Link to this definition"></a></dt>
+<dd><p>Function parameters</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookEvent.result">
+<span class="sig-name descname"><span class="pre">result</span></span><a class="headerlink" href="#uf.webhooks.WebhookEvent.result" title="Link to this definition"></a></dt>
+<dd><p>Function result (if success)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookEvent.error">
+<span class="sig-name descname"><span class="pre">error</span></span><a class="headerlink" href="#uf.webhooks.WebhookEvent.error" title="Link to this definition"></a></dt>
+<dd><p>Error message (if failure)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookEvent.timestamp">
+<span class="sig-name descname"><span class="pre">timestamp</span></span><a class="headerlink" href="#uf.webhooks.WebhookEvent.timestamp" title="Link to this definition"></a></dt>
+<dd><p>When event occurred</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookEvent.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/webhooks.html#WebhookEvent.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.webhooks.WebhookEvent.to_dict" title="Link to this definition"></a></dt>
+<dd><p>Convert to dictionary for JSON serialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookManager">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.webhooks.</span></span><span class="sig-name descname"><span class="pre">WebhookManager</span></span><a class="reference internal" href="../../_modules/uf/webhooks.html#WebhookManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.webhooks.WebhookManager" title="Link to this definition"></a></dt>
+<dd><p>Manage webhooks for multiple URLs and events.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">WebhookManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span><span class="o">.</span><span class="n">add_webhook</span><span class="p">(</span><span class="s1">&#39;https://example.com/hook1&#39;</span><span class="p">,</span> <span class="n">events</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span><span class="o">.</span><span class="n">add_webhook</span><span class="p">(</span><span class="s1">&#39;https://example.com/hook2&#39;</span><span class="p">,</span> <span class="n">events</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;failure&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="s1">&#39;my_func&#39;</span><span class="p">,</span> <span class="p">{},</span> <span class="n">result</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookManager.add_webhook">
+<span class="sig-name descname"><span class="pre">add_webhook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/webhooks.html#WebhookManager.add_webhook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.webhooks.WebhookManager.add_webhook" title="Link to this definition"></a></dt>
+<dd><p>Add a webhook.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> – Webhook URL</p></li>
+<li><p><strong>events</strong> – List of event types to trigger on (None = all)</p></li>
+<li><p><strong>headers</strong> – Optional HTTP headers</p></li>
+<li><p><strong>condition</strong> – Optional callable to filter events</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookManager.list_webhooks">
+<span class="sig-name descname"><span class="pre">list_webhooks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/webhooks.html#WebhookManager.list_webhooks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.webhooks.WebhookManager.list_webhooks" title="Link to this definition"></a></dt>
+<dd><p>List all registered webhooks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of webhook configurations</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookManager.remove_webhook">
+<span class="sig-name descname"><span class="pre">remove_webhook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/webhooks.html#WebhookManager.remove_webhook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.webhooks.WebhookManager.remove_webhook" title="Link to this definition"></a></dt>
+<dd><p>Remove a webhook by URL.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>url</strong> – Webhook URL</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if removed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.webhooks.WebhookManager.trigger">
+<span class="sig-name descname"><span class="pre">trigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../../_modules/uf/webhooks.html#WebhookManager.trigger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.webhooks.WebhookManager.trigger" title="Link to this definition"></a></dt>
+<dd><p>Trigger webhooks for an event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>event_type</strong> – Event type</p></li>
+<li><p><strong>func_name</strong> – Function name</p></li>
+<li><p><strong>params</strong> – Function parameters</p></li>
+<li><p><strong>result</strong> – Function result</p></li>
+<li><p><strong>error</strong> – Error message</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Number of webhooks triggered</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.webhooks.get_global_webhook_manager">
+<span class="sig-prename descclassname"><span class="pre">uf.webhooks.</span></span><span class="sig-name descname"><span class="pre">get_global_webhook_manager</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.webhooks.WebhookManager" title="uf.webhooks.WebhookManager"><span class="pre">WebhookManager</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/webhooks.html#get_global_webhook_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.webhooks.get_global_webhook_manager" title="Link to this definition"></a></dt>
+<dd><p>Get the global webhook manager.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.webhooks.set_global_webhook_manager">
+<span class="sig-prename descclassname"><span class="pre">uf.webhooks.</span></span><span class="sig-name descname"><span class="pre">set_global_webhook_manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#uf.webhooks.WebhookManager" title="uf.webhooks.WebhookManager"><span class="pre">WebhookManager</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/webhooks.html#set_global_webhook_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.webhooks.set_global_webhook_manager" title="Link to this definition"></a></dt>
+<dd><p>Set the global webhook manager.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.webhooks.webhook">
+<span class="sig-prename descclassname"><span class="pre">uf.webhooks.</span></span><span class="sig-name descname"><span class="pre">webhook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">on</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#uf.webhooks.WebhookManager" title="uf.webhooks.WebhookManager"><span class="pre">WebhookManager</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/webhooks.html#webhook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.webhooks.webhook" title="Link to this definition"></a></dt>
+<dd><p>Decorator to add webhooks to a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>on</strong> – List of events to trigger on (‘success’, ‘failure’, ‘start’)</p></li>
+<li><p><strong>url</strong> – Optional webhook URL</p></li>
+<li><p><strong>manager</strong> – Optional WebhookManager instance</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@webhook</span><span class="p">(</span><span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="s1">&#39;failure&#39;</span><span class="p">])</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">process_order</span><span class="p">(</span><span class="n">order_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="c1"># Process order</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;processed&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="trans.html" class="btn btn-neutral float-left" title="uf.trans" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

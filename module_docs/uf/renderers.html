@@ -1,0 +1,503 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.renderers &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="uf.rjsf_config" href="rjsf_config.html" />
+    <link rel="prev" title="uf.pydantic_support" href="pydantic_support.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">uf.renderers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.ChartRenderer"><code class="docutils literal notranslate"><span class="pre">ChartRenderer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.ChartRenderer.can_render"><code class="docutils literal notranslate"><span class="pre">ChartRenderer.can_render()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.ChartRenderer.render"><code class="docutils literal notranslate"><span class="pre">ChartRenderer.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.DataFrameRenderer"><code class="docutils literal notranslate"><span class="pre">DataFrameRenderer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.DataFrameRenderer.can_render"><code class="docutils literal notranslate"><span class="pre">DataFrameRenderer.can_render()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.DataFrameRenderer.render"><code class="docutils literal notranslate"><span class="pre">DataFrameRenderer.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.HtmlRenderer"><code class="docutils literal notranslate"><span class="pre">HtmlRenderer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.HtmlRenderer.can_render"><code class="docutils literal notranslate"><span class="pre">HtmlRenderer.can_render()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.HtmlRenderer.render"><code class="docutils literal notranslate"><span class="pre">HtmlRenderer.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.ImageRenderer"><code class="docutils literal notranslate"><span class="pre">ImageRenderer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.ImageRenderer.can_render"><code class="docutils literal notranslate"><span class="pre">ImageRenderer.can_render()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.ImageRenderer.render"><code class="docutils literal notranslate"><span class="pre">ImageRenderer.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.JsonRenderer"><code class="docutils literal notranslate"><span class="pre">JsonRenderer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.JsonRenderer.can_render"><code class="docutils literal notranslate"><span class="pre">JsonRenderer.can_render()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.JsonRenderer.render"><code class="docutils literal notranslate"><span class="pre">JsonRenderer.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.MarkdownRenderer"><code class="docutils literal notranslate"><span class="pre">MarkdownRenderer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.MarkdownRenderer.can_render"><code class="docutils literal notranslate"><span class="pre">MarkdownRenderer.can_render()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.MarkdownRenderer.render"><code class="docutils literal notranslate"><span class="pre">MarkdownRenderer.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.ResultRenderer"><code class="docutils literal notranslate"><span class="pre">ResultRenderer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.ResultRenderer.can_render"><code class="docutils literal notranslate"><span class="pre">ResultRenderer.can_render()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.ResultRenderer.render"><code class="docutils literal notranslate"><span class="pre">ResultRenderer.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.ResultRendererRegistry"><code class="docutils literal notranslate"><span class="pre">ResultRendererRegistry</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.ResultRendererRegistry.register"><code class="docutils literal notranslate"><span class="pre">ResultRendererRegistry.register()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.ResultRendererRegistry.register_for_type"><code class="docutils literal notranslate"><span class="pre">ResultRendererRegistry.register_for_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.ResultRendererRegistry.render"><code class="docutils literal notranslate"><span class="pre">ResultRendererRegistry.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.TableRenderer"><code class="docutils literal notranslate"><span class="pre">TableRenderer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.TableRenderer.can_render"><code class="docutils literal notranslate"><span class="pre">TableRenderer.can_render()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.renderers.TableRenderer.render"><code class="docutils literal notranslate"><span class="pre">TableRenderer.render()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.get_global_renderer_registry"><code class="docutils literal notranslate"><span class="pre">get_global_renderer_registry()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.get_result_renderer"><code class="docutils literal notranslate"><span class="pre">get_result_renderer()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.register_renderer"><code class="docutils literal notranslate"><span class="pre">register_renderer()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.register_renderer_for_type"><code class="docutils literal notranslate"><span class="pre">register_renderer_for_type()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.render_result"><code class="docutils literal notranslate"><span class="pre">render_result()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.renderers.result_renderer"><code class="docutils literal notranslate"><span class="pre">result_renderer()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">uf.renderers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/uf/renderers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-uf.renderers">
+<span id="uf-renderers"></span><h1>uf.renderers<a class="headerlink" href="#module-uf.renderers" title="Link to this heading"></a></h1>
+<p>Result rendering system for uf.</p>
+<p>Provides smart rendering of function results based on their type,
+including tables, charts, DataFrames, JSON, and custom renderers.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.renderers.ChartRenderer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">ChartRenderer</span></span><a class="reference internal" href="../../_modules/uf/renderers.html#ChartRenderer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.ChartRenderer" title="Link to this definition"></a></dt>
+<dd><p>Render data suitable for charts.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.ChartRenderer.can_render">
+<span class="sig-name descname"><span class="pre">can_render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#ChartRenderer.can_render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.ChartRenderer.can_render" title="Link to this definition"></a></dt>
+<dd><p>Can render list of dicts with numeric values.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.ChartRenderer.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#ChartRenderer.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.ChartRenderer.render" title="Link to this definition"></a></dt>
+<dd><p>Render as chart data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.renderers.DataFrameRenderer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">DataFrameRenderer</span></span><a class="reference internal" href="../../_modules/uf/renderers.html#DataFrameRenderer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.DataFrameRenderer" title="Link to this definition"></a></dt>
+<dd><p>Render pandas DataFrame.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.DataFrameRenderer.can_render">
+<span class="sig-name descname"><span class="pre">can_render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#DataFrameRenderer.can_render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.DataFrameRenderer.can_render" title="Link to this definition"></a></dt>
+<dd><p>Can render pandas DataFrame.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.DataFrameRenderer.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#DataFrameRenderer.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.DataFrameRenderer.render" title="Link to this definition"></a></dt>
+<dd><p>Render DataFrame as table.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.renderers.HtmlRenderer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">HtmlRenderer</span></span><a class="reference internal" href="../../_modules/uf/renderers.html#HtmlRenderer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.HtmlRenderer" title="Link to this definition"></a></dt>
+<dd><p>Render HTML strings.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.HtmlRenderer.can_render">
+<span class="sig-name descname"><span class="pre">can_render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#HtmlRenderer.can_render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.HtmlRenderer.can_render" title="Link to this definition"></a></dt>
+<dd><p>Can render strings that look like HTML.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.HtmlRenderer.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#HtmlRenderer.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.HtmlRenderer.render" title="Link to this definition"></a></dt>
+<dd><p>Render as HTML.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.renderers.ImageRenderer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">ImageRenderer</span></span><a class="reference internal" href="../../_modules/uf/renderers.html#ImageRenderer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.ImageRenderer" title="Link to this definition"></a></dt>
+<dd><p>Render image data.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.ImageRenderer.can_render">
+<span class="sig-name descname"><span class="pre">can_render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#ImageRenderer.can_render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.ImageRenderer.can_render" title="Link to this definition"></a></dt>
+<dd><p>Can render bytes that look like images.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.ImageRenderer.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#ImageRenderer.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.ImageRenderer.render" title="Link to this definition"></a></dt>
+<dd><p>Render image as base64.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.renderers.JsonRenderer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">JsonRenderer</span></span><a class="reference internal" href="../../_modules/uf/renderers.html#JsonRenderer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.JsonRenderer" title="Link to this definition"></a></dt>
+<dd><p>Render results as formatted JSON.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.JsonRenderer.can_render">
+<span class="sig-name descname"><span class="pre">can_render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#JsonRenderer.can_render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.JsonRenderer.can_render" title="Link to this definition"></a></dt>
+<dd><p>Can render any JSON-serializable result.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.JsonRenderer.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#JsonRenderer.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.JsonRenderer.render" title="Link to this definition"></a></dt>
+<dd><p>Render as formatted JSON.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.renderers.MarkdownRenderer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">MarkdownRenderer</span></span><a class="reference internal" href="../../_modules/uf/renderers.html#MarkdownRenderer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.MarkdownRenderer" title="Link to this definition"></a></dt>
+<dd><p>Render markdown strings.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.MarkdownRenderer.can_render">
+<span class="sig-name descname"><span class="pre">can_render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#MarkdownRenderer.can_render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.MarkdownRenderer.can_render" title="Link to this definition"></a></dt>
+<dd><p>Can render strings that look like markdown.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.MarkdownRenderer.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#MarkdownRenderer.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.MarkdownRenderer.render" title="Link to this definition"></a></dt>
+<dd><p>Render as markdown.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.renderers.ResultRenderer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">ResultRenderer</span></span><a class="reference internal" href="../../_modules/uf/renderers.html#ResultRenderer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.ResultRenderer" title="Link to this definition"></a></dt>
+<dd><p>Base class for result renderers.</p>
+<p>Subclass this to create custom renderers for specific result types.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.ResultRenderer.can_render">
+<span class="sig-name descname"><span class="pre">can_render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#ResultRenderer.can_render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.ResultRenderer.can_render" title="Link to this definition"></a></dt>
+<dd><p>Check if this renderer can handle the given result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> – The function result to render</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if this renderer can handle the result</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.ResultRenderer.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#ResultRenderer.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.ResultRenderer.render" title="Link to this definition"></a></dt>
+<dd><p>Render the result to a displayable format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> – The function result to render</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>‘type’: Renderer type (e.g., ‘table’, ‘chart’, ‘json’)</p></li>
+<li><p>’data’: Rendered data</p></li>
+<li><p>’options’: Optional rendering options</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary with rendering information</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.renderers.ResultRendererRegistry">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">ResultRendererRegistry</span></span><a class="reference internal" href="../../_modules/uf/renderers.html#ResultRendererRegistry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.ResultRendererRegistry" title="Link to this definition"></a></dt>
+<dd><p>Registry for result renderers.</p>
+<p>Manages a collection of renderers and selects the appropriate one
+for each result type.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.ResultRendererRegistry.register">
+<span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">renderer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#uf.renderers.ResultRenderer" title="uf.renderers.ResultRenderer"><span class="pre">ResultRenderer</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#ResultRendererRegistry.register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.ResultRendererRegistry.register" title="Link to this definition"></a></dt>
+<dd><p>Register a renderer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>renderer</strong> – ResultRenderer instance</p></li>
+<li><p><strong>priority</strong> – Higher priority renderers are tried first</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.ResultRendererRegistry.register_for_type">
+<span class="sig-name descname"><span class="pre">register_for_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#uf.renderers.ResultRenderer" title="uf.renderers.ResultRenderer"><span class="pre">ResultRenderer</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#ResultRendererRegistry.register_for_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.ResultRendererRegistry.register_for_type" title="Link to this definition"></a></dt>
+<dd><p>Register a renderer for a specific type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result_type</strong> – Python type to match</p></li>
+<li><p><strong>renderer</strong> – ResultRenderer instance</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.ResultRendererRegistry.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#ResultRendererRegistry.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.ResultRendererRegistry.render" title="Link to this definition"></a></dt>
+<dd><p>Render a result using the appropriate renderer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result</strong> – The function result to render</p></li>
+<li><p><strong>renderer_type</strong> – Optional specific renderer type to use</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered result dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.renderers.TableRenderer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">TableRenderer</span></span><a class="reference internal" href="../../_modules/uf/renderers.html#TableRenderer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.TableRenderer" title="Link to this definition"></a></dt>
+<dd><p>Render list of dicts as a table.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.TableRenderer.can_render">
+<span class="sig-name descname"><span class="pre">can_render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#TableRenderer.can_render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.TableRenderer.can_render" title="Link to this definition"></a></dt>
+<dd><p>Can render list of dictionaries.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.renderers.TableRenderer.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#TableRenderer.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.TableRenderer.render" title="Link to this definition"></a></dt>
+<dd><p>Render as table.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.renderers.get_global_renderer_registry">
+<span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">get_global_renderer_registry</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.renderers.ResultRendererRegistry" title="uf.renderers.ResultRendererRegistry"><span class="pre">ResultRendererRegistry</span></a></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#get_global_renderer_registry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.get_global_renderer_registry" title="Link to this definition"></a></dt>
+<dd><p>Get the global renderer registry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The global ResultRendererRegistry instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.renderers.get_result_renderer">
+<span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">get_result_renderer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#get_result_renderer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.get_result_renderer" title="Link to this definition"></a></dt>
+<dd><p>Get the result renderer type for a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – Function to check</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Renderer type string or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.renderers.register_renderer">
+<span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">register_renderer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">renderer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#uf.renderers.ResultRenderer" title="uf.renderers.ResultRenderer"><span class="pre">ResultRenderer</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#register_renderer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.register_renderer" title="Link to this definition"></a></dt>
+<dd><p>Register a renderer in the global registry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>renderer</strong> – ResultRenderer instance</p></li>
+<li><p><strong>priority</strong> – Higher priority renderers are tried first</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.renderers.register_renderer_for_type">
+<span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">register_renderer_for_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#uf.renderers.ResultRenderer" title="uf.renderers.ResultRenderer"><span class="pre">ResultRenderer</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#register_renderer_for_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.register_renderer_for_type" title="Link to this definition"></a></dt>
+<dd><p>Register a renderer for a specific type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result_type</strong> – Python type to match</p></li>
+<li><p><strong>renderer</strong> – ResultRenderer instance</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.renderers.render_result">
+<span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">render_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/renderers.html#render_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.render_result" title="Link to this definition"></a></dt>
+<dd><p>Render a result using the global registry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result</strong> – The function result to render</p></li>
+<li><p><strong>renderer_type</strong> – Optional specific renderer type to use</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered result dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.renderers.result_renderer">
+<span class="sig-prename descclassname"><span class="pre">uf.renderers.</span></span><span class="sig-name descname"><span class="pre">result_renderer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">renderer_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/renderers.html#result_renderer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.renderers.result_renderer" title="Link to this definition"></a></dt>
+<dd><p>Decorator to specify result renderer for a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>renderer_type</strong> – Type of renderer to use</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@result_renderer</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">get_users</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">}]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pydantic_support.html" class="btn btn-neutral float-left" title="uf.pydantic_support" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rjsf_config.html" class="btn btn-neutral float-right" title="uf.rjsf_config" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

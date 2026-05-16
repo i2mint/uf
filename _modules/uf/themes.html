@@ -1,0 +1,568 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.themes &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">uf.themes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uf.themes</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Theme and styling support for uf.</span>
+
+<span class="sd">Provides built-in themes, dark mode support, and theme customization.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+
+
+<div class="viewcode-block" id="Theme">
+<a class="viewcode-back" href="../../module_docs/uf/themes.html#uf.Theme">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Theme</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;UI theme configuration.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        name: Theme name</span>
+<span class="sd">        colors: Color palette</span>
+<span class="sd">        fonts: Font configuration</span>
+<span class="sd">        css: Additional custom CSS</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">colors</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="n">fonts</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="n">css</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+<div class="viewcode-block" id="Theme.to_css">
+<a class="viewcode-back" href="../../module_docs/uf/themes.html#uf.Theme.to_css">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_css</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert theme to CSS.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            CSS string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">css_vars</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Add color variables</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">css_vars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  --color-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Add font variables</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fonts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">css_vars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  --font-</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">;&quot;</span><span class="p">)</span>
+
+        <span class="n">css</span> <span class="o">=</span> <span class="s2">&quot;:root {</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">css_vars</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">}</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">css</span>
+
+        <span class="k">return</span> <span class="n">css</span></div>
+</div>
+
+
+
+<span class="c1"># Built-in theme definitions</span>
+
+<span class="n">LIGHT_THEME</span> <span class="o">=</span> <span class="n">Theme</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;light&quot;</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;primary&quot;</span><span class="p">:</span> <span class="s2">&quot;#4CAF50&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;secondary&quot;</span><span class="p">:</span> <span class="s2">&quot;#2196F3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="s2">&quot;#4CAF50&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;#f44336&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;warning&quot;</span><span class="p">:</span> <span class="s2">&quot;#ff9800&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="s2">&quot;#2196F3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;background&quot;</span><span class="p">:</span> <span class="s2">&quot;#ffffff&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;surface&quot;</span><span class="p">:</span> <span class="s2">&quot;#f5f5f5&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;#212121&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;text-secondary&quot;</span><span class="p">:</span> <span class="s2">&quot;#666666&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;border&quot;</span><span class="p">:</span> <span class="s2">&quot;#dddddd&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">fonts</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="s2">&quot;-apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, Roboto, sans-serif&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mono&quot;</span><span class="p">:</span> <span class="s2">&quot;&#39;Courier New&#39;, Courier, monospace&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+
+
+<span class="n">DARK_THEME</span> <span class="o">=</span> <span class="n">Theme</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dark&quot;</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;primary&quot;</span><span class="p">:</span> <span class="s2">&quot;#66BB6A&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;secondary&quot;</span><span class="p">:</span> <span class="s2">&quot;#42A5F5&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="s2">&quot;#66BB6A&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;#EF5350&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;warning&quot;</span><span class="p">:</span> <span class="s2">&quot;#FFA726&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="s2">&quot;#42A5F5&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;background&quot;</span><span class="p">:</span> <span class="s2">&quot;#1e1e1e&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;surface&quot;</span><span class="p">:</span> <span class="s2">&quot;#2d2d2d&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;#e0e0e0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;text-secondary&quot;</span><span class="p">:</span> <span class="s2">&quot;#b0b0b0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;border&quot;</span><span class="p">:</span> <span class="s2">&quot;#404040&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">fonts</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="s2">&quot;-apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, Roboto, sans-serif&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mono&quot;</span><span class="p">:</span> <span class="s2">&quot;&#39;Courier New&#39;, Courier, monospace&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">css</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">body {</span>
+<span class="s2">    background-color: var(--color-background);</span>
+<span class="s2">    color: var(--color-text);</span>
+<span class="s2">}</span>
+
+<span class="s2">#sidebar {</span>
+<span class="s2">    background-color: var(--color-surface);</span>
+<span class="s2">    border-right-color: var(--color-border);</span>
+<span class="s2">}</span>
+
+<span class="s2">#header {</span>
+<span class="s2">    background-color: var(--color-surface);</span>
+<span class="s2">    border-bottom-color: var(--color-border);</span>
+<span class="s2">    color: var(--color-text);</span>
+<span class="s2">}</span>
+
+<span class="s2">.function-item {</span>
+<span class="s2">    background-color: var(--color-background);</span>
+<span class="s2">    border-color: var(--color-border);</span>
+<span class="s2">    color: var(--color-text);</span>
+<span class="s2">}</span>
+
+<span class="s2">.function-item:hover {</span>
+<span class="s2">    background-color: var(--color-surface);</span>
+<span class="s2">}</span>
+
+<span class="s2">.function-item.active {</span>
+<span class="s2">    background-color: var(--color-primary);</span>
+<span class="s2">    color: white;</span>
+<span class="s2">}</span>
+
+<span class="s2">.form-section {</span>
+<span class="s2">    background-color: var(--color-surface);</span>
+<span class="s2">    border-color: var(--color-border);</span>
+<span class="s2">}</span>
+
+<span class="s2">#result {</span>
+<span class="s2">    background-color: var(--color-surface);</span>
+<span class="s2">    border-color: var(--color-border);</span>
+<span class="s2">}</span>
+
+<span class="s2">#result.success {</span>
+<span class="s2">    background-color: rgba(102, 187, 106, 0.1);</span>
+<span class="s2">    border-color: var(--color-success);</span>
+<span class="s2">}</span>
+
+<span class="s2">#result.error {</span>
+<span class="s2">    background-color: rgba(239, 83, 80, 0.1);</span>
+<span class="s2">    border-color: var(--color-error);</span>
+<span class="s2">}</span>
+
+<span class="s2">input, textarea, select {</span>
+<span class="s2">    background-color: var(--color-background);</span>
+<span class="s2">    border-color: var(--color-border);</span>
+<span class="s2">    color: var(--color-text);</span>
+<span class="s2">}</span>
+
+<span class="s2">button[type=&quot;submit&quot;] {</span>
+<span class="s2">    background-color: var(--color-primary);</span>
+<span class="s2">}</span>
+
+<span class="s2">button[type=&quot;submit&quot;]:hover {</span>
+<span class="s2">    background-color: var(--color-secondary);</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">OCEAN_THEME</span> <span class="o">=</span> <span class="n">Theme</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ocean&quot;</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;primary&quot;</span><span class="p">:</span> <span class="s2">&quot;#00BCD4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;secondary&quot;</span><span class="p">:</span> <span class="s2">&quot;#009688&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="s2">&quot;#4CAF50&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;#f44336&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;warning&quot;</span><span class="p">:</span> <span class="s2">&quot;#FF5722&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="s2">&quot;#03A9F4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;background&quot;</span><span class="p">:</span> <span class="s2">&quot;#f0f8ff&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;surface&quot;</span><span class="p">:</span> <span class="s2">&quot;#e1f5fe&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;#01579B&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;text-secondary&quot;</span><span class="p">:</span> <span class="s2">&quot;#0277BD&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;border&quot;</span><span class="p">:</span> <span class="s2">&quot;#B3E5FC&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">fonts</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="s2">&quot;-apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, Roboto, sans-serif&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mono&quot;</span><span class="p">:</span> <span class="s2">&quot;&#39;Courier New&#39;, Courier, monospace&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">css</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">body {</span>
+<span class="s2">    background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);</span>
+<span class="s2">}</span>
+
+<span class="s2">.function-item.active {</span>
+<span class="s2">    background: linear-gradient(135deg, #00BCD4 0%, #009688 100%);</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">SUNSET_THEME</span> <span class="o">=</span> <span class="n">Theme</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sunset&quot;</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;primary&quot;</span><span class="p">:</span> <span class="s2">&quot;#FF6F00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;secondary&quot;</span><span class="p">:</span> <span class="s2">&quot;#F4511E&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="s2">&quot;#558B2F&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;#C62828&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;warning&quot;</span><span class="p">:</span> <span class="s2">&quot;#F57C00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="s2">&quot;#1976D2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;background&quot;</span><span class="p">:</span> <span class="s2">&quot;#FFF3E0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;surface&quot;</span><span class="p">:</span> <span class="s2">&quot;#FFE0B2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;#E65100&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;text-secondary&quot;</span><span class="p">:</span> <span class="s2">&quot;#EF6C00&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;border&quot;</span><span class="p">:</span> <span class="s2">&quot;#FFCC80&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">fonts</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="s2">&quot;-apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, Roboto, sans-serif&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mono&quot;</span><span class="p">:</span> <span class="s2">&quot;&#39;Courier New&#39;, Courier, monospace&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">css</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">body {</span>
+<span class="s2">    background: linear-gradient(135deg, #FFE0B2 0%, #FFCC80 100%);</span>
+<span class="s2">}</span>
+
+<span class="s2">.function-item.active {</span>
+<span class="s2">    background: linear-gradient(135deg, #FF6F00 0%, #F4511E 100%);</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Theme registry</span>
+<span class="n">BUILT_IN_THEMES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;light&quot;</span><span class="p">:</span> <span class="n">LIGHT_THEME</span><span class="p">,</span>
+    <span class="s2">&quot;dark&quot;</span><span class="p">:</span> <span class="n">DARK_THEME</span><span class="p">,</span>
+    <span class="s2">&quot;ocean&quot;</span><span class="p">:</span> <span class="n">OCEAN_THEME</span><span class="p">,</span>
+    <span class="s2">&quot;sunset&quot;</span><span class="p">:</span> <span class="n">SUNSET_THEME</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="get_theme">
+<a class="viewcode-back" href="../../module_docs/uf/themes.html#uf.get_theme">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_theme</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Theme</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a built-in theme by name.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name: Theme name</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Theme object or None</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; theme = get_theme(&#39;dark&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; css = theme.to_css()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">BUILT_IN_THEMES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="generate_theme_toggle_js">
+<a class="viewcode-back" href="../../module_docs/uf/themes.html#uf.generate_theme_toggle_js">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_theme_toggle_js</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate JavaScript for theme toggling.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        JavaScript code for theme switching</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">js</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">// Theme toggle functionality</span>
+<span class="s2">(function() {</span>
+<span class="s2">    const THEME_KEY = &#39;uf-theme&#39;;</span>
+<span class="s2">    const DEFAULT_THEME = &#39;light&#39;;</span>
+
+<span class="s2">    function getTheme() {</span>
+<span class="s2">        return localStorage.getItem(THEME_KEY) || DEFAULT_THEME;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    function setTheme(theme) {</span>
+<span class="s2">        localStorage.setItem(THEME_KEY, theme);</span>
+<span class="s2">        document.body.setAttribute(&#39;data-theme&#39;, theme);</span>
+
+<span class="s2">        // Dispatch custom event</span>
+<span class="s2">        window.dispatchEvent(new CustomEvent(&#39;themechange&#39;, {</span>
+<span class="s2">            detail: { theme }</span>
+<span class="s2">        }));</span>
+<span class="s2">    }</span>
+
+<span class="s2">    function toggleTheme() {</span>
+<span class="s2">        const current = getTheme();</span>
+<span class="s2">        const next = current === &#39;light&#39; ? &#39;dark&#39; : &#39;light&#39;;</span>
+<span class="s2">        setTheme(next);</span>
+<span class="s2">    }</span>
+
+<span class="s2">    // Initialize theme on load</span>
+<span class="s2">    window.addEventListener(&#39;load&#39;, function() {</span>
+<span class="s2">        const theme = getTheme();</span>
+<span class="s2">        document.body.setAttribute(&#39;data-theme&#39;, theme);</span>
+<span class="s2">    });</span>
+
+<span class="s2">    // Expose functions globally</span>
+<span class="s2">    window.ufTheme = {</span>
+<span class="s2">        get: getTheme,</span>
+<span class="s2">        set: setTheme,</span>
+<span class="s2">        toggle: toggleTheme</span>
+<span class="s2">    };</span>
+<span class="s2">})();</span>
+<span class="s2">&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">js</span></div>
+
+
+
+<div class="viewcode-block" id="create_theme_toggle_button">
+<a class="viewcode-back" href="../../module_docs/uf/themes.html#uf.create_theme_toggle_button">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_theme_toggle_button</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create HTML for theme toggle button.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HTML string for theme toggle button</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;button id=&quot;theme-toggle&quot; onclick=&quot;window.ufTheme.toggle()&quot;</span>
+<span class="s2">        style=&quot;position: fixed; top: 10px; right: 10px; z-index: 1000;</span>
+<span class="s2">               padding: 10px 15px; border: none; border-radius: 5px;</span>
+<span class="s2">               cursor: pointer; background: var(--color-surface);</span>
+<span class="s2">               color: var(--color-text); font-size: 20px;&quot;&gt;</span>
+<span class="s2">    🌓</span>
+<span class="s2">&lt;/button&gt;</span>
+<span class="s2">&lt;script&gt;</span>
+<span class="s2">    // Update button on theme change</span>
+<span class="s2">    window.addEventListener(&#39;themechange&#39;, function(e) {</span>
+<span class="s2">        const btn = document.getElementById(&#39;theme-toggle&#39;);</span>
+<span class="s2">        btn.textContent = e.detail.theme === &#39;light&#39; ? &#39;🌙&#39; : &#39;☀️&#39;;</span>
+<span class="s2">    });</span>
+
+<span class="s2">    // Set initial icon</span>
+<span class="s2">    const btn = document.getElementById(&#39;theme-toggle&#39;);</span>
+<span class="s2">    btn.textContent = window.ufTheme.get() === &#39;light&#39; ? &#39;🌙&#39; : &#39;☀️&#39;;</span>
+<span class="s2">&lt;/script&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">html</span></div>
+
+
+
+<div class="viewcode-block" id="ThemeConfig">
+<a class="viewcode-back" href="../../module_docs/uf/themes.html#uf.ThemeConfig">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ThemeConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for theme system.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; config = ThemeConfig(</span>
+<span class="sd">        ...     default_theme=&#39;dark&#39;,</span>
+<span class="sd">        ...     allow_toggle=True,</span>
+<span class="sd">        ...     available_themes=[&#39;light&#39;, &#39;dark&#39;, &#39;ocean&#39;]</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">default_theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;light&#39;</span><span class="p">,</span>
+        <span class="n">allow_toggle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">available_themes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">custom_theme</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Theme</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize theme config.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            default_theme: Default theme name</span>
+<span class="sd">            allow_toggle: Allow users to toggle theme</span>
+<span class="sd">            available_themes: List of available theme names</span>
+<span class="sd">            custom_theme: Optional custom theme</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_theme</span> <span class="o">=</span> <span class="n">default_theme</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">allow_toggle</span> <span class="o">=</span> <span class="n">allow_toggle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">available_themes</span> <span class="o">=</span> <span class="n">available_themes</span> <span class="ow">or</span> <span class="p">[</span><span class="s1">&#39;light&#39;</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_theme</span> <span class="o">=</span> <span class="n">custom_theme</span>
+
+<div class="viewcode-block" id="ThemeConfig.get_css">
+<a class="viewcode-back" href="../../module_docs/uf/themes.html#uf.ThemeConfig.get_css">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_css</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get CSS for all available themes.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Combined CSS string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">css_parts</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Add light theme as default</span>
+        <span class="n">light</span> <span class="o">=</span> <span class="n">get_theme</span><span class="p">(</span><span class="s1">&#39;light&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">light</span><span class="p">:</span>
+            <span class="n">css_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">light</span><span class="o">.</span><span class="n">to_css</span><span class="p">())</span>
+
+        <span class="c1"># Add dark theme</span>
+        <span class="n">dark</span> <span class="o">=</span> <span class="n">get_theme</span><span class="p">(</span><span class="s1">&#39;dark&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dark</span><span class="p">:</span>
+            <span class="n">css_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">body[data-theme=&#39;dark&#39;] </span><span class="se">{{\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">css_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dark</span><span class="o">.</span><span class="n">to_css</span><span class="p">())</span>
+            <span class="n">css_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Add other themes</span>
+        <span class="k">for</span> <span class="n">theme_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">available_themes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">theme_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;light&#39;</span><span class="p">,</span> <span class="s1">&#39;dark&#39;</span><span class="p">]:</span>
+                <span class="k">continue</span>
+            <span class="n">theme</span> <span class="o">=</span> <span class="n">get_theme</span><span class="p">(</span><span class="n">theme_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">theme</span><span class="p">:</span>
+                <span class="n">css_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">body[data-theme=&#39;</span><span class="si">{</span><span class="n">theme_name</span><span class="si">}</span><span class="s2">&#39;] </span><span class="se">{{\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">css_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">theme</span><span class="o">.</span><span class="n">to_css</span><span class="p">())</span>
+                <span class="n">css_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Add custom theme</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_theme</span><span class="p">:</span>
+            <span class="n">css_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">body[data-theme=&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_theme</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;] </span><span class="se">{{\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">css_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_theme</span><span class="o">.</span><span class="n">to_css</span><span class="p">())</span>
+            <span class="n">css_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">css_parts</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ThemeConfig.get_js">
+<a class="viewcode-back" href="../../module_docs/uf/themes.html#uf.ThemeConfig.get_js">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_js</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get JavaScript for theme functionality.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            JavaScript string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="n">generate_theme_toggle_js</span><span class="p">()</span>
+
+        <span class="c1"># Set default theme</span>
+        <span class="n">js</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">window.ufTheme.set(window.ufTheme.get() || &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">default_theme</span><span class="si">}</span><span class="s2">&#39;);</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="n">js</span></div>
+
+
+<div class="viewcode-block" id="ThemeConfig.get_toggle_button_html">
+<a class="viewcode-back" href="../../module_docs/uf/themes.html#uf.ThemeConfig.get_toggle_button_html">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_toggle_button_html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get HTML for theme toggle button.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HTML string or empty if toggle not allowed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">allow_toggle</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">create_theme_toggle_button</span><span class="p">()</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

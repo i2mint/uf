@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.pydantic_support &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="uf.renderers" href="renderers.html" />
+    <link rel="prev" title="uf.organization" href="organization.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization.html">uf.organization</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">uf.pydantic_support</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#uf.pydantic_support.PydanticRegistry"><code class="docutils literal notranslate"><span class="pre">PydanticRegistry</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.pydantic_support.PydanticRegistry.get"><code class="docutils literal notranslate"><span class="pre">PydanticRegistry.get()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.pydantic_support.PydanticRegistry.list_models"><code class="docutils literal notranslate"><span class="pre">PydanticRegistry.list_models()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.pydantic_support.PydanticRegistry.register"><code class="docutils literal notranslate"><span class="pre">PydanticRegistry.register()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.pydantic_support.create_pydantic_spec"><code class="docutils literal notranslate"><span class="pre">create_pydantic_spec()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.pydantic_support.dict_to_pydantic"><code class="docutils literal notranslate"><span class="pre">dict_to_pydantic()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.pydantic_support.extract_field_validators"><code class="docutils literal notranslate"><span class="pre">extract_field_validators()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.pydantic_support.extract_pydantic_params"><code class="docutils literal notranslate"><span class="pre">extract_pydantic_params()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.pydantic_support.function_uses_pydantic"><code class="docutils literal notranslate"><span class="pre">function_uses_pydantic()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.pydantic_support.get_pydantic_registry"><code class="docutils literal notranslate"><span class="pre">get_pydantic_registry()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.pydantic_support.is_pydantic_model"><code class="docutils literal notranslate"><span class="pre">is_pydantic_model()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.pydantic_support.pydantic_error_to_user_friendly"><code class="docutils literal notranslate"><span class="pre">pydantic_error_to_user_friendly()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.pydantic_support.pydantic_model_to_json_schema"><code class="docutils literal notranslate"><span class="pre">pydantic_model_to_json_schema()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.pydantic_support.pydantic_to_dict"><code class="docutils literal notranslate"><span class="pre">pydantic_to_dict()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.pydantic_support.wrap_pydantic_function"><code class="docutils literal notranslate"><span class="pre">wrap_pydantic_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">uf.pydantic_support</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/uf/pydantic_support.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-uf.pydantic_support">
+<span id="uf-pydantic-support"></span><h1>uf.pydantic_support<a class="headerlink" href="#module-uf.pydantic_support" title="Link to this heading"></a></h1>
+<p>Pydantic integration for uf.</p>
+<p>Provides seamless integration with Pydantic models, automatically
+generating forms with validation from Pydantic models.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.pydantic_support.PydanticRegistry">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.pydantic_support.</span></span><span class="sig-name descname"><span class="pre">PydanticRegistry</span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#PydanticRegistry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.PydanticRegistry" title="Link to this definition"></a></dt>
+<dd><p>Registry for Pydantic models used in uf.</p>
+<p>Tracks models and provides utilities for working with them.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.pydantic_support.PydanticRegistry.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#PydanticRegistry.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.PydanticRegistry.get" title="Link to this definition"></a></dt>
+<dd><p>Get a registered model by name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Model name</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pydantic model class or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.pydantic_support.PydanticRegistry.list_models">
+<span class="sig-name descname"><span class="pre">list_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#PydanticRegistry.list_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.PydanticRegistry.list_models" title="Link to this definition"></a></dt>
+<dd><p>List all registered model names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of model name strings</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.pydantic_support.PydanticRegistry.register">
+<span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_class</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#PydanticRegistry.register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.PydanticRegistry.register" title="Link to this definition"></a></dt>
+<dd><p>Register a Pydantic model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name to register under</p></li>
+<li><p><strong>model_class</strong> – Pydantic model class</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.pydantic_support.create_pydantic_spec">
+<span class="sig-prename descclassname"><span class="pre">uf.pydantic_support.</span></span><span class="sig-name descname"><span class="pre">create_pydantic_spec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#create_pydantic_spec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.create_pydantic_spec" title="Link to this definition"></a></dt>
+<dd><p>Create RJSF spec from function with Pydantic parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – Function that uses Pydantic models</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>RJSF specification dictionary or None</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">EmailStr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">UserCreate</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">email</span><span class="p">:</span> <span class="n">EmailStr</span>
+<span class="gp">... </span>    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">UserCreate</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spec</span> <span class="o">=</span> <span class="n">create_pydantic_spec</span><span class="p">(</span><span class="n">create_user</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.pydantic_support.dict_to_pydantic">
+<span class="sig-prename descclassname"><span class="pre">uf.pydantic_support.</span></span><span class="sig-name descname"><span class="pre">dict_to_pydantic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_class</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#dict_to_pydantic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.dict_to_pydantic" title="Link to this definition"></a></dt>
+<dd><p>Convert dictionary to Pydantic model instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – Dictionary of data</p></li>
+<li><p><strong>model_class</strong> – Pydantic model class</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pydantic model instance</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValidationError</strong> – If data doesn’t match model schema</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.pydantic_support.extract_field_validators">
+<span class="sig-prename descclassname"><span class="pre">uf.pydantic_support.</span></span><span class="sig-name descname"><span class="pre">extract_field_validators</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_class</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#extract_field_validators"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.extract_field_validators" title="Link to this definition"></a></dt>
+<dd><p>Extract field validators from Pydantic model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_class</strong> – Pydantic model class</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary mapping field names to validator info</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.pydantic_support.extract_pydantic_params">
+<span class="sig-prename descclassname"><span class="pre">uf.pydantic_support.</span></span><span class="sig-name descname"><span class="pre">extract_pydantic_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#extract_pydantic_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.extract_pydantic_params" title="Link to this definition"></a></dt>
+<dd><p>Extract Pydantic model parameters from function signature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – Function to analyze</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary mapping parameter names to Pydantic model classes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.pydantic_support.function_uses_pydantic">
+<span class="sig-prename descclassname"><span class="pre">uf.pydantic_support.</span></span><span class="sig-name descname"><span class="pre">function_uses_pydantic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#function_uses_pydantic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.function_uses_pydantic" title="Link to this definition"></a></dt>
+<dd><p>Check if a function uses Pydantic models in its signature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – Function to check</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if any parameter is a Pydantic model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.pydantic_support.get_pydantic_registry">
+<span class="sig-prename descclassname"><span class="pre">uf.pydantic_support.</span></span><span class="sig-name descname"><span class="pre">get_pydantic_registry</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.pydantic_support.PydanticRegistry" title="uf.pydantic_support.PydanticRegistry"><span class="pre">PydanticRegistry</span></a></span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#get_pydantic_registry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.get_pydantic_registry" title="Link to this definition"></a></dt>
+<dd><p>Get the global Pydantic registry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Global PydanticRegistry instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.pydantic_support.is_pydantic_model">
+<span class="sig-prename descclassname"><span class="pre">uf.pydantic_support.</span></span><span class="sig-name descname"><span class="pre">is_pydantic_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#is_pydantic_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.is_pydantic_model" title="Link to this definition"></a></dt>
+<dd><p>Check if an object is a Pydantic model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>obj</strong> – Object to check</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if object is a Pydantic BaseModel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.pydantic_support.pydantic_error_to_user_friendly">
+<span class="sig-prename descclassname"><span class="pre">uf.pydantic_support.</span></span><span class="sig-name descname"><span class="pre">pydantic_error_to_user_friendly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#pydantic_error_to_user_friendly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.pydantic_error_to_user_friendly" title="Link to this definition"></a></dt>
+<dd><p>Convert Pydantic ValidationError to user-friendly format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>error</strong> – Pydantic ValidationError</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with field-level errors</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.pydantic_support.pydantic_model_to_json_schema">
+<span class="sig-prename descclassname"><span class="pre">uf.pydantic_support.</span></span><span class="sig-name descname"><span class="pre">pydantic_model_to_json_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_class</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#pydantic_model_to_json_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.pydantic_model_to_json_schema" title="Link to this definition"></a></dt>
+<dd><p>Convert a Pydantic model to JSON Schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_class</strong> – Pydantic model class</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JSON Schema dictionary</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="gp">... </span>    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="n">pydantic_model_to_json_schema</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.pydantic_support.pydantic_to_dict">
+<span class="sig-prename descclassname"><span class="pre">uf.pydantic_support.</span></span><span class="sig-name descname"><span class="pre">pydantic_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#pydantic_to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.pydantic_to_dict" title="Link to this definition"></a></dt>
+<dd><p>Convert Pydantic model instance to dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>obj</strong> – Pydantic model instance</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.pydantic_support.wrap_pydantic_function">
+<span class="sig-prename descclassname"><span class="pre">uf.pydantic_support.</span></span><span class="sig-name descname"><span class="pre">wrap_pydantic_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="reference internal" href="../../_modules/uf/pydantic_support.html#wrap_pydantic_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.pydantic_support.wrap_pydantic_function" title="Link to this definition"></a></dt>
+<dd><p>Wrap a function that uses Pydantic models.</p>
+<p>The wrapper converts dict inputs to Pydantic models before calling
+the function, and converts Pydantic outputs back to dicts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – Function to wrap</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Wrapped function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">user</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wrapped</span> <span class="o">=</span> <span class="n">wrap_pydantic_function</span><span class="p">(</span><span class="n">create_user</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">wrapped</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">})</span>  <span class="c1"># Pass dict, not User</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="organization.html" class="btn btn-neutral float-left" title="uf.organization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="renderers.html" class="btn btn-neutral float-right" title="uf.renderers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

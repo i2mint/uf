@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to uf’s documentation! &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="uf" href="module_docs/uf.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to uf’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-uf-s-documentation">
+<h1>Welcome to uf’s documentation!<a class="headerlink" href="#welcome-to-uf-s-documentation" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf.html">uf</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.ApiKey"><code class="docutils literal notranslate"><span class="pre">ApiKey</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.ApiKeyManager"><code class="docutils literal notranslate"><span class="pre">ApiKeyManager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.AsyncFunctionWrapper"><code class="docutils literal notranslate"><span class="pre">AsyncFunctionWrapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.AuthBackend"><code class="docutils literal notranslate"><span class="pre">AuthBackend</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.CacheBackend"><code class="docutils literal notranslate"><span class="pre">CacheBackend</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.CallHistory"><code class="docutils literal notranslate"><span class="pre">CallHistory</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.ConditionalFieldConfig"><code class="docutils literal notranslate"><span class="pre">ConditionalFieldConfig</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.DependencyAction"><code class="docutils literal notranslate"><span class="pre">DependencyAction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.DependencyBuilder"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.DictAuthBackend"><code class="docutils literal notranslate"><span class="pre">DictAuthBackend</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.DiskCache"><code class="docutils literal notranslate"><span class="pre">DiskCache</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.FieldDependency"><code class="docutils literal notranslate"><span class="pre">FieldDependency</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.FormDataBuilder"><code class="docutils literal notranslate"><span class="pre">FormDataBuilder</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.FunctionCall"><code class="docutils literal notranslate"><span class="pre">FunctionCall</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.FunctionGroup"><code class="docutils literal notranslate"><span class="pre">FunctionGroup</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.FunctionOrganizer"><code class="docutils literal notranslate"><span class="pre">FunctionOrganizer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.FunctionSpecStore"><code class="docutils literal notranslate"><span class="pre">FunctionSpecStore</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.HistoryManager"><code class="docutils literal notranslate"><span class="pre">HistoryManager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.InputTransformRegistry"><code class="docutils literal notranslate"><span class="pre">InputTransformRegistry</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.MemoryCache"><code class="docutils literal notranslate"><span class="pre">MemoryCache</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.OpenAPIConfig"><code class="docutils literal notranslate"><span class="pre">OpenAPIConfig</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.Preset"><code class="docutils literal notranslate"><span class="pre">Preset</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.PresetManager"><code class="docutils literal notranslate"><span class="pre">PresetManager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.ResultRenderer"><code class="docutils literal notranslate"><span class="pre">ResultRenderer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.ResultRendererRegistry"><code class="docutils literal notranslate"><span class="pre">ResultRendererRegistry</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.RjsfConfigBuilder"><code class="docutils literal notranslate"><span class="pre">RjsfConfigBuilder</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.RjsfFieldConfig"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.SessionManager"><code class="docutils literal notranslate"><span class="pre">SessionManager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.Task"><code class="docutils literal notranslate"><span class="pre">Task</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.TaskQueue"><code class="docutils literal notranslate"><span class="pre">TaskQueue</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.TaskStatus"><code class="docutils literal notranslate"><span class="pre">TaskStatus</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.Theme"><code class="docutils literal notranslate"><span class="pre">Theme</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.ThemeConfig"><code class="docutils literal notranslate"><span class="pre">ThemeConfig</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.UfApp"><code class="docutils literal notranslate"><span class="pre">UfApp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.UfAppTester"><code class="docutils literal notranslate"><span class="pre">UfAppTester</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.UfTestClient"><code class="docutils literal notranslate"><span class="pre">UfTestClient</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.WebhookClient"><code class="docutils literal notranslate"><span class="pre">WebhookClient</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.WebhookEvent"><code class="docutils literal notranslate"><span class="pre">WebhookEvent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.WebhookManager"><code class="docutils literal notranslate"><span class="pre">WebhookManager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.add_openapi_routes"><code class="docutils literal notranslate"><span class="pre">add_openapi_routes()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.apply_field_configs"><code class="docutils literal notranslate"><span class="pre">apply_field_configs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.assert_field_required"><code class="docutils literal notranslate"><span class="pre">assert_field_required()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.assert_field_type"><code class="docutils literal notranslate"><span class="pre">assert_field_type()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.assert_has_field"><code class="docutils literal notranslate"><span class="pre">assert_has_field()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.assert_valid_rjsf_spec"><code class="docutils literal notranslate"><span class="pre">assert_valid_rjsf_spec()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.async_to_sync"><code class="docutils literal notranslate"><span class="pre">async_to_sync()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.auto_group_by_module"><code class="docutils literal notranslate"><span class="pre">auto_group_by_module()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.auto_group_by_prefix"><code class="docutils literal notranslate"><span class="pre">auto_group_by_prefix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.auto_group_by_tag"><code class="docutils literal notranslate"><span class="pre">auto_group_by_tag()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.background"><code class="docutils literal notranslate"><span class="pre">background()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.cached"><code class="docutils literal notranslate"><span class="pre">cached()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.deprecated"><code class="docutils literal notranslate"><span class="pre">deprecated()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.dict_to_pydantic"><code class="docutils literal notranslate"><span class="pre">dict_to_pydantic()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.enable_history"><code class="docutils literal notranslate"><span class="pre">enable_history()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.field_config"><code class="docutils literal notranslate"><span class="pre">field_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.function_uses_pydantic"><code class="docutils literal notranslate"><span class="pre">function_uses_pydantic()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.generate_openapi_spec"><code class="docutils literal notranslate"><span class="pre">generate_openapi_spec()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_example"><code class="docutils literal notranslate"><span class="pre">get_example()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_field_config"><code class="docutils literal notranslate"><span class="pre">get_field_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_field_configs"><code class="docutils literal notranslate"><span class="pre">get_field_configs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_field_dependencies"><code class="docutils literal notranslate"><span class="pre">get_field_dependencies()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_global_auth_backend"><code class="docutils literal notranslate"><span class="pre">get_global_auth_backend()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_global_cache_backend"><code class="docutils literal notranslate"><span class="pre">get_global_cache_backend()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_global_history_manager"><code class="docutils literal notranslate"><span class="pre">get_global_history_manager()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_global_registry"><code class="docutils literal notranslate"><span class="pre">get_global_registry()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_global_renderer_registry"><code class="docutils literal notranslate"><span class="pre">get_global_renderer_registry()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_global_task_queue"><code class="docutils literal notranslate"><span class="pre">get_global_task_queue()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_global_webhook_manager"><code class="docutils literal notranslate"><span class="pre">get_global_webhook_manager()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_group"><code class="docutils literal notranslate"><span class="pre">get_group()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_result_renderer"><code class="docutils literal notranslate"><span class="pre">get_result_renderer()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_theme"><code class="docutils literal notranslate"><span class="pre">get_theme()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.get_ui_config"><code class="docutils literal notranslate"><span class="pre">get_ui_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.group"><code class="docutils literal notranslate"><span class="pre">group()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.hidden"><code class="docutils literal notranslate"><span class="pre">hidden()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.is_async_function"><code class="docutils literal notranslate"><span class="pre">is_async_function()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.is_hidden"><code class="docutils literal notranslate"><span class="pre">is_hidden()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.is_pydantic_model"><code class="docutils literal notranslate"><span class="pre">is_pydantic_model()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.make_sync_compatible"><code class="docutils literal notranslate"><span class="pre">make_sync_compatible()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.mk_grouped_app"><code class="docutils literal notranslate"><span class="pre">mk_grouped_app()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.mk_rjsf_app"><code class="docutils literal notranslate"><span class="pre">mk_rjsf_app()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.pydantic_model_to_json_schema"><code class="docutils literal notranslate"><span class="pre">pydantic_model_to_json_schema()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.pydantic_to_dict"><code class="docutils literal notranslate"><span class="pre">pydantic_to_dict()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.rate_limit"><code class="docutils literal notranslate"><span class="pre">rate_limit()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.register_renderer"><code class="docutils literal notranslate"><span class="pre">register_renderer()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.register_type"><code class="docutils literal notranslate"><span class="pre">register_type()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.render_result"><code class="docutils literal notranslate"><span class="pre">render_result()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.require_auth"><code class="docutils literal notranslate"><span class="pre">require_auth()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.requires_auth"><code class="docutils literal notranslate"><span class="pre">requires_auth()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.result_renderer"><code class="docutils literal notranslate"><span class="pre">result_renderer()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.retry_async"><code class="docutils literal notranslate"><span class="pre">retry_async()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.test_ui_function"><code class="docutils literal notranslate"><span class="pre">test_ui_function()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.timeout_async"><code class="docutils literal notranslate"><span class="pre">timeout_async()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.ui_config"><code class="docutils literal notranslate"><span class="pre">ui_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.webhook"><code class="docutils literal notranslate"><span class="pre">webhook()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.with_dependencies"><code class="docutils literal notranslate"><span class="pre">with_dependencies()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.with_example"><code class="docutils literal notranslate"><span class="pre">with_example()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf.html#uf.wrap_pydantic_function"><code class="docutils literal notranslate"><span class="pre">wrap_pydantic_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/async_support.html">uf.async_support</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/async_support.html#uf.async_support.AsyncContext"><code class="docutils literal notranslate"><span class="pre">AsyncContext</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/async_support.html#uf.async_support.AsyncFunctionWrapper"><code class="docutils literal notranslate"><span class="pre">AsyncFunctionWrapper</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/async_support.html#uf.async_support.async_to_sync"><code class="docutils literal notranslate"><span class="pre">async_to_sync()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/async_support.html#uf.async_support.batch_async_calls"><code class="docutils literal notranslate"><span class="pre">batch_async_calls()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/async_support.html#uf.async_support.create_async_handler"><code class="docutils literal notranslate"><span class="pre">create_async_handler()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/async_support.html#uf.async_support.detect_async_framework"><code class="docutils literal notranslate"><span class="pre">detect_async_framework()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/async_support.html#uf.async_support.is_async_function"><code class="docutils literal notranslate"><span class="pre">is_async_function()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/async_support.html#uf.async_support.is_framework_async_capable"><code class="docutils literal notranslate"><span class="pre">is_framework_async_capable()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/async_support.html#uf.async_support.make_sync_compatible"><code class="docutils literal notranslate"><span class="pre">make_sync_compatible()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/async_support.html#uf.async_support.retry_async"><code class="docutils literal notranslate"><span class="pre">retry_async()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/async_support.html#uf.async_support.timeout_async"><code class="docutils literal notranslate"><span class="pre">timeout_async()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/auth.html">uf.auth</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/auth.html#uf.auth.ApiKey"><code class="docutils literal notranslate"><span class="pre">ApiKey</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/auth.html#uf.auth.ApiKeyManager"><code class="docutils literal notranslate"><span class="pre">ApiKeyManager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/auth.html#uf.auth.AuthBackend"><code class="docutils literal notranslate"><span class="pre">AuthBackend</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/auth.html#uf.auth.DictAuthBackend"><code class="docutils literal notranslate"><span class="pre">DictAuthBackend</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/auth.html#uf.auth.PasswordHasher"><code class="docutils literal notranslate"><span class="pre">PasswordHasher</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/auth.html#uf.auth.SessionManager"><code class="docutils literal notranslate"><span class="pre">SessionManager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/auth.html#uf.auth.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/auth.html#uf.auth.get_global_api_key_manager"><code class="docutils literal notranslate"><span class="pre">get_global_api_key_manager()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/auth.html#uf.auth.get_global_auth_backend"><code class="docutils literal notranslate"><span class="pre">get_global_auth_backend()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/auth.html#uf.auth.get_global_session_manager"><code class="docutils literal notranslate"><span class="pre">get_global_session_manager()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/auth.html#uf.auth.require_auth"><code class="docutils literal notranslate"><span class="pre">require_auth()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/auth.html#uf.auth.set_global_api_key_manager"><code class="docutils literal notranslate"><span class="pre">set_global_api_key_manager()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/auth.html#uf.auth.set_global_auth_backend"><code class="docutils literal notranslate"><span class="pre">set_global_auth_backend()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/auth.html#uf.auth.set_global_session_manager"><code class="docutils literal notranslate"><span class="pre">set_global_session_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/background.html">uf.background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/background.html#uf.background.PeriodicTask"><code class="docutils literal notranslate"><span class="pre">PeriodicTask</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/background.html#uf.background.Task"><code class="docutils literal notranslate"><span class="pre">Task</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/background.html#uf.background.TaskQueue"><code class="docutils literal notranslate"><span class="pre">TaskQueue</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/background.html#uf.background.TaskStatus"><code class="docutils literal notranslate"><span class="pre">TaskStatus</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/background.html#uf.background.background"><code class="docutils literal notranslate"><span class="pre">background()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/background.html#uf.background.get_global_task_queue"><code class="docutils literal notranslate"><span class="pre">get_global_task_queue()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/background.html#uf.background.get_or_create_task_queue"><code class="docutils literal notranslate"><span class="pre">get_or_create_task_queue()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/background.html#uf.background.set_global_task_queue"><code class="docutils literal notranslate"><span class="pre">set_global_task_queue()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/base.html">uf.base</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/base.html#uf.base.UfApp"><code class="docutils literal notranslate"><span class="pre">UfApp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/base.html#uf.base.mk_rjsf_app"><code class="docutils literal notranslate"><span class="pre">mk_rjsf_app()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/caching.html">uf.caching</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/caching.html#uf.caching.CacheBackend"><code class="docutils literal notranslate"><span class="pre">CacheBackend</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/caching.html#uf.caching.CacheStats"><code class="docutils literal notranslate"><span class="pre">CacheStats</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/caching.html#uf.caching.DiskCache"><code class="docutils literal notranslate"><span class="pre">DiskCache</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/caching.html#uf.caching.MemoryCache"><code class="docutils literal notranslate"><span class="pre">MemoryCache</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/caching.html#uf.caching.cache_clear_all"><code class="docutils literal notranslate"><span class="pre">cache_clear_all()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/caching.html#uf.caching.cache_invalidate"><code class="docutils literal notranslate"><span class="pre">cache_invalidate()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/caching.html#uf.caching.cached"><code class="docutils literal notranslate"><span class="pre">cached()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/caching.html#uf.caching.get_global_cache_backend"><code class="docutils literal notranslate"><span class="pre">get_global_cache_backend()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/caching.html#uf.caching.make_cache_key"><code class="docutils literal notranslate"><span class="pre">make_cache_key()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/caching.html#uf.caching.set_global_cache_backend"><code class="docutils literal notranslate"><span class="pre">set_global_cache_backend()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/decorators.html">uf.decorators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/decorators.html#uf.decorators.deprecated"><code class="docutils literal notranslate"><span class="pre">deprecated()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/decorators.html#uf.decorators.field_config"><code class="docutils literal notranslate"><span class="pre">field_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/decorators.html#uf.decorators.get_example"><code class="docutils literal notranslate"><span class="pre">get_example()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/decorators.html#uf.decorators.get_field_configs"><code class="docutils literal notranslate"><span class="pre">get_field_configs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/decorators.html#uf.decorators.get_group"><code class="docutils literal notranslate"><span class="pre">get_group()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/decorators.html#uf.decorators.get_ui_config"><code class="docutils literal notranslate"><span class="pre">get_ui_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/decorators.html#uf.decorators.group"><code class="docutils literal notranslate"><span class="pre">group()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/decorators.html#uf.decorators.hidden"><code class="docutils literal notranslate"><span class="pre">hidden()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/decorators.html#uf.decorators.is_hidden"><code class="docutils literal notranslate"><span class="pre">is_hidden()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/decorators.html#uf.decorators.rate_limit"><code class="docutils literal notranslate"><span class="pre">rate_limit()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/decorators.html#uf.decorators.requires_auth"><code class="docutils literal notranslate"><span class="pre">requires_auth()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/decorators.html#uf.decorators.ui_config"><code class="docutils literal notranslate"><span class="pre">ui_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/decorators.html#uf.decorators.with_example"><code class="docutils literal notranslate"><span class="pre">with_example()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/field_interactions.html">uf.field_interactions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/field_interactions.html#uf.field_interactions.DependencyAction"><code class="docutils literal notranslate"><span class="pre">DependencyAction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/field_interactions.html#uf.field_interactions.DependencyBuilder"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/field_interactions.html#uf.field_interactions.FieldDependency"><code class="docutils literal notranslate"><span class="pre">FieldDependency</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/field_interactions.html#uf.field_interactions.add_field_dependencies"><code class="docutils literal notranslate"><span class="pre">add_field_dependencies()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/field_interactions.html#uf.field_interactions.get_field_dependencies"><code class="docutils literal notranslate"><span class="pre">get_field_dependencies()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/field_interactions.html#uf.field_interactions.with_dependencies"><code class="docutils literal notranslate"><span class="pre">with_dependencies()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/history.html">uf.history</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/history.html#uf.history.CallHistory"><code class="docutils literal notranslate"><span class="pre">CallHistory</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/history.html#uf.history.FunctionCall"><code class="docutils literal notranslate"><span class="pre">FunctionCall</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/history.html#uf.history.HistoryManager"><code class="docutils literal notranslate"><span class="pre">HistoryManager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/history.html#uf.history.Preset"><code class="docutils literal notranslate"><span class="pre">Preset</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/history.html#uf.history.PresetManager"><code class="docutils literal notranslate"><span class="pre">PresetManager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/history.html#uf.history.enable_history"><code class="docutils literal notranslate"><span class="pre">enable_history()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/history.html#uf.history.get_global_history_manager"><code class="docutils literal notranslate"><span class="pre">get_global_history_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/openapi.html">uf.openapi</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/openapi.html#uf.openapi.OpenAPIConfig"><code class="docutils literal notranslate"><span class="pre">OpenAPIConfig</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/openapi.html#uf.openapi.add_openapi_routes"><code class="docutils literal notranslate"><span class="pre">add_openapi_routes()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/openapi.html#uf.openapi.function_to_openapi_operation"><code class="docutils literal notranslate"><span class="pre">function_to_openapi_operation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/openapi.html#uf.openapi.generate_openapi_spec"><code class="docutils literal notranslate"><span class="pre">generate_openapi_spec()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/openapi.html#uf.openapi.redoc_ui_html"><code class="docutils literal notranslate"><span class="pre">redoc_ui_html()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/openapi.html#uf.openapi.swagger_ui_html"><code class="docutils literal notranslate"><span class="pre">swagger_ui_html()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/organization.html">uf.organization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/organization.html#uf.organization.FunctionGroup"><code class="docutils literal notranslate"><span class="pre">FunctionGroup</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/organization.html#uf.organization.FunctionOrganizer"><code class="docutils literal notranslate"><span class="pre">FunctionOrganizer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/organization.html#uf.organization.auto_group_by_module"><code class="docutils literal notranslate"><span class="pre">auto_group_by_module()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/organization.html#uf.organization.auto_group_by_prefix"><code class="docutils literal notranslate"><span class="pre">auto_group_by_prefix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/organization.html#uf.organization.auto_group_by_tag"><code class="docutils literal notranslate"><span class="pre">auto_group_by_tag()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/organization.html#uf.organization.mk_grouped_app"><code class="docutils literal notranslate"><span class="pre">mk_grouped_app()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/pydantic_support.html">uf.pydantic_support</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/pydantic_support.html#uf.pydantic_support.PydanticRegistry"><code class="docutils literal notranslate"><span class="pre">PydanticRegistry</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/pydantic_support.html#uf.pydantic_support.create_pydantic_spec"><code class="docutils literal notranslate"><span class="pre">create_pydantic_spec()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/pydantic_support.html#uf.pydantic_support.dict_to_pydantic"><code class="docutils literal notranslate"><span class="pre">dict_to_pydantic()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/pydantic_support.html#uf.pydantic_support.extract_field_validators"><code class="docutils literal notranslate"><span class="pre">extract_field_validators()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/pydantic_support.html#uf.pydantic_support.extract_pydantic_params"><code class="docutils literal notranslate"><span class="pre">extract_pydantic_params()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/pydantic_support.html#uf.pydantic_support.function_uses_pydantic"><code class="docutils literal notranslate"><span class="pre">function_uses_pydantic()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/pydantic_support.html#uf.pydantic_support.get_pydantic_registry"><code class="docutils literal notranslate"><span class="pre">get_pydantic_registry()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/pydantic_support.html#uf.pydantic_support.is_pydantic_model"><code class="docutils literal notranslate"><span class="pre">is_pydantic_model()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/pydantic_support.html#uf.pydantic_support.pydantic_error_to_user_friendly"><code class="docutils literal notranslate"><span class="pre">pydantic_error_to_user_friendly()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/pydantic_support.html#uf.pydantic_support.pydantic_model_to_json_schema"><code class="docutils literal notranslate"><span class="pre">pydantic_model_to_json_schema()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/pydantic_support.html#uf.pydantic_support.pydantic_to_dict"><code class="docutils literal notranslate"><span class="pre">pydantic_to_dict()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/pydantic_support.html#uf.pydantic_support.wrap_pydantic_function"><code class="docutils literal notranslate"><span class="pre">wrap_pydantic_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/renderers.html">uf.renderers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.ChartRenderer"><code class="docutils literal notranslate"><span class="pre">ChartRenderer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.DataFrameRenderer"><code class="docutils literal notranslate"><span class="pre">DataFrameRenderer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.HtmlRenderer"><code class="docutils literal notranslate"><span class="pre">HtmlRenderer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.ImageRenderer"><code class="docutils literal notranslate"><span class="pre">ImageRenderer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.JsonRenderer"><code class="docutils literal notranslate"><span class="pre">JsonRenderer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.MarkdownRenderer"><code class="docutils literal notranslate"><span class="pre">MarkdownRenderer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.ResultRenderer"><code class="docutils literal notranslate"><span class="pre">ResultRenderer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.ResultRendererRegistry"><code class="docutils literal notranslate"><span class="pre">ResultRendererRegistry</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.TableRenderer"><code class="docutils literal notranslate"><span class="pre">TableRenderer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.get_global_renderer_registry"><code class="docutils literal notranslate"><span class="pre">get_global_renderer_registry()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.get_result_renderer"><code class="docutils literal notranslate"><span class="pre">get_result_renderer()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.register_renderer"><code class="docutils literal notranslate"><span class="pre">register_renderer()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.register_renderer_for_type"><code class="docutils literal notranslate"><span class="pre">register_renderer_for_type()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.render_result"><code class="docutils literal notranslate"><span class="pre">render_result()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/renderers.html#uf.renderers.result_renderer"><code class="docutils literal notranslate"><span class="pre">result_renderer()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/rjsf_config.html">uf.rjsf_config</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/rjsf_config.html#uf.rjsf_config.ConditionalFieldConfig"><code class="docutils literal notranslate"><span class="pre">ConditionalFieldConfig</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/rjsf_config.html#uf.rjsf_config.RjsfConfigBuilder"><code class="docutils literal notranslate"><span class="pre">RjsfConfigBuilder</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/rjsf_config.html#uf.rjsf_config.RjsfFieldConfig"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/rjsf_config.html#uf.rjsf_config.apply_field_configs"><code class="docutils literal notranslate"><span class="pre">apply_field_configs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/rjsf_config.html#uf.rjsf_config.get_field_config"><code class="docutils literal notranslate"><span class="pre">get_field_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/routes.html">uf.routes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/routes.html#uf.routes.add_ui_routes"><code class="docutils literal notranslate"><span class="pre">add_ui_routes()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/routes.html#uf.routes.create_function_handler"><code class="docutils literal notranslate"><span class="pre">create_function_handler()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/specs.html">uf.specs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/specs.html#uf.specs.FunctionSpecStore"><code class="docutils literal notranslate"><span class="pre">FunctionSpecStore</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/templates.html">uf.templates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/templates.html#uf.templates.generate_error_page"><code class="docutils literal notranslate"><span class="pre">generate_error_page()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/templates.html#uf.templates.generate_index_html"><code class="docutils literal notranslate"><span class="pre">generate_index_html()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/testing.html">uf.testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/testing.html#uf.testing.FormDataBuilder"><code class="docutils literal notranslate"><span class="pre">FormDataBuilder</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/testing.html#uf.testing.UfAppTester"><code class="docutils literal notranslate"><span class="pre">UfAppTester</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/testing.html#uf.testing.UfTestClient"><code class="docutils literal notranslate"><span class="pre">UfTestClient</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/testing.html#uf.testing.assert_field_required"><code class="docutils literal notranslate"><span class="pre">assert_field_required()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/testing.html#uf.testing.assert_field_type"><code class="docutils literal notranslate"><span class="pre">assert_field_type()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/testing.html#uf.testing.assert_has_field"><code class="docutils literal notranslate"><span class="pre">assert_has_field()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/testing.html#uf.testing.assert_valid_rjsf_spec"><code class="docutils literal notranslate"><span class="pre">assert_valid_rjsf_spec()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/testing.html#uf.testing.mock_function_response"><code class="docutils literal notranslate"><span class="pre">mock_function_response()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/testing.html#uf.testing.test_ui_function"><code class="docutils literal notranslate"><span class="pre">test_ui_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/themes.html">uf.themes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/themes.html#uf.themes.Theme"><code class="docutils literal notranslate"><span class="pre">Theme</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/themes.html#uf.themes.ThemeConfig"><code class="docutils literal notranslate"><span class="pre">ThemeConfig</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/themes.html#uf.themes.create_theme_toggle_button"><code class="docutils literal notranslate"><span class="pre">create_theme_toggle_button()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/themes.html#uf.themes.generate_theme_toggle_js"><code class="docutils literal notranslate"><span class="pre">generate_theme_toggle_js()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/themes.html#uf.themes.get_theme"><code class="docutils literal notranslate"><span class="pre">get_theme()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/trans.html">uf.trans</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/trans.html#uf.trans.InputTransformRegistry"><code class="docutils literal notranslate"><span class="pre">InputTransformRegistry</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/trans.html#uf.trans.get_global_registry"><code class="docutils literal notranslate"><span class="pre">get_global_registry()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/trans.html#uf.trans.register_common_types"><code class="docutils literal notranslate"><span class="pre">register_common_types()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/trans.html#uf.trans.register_type"><code class="docutils literal notranslate"><span class="pre">register_type()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module_docs/uf/webhooks.html">uf.webhooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/webhooks.html#uf.webhooks.WebhookClient"><code class="docutils literal notranslate"><span class="pre">WebhookClient</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/webhooks.html#uf.webhooks.WebhookEvent"><code class="docutils literal notranslate"><span class="pre">WebhookEvent</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/webhooks.html#uf.webhooks.WebhookManager"><code class="docutils literal notranslate"><span class="pre">WebhookManager</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/webhooks.html#uf.webhooks.get_global_webhook_manager"><code class="docutils literal notranslate"><span class="pre">get_global_webhook_manager()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/webhooks.html#uf.webhooks.set_global_webhook_manager"><code class="docutils literal notranslate"><span class="pre">set_global_webhook_manager()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="module_docs/uf/webhooks.html#uf.webhooks.webhook"><code class="docutils literal notranslate"><span class="pre">webhook()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+<p>Release: 0.1.1</p>
+<p>Last change: May 16, 2026</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="module_docs/uf.html" class="btn btn-neutral float-right" title="uf" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

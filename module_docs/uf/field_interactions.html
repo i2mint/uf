@@ -1,0 +1,584 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.field_interactions &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="uf.history" href="history.html" />
+    <link rel="prev" title="uf.decorators" href="decorators.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decorators.html">uf.decorators</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">uf.field_interactions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#uf.field_interactions.DependencyAction"><code class="docutils literal notranslate"><span class="pre">DependencyAction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.build"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.build()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.custom"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.custom()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.disable"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.disable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.enable"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.enable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.equals"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.equals()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.greater_than"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.greater_than()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.hide"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.hide()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.in_list"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.in_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.is_falsy"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.is_falsy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.is_truthy"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.is_truthy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.less_than"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.less_than()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.make_optional"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.make_optional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.not_equals"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.not_equals()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.require"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.require()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.show"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.show()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder.when"><code class="docutils literal notranslate"><span class="pre">DependencyBuilder.when()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.field_interactions.FieldDependency"><code class="docutils literal notranslate"><span class="pre">FieldDependency</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.FieldDependency.source_field"><code class="docutils literal notranslate"><span class="pre">FieldDependency.source_field</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.FieldDependency.target_field"><code class="docutils literal notranslate"><span class="pre">FieldDependency.target_field</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.FieldDependency.condition"><code class="docutils literal notranslate"><span class="pre">FieldDependency.condition</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.FieldDependency.action"><code class="docutils literal notranslate"><span class="pre">FieldDependency.action</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.FieldDependency.else_action"><code class="docutils literal notranslate"><span class="pre">FieldDependency.else_action</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.FieldDependency.check"><code class="docutils literal notranslate"><span class="pre">FieldDependency.check()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.FieldDependency.to_json_schema"><code class="docutils literal notranslate"><span class="pre">FieldDependency.to_json_schema()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.field_interactions.FieldDependency.to_ui_schema"><code class="docutils literal notranslate"><span class="pre">FieldDependency.to_ui_schema()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.field_interactions.add_field_dependencies"><code class="docutils literal notranslate"><span class="pre">add_field_dependencies()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.field_interactions.get_field_dependencies"><code class="docutils literal notranslate"><span class="pre">get_field_dependencies()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.field_interactions.with_dependencies"><code class="docutils literal notranslate"><span class="pre">with_dependencies()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">uf.field_interactions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/uf/field_interactions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-uf.field_interactions">
+<span id="uf-field-interactions"></span><h1>uf.field_interactions<a class="headerlink" href="#module-uf.field_interactions" title="Link to this heading"></a></h1>
+<p>Field dependencies and interactions for uf.</p>
+<p>Provides tools for defining relationships between form fields, such as
+conditional display, dynamic validation, and field dependencies.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyAction">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.field_interactions.</span></span><span class="sig-name descname"><span class="pre">DependencyAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyAction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyAction" title="Link to this definition"></a></dt>
+<dd><p>Actions that can be triggered by field dependencies.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.field_interactions.</span></span><span class="sig-name descname"><span class="pre">DependencyBuilder</span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder" title="Link to this definition"></a></dt>
+<dd><p>Builder for creating field dependencies.</p>
+<p>Provides a fluent interface for defining dependencies between fields.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span> <span class="o">=</span> <span class="n">DependencyBuilder</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="s1">&#39;other&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;other_reason&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">greater_than</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span><span class="o">.</span><span class="n">enable</span><span class="p">(</span><span class="s1">&#39;alcohol_consent&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dependencies</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#uf.field_interactions.FieldDependency" title="uf.field_interactions.FieldDependency"><span class="pre">FieldDependency</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.build" title="Link to this definition"></a></dt>
+<dd><p>Build and return the list of dependencies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of FieldDependency objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.custom">
+<span class="sig-name descname"><span class="pre">custom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.custom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.custom" title="Link to this definition"></a></dt>
+<dd><p>Condition: custom callable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>condition</strong> – Function that takes value and returns bool</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.disable">
+<span class="sig-name descname"><span class="pre">disable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.disable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.disable" title="Link to this definition"></a></dt>
+<dd><p>Action: disable target field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>target_field</strong> – Name of field to disable</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.enable">
+<span class="sig-name descname"><span class="pre">enable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.enable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.enable" title="Link to this definition"></a></dt>
+<dd><p>Action: enable target field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>target_field</strong> – Name of field to enable</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.equals">
+<span class="sig-name descname"><span class="pre">equals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.equals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.equals" title="Link to this definition"></a></dt>
+<dd><p>Condition: field equals value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – Value to compare against</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.greater_than">
+<span class="sig-name descname"><span class="pre">greater_than</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.greater_than"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.greater_than" title="Link to this definition"></a></dt>
+<dd><p>Condition: field is greater than value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – Value to compare against</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.hide">
+<span class="sig-name descname"><span class="pre">hide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.hide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.hide" title="Link to this definition"></a></dt>
+<dd><p>Action: hide target field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>target_field</strong> – Name of field to hide</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.in_list">
+<span class="sig-name descname"><span class="pre">in_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.in_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.in_list" title="Link to this definition"></a></dt>
+<dd><p>Condition: field value is in list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>values</strong> – List of acceptable values</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.is_falsy">
+<span class="sig-name descname"><span class="pre">is_falsy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.is_falsy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.is_falsy" title="Link to this definition"></a></dt>
+<dd><p>Condition: field is falsy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.is_truthy">
+<span class="sig-name descname"><span class="pre">is_truthy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.is_truthy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.is_truthy" title="Link to this definition"></a></dt>
+<dd><p>Condition: field is truthy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.less_than">
+<span class="sig-name descname"><span class="pre">less_than</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.less_than"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.less_than" title="Link to this definition"></a></dt>
+<dd><p>Condition: field is less than value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – Value to compare against</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.make_optional">
+<span class="sig-name descname"><span class="pre">make_optional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.make_optional"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.make_optional" title="Link to this definition"></a></dt>
+<dd><p>Action: make target field optional.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>target_field</strong> – Name of field to make optional</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.not_equals">
+<span class="sig-name descname"><span class="pre">not_equals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.not_equals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.not_equals" title="Link to this definition"></a></dt>
+<dd><p>Condition: field does not equal value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – Value to compare against</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.require">
+<span class="sig-name descname"><span class="pre">require</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.require"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.require" title="Link to this definition"></a></dt>
+<dd><p>Action: make target field required.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>target_field</strong> – Name of field to require</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.show" title="Link to this definition"></a></dt>
+<dd><p>Action: show target field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>target_field</strong> – Name of field to show</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.DependencyBuilder.when">
+<span class="sig-name descname"><span class="pre">when</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyBuilder" title="uf.field_interactions.DependencyBuilder"><span class="pre">DependencyBuilder</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#DependencyBuilder.when"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.DependencyBuilder.when" title="Link to this definition"></a></dt>
+<dd><p>Start a dependency condition on a field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>field_name</strong> – Name of the source field</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.field_interactions.FieldDependency">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.field_interactions.</span></span><span class="sig-name descname"><span class="pre">FieldDependency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#uf.field_interactions.DependencyAction" title="uf.field_interactions.DependencyAction"><span class="pre">DependencyAction</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">else_action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#uf.field_interactions.DependencyAction" title="uf.field_interactions.DependencyAction"><span class="pre">DependencyAction</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/field_interactions.html#FieldDependency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.FieldDependency" title="Link to this definition"></a></dt>
+<dd><p>Define a dependency between form fields.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.field_interactions.FieldDependency.source_field">
+<span class="sig-name descname"><span class="pre">source_field</span></span><a class="headerlink" href="#uf.field_interactions.FieldDependency.source_field" title="Link to this definition"></a></dt>
+<dd><p>Name of the field that triggers the dependency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.field_interactions.FieldDependency.target_field">
+<span class="sig-name descname"><span class="pre">target_field</span></span><a class="headerlink" href="#uf.field_interactions.FieldDependency.target_field" title="Link to this definition"></a></dt>
+<dd><p>Name of the field affected by the dependency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.field_interactions.FieldDependency.condition">
+<span class="sig-name descname"><span class="pre">condition</span></span><a class="headerlink" href="#uf.field_interactions.FieldDependency.condition" title="Link to this definition"></a></dt>
+<dd><p>Function that takes source value and returns bool</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[Any], bool]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.field_interactions.FieldDependency.action">
+<span class="sig-name descname"><span class="pre">action</span></span><a class="headerlink" href="#uf.field_interactions.FieldDependency.action" title="Link to this definition"></a></dt>
+<dd><p>Action to perform when condition is true</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#uf.field_interactions.DependencyAction" title="uf.field_interactions.DependencyAction">uf.field_interactions.DependencyAction</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.field_interactions.FieldDependency.else_action">
+<span class="sig-name descname"><span class="pre">else_action</span></span><a class="headerlink" href="#uf.field_interactions.FieldDependency.else_action" title="Link to this definition"></a></dt>
+<dd><p>Optional action when condition is false</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#uf.field_interactions.DependencyAction" title="uf.field_interactions.DependencyAction">uf.field_interactions.DependencyAction</a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show &#39;other_reason&#39; only when reason is &#39;other&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dep</span> <span class="o">=</span> <span class="n">FieldDependency</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">source_field</span><span class="o">=</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">target_field</span><span class="o">=</span><span class="s1">&#39;other_reason&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">condition</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="o">==</span> <span class="s1">&#39;other&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">action</span><span class="o">=</span><span class="n">DependencyAction</span><span class="o">.</span><span class="n">SHOW</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">else_action</span><span class="o">=</span><span class="n">DependencyAction</span><span class="o">.</span><span class="n">HIDE</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.FieldDependency.check">
+<span class="sig-name descname"><span class="pre">check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.field_interactions.DependencyAction" title="uf.field_interactions.DependencyAction"><span class="pre">DependencyAction</span></a></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#FieldDependency.check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.FieldDependency.check" title="Link to this definition"></a></dt>
+<dd><p>Check the condition and return the appropriate action.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – Value of the source field</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The action to perform</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.FieldDependency.to_json_schema">
+<span class="sig-name descname"><span class="pre">to_json_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#FieldDependency.to_json_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.FieldDependency.to_json_schema" title="Link to this definition"></a></dt>
+<dd><p>Convert to JSON Schema dependencies format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON Schema dependencies structure</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This uses JSON Schema’s if/then/else structure for dependencies.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.field_interactions.FieldDependency.to_ui_schema">
+<span class="sig-name descname"><span class="pre">to_ui_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#FieldDependency.to_ui_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.FieldDependency.to_ui_schema" title="Link to this definition"></a></dt>
+<dd><p>Convert to RJSF UI Schema dependencies format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>UI Schema dependencies structure</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.field_interactions.add_field_dependencies">
+<span class="sig-prename descclassname"><span class="pre">uf.field_interactions.</span></span><span class="sig-name descname"><span class="pre">add_field_dependencies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependencies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#uf.field_interactions.FieldDependency" title="uf.field_interactions.FieldDependency"><span class="pre">FieldDependency</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#add_field_dependencies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.add_field_dependencies" title="Link to this definition"></a></dt>
+<dd><p>Augment RJSF spec with field dependencies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> – Function to augment</p></li>
+<li><p><strong>dependencies</strong> – List of field dependencies</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with augmented schema and uiSchema</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">deps</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="n">FieldDependency</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span> <span class="s1">&#39;other_reason&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="o">==</span> <span class="s1">&#39;other&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="n">DependencyAction</span><span class="o">.</span><span class="n">SHOW</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spec</span> <span class="o">=</span> <span class="n">add_field_dependencies</span><span class="p">(</span><span class="n">my_func</span><span class="p">,</span> <span class="n">deps</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.field_interactions.get_field_dependencies">
+<span class="sig-prename descclassname"><span class="pre">uf.field_interactions.</span></span><span class="sig-name descname"><span class="pre">get_field_dependencies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#uf.field_interactions.FieldDependency" title="uf.field_interactions.FieldDependency"><span class="pre">FieldDependency</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/field_interactions.html#get_field_dependencies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.get_field_dependencies" title="Link to this definition"></a></dt>
+<dd><p>Get field dependencies from a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – Function to get dependencies from</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of FieldDependency objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.field_interactions.with_dependencies">
+<span class="sig-prename descclassname"><span class="pre">uf.field_interactions.</span></span><span class="sig-name descname"><span class="pre">with_dependencies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">dependencies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#uf.field_interactions.FieldDependency" title="uf.field_interactions.FieldDependency"><span class="pre">FieldDependency</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/field_interactions.html#with_dependencies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.field_interactions.with_dependencies" title="Link to this definition"></a></dt>
+<dd><p>Decorator to attach field dependencies to a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>*dependencies</strong> – FieldDependency objects</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@with_dependencies</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">FieldDependency</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span> <span class="s1">&#39;other_reason&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="o">==</span> <span class="s1">&#39;other&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="n">DependencyAction</span><span class="o">.</span><span class="n">SHOW</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">submit_feedback</span><span class="p">(</span><span class="n">reason</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">other_reason</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="decorators.html" class="btn btn-neutral float-left" title="uf.decorators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="history.html" class="btn btn-neutral float-right" title="uf.history" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

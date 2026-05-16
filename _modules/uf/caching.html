@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.caching &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">uf.caching</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uf.caching</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Result caching for uf.</span>
+
+<span class="sd">Provides caching decorators and backends to cache function results,</span>
+<span class="sd">improving performance for expensive operations.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Hashable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+
+
+<div class="viewcode-block" id="CacheBackend">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.CacheBackend">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CacheBackend</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for cache backends.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CacheBackend.get">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.CacheBackend.get">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a value from cache.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            key: Cache key</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Cached value or None if not found/expired</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="CacheBackend.set">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.CacheBackend.set">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a value in cache.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            key: Cache key</span>
+<span class="sd">            value: Value to cache</span>
+<span class="sd">            ttl: Time to live in seconds</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="CacheBackend.delete">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.CacheBackend.delete">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete a key from cache.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            key: Cache key</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if deleted</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="CacheBackend.clear">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.CacheBackend.clear">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear all cache entries.&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="CacheBackend.exists">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.CacheBackend.exists">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if key exists in cache.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            key: Cache key</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if exists and not expired</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="MemoryCache">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.MemoryCache">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MemoryCache</span><span class="p">(</span><span class="n">CacheBackend</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;In-memory cache backend.</span>
+
+<span class="sd">    Simple dictionary-based caching suitable for single-process applications.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; cache = MemoryCache(default_ttl=3600)</span>
+<span class="sd">        &gt;&gt;&gt; cache.set(&#39;key&#39;, &#39;value&#39;, ttl=60)</span>
+<span class="sd">        &gt;&gt;&gt; value = cache.get(&#39;key&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default_ttl</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3600</span><span class="p">,</span> <span class="n">max_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize memory cache.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            default_ttl: Default TTL in seconds</span>
+<span class="sd">            max_size: Maximum number of entries</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_ttl</span> <span class="o">=</span> <span class="n">default_ttl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_size</span> <span class="o">=</span> <span class="n">max_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="MemoryCache.get">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.MemoryCache.get">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a value from cache.&quot;&quot;&quot;</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">entry</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Check expiration</span>
+        <span class="k">if</span> <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;expires_at&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;expires_at&#39;</span><span class="p">]:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="MemoryCache.set">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.MemoryCache.set">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a value in cache.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ttl</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ttl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_ttl</span>
+
+        <span class="n">expires_at</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">ttl</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">expires_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">ttl</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">,</span>
+            <span class="s1">&#39;expires_at&#39;</span><span class="p">:</span> <span class="n">expires_at</span><span class="p">,</span>
+            <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Evict oldest entries if over max size</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_size</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_evict_oldest</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="MemoryCache.delete">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.MemoryCache.delete">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete a key from cache.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="MemoryCache.clear">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.MemoryCache.clear">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear all cache entries.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_evict_oldest</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evict oldest entries to fit max size.&quot;&quot;&quot;</span>
+        <span class="c1"># Sort by created_at and remove oldest 10%</span>
+        <span class="n">sorted_keys</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span>
+            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="n">num_to_remove</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">sorted_keys</span><span class="p">[:</span><span class="n">num_to_remove</span><span class="p">]:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+<div class="viewcode-block" id="MemoryCache.cleanup_expired">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.MemoryCache.cleanup_expired">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup_expired</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove expired entries.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Number of entries removed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">expired</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">key</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;expires_at&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">now</span> <span class="o">&gt;</span> <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;expires_at&#39;</span><span class="p">]</span>
+        <span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">expired</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">expired</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MemoryCache.stats">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.MemoryCache.stats">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get cache statistics.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary with cache stats</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">expired</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+            <span class="mi">1</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;expires_at&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">now</span> <span class="o">&gt;</span> <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;expires_at&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;total_entries&#39;</span><span class="p">:</span> <span class="n">total</span><span class="p">,</span>
+            <span class="s1">&#39;active_entries&#39;</span><span class="p">:</span> <span class="n">total</span> <span class="o">-</span> <span class="n">expired</span><span class="p">,</span>
+            <span class="s1">&#39;expired_entries&#39;</span><span class="p">:</span> <span class="n">expired</span><span class="p">,</span>
+            <span class="s1">&#39;max_size&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_size</span><span class="p">,</span>
+            <span class="s1">&#39;utilization&#39;</span><span class="p">:</span> <span class="n">total</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_size</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_size</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DiskCache">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.DiskCache">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DiskCache</span><span class="p">(</span><span class="n">CacheBackend</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Disk-based cache backend using pickle.</span>
+
+<span class="sd">    Persists cache to disk, suitable for larger datasets or persistence</span>
+<span class="sd">    across restarts.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; cache = DiskCache(cache_dir=&#39;/tmp/uf_cache&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; cache.set(&#39;expensive_result&#39;, big_data)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;.uf_cache&#39;</span><span class="p">,</span> <span class="n">default_ttl</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3600</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize disk cache.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cache_dir: Directory to store cache files</span>
+<span class="sd">            default_ttl: Default TTL in seconds</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span> <span class="o">=</span> <span class="n">cache_dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_ttl</span> <span class="o">=</span> <span class="n">default_ttl</span>
+
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get file path for a key.&quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+        <span class="c1"># Hash the key to create valid filename</span>
+        <span class="n">key_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key_hash</span><span class="si">}</span><span class="s2">.cache&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DiskCache.get">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.DiskCache.get">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a value from cache.&quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_path</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">entry</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+            <span class="c1"># Check expiration</span>
+            <span class="k">if</span> <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;expires_at&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;expires_at&#39;</span><span class="p">]:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+            <span class="k">return</span> <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="DiskCache.set">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.DiskCache.set">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a value in cache.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ttl</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ttl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_ttl</span>
+
+        <span class="n">expires_at</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">ttl</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">expires_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">ttl</span><span class="p">)</span>
+
+        <span class="n">entry</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">,</span>
+            <span class="s1">&#39;expires_at&#39;</span><span class="p">:</span> <span class="n">expires_at</span><span class="p">,</span>
+            <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+        <span class="p">}</span>
+
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_path</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DiskCache.delete">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.DiskCache.delete">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete a key from cache.&quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_path</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="DiskCache.clear">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.DiskCache.clear">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear all cache entries.&quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+
+        <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="s1">&#39;*.cache&#39;</span><span class="p">)):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="make_cache_key">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.make_cache_key">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_cache_key</span><span class="p">(</span><span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a cache key from function call.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func_name: Function name</span>
+<span class="sd">        args: Positional arguments</span>
+<span class="sd">        kwargs: Keyword arguments</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Cache key string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create a deterministic key from arguments</span>
+    <span class="n">key_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;func&#39;</span><span class="p">:</span> <span class="n">func_name</span><span class="p">,</span>
+        <span class="s1">&#39;args&#39;</span><span class="p">:</span> <span class="n">args</span><span class="p">,</span>
+        <span class="s1">&#39;kwargs&#39;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Serialize to JSON for hashing</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">key_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">key_data</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+        <span class="c1"># Fallback to string representation</span>
+        <span class="n">key_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Hash for compact key</span>
+    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">key_str</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="cached">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.cached">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">cached</span><span class="p">(</span>
+    <span class="n">ttl</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3600</span><span class="p">,</span>
+    <span class="n">backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">key_func</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to cache function results.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ttl: Time to live in seconds</span>
+<span class="sd">        backend: Cache backend (uses global MemoryCache if None)</span>
+<span class="sd">        key_func: Optional function to generate cache key</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Decorator function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; @cached(ttl=3600)</span>
+<span class="sd">        ... def expensive_calculation(x: int, y: int) -&gt; int:</span>
+<span class="sd">        ...     # Only runs once per unique (x, y) combination</span>
+<span class="sd">        ...     return heavy_computation(x, y)</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; result = expensive_calculation(10, 20)  # Computes</span>
+<span class="sd">        &gt;&gt;&gt; result2 = expensive_calculation(10, 20)  # From cache</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="n">get_global_cache_backend</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">backend</span> <span class="o">=</span> <span class="n">MemoryCache</span><span class="p">(</span><span class="n">default_ttl</span><span class="o">=</span><span class="n">ttl</span><span class="p">)</span>
+            <span class="n">set_global_cache_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="c1"># Generate cache key</span>
+            <span class="k">if</span> <span class="n">key_func</span><span class="p">:</span>
+                <span class="n">cache_key</span> <span class="o">=</span> <span class="n">key_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cache_key</span> <span class="o">=</span> <span class="n">make_cache_key</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="c1"># Try to get from cache</span>
+            <span class="n">cached_result</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">cached_result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">cached_result</span>
+
+            <span class="c1"># Compute result</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="c1"># Store in cache</span>
+            <span class="n">backend</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cache_key</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="n">ttl</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">result</span>
+
+        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_cached__</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_cache_backend__</span> <span class="o">=</span> <span class="n">backend</span>
+        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_cache_ttl__</span> <span class="o">=</span> <span class="n">ttl</span>
+
+        <span class="c1"># Add cache control methods</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">clear_cache</span><span class="p">():</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Clear all cached results for this function.&quot;&quot;&quot;</span>
+            <span class="c1"># This is a simplified version</span>
+            <span class="c1"># Full implementation would track keys per function</span>
+            <span class="n">backend</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+        <span class="n">wrapper</span><span class="o">.</span><span class="n">clear_cache</span> <span class="o">=</span> <span class="n">clear_cache</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+
+<div class="viewcode-block" id="cache_invalidate">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.cache_invalidate">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">cache_invalidate</span><span class="p">(</span><span class="n">cache_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Invalidate a specific cache entry.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cache_key: Cache key to invalidate</span>
+<span class="sd">        backend: Cache backend (uses global if None)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        True if invalidated</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="n">get_global_cache_backend</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">backend</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">backend</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="cache_clear_all">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.cache_clear_all">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">cache_clear_all</span><span class="p">(</span><span class="n">backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Clear all cache entries.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        backend: Cache backend (uses global if None)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">backend</span> <span class="o">=</span> <span class="n">get_global_cache_backend</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">backend</span><span class="p">:</span>
+        <span class="n">backend</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="CacheStats">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.CacheStats">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CacheStats</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Track cache hit/miss statistics.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize cache stats.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">misses</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sets</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="CacheStats.record_hit">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.CacheStats.record_hit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">record_hit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Record a cache hit.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="CacheStats.record_miss">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.CacheStats.record_miss">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">record_miss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Record a cache miss.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">misses</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="CacheStats.record_set">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.CacheStats.record_set">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">record_set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Record a cache set.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sets</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="CacheStats.hit_rate">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.CacheStats.hit_rate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">hit_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate hit rate.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Hit rate as a percentage (0-100)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">misses</span>
+        <span class="k">if</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">/</span> <span class="n">total</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span></div>
+
+
+<div class="viewcode-block" id="CacheStats.reset">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.CacheStats.reset">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset all statistics.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">misses</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sets</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="CacheStats.to_dict">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.CacheStats.to_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert to dictionary.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Statistics dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;hits&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hits</span><span class="p">,</span>
+            <span class="s1">&#39;misses&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">misses</span><span class="p">,</span>
+            <span class="s1">&#39;sets&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sets</span><span class="p">,</span>
+            <span class="s1">&#39;hit_rate&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hit_rate</span><span class="p">(),</span>
+            <span class="s1">&#39;total_requests&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">misses</span><span class="p">,</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<span class="c1"># Global cache backend</span>
+<span class="n">_global_cache_backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="set_global_cache_backend">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.set_global_cache_backend">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_global_cache_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">:</span> <span class="n">CacheBackend</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the global cache backend.&quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_global_cache_backend</span>
+    <span class="n">_global_cache_backend</span> <span class="o">=</span> <span class="n">backend</span></div>
+
+
+
+<div class="viewcode-block" id="get_global_cache_backend">
+<a class="viewcode-back" href="../../module_docs/uf/caching.html#uf.get_global_cache_backend">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_global_cache_backend</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the global cache backend.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_global_cache_backend</span></div>
+
+
+
+<span class="c1"># Initialize default global backend</span>
+<span class="n">set_global_cache_backend</span><span class="p">(</span><span class="n">MemoryCache</span><span class="p">())</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

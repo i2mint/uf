@@ -1,0 +1,638 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.renderers &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">uf.renderers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uf.renderers</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Result rendering system for uf.</span>
+
+<span class="sd">Provides smart rendering of function results based on their type,</span>
+<span class="sd">including tables, charts, DataFrames, JSON, and custom renderers.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+
+<div class="viewcode-block" id="ResultRenderer">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.ResultRenderer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ResultRenderer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for result renderers.</span>
+
+<span class="sd">    Subclass this to create custom renderers for specific result types.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ResultRenderer.can_render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.ResultRenderer.can_render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if this renderer can handle the given result.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            result: The function result to render</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if this renderer can handle the result</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="ResultRenderer.render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.ResultRenderer.render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render the result to a displayable format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            result: The function result to render</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary with rendering information:</span>
+<span class="sd">            - &#39;type&#39;: Renderer type (e.g., &#39;table&#39;, &#39;chart&#39;, &#39;json&#39;)</span>
+<span class="sd">            - &#39;data&#39;: Rendered data</span>
+<span class="sd">            - &#39;options&#39;: Optional rendering options</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="JsonRenderer">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.JsonRenderer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JsonRenderer</span><span class="p">(</span><span class="n">ResultRenderer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render results as formatted JSON.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="JsonRenderer.can_render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.JsonRenderer.can_render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Can render any JSON-serializable result.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="JsonRenderer.render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.JsonRenderer.render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render as formatted JSON.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span>
+            <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;indent&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="TableRenderer">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.TableRenderer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TableRenderer</span><span class="p">(</span><span class="n">ResultRenderer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render list of dicts as a table.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TableRenderer.can_render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.TableRenderer.can_render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Can render list of dictionaries.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TableRenderer.render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.TableRenderer.render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render as table.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;columns&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+
+        <span class="c1"># Extract columns from first item</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;table&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span>
+            <span class="s1">&#39;columns&#39;</span><span class="p">:</span> <span class="n">columns</span><span class="p">,</span>
+            <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;sortable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;searchable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DataFrameRenderer">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.DataFrameRenderer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataFrameRenderer</span><span class="p">(</span><span class="n">ResultRenderer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render pandas DataFrame.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DataFrameRenderer.can_render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.DataFrameRenderer.can_render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Can render pandas DataFrame.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+            <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="DataFrameRenderer.render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.DataFrameRenderer.render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render DataFrame as table.&quot;&quot;&quot;</span>
+        <span class="c1"># Convert to dict records</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;records&#39;</span><span class="p">)</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;dataframe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+            <span class="s1">&#39;columns&#39;</span><span class="p">:</span> <span class="n">columns</span><span class="p">,</span>
+            <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;sortable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s1">&#39;searchable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="p">},</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ChartRenderer">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.ChartRenderer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ChartRenderer</span><span class="p">(</span><span class="n">ResultRenderer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render data suitable for charts.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ChartRenderer.can_render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.ChartRenderer.can_render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Can render list of dicts with numeric values.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="c1"># Check if has numeric values</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">has_numeric</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span>
+            <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">first</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">has_numeric</span></div>
+
+
+<div class="viewcode-block" id="ChartRenderer.render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.ChartRenderer.render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render as chart data.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;chart&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+
+        <span class="c1"># Extract labels and datasets</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">label_key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">first</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># First key is label</span>
+        <span class="n">value_keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">first</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">first</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))]</span>
+
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="n">label_key</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+        <span class="n">datasets</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">value_key</span> <span class="ow">in</span> <span class="n">value_keys</span><span class="p">:</span>
+            <span class="n">datasets</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">value_key</span><span class="p">,</span>
+                <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="n">value_key</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">],</span>
+            <span class="p">})</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;chart&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;labels&#39;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span>
+                <span class="s1">&#39;datasets&#39;</span><span class="p">:</span> <span class="n">datasets</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;chart_type&#39;</span><span class="p">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span>  <span class="c1"># default, can be overridden</span>
+                <span class="s1">&#39;responsive&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ImageRenderer">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.ImageRenderer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ImageRenderer</span><span class="p">(</span><span class="n">ResultRenderer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render image data.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ImageRenderer.can_render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.ImageRenderer.can_render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Can render bytes that look like images.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+            <span class="c1"># Check for common image headers</span>
+            <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x89</span><span class="s1">PNG&#39;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xff\xd8\xff</span><span class="s1">&#39;</span><span class="p">):</span>  <span class="c1"># JPEG</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;GIF8&#39;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="ImageRenderer.render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.ImageRenderer.render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render image as base64.&quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
+
+        <span class="n">b64_data</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Detect format</span>
+        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x89</span><span class="s1">PNG&#39;</span><span class="p">):</span>
+            <span class="n">mime_type</span> <span class="o">=</span> <span class="s1">&#39;image/png&#39;</span>
+        <span class="k">elif</span> <span class="n">result</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xff\xd8\xff</span><span class="s1">&#39;</span><span class="p">):</span>
+            <span class="n">mime_type</span> <span class="o">=</span> <span class="s1">&#39;image/jpeg&#39;</span>
+        <span class="k">elif</span> <span class="n">result</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;GIF8&#39;</span><span class="p">):</span>
+            <span class="n">mime_type</span> <span class="o">=</span> <span class="s1">&#39;image/gif&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mime_type</span> <span class="o">=</span> <span class="s1">&#39;image/png&#39;</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;image&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;data:</span><span class="si">{</span><span class="n">mime_type</span><span class="si">}</span><span class="s1">;base64,</span><span class="si">{</span><span class="n">b64_data</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ResultRendererRegistry">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.ResultRendererRegistry">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ResultRendererRegistry</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Registry for result renderers.</span>
+
+<span class="sd">    Manages a collection of renderers and selects the appropriate one</span>
+<span class="sd">    for each result type.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the registry with default renderers.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_renderers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ResultRenderer</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type_renderers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ResultRenderer</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Register default renderers in priority order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">DataFrameRenderer</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">ImageRenderer</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">TableRenderer</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">ChartRenderer</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">JsonRenderer</span><span class="p">())</span>  <span class="c1"># Fallback</span>
+
+<div class="viewcode-block" id="ResultRendererRegistry.register">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.ResultRendererRegistry.register">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">renderer</span><span class="p">:</span> <span class="n">ResultRenderer</span><span class="p">,</span>
+        <span class="n">priority</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Register a renderer.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            renderer: ResultRenderer instance</span>
+<span class="sd">            priority: Higher priority renderers are tried first</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_renderers</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">priority</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ResultRendererRegistry.register_for_type">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.ResultRendererRegistry.register_for_type">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_for_type</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">result_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">,</span>
+        <span class="n">renderer</span><span class="p">:</span> <span class="n">ResultRenderer</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Register a renderer for a specific type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            result_type: Python type to match</span>
+<span class="sd">            renderer: ResultRenderer instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">type_name</span> <span class="o">=</span> <span class="n">result_type</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type_renderers</span><span class="p">[</span><span class="n">type_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">renderer</span></div>
+
+
+<div class="viewcode-block" id="ResultRendererRegistry.render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.ResultRendererRegistry.render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">renderer_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render a result using the appropriate renderer.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            result: The function result to render</span>
+<span class="sd">            renderer_type: Optional specific renderer type to use</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Rendered result dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># If specific renderer requested, try that first</span>
+        <span class="k">if</span> <span class="n">renderer_type</span> <span class="ow">and</span> <span class="n">renderer_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type_renderers</span><span class="p">:</span>
+            <span class="n">renderer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type_renderers</span><span class="p">[</span><span class="n">renderer_type</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">renderer</span><span class="o">.</span><span class="n">can_render</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="c1"># Check type-specific renderers</span>
+        <span class="n">result_type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">if</span> <span class="n">result_type_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type_renderers</span><span class="p">:</span>
+            <span class="n">renderer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type_renderers</span><span class="p">[</span><span class="n">result_type_name</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">renderer</span><span class="o">.</span><span class="n">can_render</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="c1"># Try each registered renderer</span>
+        <span class="k">for</span> <span class="n">renderer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_renderers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">renderer</span><span class="o">.</span><span class="n">can_render</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="c1"># Fallback to JSON</span>
+        <span class="k">return</span> <span class="n">JsonRenderer</span><span class="p">()</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">))</span></div>
+</div>
+
+
+
+<span class="c1"># Global registry instance</span>
+<span class="n">_global_registry</span> <span class="o">=</span> <span class="n">ResultRendererRegistry</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="get_global_renderer_registry">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.get_global_renderer_registry">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_global_renderer_registry</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ResultRendererRegistry</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the global renderer registry.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The global ResultRendererRegistry instance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_global_registry</span></div>
+
+
+
+<div class="viewcode-block" id="register_renderer">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.register_renderer">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_renderer</span><span class="p">(</span><span class="n">renderer</span><span class="p">:</span> <span class="n">ResultRenderer</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Register a renderer in the global registry.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        renderer: ResultRenderer instance</span>
+<span class="sd">        priority: Higher priority renderers are tried first</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_global_registry</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="n">priority</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="register_renderer_for_type">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.register_renderer_for_type">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">register_renderer_for_type</span><span class="p">(</span><span class="n">result_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">,</span> <span class="n">renderer</span><span class="p">:</span> <span class="n">ResultRenderer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Register a renderer for a specific type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        result_type: Python type to match</span>
+<span class="sd">        renderer: ResultRenderer instance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_global_registry</span><span class="o">.</span><span class="n">register_for_type</span><span class="p">(</span><span class="n">result_type</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="render_result">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.render_result">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">render_result</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">renderer_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render a result using the global registry.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        result: The function result to render</span>
+<span class="sd">        renderer_type: Optional specific renderer type to use</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Rendered result dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_global_registry</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">renderer_type</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="result_renderer">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.result_renderer">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">result_renderer</span><span class="p">(</span><span class="n">renderer_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to specify result renderer for a function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        renderer_type: Type of renderer to use</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Decorator function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; @result_renderer(&#39;table&#39;)</span>
+<span class="sd">        ... def get_users() -&gt; list[dict]:</span>
+<span class="sd">        ...     return [{&#39;name&#39;: &#39;Alice&#39;, &#39;age&#39;: 30}]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__uf_result_renderer__&#39;</span><span class="p">,</span> <span class="n">renderer_type</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+
+<div class="viewcode-block" id="get_result_renderer">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.get_result_renderer">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_result_renderer</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the result renderer type for a function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Function to check</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Renderer type string or None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__uf_result_renderer__&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Custom renderer examples</span>
+
+
+<div class="viewcode-block" id="MarkdownRenderer">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.MarkdownRenderer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MarkdownRenderer</span><span class="p">(</span><span class="n">ResultRenderer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render markdown strings.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MarkdownRenderer.can_render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.MarkdownRenderer.can_render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Can render strings that look like markdown.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="c1"># Simple heuristic: contains markdown-like syntax</span>
+        <span class="n">md_indicators</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="s1">&#39;**&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;```&#39;</span><span class="p">,</span> <span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">indicator</span> <span class="ow">in</span> <span class="n">result</span> <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">md_indicators</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MarkdownRenderer.render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.MarkdownRenderer.render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render as markdown.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;markdown&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span>
+            <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="HtmlRenderer">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.HtmlRenderer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">HtmlRenderer</span><span class="p">(</span><span class="n">ResultRenderer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render HTML strings.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="HtmlRenderer.can_render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.HtmlRenderer.can_render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Can render strings that look like HTML.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;&lt;&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;&gt;&#39;</span> <span class="ow">in</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="HtmlRenderer.render">
+<a class="viewcode-back" href="../../module_docs/uf/renderers.html#uf.HtmlRenderer.render">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Render as HTML.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;html&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span>
+            <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;sanitize&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>  <span class="c1"># Security: sanitize HTML</span>
+        <span class="p">}</span></div>
+</div>
+
+
+
+<span class="c1"># Register additional renderers</span>
+<span class="n">register_renderer</span><span class="p">(</span><span class="n">MarkdownRenderer</span><span class="p">())</span>
+<span class="n">register_renderer</span><span class="p">(</span><span class="n">HtmlRenderer</span><span class="p">())</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

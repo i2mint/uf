@@ -1,0 +1,4 @@
+uf.specs
+========
+.. automodule:: uf.specs
+   :members:

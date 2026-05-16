@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.organization &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="uf.pydantic_support" href="pydantic_support.html" />
+    <link rel="prev" title="uf.openapi" href="openapi.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openapi.html">uf.openapi</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">uf.organization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#uf.organization.FunctionGroup"><code class="docutils literal notranslate"><span class="pre">FunctionGroup</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.organization.FunctionGroup.name"><code class="docutils literal notranslate"><span class="pre">FunctionGroup.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.organization.FunctionGroup.funcs"><code class="docutils literal notranslate"><span class="pre">FunctionGroup.funcs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.organization.FunctionGroup.description"><code class="docutils literal notranslate"><span class="pre">FunctionGroup.description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.organization.FunctionGroup.icon"><code class="docutils literal notranslate"><span class="pre">FunctionGroup.icon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.organization.FunctionGroup.order"><code class="docutils literal notranslate"><span class="pre">FunctionGroup.order</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.organization.FunctionGroup.collapsed"><code class="docutils literal notranslate"><span class="pre">FunctionGroup.collapsed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.organization.FunctionGroup.add_function"><code class="docutils literal notranslate"><span class="pre">FunctionGroup.add_function()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.organization.FunctionGroup.get_function_names"><code class="docutils literal notranslate"><span class="pre">FunctionGroup.get_function_names()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.organization.FunctionOrganizer"><code class="docutils literal notranslate"><span class="pre">FunctionOrganizer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.organization.FunctionOrganizer.add_to_group"><code class="docutils literal notranslate"><span class="pre">FunctionOrganizer.add_to_group()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.organization.FunctionOrganizer.add_ungrouped"><code class="docutils literal notranslate"><span class="pre">FunctionOrganizer.add_ungrouped()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.organization.FunctionOrganizer.get_all_functions"><code class="docutils literal notranslate"><span class="pre">FunctionOrganizer.get_all_functions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.organization.FunctionOrganizer.get_groups"><code class="docutils literal notranslate"><span class="pre">FunctionOrganizer.get_groups()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.organization.FunctionOrganizer.group"><code class="docutils literal notranslate"><span class="pre">FunctionOrganizer.group()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.organization.FunctionOrganizer.to_dict"><code class="docutils literal notranslate"><span class="pre">FunctionOrganizer.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.organization.auto_group_by_module"><code class="docutils literal notranslate"><span class="pre">auto_group_by_module()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.organization.auto_group_by_prefix"><code class="docutils literal notranslate"><span class="pre">auto_group_by_prefix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.organization.auto_group_by_tag"><code class="docutils literal notranslate"><span class="pre">auto_group_by_tag()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.organization.mk_grouped_app"><code class="docutils literal notranslate"><span class="pre">mk_grouped_app()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">uf.organization</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/uf/organization.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-uf.organization">
+<span id="uf-organization"></span><h1>uf.organization<a class="headerlink" href="#module-uf.organization" title="Link to this heading"></a></h1>
+<p>Function grouping and organization for uf.</p>
+<p>Provides tools for organizing functions into categories, groups, and
+hierarchies for better navigation in the UI.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.organization.FunctionGroup">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.organization.</span></span><span class="sig-name descname"><span class="pre">FunctionGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">funcs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collapsed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/organization.html#FunctionGroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.FunctionGroup" title="Link to this definition"></a></dt>
+<dd><p>Group of functions with metadata.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.organization.FunctionGroup.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#uf.organization.FunctionGroup.name" title="Link to this definition"></a></dt>
+<dd><p>Name of the group</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.organization.FunctionGroup.funcs">
+<span class="sig-name descname"><span class="pre">funcs</span></span><a class="headerlink" href="#uf.organization.FunctionGroup.funcs" title="Link to this definition"></a></dt>
+<dd><p>Functions in this group</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[Callable]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.organization.FunctionGroup.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#uf.organization.FunctionGroup.description" title="Link to this definition"></a></dt>
+<dd><p>Description of the group</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.organization.FunctionGroup.icon">
+<span class="sig-name descname"><span class="pre">icon</span></span><a class="headerlink" href="#uf.organization.FunctionGroup.icon" title="Link to this definition"></a></dt>
+<dd><p>Optional icon identifier for the group</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.organization.FunctionGroup.order">
+<span class="sig-name descname"><span class="pre">order</span></span><a class="headerlink" href="#uf.organization.FunctionGroup.order" title="Link to this definition"></a></dt>
+<dd><p>Display order (lower numbers first)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.organization.FunctionGroup.collapsed">
+<span class="sig-name descname"><span class="pre">collapsed</span></span><a class="headerlink" href="#uf.organization.FunctionGroup.collapsed" title="Link to this definition"></a></dt>
+<dd><p>Whether the group starts collapsed in UI</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">math_funcs</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Math&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">add</span><span class="p">,</span> <span class="n">subtract</span><span class="p">,</span> <span class="n">multiply</span><span class="p">,</span> <span class="n">divide</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Mathematical operations&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">icon</span><span class="o">=</span><span class="s1">&#39;calculator&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.organization.FunctionGroup.add_function">
+<span class="sig-name descname"><span class="pre">add_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.organization.FunctionGroup" title="uf.organization.FunctionGroup"><span class="pre">FunctionGroup</span></a></span></span><a class="reference internal" href="../../_modules/uf/organization.html#FunctionGroup.add_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.FunctionGroup.add_function" title="Link to this definition"></a></dt>
+<dd><p>Add a function to this group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – Function to add</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.organization.FunctionGroup.get_function_names">
+<span class="sig-name descname"><span class="pre">get_function_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/organization.html#FunctionGroup.get_function_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.FunctionGroup.get_function_names" title="Link to this definition"></a></dt>
+<dd><p>Get names of all functions in this group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of function name strings</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.organization.FunctionOrganizer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.organization.</span></span><span class="sig-name descname"><span class="pre">FunctionOrganizer</span></span><a class="reference internal" href="../../_modules/uf/organization.html#FunctionOrganizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.FunctionOrganizer" title="Link to this definition"></a></dt>
+<dd><p>Organize functions into groups and hierarchies.</p>
+<p>This class provides a fluent interface for building function
+organization structures that can be used to generate grouped
+navigation in the UI.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;Admin&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">user_create</span><span class="p">,</span> <span class="n">user_delete</span><span class="p">],</span> <span class="n">icon</span><span class="o">=</span><span class="s1">&#39;shield&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;Reports&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">generate_report</span><span class="p">,</span> <span class="n">export_csv</span><span class="p">],</span> <span class="n">icon</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groups</span> <span class="o">=</span> <span class="n">organizer</span><span class="o">.</span><span class="n">get_groups</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.organization.FunctionOrganizer.add_to_group">
+<span class="sig-name descname"><span class="pre">add_to_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.organization.FunctionOrganizer" title="uf.organization.FunctionOrganizer"><span class="pre">FunctionOrganizer</span></a></span></span><a class="reference internal" href="../../_modules/uf/organization.html#FunctionOrganizer.add_to_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.FunctionOrganizer.add_to_group" title="Link to this definition"></a></dt>
+<dd><p>Add a function to an existing group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group_name</strong> – Name of the group</p></li>
+<li><p><strong>func</strong> – Function to add</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If group doesn’t exist</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.organization.FunctionOrganizer.add_ungrouped">
+<span class="sig-name descname"><span class="pre">add_ungrouped</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.organization.FunctionOrganizer" title="uf.organization.FunctionOrganizer"><span class="pre">FunctionOrganizer</span></a></span></span><a class="reference internal" href="../../_modules/uf/organization.html#FunctionOrganizer.add_ungrouped"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.FunctionOrganizer.add_ungrouped" title="Link to this definition"></a></dt>
+<dd><p>Add a function without a group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – Function to add</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.organization.FunctionOrganizer.get_all_functions">
+<span class="sig-name descname"><span class="pre">get_all_functions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/organization.html#FunctionOrganizer.get_all_functions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.FunctionOrganizer.get_all_functions" title="Link to this definition"></a></dt>
+<dd><p>Get all functions across all groups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of all functions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.organization.FunctionOrganizer.get_groups">
+<span class="sig-name descname"><span class="pre">get_groups</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#uf.organization.FunctionGroup" title="uf.organization.FunctionGroup"><span class="pre">FunctionGroup</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/organization.html#FunctionOrganizer.get_groups"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.FunctionOrganizer.get_groups" title="Link to this definition"></a></dt>
+<dd><p>Get all groups, sorted by order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of FunctionGroup objects sorted by order</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.organization.FunctionOrganizer.group">
+<span class="sig-name descname"><span class="pre">group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">funcs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collapsed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.organization.FunctionGroup" title="uf.organization.FunctionGroup"><span class="pre">FunctionGroup</span></a></span></span><a class="reference internal" href="../../_modules/uf/organization.html#FunctionOrganizer.group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.FunctionOrganizer.group" title="Link to this definition"></a></dt>
+<dd><p>Create and add a function group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the group</p></li>
+<li><p><strong>funcs</strong> – Optional functions to add to group</p></li>
+<li><p><strong>description</strong> – Description of the group</p></li>
+<li><p><strong>icon</strong> – Optional icon identifier</p></li>
+<li><p><strong>order</strong> – Display order</p></li>
+<li><p><strong>collapsed</strong> – Whether to start collapsed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The created FunctionGroup</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Database&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">save_record</span><span class="p">,</span> <span class="n">load_record</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Database operations&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">icon</span><span class="o">=</span><span class="s1">&#39;database&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.organization.FunctionOrganizer.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/organization.html#FunctionOrganizer.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.FunctionOrganizer.to_dict" title="Link to this definition"></a></dt>
+<dd><p>Convert organization to dictionary format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary representation suitable for JSON serialization</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">org_dict</span> <span class="o">=</span> <span class="n">organizer</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Can be used in templates or APIs</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.organization.auto_group_by_module">
+<span class="sig-prename descclassname"><span class="pre">uf.organization.</span></span><span class="sig-name descname"><span class="pre">auto_group_by_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">funcs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.organization.FunctionOrganizer" title="uf.organization.FunctionOrganizer"><span class="pre">FunctionOrganizer</span></a></span></span><a class="reference internal" href="../../_modules/uf/organization.html#auto_group_by_module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.auto_group_by_module" title="Link to this definition"></a></dt>
+<dd><p>Automatically group functions by their module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>funcs</strong> – Functions to organize</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>FunctionOrganizer with module-based groups</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">myapp</span><span class="w"> </span><span class="kn">import</span> <span class="n">user_ops</span><span class="p">,</span> <span class="n">report_ops</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">user_ops</span><span class="o">.</span><span class="n">create</span><span class="p">,</span> <span class="n">user_ops</span><span class="o">.</span><span class="n">delete</span><span class="p">,</span> <span class="n">report_ops</span><span class="o">.</span><span class="n">generate</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_module</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.organization.auto_group_by_prefix">
+<span class="sig-prename descclassname"><span class="pre">uf.organization.</span></span><span class="sig-name descname"><span class="pre">auto_group_by_prefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">funcs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'_'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.organization.FunctionOrganizer" title="uf.organization.FunctionOrganizer"><span class="pre">FunctionOrganizer</span></a></span></span><a class="reference internal" href="../../_modules/uf/organization.html#auto_group_by_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.auto_group_by_prefix" title="Link to this definition"></a></dt>
+<dd><p>Automatically group functions by name prefix.</p>
+<p>Groups functions based on the part of their name before the separator.
+For example, with separator=”_”:
+- user_create, user_delete → “user” group
+- report_generate, report_export → “report” group</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>funcs</strong> – Functions to organize</p></li>
+<li><p><strong>separator</strong> – Separator character (default: “_”)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>FunctionOrganizer with auto-generated groups</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">user_create</span><span class="p">,</span> <span class="n">user_delete</span><span class="p">,</span> <span class="n">report_generate</span><span class="p">,</span> <span class="n">admin_reset</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_prefix</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Creates groups: &#39;user&#39;, &#39;report&#39;, &#39;admin&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.organization.auto_group_by_tag">
+<span class="sig-prename descclassname"><span class="pre">uf.organization.</span></span><span class="sig-name descname"><span class="pre">auto_group_by_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">funcs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag_attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'__uf_group__'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.organization.FunctionOrganizer" title="uf.organization.FunctionOrganizer"><span class="pre">FunctionOrganizer</span></a></span></span><a class="reference internal" href="../../_modules/uf/organization.html#auto_group_by_tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.auto_group_by_tag" title="Link to this definition"></a></dt>
+<dd><p>Automatically group functions by a tag attribute.</p>
+<p>Functions can be tagged with a group name using an attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>funcs</strong> – Functions to organize</p></li>
+<li><p><strong>tag_attr</strong> – Name of the attribute to use for grouping</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>FunctionOrganizer with tag-based groups</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_user</span><span class="o">.</span><span class="n">__uf_group__</span> <span class="o">=</span> <span class="s1">&#39;Admin&#39;</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_tag</span><span class="p">([</span><span class="n">create_user</span><span class="p">,</span> <span class="n">other_func</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.organization.mk_grouped_app">
+<span class="sig-prename descclassname"><span class="pre">uf.organization.</span></span><span class="sig-name descname"><span class="pre">mk_grouped_app</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#uf.organization.FunctionGroup" title="uf.organization.FunctionGroup"><span class="pre">FunctionGroup</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">mk_rjsf_app_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/organization.html#mk_grouped_app"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.mk_grouped_app" title="Link to this definition"></a></dt>
+<dd><p>Create a uf app with grouped function navigation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>groups</strong> – Iterable of FunctionGroup objects</p></li>
+<li><p><strong>**mk_rjsf_app_kwargs</strong> – Arguments passed to mk_rjsf_app</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configured web application with grouped navigation</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">admin_group</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span><span class="s1">&#39;Admin&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">user_create</span><span class="p">,</span> <span class="n">user_delete</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reports_group</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span><span class="s1">&#39;Reports&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">generate_report</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_grouped_app</span><span class="p">([</span><span class="n">admin_group</span><span class="p">,</span> <span class="n">reports_group</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="openapi.html" class="btn btn-neutral float-left" title="uf.openapi" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pydantic_support.html" class="btn btn-neutral float-right" title="uf.pydantic_support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

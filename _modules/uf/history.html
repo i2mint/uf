@@ -1,0 +1,790 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.history &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">uf.history</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uf.history</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Call history and presets for uf.</span>
+
+<span class="sd">Provides functionality to track function calls, save parameter presets,</span>
+<span class="sd">and reuse previous calls for improved user experience.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+
+<div class="viewcode-block" id="FunctionCall">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.FunctionCall">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FunctionCall</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Record of a single function call.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        func_name: Name of the function</span>
+<span class="sd">        params: Parameters used</span>
+<span class="sd">        result: Result returned (if captured)</span>
+<span class="sd">        timestamp: When the call was made</span>
+<span class="sd">        success: Whether the call succeeded</span>
+<span class="sd">        error: Error message if failed</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">error</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize function call record.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Name of the function</span>
+<span class="sd">            params: Parameters dictionary</span>
+<span class="sd">            result: Function result</span>
+<span class="sd">            success: Whether call succeeded</span>
+<span class="sd">            error: Error message if failed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func_name</span> <span class="o">=</span> <span class="n">func_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">result</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">success</span> <span class="o">=</span> <span class="n">success</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">error</span>
+
+<div class="viewcode-block" id="FunctionCall.to_dict">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.FunctionCall.to_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert to dictionary.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary representation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;func_name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_name</span><span class="p">,</span>
+            <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span>
+            <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">,</span>
+            <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="FunctionCall.from_dict">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.FunctionCall.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FunctionCall&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create from dictionary.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: Dictionary with call data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            FunctionCall instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">call</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">func_name</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;func_name&#39;</span><span class="p">],</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">],</span>
+            <span class="n">result</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">),</span>
+            <span class="n">success</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+            <span class="n">error</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;timestamp&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">call</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">call</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CallHistory">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.CallHistory">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CallHistory</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manage history of function calls.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; history = CallHistory(max_size=100)</span>
+<span class="sd">        &gt;&gt;&gt; history.record(&#39;add&#39;, {&#39;x&#39;: 10, &#39;y&#39;: 20}, result=30)</span>
+<span class="sd">        &gt;&gt;&gt; recent = history.get_recent(&#39;add&#39;, limit=5)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize call history.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            max_size: Maximum number of calls to keep per function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_size</span> <span class="o">=</span> <span class="n">max_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_history</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">FunctionCall</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CallHistory.record">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.CallHistory.record">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">record</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">error</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Record a function call.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Name of the function</span>
+<span class="sd">            params: Parameters used</span>
+<span class="sd">            result: Result returned</span>
+<span class="sd">            success: Whether call succeeded</span>
+<span class="sd">            error: Error message if failed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">call</span> <span class="o">=</span> <span class="n">FunctionCall</span><span class="p">(</span>
+            <span class="n">func_name</span><span class="o">=</span><span class="n">func_name</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+            <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span>
+            <span class="n">success</span><span class="o">=</span><span class="n">success</span><span class="p">,</span>
+            <span class="n">error</span><span class="o">=</span><span class="n">error</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_history</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">call</span><span class="p">)</span>
+
+        <span class="c1"># Trim to max size</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_history</span><span class="p">[</span><span class="n">func_name</span><span class="p">])</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_size</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_history</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_history</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_size</span><span class="p">:]</span></div>
+
+
+<div class="viewcode-block" id="CallHistory.get_recent">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.CallHistory.get_recent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_recent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FunctionCall</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get recent calls for a function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Function name</span>
+<span class="sd">            limit: Maximum number to return</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of recent FunctionCall objects (newest first)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">calls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">calls</span><span class="p">[</span><span class="o">-</span><span class="n">limit</span><span class="p">:]))</span></div>
+
+
+<div class="viewcode-block" id="CallHistory.get_successful_calls">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.CallHistory.get_successful_calls">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_successful_calls</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FunctionCall</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get recent successful calls.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Function name</span>
+<span class="sd">            limit: Maximum number to return</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of successful FunctionCall objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">calls</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">success</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">calls</span><span class="p">[</span><span class="o">-</span><span class="n">limit</span><span class="p">:]))</span></div>
+
+
+<div class="viewcode-block" id="CallHistory.clear">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.CallHistory.clear">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear history.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Function to clear, or None for all</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">func_name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_history</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_history</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CallHistory.to_dict">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.CallHistory.to_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert history to dictionary.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary representation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">func_name</span><span class="p">:</span> <span class="p">[</span><span class="n">call</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">call</span> <span class="ow">in</span> <span class="n">calls</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">func_name</span><span class="p">,</span> <span class="n">calls</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_history</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="CallHistory.from_dict">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.CallHistory.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">max_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CallHistory&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create from dictionary.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: Dictionary with history data</span>
+<span class="sd">            max_size: Maximum size per function</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            CallHistory instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">history</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">max_size</span><span class="o">=</span><span class="n">max_size</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">func_name</span><span class="p">,</span> <span class="n">calls_data</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">history</span><span class="o">.</span><span class="n">_history</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">FunctionCall</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">call_data</span><span class="p">)</span> <span class="k">for</span> <span class="n">call_data</span> <span class="ow">in</span> <span class="n">calls_data</span>
+            <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">history</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Preset">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.Preset">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Preset</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A saved parameter preset for a function.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        name: Preset name</span>
+<span class="sd">        func_name: Function this preset is for</span>
+<span class="sd">        params: Parameter values</span>
+<span class="sd">        description: Optional description</span>
+<span class="sd">        created_at: When preset was created</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize preset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: Preset name</span>
+<span class="sd">            func_name: Function name</span>
+<span class="sd">            params: Parameter values</span>
+<span class="sd">            description: Optional description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func_name</span> <span class="o">=</span> <span class="n">func_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">created_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Preset.to_dict">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.Preset.to_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert to dictionary.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary representation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s1">&#39;func_name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_name</span><span class="p">,</span>
+            <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+            <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">created_at</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="Preset.from_dict">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.Preset.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Preset&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create from dictionary.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: Dictionary with preset data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Preset instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">preset</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+            <span class="n">func_name</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;func_name&#39;</span><span class="p">],</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">],</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;created_at&#39;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">preset</span><span class="o">.</span><span class="n">created_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">preset</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="PresetManager">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.PresetManager">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PresetManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manage parameter presets for functions.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; presets = PresetManager()</span>
+<span class="sd">        &gt;&gt;&gt; presets.save(&#39;quick_add&#39;, &#39;add&#39;, {&#39;x&#39;: 10, &#39;y&#39;: 20}, &#39;Quick test&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; preset = presets.get(&#39;quick_add&#39;, &#39;add&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; result = my_func(**preset.params)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize preset manager.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Preset</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PresetManager.save">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.PresetManager.save">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Preset</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save a parameter preset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            preset_name: Name for this preset</span>
+<span class="sd">            func_name: Function this preset is for</span>
+<span class="sd">            params: Parameter values</span>
+<span class="sd">            description: Optional description</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Created Preset object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">preset</span> <span class="o">=</span> <span class="n">Preset</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">preset_name</span><span class="p">,</span>
+            <span class="n">func_name</span><span class="o">=</span><span class="n">func_name</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="n">preset_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">preset</span>
+        <span class="k">return</span> <span class="n">preset</span></div>
+
+
+<div class="viewcode-block" id="PresetManager.get">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.PresetManager.get">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Preset</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a preset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            preset_name: Name of preset</span>
+<span class="sd">            func_name: Function name</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Preset object or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">preset_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PresetManager.list_presets">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.PresetManager.list_presets">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_presets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Preset</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List all presets for a function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Function name</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of Preset objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="PresetManager.delete">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.PresetManager.delete">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete a preset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            preset_name: Name of preset</span>
+<span class="sd">            func_name: Function name</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if deleted, False if not found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">func_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span> <span class="ow">and</span> <span class="n">preset_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="p">[</span><span class="n">func_name</span><span class="p">]:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="n">preset_name</span><span class="p">]</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="PresetManager.to_dict">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.PresetManager.to_dict">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert to dictionary.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary representation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">func_name</span><span class="p">:</span> <span class="p">{</span>
+                <span class="n">preset_name</span><span class="p">:</span> <span class="n">preset</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">preset_name</span><span class="p">,</span> <span class="n">preset</span> <span class="ow">in</span> <span class="n">presets</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">func_name</span><span class="p">,</span> <span class="n">presets</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="PresetManager.from_dict">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.PresetManager.from_dict">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PresetManager&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create from dictionary.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: Dictionary with preset data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            PresetManager instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">manager</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">func_name</span><span class="p">,</span> <span class="n">presets_data</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">preset_name</span><span class="p">,</span> <span class="n">preset_data</span> <span class="ow">in</span> <span class="n">presets_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">preset</span> <span class="o">=</span> <span class="n">Preset</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">preset_data</span><span class="p">)</span>
+                <span class="n">manager</span><span class="o">.</span><span class="n">_presets</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="n">preset_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">preset</span>
+
+        <span class="k">return</span> <span class="n">manager</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="HistoryManager">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.HistoryManager">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">HistoryManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Combined manager for history and presets.</span>
+
+<span class="sd">    Provides a unified interface for tracking calls and managing presets.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; manager = HistoryManager()</span>
+<span class="sd">        &gt;&gt;&gt; manager.record_call(&#39;add&#39;, {&#39;x&#39;: 10, &#39;y&#39;: 20}, result=30)</span>
+<span class="sd">        &gt;&gt;&gt; manager.save_preset(&#39;quick&#39;, &#39;add&#39;, {&#39;x&#39;: 10, &#39;y&#39;: 20})</span>
+<span class="sd">        &gt;&gt;&gt; recent = manager.get_recent_calls(&#39;add&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; presets = manager.get_presets(&#39;add&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_history</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize history manager.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            max_history: Maximum history size per function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="n">CallHistory</span><span class="p">(</span><span class="n">max_size</span><span class="o">=</span><span class="n">max_history</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">presets</span> <span class="o">=</span> <span class="n">PresetManager</span><span class="p">()</span>
+
+<div class="viewcode-block" id="HistoryManager.record_call">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.HistoryManager.record_call">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">record_call</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">error</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Record a function call.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Function name</span>
+<span class="sd">            params: Parameters used</span>
+<span class="sd">            result: Result returned</span>
+<span class="sd">            success: Whether call succeeded</span>
+<span class="sd">            error: Error message if failed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">success</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="HistoryManager.get_recent_calls">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.HistoryManager.get_recent_calls">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_recent_calls</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FunctionCall</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get recent calls.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Function name</span>
+<span class="sd">            limit: Maximum number to return</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of recent FunctionCall objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">get_recent</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="HistoryManager.save_preset">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.HistoryManager.save_preset">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_preset</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Preset</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save a preset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            preset_name: Name for preset</span>
+<span class="sd">            func_name: Function name</span>
+<span class="sd">            params: Parameter values</span>
+<span class="sd">            description: Optional description</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Created Preset object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">presets</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">preset_name</span><span class="p">,</span> <span class="n">func_name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="HistoryManager.get_preset">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.HistoryManager.get_preset">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_preset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Preset</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a preset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            preset_name: Name of preset</span>
+<span class="sd">            func_name: Function name</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Preset object or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">presets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">preset_name</span><span class="p">,</span> <span class="n">func_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="HistoryManager.get_presets">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.HistoryManager.get_presets">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_presets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Preset</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all presets for a function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Function name</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of Preset objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">presets</span><span class="o">.</span><span class="n">list_presets</span><span class="p">(</span><span class="n">func_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="HistoryManager.save_to_file">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.HistoryManager.save_to_file">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save history and presets to file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filepath: Path to save to</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;history&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+            <span class="s1">&#39;presets&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">presets</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+        <span class="p">}</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="HistoryManager.load_from_file">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.HistoryManager.load_from_file">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_history</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;HistoryManager&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load from file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filepath: Path to load from</span>
+<span class="sd">            max_history: Maximum history size</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HistoryManager instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="n">manager</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">max_history</span><span class="o">=</span><span class="n">max_history</span><span class="p">)</span>
+        <span class="n">manager</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="n">CallHistory</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;history&#39;</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">max_history</span><span class="p">)</span>
+        <span class="n">manager</span><span class="o">.</span><span class="n">presets</span> <span class="o">=</span> <span class="n">PresetManager</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;presets&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+
+        <span class="k">return</span> <span class="n">manager</span></div>
+</div>
+
+
+
+<span class="c1"># Global instance</span>
+<span class="n">_global_history_manager</span> <span class="o">=</span> <span class="n">HistoryManager</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="get_global_history_manager">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.get_global_history_manager">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_global_history_manager</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">HistoryManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the global history manager.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Global HistoryManager instance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_global_history_manager</span></div>
+
+
+
+<div class="viewcode-block" id="enable_history">
+<a class="viewcode-back" href="../../module_docs/uf/history.html#uf.enable_history">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">enable_history</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">max_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to enable call history for a function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        max_size: Maximum history size</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Decorator function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; @enable_history</span>
+<span class="sd">        ... def my_function(x: int):</span>
+<span class="sd">        ...     return x * 2</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Wrapper that records calls.&quot;&quot;&quot;</span>
+        <span class="n">manager</span> <span class="o">=</span> <span class="n">get_global_history_manager</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">manager</span><span class="o">.</span><span class="n">record_call</span><span class="p">(</span>
+                <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                <span class="n">kwargs</span><span class="p">,</span>
+                <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span>
+                <span class="n">success</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">manager</span><span class="o">.</span><span class="n">record_call</span><span class="p">(</span>
+                <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                <span class="n">kwargs</span><span class="p">,</span>
+                <span class="n">success</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="k">raise</span>
+
+    <span class="n">wrapper</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="n">wrapper</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_history_enabled__</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

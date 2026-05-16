@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.testing &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">uf.testing</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uf.testing</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Testing utilities for uf applications.</span>
+
+<span class="sd">Provides tools for testing uf apps, including test clients, fixtures,</span>
+<span class="sd">and assertion helpers.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+
+<div class="viewcode-block" id="UfTestClient">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfTestClient">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">UfTestClient</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test client for uf applications.</span>
+
+<span class="sd">    Provides a convenient interface for testing uf apps without</span>
+<span class="sd">    running a web server.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from uf import mk_rjsf_app</span>
+<span class="sd">        &gt;&gt;&gt; app = mk_rjsf_app([my_func])</span>
+<span class="sd">        &gt;&gt;&gt; client = UfTestClient(app)</span>
+<span class="sd">        &gt;&gt;&gt; response = client.call_function(&#39;my_func&#39;, {&#39;x&#39;: 10, &#39;y&#39;: 20})</span>
+<span class="sd">        &gt;&gt;&gt; assert response[&#39;success&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize test client.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            app: The uf application to test</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;function_specs&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<div class="viewcode-block" id="UfTestClient.list_functions">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfTestClient.list_functions">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get list of available function names.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of function name strings</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">return</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="UfTestClient.get_spec">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfTestClient.get_spec">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get RJSF specification for a function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Name of the function</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Function specification dict</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            KeyError: If function not found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;App does not have function_specs&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="UfTestClient.call_function">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfTestClient.call_function">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">call_function</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">expect_success</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Call a function with the given parameters.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Name of the function to call</span>
+<span class="sd">            params: Dictionary of parameters</span>
+<span class="sd">            expect_success: Whether to expect success (raises on failure)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Result dictionary with &#39;success&#39; and &#39;result&#39; or &#39;error&#39;</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            AssertionError: If expect_success=True and call fails</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;App does not have function_specs&quot;</span><span class="p">)</span>
+
+        <span class="n">spec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;func&#39;</span><span class="p">]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">}</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+                <span class="s1">&#39;error_type&#39;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">expect_success</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Function call failed: </span><span class="si">{</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="UfTestClient.validate_params">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfTestClient.validate_params">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate parameters against function schema.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Name of the function</span>
+<span class="sd">            params: Parameters to validate</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple of (is_valid, error_message)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">spec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_spec</span><span class="p">(</span><span class="n">func_name</span><span class="p">)</span>
+            <span class="n">schema</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;schema&#39;</span><span class="p">]</span>
+
+            <span class="c1"># Check required parameters</span>
+            <span class="n">required</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="k">for</span> <span class="n">req_param</span> <span class="ow">in</span> <span class="n">required</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">req_param</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Missing required parameter: </span><span class="si">{</span><span class="n">req_param</span><span class="si">}</span><span class="s2">&quot;</span>
+
+            <span class="c1"># Basic type checking</span>
+            <span class="n">properties</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">param_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">properties</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Unknown parameter: </span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+                <span class="n">param_schema</span> <span class="o">=</span> <span class="n">properties</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span>
+                <span class="n">expected_type</span> <span class="o">=</span> <span class="n">param_schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">expected_type</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_type</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">expected_type</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="p">(</span>
+                            <span class="kc">False</span><span class="p">,</span>
+                            <span class="sa">f</span><span class="s2">&quot;Parameter </span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2"> has wrong type. &quot;</span>
+                            <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">expected_type</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                        <span class="p">)</span>
+
+            <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Validation error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">json_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if value matches JSON Schema type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            value: Value to check</span>
+<span class="sd">            json_type: JSON Schema type name</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if types match</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">type_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;string&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;number&#39;</span><span class="p">:</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
+            <span class="s1">&#39;integer&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="s1">&#39;boolean&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+            <span class="s1">&#39;array&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+            <span class="s1">&#39;object&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+            <span class="s1">&#39;null&#39;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="n">expected_types</span> <span class="o">=</span> <span class="n">type_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">json_type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">expected_types</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># Unknown type, allow it</span>
+
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">expected_types</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="UfAppTester">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfAppTester">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">UfAppTester</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Context manager for testing uf apps.</span>
+
+<span class="sd">    Provides a testing context with common utilities and assertions.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; with UfAppTester(app) as tester:</span>
+<span class="sd">        ...     result = tester.submit_form(&#39;add&#39;, {&#39;x&#39;: 10, &#39;y&#39;: 20})</span>
+<span class="sd">        ...     tester.assert_success(result)</span>
+<span class="sd">        ...     tester.assert_result_equals(result, 30)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the app tester.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            app: The uf application to test</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">UfTestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_results_history</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;UfAppTester&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enter the testing context.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Exit the testing context.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="UfAppTester.submit_form">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfAppTester.submit_form">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">submit_form</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">form_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate form submission.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Name of the function</span>
+<span class="sd">            form_data: Form data as dictionary</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Result dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">call_function</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="n">form_data</span><span class="p">,</span> <span class="n">expect_success</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_results_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="UfAppTester.assert_success">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfAppTester.assert_success">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">assert_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Assert that a result indicates success.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            result: Result dictionary</span>
+<span class="sd">            message: Optional custom error message</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            AssertionError: If result is not successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">message</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;Expected success but got error: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">),</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="UfAppTester.assert_failure">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfAppTester.assert_failure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">assert_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Assert that a result indicates failure.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            result: Result dictionary</span>
+<span class="sd">            message: Optional custom error message</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            AssertionError: If result is successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">message</span> <span class="ow">or</span> <span class="s2">&quot;Expected failure but got success&quot;</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">),</span> <span class="n">msg</span></div>
+
+
+<div class="viewcode-block" id="UfAppTester.assert_result_equals">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfAppTester.assert_result_equals">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">assert_result_equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">expected</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Assert that result value equals expected.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            result: Result dictionary</span>
+<span class="sd">            expected: Expected value</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            AssertionError: If values don&#39;t match</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assert_success</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="n">actual</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">actual</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+<div class="viewcode-block" id="UfAppTester.assert_error_type">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfAppTester.assert_error_type">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">assert_error_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">error_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Assert that error type matches.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            result: Result dictionary</span>
+<span class="sd">            error_type: Expected error type name</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            AssertionError: If error types don&#39;t match</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assert_failure</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="n">actual_type</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;error_type&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">actual_type</span> <span class="o">==</span> <span class="n">error_type</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">error_type</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">actual_type</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+<div class="viewcode-block" id="UfAppTester.get_history">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfAppTester.get_history">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get history of all results.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of result dictionaries</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results_history</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="test_ui_function">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.test_ui_function">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_ui_function</span><span class="p">(</span>
+    <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+    <span class="n">test_inputs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">expected_output</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">expected_exception</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test a function with form-like input.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Function to test</span>
+<span class="sd">        test_inputs: Dictionary of test parameters</span>
+<span class="sd">        expected_output: Expected return value (if any)</span>
+<span class="sd">        expected_exception: Expected exception type (if any)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        True if test passes</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: If test fails</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; def add(x: int, y: int) -&gt; int:</span>
+<span class="sd">        ...     return x + y</span>
+<span class="sd">        &gt;&gt;&gt; test_ui_function(add, {&#39;x&#39;: 10, &#39;y&#39;: 20}, expected_output=30)</span>
+<span class="sd">        True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">expected_exception</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">test_inputs</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">expected_exception</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> but no exception was raised&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">expected_exception</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">expected_exception</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">test_inputs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">expected_output</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="n">expected_output</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">expected_output</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<span class="n">test_ui_function</span><span class="o">.</span><span class="n">__test__</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># tell pytest this is a utility, not a test case</span>
+
+
+<div class="viewcode-block" id="mock_function_response">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.mock_function_response">[docs]</a>
+<span class="nd">@contextmanager</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mock_function_response</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mock_result</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Context manager to mock a function&#39;s response.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        app: The uf application</span>
+<span class="sd">        func_name: Name of function to mock</span>
+<span class="sd">        mock_result: Value to return</span>
+
+<span class="sd">    Yields:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; with mock_function_response(app, &#39;get_user&#39;, {&#39;name&#39;: &#39;Test&#39;}):</span>
+<span class="sd">        ...     # Calls to get_user will return {&#39;name&#39;: &#39;Test&#39;}</span>
+<span class="sd">        ...     result = client.call_function(&#39;get_user&#39;, {&#39;id&#39;: 1})</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;function_specs&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;App does not have function_specs&quot;</span><span class="p">)</span>
+
+    <span class="n">spec</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">function_specs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
+    <span class="n">original_func</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;func&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Create mock function</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mock_func</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">mock_result</span>
+
+    <span class="c1"># Replace function</span>
+    <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;func&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mock_func</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">yield</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="c1"># Restore original function</span>
+        <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;func&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">original_func</span></div>
+
+
+
+<div class="viewcode-block" id="FormDataBuilder">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.FormDataBuilder">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FormDataBuilder</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Builder for constructing form data for tests.</span>
+
+<span class="sd">    Provides a fluent interface for building test form data.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; form_data = (</span>
+<span class="sd">        ...     FormDataBuilder()</span>
+<span class="sd">        ...     .field(&#39;name&#39;, &#39;John Doe&#39;)</span>
+<span class="sd">        ...     .field(&#39;email&#39;, &#39;john@example.com&#39;)</span>
+<span class="sd">        ...     .field(&#39;age&#39;, 30)</span>
+<span class="sd">        ...     .build()</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the builder.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="FormDataBuilder.field">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.FormDataBuilder.field">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FormDataBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a field to the form data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: Field name</span>
+<span class="sd">            value: Field value</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Self for method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="FormDataBuilder.fields">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.FormDataBuilder.fields">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FormDataBuilder&#39;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add multiple fields at once.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            **kwargs: Field name-value pairs</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Self for method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="FormDataBuilder.build">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.FormDataBuilder.build">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build and return the form data.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary of form data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="assert_valid_rjsf_spec">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.assert_valid_rjsf_spec">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">assert_valid_rjsf_spec</span><span class="p">(</span><span class="n">spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assert that a specification is valid RJSF format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spec: The specification to validate</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: If spec is invalid</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="s1">&#39;schema&#39;</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">,</span> <span class="s2">&quot;Spec must have &#39;schema&#39; key&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="s1">&#39;schema&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">),</span> <span class="s2">&quot;Schema must be a dict&quot;</span>
+
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;schema&#39;</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="s1">&#39;type&#39;</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">,</span> <span class="s2">&quot;Schema must have &#39;type&#39;&quot;</span>
+    <span class="k">assert</span> <span class="s1">&#39;properties&#39;</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">,</span> <span class="s2">&quot;Schema must have &#39;properties&#39;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">),</span> <span class="s2">&quot;Properties must be a dict&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="assert_has_field">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.assert_has_field">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">assert_has_field</span><span class="p">(</span><span class="n">spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assert that a spec has a specific field.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spec: The specification</span>
+<span class="sd">        field_name: Name of the field to check</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: If field not found</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">assert_valid_rjsf_spec</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+    <span class="n">properties</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;schema&#39;</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">properties</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="n">field_name</span><span class="si">}</span><span class="s2">&#39; not found in schema&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="assert_field_type">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.assert_field_type">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">assert_field_type</span><span class="p">(</span><span class="n">spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assert that a field has the expected type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spec: The specification</span>
+<span class="sd">        field_name: Name of the field</span>
+<span class="sd">        expected_type: Expected JSON Schema type</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: If type doesn&#39;t match</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">assert_has_field</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
+    <span class="n">field_schema</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;schema&#39;</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">field_name</span><span class="p">]</span>
+    <span class="n">actual_type</span> <span class="o">=</span> <span class="n">field_schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">actual_type</span> <span class="o">==</span> <span class="n">expected_type</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Expected type &#39;</span><span class="si">{</span><span class="n">expected_type</span><span class="si">}</span><span class="s2">&#39;, got &#39;</span><span class="si">{</span><span class="n">actual_type</span><span class="si">}</span><span class="s2">&#39;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="assert_field_required">
+<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.assert_field_required">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">assert_field_required</span><span class="p">(</span><span class="n">spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assert that a field is required.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spec: The specification</span>
+<span class="sd">        field_name: Name of the field</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: If field is not required</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">assert_has_field</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
+    <span class="n">required</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;schema&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="k">assert</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">required</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="n">field_name</span><span class="si">}</span><span class="s2">&#39; is not required&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

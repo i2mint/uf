@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.base &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">uf.base</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uf.base</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Core functionality for uf - UI Fast.</span>
+
+<span class="sd">This module provides the main `mk_rjsf_app` function that bridges:</span>
+<span class="sd">- Functions → HTTP services (via qh)</span>
+<span class="sd">- HTTP services → Web UI forms (via ju.rjsf)</span>
+
+<span class="sd">Following the &quot;convention over configuration&quot; philosophy, it provides sensible</span>
+<span class="sd">defaults while allowing customization where needed.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Mapping</span> <span class="k">as</span> <span class="n">MappingType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">uf.specs</span><span class="w"> </span><span class="kn">import</span> <span class="n">FunctionSpecStore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">uf.routes</span><span class="w"> </span><span class="kn">import</span> <span class="n">add_ui_routes</span>
+
+
+<div class="viewcode-block" id="mk_rjsf_app">
+<a class="viewcode-back" href="../../module_docs/uf/base.html#uf.mk_rjsf_app">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_rjsf_app</span><span class="p">(</span>
+    <span class="n">funcs</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="c1"># qh-related kwargs</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">input_trans</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">output_trans</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="c1"># rjsf-related kwargs</span>
+    <span class="n">rjsf_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ui_schema_factory</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">param_to_prop_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="c1"># uf-specific kwargs</span>
+    <span class="n">page_title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Function Interface&quot;</span><span class="p">,</span>
+    <span class="n">function_display_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MappingType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">custom_css</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rjsf_theme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">add_ui</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">qh_kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an RJSF-backed web app from a list of functions.</span>
+
+<span class="sd">    This is the main entry point for uf. It combines qh&#39;s HTTP service</span>
+<span class="sd">    generation with ju&#39;s RJSF form generation to create a complete</span>
+<span class="sd">    web interface for your functions.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        funcs: Iterable of callable functions to expose via web UI</span>
+<span class="sd">        config: Optional qh.AppConfig for HTTP service configuration</span>
+<span class="sd">        input_trans: Optional input transformation function for qh</span>
+<span class="sd">        output_trans: Optional output transformation function for qh</span>
+<span class="sd">        rjsf_config: Optional configuration dict for RJSF generation</span>
+<span class="sd">        ui_schema_factory: Optional callable to customize UI schema</span>
+<span class="sd">        param_to_prop_type: Optional callable to map parameters to types</span>
+<span class="sd">        page_title: Title for the web interface</span>
+<span class="sd">        function_display_names: Optional mapping to override function names</span>
+<span class="sd">        custom_css: Optional custom CSS for the web interface</span>
+<span class="sd">        rjsf_theme: RJSF theme to use (&#39;default&#39;, &#39;material-ui&#39;, etc.)</span>
+<span class="sd">        add_ui: Whether to add UI routes (set False for API-only)</span>
+<span class="sd">        **qh_kwargs: Additional keyword arguments passed to qh.mk_app</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A configured web application (bottle or FastAPI app) with:</span>
+<span class="sd">        - HTTP endpoints for each function</span>
+<span class="sd">        - RJSF-based web interface (if add_ui=True)</span>
+<span class="sd">        - API routes for function specs</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; def add(x: int, y: int) -&gt; int:</span>
+<span class="sd">        ...     &#39;&#39;&#39;Add two numbers&#39;&#39;&#39;</span>
+<span class="sd">        ...     return x + y</span>
+<span class="sd">        ...</span>
+<span class="sd">        &gt;&gt;&gt; def greet(name: str) -&gt; str:</span>
+<span class="sd">        ...     &#39;&#39;&#39;Greet a person&#39;&#39;&#39;</span>
+<span class="sd">        ...     return f&quot;Hello, {name}!&quot;</span>
+<span class="sd">        ...</span>
+<span class="sd">        &gt;&gt;&gt; app = mk_rjsf_app([add, greet])</span>
+<span class="sd">        &gt;&gt;&gt; # app.run()  # Start the web server</span>
+
+<span class="sd">    Example with customization:</span>
+<span class="sd">        &gt;&gt;&gt; from uf import mk_rjsf_app, RjsfFieldConfig</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; def send_email(to: str, subject: str, body: str):</span>
+<span class="sd">        ...     &#39;&#39;&#39;Send an email&#39;&#39;&#39;</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">        ...</span>
+<span class="sd">        &gt;&gt;&gt; app = mk_rjsf_app(</span>
+<span class="sd">        ...     [send_email],</span>
+<span class="sd">        ...     page_title=&quot;Email Sender&quot;,</span>
+<span class="sd">        ...     custom_css=&quot;body { background: #f0f0f0; }&quot;,</span>
+<span class="sd">        ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Convert to list to allow multiple iterations</span>
+    <span class="n">funcs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
+
+    <span class="c1"># Create function specification store</span>
+    <span class="n">function_specs</span> <span class="o">=</span> <span class="n">FunctionSpecStore</span><span class="p">(</span>
+        <span class="n">funcs</span><span class="p">,</span>
+        <span class="n">rjsf_config</span><span class="o">=</span><span class="n">rjsf_config</span> <span class="ow">or</span> <span class="p">{},</span>
+        <span class="n">ui_schema_factory</span><span class="o">=</span><span class="n">ui_schema_factory</span><span class="p">,</span>
+        <span class="n">param_to_prop_type</span><span class="o">=</span><span class="n">param_to_prop_type</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create HTTP service using qh</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">qh</span><span class="w"> </span><span class="kn">import</span> <span class="n">mk_app</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+            <span class="s2">&quot;qh is required for mk_rjsf_app. Install it with: pip install qh&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Build the qh app with function endpoints</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">mk_app</span><span class="p">(</span>
+        <span class="n">funcs</span><span class="p">,</span>
+        <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+        <span class="n">input_trans</span><span class="o">=</span><span class="n">input_trans</span><span class="p">,</span>
+        <span class="n">output_trans</span><span class="o">=</span><span class="n">output_trans</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">qh_kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Store function_specs on the app for later access</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">function_specs</span> <span class="o">=</span> <span class="n">function_specs</span>
+
+    <span class="c1"># Add UI routes if requested</span>
+    <span class="k">if</span> <span class="n">add_ui</span><span class="p">:</span>
+        <span class="n">add_ui_routes</span><span class="p">(</span>
+            <span class="n">app</span><span class="p">,</span>
+            <span class="n">function_specs</span><span class="p">,</span>
+            <span class="n">page_title</span><span class="o">=</span><span class="n">page_title</span><span class="p">,</span>
+            <span class="n">custom_css</span><span class="o">=</span><span class="n">custom_css</span><span class="p">,</span>
+            <span class="n">rjsf_theme</span><span class="o">=</span><span class="n">rjsf_theme</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">app</span></div>
+
+
+
+<div class="viewcode-block" id="UfApp">
+<a class="viewcode-back" href="../../module_docs/uf/base.html#uf.UfApp">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">UfApp</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper class for uf applications.</span>
+
+<span class="sd">    Provides a higher-level interface with additional conveniences</span>
+<span class="sd">    beyond the raw qh app.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        app: The underlying qh/bottle/fastapi app</span>
+<span class="sd">        function_specs: FunctionSpecStore for function metadata</span>
+<span class="sd">        funcs: Dictionary mapping function names to callables</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">funcs</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span>
+        <span class="o">**</span><span class="n">mk_rjsf_app_kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize UfApp.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            funcs: Iterable of callable functions</span>
+<span class="sd">            **mk_rjsf_app_kwargs: Arguments passed to mk_rjsf_app</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span> <span class="o">=</span> <span class="p">{</span><span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="o">**</span><span class="n">mk_rjsf_app_kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">function_specs</span>
+
+<div class="viewcode-block" id="UfApp.run">
+<a class="viewcode-back" href="../../module_docs/uf/base.html#uf.UfApp.run">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8080</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the web application.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            host: Host to bind to</span>
+<span class="sd">            port: Port to listen on</span>
+<span class="sd">            **kwargs: Additional arguments passed to app.run()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">):</span>
+            <span class="c1"># Bottle app</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># FastAPI or other - provide guidance</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                <span class="s2">&quot;For FastAPI apps, use: uvicorn.run(app.app, host=&#39;...&#39;, port=...)&quot;</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UfApp.call">
+<a class="viewcode-back" href="../../module_docs/uf/base.html#uf.UfApp.call">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Call a function directly by name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Name of the function to call</span>
+<span class="sd">            **kwargs: Arguments to pass to the function</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Result of the function call</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            KeyError: If function name not found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">func_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Function &#39;</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">[</span><span class="n">func_name</span><span class="p">](</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UfApp.get_spec">
+<a class="viewcode-back" href="../../module_docs/uf/base.html#uf.UfApp.get_spec">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get RJSF specification for a function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func_name: Name of the function</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary with schema and uiSchema</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            KeyError: If function name not found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="UfApp.list_functions">
+<a class="viewcode-back" href="../../module_docs/uf/base.html#uf.UfApp.list_functions">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get list of all function names.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of function name strings</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String representation of UfApp.&quot;&quot;&quot;</span>
+        <span class="n">func_names</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list_functions</span><span class="p">())</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;UfApp(</span><span class="si">{</span><span class="n">func_names</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,526 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.background &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="uf.base" href="base.html" />
+    <link rel="prev" title="uf.auth" href="auth.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth.html">uf.auth</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">uf.background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#uf.background.PeriodicTask"><code class="docutils literal notranslate"><span class="pre">PeriodicTask</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.PeriodicTask.start"><code class="docutils literal notranslate"><span class="pre">PeriodicTask.start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.PeriodicTask.stop"><code class="docutils literal notranslate"><span class="pre">PeriodicTask.stop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.background.Task"><code class="docutils literal notranslate"><span class="pre">Task</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.Task.task_id"><code class="docutils literal notranslate"><span class="pre">Task.task_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.Task.func_name"><code class="docutils literal notranslate"><span class="pre">Task.func_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.Task.args"><code class="docutils literal notranslate"><span class="pre">Task.args</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.Task.kwargs"><code class="docutils literal notranslate"><span class="pre">Task.kwargs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.Task.status"><code class="docutils literal notranslate"><span class="pre">Task.status</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.Task.result"><code class="docutils literal notranslate"><span class="pre">Task.result</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.Task.error"><code class="docutils literal notranslate"><span class="pre">Task.error</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.Task.created_at"><code class="docutils literal notranslate"><span class="pre">Task.created_at</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.Task.started_at"><code class="docutils literal notranslate"><span class="pre">Task.started_at</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.Task.completed_at"><code class="docutils literal notranslate"><span class="pre">Task.completed_at</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.Task.progress"><code class="docutils literal notranslate"><span class="pre">Task.progress</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.Task.execute"><code class="docutils literal notranslate"><span class="pre">Task.execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.Task.to_dict"><code class="docutils literal notranslate"><span class="pre">Task.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.background.TaskQueue"><code class="docutils literal notranslate"><span class="pre">TaskQueue</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.TaskQueue.cancel_task"><code class="docutils literal notranslate"><span class="pre">TaskQueue.cancel_task()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.TaskQueue.get_result"><code class="docutils literal notranslate"><span class="pre">TaskQueue.get_result()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.TaskQueue.get_status"><code class="docutils literal notranslate"><span class="pre">TaskQueue.get_status()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.TaskQueue.get_task"><code class="docutils literal notranslate"><span class="pre">TaskQueue.get_task()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.TaskQueue.queue_size"><code class="docutils literal notranslate"><span class="pre">TaskQueue.queue_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.TaskQueue.start"><code class="docutils literal notranslate"><span class="pre">TaskQueue.start()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.TaskQueue.stats"><code class="docutils literal notranslate"><span class="pre">TaskQueue.stats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.TaskQueue.stop"><code class="docutils literal notranslate"><span class="pre">TaskQueue.stop()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.background.TaskQueue.submit"><code class="docutils literal notranslate"><span class="pre">TaskQueue.submit()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.background.TaskStatus"><code class="docutils literal notranslate"><span class="pre">TaskStatus</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.background.background"><code class="docutils literal notranslate"><span class="pre">background()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.background.get_global_task_queue"><code class="docutils literal notranslate"><span class="pre">get_global_task_queue()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.background.get_or_create_task_queue"><code class="docutils literal notranslate"><span class="pre">get_or_create_task_queue()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.background.set_global_task_queue"><code class="docutils literal notranslate"><span class="pre">set_global_task_queue()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">uf.background</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/uf/background.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-uf.background">
+<span id="uf-background"></span><h1>uf.background<a class="headerlink" href="#module-uf.background" title="Link to this heading"></a></h1>
+<p>Background task execution for uf.</p>
+<p>Provides decorators and utilities for running tasks in the background,
+with support for queues, scheduling, and progress tracking.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.background.PeriodicTask">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.background.</span></span><span class="sig-name descname"><span class="pre">PeriodicTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/background.html#PeriodicTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.PeriodicTask" title="Link to this definition"></a></dt>
+<dd><p>Task that runs periodically.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cleaning up...&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">periodic</span> <span class="o">=</span> <span class="n">PeriodicTask</span><span class="p">(</span><span class="n">cleanup</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">periodic</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Runs every hour</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">periodic</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.background.PeriodicTask.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#PeriodicTask.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.PeriodicTask.start" title="Link to this definition"></a></dt>
+<dd><p>Start periodic execution.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.background.PeriodicTask.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#PeriodicTask.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.PeriodicTask.stop" title="Link to this definition"></a></dt>
+<dd><p>Stop periodic execution.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.background.Task">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.background.</span></span><span class="sig-name descname"><span class="pre">Task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/background.html#Task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.Task" title="Link to this definition"></a></dt>
+<dd><p>Represents a background task.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.background.Task.task_id">
+<span class="sig-name descname"><span class="pre">task_id</span></span><a class="headerlink" href="#uf.background.Task.task_id" title="Link to this definition"></a></dt>
+<dd><p>Unique task identifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.background.Task.func_name">
+<span class="sig-name descname"><span class="pre">func_name</span></span><a class="headerlink" href="#uf.background.Task.func_name" title="Link to this definition"></a></dt>
+<dd><p>Name of the function</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.background.Task.args">
+<span class="sig-name descname"><span class="pre">args</span></span><a class="headerlink" href="#uf.background.Task.args" title="Link to this definition"></a></dt>
+<dd><p>Positional arguments</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.background.Task.kwargs">
+<span class="sig-name descname"><span class="pre">kwargs</span></span><a class="headerlink" href="#uf.background.Task.kwargs" title="Link to this definition"></a></dt>
+<dd><p>Keyword arguments</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.background.Task.status">
+<span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#uf.background.Task.status" title="Link to this definition"></a></dt>
+<dd><p>Current task status</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.background.Task.result">
+<span class="sig-name descname"><span class="pre">result</span></span><a class="headerlink" href="#uf.background.Task.result" title="Link to this definition"></a></dt>
+<dd><p>Task result (if completed)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.background.Task.error">
+<span class="sig-name descname"><span class="pre">error</span></span><a class="headerlink" href="#uf.background.Task.error" title="Link to this definition"></a></dt>
+<dd><p>Error message (if failed)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.background.Task.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#uf.background.Task.created_at" title="Link to this definition"></a></dt>
+<dd><p>When task was created</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.background.Task.started_at">
+<span class="sig-name descname"><span class="pre">started_at</span></span><a class="headerlink" href="#uf.background.Task.started_at" title="Link to this definition"></a></dt>
+<dd><p>When task started running</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.background.Task.completed_at">
+<span class="sig-name descname"><span class="pre">completed_at</span></span><a class="headerlink" href="#uf.background.Task.completed_at" title="Link to this definition"></a></dt>
+<dd><p>When task completed</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.background.Task.progress">
+<span class="sig-name descname"><span class="pre">progress</span></span><a class="headerlink" href="#uf.background.Task.progress" title="Link to this definition"></a></dt>
+<dd><p>Progress percentage (0-100)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.background.Task.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#Task.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.Task.execute" title="Link to this definition"></a></dt>
+<dd><p>Execute the task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Task result</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If task execution fails</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.background.Task.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#Task.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.Task.to_dict" title="Link to this definition"></a></dt>
+<dd><p>Convert task to dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.background.TaskQueue">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.background.</span></span><span class="sig-name descname"><span class="pre">TaskQueue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_workers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_queue_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/background.html#TaskQueue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.TaskQueue" title="Link to this definition"></a></dt>
+<dd><p>FIFO queue for background tasks.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">task_queue</span> <span class="o">=</span> <span class="n">TaskQueue</span><span class="p">(</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">task_queue</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task_queue</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">expensive_function</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">status</span> <span class="o">=</span> <span class="n">task_queue</span><span class="o">.</span><span class="n">get_status</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">task_queue</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.background.TaskQueue.cancel_task">
+<span class="sig-name descname"><span class="pre">cancel_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#TaskQueue.cancel_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.TaskQueue.cancel_task" title="Link to this definition"></a></dt>
+<dd><p>Cancel a task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>task_id</strong> – Task ID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if cancelled</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Can only cancel pending tasks</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.background.TaskQueue.get_result">
+<span class="sig-name descname"><span class="pre">get_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#TaskQueue.get_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.TaskQueue.get_result" title="Link to this definition"></a></dt>
+<dd><p>Get task result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task_id</strong> – Task ID</p></li>
+<li><p><strong>wait</strong> – Whether to wait for completion</p></li>
+<li><p><strong>timeout</strong> – Optional timeout in seconds</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Task result</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – If task not found</p></li>
+<li><p><strong>RuntimeError</strong> – If task failed</p></li>
+<li><p><strong>TimeoutError</strong> – If wait times out</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.background.TaskQueue.get_status">
+<span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.background.TaskStatus" title="uf.background.TaskStatus"><span class="pre">TaskStatus</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#TaskQueue.get_status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.TaskQueue.get_status" title="Link to this definition"></a></dt>
+<dd><p>Get task status.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>task_id</strong> – Task ID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TaskStatus or None if not found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.background.TaskQueue.get_task">
+<span class="sig-name descname"><span class="pre">get_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.background.Task" title="uf.background.Task"><span class="pre">Task</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#TaskQueue.get_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.TaskQueue.get_task" title="Link to this definition"></a></dt>
+<dd><p>Get task object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>task_id</strong> – Task ID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Task object or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.background.TaskQueue.queue_size">
+<span class="sig-name descname"><span class="pre">queue_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#TaskQueue.queue_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.TaskQueue.queue_size" title="Link to this definition"></a></dt>
+<dd><p>Get current queue size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of pending tasks</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.background.TaskQueue.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#TaskQueue.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.TaskQueue.start" title="Link to this definition"></a></dt>
+<dd><p>Start worker threads.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.background.TaskQueue.stats">
+<span class="sig-name descname"><span class="pre">stats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#TaskQueue.stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.TaskQueue.stats" title="Link to this definition"></a></dt>
+<dd><p>Get queue statistics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary with statistics</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.background.TaskQueue.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#TaskQueue.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.TaskQueue.stop" title="Link to this definition"></a></dt>
+<dd><p>Stop worker threads.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>wait</strong> – Whether to wait for threads to finish</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.background.TaskQueue.submit">
+<span class="sig-name descname"><span class="pre">submit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#TaskQueue.submit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.TaskQueue.submit" title="Link to this definition"></a></dt>
+<dd><p>Submit a task for execution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> – Function to execute</p></li>
+<li><p><strong>*args</strong> – Positional arguments</p></li>
+<li><p><strong>task_id</strong> – Optional task ID</p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Task ID</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>queue.Full</strong> – If queue is full</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.background.TaskStatus">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.background.</span></span><span class="sig-name descname"><span class="pre">TaskStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/background.html#TaskStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.TaskStatus" title="Link to this definition"></a></dt>
+<dd><p>Status of a background task.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.background.background">
+<span class="sig-prename descclassname"><span class="pre">uf.background.</span></span><span class="sig-name descname"><span class="pre">background</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queue_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_queue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#uf.background.TaskQueue" title="uf.background.TaskQueue"><span class="pre">TaskQueue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/background.html#background"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.background" title="Link to this definition"></a></dt>
+<dd><p>Decorator to run function in background.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>queue_name</strong> – Name of the queue to use</p></li>
+<li><p><strong>task_queue</strong> – Optional TaskQueue instance</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@background</span><span class="p">()</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">send_email</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">subject</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="c1"># Long-running email sending</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">task_id</span> <span class="o">=</span> <span class="n">send_email</span><span class="p">(</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Returns immediately with task_id</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.background.get_global_task_queue">
+<span class="sig-prename descclassname"><span class="pre">uf.background.</span></span><span class="sig-name descname"><span class="pre">get_global_task_queue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.background.TaskQueue" title="uf.background.TaskQueue"><span class="pre">TaskQueue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#get_global_task_queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.get_global_task_queue" title="Link to this definition"></a></dt>
+<dd><p>Get a global task queue by name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Queue name</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TaskQueue or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.background.get_or_create_task_queue">
+<span class="sig-prename descclassname"><span class="pre">uf.background.</span></span><span class="sig-name descname"><span class="pre">get_or_create_task_queue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_workers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.background.TaskQueue" title="uf.background.TaskQueue"><span class="pre">TaskQueue</span></a></span></span><a class="reference internal" href="../../_modules/uf/background.html#get_or_create_task_queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.get_or_create_task_queue" title="Link to this definition"></a></dt>
+<dd><p>Get or create a task queue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Queue name</p></li>
+<li><p><strong>num_workers</strong> – Number of workers if creating</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TaskQueue instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.background.set_global_task_queue">
+<span class="sig-prename descclassname"><span class="pre">uf.background.</span></span><span class="sig-name descname"><span class="pre">set_global_task_queue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_queue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#uf.background.TaskQueue" title="uf.background.TaskQueue"><span class="pre">TaskQueue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/background.html#set_global_task_queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.background.set_global_task_queue" title="Link to this definition"></a></dt>
+<dd><p>Set a global task queue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Queue name</p></li>
+<li><p><strong>task_queue</strong> – TaskQueue instance</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="auth.html" class="btn btn-neutral float-left" title="uf.auth" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="base.html" class="btn btn-neutral float-right" title="uf.base" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

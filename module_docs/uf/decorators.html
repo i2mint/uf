@@ -1,0 +1,449 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.decorators &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="uf.field_interactions" href="field_interactions.html" />
+    <link rel="prev" title="uf.caching" href="caching.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caching.html">uf.caching</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">uf.decorators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#uf.decorators.deprecated"><code class="docutils literal notranslate"><span class="pre">deprecated()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.decorators.field_config"><code class="docutils literal notranslate"><span class="pre">field_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.decorators.get_example"><code class="docutils literal notranslate"><span class="pre">get_example()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.decorators.get_field_configs"><code class="docutils literal notranslate"><span class="pre">get_field_configs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.decorators.get_group"><code class="docutils literal notranslate"><span class="pre">get_group()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.decorators.get_ui_config"><code class="docutils literal notranslate"><span class="pre">get_ui_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.decorators.group"><code class="docutils literal notranslate"><span class="pre">group()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.decorators.hidden"><code class="docutils literal notranslate"><span class="pre">hidden()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.decorators.is_hidden"><code class="docutils literal notranslate"><span class="pre">is_hidden()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.decorators.rate_limit"><code class="docutils literal notranslate"><span class="pre">rate_limit()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.decorators.requires_auth"><code class="docutils literal notranslate"><span class="pre">requires_auth()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.decorators.ui_config"><code class="docutils literal notranslate"><span class="pre">ui_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.decorators.with_example"><code class="docutils literal notranslate"><span class="pre">with_example()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">uf.decorators</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/uf/decorators.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-uf.decorators">
+<span id="uf-decorators"></span><h1>uf.decorators<a class="headerlink" href="#module-uf.decorators" title="Link to this heading"></a></h1>
+<p>UI metadata decorators for uf.</p>
+<p>Provides decorators for annotating functions with UI configuration,
+grouping, and field specifications.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.decorators.deprecated">
+<span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">deprecated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/decorators.html#deprecated"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.deprecated" title="Link to this definition"></a></dt>
+<dd><p>Decorator to mark a function as deprecated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>message</strong> – Optional deprecation message</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@deprecated</span><span class="p">(</span><span class="s2">&quot;Use new_function instead&quot;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">old_function</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.decorators.field_config">
+<span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">field_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">field_configs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="rjsf_config.html#uf.rjsf_config.RjsfFieldConfig" title="uf.rjsf_config.RjsfFieldConfig"><span class="pre">RjsfFieldConfig</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/decorators.html#field_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.field_config" title="Link to this definition"></a></dt>
+<dd><p>Decorator to configure specific fields of a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**field_configs</strong> – Keyword arguments mapping parameter names to configs</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">uf.rjsf_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_field_config</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@field_config</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">email</span><span class="o">=</span><span class="n">get_field_config</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">bio</span><span class="o">=</span><span class="n">get_field_config</span><span class="p">(</span><span class="s1">&#39;multiline_text&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">create_profile</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">bio</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.decorators.get_example">
+<span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">get_example</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/decorators.html#get_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.get_example" title="Link to this definition"></a></dt>
+<dd><p>Get example arguments from a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – Function to get example from</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple of (args, kwargs) or None if no example</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span> <span class="o">=</span> <span class="n">get_example</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">example</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="n">example</span>
+<span class="gp">... </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">my_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.decorators.get_field_configs">
+<span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">get_field_configs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="rjsf_config.html#uf.rjsf_config.RjsfFieldConfig" title="uf.rjsf_config.RjsfFieldConfig"><span class="pre">RjsfFieldConfig</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/decorators.html#get_field_configs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.get_field_configs" title="Link to this definition"></a></dt>
+<dd><p>Get field configurations from a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – Function to get field configs from</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary mapping parameter names to RjsfFieldConfig</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field_configs</span> <span class="o">=</span> <span class="n">get_field_configs</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="s1">&#39;email&#39;</span> <span class="ow">in</span> <span class="n">field_configs</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">field_configs</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.decorators.get_group">
+<span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">get_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/decorators.html#get_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.get_group" title="Link to this definition"></a></dt>
+<dd><p>Get group name from a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – Function to get group from</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Group name or None</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">group</span> <span class="o">=</span> <span class="n">get_group</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">group</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Function is in group: </span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.decorators.get_ui_config">
+<span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">get_ui_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/decorators.html#get_ui_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.get_ui_config" title="Link to this definition"></a></dt>
+<dd><p>Get UI configuration from a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – Function to get config from</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Configuration dictionary or None if not configured</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">config</span> <span class="o">=</span> <span class="n">get_ui_config</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">config</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.decorators.group">
+<span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/decorators.html#group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.group" title="Link to this definition"></a></dt>
+<dd><p>Decorator to assign a function to a group.</p>
+<p>Simpler alternative to ui_config when you only need to set the group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>group_name</strong> – Name of the group</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@group</span><span class="p">(</span><span class="s2">&quot;Admin&quot;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">delete_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.decorators.hidden">
+<span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">hidden</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="reference internal" href="../../_modules/uf/decorators.html#hidden"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.hidden" title="Link to this definition"></a></dt>
+<dd><p>Decorator to hide a function from the UI.</p>
+<p>The function will still be callable via the API but won’t appear
+in the UI navigation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – Function to hide</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorated function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@hidden</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">internal_function</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.decorators.is_hidden">
+<span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">is_hidden</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/decorators.html#is_hidden"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.is_hidden" title="Link to this definition"></a></dt>
+<dd><p>Check if a function is hidden from UI.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – Function to check</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if function is hidden, False otherwise</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="ow">not</span> <span class="n">is_hidden</span><span class="p">(</span><span class="n">my_function</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="c1"># Show in UI</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.decorators.rate_limit">
+<span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">rate_limit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">calls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">period</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/decorators.html#rate_limit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.rate_limit" title="Link to this definition"></a></dt>
+<dd><p>Decorator to mark a function with rate limiting metadata.</p>
+<p>This is metadata-only; actual rate limiting must be implemented
+separately.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>calls</strong> – Number of calls allowed</p></li>
+<li><p><strong>period</strong> – Time period in seconds</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@rate_limit</span><span class="p">(</span><span class="n">calls</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>  <span class="c1"># 10 calls per minute</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">send_email</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">subject</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.decorators.requires_auth">
+<span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">requires_auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">roles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/decorators.html#requires_auth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.requires_auth" title="Link to this definition"></a></dt>
+<dd><p>Decorator to mark a function as requiring authentication.</p>
+<p>This is metadata-only; actual authentication must be implemented
+separately in the application layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>roles</strong> – List of required roles</p></li>
+<li><p><strong>permissions</strong> – List of required permissions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@requires_auth</span><span class="p">(</span><span class="n">roles</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;admin&#39;</span><span class="p">],</span> <span class="n">permissions</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;user:delete&#39;</span><span class="p">])</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">delete_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.decorators.ui_config">
+<span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">ui_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="rjsf_config.html#uf.rjsf_config.RjsfFieldConfig" title="uf.rjsf_config.RjsfFieldConfig"><span class="pre">RjsfFieldConfig</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/decorators.html#ui_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.ui_config" title="Link to this definition"></a></dt>
+<dd><p>Decorator to add UI configuration to functions.</p>
+<p>This decorator attaches metadata to functions that uf can use to
+customize the generated UI.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> – Custom title for the function in UI</p></li>
+<li><p><strong>description</strong> – Custom description (overrides docstring)</p></li>
+<li><p><strong>group</strong> – Group name for organization</p></li>
+<li><p><strong>fields</strong> – Dictionary mapping parameter names to RjsfFieldConfig</p></li>
+<li><p><strong>hidden</strong> – Whether to hide this function from UI</p></li>
+<li><p><strong>icon</strong> – Icon identifier for the function</p></li>
+<li><p><strong>order</strong> – Display order within group</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@ui_config</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;User Registration&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">group</span><span class="o">=</span><span class="s2">&quot;Admin&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">fields</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;email&#39;</span><span class="p">)}</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">register_user</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.decorators.with_example">
+<span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">with_example</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">example_args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">example_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/decorators.html#with_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.with_example" title="Link to this definition"></a></dt>
+<dd><p>Decorator to attach example arguments to a function.</p>
+<p>This can be used to provide example/test data that appears in the UI.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*example_args</strong> – Example positional arguments</p></li>
+<li><p><strong>**example_kwargs</strong> – Example keyword arguments</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@with_example</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="caching.html" class="btn btn-neutral float-left" title="uf.caching" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="field_interactions.html" class="btn btn-neutral float-right" title="uf.field_interactions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

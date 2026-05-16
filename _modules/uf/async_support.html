@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.async_support &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">uf.async_support</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for uf.async_support</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Async function support for uf.</span>
+
+<span class="sd">Provides utilities for detecting and handling async functions,</span>
+<span class="sd">allowing seamless integration of async def functions in uf apps.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+
+
+<div class="viewcode-block" id="is_async_function">
+<a class="viewcode-back" href="../../module_docs/uf/async_support.html#uf.is_async_function">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_async_function</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a function is async.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Function to check</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        True if function is async</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; async def my_async_func():</span>
+<span class="sd">        ...     pass</span>
+<span class="sd">        &gt;&gt;&gt; is_async_function(my_async_func)</span>
+<span class="sd">        True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">iscoroutinefunction</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="async_to_sync">
+<a class="viewcode-back" href="../../module_docs/uf/async_support.html#uf.async_to_sync">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">async_to_sync</span><span class="p">(</span><span class="n">async_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert an async function to a synchronous wrapper.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        async_func: Async function to wrap</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Synchronous wrapper function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; async def fetch_data(url: str):</span>
+<span class="sd">        ...     # async operations</span>
+<span class="sd">        ...     return data</span>
+<span class="sd">        &gt;&gt;&gt; sync_fetch = async_to_sync(fetch_data)</span>
+<span class="sd">        &gt;&gt;&gt; result = sync_fetch(&#39;https://example.com&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_async_function</span><span class="p">(</span><span class="n">async_func</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">async_func</span>
+
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">async_func</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sync_wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Synchronous wrapper that runs async function.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Try to get existing event loop</span>
+            <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">loop</span><span class="o">.</span><span class="n">is_running</span><span class="p">():</span>
+                <span class="c1"># Loop is already running, create a new one in a thread</span>
+                <span class="kn">import</span><span class="w"> </span><span class="nn">concurrent.futures</span>
+                <span class="k">with</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+                    <span class="n">future</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+                        <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">,</span>
+                        <span class="n">async_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                    <span class="p">)</span>
+                    <span class="k">return</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Loop exists but not running</span>
+                <span class="k">return</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">async_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+            <span class="c1"># No event loop, create one</span>
+            <span class="k">return</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">async_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+
+    <span class="c1"># Preserve metadata</span>
+    <span class="n">sync_wrapper</span><span class="o">.</span><span class="n">__uf_is_async__</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">sync_wrapper</span><span class="o">.</span><span class="n">__uf_original_async__</span> <span class="o">=</span> <span class="n">async_func</span>
+
+    <span class="k">return</span> <span class="n">sync_wrapper</span></div>
+
+
+
+<div class="viewcode-block" id="make_sync_compatible">
+<a class="viewcode-back" href="../../module_docs/uf/async_support.html#uf.make_sync_compatible">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_sync_compatible</span><span class="p">(</span><span class="n">funcs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert any async functions in the list to sync wrappers.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        funcs: List of functions (may include async)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List of functions (all synchronous)</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; funcs = [sync_func, async_func, another_sync]</span>
+<span class="sd">        &gt;&gt;&gt; compatible = make_sync_compatible(funcs)</span>
+<span class="sd">        &gt;&gt;&gt; # All functions in compatible are now callable synchronously</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">async_to_sync</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="create_async_handler">
+<a class="viewcode-back" href="../../module_docs/uf/async_support.html#uf.create_async_handler">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_async_handler</span><span class="p">(</span><span class="n">async_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a handler for async functions in web frameworks.</span>
+
+<span class="sd">    This is useful for integrating with frameworks that may or may not</span>
+<span class="sd">    support async natively (like Bottle vs FastAPI).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        async_func: Async function to create handler for</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Appropriate handler (async or sync wrapped)</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; async def my_endpoint(param: str):</span>
+<span class="sd">        ...     result = await some_async_operation(param)</span>
+<span class="sd">        ...     return result</span>
+<span class="sd">        &gt;&gt;&gt; handler = create_async_handler(my_endpoint)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_async_function</span><span class="p">(</span><span class="n">async_func</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">async_func</span>
+
+    <span class="c1"># For now, return sync wrapper</span>
+    <span class="c1"># In future, could detect framework and return async if supported</span>
+    <span class="k">return</span> <span class="n">async_to_sync</span><span class="p">(</span><span class="n">async_func</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="AsyncFunctionWrapper">
+<a class="viewcode-back" href="../../module_docs/uf/async_support.html#uf.AsyncFunctionWrapper">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AsyncFunctionWrapper</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper for async functions that provides both sync and async access.</span>
+
+<span class="sd">    This allows the same function to be called either way, depending on</span>
+<span class="sd">    the context.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; async def fetch_user(user_id: int):</span>
+<span class="sd">        ...     # async database query</span>
+<span class="sd">        ...     return user_data</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; wrapper = AsyncFunctionWrapper(fetch_user)</span>
+<span class="sd">        &gt;&gt;&gt; # Sync call</span>
+<span class="sd">        &gt;&gt;&gt; user = wrapper.call_sync(user_id=123)</span>
+<span class="sd">        &gt;&gt;&gt; # Async call</span>
+<span class="sd">        &gt;&gt;&gt; user = await wrapper.call_async(user_id=123)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the wrapper.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            func: Function to wrap (sync or async)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_async</span> <span class="o">=</span> <span class="n">is_async_function</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AsyncFunctionWrapper.call_sync">
+<a class="viewcode-back" href="../../module_docs/uf/async_support.html#uf.AsyncFunctionWrapper.call_sync">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">call_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Call the function synchronously.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            *args: Positional arguments</span>
+<span class="sd">            **kwargs: Keyword arguments</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Function result</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_async</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">async_to_sync</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AsyncFunctionWrapper.call_async">
+<a class="viewcode-back" href="../../module_docs/uf/async_support.html#uf.AsyncFunctionWrapper.call_async">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">call_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Call the function asynchronously.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            *args: Positional arguments</span>
+<span class="sd">            **kwargs: Keyword arguments</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Function result</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_async</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Run sync function in executor to avoid blocking</span>
+            <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span>
+                <span class="kc">None</span><span class="p">,</span>
+                <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Call synchronously by default.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            *args: Positional arguments</span>
+<span class="sd">            **kwargs: Keyword arguments</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Function result</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_sync</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="batch_async_calls">
+<a class="viewcode-back" href="../../module_docs/uf/async_support.html#uf.batch_async_calls">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">batch_async_calls</span><span class="p">(</span>
+    <span class="n">async_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+    <span class="n">calls</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute multiple async function calls concurrently.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        async_func: Async function to call</span>
+<span class="sd">        calls: List of dicts with &#39;args&#39; and &#39;kwargs&#39; for each call</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List of results in same order as calls</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; async def fetch_user(user_id: int):</span>
+<span class="sd">        ...     return await db.get_user(user_id)</span>
+<span class="sd">        &gt;&gt;&gt;</span>
+<span class="sd">        &gt;&gt;&gt; calls = [</span>
+<span class="sd">        ...     {&#39;args&#39;: (), &#39;kwargs&#39;: {&#39;user_id&#39;: 1}},</span>
+<span class="sd">        ...     {&#39;args&#39;: (), &#39;kwargs&#39;: {&#39;user_id&#39;: 2}},</span>
+<span class="sd">        ...     {&#39;args&#39;: (), &#39;kwargs&#39;: {&#39;user_id&#39;: 3}},</span>
+<span class="sd">        ... ]</span>
+<span class="sd">        &gt;&gt;&gt; users = batch_async_calls(fetch_user, calls)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_async_function</span><span class="p">(</span><span class="n">async_func</span><span class="p">):</span>
+        <span class="c1"># Sync function, just call sequentially</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">async_func</span><span class="p">(</span><span class="o">*</span><span class="n">call</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;args&#39;</span><span class="p">,</span> <span class="p">()),</span> <span class="o">**</span><span class="n">call</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kwargs&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+            <span class="k">for</span> <span class="n">call</span> <span class="ow">in</span> <span class="n">calls</span>
+        <span class="p">]</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">run_batch</span><span class="p">():</span>
+        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">async_func</span><span class="p">(</span><span class="o">*</span><span class="n">call</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;args&#39;</span><span class="p">,</span> <span class="p">()),</span> <span class="o">**</span><span class="n">call</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kwargs&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+            <span class="k">for</span> <span class="n">call</span> <span class="ow">in</span> <span class="n">calls</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">run_batch</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="timeout_async">
+<a class="viewcode-back" href="../../module_docs/uf/async_support.html#uf.timeout_async">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">timeout_async</span><span class="p">(</span><span class="n">seconds</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to add timeout to async functions.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        seconds: Timeout in seconds</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Decorator function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; @timeout_async(5.0)</span>
+<span class="sd">        ... async def slow_operation():</span>
+<span class="sd">        ...     await asyncio.sleep(10)  # Will timeout after 5s</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">async_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_async_function</span><span class="p">(</span><span class="n">async_func</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">async_func</span>
+
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">async_func</span><span class="p">)</span>
+        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span>
+                    <span class="n">async_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                    <span class="n">timeout</span><span class="o">=</span><span class="n">seconds</span>
+                <span class="p">)</span>
+            <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">TimeoutError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Function </span><span class="si">{</span><span class="n">async_func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;timed out after </span><span class="si">{</span><span class="n">seconds</span><span class="si">}</span><span class="s2"> seconds&quot;</span>
+                <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+
+<div class="viewcode-block" id="retry_async">
+<a class="viewcode-back" href="../../module_docs/uf/async_support.html#uf.retry_async">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">retry_async</span><span class="p">(</span><span class="n">max_attempts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">delay</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to add retry logic to async functions.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        max_attempts: Maximum number of attempts</span>
+<span class="sd">        delay: Delay between attempts in seconds</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Decorator function</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; @retry_async(max_attempts=3, delay=2.0)</span>
+<span class="sd">        ... async def unreliable_api_call():</span>
+<span class="sd">        ...     # May fail, will retry</span>
+<span class="sd">        ...     return await external_api.fetch()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">async_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_async_function</span><span class="p">(</span><span class="n">async_func</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">async_func</span>
+
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">async_func</span><span class="p">)</span>
+        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">last_exception</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_attempts</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="k">await</span> <span class="n">async_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">last_exception</span> <span class="o">=</span> <span class="n">e</span>
+                    <span class="k">if</span> <span class="n">attempt</span> <span class="o">&lt;</span> <span class="n">max_attempts</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">last_exception</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+
+<div class="viewcode-block" id="AsyncContext">
+<a class="viewcode-back" href="../../module_docs/uf/async_support.html#uf.AsyncContext">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">AsyncContext</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Context manager for handling async operations in uf.</span>
+
+<span class="sd">    This helps manage event loops and async resources properly.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; with AsyncContext() as ctx:</span>
+<span class="sd">        ...     result = ctx.run(my_async_function(param))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize async context.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loop</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_owned_loop</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enter the context.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_owned_loop</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">new_event_loop</span><span class="p">()</span>
+            <span class="n">asyncio</span><span class="o">.</span><span class="n">set_event_loop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loop</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_owned_loop</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Exit the context.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_owned_loop</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loop</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_loop</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<div class="viewcode-block" id="AsyncContext.run">
+<a class="viewcode-back" href="../../module_docs/uf/async_support.html#uf.AsyncContext.run">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coro</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run a coroutine in this context.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            coro: Coroutine to run</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Result of the coroutine</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loop</span><span class="o">.</span><span class="n">is_running</span><span class="p">():</span>
+            <span class="c1"># Can&#39;t run_until_complete on a running loop</span>
+            <span class="c1"># Use asyncio.run in a thread</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">concurrent.futures</span>
+            <span class="k">with</span> <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">ThreadPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+                <span class="n">future</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">,</span> <span class="n">coro</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">coro</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="detect_async_framework">
+<a class="viewcode-back" href="../../module_docs/uf/async_support.html#uf.detect_async_framework">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">detect_async_framework</span><span class="p">(</span><span class="n">app</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Detect if the web framework supports async natively.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        app: The web application</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Framework name: &#39;fastapi&#39;, &#39;bottle&#39;, &#39;unknown&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">app_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">app</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+
+    <span class="k">if</span> <span class="s1">&#39;FastAPI&#39;</span> <span class="ow">in</span> <span class="n">app_type</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;fastapi&#39;</span>
+    <span class="k">elif</span> <span class="s1">&#39;Bottle&#39;</span> <span class="ow">in</span> <span class="n">app_type</span> <span class="ow">or</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;route&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;bottle&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;unknown&#39;</span></div>
+
+
+
+<div class="viewcode-block" id="is_framework_async_capable">
+<a class="viewcode-back" href="../../module_docs/uf/async_support.html#uf.is_framework_async_capable">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_framework_async_capable</span><span class="p">(</span><span class="n">app</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the framework supports async handlers natively.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        app: The web application</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        True if framework supports async</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">framework</span> <span class="o">=</span> <span class="n">detect_async_framework</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">framework</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;fastapi&#39;</span><span class="p">,</span> <span class="s1">&#39;aiohttp&#39;</span><span class="p">,</span> <span class="s1">&#39;starlette&#39;</span><span class="p">]</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

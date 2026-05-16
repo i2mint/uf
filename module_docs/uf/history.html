@@ -1,0 +1,683 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>uf.history &mdash; uf 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="uf.openapi" href="openapi.html" />
+    <link rel="prev" title="uf.field_interactions" href="field_interactions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            uf
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../uf.html">uf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async_support.html">uf.async_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth.html">uf.auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">uf.background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base.html">uf.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="caching.html">uf.caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decorators.html">uf.decorators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">uf.history</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#uf.history.CallHistory"><code class="docutils literal notranslate"><span class="pre">CallHistory</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.CallHistory.clear"><code class="docutils literal notranslate"><span class="pre">CallHistory.clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.CallHistory.from_dict"><code class="docutils literal notranslate"><span class="pre">CallHistory.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.CallHistory.get_recent"><code class="docutils literal notranslate"><span class="pre">CallHistory.get_recent()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.CallHistory.get_successful_calls"><code class="docutils literal notranslate"><span class="pre">CallHistory.get_successful_calls()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.CallHistory.record"><code class="docutils literal notranslate"><span class="pre">CallHistory.record()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.CallHistory.to_dict"><code class="docutils literal notranslate"><span class="pre">CallHistory.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.history.FunctionCall"><code class="docutils literal notranslate"><span class="pre">FunctionCall</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.FunctionCall.func_name"><code class="docutils literal notranslate"><span class="pre">FunctionCall.func_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.FunctionCall.params"><code class="docutils literal notranslate"><span class="pre">FunctionCall.params</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.FunctionCall.result"><code class="docutils literal notranslate"><span class="pre">FunctionCall.result</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.FunctionCall.timestamp"><code class="docutils literal notranslate"><span class="pre">FunctionCall.timestamp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.FunctionCall.success"><code class="docutils literal notranslate"><span class="pre">FunctionCall.success</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.FunctionCall.error"><code class="docutils literal notranslate"><span class="pre">FunctionCall.error</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.FunctionCall.from_dict"><code class="docutils literal notranslate"><span class="pre">FunctionCall.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.FunctionCall.to_dict"><code class="docutils literal notranslate"><span class="pre">FunctionCall.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.history.HistoryManager"><code class="docutils literal notranslate"><span class="pre">HistoryManager</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.HistoryManager.get_preset"><code class="docutils literal notranslate"><span class="pre">HistoryManager.get_preset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.HistoryManager.get_presets"><code class="docutils literal notranslate"><span class="pre">HistoryManager.get_presets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.HistoryManager.get_recent_calls"><code class="docutils literal notranslate"><span class="pre">HistoryManager.get_recent_calls()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.HistoryManager.load_from_file"><code class="docutils literal notranslate"><span class="pre">HistoryManager.load_from_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.HistoryManager.record_call"><code class="docutils literal notranslate"><span class="pre">HistoryManager.record_call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.HistoryManager.save_preset"><code class="docutils literal notranslate"><span class="pre">HistoryManager.save_preset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.HistoryManager.save_to_file"><code class="docutils literal notranslate"><span class="pre">HistoryManager.save_to_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.history.Preset"><code class="docutils literal notranslate"><span class="pre">Preset</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.Preset.name"><code class="docutils literal notranslate"><span class="pre">Preset.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.Preset.func_name"><code class="docutils literal notranslate"><span class="pre">Preset.func_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.Preset.params"><code class="docutils literal notranslate"><span class="pre">Preset.params</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.Preset.description"><code class="docutils literal notranslate"><span class="pre">Preset.description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.Preset.created_at"><code class="docutils literal notranslate"><span class="pre">Preset.created_at</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.Preset.from_dict"><code class="docutils literal notranslate"><span class="pre">Preset.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.Preset.to_dict"><code class="docutils literal notranslate"><span class="pre">Preset.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.history.PresetManager"><code class="docutils literal notranslate"><span class="pre">PresetManager</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.PresetManager.delete"><code class="docutils literal notranslate"><span class="pre">PresetManager.delete()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.PresetManager.from_dict"><code class="docutils literal notranslate"><span class="pre">PresetManager.from_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.PresetManager.get"><code class="docutils literal notranslate"><span class="pre">PresetManager.get()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.PresetManager.list_presets"><code class="docutils literal notranslate"><span class="pre">PresetManager.list_presets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.PresetManager.save"><code class="docutils literal notranslate"><span class="pre">PresetManager.save()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uf.history.PresetManager.to_dict"><code class="docutils literal notranslate"><span class="pre">PresetManager.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.history.enable_history"><code class="docutils literal notranslate"><span class="pre">enable_history()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uf.history.get_global_history_manager"><code class="docutils literal notranslate"><span class="pre">get_global_history_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="openapi.html">uf.openapi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization.html">uf.organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="renderers.html">uf.renderers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="routes.html">uf.routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specs.html">uf.specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">uf.templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">uf.testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="themes.html">uf.themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trans.html">uf.trans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">uf.webhooks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">uf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">uf.history</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/module_docs/uf/history.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-uf.history">
+<span id="uf-history"></span><h1>uf.history<a class="headerlink" href="#module-uf.history" title="Link to this heading"></a></h1>
+<p>Call history and presets for uf.</p>
+<p>Provides functionality to track function calls, save parameter presets,
+and reuse previous calls for improved user experience.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.history.CallHistory">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.history.</span></span><span class="sig-name descname"><span class="pre">CallHistory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/history.html#CallHistory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.CallHistory" title="Link to this definition"></a></dt>
+<dd><p>Manage history of function calls.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">history</span> <span class="o">=</span> <span class="n">CallHistory</span><span class="p">(</span><span class="n">max_size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">history</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span> <span class="n">result</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">recent</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">get_recent</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.CallHistory.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/history.html#CallHistory.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.CallHistory.clear" title="Link to this definition"></a></dt>
+<dd><p>Clear history.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func_name</strong> – Function to clear, or None for all</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.CallHistory.from_dict">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.history.CallHistory" title="uf.history.CallHistory"><span class="pre">CallHistory</span></a></span></span><a class="reference internal" href="../../_modules/uf/history.html#CallHistory.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.CallHistory.from_dict" title="Link to this definition"></a></dt>
+<dd><p>Create from dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – Dictionary with history data</p></li>
+<li><p><strong>max_size</strong> – Maximum size per function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>CallHistory instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.CallHistory.get_recent">
+<span class="sig-name descname"><span class="pre">get_recent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#uf.history.FunctionCall" title="uf.history.FunctionCall"><span class="pre">FunctionCall</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/history.html#CallHistory.get_recent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.CallHistory.get_recent" title="Link to this definition"></a></dt>
+<dd><p>Get recent calls for a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> – Function name</p></li>
+<li><p><strong>limit</strong> – Maximum number to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of recent FunctionCall objects (newest first)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.CallHistory.get_successful_calls">
+<span class="sig-name descname"><span class="pre">get_successful_calls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#uf.history.FunctionCall" title="uf.history.FunctionCall"><span class="pre">FunctionCall</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/history.html#CallHistory.get_successful_calls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.CallHistory.get_successful_calls" title="Link to this definition"></a></dt>
+<dd><p>Get recent successful calls.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> – Function name</p></li>
+<li><p><strong>limit</strong> – Maximum number to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of successful FunctionCall objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.CallHistory.record">
+<span class="sig-name descname"><span class="pre">record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">success</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/history.html#CallHistory.record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.CallHistory.record" title="Link to this definition"></a></dt>
+<dd><p>Record a function call.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> – Name of the function</p></li>
+<li><p><strong>params</strong> – Parameters used</p></li>
+<li><p><strong>result</strong> – Result returned</p></li>
+<li><p><strong>success</strong> – Whether call succeeded</p></li>
+<li><p><strong>error</strong> – Error message if failed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.CallHistory.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/history.html#CallHistory.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.CallHistory.to_dict" title="Link to this definition"></a></dt>
+<dd><p>Convert history to dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.history.FunctionCall">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.history.</span></span><span class="sig-name descname"><span class="pre">FunctionCall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">success</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/history.html#FunctionCall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.FunctionCall" title="Link to this definition"></a></dt>
+<dd><p>Record of a single function call.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.func_name">
+<span class="sig-name descname"><span class="pre">func_name</span></span><a class="headerlink" href="#uf.history.FunctionCall.func_name" title="Link to this definition"></a></dt>
+<dd><p>Name of the function</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.params">
+<span class="sig-name descname"><span class="pre">params</span></span><a class="headerlink" href="#uf.history.FunctionCall.params" title="Link to this definition"></a></dt>
+<dd><p>Parameters used</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.result">
+<span class="sig-name descname"><span class="pre">result</span></span><a class="headerlink" href="#uf.history.FunctionCall.result" title="Link to this definition"></a></dt>
+<dd><p>Result returned (if captured)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.timestamp">
+<span class="sig-name descname"><span class="pre">timestamp</span></span><a class="headerlink" href="#uf.history.FunctionCall.timestamp" title="Link to this definition"></a></dt>
+<dd><p>When the call was made</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.success">
+<span class="sig-name descname"><span class="pre">success</span></span><a class="headerlink" href="#uf.history.FunctionCall.success" title="Link to this definition"></a></dt>
+<dd><p>Whether the call succeeded</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.error">
+<span class="sig-name descname"><span class="pre">error</span></span><a class="headerlink" href="#uf.history.FunctionCall.error" title="Link to this definition"></a></dt>
+<dd><p>Error message if failed</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.from_dict">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.history.FunctionCall" title="uf.history.FunctionCall"><span class="pre">FunctionCall</span></a></span></span><a class="reference internal" href="../../_modules/uf/history.html#FunctionCall.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.FunctionCall.from_dict" title="Link to this definition"></a></dt>
+<dd><p>Create from dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – Dictionary with call data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>FunctionCall instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/history.html#FunctionCall.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.FunctionCall.to_dict" title="Link to this definition"></a></dt>
+<dd><p>Convert to dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.history.HistoryManager">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.history.</span></span><span class="sig-name descname"><span class="pre">HistoryManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_history</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/history.html#HistoryManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager" title="Link to this definition"></a></dt>
+<dd><p>Combined manager for history and presets.</p>
+<p>Provides a unified interface for tracking calls and managing presets.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">HistoryManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span><span class="o">.</span><span class="n">record_call</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span> <span class="n">result</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span><span class="o">.</span><span class="n">save_preset</span><span class="p">(</span><span class="s1">&#39;quick&#39;</span><span class="p">,</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">recent</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_recent_calls</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">presets</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_presets</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.HistoryManager.get_preset">
+<span class="sig-name descname"><span class="pre">get_preset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><span class="pre">Preset</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/history.html#HistoryManager.get_preset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager.get_preset" title="Link to this definition"></a></dt>
+<dd><p>Get a preset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preset_name</strong> – Name of preset</p></li>
+<li><p><strong>func_name</strong> – Function name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Preset object or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.HistoryManager.get_presets">
+<span class="sig-name descname"><span class="pre">get_presets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><span class="pre">Preset</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/history.html#HistoryManager.get_presets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager.get_presets" title="Link to this definition"></a></dt>
+<dd><p>Get all presets for a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func_name</strong> – Function name</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of Preset objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.HistoryManager.get_recent_calls">
+<span class="sig-name descname"><span class="pre">get_recent_calls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#uf.history.FunctionCall" title="uf.history.FunctionCall"><span class="pre">FunctionCall</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/history.html#HistoryManager.get_recent_calls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager.get_recent_calls" title="Link to this definition"></a></dt>
+<dd><p>Get recent calls.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> – Function name</p></li>
+<li><p><strong>limit</strong> – Maximum number to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of recent FunctionCall objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.HistoryManager.load_from_file">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">load_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_history</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.history.HistoryManager" title="uf.history.HistoryManager"><span class="pre">HistoryManager</span></a></span></span><a class="reference internal" href="../../_modules/uf/history.html#HistoryManager.load_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager.load_from_file" title="Link to this definition"></a></dt>
+<dd><p>Load from file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> – Path to load from</p></li>
+<li><p><strong>max_history</strong> – Maximum history size</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>HistoryManager instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.HistoryManager.record_call">
+<span class="sig-name descname"><span class="pre">record_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">success</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/history.html#HistoryManager.record_call"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager.record_call" title="Link to this definition"></a></dt>
+<dd><p>Record a function call.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> – Function name</p></li>
+<li><p><strong>params</strong> – Parameters used</p></li>
+<li><p><strong>result</strong> – Result returned</p></li>
+<li><p><strong>success</strong> – Whether call succeeded</p></li>
+<li><p><strong>error</strong> – Error message if failed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.HistoryManager.save_preset">
+<span class="sig-name descname"><span class="pre">save_preset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><span class="pre">Preset</span></a></span></span><a class="reference internal" href="../../_modules/uf/history.html#HistoryManager.save_preset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager.save_preset" title="Link to this definition"></a></dt>
+<dd><p>Save a preset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preset_name</strong> – Name for preset</p></li>
+<li><p><strong>func_name</strong> – Function name</p></li>
+<li><p><strong>params</strong> – Parameter values</p></li>
+<li><p><strong>description</strong> – Optional description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Created Preset object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.HistoryManager.save_to_file">
+<span class="sig-name descname"><span class="pre">save_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/history.html#HistoryManager.save_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager.save_to_file" title="Link to this definition"></a></dt>
+<dd><p>Save history and presets to file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filepath</strong> – Path to save to</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.history.Preset">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.history.</span></span><span class="sig-name descname"><span class="pre">Preset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/uf/history.html#Preset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.Preset" title="Link to this definition"></a></dt>
+<dd><p>A saved parameter preset for a function.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.Preset.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#uf.history.Preset.name" title="Link to this definition"></a></dt>
+<dd><p>Preset name</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.Preset.func_name">
+<span class="sig-name descname"><span class="pre">func_name</span></span><a class="headerlink" href="#uf.history.Preset.func_name" title="Link to this definition"></a></dt>
+<dd><p>Function this preset is for</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.Preset.params">
+<span class="sig-name descname"><span class="pre">params</span></span><a class="headerlink" href="#uf.history.Preset.params" title="Link to this definition"></a></dt>
+<dd><p>Parameter values</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.Preset.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#uf.history.Preset.description" title="Link to this definition"></a></dt>
+<dd><p>Optional description</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.Preset.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#uf.history.Preset.created_at" title="Link to this definition"></a></dt>
+<dd><p>When preset was created</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.Preset.from_dict">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><span class="pre">Preset</span></a></span></span><a class="reference internal" href="../../_modules/uf/history.html#Preset.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.Preset.from_dict" title="Link to this definition"></a></dt>
+<dd><p>Create from dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – Dictionary with preset data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Preset instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.Preset.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/history.html#Preset.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.Preset.to_dict" title="Link to this definition"></a></dt>
+<dd><p>Convert to dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.history.PresetManager">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.history.</span></span><span class="sig-name descname"><span class="pre">PresetManager</span></span><a class="reference internal" href="../../_modules/uf/history.html#PresetManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.PresetManager" title="Link to this definition"></a></dt>
+<dd><p>Manage parameter presets for functions.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">presets</span> <span class="o">=</span> <span class="n">PresetManager</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">presets</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;quick_add&#39;</span><span class="p">,</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span> <span class="s1">&#39;Quick test&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">preset</span> <span class="o">=</span> <span class="n">presets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;quick_add&#39;</span><span class="p">,</span> <span class="s1">&#39;add&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">my_func</span><span class="p">(</span><span class="o">**</span><span class="n">preset</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.PresetManager.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/uf/history.html#PresetManager.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.PresetManager.delete" title="Link to this definition"></a></dt>
+<dd><p>Delete a preset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preset_name</strong> – Name of preset</p></li>
+<li><p><strong>func_name</strong> – Function name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if deleted, False if not found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.PresetManager.from_dict">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.history.PresetManager" title="uf.history.PresetManager"><span class="pre">PresetManager</span></a></span></span><a class="reference internal" href="../../_modules/uf/history.html#PresetManager.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.PresetManager.from_dict" title="Link to this definition"></a></dt>
+<dd><p>Create from dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – Dictionary with preset data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>PresetManager instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.PresetManager.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><span class="pre">Preset</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/uf/history.html#PresetManager.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.PresetManager.get" title="Link to this definition"></a></dt>
+<dd><p>Get a preset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preset_name</strong> – Name of preset</p></li>
+<li><p><strong>func_name</strong> – Function name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Preset object or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.PresetManager.list_presets">
+<span class="sig-name descname"><span class="pre">list_presets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><span class="pre">Preset</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/uf/history.html#PresetManager.list_presets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.PresetManager.list_presets" title="Link to this definition"></a></dt>
+<dd><p>List all presets for a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func_name</strong> – Function name</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of Preset objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.PresetManager.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><span class="pre">Preset</span></a></span></span><a class="reference internal" href="../../_modules/uf/history.html#PresetManager.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.PresetManager.save" title="Link to this definition"></a></dt>
+<dd><p>Save a parameter preset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preset_name</strong> – Name for this preset</p></li>
+<li><p><strong>func_name</strong> – Function this preset is for</p></li>
+<li><p><strong>params</strong> – Parameter values</p></li>
+<li><p><strong>description</strong> – Optional description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Created Preset object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.PresetManager.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/uf/history.html#PresetManager.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.PresetManager.to_dict" title="Link to this definition"></a></dt>
+<dd><p>Convert to dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.history.enable_history">
+<span class="sig-prename descclassname"><span class="pre">uf.history.</span></span><span class="sig-name descname"><span class="pre">enable_history</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="reference internal" href="../../_modules/uf/history.html#enable_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.enable_history" title="Link to this definition"></a></dt>
+<dd><p>Decorator to enable call history for a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>max_size</strong> – Maximum history size</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nd">@enable_history</span>
+<span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.history.get_global_history_manager">
+<span class="sig-prename descclassname"><span class="pre">uf.history.</span></span><span class="sig-name descname"><span class="pre">get_global_history_manager</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#uf.history.HistoryManager" title="uf.history.HistoryManager"><span class="pre">HistoryManager</span></a></span></span><a class="reference internal" href="../../_modules/uf/history.html#get_global_history_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.get_global_history_manager" title="Link to this definition"></a></dt>
+<dd><p>Get the global history manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Global HistoryManager instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="field_interactions.html" class="btn btn-neutral float-left" title="uf.field_interactions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="openapi.html" class="btn btn-neutral float-right" title="uf.openapi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright NO COPYRIGHT.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
