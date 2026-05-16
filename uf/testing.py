@@ -324,6 +324,9 @@ def test_ui_function(
         return True
 
 
+test_ui_function.__test__ = False  # tell pytest this is a utility, not a test case
+
+
 @contextmanager
 def mock_function_response(app, func_name: str, mock_result: Any):
     """Context manager to mock a function's response.
