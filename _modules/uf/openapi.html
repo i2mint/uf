@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>uf.openapi &mdash; uf 0.1.1 documentation</title>
+  <title>uf.openapi &mdash; uf 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -120,76 +120,70 @@
     <span class="n">doc</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getdoc</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
 
     <span class="c1"># Parse docstring for description</span>
-    <span class="n">lines</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">summary</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">lines</span> <span class="k">else</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
-    <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">summary</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">summary</span>
 
     <span class="c1"># Build parameters from signature</span>
     <span class="n">parameters</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">request_body</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="n">type_map</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nb">int</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>
-        <span class="nb">float</span><span class="p">:</span> <span class="s1">&#39;number&#39;</span><span class="p">,</span>
-        <span class="nb">str</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
-        <span class="nb">bool</span><span class="p">:</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
-        <span class="nb">list</span><span class="p">:</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span>
-        <span class="nb">dict</span><span class="p">:</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+        <span class="nb">int</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+        <span class="nb">float</span><span class="p">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span>
+        <span class="nb">str</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+        <span class="nb">bool</span><span class="p">:</span> <span class="s2">&quot;boolean&quot;</span><span class="p">,</span>
+        <span class="nb">list</span><span class="p">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+        <span class="nb">dict</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">param_type</span> <span class="o">=</span> <span class="s1">&#39;string&#39;</span>  <span class="c1"># default</span>
+        <span class="n">param_type</span> <span class="o">=</span> <span class="s2">&quot;string&quot;</span>  <span class="c1"># default</span>
 
         <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span> <span class="o">!=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Parameter</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
             <span class="n">py_type</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span>
             <span class="c1"># Handle Optional types</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">py_type</span><span class="p">,</span> <span class="s1">&#39;__origin__&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">py_type</span><span class="p">,</span> <span class="s2">&quot;__origin__&quot;</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">py_type</span><span class="o">.</span><span class="n">__origin__</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="n">Optional</span><span class="p">):</span>
                     <span class="n">py_type</span> <span class="o">=</span> <span class="n">py_type</span><span class="o">.</span><span class="n">__args__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-            <span class="n">param_type</span> <span class="o">=</span> <span class="n">type_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">py_type</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">)</span>
+            <span class="n">param_type</span> <span class="o">=</span> <span class="n">type_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">py_type</span><span class="p">,</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span>
 
         <span class="n">param_schema</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">param_type</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">param_type</span><span class="p">,</span>
         <span class="p">}</span>
 
         <span class="c1"># Check if required</span>
         <span class="n">required</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">default</span> <span class="o">==</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Parameter</span><span class="o">.</span><span class="n">empty</span>
 
-        <span class="n">parameters</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">param_name</span><span class="p">,</span>
-            <span class="s1">&#39;in&#39;</span><span class="p">:</span> <span class="s1">&#39;query&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="n">required</span><span class="p">,</span>
-            <span class="s1">&#39;schema&#39;</span><span class="p">:</span> <span class="n">param_schema</span><span class="p">,</span>
-        <span class="p">})</span>
+        <span class="n">parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">param_name</span><span class="p">,</span>
+                <span class="s2">&quot;in&quot;</span><span class="p">:</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="n">required</span><span class="p">,</span>
+                <span class="s2">&quot;schema&quot;</span><span class="p">:</span> <span class="n">param_schema</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
 
     <span class="n">operation</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;summary&#39;</span><span class="p">:</span> <span class="n">summary</span><span class="p">,</span>
-        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
-        <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="n">parameters</span><span class="p">,</span>
-        <span class="s1">&#39;responses&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;200&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Successful response&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s1">&#39;application/json&#39;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="s1">&#39;schema&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;object&#39;</span><span class="p">}</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
+        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">summary</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+        <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="n">parameters</span><span class="p">,</span>
+        <span class="s2">&quot;responses&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;200&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Successful response&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;application/json&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;schema&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">}}},</span>
             <span class="p">},</span>
-            <span class="s1">&#39;400&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Bad request&#39;</span>
-            <span class="p">},</span>
-            <span class="s1">&#39;500&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Internal server error&#39;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
+            <span class="s2">&quot;400&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Bad request&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;500&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Internal server error&quot;</span><span class="p">},</span>
+        <span class="p">},</span>
     <span class="p">}</span>
 
     <span class="c1"># Add tags if function has group</span>
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s1">&#39;__uf_ui_config__&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">&quot;__uf_ui_config__&quot;</span><span class="p">):</span>
         <span class="n">config</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">__uf_ui_config__</span>
-        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">):</span>
-            <span class="n">operation</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">):</span>
+            <span class="n">operation</span><span class="p">[</span><span class="s2">&quot;tags&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]]</span>
 
     <span class="k">return</span> <span class="n">operation</span></div>
 
@@ -217,39 +211,39 @@
 <span class="sd">        OpenAPI specification dictionary</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">servers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">servers</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="p">}]</span>
+        <span class="n">servers</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span><span class="p">}]</span>
 
     <span class="n">paths</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">tags</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
         <span class="n">func_name</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">&quot;</span>
 
         <span class="n">operation</span> <span class="o">=</span> <span class="n">function_to_openapi_operation</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
 
         <span class="c1"># Collect tags</span>
-        <span class="k">if</span> <span class="s1">&#39;tags&#39;</span> <span class="ow">in</span> <span class="n">operation</span><span class="p">:</span>
-            <span class="n">tags</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">operation</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s2">&quot;tags&quot;</span> <span class="ow">in</span> <span class="n">operation</span><span class="p">:</span>
+            <span class="n">tags</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">operation</span><span class="p">[</span><span class="s2">&quot;tags&quot;</span><span class="p">])</span>
 
         <span class="n">paths</span><span class="p">[</span><span class="n">path</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;post&#39;</span><span class="p">:</span> <span class="n">operation</span>  <span class="c1"># Use POST for form submissions</span>
+            <span class="s2">&quot;post&quot;</span><span class="p">:</span> <span class="n">operation</span>  <span class="c1"># Use POST for form submissions</span>
         <span class="p">}</span>
 
     <span class="n">spec</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;openapi&#39;</span><span class="p">:</span> <span class="s1">&#39;3.0.0&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;info&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
-            <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="n">version</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+        <span class="s2">&quot;openapi&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">version</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
         <span class="p">},</span>
-        <span class="s1">&#39;servers&#39;</span><span class="p">:</span> <span class="n">servers</span><span class="p">,</span>
-        <span class="s1">&#39;paths&#39;</span><span class="p">:</span> <span class="n">paths</span><span class="p">,</span>
+        <span class="s2">&quot;servers&quot;</span><span class="p">:</span> <span class="n">servers</span><span class="p">,</span>
+        <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="n">paths</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="c1"># Add tags</span>
     <span class="k">if</span> <span class="n">tags</span><span class="p">:</span>
-        <span class="n">spec</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">tag</span><span class="p">}</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tags</span><span class="p">)]</span>
+        <span class="n">spec</span><span class="p">[</span><span class="s2">&quot;tags&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">tag</span><span class="p">}</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tags</span><span class="p">)]</span>
 
     <span class="k">return</span> <span class="n">spec</span></div>
 
@@ -257,7 +251,7 @@
 
 <div class="viewcode-block" id="swagger_ui_html">
 <a class="viewcode-back" href="../../module_docs/uf/openapi.html#uf.swagger_ui_html">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">swagger_ui_html</span><span class="p">(</span><span class="n">openapi_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;/openapi.json&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">swagger_ui_html</span><span class="p">(</span><span class="n">openapi_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/openapi.json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate Swagger UI HTML.</span>
 
 <span class="sd">    Args:</span>
@@ -299,7 +293,7 @@
 
 <div class="viewcode-block" id="redoc_ui_html">
 <a class="viewcode-back" href="../../module_docs/uf/openapi.html#uf.redoc_ui_html">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">redoc_ui_html</span><span class="p">(</span><span class="n">openapi_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;/openapi.json&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">redoc_ui_html</span><span class="p">(</span><span class="n">openapi_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/openapi.json&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate ReDoc UI HTML.</span>
 
 <span class="sd">    Args:</span>
@@ -343,23 +337,25 @@
     <span class="n">spec</span> <span class="o">=</span> <span class="n">generate_openapi_spec</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="o">**</span><span class="n">spec_kwargs</span><span class="p">)</span>
 
     <span class="c1"># Detect framework</span>
-    <span class="n">is_bottle</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;route&#39;</span><span class="p">)</span>
+    <span class="n">is_bottle</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s2">&quot;route&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">is_bottle</span><span class="p">:</span>
-        <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/openapi.json&#39;</span><span class="p">)</span>
+
+        <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/openapi.json&quot;</span><span class="p">)</span>
         <span class="k">def</span><span class="w"> </span><span class="nf">openapi_spec</span><span class="p">():</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;Return OpenAPI spec.&quot;&quot;&quot;</span>
             <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">bottle</span><span class="w"> </span><span class="kn">import</span> <span class="n">response</span>
-            <span class="n">response</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="s1">&#39;application/json&#39;</span>
+
+            <span class="n">response</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="s2">&quot;application/json&quot;</span>
             <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
 
-        <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/docs&#39;</span><span class="p">)</span>
+        <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/docs&quot;</span><span class="p">)</span>
         <span class="k">def</span><span class="w"> </span><span class="nf">swagger_ui</span><span class="p">():</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;Return Swagger UI.&quot;&quot;&quot;</span>
             <span class="k">return</span> <span class="n">swagger_ui_html</span><span class="p">()</span>
 
-        <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/redoc&#39;</span><span class="p">)</span>
+        <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/redoc&quot;</span><span class="p">)</span>
         <span class="k">def</span><span class="w"> </span><span class="nf">redoc_ui</span><span class="p">():</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;Return ReDoc UI.&quot;&quot;&quot;</span>
             <span class="k">return</span> <span class="n">redoc_ui_html</span><span class="p">()</span>
@@ -367,17 +363,17 @@
         <span class="c1"># FastAPI</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.responses</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSONResponse</span><span class="p">,</span> <span class="n">HTMLResponse</span>
 
-        <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/openapi.json&#39;</span><span class="p">)</span>
+        <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/openapi.json&quot;</span><span class="p">)</span>
         <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">openapi_spec</span><span class="p">():</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;Return OpenAPI spec.&quot;&quot;&quot;</span>
             <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">spec</span><span class="p">)</span>
 
-        <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/docs&#39;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
+        <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/docs&quot;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
         <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">swagger_ui</span><span class="p">():</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;Return Swagger UI.&quot;&quot;&quot;</span>
             <span class="k">return</span> <span class="n">swagger_ui_html</span><span class="p">()</span>
 
-        <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/redoc&#39;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
+        <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/redoc&quot;</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">HTMLResponse</span><span class="p">)</span>
         <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">redoc_ui</span><span class="p">():</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;Return ReDoc UI.&quot;&quot;&quot;</span>
             <span class="k">return</span> <span class="n">redoc_ui_html</span><span class="p">()</span></div>
@@ -419,7 +415,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">version</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">servers</span> <span class="o">=</span> <span class="n">servers</span> <span class="ow">or</span> <span class="p">[{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="p">}]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">servers</span> <span class="o">=</span> <span class="n">servers</span> <span class="ow">or</span> <span class="p">[{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span><span class="p">}]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">enable_swagger</span> <span class="o">=</span> <span class="n">enable_swagger</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">enable_redoc</span> <span class="o">=</span> <span class="n">enable_redoc</span>
 
@@ -432,12 +428,12 @@
 <span class="sd">            Configuration dictionary</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
-            <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
-            <span class="s1">&#39;servers&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">servers</span><span class="p">,</span>
-            <span class="s1">&#39;enable_swagger&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">enable_swagger</span><span class="p">,</span>
-            <span class="s1">&#39;enable_redoc&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">enable_redoc</span><span class="p">,</span>
+            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+            <span class="s2">&quot;servers&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">servers</span><span class="p">,</span>
+            <span class="s2">&quot;enable_swagger&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">enable_swagger</span><span class="p">,</span>
+            <span class="s2">&quot;enable_redoc&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">enable_redoc</span><span class="p">,</span>
         <span class="p">}</span></div>
 </div>
 
@@ -450,7 +446,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

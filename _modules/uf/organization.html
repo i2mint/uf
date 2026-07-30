@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>uf.organization &mdash; uf 0.1.1 documentation</title>
+  <title>uf.organization &mdash; uf 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -137,7 +137,7 @@
 
 <div class="viewcode-block" id="FunctionGroup.add_function">
 <a class="viewcode-back" href="../../module_docs/uf/organization.html#uf.FunctionGroup.add_function">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">add_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FunctionGroup&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FunctionGroup&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a function to this group.</span>
 
 <span class="sd">        Args:</span>
@@ -231,7 +231,7 @@
 
 <div class="viewcode-block" id="FunctionOrganizer.add_to_group">
 <a class="viewcode-back" href="../../module_docs/uf/organization.html#uf.FunctionOrganizer.add_to_group">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">add_to_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FunctionOrganizer&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_to_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FunctionOrganizer&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a function to an existing group.</span>
 
 <span class="sd">        Args:</span>
@@ -254,7 +254,7 @@
 
 <div class="viewcode-block" id="FunctionOrganizer.add_ungrouped">
 <a class="viewcode-back" href="../../module_docs/uf/organization.html#uf.FunctionOrganizer.add_ungrouped">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">add_ungrouped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;FunctionOrganizer&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_ungrouped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FunctionOrganizer&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a function without a group.</span>
 
 <span class="sd">        Args:</span>
@@ -318,17 +318,17 @@
 <span class="sd">            &gt;&gt;&gt; # Can be used in templates or APIs</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;groups&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="p">[</span>
                 <span class="p">{</span>
-                    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                    <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
-                    <span class="s1">&#39;icon&#39;</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">icon</span><span class="p">,</span>
-                    <span class="s1">&#39;order&#39;</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">order</span><span class="p">,</span>
-                    <span class="s1">&#39;collapsed&#39;</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">collapsed</span><span class="p">,</span>
-                    <span class="s1">&#39;functions&#39;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+                    <span class="s2">&quot;icon&quot;</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">icon</span><span class="p">,</span>
+                    <span class="s2">&quot;order&quot;</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">order</span><span class="p">,</span>
+                    <span class="s2">&quot;collapsed&quot;</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">collapsed</span><span class="p">,</span>
+                    <span class="s2">&quot;functions&quot;</span><span class="p">:</span> <span class="p">[</span>
                         <span class="p">{</span>
-                            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-                            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
                         <span class="p">}</span>
                         <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">funcs</span>
                     <span class="p">],</span>
@@ -402,22 +402,23 @@
 <span class="sd">        organizer: FunctionOrganizer instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Detect framework</span>
-    <span class="n">is_bottle</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;route&#39;</span><span class="p">)</span>
+    <span class="n">is_bottle</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s2">&quot;route&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">is_bottle</span><span class="p">:</span>
-        <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/groups&#39;</span><span class="p">)</span>
+
+        <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/api/groups&quot;</span><span class="p">)</span>
         <span class="k">def</span><span class="w"> </span><span class="nf">get_groups</span><span class="p">():</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;Get function group organization.&quot;&quot;&quot;</span>
             <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">bottle</span><span class="w"> </span><span class="kn">import</span> <span class="n">response</span>
 
-            <span class="n">response</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="s1">&#39;application/json&#39;</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="s2">&quot;application/json&quot;</span>
             <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">organizer</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># FastAPI</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.responses</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSONResponse</span>
 
-        <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/api/groups&#39;</span><span class="p">)</span>
+        <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/api/groups&quot;</span><span class="p">)</span>
         <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_groups</span><span class="p">():</span>
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;Get function group organization.&quot;&quot;&quot;</span>
             <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">organizer</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
@@ -459,14 +460,14 @@
             <span class="n">prefix</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">separator</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">groups_dict</span><span class="p">[</span><span class="n">prefix</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">groups_dict</span><span class="p">[</span><span class="s1">&#39;other&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+            <span class="n">groups_dict</span><span class="p">[</span><span class="s2">&quot;other&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
 
     <span class="c1"># Create organizer</span>
     <span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">group_name</span><span class="p">,</span> <span class="n">group_funcs</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">groups_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
         <span class="c1"># Capitalize group name</span>
-        <span class="n">display_name</span> <span class="o">=</span> <span class="n">group_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+        <span class="n">display_name</span> <span class="o">=</span> <span class="n">group_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
 
         <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
             <span class="n">display_name</span><span class="p">,</span>
@@ -501,8 +502,8 @@
     <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
         <span class="n">module</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__module__</span>
         <span class="c1"># Get last part of module name</span>
-        <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">module</span><span class="p">:</span>
-            <span class="n">module_name</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">module</span><span class="p">:</span>
+            <span class="n">module_name</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">module_name</span> <span class="o">=</span> <span class="n">module</span>
 
@@ -512,7 +513,7 @@
     <span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">module_name</span><span class="p">,</span> <span class="n">group_funcs</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">groups_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-        <span class="n">display_name</span> <span class="o">=</span> <span class="n">module_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+        <span class="n">display_name</span> <span class="o">=</span> <span class="n">module_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
 
         <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
             <span class="n">display_name</span><span class="p">,</span>
@@ -526,7 +527,9 @@
 
 <div class="viewcode-block" id="auto_group_by_tag">
 <a class="viewcode-back" href="../../module_docs/uf/organization.html#uf.auto_group_by_tag">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">auto_group_by_tag</span><span class="p">(</span><span class="n">funcs</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">tag_attr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;__uf_group__&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FunctionOrganizer</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">auto_group_by_tag</span><span class="p">(</span>
+    <span class="n">funcs</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">tag_attr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;__uf_group__&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FunctionOrganizer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Automatically group functions by a tag attribute.</span>
 
 <span class="sd">    Functions can be tagged with a group name using an attribute.</span>
@@ -550,7 +553,7 @@
     <span class="n">groups_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
-        <span class="n">tag</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">tag_attr</span><span class="p">,</span> <span class="s1">&#39;Other&#39;</span><span class="p">)</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">tag_attr</span><span class="p">,</span> <span class="s2">&quot;Other&quot;</span><span class="p">)</span>
         <span class="n">groups_dict</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
 
     <span class="c1"># Create organizer</span>
@@ -570,7 +573,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

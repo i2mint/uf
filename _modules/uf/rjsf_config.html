@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>uf.rjsf_config &mdash; uf 0.1.1 documentation</title>
+  <title>uf.rjsf_config &mdash; uf 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -158,15 +158,15 @@
         <span class="n">patch</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">:</span>
-            <span class="n">patch</span><span class="p">[</span><span class="s1">&#39;format&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span>
+            <span class="n">patch</span><span class="p">[</span><span class="s2">&quot;format&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum</span><span class="p">:</span>
-            <span class="n">patch</span><span class="p">[</span><span class="s1">&#39;enum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum</span>
+            <span class="n">patch</span><span class="p">[</span><span class="s2">&quot;enum&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">:</span>
-            <span class="n">patch</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span>
+            <span class="n">patch</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">:</span>
-            <span class="n">patch</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span>
+            <span class="n">patch</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">patch</span><span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default</span>
+            <span class="n">patch</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default</span>
 
         <span class="k">return</span> <span class="n">patch</span></div>
 
@@ -182,18 +182,18 @@
         <span class="n">ui_patch</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">widget</span><span class="p">:</span>
-            <span class="n">ui_patch</span><span class="p">[</span><span class="s1">&#39;ui:widget&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">widget</span>
+            <span class="n">ui_patch</span><span class="p">[</span><span class="s2">&quot;ui:widget&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">widget</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">placeholder</span><span class="p">:</span>
-            <span class="n">ui_patch</span><span class="p">[</span><span class="s1">&#39;ui:placeholder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">placeholder</span>
+            <span class="n">ui_patch</span><span class="p">[</span><span class="s2">&quot;ui:placeholder&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">placeholder</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">disabled</span><span class="p">:</span>
-            <span class="n">ui_patch</span><span class="p">[</span><span class="s1">&#39;ui:disabled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">ui_patch</span><span class="p">[</span><span class="s2">&quot;ui:disabled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">readonly</span><span class="p">:</span>
-            <span class="n">ui_patch</span><span class="p">[</span><span class="s1">&#39;ui:readonly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">ui_patch</span><span class="p">[</span><span class="s2">&quot;ui:readonly&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden</span><span class="p">:</span>
-            <span class="n">ui_patch</span><span class="p">[</span><span class="s1">&#39;ui:widget&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;hidden&#39;</span>
+            <span class="n">ui_patch</span><span class="p">[</span><span class="s2">&quot;ui:widget&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;hidden&quot;</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_options</span><span class="p">:</span>
-            <span class="n">ui_patch</span><span class="p">[</span><span class="s1">&#39;ui:options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_options</span>
+            <span class="n">ui_patch</span><span class="p">[</span><span class="s2">&quot;ui:options&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_options</span>
 
         <span class="k">return</span> <span class="n">ui_patch</span></div>
 </div>
@@ -223,7 +223,7 @@
 
 <div class="viewcode-block" id="RjsfConfigBuilder.field">
 <a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.RjsfConfigBuilder.field">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;RjsfConfigBuilder&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;RjsfConfigBuilder&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Configure a specific field.</span>
 
 <span class="sd">        Args:</span>
@@ -239,7 +239,7 @@
 
 <div class="viewcode-block" id="RjsfConfigBuilder.order">
 <a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.RjsfConfigBuilder.order">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_order</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;RjsfConfigBuilder&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_order</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;RjsfConfigBuilder&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the order of fields in the form.</span>
 
 <span class="sd">        Args:</span>
@@ -254,7 +254,7 @@
 
 <div class="viewcode-block" id="RjsfConfigBuilder.class_names">
 <a class="viewcode-back" href="../../module_docs/uf/rjsf_config.html#uf.RjsfConfigBuilder.class_names">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">class_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">class_names</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;RjsfConfigBuilder&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">class_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">class_names</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;RjsfConfigBuilder&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set CSS class names for the form.</span>
 
 <span class="sd">        Args:</span>
@@ -285,9 +285,9 @@
         <span class="c1"># Apply field configurations</span>
         <span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_configs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="c1"># Update schema properties</span>
-            <span class="k">if</span> <span class="s1">&#39;properties&#39;</span> <span class="ow">in</span> <span class="n">schema</span> <span class="ow">and</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="s2">&quot;properties&quot;</span> <span class="ow">in</span> <span class="n">schema</span> <span class="ow">and</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">]:</span>
                 <span class="n">schema_patch</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">to_json_schema_patch</span><span class="p">()</span>
-                <span class="n">schema</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">field_name</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">schema_patch</span><span class="p">)</span>
+                <span class="n">schema</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">][</span><span class="n">field_name</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">schema_patch</span><span class="p">)</span>
 
             <span class="c1"># Update UI schema</span>
             <span class="n">ui_patch</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">to_ui_schema_patch</span><span class="p">()</span>
@@ -296,15 +296,15 @@
 
         <span class="c1"># Apply UI order</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ui_order</span><span class="p">:</span>
-            <span class="n">ui_schema</span><span class="p">[</span><span class="s1">&#39;ui:order&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ui_order</span>
+            <span class="n">ui_schema</span><span class="p">[</span><span class="s2">&quot;ui:order&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ui_order</span>
 
         <span class="c1"># Apply class names</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_class_names</span><span class="p">:</span>
-            <span class="n">ui_schema</span><span class="p">[</span><span class="s1">&#39;ui:classNames&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_class_names</span>
+            <span class="n">ui_schema</span><span class="p">[</span><span class="s2">&quot;ui:classNames&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_class_names</span>
 
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;schema&#39;</span><span class="p">:</span> <span class="n">schema</span><span class="p">,</span>
-            <span class="s1">&#39;uiSchema&#39;</span><span class="p">:</span> <span class="n">ui_schema</span><span class="p">,</span>
+            <span class="s2">&quot;schema&quot;</span><span class="p">:</span> <span class="n">schema</span><span class="p">,</span>
+            <span class="s2">&quot;uiSchema&quot;</span><span class="p">:</span> <span class="n">ui_schema</span><span class="p">,</span>
         <span class="p">}</span></div>
 </div>
 
@@ -312,42 +312,42 @@
 
 <span class="c1"># Predefined field configurations for common use cases</span>
 <span class="n">COMMON_FIELD_CONFIGS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
-        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;email&#39;</span><span class="p">,</span>
-        <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;email&#39;</span><span class="p">,</span>
-        <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;user@example.com&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s2">&quot;email&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;email&quot;</span><span class="p">,</span>
+        <span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
-        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;password&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
-        <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;uri&#39;</span><span class="p">,</span>
-        <span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;https://example.com&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;uri&quot;</span><span class="p">,</span>
+        <span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="s1">&#39;multiline_text&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
-        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;textarea&#39;</span><span class="p">,</span>
-        <span class="n">ui_options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;rows&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+    <span class="s2">&quot;multiline_text&quot;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s2">&quot;textarea&quot;</span><span class="p">,</span>
+        <span class="n">ui_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;rows&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
     <span class="p">),</span>
-    <span class="s1">&#39;long_text&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
-        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;textarea&#39;</span><span class="p">,</span>
-        <span class="n">ui_options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;rows&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
+    <span class="s2">&quot;long_text&quot;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s2">&quot;textarea&quot;</span><span class="p">,</span>
+        <span class="n">ui_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;rows&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
     <span class="p">),</span>
-    <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
-        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span>
-        <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;date&quot;</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
-        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span>
-        <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;date-time&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;datetime&quot;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;date-time&quot;</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
-        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;color&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s2">&quot;color&quot;</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
-        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;range&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;range&quot;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s2">&quot;range&quot;</span><span class="p">,</span>
     <span class="p">),</span>
-    <span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
-        <span class="n">widget</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+        <span class="n">widget</span><span class="o">=</span><span class="s2">&quot;file&quot;</span><span class="p">,</span>
     <span class="p">),</span>
 <span class="p">}</span>
 
@@ -409,7 +409,7 @@
         <span class="n">builder</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">ui_schema</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;schema&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;uiSchema&#39;</span><span class="p">]</span></div>
+    <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;schema&quot;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;uiSchema&quot;</span><span class="p">]</span></div>
 
 
 
@@ -457,13 +457,13 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            JSON Schema conditional structure</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">schema</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;if&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="p">}</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;if&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">condition</span><span class="p">}</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">then_schema</span><span class="p">:</span>
-            <span class="n">schema</span><span class="p">[</span><span class="s1">&#39;then&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">then_schema</span>
+            <span class="n">schema</span><span class="p">[</span><span class="s2">&quot;then&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">then_schema</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">else_schema</span><span class="p">:</span>
-            <span class="n">schema</span><span class="p">[</span><span class="s1">&#39;else&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">else_schema</span>
+            <span class="n">schema</span><span class="p">[</span><span class="s2">&quot;else&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">else_schema</span>
 
         <span class="k">return</span> <span class="n">schema</span></div>
 </div>
@@ -477,7 +477,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

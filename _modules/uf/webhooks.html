@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>uf.webhooks &mdash; uf 0.1.1 documentation</title>
+  <title>uf.webhooks &mdash; uf 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/documentation_options.js?v=92734c54"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
@@ -154,12 +154,12 @@
 <span class="sd">            Dictionary representation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;event_type&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_type</span><span class="p">,</span>
-            <span class="s1">&#39;func_name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_name</span><span class="p">,</span>
-            <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span>
-            <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">,</span>
-            <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">,</span>
-            <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s2">&quot;event_type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">event_type</span><span class="p">,</span>
+            <span class="s2">&quot;func_name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_name</span><span class="p">,</span>
+            <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span>
+            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">,</span>
+            <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">,</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
         <span class="p">}</span></div>
 </div>
 
@@ -234,7 +234,7 @@
         <span class="n">payload</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
         <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
             <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
-            <span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+            <span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
         <span class="p">}</span>
 
         <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retry_count</span><span class="p">):</span>
@@ -254,7 +254,8 @@
                     <span class="k">return</span> <span class="kc">False</span>
                 <span class="c1"># Retry with exponential backoff</span>
                 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">attempt</span><span class="p">)</span>
+
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">attempt</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="kc">False</span></div>
 
@@ -293,13 +294,15 @@
 <span class="sd">            headers: Optional HTTP headers</span>
 <span class="sd">            condition: Optional callable to filter events</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_webhooks</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
-            <span class="s1">&#39;events&#39;</span><span class="p">:</span> <span class="n">events</span><span class="p">,</span>
-            <span class="s1">&#39;headers&#39;</span><span class="p">:</span> <span class="n">headers</span> <span class="ow">or</span> <span class="p">{},</span>
-            <span class="s1">&#39;condition&#39;</span><span class="p">:</span> <span class="n">condition</span><span class="p">,</span>
-            <span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="n">WebhookClient</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="p">),</span>
-        <span class="p">})</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_webhooks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+                <span class="s2">&quot;events&quot;</span><span class="p">:</span> <span class="n">events</span><span class="p">,</span>
+                <span class="s2">&quot;headers&quot;</span><span class="p">:</span> <span class="n">headers</span> <span class="ow">or</span> <span class="p">{},</span>
+                <span class="s2">&quot;condition&quot;</span><span class="p">:</span> <span class="n">condition</span><span class="p">,</span>
+                <span class="s2">&quot;client&quot;</span><span class="p">:</span> <span class="n">WebhookClient</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="p">),</span>
+            <span class="p">}</span>
+        <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="WebhookManager.remove_webhook">
@@ -314,7 +317,7 @@
 <span class="sd">            True if removed</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">original_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_webhooks</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_webhooks</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_webhooks</span> <span class="k">if</span> <span class="n">w</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">url</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_webhooks</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_webhooks</span> <span class="k">if</span> <span class="n">w</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">url</span><span class="p">]</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_webhooks</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">original_len</span></div>
 
 
@@ -345,15 +348,15 @@
         <span class="n">triggered</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">webhook</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_webhooks</span><span class="p">:</span>
             <span class="c1"># Check if this webhook should be triggered</span>
-            <span class="k">if</span> <span class="n">webhook</span><span class="p">[</span><span class="s1">&#39;events&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">event_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">webhook</span><span class="p">[</span><span class="s1">&#39;events&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">webhook</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">event_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">webhook</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]:</span>
                 <span class="k">continue</span>
 
             <span class="c1"># Check condition if provided</span>
-            <span class="k">if</span> <span class="n">webhook</span><span class="p">[</span><span class="s1">&#39;condition&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">webhook</span><span class="p">[</span><span class="s1">&#39;condition&#39;</span><span class="p">](</span><span class="n">event</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">webhook</span><span class="p">[</span><span class="s2">&quot;condition&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">webhook</span><span class="p">[</span><span class="s2">&quot;condition&quot;</span><span class="p">](</span><span class="n">event</span><span class="p">):</span>
                 <span class="k">continue</span>
 
             <span class="c1"># Send webhook</span>
-            <span class="n">webhook</span><span class="p">[</span><span class="s1">&#39;client&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+            <span class="n">webhook</span><span class="p">[</span><span class="s2">&quot;client&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
             <span class="n">triggered</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="k">return</span> <span class="n">triggered</span></div>
@@ -369,8 +372,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span>
             <span class="p">{</span>
-                <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">w</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">],</span>
-                <span class="s1">&#39;events&#39;</span><span class="p">:</span> <span class="n">w</span><span class="p">[</span><span class="s1">&#39;events&#39;</span><span class="p">],</span>
+                <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">w</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;events&quot;</span><span class="p">:</span> <span class="n">w</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">],</span>
             <span class="p">}</span>
             <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_webhooks</span>
         <span class="p">]</span></div>
@@ -402,7 +405,7 @@
 <span class="sd">        ...     return {&#39;status&#39;: &#39;processed&#39;}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">on</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">on</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="s1">&#39;failure&#39;</span><span class="p">]</span>
+        <span class="n">on</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="s2">&quot;failure&quot;</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">manager</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">manager</span> <span class="o">=</span> <span class="n">get_global_webhook_manager</span><span class="p">()</span>
@@ -421,22 +424,22 @@
             <span class="n">params</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
             <span class="c1"># Trigger start event if configured</span>
-            <span class="k">if</span> <span class="s1">&#39;start&#39;</span> <span class="ow">in</span> <span class="n">on</span><span class="p">:</span>
-                <span class="n">manager</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;start&quot;</span> <span class="ow">in</span> <span class="n">on</span><span class="p">:</span>
+                <span class="n">manager</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="s2">&quot;start&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
 
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
                 <span class="c1"># Trigger success event</span>
-                <span class="k">if</span> <span class="s1">&#39;success&#39;</span> <span class="ow">in</span> <span class="n">on</span><span class="p">:</span>
-                    <span class="n">manager</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;success&quot;</span> <span class="ow">in</span> <span class="n">on</span><span class="p">:</span>
+                    <span class="n">manager</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
 
                 <span class="k">return</span> <span class="n">result</span>
 
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                 <span class="c1"># Trigger failure event</span>
-                <span class="k">if</span> <span class="s1">&#39;failure&#39;</span> <span class="ow">in</span> <span class="n">on</span><span class="p">:</span>
-                    <span class="n">manager</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="s1">&#39;failure&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                <span class="k">if</span> <span class="s2">&quot;failure&quot;</span> <span class="ow">in</span> <span class="n">on</span><span class="p">:</span>
+                    <span class="n">manager</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="s2">&quot;failure&quot;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 
                 <span class="k">raise</span>
 
@@ -478,7 +481,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright NO COPYRIGHT.</p>
+    <p></p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
