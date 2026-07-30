@@ -31,19 +31,22 @@ pip install uf
 ```python
 from uf import mk_rjsf_app
 
+
 def add(x: int, y: int) -> int:
     """Add two numbers"""
     return x + y
+
 
 def greet(name: str) -> str:
     """Greet a person"""
     return f"Hello, {name}!"
 
+
 # Create the app
 app = mk_rjsf_app([add, greet])
 
 # Run it (for Bottle apps)
-app.run(host='localhost', port=8080)
+app.run(host="localhost", port=8080)
 ```
 
 Then open http://localhost:8080 in your browser!
@@ -77,9 +80,11 @@ The result: A complete web UI with zero boilerplate!
 ```python
 from uf import mk_rjsf_app
 
+
 def multiply(x: float, y: float) -> float:
     """Multiply two numbers"""
     return x * y
+
 
 app = mk_rjsf_app([multiply], page_title="Calculator")
 ```
@@ -91,6 +96,7 @@ For more control, use the `UfApp` class:
 ```python
 from uf import UfApp
 
+
 def fibonacci(n: int) -> list:
     """Generate Fibonacci sequence"""
     if n <= 0:
@@ -100,23 +106,24 @@ def fibonacci(n: int) -> list:
 
     fib = [0, 1]
     for i in range(2, n):
-        fib.append(fib[i-1] + fib[i-2])
+        fib.append(fib[i - 1] + fib[i - 2])
     return fib
+
 
 # Create app
 uf_app = UfApp([fibonacci])
 
 # Call functions programmatically
-result = uf_app.call('fibonacci', n=10)
+result = uf_app.call("fibonacci", n=10)
 
 # Access specs
-spec = uf_app.get_spec('fibonacci')
+spec = uf_app.get_spec("fibonacci")
 
 # List available functions
 functions = uf_app.list_functions()
 
 # Run the server
-uf_app.run(host='localhost', port=8080)
+uf_app.run(host="localhost", port=8080)
 ```
 
 ## UI Decorators
@@ -128,6 +135,7 @@ Add rich metadata to your functions using decorators:
 ```python
 from uf import ui_config, RjsfFieldConfig, get_field_config
 
+
 @ui_config(
     title="User Registration",
     description="Create a new user account",
@@ -135,19 +143,20 @@ from uf import ui_config, RjsfFieldConfig, get_field_config
     icon="user-plus",
     order=1,
     fields={
-        'email': get_field_config('email'),
-        'bio': get_field_config('multiline_text'),
-    }
+        "email": get_field_config("email"),
+        "bio": get_field_config("multiline_text"),
+    },
 )
-def register_user(email: str, name: str, bio: str = ''):
+def register_user(email: str, name: str, bio: str = ""):
     """Register a new user."""
-    return {'email': email, 'name': name, 'bio': bio}
+    return {"email": email, "name": name, "bio": bio}
 ```
 
 ### `@group` - Simple Grouping
 
 ```python
 from uf import group
+
 
 @group("Admin")
 def delete_user(user_id: int):
@@ -160,9 +169,10 @@ def delete_user(user_id: int):
 ```python
 from uf import field_config, get_field_config
 
+
 @field_config(
-    email=get_field_config('email'),
-    message=get_field_config('multiline_text'),
+    email=get_field_config("email"),
+    message=get_field_config("multiline_text"),
 )
 def send_message(email: str, message: str):
     """Send a message to a user."""
@@ -173,6 +183,7 @@ def send_message(email: str, message: str):
 
 ```python
 from uf import hidden
+
 
 @hidden
 def internal_function():
@@ -185,6 +196,7 @@ def internal_function():
 ```python
 from uf import with_example
 
+
 @with_example(x=10, y=20)
 def add(x: int, y: int) -> int:
     """Add two numbers."""
@@ -196,13 +208,16 @@ def add(x: int, y: int) -> int:
 ```python
 from uf import deprecated, requires_auth, rate_limit
 
+
 @deprecated("Use new_function instead")
 def old_function():
     pass
 
-@requires_auth(roles=['admin'], permissions=['user:delete'])
+
+@requires_auth(roles=["admin"], permissions=["user:delete"])
 def delete_user(user_id: int):
     pass
+
 
 @rate_limit(calls=10, period=60)  # 10 calls per minute
 def send_email(to: str, subject: str):
@@ -217,15 +232,15 @@ def send_email(to: str, subject: str):
 from uf import get_field_config
 
 # Available configurations:
-email_config = get_field_config('email')
-password_config = get_field_config('password')
-url_config = get_field_config('url')
-multiline_config = get_field_config('multiline_text')
-long_text_config = get_field_config('long_text')
-date_config = get_field_config('date')
-datetime_config = get_field_config('datetime')
-color_config = get_field_config('color')
-file_config = get_field_config('file')
+email_config = get_field_config("email")
+password_config = get_field_config("password")
+url_config = get_field_config("url")
+multiline_config = get_field_config("multiline_text")
+long_text_config = get_field_config("long_text")
+date_config = get_field_config("date")
+datetime_config = get_field_config("datetime")
+color_config = get_field_config("color")
+file_config = get_field_config("file")
 ```
 
 ### Custom Field Configuration
@@ -234,11 +249,12 @@ file_config = get_field_config('file')
 from uf import RjsfFieldConfig
 
 custom_field = RjsfFieldConfig(
-    widget='select',
-    enum=['option1', 'option2', 'option3'],
-    placeholder='Choose an option',
-    description='Please select one option',
+    widget="select",
+    enum=["option1", "option2", "option3"],
+    placeholder="Choose an option",
+    description="Please select one option",
 )
+
 
 @field_config(status=custom_field)
 def update_status(status: str):
@@ -251,10 +267,10 @@ def update_status(status: str):
 from uf import RjsfConfigBuilder, RjsfFieldConfig
 
 builder = RjsfConfigBuilder()
-builder.field('name', RjsfFieldConfig(placeholder='Enter name'))
-builder.field('email', RjsfFieldConfig(format='email'))
-builder.order(['name', 'email', 'phone'])
-builder.class_names('custom-form')
+builder.field("name", RjsfFieldConfig(placeholder="Enter name"))
+builder.field("email", RjsfFieldConfig(format="email"))
+builder.order(["name", "email", "phone"])
+builder.class_names("custom-form")
 
 spec = builder.build(base_schema)
 ```
@@ -293,8 +309,7 @@ from uf import auto_group_by_prefix
 # Functions named user_create, user_delete, report_generate, etc.
 # will be automatically grouped into "User", "Report", etc.
 organizer = auto_group_by_prefix(
-    [user_create, user_delete, report_generate],
-    separator="_"
+    [user_create, user_delete, report_generate], separator="_"
 )
 ```
 
@@ -311,8 +326,10 @@ organizer = auto_group_by_module([func1, func2, func3])
 ```python
 from uf import auto_group_by_tag
 
+
 def my_function():
     pass
+
 
 my_function.__uf_group__ = "Admin"
 
@@ -331,20 +348,10 @@ from pathlib import Path
 from decimal import Decimal
 
 # Register Path type
-register_type(
-    Path,
-    to_json=str,
-    from_json=Path,
-    json_schema_type='string'
-)
+register_type(Path, to_json=str, from_json=Path, json_schema_type="string")
 
 # Register Decimal type
-register_type(
-    Decimal,
-    to_json=float,
-    from_json=Decimal,
-    json_schema_type='number'
-)
+register_type(Decimal, to_json=float, from_json=Decimal, json_schema_type="number")
 ```
 
 ### Using a Custom Registry
@@ -358,19 +365,15 @@ registry.register_type(
     MyCustomType,
     to_json=lambda x: x.to_dict(),
     from_json=MyCustomType.from_dict,
-    ui_widget='textarea',
-    json_schema_type='object'
+    ui_widget="textarea",
+    json_schema_type="object",
 )
 
 # Use with mk_rjsf_app
 input_trans = registry.mk_input_trans_for_funcs([my_func])
 output_trans = registry.mk_output_trans()
 
-app = mk_rjsf_app(
-    [my_func],
-    input_trans=input_trans,
-    output_trans=output_trans
-)
+app = mk_rjsf_app([my_func], input_trans=input_trans, output_trans=output_trans)
 ```
 
 ### Pre-registered Types
@@ -392,15 +395,16 @@ Create dynamic forms where fields show/hide based on other field values:
 ```python
 from uf import FieldDependency, DependencyAction, with_dependencies
 
+
 @with_dependencies(
     FieldDependency(
-        source_field='reason',
-        target_field='other_reason',
-        condition=lambda v: v == 'other',
+        source_field="reason",
+        target_field="other_reason",
+        condition=lambda v: v == "other",
         action=DependencyAction.SHOW,
     )
 )
-def submit_feedback(reason: str, other_reason: str = ''):
+def submit_feedback(reason: str, other_reason: str = ""):
     """Submit feedback with conditional 'other' field."""
     pass
 ```
@@ -411,9 +415,9 @@ def submit_feedback(reason: str, other_reason: str = ''):
 from uf import DependencyBuilder
 
 builder = DependencyBuilder()
-builder.when('age').greater_than(18).enable('alcohol_consent')
-builder.when('country').equals('US').show('state')
-builder.when('priority').in_list(['high', 'urgent']).require('manager_approval')
+builder.when("age").greater_than(18).enable("alcohol_consent")
+builder.when("country").equals("US").show("state")
+builder.when("priority").in_list(["high", "urgent"]).require("manager_approval")
 
 dependencies = builder.build()
 ```
@@ -442,12 +446,12 @@ client = UfTestClient(app)
 functions = client.list_functions()
 
 # Get spec
-spec = client.get_spec('my_function')
+spec = client.get_spec("my_function")
 
 # Call function
-result = client.call_function('my_function', {'x': 10, 'y': 20})
-assert result['success']
-assert result['result'] == 30
+result = client.call_function("my_function", {"x": 10, "y": 20})
+assert result["success"]
+assert result["result"] == 30
 ```
 
 ### Test Context Manager
@@ -456,7 +460,7 @@ assert result['result'] == 30
 from uf import UfAppTester
 
 with UfAppTester(app) as tester:
-    result = tester.submit_form('add', {'x': 10, 'y': 20})
+    result = tester.submit_form("add", {"x": 10, "y": 20})
     tester.assert_success(result)
     tester.assert_result_equals(result, 30)
 ```
@@ -466,18 +470,16 @@ with UfAppTester(app) as tester:
 ```python
 from uf import test_ui_function
 
+
 def add(x: int, y: int) -> int:
     return x + y
 
+
 # Test with expected output
-test_ui_function(add, {'x': 10, 'y': 20}, expected_output=30)
+test_ui_function(add, {"x": 10, "y": 20}, expected_output=30)
 
 # Test with expected exception
-test_ui_function(
-    divide,
-    {'x': 10, 'y': 0},
-    expected_exception=ZeroDivisionError
-)
+test_ui_function(divide, {"x": 10, "y": 0}, expected_exception=ZeroDivisionError)
 ```
 
 ### Form Data Builder
@@ -487,9 +489,9 @@ from uf import FormDataBuilder
 
 form_data = (
     FormDataBuilder()
-    .field('name', 'John Doe')
-    .field('email', 'john@example.com')
-    .fields(age=30, city='NYC')
+    .field("name", "John Doe")
+    .field("email", "john@example.com")
+    .fields(age=30, city="NYC")
     .build()
 )
 ```
@@ -504,12 +506,12 @@ from uf import (
     assert_field_required,
 )
 
-spec = app.function_specs['my_function']
+spec = app.function_specs["my_function"]
 
 assert_valid_rjsf_spec(spec)
-assert_has_field(spec, 'email')
-assert_field_type(spec, 'age', 'integer')
-assert_field_required(spec, 'name')
+assert_has_field(spec, "email")
+assert_field_type(spec, "age", "integer")
+assert_field_required(spec, "name")
 ```
 
 ## Customization
