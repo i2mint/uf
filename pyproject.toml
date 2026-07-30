@@ -5,19 +5,39 @@ build-backend = "hatchling.build"
 [project]
 name = "uf"
 version = "0.1.2"
-description = "UI Fast"
+description = "Minimal-boilerplate web UIs for Python functions"
 readme = "README.md"
 requires-python = ">=3.10"
-keywords = []
-authors = []
+license = "MIT"
+keywords = [
+    "ui",
+    "forms",
+    "rjsf",
+    "json-schema",
+    "web-ui",
+    "fastapi",
+    "bottle",
+    "python-functions",
+]
+authors = [
+    { name = "Thor Whalen" },
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: User Interfaces",
+    "Framework :: FastAPI",
+]
 dependencies = ["qh", "ju", "i2", "dol", "meshed"]
-
-[project.license]
-text = "mit"
 
 [project.urls]
 Homepage = "https://github.com/i2mint/uf"
 Repository = "https://github.com/i2mint/uf"
+Documentation = "https://i2mint.github.io/uf/"
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0", "pytest-cov>=4.0", "ruff>=0.1.0"]
