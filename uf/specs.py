@@ -93,7 +93,9 @@ class FunctionSpecStore(Mapping):
             from ju.rjsf import func_to_form_spec
 
             # Generate form spec
-            form_spec = func_to_form_spec(func, **self._rjsf_config)
+            # ju nests the spec under a "rjsf" field by default; uf wants it flat
+            rjsf_config = {"nest_under_field": None, **self._rjsf_config}
+            form_spec = func_to_form_spec(func, **rjsf_config)
 
             # Apply custom UI schema factory if provided
             if self._ui_schema_factory:
