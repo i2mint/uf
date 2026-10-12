@@ -1,0 +1,24 @@
+uf.decorators
+=============
+
+.. automodule:: uf.decorators
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      deprecated
+      field_config
+      get_example
+      get_field_configs
+      get_group
+      get_ui_config
+      group
+      hidden
+      is_hidden
+      rate_limit
+      requires_auth
+      ui_config
+      with_example
+   

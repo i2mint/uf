@@ -1,4 +1,0 @@
-uf
-==
-.. automodule:: uf
-   :members:

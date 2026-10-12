@@ -1,0 +1,31 @@
+uf.renderers
+============
+
+.. automodule:: uf.renderers
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_global_renderer_registry
+      get_result_renderer
+      register_renderer
+      register_renderer_for_type
+      render_result
+      result_renderer
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ChartRenderer
+      DataFrameRenderer
+      HtmlRenderer
+      ImageRenderer
+      JsonRenderer
+      MarkdownRenderer
+      ResultRenderer
+      ResultRendererRegistry
+      TableRenderer
+   

@@ -1,4 +1,0 @@
-uf.field_interactions
-=====================
-.. automodule:: uf.field_interactions
-   :members:

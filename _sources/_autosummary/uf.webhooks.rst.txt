@@ -1,0 +1,22 @@
+uf.webhooks
+===========
+
+.. automodule:: uf.webhooks
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_global_webhook_manager
+      set_global_webhook_manager
+      webhook
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      WebhookClient
+      WebhookEvent
+      WebhookManager
+   

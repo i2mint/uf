@@ -1,0 +1,21 @@
+uf.themes
+=========
+
+.. automodule:: uf.themes
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      create_theme_toggle_button
+      generate_theme_toggle_js
+      get_theme
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Theme
+      ThemeConfig
+   

@@ -1,4 +1,0 @@
-uf.openapi
-==========
-.. automodule:: uf.openapi
-   :members:

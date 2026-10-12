@@ -1,0 +1,18 @@
+uf.base
+=======
+
+.. automodule:: uf.base
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      mk_rjsf_app
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      UfApp
+   

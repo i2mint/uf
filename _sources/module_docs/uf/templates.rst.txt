@@ -1,4 +1,0 @@
-uf.templates
-============
-.. automodule:: uf.templates
-   :members:

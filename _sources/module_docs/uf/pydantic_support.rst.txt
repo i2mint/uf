@@ -1,4 +1,0 @@
-uf.pydantic_support
-===================
-.. automodule:: uf.pydantic_support
-   :members:

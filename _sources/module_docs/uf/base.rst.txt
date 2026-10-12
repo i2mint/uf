@@ -1,4 +1,0 @@
-uf.base
-=======
-.. automodule:: uf.base
-   :members:

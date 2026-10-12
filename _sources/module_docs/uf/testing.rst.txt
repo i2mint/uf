@@ -1,4 +1,0 @@
-uf.testing
-==========
-.. automodule:: uf.testing
-   :members:

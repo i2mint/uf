@@ -1,4 +1,0 @@
-uf.renderers
-============
-.. automodule:: uf.renderers
-   :members:

@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="pink" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>uf.history - uf</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="uf.openapi" href="uf.openapi.html" /><link rel="prev" title="uf.field_interactions" href="uf.field_interactions.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d88b86f9" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="uf.history"/>
+    <meta name="twitter:card" content="summary"/>
+  
+<link rel="alternate" type="text/markdown" href="uf.history.html.md">
+<link rel="describedby" href="../llms.txt" type="text/markdown">
+</head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>uf</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/i2mint/uf" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="uf.html">uf</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="uf.async_support.html">uf.async_support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.auth.html">uf.auth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.base.html">uf.base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.caching.html">uf.caching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.decorators.html">uf.decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">uf.history</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.openapi.html">uf.openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.organization.html">uf.organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.renderers.html">uf.renderers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.routes.html">uf.routes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.specs.html">uf.specs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.templates.html">uf.templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.testing.html">uf.testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.themes.html">uf.themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.trans.html">uf.trans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.webhooks.html">uf.webhooks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#uf.history.CallHistory"><code class="docutils literal notranslate"><span class="pre">CallHistory</span></code></a><ul>
+<li><a class="reference internal" href="#uf.history.CallHistory.clear"><code class="docutils literal notranslate"><span class="pre">CallHistory.clear()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.CallHistory.from_dict"><code class="docutils literal notranslate"><span class="pre">CallHistory.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.CallHistory.get_recent"><code class="docutils literal notranslate"><span class="pre">CallHistory.get_recent()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.CallHistory.get_successful_calls"><code class="docutils literal notranslate"><span class="pre">CallHistory.get_successful_calls()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.CallHistory.record"><code class="docutils literal notranslate"><span class="pre">CallHistory.record()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.CallHistory.to_dict"><code class="docutils literal notranslate"><span class="pre">CallHistory.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.history.FunctionCall"><code class="docutils literal notranslate"><span class="pre">FunctionCall</span></code></a><ul>
+<li><a class="reference internal" href="#uf.history.FunctionCall.func_name"><code class="docutils literal notranslate"><span class="pre">FunctionCall.func_name</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.FunctionCall.params"><code class="docutils literal notranslate"><span class="pre">FunctionCall.params</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.FunctionCall.result"><code class="docutils literal notranslate"><span class="pre">FunctionCall.result</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.FunctionCall.timestamp"><code class="docutils literal notranslate"><span class="pre">FunctionCall.timestamp</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.FunctionCall.success"><code class="docutils literal notranslate"><span class="pre">FunctionCall.success</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.FunctionCall.error"><code class="docutils literal notranslate"><span class="pre">FunctionCall.error</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.FunctionCall.from_dict"><code class="docutils literal notranslate"><span class="pre">FunctionCall.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.FunctionCall.to_dict"><code class="docutils literal notranslate"><span class="pre">FunctionCall.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.history.HistoryManager"><code class="docutils literal notranslate"><span class="pre">HistoryManager</span></code></a><ul>
+<li><a class="reference internal" href="#uf.history.HistoryManager.get_preset"><code class="docutils literal notranslate"><span class="pre">HistoryManager.get_preset()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.HistoryManager.get_presets"><code class="docutils literal notranslate"><span class="pre">HistoryManager.get_presets()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.HistoryManager.get_recent_calls"><code class="docutils literal notranslate"><span class="pre">HistoryManager.get_recent_calls()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.HistoryManager.load_from_file"><code class="docutils literal notranslate"><span class="pre">HistoryManager.load_from_file()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.HistoryManager.record_call"><code class="docutils literal notranslate"><span class="pre">HistoryManager.record_call()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.HistoryManager.save_preset"><code class="docutils literal notranslate"><span class="pre">HistoryManager.save_preset()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.HistoryManager.save_to_file"><code class="docutils literal notranslate"><span class="pre">HistoryManager.save_to_file()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.history.Preset"><code class="docutils literal notranslate"><span class="pre">Preset</span></code></a><ul>
+<li><a class="reference internal" href="#uf.history.Preset.name"><code class="docutils literal notranslate"><span class="pre">Preset.name</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.Preset.func_name"><code class="docutils literal notranslate"><span class="pre">Preset.func_name</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.Preset.params"><code class="docutils literal notranslate"><span class="pre">Preset.params</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.Preset.description"><code class="docutils literal notranslate"><span class="pre">Preset.description</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.Preset.created_at"><code class="docutils literal notranslate"><span class="pre">Preset.created_at</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.Preset.from_dict"><code class="docutils literal notranslate"><span class="pre">Preset.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.Preset.to_dict"><code class="docutils literal notranslate"><span class="pre">Preset.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.history.PresetManager"><code class="docutils literal notranslate"><span class="pre">PresetManager</span></code></a><ul>
+<li><a class="reference internal" href="#uf.history.PresetManager.delete"><code class="docutils literal notranslate"><span class="pre">PresetManager.delete()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.PresetManager.from_dict"><code class="docutils literal notranslate"><span class="pre">PresetManager.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.PresetManager.get"><code class="docutils literal notranslate"><span class="pre">PresetManager.get()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.PresetManager.list_presets"><code class="docutils literal notranslate"><span class="pre">PresetManager.list_presets()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.PresetManager.save"><code class="docutils literal notranslate"><span class="pre">PresetManager.save()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.PresetManager.to_dict"><code class="docutils literal notranslate"><span class="pre">PresetManager.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.history.enable_history"><code class="docutils literal notranslate"><span class="pre">enable_history()</span></code></a></li>
+<li><a class="reference internal" href="#uf.history.get_global_history_manager"><code class="docutils literal notranslate"><span class="pre">get_global_history_manager()</span></code></a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">uf</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../api.html"><span itemprop="name">API reference</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="uf.html"><span itemprop="name">uf</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">uf.history</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section id="module-uf.history">
+<span id="uf-history"></span><h1>uf.history<a class="headerlink" href="#module-uf.history" title="Link to this heading">#</a></h1>
+<p>Call history and presets for uf.</p>
+<p>Provides functionality to track function calls, save parameter presets,
+and reuse previous calls for improved user experience.</p>
+<p class="rubric">Functions</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.history.enable_history" title="uf.history.enable_history"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enable_history</span></code></a>(func[, max_size])</p></td>
+<td><p>Decorator to enable call history for a function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.history.get_global_history_manager" title="uf.history.get_global_history_manager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_global_history_manager</span></code></a>()</p></td>
+<td><p>Get the global history manager.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Classes</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.history.CallHistory" title="uf.history.CallHistory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CallHistory</span></code></a>([max_size])</p></td>
+<td><p>Manage history of function calls.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.history.FunctionCall" title="uf.history.FunctionCall"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FunctionCall</span></code></a>(func_name, params[, result, ...])</p></td>
+<td><p>Record of a single function call.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.history.HistoryManager" title="uf.history.HistoryManager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HistoryManager</span></code></a>([max_history])</p></td>
+<td><p>Combined manager for history and presets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Preset</span></code></a>(name, func_name, params[, description])</p></td>
+<td><p>A saved parameter preset for a function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.history.PresetManager" title="uf.history.PresetManager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PresetManager</span></code></a>()</p></td>
+<td><p>Manage parameter presets for functions.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.history.CallHistory">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.history.</span></span><span class="sig-name descname"><span class="pre">CallHistory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#CallHistory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.CallHistory" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Manage history of function calls.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">history</span> <span class="o">=</span> <span class="n">CallHistory</span><span class="p">(</span><span class="n">max_size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">history</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="s1">'add'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span> <span class="n">result</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">recent</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">get_recent</span><span class="p">(</span><span class="s1">'add'</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.CallHistory.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#CallHistory.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.CallHistory.clear" title="Link to this definition">#</a></dt>
+<dd><p>Clear history.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – Function to clear, or None for all</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.CallHistory.from_dict">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#CallHistory.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.CallHistory.from_dict" title="Link to this definition">#</a></dt>
+<dd><p>Create from dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Dictionary with history data</p></li>
+<li><p><strong>max_size</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Maximum size per function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.history.CallHistory" title="uf.history.CallHistory"><code class="xref py py-class docutils literal notranslate"><span class="pre">CallHistory</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CallHistory instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.CallHistory.get_recent">
+<span class="sig-name descname"><span class="pre">get_recent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#CallHistory.get_recent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.CallHistory.get_recent" title="Link to this definition">#</a></dt>
+<dd><p>Get recent calls for a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Function name</p></li>
+<li><p><strong>limit</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Maximum number to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference internal" href="#uf.history.FunctionCall" title="uf.history.FunctionCall"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionCall</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of recent FunctionCall objects (newest first)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.CallHistory.get_successful_calls">
+<span class="sig-name descname"><span class="pre">get_successful_calls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#CallHistory.get_successful_calls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.CallHistory.get_successful_calls" title="Link to this definition">#</a></dt>
+<dd><p>Get recent successful calls.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Function name</p></li>
+<li><p><strong>limit</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Maximum number to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference internal" href="#uf.history.FunctionCall" title="uf.history.FunctionCall"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionCall</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of successful FunctionCall objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.CallHistory.record">
+<span class="sig-name descname"><span class="pre">record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">success</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#CallHistory.record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.CallHistory.record" title="Link to this definition">#</a></dt>
+<dd><p>Record a function call.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name of the function</p></li>
+<li><p><strong>params</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Parameters used</p></li>
+<li><p><strong>result</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span>) – Result returned</p></li>
+<li><p><strong>success</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether call succeeded</p></li>
+<li><p><strong>error</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – Error message if failed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.CallHistory.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#CallHistory.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.CallHistory.to_dict" title="Link to this definition">#</a></dt>
+<dd><p>Convert history to dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.history.FunctionCall">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.history.</span></span><span class="sig-name descname"><span class="pre">FunctionCall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">success</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#FunctionCall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.FunctionCall" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Record of a single function call.</p>
+<dl class="field-list simple">
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.func_name">
+<span class="sig-name descname"><span class="pre">func_name</span></span><a class="headerlink" href="#uf.history.FunctionCall.func_name" title="Link to this definition">#</a></dt>
+<dd><p>Name of the function</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.params">
+<span class="sig-name descname"><span class="pre">params</span></span><a class="headerlink" href="#uf.history.FunctionCall.params" title="Link to this definition">#</a></dt>
+<dd><p>Parameters used</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.result">
+<span class="sig-name descname"><span class="pre">result</span></span><a class="headerlink" href="#uf.history.FunctionCall.result" title="Link to this definition">#</a></dt>
+<dd><p>Result returned (if captured)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.timestamp">
+<span class="sig-name descname"><span class="pre">timestamp</span></span><a class="headerlink" href="#uf.history.FunctionCall.timestamp" title="Link to this definition">#</a></dt>
+<dd><p>When the call was made</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.success">
+<span class="sig-name descname"><span class="pre">success</span></span><a class="headerlink" href="#uf.history.FunctionCall.success" title="Link to this definition">#</a></dt>
+<dd><p>Whether the call succeeded</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.error">
+<span class="sig-name descname"><span class="pre">error</span></span><a class="headerlink" href="#uf.history.FunctionCall.error" title="Link to this definition">#</a></dt>
+<dd><p>Error message if failed</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.from_dict">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#FunctionCall.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.FunctionCall.from_dict" title="Link to this definition">#</a></dt>
+<dd><p>Create from dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Dictionary with call data</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.history.FunctionCall" title="uf.history.FunctionCall"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionCall</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>FunctionCall instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.FunctionCall.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#FunctionCall.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.FunctionCall.to_dict" title="Link to this definition">#</a></dt>
+<dd><p>Convert to dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.history.HistoryManager">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.history.</span></span><span class="sig-name descname"><span class="pre">HistoryManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#HistoryManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Combined manager for history and presets.</p>
+<p>Provides a unified interface for tracking calls and managing presets.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span> <span class="o">=</span> <span class="n">HistoryManager</span><span class="p">()</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span><span class="o">.</span><span class="n">record_call</span><span class="p">(</span><span class="s1">'add'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span> <span class="n">result</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">manager</span><span class="o">.</span><span class="n">save_preset</span><span class="p">(</span><span class="s1">'quick'</span><span class="p">,</span> <span class="s1">'add'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">recent</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_recent_calls</span><span class="p">(</span><span class="s1">'add'</span><span class="p">)</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">presets</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_presets</span><span class="p">(</span><span class="s1">'add'</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.HistoryManager.get_preset">
+<span class="sig-name descname"><span class="pre">get_preset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preset_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#HistoryManager.get_preset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager.get_preset" title="Link to this definition">#</a></dt>
+<dd><p>Get a preset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preset_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name of preset</p></li>
+<li><p><strong>func_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Function name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Preset</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Preset object or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.HistoryManager.get_presets">
+<span class="sig-name descname"><span class="pre">get_presets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#HistoryManager.get_presets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager.get_presets" title="Link to this definition">#</a></dt>
+<dd><p>Get all presets for a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Function name</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Preset</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of Preset objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.HistoryManager.get_recent_calls">
+<span class="sig-name descname"><span class="pre">get_recent_calls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#HistoryManager.get_recent_calls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager.get_recent_calls" title="Link to this definition">#</a></dt>
+<dd><p>Get recent calls.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Function name</p></li>
+<li><p><strong>limit</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Maximum number to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference internal" href="#uf.history.FunctionCall" title="uf.history.FunctionCall"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionCall</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of recent FunctionCall objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.HistoryManager.load_from_file">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">load_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#HistoryManager.load_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager.load_from_file" title="Link to this definition">#</a></dt>
+<dd><p>Load from file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to load from</p></li>
+<li><p><strong>max_history</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Maximum history size</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.history.HistoryManager" title="uf.history.HistoryManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">HistoryManager</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HistoryManager instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.HistoryManager.record_call">
+<span class="sig-name descname"><span class="pre">record_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">success</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#HistoryManager.record_call"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager.record_call" title="Link to this definition">#</a></dt>
+<dd><p>Record a function call.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Function name</p></li>
+<li><p><strong>params</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Parameters used</p></li>
+<li><p><strong>result</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span>) – Result returned</p></li>
+<li><p><strong>success</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether call succeeded</p></li>
+<li><p><strong>error</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – Error message if failed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.HistoryManager.save_preset">
+<span class="sig-name descname"><span class="pre">save_preset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preset_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#HistoryManager.save_preset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager.save_preset" title="Link to this definition">#</a></dt>
+<dd><p>Save a preset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preset_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name for preset</p></li>
+<li><p><strong>func_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Function name</p></li>
+<li><p><strong>params</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Parameter values</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Optional description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Preset</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Created Preset object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.HistoryManager.save_to_file">
+<span class="sig-name descname"><span class="pre">save_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#HistoryManager.save_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.HistoryManager.save_to_file" title="Link to this definition">#</a></dt>
+<dd><p>Save history and presets to file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filepath</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to save to</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.history.Preset">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.history.</span></span><span class="sig-name descname"><span class="pre">Preset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#Preset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.Preset" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A saved parameter preset for a function.</p>
+<dl class="field-list simple">
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.Preset.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#uf.history.Preset.name" title="Link to this definition">#</a></dt>
+<dd><p>Preset name</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.Preset.func_name">
+<span class="sig-name descname"><span class="pre">func_name</span></span><a class="headerlink" href="#uf.history.Preset.func_name" title="Link to this definition">#</a></dt>
+<dd><p>Function this preset is for</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.Preset.params">
+<span class="sig-name descname"><span class="pre">params</span></span><a class="headerlink" href="#uf.history.Preset.params" title="Link to this definition">#</a></dt>
+<dd><p>Parameter values</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.Preset.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#uf.history.Preset.description" title="Link to this definition">#</a></dt>
+<dd><p>Optional description</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.history.Preset.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#uf.history.Preset.created_at" title="Link to this definition">#</a></dt>
+<dd><p>When preset was created</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.Preset.from_dict">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#Preset.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.Preset.from_dict" title="Link to this definition">#</a></dt>
+<dd><p>Create from dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Dictionary with preset data</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Preset</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Preset instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.Preset.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#Preset.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.Preset.to_dict" title="Link to this definition">#</a></dt>
+<dd><p>Convert to dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.history.PresetManager">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.history.</span></span><span class="sig-name descname"><span class="pre">PresetManager</span></span><a class="reference internal" href="../_modules/uf/history.html#PresetManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.PresetManager" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Manage parameter presets for functions.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">presets</span> <span class="o">=</span> <span class="n">PresetManager</span><span class="p">()</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">presets</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">'quick_add'</span><span class="p">,</span> <span class="s1">'add'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span> <span class="s1">'Quick test'</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">preset</span> <span class="o">=</span> <span class="n">presets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'quick_add'</span><span class="p">,</span> <span class="s1">'add'</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">my_func</span><span class="p">(</span><span class="o">**</span><span class="n">preset</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.PresetManager.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preset_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#PresetManager.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.PresetManager.delete" title="Link to this definition">#</a></dt>
+<dd><p>Delete a preset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preset_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name of preset</p></li>
+<li><p><strong>func_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Function name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if deleted, False if not found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.PresetManager.from_dict">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#PresetManager.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.PresetManager.from_dict" title="Link to this definition">#</a></dt>
+<dd><p>Create from dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Dictionary with preset data</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.history.PresetManager" title="uf.history.PresetManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">PresetManager</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>PresetManager instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.PresetManager.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preset_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#PresetManager.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.PresetManager.get" title="Link to this definition">#</a></dt>
+<dd><p>Get a preset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preset_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name of preset</p></li>
+<li><p><strong>func_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Function name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Preset</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Preset object or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.PresetManager.list_presets">
+<span class="sig-name descname"><span class="pre">list_presets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#PresetManager.list_presets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.PresetManager.list_presets" title="Link to this definition">#</a></dt>
+<dd><p>List all presets for a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Function name</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Preset</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of Preset objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.PresetManager.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preset_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#PresetManager.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.PresetManager.save" title="Link to this definition">#</a></dt>
+<dd><p>Save a parameter preset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preset_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name for this preset</p></li>
+<li><p><strong>func_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Function this preset is for</p></li>
+<li><p><strong>params</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Parameter values</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Optional description</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.history.Preset" title="uf.history.Preset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Preset</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Created Preset object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.history.PresetManager.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#PresetManager.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.PresetManager.to_dict" title="Link to this definition">#</a></dt>
+<dd><p>Convert to dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.history.enable_history">
+<span class="sig-prename descclassname"><span class="pre">uf.history.</span></span><span class="sig-name descname"><span class="pre">enable_history</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#enable_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.enable_history" title="Link to this definition">#</a></dt>
+<dd><p>Decorator to enable call history for a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>max_size</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Maximum history size</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="nd">@enable_history</span>
+</span><span data-line="2"><span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.history.get_global_history_manager">
+<span class="sig-prename descclassname"><span class="pre">uf.history.</span></span><span class="sig-name descname"><span class="pre">get_global_history_manager</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/history.html#get_global_history_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.history.get_global_history_manager" title="Link to this definition">#</a></dt>
+<dd><p>Get the global history manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.history.HistoryManager" title="uf.history.HistoryManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">HistoryManager</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Global HistoryManager instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="uf.field_interactions.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">uf.field_interactions</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="uf.openapi.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">uf.openapi</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright">
+  <p>
+    Made with
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/i2mint/uf" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=fd825880"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=fd10adb8"></script>
+      <script src="../_static/shibuya.js?v=50760d75"></script></body>
+</html>

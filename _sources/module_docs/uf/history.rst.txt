@@ -1,4 +1,0 @@
-uf.history
-==========
-.. automodule:: uf.history
-   :members:

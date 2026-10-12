@@ -1,0 +1,13 @@
+uf.templates
+============
+
+.. automodule:: uf.templates
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      generate_error_page
+      generate_index_html
+   

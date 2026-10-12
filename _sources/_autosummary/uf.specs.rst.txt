@@ -1,0 +1,18 @@
+uf.specs
+========
+
+.. automodule:: uf.specs
+
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      FunctionSpecStore
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+   
+      JuNotInstalledWarning
+   

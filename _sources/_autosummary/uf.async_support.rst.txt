@@ -1,0 +1,27 @@
+uf.async\_support
+=================
+
+.. automodule:: uf.async_support
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      async_to_sync
+      batch_async_calls
+      create_async_handler
+      detect_async_framework
+      is_async_function
+      is_framework_async_capable
+      make_sync_compatible
+      retry_async
+      timeout_async
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      AsyncContext
+      AsyncFunctionWrapper
+   

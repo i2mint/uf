@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="pink" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>uf.auth - uf</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="uf.base" href="uf.base.html" /><link rel="prev" title="uf.async_support" href="uf.async_support.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d88b86f9" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="uf.auth"/>
+    <meta name="twitter:card" content="summary"/>
+  
+<link rel="alternate" type="text/markdown" href="uf.auth.html.md">
+<link rel="describedby" href="../llms.txt" type="text/markdown">
+</head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>uf</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/i2mint/uf" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="uf.html">uf</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="uf.async_support.html">uf.async_support</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">uf.auth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.base.html">uf.base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.caching.html">uf.caching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.decorators.html">uf.decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.history.html">uf.history</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.openapi.html">uf.openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.organization.html">uf.organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.renderers.html">uf.renderers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.routes.html">uf.routes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.specs.html">uf.specs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.templates.html">uf.templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.testing.html">uf.testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.themes.html">uf.themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.trans.html">uf.trans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.webhooks.html">uf.webhooks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#uf.auth.ApiKey"><code class="docutils literal notranslate"><span class="pre">ApiKey</span></code></a><ul>
+<li><a class="reference internal" href="#uf.auth.ApiKey.key"><code class="docutils literal notranslate"><span class="pre">ApiKey.key</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.ApiKey.name"><code class="docutils literal notranslate"><span class="pre">ApiKey.name</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.ApiKey.permissions"><code class="docutils literal notranslate"><span class="pre">ApiKey.permissions</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.ApiKey.created_at"><code class="docutils literal notranslate"><span class="pre">ApiKey.created_at</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.ApiKey.expires_at"><code class="docutils literal notranslate"><span class="pre">ApiKey.expires_at</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.ApiKey.is_active"><code class="docutils literal notranslate"><span class="pre">ApiKey.is_active</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.ApiKey.has_permission"><code class="docutils literal notranslate"><span class="pre">ApiKey.has_permission()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.ApiKey.is_expired"><code class="docutils literal notranslate"><span class="pre">ApiKey.is_expired()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.auth.ApiKeyManager"><code class="docutils literal notranslate"><span class="pre">ApiKeyManager</span></code></a><ul>
+<li><a class="reference internal" href="#uf.auth.ApiKeyManager.create_key"><code class="docutils literal notranslate"><span class="pre">ApiKeyManager.create_key()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.ApiKeyManager.list_keys"><code class="docutils literal notranslate"><span class="pre">ApiKeyManager.list_keys()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.ApiKeyManager.revoke_key"><code class="docutils literal notranslate"><span class="pre">ApiKeyManager.revoke_key()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.ApiKeyManager.validate_key"><code class="docutils literal notranslate"><span class="pre">ApiKeyManager.validate_key()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.auth.AuthBackend"><code class="docutils literal notranslate"><span class="pre">AuthBackend</span></code></a><ul>
+<li><a class="reference internal" href="#uf.auth.AuthBackend.authenticate"><code class="docutils literal notranslate"><span class="pre">AuthBackend.authenticate()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.AuthBackend.create_user"><code class="docutils literal notranslate"><span class="pre">AuthBackend.create_user()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.AuthBackend.delete_user"><code class="docutils literal notranslate"><span class="pre">AuthBackend.delete_user()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.AuthBackend.get_user"><code class="docutils literal notranslate"><span class="pre">AuthBackend.get_user()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.AuthBackend.update_user"><code class="docutils literal notranslate"><span class="pre">AuthBackend.update_user()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.auth.DictAuthBackend"><code class="docutils literal notranslate"><span class="pre">DictAuthBackend</span></code></a><ul>
+<li><a class="reference internal" href="#uf.auth.DictAuthBackend.authenticate"><code class="docutils literal notranslate"><span class="pre">DictAuthBackend.authenticate()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.DictAuthBackend.create_user"><code class="docutils literal notranslate"><span class="pre">DictAuthBackend.create_user()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.DictAuthBackend.delete_user"><code class="docutils literal notranslate"><span class="pre">DictAuthBackend.delete_user()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.DictAuthBackend.from_dict"><code class="docutils literal notranslate"><span class="pre">DictAuthBackend.from_dict()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.DictAuthBackend.get_user"><code class="docutils literal notranslate"><span class="pre">DictAuthBackend.get_user()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.DictAuthBackend.update_user"><code class="docutils literal notranslate"><span class="pre">DictAuthBackend.update_user()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.auth.PasswordHasher"><code class="docutils literal notranslate"><span class="pre">PasswordHasher</span></code></a><ul>
+<li><a class="reference internal" href="#uf.auth.PasswordHasher.hash_password"><code class="docutils literal notranslate"><span class="pre">PasswordHasher.hash_password()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.PasswordHasher.verify_password"><code class="docutils literal notranslate"><span class="pre">PasswordHasher.verify_password()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.auth.SessionManager"><code class="docutils literal notranslate"><span class="pre">SessionManager</span></code></a><ul>
+<li><a class="reference internal" href="#uf.auth.SessionManager.cleanup_expired"><code class="docutils literal notranslate"><span class="pre">SessionManager.cleanup_expired()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.SessionManager.create_session"><code class="docutils literal notranslate"><span class="pre">SessionManager.create_session()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.SessionManager.delete_session"><code class="docutils literal notranslate"><span class="pre">SessionManager.delete_session()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.SessionManager.get_session"><code class="docutils literal notranslate"><span class="pre">SessionManager.get_session()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.auth.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a><ul>
+<li><a class="reference internal" href="#uf.auth.User.username"><code class="docutils literal notranslate"><span class="pre">User.username</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.User.password_hash"><code class="docutils literal notranslate"><span class="pre">User.password_hash</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.User.roles"><code class="docutils literal notranslate"><span class="pre">User.roles</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.User.permissions"><code class="docutils literal notranslate"><span class="pre">User.permissions</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.User.metadata"><code class="docutils literal notranslate"><span class="pre">User.metadata</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.User.created_at"><code class="docutils literal notranslate"><span class="pre">User.created_at</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.User.is_active"><code class="docutils literal notranslate"><span class="pre">User.is_active</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.User.has_all_roles"><code class="docutils literal notranslate"><span class="pre">User.has_all_roles()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.User.has_any_role"><code class="docutils literal notranslate"><span class="pre">User.has_any_role()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.User.has_permission"><code class="docutils literal notranslate"><span class="pre">User.has_permission()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.User.has_role"><code class="docutils literal notranslate"><span class="pre">User.has_role()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.auth.get_global_api_key_manager"><code class="docutils literal notranslate"><span class="pre">get_global_api_key_manager()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.get_global_auth_backend"><code class="docutils literal notranslate"><span class="pre">get_global_auth_backend()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.get_global_session_manager"><code class="docutils literal notranslate"><span class="pre">get_global_session_manager()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.require_auth"><code class="docutils literal notranslate"><span class="pre">require_auth()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.set_global_api_key_manager"><code class="docutils literal notranslate"><span class="pre">set_global_api_key_manager()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.set_global_auth_backend"><code class="docutils literal notranslate"><span class="pre">set_global_auth_backend()</span></code></a></li>
+<li><a class="reference internal" href="#uf.auth.set_global_session_manager"><code class="docutils literal notranslate"><span class="pre">set_global_session_manager()</span></code></a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">uf</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../api.html"><span itemprop="name">API reference</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="uf.html"><span itemprop="name">uf</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">uf.auth</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section id="module-uf.auth">
+<span id="uf-auth"></span><h1>uf.auth<a class="headerlink" href="#module-uf.auth" title="Link to this heading">#</a></h1>
+<p>Authentication and authorization for uf.</p>
+<p>Provides authentication backends, session management, and role-based
+access control for uf applications.</p>
+<p class="rubric">Functions</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.auth.get_global_api_key_manager" title="uf.auth.get_global_api_key_manager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_global_api_key_manager</span></code></a>()</p></td>
+<td><p>Get the global API key manager.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.auth.get_global_auth_backend" title="uf.auth.get_global_auth_backend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_global_auth_backend</span></code></a>()</p></td>
+<td><p>Get the global authentication backend.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.auth.get_global_session_manager" title="uf.auth.get_global_session_manager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_global_session_manager</span></code></a>()</p></td>
+<td><p>Get the global session manager.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.auth.require_auth" title="uf.auth.require_auth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">require_auth</span></code></a>(backend[, roles, permissions])</p></td>
+<td><p>Decorator to require authentication for a function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.auth.set_global_api_key_manager" title="uf.auth.set_global_api_key_manager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_global_api_key_manager</span></code></a>(manager)</p></td>
+<td><p>Set the global API key manager.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.auth.set_global_auth_backend" title="uf.auth.set_global_auth_backend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_global_auth_backend</span></code></a>(backend)</p></td>
+<td><p>Set the global authentication backend.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.auth.set_global_session_manager" title="uf.auth.set_global_session_manager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_global_session_manager</span></code></a>(manager)</p></td>
+<td><p>Set the global session manager.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Classes</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.auth.ApiKey" title="uf.auth.ApiKey"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ApiKey</span></code></a>(key, name[, permissions, expires_at])</p></td>
+<td><p>API key for programmatic access.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.auth.ApiKeyManager" title="uf.auth.ApiKeyManager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ApiKeyManager</span></code></a>([key_prefix])</p></td>
+<td><p>Manage API keys for programmatic access.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.auth.AuthBackend" title="uf.auth.AuthBackend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AuthBackend</span></code></a>()</p></td>
+<td><p>Base authentication backend.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.auth.DictAuthBackend" title="uf.auth.DictAuthBackend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DictAuthBackend</span></code></a>()</p></td>
+<td><p>Simple in-memory dictionary-based authentication.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.auth.PasswordHasher" title="uf.auth.PasswordHasher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PasswordHasher</span></code></a>()</p></td>
+<td><p>Password hashing utilities.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.auth.SessionManager" title="uf.auth.SessionManager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SessionManager</span></code></a>(secret_key[, session_timeout])</p></td>
+<td><p>Manage user sessions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.auth.User" title="uf.auth.User"><code class="xref py py-obj docutils literal notranslate"><span class="pre">User</span></code></a>(username, password_hash[, roles, ...])</p></td>
+<td><p>User account information.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.auth.ApiKey">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.auth.</span></span><span class="sig-name descname"><span class="pre">ApiKey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expires_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#ApiKey"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.ApiKey" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>API key for programmatic access.</p>
+<dl class="field-list simple">
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.auth.ApiKey.key">
+<span class="sig-name descname"><span class="pre">key</span></span><a class="headerlink" href="#uf.auth.ApiKey.key" title="Link to this definition">#</a></dt>
+<dd><p>The API key string</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.auth.ApiKey.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#uf.auth.ApiKey.name" title="Link to this definition">#</a></dt>
+<dd><p>Descriptive name</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.auth.ApiKey.permissions">
+<span class="sig-name descname"><span class="pre">permissions</span></span><a class="headerlink" href="#uf.auth.ApiKey.permissions" title="Link to this definition">#</a></dt>
+<dd><p>List of allowed permissions</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.auth.ApiKey.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#uf.auth.ApiKey.created_at" title="Link to this definition">#</a></dt>
+<dd><p>When key was created</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.auth.ApiKey.expires_at">
+<span class="sig-name descname"><span class="pre">expires_at</span></span><a class="headerlink" href="#uf.auth.ApiKey.expires_at" title="Link to this definition">#</a></dt>
+<dd><p>Optional expiration</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.auth.ApiKey.is_active">
+<span class="sig-name descname"><span class="pre">is_active</span></span><a class="headerlink" href="#uf.auth.ApiKey.is_active" title="Link to this definition">#</a></dt>
+<dd><p>Whether key is active</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.ApiKey.has_permission">
+<span class="sig-name descname"><span class="pre">has_permission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">permission</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#ApiKey.has_permission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.ApiKey.has_permission" title="Link to this definition">#</a></dt>
+<dd><p>Check if key has permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.ApiKey.is_expired">
+<span class="sig-name descname"><span class="pre">is_expired</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#ApiKey.is_expired"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.ApiKey.is_expired" title="Link to this definition">#</a></dt>
+<dd><p>Check if key is expired.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.auth.ApiKeyManager">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.auth.</span></span><span class="sig-name descname"><span class="pre">ApiKeyManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sk_'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#ApiKeyManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.ApiKeyManager" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Manage API keys for programmatic access.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">api_keys</span> <span class="o">=</span> <span class="n">ApiKeyManager</span><span class="p">()</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">key</span> <span class="o">=</span> <span class="n">api_keys</span><span class="o">.</span><span class="n">create_key</span><span class="p">(</span><span class="s1">'mobile_app'</span><span class="p">,</span> <span class="n">permissions</span><span class="o">=</span><span class="p">[</span><span class="s1">'read'</span><span class="p">])</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Your API key: </span><span class="si">{</span><span class="n">key</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Later, validate</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">api_keys</span><span class="o">.</span><span class="n">validate_key</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="s1">'read'</span><span class="p">):</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="c1"># Allow access</span>
+</span></pre></div>
+</div>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.ApiKeyManager.create_key">
+<span class="sig-name descname"><span class="pre">create_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expires_in_days</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#ApiKeyManager.create_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.ApiKeyManager.create_key" title="Link to this definition">#</a></dt>
+<dd><p>Create a new API key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Descriptive name for the key</p></li>
+<li><p><strong>permissions</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]</span>) – List of allowed permissions</p></li>
+<li><p><strong>expires_in_days</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</span>) – Optional expiration in days</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.auth.ApiKey" title="uf.auth.ApiKey"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApiKey</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Created ApiKey object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.ApiKeyManager.list_keys">
+<span class="sig-name descname"><span class="pre">list_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#ApiKeyManager.list_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.ApiKeyManager.list_keys" title="Link to this definition">#</a></dt>
+<dd><p>List all API keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference internal" href="#uf.auth.ApiKey" title="uf.auth.ApiKey"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApiKey</span></code></a>]</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of ApiKey objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.ApiKeyManager.revoke_key">
+<span class="sig-name descname"><span class="pre">revoke_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#ApiKeyManager.revoke_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.ApiKeyManager.revoke_key" title="Link to this definition">#</a></dt>
+<dd><p>Revoke an API key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – API key string</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if revoked</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.ApiKeyManager.validate_key">
+<span class="sig-name descname"><span class="pre">validate_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permission</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#ApiKeyManager.validate_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.ApiKeyManager.validate_key" title="Link to this definition">#</a></dt>
+<dd><p>Validate an API key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – API key string</p></li>
+<li><p><strong>permission</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – Optional permission to check</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if valid</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.auth.AuthBackend">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.auth.</span></span><span class="sig-name descname"><span class="pre">AuthBackend</span></span><a class="reference internal" href="../_modules/uf/auth.html#AuthBackend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.AuthBackend" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Base authentication backend.</p>
+<p>Subclass this to create custom authentication backends.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.AuthBackend.authenticate">
+<span class="sig-name descname"><span class="pre">authenticate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#AuthBackend.authenticate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.AuthBackend.authenticate" title="Link to this definition">#</a></dt>
+<dd><p>Authenticate a user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Username</p></li>
+<li><p><strong>password</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Password</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#uf.auth.User" title="uf.auth.User"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>User object if authenticated, None otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.AuthBackend.create_user">
+<span class="sig-name descname"><span class="pre">create_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#AuthBackend.create_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.AuthBackend.create_user" title="Link to this definition">#</a></dt>
+<dd><p>Create a new user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Username</p></li>
+<li><p><strong>password</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Plain text password</p></li>
+<li><p><strong>roles</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]</span>) – List of roles</p></li>
+<li><p><strong>permissions</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]</span>) – List of permissions</p></li>
+<li><p><strong>**metadata</strong> – Additional user metadata</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.auth.User" title="uf.auth.User"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Created User object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.AuthBackend.delete_user">
+<span class="sig-name descname"><span class="pre">delete_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#AuthBackend.delete_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.AuthBackend.delete_user" title="Link to this definition">#</a></dt>
+<dd><p>Delete a user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>username</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Username</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if deleted successfully</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.AuthBackend.get_user">
+<span class="sig-name descname"><span class="pre">get_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#AuthBackend.get_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.AuthBackend.get_user" title="Link to this definition">#</a></dt>
+<dd><p>Get a user by username.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>username</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Username</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#uf.auth.User" title="uf.auth.User"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>User object or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.AuthBackend.update_user">
+<span class="sig-name descname"><span class="pre">update_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">updates</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#AuthBackend.update_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.AuthBackend.update_user" title="Link to this definition">#</a></dt>
+<dd><p>Update user information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Username</p></li>
+<li><p><strong>**updates</strong> – Fields to update</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if updated successfully</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.auth.DictAuthBackend">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.auth.</span></span><span class="sig-name descname"><span class="pre">DictAuthBackend</span></span><a class="reference internal" href="../_modules/uf/auth.html#DictAuthBackend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.DictAuthBackend" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uf.auth.AuthBackend" title="uf.auth.AuthBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">AuthBackend</span></code></a></p>
+<p>Simple in-memory dictionary-based authentication.</p>
+<p>Suitable for development and simple applications.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">backend</span> <span class="o">=</span> <span class="n">DictAuthBackend</span><span class="p">()</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">backend</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s1">'admin'</span><span class="p">,</span> <span class="s1">'secret'</span><span class="p">,</span> <span class="n">roles</span><span class="o">=</span><span class="p">[</span><span class="s1">'admin'</span><span class="p">])</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="s1">'admin'</span><span class="p">,</span> <span class="s1">'secret'</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.DictAuthBackend.authenticate">
+<span class="sig-name descname"><span class="pre">authenticate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#DictAuthBackend.authenticate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.DictAuthBackend.authenticate" title="Link to this definition">#</a></dt>
+<dd><p>Authenticate a user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#uf.auth.User" title="uf.auth.User"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.DictAuthBackend.create_user">
+<span class="sig-name descname"><span class="pre">create_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#DictAuthBackend.create_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.DictAuthBackend.create_user" title="Link to this definition">#</a></dt>
+<dd><p>Create a new user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.auth.User" title="uf.auth.User"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.DictAuthBackend.delete_user">
+<span class="sig-name descname"><span class="pre">delete_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#DictAuthBackend.delete_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.DictAuthBackend.delete_user" title="Link to this definition">#</a></dt>
+<dd><p>Delete a user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.DictAuthBackend.from_dict">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">users_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#DictAuthBackend.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.DictAuthBackend.from_dict" title="Link to this definition">#</a></dt>
+<dd><p>Create backend from dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>users_data</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Dictionary mapping usernames to user info</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.auth.DictAuthBackend" title="uf.auth.DictAuthBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">DictAuthBackend</span></code></a></span></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">backend</span> <span class="o">=</span> <span class="n">DictAuthBackend</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="s1">'admin'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'password'</span><span class="p">:</span> <span class="s1">'secret'</span><span class="p">,</span> <span class="s1">'roles'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'admin'</span><span class="p">]},</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="s1">'user'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'password'</span><span class="p">:</span> <span class="s1">'pass'</span><span class="p">,</span> <span class="s1">'roles'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'user'</span><span class="p">]},</span>
+</span><span data-line="4"><span class="gp">... </span><span class="p">})</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.DictAuthBackend.get_user">
+<span class="sig-name descname"><span class="pre">get_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#DictAuthBackend.get_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.DictAuthBackend.get_user" title="Link to this definition">#</a></dt>
+<dd><p>Get a user by username.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#uf.auth.User" title="uf.auth.User"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.DictAuthBackend.update_user">
+<span class="sig-name descname"><span class="pre">update_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">updates</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#DictAuthBackend.update_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.DictAuthBackend.update_user" title="Link to this definition">#</a></dt>
+<dd><p>Update user information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.auth.PasswordHasher">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.auth.</span></span><span class="sig-name descname"><span class="pre">PasswordHasher</span></span><a class="reference internal" href="../_modules/uf/auth.html#PasswordHasher"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.PasswordHasher" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Password hashing utilities.</p>
+<p>Uses PBKDF2-HMAC-SHA256 for secure password hashing.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.PasswordHasher.hash_password">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">hash_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#PasswordHasher.hash_password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.PasswordHasher.hash_password" title="Link to this definition">#</a></dt>
+<dd><p>Hash a password.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>password</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Plain text password</p></li>
+<li><p><strong>salt</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – Optional salt (generated if not provided)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>salt$hash</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.PasswordHasher.verify_password">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">verify_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password_hash</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#PasswordHasher.verify_password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.PasswordHasher.verify_password" title="Link to this definition">#</a></dt>
+<dd><p>Verify a password against its hash.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>password</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Plain text password</p></li>
+<li><p><strong>password_hash</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Hash string from hash_password()</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if password matches</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.auth.SessionManager">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.auth.</span></span><span class="sig-name descname"><span class="pre">SessionManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">secret_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3600</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#SessionManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.SessionManager" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Manage user sessions.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">sessions</span> <span class="o">=</span> <span class="n">SessionManager</span><span class="p">(</span><span class="n">secret_key</span><span class="o">=</span><span class="s1">'my-secret'</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">session_id</span> <span class="o">=</span> <span class="n">sessions</span><span class="o">.</span><span class="n">create_session</span><span class="p">(</span><span class="s1">'admin'</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">sessions</span><span class="o">.</span><span class="n">get_session</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.SessionManager.cleanup_expired">
+<span class="sig-name descname"><span class="pre">cleanup_expired</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#SessionManager.cleanup_expired"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.SessionManager.cleanup_expired" title="Link to this definition">#</a></dt>
+<dd><p>Remove expired sessions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Number of sessions removed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.SessionManager.create_session">
+<span class="sig-name descname"><span class="pre">create_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#SessionManager.create_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.SessionManager.create_session" title="Link to this definition">#</a></dt>
+<dd><p>Create a new session.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Username for session</p></li>
+<li><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]</span>) – Optional session data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Session ID</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.SessionManager.delete_session">
+<span class="sig-name descname"><span class="pre">delete_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#SessionManager.delete_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.SessionManager.delete_session" title="Link to this definition">#</a></dt>
+<dd><p>Delete a session.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>session_id</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Session ID</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if deleted</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.SessionManager.get_session">
+<span class="sig-name descname"><span class="pre">get_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#SessionManager.get_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.SessionManager.get_session" title="Link to this definition">#</a></dt>
+<dd><p>Get session data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>session_id</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Session ID</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Session data or None if expired/invalid</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.auth.User">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.auth.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password_hash</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_active</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#User"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.User" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>User account information.</p>
+<dl class="field-list simple">
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.auth.User.username">
+<span class="sig-name descname"><span class="pre">username</span></span><a class="headerlink" href="#uf.auth.User.username" title="Link to this definition">#</a></dt>
+<dd><p>Unique username</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.auth.User.password_hash">
+<span class="sig-name descname"><span class="pre">password_hash</span></span><a class="headerlink" href="#uf.auth.User.password_hash" title="Link to this definition">#</a></dt>
+<dd><p>Hashed password</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.auth.User.roles">
+<span class="sig-name descname"><span class="pre">roles</span></span><a class="headerlink" href="#uf.auth.User.roles" title="Link to this definition">#</a></dt>
+<dd><p>List of role names</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.auth.User.permissions">
+<span class="sig-name descname"><span class="pre">permissions</span></span><a class="headerlink" href="#uf.auth.User.permissions" title="Link to this definition">#</a></dt>
+<dd><p>List of permission strings</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.auth.User.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#uf.auth.User.metadata" title="Link to this definition">#</a></dt>
+<dd><p>Additional user metadata</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.auth.User.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#uf.auth.User.created_at" title="Link to this definition">#</a></dt>
+<dd><p>When user was created</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.auth.User.is_active">
+<span class="sig-name descname"><span class="pre">is_active</span></span><a class="headerlink" href="#uf.auth.User.is_active" title="Link to this definition">#</a></dt>
+<dd><p>Whether account is active</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.User.has_all_roles">
+<span class="sig-name descname"><span class="pre">has_all_roles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">roles</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#User.has_all_roles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.User.has_all_roles" title="Link to this definition">#</a></dt>
+<dd><p>Check if user has all of the given roles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.User.has_any_role">
+<span class="sig-name descname"><span class="pre">has_any_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">roles</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#User.has_any_role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.User.has_any_role" title="Link to this definition">#</a></dt>
+<dd><p>Check if user has any of the given roles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.User.has_permission">
+<span class="sig-name descname"><span class="pre">has_permission</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">permission</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#User.has_permission"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.User.has_permission" title="Link to this definition">#</a></dt>
+<dd><p>Check if user has a permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.auth.User.has_role">
+<span class="sig-name descname"><span class="pre">has_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#User.has_role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.User.has_role" title="Link to this definition">#</a></dt>
+<dd><p>Check if user has a role.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.auth.get_global_api_key_manager">
+<span class="sig-prename descclassname"><span class="pre">uf.auth.</span></span><span class="sig-name descname"><span class="pre">get_global_api_key_manager</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#get_global_api_key_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.get_global_api_key_manager" title="Link to this definition">#</a></dt>
+<dd><p>Get the global API key manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#uf.auth.ApiKeyManager" title="uf.auth.ApiKeyManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApiKeyManager</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.auth.get_global_auth_backend">
+<span class="sig-prename descclassname"><span class="pre">uf.auth.</span></span><span class="sig-name descname"><span class="pre">get_global_auth_backend</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#get_global_auth_backend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.get_global_auth_backend" title="Link to this definition">#</a></dt>
+<dd><p>Get the global authentication backend.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#uf.auth.AuthBackend" title="uf.auth.AuthBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">AuthBackend</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.auth.get_global_session_manager">
+<span class="sig-prename descclassname"><span class="pre">uf.auth.</span></span><span class="sig-name descname"><span class="pre">get_global_session_manager</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#get_global_session_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.get_global_session_manager" title="Link to this definition">#</a></dt>
+<dd><p>Get the global session manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#uf.auth.SessionManager" title="uf.auth.SessionManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">SessionManager</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.auth.require_auth">
+<span class="sig-prename descclassname"><span class="pre">uf.auth.</span></span><span class="sig-name descname"><span class="pre">require_auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backend</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">permissions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#require_auth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.require_auth" title="Link to this definition">#</a></dt>
+<dd><p>Decorator to require authentication for a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>backend</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.auth.AuthBackend" title="uf.auth.AuthBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">AuthBackend</span></code></a></span>) – Authentication backend</p></li>
+<li><p><strong>roles</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]</span>) – Required roles (any)</p></li>
+<li><p><strong>permissions</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]</span>) – Required permissions (all)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">backend</span> <span class="o">=</span> <span class="n">DictAuthBackend</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="s1">'admin'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'password'</span><span class="p">:</span> <span class="s1">'secret'</span><span class="p">,</span> <span class="s1">'roles'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'admin'</span><span class="p">]}</span>
+</span><span data-line="3"><span class="gp">... </span><span class="p">})</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="nd">@require_auth</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">roles</span><span class="o">=</span><span class="p">[</span><span class="s1">'admin'</span><span class="p">])</span>
+</span><span data-line="5"><span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">delete_all</span><span class="p">():</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="k">pass</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.auth.set_global_api_key_manager">
+<span class="sig-prename descclassname"><span class="pre">uf.auth.</span></span><span class="sig-name descname"><span class="pre">set_global_api_key_manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">manager</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#set_global_api_key_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.set_global_api_key_manager" title="Link to this definition">#</a></dt>
+<dd><p>Set the global API key manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.auth.set_global_auth_backend">
+<span class="sig-prename descclassname"><span class="pre">uf.auth.</span></span><span class="sig-name descname"><span class="pre">set_global_auth_backend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backend</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#set_global_auth_backend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.set_global_auth_backend" title="Link to this definition">#</a></dt>
+<dd><p>Set the global authentication backend.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.auth.set_global_session_manager">
+<span class="sig-prename descclassname"><span class="pre">uf.auth.</span></span><span class="sig-name descname"><span class="pre">set_global_session_manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">manager</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/auth.html#set_global_session_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.auth.set_global_session_manager" title="Link to this definition">#</a></dt>
+<dd><p>Set the global session manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="uf.async_support.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">uf.async_support</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="uf.base.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">uf.base</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright">
+  <p>
+    Made with
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/i2mint/uf" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=fd825880"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=fd10adb8"></script>
+      <script src="../_static/shibuya.js?v=50760d75"></script></body>
+</html>

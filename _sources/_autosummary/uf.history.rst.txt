@@ -1,0 +1,23 @@
+uf.history
+==========
+
+.. automodule:: uf.history
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      enable_history
+      get_global_history_manager
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      CallHistory
+      FunctionCall
+      HistoryManager
+      Preset
+      PresetManager
+   

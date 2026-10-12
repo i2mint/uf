@@ -1,0 +1,139 @@
+﻿uf
+==
+
+.. automodule:: uf
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      mk_rjsf_app
+      get_field_config
+      apply_field_configs
+      register_type
+      get_global_registry
+      mk_grouped_app
+      auto_group_by_prefix
+      auto_group_by_module
+      auto_group_by_tag
+      ui_config
+      group
+      hidden
+      field_config
+      with_example
+      deprecated
+      requires_auth
+      rate_limit
+      get_ui_config
+      get_group
+      get_field_configs
+      is_hidden
+      get_example
+      with_dependencies
+      get_field_dependencies
+      test_ui_function
+      assert_valid_rjsf_spec
+      assert_has_field
+      assert_field_type
+      assert_field_required
+      get_global_renderer_registry
+      register_renderer
+      render_result
+      result_renderer
+      get_result_renderer
+      is_async_function
+      async_to_sync
+      make_sync_compatible
+      timeout_async
+      retry_async
+      is_pydantic_model
+      pydantic_model_to_json_schema
+      function_uses_pydantic
+      wrap_pydantic_function
+      pydantic_to_dict
+      dict_to_pydantic
+      get_global_history_manager
+      enable_history
+      require_auth
+      get_global_auth_backend
+      cached
+      get_global_cache_backend
+      background
+      get_global_task_queue
+      generate_openapi_spec
+      add_openapi_routes
+      webhook
+      get_global_webhook_manager
+      get_theme
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      UfApp
+      FunctionSpecStore
+      RjsfFieldConfig
+      RjsfConfigBuilder
+      ConditionalFieldConfig
+      InputTransformRegistry
+      FunctionGroup
+      FunctionOrganizer
+      FieldDependency
+      DependencyAction
+      DependencyBuilder
+      UfTestClient
+      UfAppTester
+      FormDataBuilder
+      ResultRenderer
+      ResultRendererRegistry
+      AsyncFunctionWrapper
+      FunctionCall
+      CallHistory
+      Preset
+      PresetManager
+      HistoryManager
+      User
+      AuthBackend
+      DictAuthBackend
+      SessionManager
+      ApiKey
+      ApiKeyManager
+      CacheBackend
+      MemoryCache
+      DiskCache
+      Task
+      TaskStatus
+      TaskQueue
+      OpenAPIConfig
+      WebhookEvent
+      WebhookClient
+      WebhookManager
+      Theme
+      ThemeConfig
+   
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   async_support
+   auth
+   base
+   caching
+   decorators
+   field_interactions
+   history
+   openapi
+   organization
+   pydantic_support
+   renderers
+   rjsf_config
+   routes
+   specs
+   templates
+   testing
+   themes
+   trans
+   webhooks

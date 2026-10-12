@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="pink" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>uf.caching - uf</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="uf.decorators" href="uf.decorators.html" /><link rel="prev" title="uf.base" href="uf.base.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d88b86f9" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="uf.caching"/>
+    <meta name="twitter:card" content="summary"/>
+  
+<link rel="alternate" type="text/markdown" href="uf.caching.html.md">
+<link rel="describedby" href="../llms.txt" type="text/markdown">
+</head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>uf</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/i2mint/uf" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="uf.html">uf</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="uf.async_support.html">uf.async_support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.auth.html">uf.auth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.base.html">uf.base</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">uf.caching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.decorators.html">uf.decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.history.html">uf.history</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.openapi.html">uf.openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.organization.html">uf.organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.renderers.html">uf.renderers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.routes.html">uf.routes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.specs.html">uf.specs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.templates.html">uf.templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.testing.html">uf.testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.themes.html">uf.themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.trans.html">uf.trans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.webhooks.html">uf.webhooks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#uf.caching.CacheBackend"><code class="docutils literal notranslate"><span class="pre">CacheBackend</span></code></a><ul>
+<li><a class="reference internal" href="#uf.caching.CacheBackend.clear"><code class="docutils literal notranslate"><span class="pre">CacheBackend.clear()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.CacheBackend.delete"><code class="docutils literal notranslate"><span class="pre">CacheBackend.delete()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.CacheBackend.exists"><code class="docutils literal notranslate"><span class="pre">CacheBackend.exists()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.CacheBackend.get"><code class="docutils literal notranslate"><span class="pre">CacheBackend.get()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.CacheBackend.set"><code class="docutils literal notranslate"><span class="pre">CacheBackend.set()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.caching.CacheStats"><code class="docutils literal notranslate"><span class="pre">CacheStats</span></code></a><ul>
+<li><a class="reference internal" href="#uf.caching.CacheStats.hit_rate"><code class="docutils literal notranslate"><span class="pre">CacheStats.hit_rate()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.CacheStats.record_hit"><code class="docutils literal notranslate"><span class="pre">CacheStats.record_hit()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.CacheStats.record_miss"><code class="docutils literal notranslate"><span class="pre">CacheStats.record_miss()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.CacheStats.record_set"><code class="docutils literal notranslate"><span class="pre">CacheStats.record_set()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.CacheStats.reset"><code class="docutils literal notranslate"><span class="pre">CacheStats.reset()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.CacheStats.to_dict"><code class="docutils literal notranslate"><span class="pre">CacheStats.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.caching.DiskCache"><code class="docutils literal notranslate"><span class="pre">DiskCache</span></code></a><ul>
+<li><a class="reference internal" href="#uf.caching.DiskCache.clear"><code class="docutils literal notranslate"><span class="pre">DiskCache.clear()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.DiskCache.delete"><code class="docutils literal notranslate"><span class="pre">DiskCache.delete()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.DiskCache.get"><code class="docutils literal notranslate"><span class="pre">DiskCache.get()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.DiskCache.set"><code class="docutils literal notranslate"><span class="pre">DiskCache.set()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.caching.MemoryCache"><code class="docutils literal notranslate"><span class="pre">MemoryCache</span></code></a><ul>
+<li><a class="reference internal" href="#uf.caching.MemoryCache.cleanup_expired"><code class="docutils literal notranslate"><span class="pre">MemoryCache.cleanup_expired()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.MemoryCache.clear"><code class="docutils literal notranslate"><span class="pre">MemoryCache.clear()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.MemoryCache.delete"><code class="docutils literal notranslate"><span class="pre">MemoryCache.delete()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.MemoryCache.get"><code class="docutils literal notranslate"><span class="pre">MemoryCache.get()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.MemoryCache.set"><code class="docutils literal notranslate"><span class="pre">MemoryCache.set()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.MemoryCache.stats"><code class="docutils literal notranslate"><span class="pre">MemoryCache.stats()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.caching.cache_clear_all"><code class="docutils literal notranslate"><span class="pre">cache_clear_all()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.cache_invalidate"><code class="docutils literal notranslate"><span class="pre">cache_invalidate()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.cached"><code class="docutils literal notranslate"><span class="pre">cached()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.get_global_cache_backend"><code class="docutils literal notranslate"><span class="pre">get_global_cache_backend()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.make_cache_key"><code class="docutils literal notranslate"><span class="pre">make_cache_key()</span></code></a></li>
+<li><a class="reference internal" href="#uf.caching.set_global_cache_backend"><code class="docutils literal notranslate"><span class="pre">set_global_cache_backend()</span></code></a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">uf</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../api.html"><span itemprop="name">API reference</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="uf.html"><span itemprop="name">uf</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">uf.caching</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section id="module-uf.caching">
+<span id="uf-caching"></span><h1>uf.caching<a class="headerlink" href="#module-uf.caching" title="Link to this heading">#</a></h1>
+<p>Result caching for uf.</p>
+<p>Provides caching decorators and backends to cache function results,
+improving performance for expensive operations.</p>
+<p class="rubric">Functions</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.caching.cache_clear_all" title="uf.caching.cache_clear_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_clear_all</span></code></a>([backend])</p></td>
+<td><p>Clear all cache entries.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.caching.cache_invalidate" title="uf.caching.cache_invalidate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_invalidate</span></code></a>(cache_key[, backend])</p></td>
+<td><p>Invalidate a specific cache entry.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.caching.cached" title="uf.caching.cached"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cached</span></code></a>([ttl, backend, key_func])</p></td>
+<td><p>Decorator to cache function results.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.caching.get_global_cache_backend" title="uf.caching.get_global_cache_backend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_global_cache_backend</span></code></a>()</p></td>
+<td><p>Get the global cache backend.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.caching.make_cache_key" title="uf.caching.make_cache_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_cache_key</span></code></a>(func_name, args, kwargs)</p></td>
+<td><p>Create a cache key from function call.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.caching.set_global_cache_backend" title="uf.caching.set_global_cache_backend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_global_cache_backend</span></code></a>(backend)</p></td>
+<td><p>Set the global cache backend.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Classes</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.caching.CacheBackend" title="uf.caching.CacheBackend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CacheBackend</span></code></a>()</p></td>
+<td><p>Base class for cache backends.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.caching.CacheStats" title="uf.caching.CacheStats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CacheStats</span></code></a>()</p></td>
+<td><p>Track cache hit/miss statistics.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.caching.DiskCache" title="uf.caching.DiskCache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DiskCache</span></code></a>([cache_dir, default_ttl])</p></td>
+<td><p>Disk-based cache backend using pickle.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.caching.MemoryCache" title="uf.caching.MemoryCache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MemoryCache</span></code></a>([default_ttl, max_size])</p></td>
+<td><p>In-memory cache backend.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.caching.CacheBackend">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.caching.</span></span><span class="sig-name descname"><span class="pre">CacheBackend</span></span><a class="reference internal" href="../_modules/uf/caching.html#CacheBackend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.CacheBackend" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Base class for cache backends.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.CacheBackend.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#CacheBackend.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.CacheBackend.clear" title="Link to this definition">#</a></dt>
+<dd><p>Clear all cache entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.CacheBackend.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#CacheBackend.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.CacheBackend.delete" title="Link to this definition">#</a></dt>
+<dd><p>Delete a key from cache.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Cache key</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if deleted</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.CacheBackend.exists">
+<span class="sig-name descname"><span class="pre">exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#CacheBackend.exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.CacheBackend.exists" title="Link to this definition">#</a></dt>
+<dd><p>Check if key exists in cache.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Cache key</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if exists and not expired</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.CacheBackend.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#CacheBackend.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.CacheBackend.get" title="Link to this definition">#</a></dt>
+<dd><p>Get a value from cache.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Cache key</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Cached value or None if not found/expired</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.CacheBackend.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ttl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#CacheBackend.set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.CacheBackend.set" title="Link to this definition">#</a></dt>
+<dd><p>Set a value in cache.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Cache key</p></li>
+<li><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span>) – Value to cache</p></li>
+<li><p><strong>ttl</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</span>) – Time to live in seconds</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.caching.CacheStats">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.caching.</span></span><span class="sig-name descname"><span class="pre">CacheStats</span></span><a class="reference internal" href="../_modules/uf/caching.html#CacheStats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.CacheStats" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Track cache hit/miss statistics.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.CacheStats.hit_rate">
+<span class="sig-name descname"><span class="pre">hit_rate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#CacheStats.hit_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.CacheStats.hit_rate" title="Link to this definition">#</a></dt>
+<dd><p>Calculate hit rate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Hit rate as a percentage (0-100)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.CacheStats.record_hit">
+<span class="sig-name descname"><span class="pre">record_hit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#CacheStats.record_hit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.CacheStats.record_hit" title="Link to this definition">#</a></dt>
+<dd><p>Record a cache hit.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.CacheStats.record_miss">
+<span class="sig-name descname"><span class="pre">record_miss</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#CacheStats.record_miss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.CacheStats.record_miss" title="Link to this definition">#</a></dt>
+<dd><p>Record a cache miss.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.CacheStats.record_set">
+<span class="sig-name descname"><span class="pre">record_set</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#CacheStats.record_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.CacheStats.record_set" title="Link to this definition">#</a></dt>
+<dd><p>Record a cache set.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.CacheStats.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#CacheStats.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.CacheStats.reset" title="Link to this definition">#</a></dt>
+<dd><p>Reset all statistics.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.CacheStats.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#CacheStats.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.CacheStats.to_dict" title="Link to this definition">#</a></dt>
+<dd><p>Convert to dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Statistics dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.caching.DiskCache">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.caching.</span></span><span class="sig-name descname"><span class="pre">DiskCache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.uf_cache'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_ttl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3600</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#DiskCache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.DiskCache" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uf.caching.CacheBackend" title="uf.caching.CacheBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">CacheBackend</span></code></a></p>
+<p>Disk-based cache backend using pickle.</p>
+<p>Persists cache to disk, suitable for larger datasets or persistence
+across restarts.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span> <span class="o">=</span> <span class="n">DiskCache</span><span class="p">(</span><span class="n">cache_dir</span><span class="o">=</span><span class="s1">'/tmp/uf_cache'</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">'expensive_result'</span><span class="p">,</span> <span class="n">big_data</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.DiskCache.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#DiskCache.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.DiskCache.clear" title="Link to this definition">#</a></dt>
+<dd><p>Clear all cache entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.DiskCache.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#DiskCache.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.DiskCache.delete" title="Link to this definition">#</a></dt>
+<dd><p>Delete a key from cache.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.DiskCache.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#DiskCache.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.DiskCache.get" title="Link to this definition">#</a></dt>
+<dd><p>Get a value from cache.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.DiskCache.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ttl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#DiskCache.set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.DiskCache.set" title="Link to this definition">#</a></dt>
+<dd><p>Set a value in cache.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.caching.MemoryCache">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.caching.</span></span><span class="sig-name descname"><span class="pre">MemoryCache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">default_ttl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3600</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#MemoryCache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.MemoryCache" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#uf.caching.CacheBackend" title="uf.caching.CacheBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">CacheBackend</span></code></a></p>
+<p>In-memory cache backend.</p>
+<p>Simple dictionary-based caching suitable for single-process applications.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span> <span class="o">=</span> <span class="n">MemoryCache</span><span class="p">(</span><span class="n">default_ttl</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.MemoryCache.cleanup_expired">
+<span class="sig-name descname"><span class="pre">cleanup_expired</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#MemoryCache.cleanup_expired"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.MemoryCache.cleanup_expired" title="Link to this definition">#</a></dt>
+<dd><p>Remove expired entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Number of entries removed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.MemoryCache.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#MemoryCache.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.MemoryCache.clear" title="Link to this definition">#</a></dt>
+<dd><p>Clear all cache entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.MemoryCache.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#MemoryCache.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.MemoryCache.delete" title="Link to this definition">#</a></dt>
+<dd><p>Delete a key from cache.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.MemoryCache.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#MemoryCache.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.MemoryCache.get" title="Link to this definition">#</a></dt>
+<dd><p>Get a value from cache.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.MemoryCache.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ttl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#MemoryCache.set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.MemoryCache.set" title="Link to this definition">#</a></dt>
+<dd><p>Set a value in cache.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.caching.MemoryCache.stats">
+<span class="sig-name descname"><span class="pre">stats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#MemoryCache.stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.MemoryCache.stats" title="Link to this definition">#</a></dt>
+<dd><p>Get cache statistics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with cache stats</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.caching.cache_clear_all">
+<span class="sig-prename descclassname"><span class="pre">uf.caching.</span></span><span class="sig-name descname"><span class="pre">cache_clear_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#cache_clear_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.cache_clear_all" title="Link to this definition">#</a></dt>
+<dd><p>Clear all cache entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>backend</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#uf.caching.CacheBackend" title="uf.caching.CacheBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">CacheBackend</span></code></a>]</span>) – Cache backend (uses global if None)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.caching.cache_invalidate">
+<span class="sig-prename descclassname"><span class="pre">uf.caching.</span></span><span class="sig-name descname"><span class="pre">cache_invalidate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#cache_invalidate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.cache_invalidate" title="Link to this definition">#</a></dt>
+<dd><p>Invalidate a specific cache entry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cache_key</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Cache key to invalidate</p></li>
+<li><p><strong>backend</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#uf.caching.CacheBackend" title="uf.caching.CacheBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">CacheBackend</span></code></a>]</span>) – Cache backend (uses global if None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if invalidated</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.caching.cached">
+<span class="sig-prename descclassname"><span class="pre">uf.caching.</span></span><span class="sig-name descname"><span class="pre">cached</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ttl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3600</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#cached"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.cached" title="Link to this definition">#</a></dt>
+<dd><p>Decorator to cache function results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ttl</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Time to live in seconds</p></li>
+<li><p><strong>backend</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#uf.caching.CacheBackend" title="uf.caching.CacheBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">CacheBackend</span></code></a>]</span>) – Cache backend (uses global MemoryCache if None)</p></li>
+<li><p><strong>key_func</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>]</span>) – Optional function to generate cache key</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="nd">@cached</span><span class="p">(</span><span class="n">ttl</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">expensive_calculation</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="c1"># Only runs once per unique (x, y) combination</span>
+</span><span data-line="4"><span class="gp">... </span>    <span class="k">return</span> <span class="n">heavy_computation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt;</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">expensive_calculation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># Computes</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="n">result2</span> <span class="o">=</span> <span class="n">expensive_calculation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># From cache</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.caching.get_global_cache_backend">
+<span class="sig-prename descclassname"><span class="pre">uf.caching.</span></span><span class="sig-name descname"><span class="pre">get_global_cache_backend</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#get_global_cache_backend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.get_global_cache_backend" title="Link to this definition">#</a></dt>
+<dd><p>Get the global cache backend.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#uf.caching.CacheBackend" title="uf.caching.CacheBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">CacheBackend</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.caching.make_cache_key">
+<span class="sig-prename descclassname"><span class="pre">uf.caching.</span></span><span class="sig-name descname"><span class="pre">make_cache_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#make_cache_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.make_cache_key" title="Link to this definition">#</a></dt>
+<dd><p>Create a cache key from function call.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Function name</p></li>
+<li><p><strong>args</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></span>) – Positional arguments</p></li>
+<li><p><strong>kwargs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Keyword arguments</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Cache key string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.caching.set_global_cache_backend">
+<span class="sig-prename descclassname"><span class="pre">uf.caching.</span></span><span class="sig-name descname"><span class="pre">set_global_cache_backend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backend</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/caching.html#set_global_cache_backend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.caching.set_global_cache_backend" title="Link to this definition">#</a></dt>
+<dd><p>Set the global cache backend.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/constants.html#None" title="(in Python v3.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="uf.base.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">uf.base</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="uf.decorators.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">uf.decorators</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright">
+  <p>
+    Made with
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/i2mint/uf" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=fd825880"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=fd10adb8"></script>
+      <script src="../_static/shibuya.js?v=50760d75"></script></body>
+</html>

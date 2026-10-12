@@ -1,4 +1,0 @@
-uf.background
-=============
-.. automodule:: uf.background
-   :members:

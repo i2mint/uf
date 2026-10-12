@@ -1,0 +1,22 @@
+uf.field\_interactions
+======================
+
+.. automodule:: uf.field_interactions
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      add_field_dependencies
+      get_field_dependencies
+      with_dependencies
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      DependencyAction
+      DependencyBuilder
+      FieldDependency
+   

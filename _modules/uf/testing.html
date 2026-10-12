@@ -1,680 +1,1078 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../../">
+<html lang="en" data-accent-color="pink" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>uf.testing &mdash; uf 0.1.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-
-  
-      <script src="../../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=92734c54"></script>
-      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="../../_static/toggleprompt.js?v=d7ede5d2"></script>
-      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
-</head>
-
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../../index.html" class="icon icon-home">
-            uf
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>uf.testing - uf</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d88b86f9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="uf.testing"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../index.html">
+      
+      
+      <strong>uf</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/i2mint/uf" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf.html">uf</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/async_support.html">uf.async_support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/auth.html">uf.auth</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/background.html">uf.background</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/base.html">uf.base</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/caching.html">uf.caching</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/decorators.html">uf.decorators</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/field_interactions.html">uf.field_interactions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/history.html">uf.history</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/openapi.html">uf.openapi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/organization.html">uf.organization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/pydantic_support.html">uf.pydantic_support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/renderers.html">uf.renderers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/rjsf_config.html">uf.rjsf_config</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/routes.html">uf.routes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/specs.html">uf.specs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/templates.html">uf.templates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/testing.html">uf.testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/themes.html">uf.themes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/trans.html">uf.trans</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../module_docs/uf/webhooks.html">uf.webhooks</a></li>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/uf.html">uf</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.async_support.html">uf.async_support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.auth.html">uf.auth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.base.html">uf.base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.caching.html">uf.caching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.decorators.html">uf.decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.history.html">uf.history</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.openapi.html">uf.openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.organization.html">uf.organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.renderers.html">uf.renderers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.routes.html">uf.routes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.specs.html">uf.specs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.templates.html">uf.templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.testing.html">uf.testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.themes.html">uf.themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.trans.html">uf.trans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.webhooks.html">uf.webhooks</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
         </div>
       </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">uf</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">uf.testing</li>
-      <li class="wy-breadcrumbs-aside">
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <h1>Source code for uf.testing</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Testing utilities for uf applications.</span>
-
-<span class="sd">Provides tools for testing uf apps, including test clients, fixtures,</span>
-<span class="sd">and assertion helpers.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">contextmanager</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-
-
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">uf</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Module code</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">uf.testing</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <h1>Source code for uf.testing</h1><div class="highlight"><pre>
+<span></span><span data-line="1"><span class="sd">"""Testing utilities for uf applications.</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="sd">Provides tools for testing uf apps, including test clients, fixtures,</span>
+</span><span data-line="4"><span class="sd">and assertion helpers.</span>
+</span><span data-line="5"><span class="sd">"""</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+</span><span data-line="8"><span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">contextmanager</span>
+</span><span data-line="9"><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span data-line="10">
+</span><span data-line="11">
 <div class="viewcode-block" id="UfTestClient">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfTestClient">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">UfTestClient</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test client for uf applications.</span>
-
-<span class="sd">    Provides a convenient interface for testing uf apps without</span>
-<span class="sd">    running a web server.</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; from uf import mk_rjsf_app</span>
-<span class="sd">        &gt;&gt;&gt; app = mk_rjsf_app([my_func])</span>
-<span class="sd">        &gt;&gt;&gt; client = UfTestClient(app)</span>
-<span class="sd">        &gt;&gt;&gt; response = client.call_function(&#39;my_func&#39;, {&#39;x&#39;: 10, &#39;y&#39;: 20})</span>
-<span class="sd">        &gt;&gt;&gt; assert response[&#39;success&#39;]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize test client.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            app: The uf application to test</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s2">&quot;function_specs&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.UfTestClient">[docs]</a>
+</span><span data-line="12"><span class="k">class</span><span class="w"> </span><span class="nc">UfTestClient</span><span class="p">:</span>
+</span><span data-line="13"><span class="w">    </span><span class="sd">"""Test client for uf applications.</span>
+</span><span data-line="14">
+</span><span data-line="15"><span class="sd">    Provides a convenient interface for testing uf apps without</span>
+</span><span data-line="16"><span class="sd">    running a web server.</span>
+</span><span data-line="17">
+</span><span data-line="18"><span class="sd">    Example:</span>
+</span><span data-line="19"><span class="sd">        &gt;&gt;&gt; from uf import mk_rjsf_app</span>
+</span><span data-line="20"><span class="sd">        &gt;&gt;&gt; app = mk_rjsf_app([my_func])</span>
+</span><span data-line="21"><span class="sd">        &gt;&gt;&gt; client = UfTestClient(app)</span>
+</span><span data-line="22"><span class="sd">        &gt;&gt;&gt; response = client.call_function('my_func', {'x': 10, 'y': 20})</span>
+</span><span data-line="23"><span class="sd">        &gt;&gt;&gt; assert response['success']</span>
+</span><span data-line="24"><span class="sd">    """</span>
+</span><span data-line="25">
+</span><span data-line="26">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
+</span><span data-line="27"><span class="w">        </span><span class="sd">"""Initialize test client.</span>
+</span><span data-line="28">
+</span><span data-line="29"><span class="sd">        Args:</span>
+</span><span data-line="30"><span class="sd">            app: The uf application to test</span>
+</span><span data-line="31"><span class="sd">        """</span>
+</span><span data-line="32">        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
+</span><span data-line="33">        <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s2">"function_specs"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span><span data-line="34">
 <div class="viewcode-block" id="UfTestClient.list_functions">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfTestClient.list_functions">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">list_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get list of available function names.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.UfTestClient.list_functions">[docs]</a>
+</span><span data-line="35">    <span class="k">def</span><span class="w"> </span><span class="nf">list_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="36"><span class="w">        </span><span class="sd">"""Get list of available function names.</span>
+</span><span data-line="37">
+</span><span data-line="38"><span class="sd">        Returns:</span>
+</span><span data-line="39"><span class="sd">            List of function name strings</span>
+</span><span data-line="40"><span class="sd">        """</span>
+</span><span data-line="41">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">:</span>
+</span><span data-line="42">            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</span><span data-line="43">        <span class="k">return</span> <span class="p">[]</span></div>
 
-<span class="sd">        Returns:</span>
-<span class="sd">            List of function name strings</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-        <span class="k">return</span> <span class="p">[]</span></div>
-
-
+</span><span data-line="44">
 <div class="viewcode-block" id="UfTestClient.get_spec">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfTestClient.get_spec">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get RJSF specification for a function.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.UfTestClient.get_spec">[docs]</a>
+</span><span data-line="45">    <span class="k">def</span><span class="w"> </span><span class="nf">get_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span data-line="46"><span class="w">        </span><span class="sd">"""Get RJSF specification for a function.</span>
+</span><span data-line="47">
+</span><span data-line="48"><span class="sd">        Args:</span>
+</span><span data-line="49"><span class="sd">            func_name: Name of the function</span>
+</span><span data-line="50">
+</span><span data-line="51"><span class="sd">        Returns:</span>
+</span><span data-line="52"><span class="sd">            Function specification dict</span>
+</span><span data-line="53">
+</span><span data-line="54"><span class="sd">        Raises:</span>
+</span><span data-line="55"><span class="sd">            KeyError: If function not found</span>
+</span><span data-line="56"><span class="sd">        """</span>
+</span><span data-line="57">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">:</span>
+</span><span data-line="58">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"App does not have function_specs"</span><span class="p">)</span>
+</span><span data-line="59">
+</span><span data-line="60">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span></div>
 
-<span class="sd">        Args:</span>
-<span class="sd">            func_name: Name of the function</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Function specification dict</span>
-
-<span class="sd">        Raises:</span>
-<span class="sd">            KeyError: If function not found</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;App does not have function_specs&quot;</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span></div>
-
-
+</span><span data-line="61">
 <div class="viewcode-block" id="UfTestClient.call_function">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfTestClient.call_function">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">call_function</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-        <span class="o">*</span><span class="p">,</span>
-        <span class="n">expect_success</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Call a function with the given parameters.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.UfTestClient.call_function">[docs]</a>
+</span><span data-line="62">    <span class="k">def</span><span class="w"> </span><span class="nf">call_function</span><span class="p">(</span>
+</span><span data-line="63">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="64">        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span data-line="65">        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+</span><span data-line="66">        <span class="o">*</span><span class="p">,</span>
+</span><span data-line="67">        <span class="n">expect_success</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="68">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span data-line="69"><span class="w">        </span><span class="sd">"""Call a function with the given parameters.</span>
+</span><span data-line="70">
+</span><span data-line="71"><span class="sd">        Args:</span>
+</span><span data-line="72"><span class="sd">            func_name: Name of the function to call</span>
+</span><span data-line="73"><span class="sd">            params: Dictionary of parameters</span>
+</span><span data-line="74"><span class="sd">            expect_success: Whether to expect success (raises on failure)</span>
+</span><span data-line="75">
+</span><span data-line="76"><span class="sd">        Returns:</span>
+</span><span data-line="77"><span class="sd">            Result dictionary with 'success' and 'result' or 'error'</span>
+</span><span data-line="78">
+</span><span data-line="79"><span class="sd">        Raises:</span>
+</span><span data-line="80"><span class="sd">            AssertionError: If expect_success=True and call fails</span>
+</span><span data-line="81"><span class="sd">        """</span>
+</span><span data-line="82">        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">:</span>
+</span><span data-line="83">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"App does not have function_specs"</span><span class="p">)</span>
+</span><span data-line="84">
+</span><span data-line="85">        <span class="n">spec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
+</span><span data-line="86">        <span class="n">func</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s2">"func"</span><span class="p">]</span>
+</span><span data-line="87">
+</span><span data-line="88">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="89">            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+</span><span data-line="90">            <span class="n">response</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"result"</span><span class="p">:</span> <span class="n">result</span><span class="p">}</span>
+</span><span data-line="91">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="92">            <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+</span><span data-line="93">                <span class="s2">"success"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+</span><span data-line="94">                <span class="s2">"error"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+</span><span data-line="95">                <span class="s2">"error_type"</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+</span><span data-line="96">            <span class="p">}</span>
+</span><span data-line="97">
+</span><span data-line="98">        <span class="k">if</span> <span class="n">expect_success</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">response</span><span class="p">[</span><span class="s2">"success"</span><span class="p">]:</span>
+</span><span data-line="99">            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Function call failed: </span><span class="si">{</span><span class="n">response</span><span class="p">[</span><span class="s1">'error'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span data-line="100">
+</span><span data-line="101">        <span class="k">return</span> <span class="n">response</span></div>
 
-<span class="sd">        Args:</span>
-<span class="sd">            func_name: Name of the function to call</span>
-<span class="sd">            params: Dictionary of parameters</span>
-<span class="sd">            expect_success: Whether to expect success (raises on failure)</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Result dictionary with &#39;success&#39; and &#39;result&#39; or &#39;error&#39;</span>
-
-<span class="sd">        Raises:</span>
-<span class="sd">            AssertionError: If expect_success=True and call fails</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;App does not have function_specs&quot;</span><span class="p">)</span>
-
-        <span class="n">spec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
-        <span class="n">func</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s2">&quot;func&quot;</span><span class="p">]</span>
-
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">result</span><span class="p">}</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-                <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
-                <span class="s2">&quot;error_type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-            <span class="p">}</span>
-
-        <span class="k">if</span> <span class="n">expect_success</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Function call failed: </span><span class="si">{</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">response</span></div>
-
-
+</span><span data-line="102">
 <div class="viewcode-block" id="UfTestClient.validate_params">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfTestClient.validate_params">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">validate_params</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate parameters against function schema.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.UfTestClient.validate_params">[docs]</a>
+</span><span data-line="103">    <span class="k">def</span><span class="w"> </span><span class="nf">validate_params</span><span class="p">(</span>
+</span><span data-line="104">        <span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span>
+</span><span data-line="105">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+</span><span data-line="106"><span class="w">        </span><span class="sd">"""Validate parameters against function schema.</span>
+</span><span data-line="107">
+</span><span data-line="108"><span class="sd">        Args:</span>
+</span><span data-line="109"><span class="sd">            func_name: Name of the function</span>
+</span><span data-line="110"><span class="sd">            params: Parameters to validate</span>
+</span><span data-line="111">
+</span><span data-line="112"><span class="sd">        Returns:</span>
+</span><span data-line="113"><span class="sd">            Tuple of (is_valid, error_message)</span>
+</span><span data-line="114"><span class="sd">        """</span>
+</span><span data-line="115">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="116">            <span class="n">spec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_spec</span><span class="p">(</span><span class="n">func_name</span><span class="p">)</span>
+</span><span data-line="117">            <span class="n">schema</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s2">"schema"</span><span class="p">]</span>
+</span><span data-line="118">
+</span><span data-line="119">            <span class="c1"># Check required parameters</span>
+</span><span data-line="120">            <span class="n">required</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"required"</span><span class="p">,</span> <span class="p">[])</span>
+</span><span data-line="121">            <span class="k">for</span> <span class="n">req_param</span> <span class="ow">in</span> <span class="n">required</span><span class="p">:</span>
+</span><span data-line="122">                <span class="k">if</span> <span class="n">req_param</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+</span><span data-line="123">                    <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Missing required parameter: </span><span class="si">{</span><span class="n">req_param</span><span class="si">}</span><span class="s2">"</span>
+</span><span data-line="124">
+</span><span data-line="125">            <span class="c1"># Basic type checking</span>
+</span><span data-line="126">            <span class="n">properties</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"properties"</span><span class="p">,</span> <span class="p">{})</span>
+</span><span data-line="127">            <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="128">                <span class="k">if</span> <span class="n">param_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">properties</span><span class="p">:</span>
+</span><span data-line="129">                    <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Unknown parameter: </span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2">"</span>
+</span><span data-line="130">
+</span><span data-line="131">                <span class="n">param_schema</span> <span class="o">=</span> <span class="n">properties</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span>
+</span><span data-line="132">                <span class="n">expected_type</span> <span class="o">=</span> <span class="n">param_schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"type"</span><span class="p">)</span>
+</span><span data-line="133">
+</span><span data-line="134">                <span class="k">if</span> <span class="n">expected_type</span><span class="p">:</span>
+</span><span data-line="135">                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_type</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">expected_type</span><span class="p">):</span>
+</span><span data-line="136">                        <span class="k">return</span> <span class="p">(</span>
+</span><span data-line="137">                            <span class="kc">False</span><span class="p">,</span>
+</span><span data-line="138">                            <span class="sa">f</span><span class="s2">"Parameter </span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2"> has wrong type. "</span>
+</span><span data-line="139">                            <span class="sa">f</span><span class="s2">"Expected </span><span class="si">{</span><span class="n">expected_type</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+</span><span data-line="140">                        <span class="p">)</span>
+</span><span data-line="141">
+</span><span data-line="142">            <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span>
+</span><span data-line="143">
+</span><span data-line="144">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="145">            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Validation error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span></div>
 
-<span class="sd">        Args:</span>
-<span class="sd">            func_name: Name of the function</span>
-<span class="sd">            params: Parameters to validate</span>
+</span><span data-line="146">
+</span><span data-line="147">    <span class="k">def</span><span class="w"> </span><span class="nf">_check_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">json_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="148"><span class="w">        </span><span class="sd">"""Check if value matches JSON Schema type.</span>
+</span><span data-line="149">
+</span><span data-line="150"><span class="sd">        Args:</span>
+</span><span data-line="151"><span class="sd">            value: Value to check</span>
+</span><span data-line="152"><span class="sd">            json_type: JSON Schema type name</span>
+</span><span data-line="153">
+</span><span data-line="154"><span class="sd">        Returns:</span>
+</span><span data-line="155"><span class="sd">            True if types match</span>
+</span><span data-line="156"><span class="sd">        """</span>
+</span><span data-line="157">        <span class="n">type_map</span> <span class="o">=</span> <span class="p">{</span>
+</span><span data-line="158">            <span class="s2">"string"</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span data-line="159">            <span class="s2">"number"</span><span class="p">:</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
+</span><span data-line="160">            <span class="s2">"integer"</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+</span><span data-line="161">            <span class="s2">"boolean"</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+</span><span data-line="162">            <span class="s2">"array"</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+</span><span data-line="163">            <span class="s2">"object"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+</span><span data-line="164">            <span class="s2">"null"</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span>
+</span><span data-line="165">        <span class="p">}</span>
+</span><span data-line="166">
+</span><span data-line="167">        <span class="n">expected_types</span> <span class="o">=</span> <span class="n">type_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">json_type</span><span class="p">)</span>
+</span><span data-line="168">        <span class="k">if</span> <span class="n">expected_types</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="169">            <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># Unknown type, allow it</span>
+</span><span data-line="170">
+</span><span data-line="171">        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">expected_types</span><span class="p">)</span></div>
 
-<span class="sd">        Returns:</span>
-<span class="sd">            Tuple of (is_valid, error_message)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">spec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_spec</span><span class="p">(</span><span class="n">func_name</span><span class="p">)</span>
-            <span class="n">schema</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s2">&quot;schema&quot;</span><span class="p">]</span>
-
-            <span class="c1"># Check required parameters</span>
-            <span class="n">required</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;required&quot;</span><span class="p">,</span> <span class="p">[])</span>
-            <span class="k">for</span> <span class="n">req_param</span> <span class="ow">in</span> <span class="n">required</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">req_param</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Missing required parameter: </span><span class="si">{</span><span class="n">req_param</span><span class="si">}</span><span class="s2">&quot;</span>
-
-            <span class="c1"># Basic type checking</span>
-            <span class="n">properties</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;properties&quot;</span><span class="p">,</span> <span class="p">{})</span>
-            <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">param_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">properties</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Unknown parameter: </span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2">&quot;</span>
-
-                <span class="n">param_schema</span> <span class="o">=</span> <span class="n">properties</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span>
-                <span class="n">expected_type</span> <span class="o">=</span> <span class="n">param_schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span>
-
-                <span class="k">if</span> <span class="n">expected_type</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_type</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">expected_type</span><span class="p">):</span>
-                        <span class="k">return</span> <span class="p">(</span>
-                            <span class="kc">False</span><span class="p">,</span>
-                            <span class="sa">f</span><span class="s2">&quot;Parameter </span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2"> has wrong type. &quot;</span>
-                            <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">expected_type</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-                        <span class="p">)</span>
-
-            <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">None</span>
-
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Validation error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></div>
-
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">_check_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">json_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if value matches JSON Schema type.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            value: Value to check</span>
-<span class="sd">            json_type: JSON Schema type name</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            True if types match</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">type_map</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;string&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="s2">&quot;number&quot;</span><span class="p">:</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
-            <span class="s2">&quot;integer&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="s2">&quot;boolean&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-            <span class="s2">&quot;array&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
-            <span class="s2">&quot;object&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-            <span class="s2">&quot;null&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span>
-        <span class="p">}</span>
-
-        <span class="n">expected_types</span> <span class="o">=</span> <span class="n">type_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">json_type</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">expected_types</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># Unknown type, allow it</span>
-
-        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">expected_types</span><span class="p">)</span></div>
-
-
-
+</span><span data-line="172">
+</span><span data-line="173">
 <div class="viewcode-block" id="UfAppTester">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfAppTester">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">UfAppTester</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Context manager for testing uf apps.</span>
-
-<span class="sd">    Provides a testing context with common utilities and assertions.</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; with UfAppTester(app) as tester:</span>
-<span class="sd">        ...     result = tester.submit_form(&#39;add&#39;, {&#39;x&#39;: 10, &#39;y&#39;: 20})</span>
-<span class="sd">        ...     tester.assert_success(result)</span>
-<span class="sd">        ...     tester.assert_result_equals(result, 30)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the app tester.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            app: The uf application to test</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">UfTestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_results_history</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;UfAppTester&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enter the testing context.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Exit the testing context.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.UfAppTester">[docs]</a>
+</span><span data-line="174"><span class="k">class</span><span class="w"> </span><span class="nc">UfAppTester</span><span class="p">:</span>
+</span><span data-line="175"><span class="w">    </span><span class="sd">"""Context manager for testing uf apps.</span>
+</span><span data-line="176">
+</span><span data-line="177"><span class="sd">    Provides a testing context with common utilities and assertions.</span>
+</span><span data-line="178">
+</span><span data-line="179"><span class="sd">    Example:</span>
+</span><span data-line="180"><span class="sd">        &gt;&gt;&gt; with UfAppTester(app) as tester:</span>
+</span><span data-line="181"><span class="sd">        ...     result = tester.submit_form('add', {'x': 10, 'y': 20})</span>
+</span><span data-line="182"><span class="sd">        ...     tester.assert_success(result)</span>
+</span><span data-line="183"><span class="sd">        ...     tester.assert_result_equals(result, 30)</span>
+</span><span data-line="184"><span class="sd">    """</span>
+</span><span data-line="185">
+</span><span data-line="186">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
+</span><span data-line="187"><span class="w">        </span><span class="sd">"""Initialize the app tester.</span>
+</span><span data-line="188">
+</span><span data-line="189"><span class="sd">        Args:</span>
+</span><span data-line="190"><span class="sd">            app: The uf application to test</span>
+</span><span data-line="191"><span class="sd">        """</span>
+</span><span data-line="192">        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
+</span><span data-line="193">        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">UfTestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</span><span data-line="194">        <span class="bp">self</span><span class="o">.</span><span class="n">_results_history</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span data-line="195">
+</span><span data-line="196">    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"UfAppTester"</span><span class="p">:</span>
+</span><span data-line="197"><span class="w">        </span><span class="sd">"""Enter the testing context."""</span>
+</span><span data-line="198">        <span class="k">return</span> <span class="bp">self</span>
+</span><span data-line="199">
+</span><span data-line="200">    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+</span><span data-line="201"><span class="w">        </span><span class="sd">"""Exit the testing context."""</span>
+</span><span data-line="202">        <span class="k">pass</span>
+</span><span data-line="203">
 <div class="viewcode-block" id="UfAppTester.submit_form">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfAppTester.submit_form">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">submit_form</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">form_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate form submission.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.UfAppTester.submit_form">[docs]</a>
+</span><span data-line="204">    <span class="k">def</span><span class="w"> </span><span class="nf">submit_form</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">form_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span data-line="205"><span class="w">        </span><span class="sd">"""Simulate form submission.</span>
+</span><span data-line="206">
+</span><span data-line="207"><span class="sd">        Args:</span>
+</span><span data-line="208"><span class="sd">            func_name: Name of the function</span>
+</span><span data-line="209"><span class="sd">            form_data: Form data as dictionary</span>
+</span><span data-line="210">
+</span><span data-line="211"><span class="sd">        Returns:</span>
+</span><span data-line="212"><span class="sd">            Result dictionary</span>
+</span><span data-line="213"><span class="sd">        """</span>
+</span><span data-line="214">        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">call_function</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="n">form_data</span><span class="p">,</span> <span class="n">expect_success</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="215">        <span class="bp">self</span><span class="o">.</span><span class="n">_results_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span><span data-line="216">        <span class="k">return</span> <span class="n">result</span></div>
 
-<span class="sd">        Args:</span>
-<span class="sd">            func_name: Name of the function</span>
-<span class="sd">            form_data: Form data as dictionary</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Result dictionary</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">call_function</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="n">form_data</span><span class="p">,</span> <span class="n">expect_success</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_results_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">result</span></div>
-
-
+</span><span data-line="217">
 <div class="viewcode-block" id="UfAppTester.assert_success">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfAppTester.assert_success">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">assert_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Assert that a result indicates success.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.UfAppTester.assert_success">[docs]</a>
+</span><span data-line="218">    <span class="k">def</span><span class="w"> </span><span class="nf">assert_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">):</span>
+</span><span data-line="219"><span class="w">        </span><span class="sd">"""Assert that a result indicates success.</span>
+</span><span data-line="220">
+</span><span data-line="221"><span class="sd">        Args:</span>
+</span><span data-line="222"><span class="sd">            result: Result dictionary</span>
+</span><span data-line="223"><span class="sd">            message: Optional custom error message</span>
+</span><span data-line="224">
+</span><span data-line="225"><span class="sd">        Raises:</span>
+</span><span data-line="226"><span class="sd">            AssertionError: If result is not successful</span>
+</span><span data-line="227"><span class="sd">        """</span>
+</span><span data-line="228">        <span class="n">msg</span> <span class="o">=</span> <span class="n">message</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">"Expected success but got error: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'error'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+</span><span data-line="229">        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">),</span> <span class="n">msg</span></div>
 
-<span class="sd">        Args:</span>
-<span class="sd">            result: Result dictionary</span>
-<span class="sd">            message: Optional custom error message</span>
-
-<span class="sd">        Raises:</span>
-<span class="sd">            AssertionError: If result is not successful</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="n">message</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;Expected success but got error: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">),</span> <span class="n">msg</span></div>
-
-
+</span><span data-line="230">
 <div class="viewcode-block" id="UfAppTester.assert_failure">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfAppTester.assert_failure">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">assert_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Assert that a result indicates failure.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.UfAppTester.assert_failure">[docs]</a>
+</span><span data-line="231">    <span class="k">def</span><span class="w"> </span><span class="nf">assert_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">):</span>
+</span><span data-line="232"><span class="w">        </span><span class="sd">"""Assert that a result indicates failure.</span>
+</span><span data-line="233">
+</span><span data-line="234"><span class="sd">        Args:</span>
+</span><span data-line="235"><span class="sd">            result: Result dictionary</span>
+</span><span data-line="236"><span class="sd">            message: Optional custom error message</span>
+</span><span data-line="237">
+</span><span data-line="238"><span class="sd">        Raises:</span>
+</span><span data-line="239"><span class="sd">            AssertionError: If result is successful</span>
+</span><span data-line="240"><span class="sd">        """</span>
+</span><span data-line="241">        <span class="n">msg</span> <span class="o">=</span> <span class="n">message</span> <span class="ow">or</span> <span class="s2">"Expected failure but got success"</span>
+</span><span data-line="242">        <span class="k">assert</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">),</span> <span class="n">msg</span></div>
 
-<span class="sd">        Args:</span>
-<span class="sd">            result: Result dictionary</span>
-<span class="sd">            message: Optional custom error message</span>
-
-<span class="sd">        Raises:</span>
-<span class="sd">            AssertionError: If result is successful</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="n">message</span> <span class="ow">or</span> <span class="s2">&quot;Expected failure but got success&quot;</span>
-        <span class="k">assert</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">),</span> <span class="n">msg</span></div>
-
-
+</span><span data-line="243">
 <div class="viewcode-block" id="UfAppTester.assert_result_equals">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfAppTester.assert_result_equals">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">assert_result_equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">expected</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Assert that result value equals expected.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.UfAppTester.assert_result_equals">[docs]</a>
+</span><span data-line="244">    <span class="k">def</span><span class="w"> </span><span class="nf">assert_result_equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">expected</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+</span><span data-line="245"><span class="w">        </span><span class="sd">"""Assert that result value equals expected.</span>
+</span><span data-line="246">
+</span><span data-line="247"><span class="sd">        Args:</span>
+</span><span data-line="248"><span class="sd">            result: Result dictionary</span>
+</span><span data-line="249"><span class="sd">            expected: Expected value</span>
+</span><span data-line="250">
+</span><span data-line="251"><span class="sd">        Raises:</span>
+</span><span data-line="252"><span class="sd">            AssertionError: If values don't match</span>
+</span><span data-line="253"><span class="sd">        """</span>
+</span><span data-line="254">        <span class="bp">self</span><span class="o">.</span><span class="n">assert_success</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span><span data-line="255">        <span class="n">actual</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"result"</span><span class="p">)</span>
+</span><span data-line="256">        <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Expected </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">actual</span><span class="si">}</span><span class="s2">"</span></div>
 
-<span class="sd">        Args:</span>
-<span class="sd">            result: Result dictionary</span>
-<span class="sd">            expected: Expected value</span>
-
-<span class="sd">        Raises:</span>
-<span class="sd">            AssertionError: If values don&#39;t match</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assert_success</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-        <span class="n">actual</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">actual</span><span class="si">}</span><span class="s2">&quot;</span></div>
-
-
+</span><span data-line="257">
 <div class="viewcode-block" id="UfAppTester.assert_error_type">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfAppTester.assert_error_type">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">assert_error_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">error_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Assert that error type matches.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.UfAppTester.assert_error_type">[docs]</a>
+</span><span data-line="258">    <span class="k">def</span><span class="w"> </span><span class="nf">assert_error_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">error_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span data-line="259"><span class="w">        </span><span class="sd">"""Assert that error type matches.</span>
+</span><span data-line="260">
+</span><span data-line="261"><span class="sd">        Args:</span>
+</span><span data-line="262"><span class="sd">            result: Result dictionary</span>
+</span><span data-line="263"><span class="sd">            error_type: Expected error type name</span>
+</span><span data-line="264">
+</span><span data-line="265"><span class="sd">        Raises:</span>
+</span><span data-line="266"><span class="sd">            AssertionError: If error types don't match</span>
+</span><span data-line="267"><span class="sd">        """</span>
+</span><span data-line="268">        <span class="bp">self</span><span class="o">.</span><span class="n">assert_failure</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span><span data-line="269">        <span class="n">actual_type</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"error_type"</span><span class="p">)</span>
+</span><span data-line="270">        <span class="k">assert</span> <span class="n">actual_type</span> <span class="o">==</span> <span class="n">error_type</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Expected </span><span class="si">{</span><span class="n">error_type</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">actual_type</span><span class="si">}</span><span class="s2">"</span></div>
 
-<span class="sd">        Args:</span>
-<span class="sd">            result: Result dictionary</span>
-<span class="sd">            error_type: Expected error type name</span>
-
-<span class="sd">        Raises:</span>
-<span class="sd">            AssertionError: If error types don&#39;t match</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assert_failure</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-        <span class="n">actual_type</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;error_type&quot;</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">actual_type</span> <span class="o">==</span> <span class="n">error_type</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">error_type</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">actual_type</span><span class="si">}</span><span class="s2">&quot;</span></div>
-
-
+</span><span data-line="271">
 <div class="viewcode-block" id="UfAppTester.get_history">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.UfAppTester.get_history">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get history of all results.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            List of result dictionaries</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results_history</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.UfAppTester.get_history">[docs]</a>
+</span><span data-line="272">    <span class="k">def</span><span class="w"> </span><span class="nf">get_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+</span><span data-line="273"><span class="w">        </span><span class="sd">"""Get history of all results.</span>
+</span><span data-line="274">
+</span><span data-line="275"><span class="sd">        Returns:</span>
+</span><span data-line="276"><span class="sd">            List of result dictionaries</span>
+</span><span data-line="277"><span class="sd">        """</span>
+</span><span data-line="278">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results_history</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
 </div>
 
-
-
+</span><span data-line="279">
+</span><span data-line="280">
 <div class="viewcode-block" id="test_ui_function">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.test_ui_function">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">test_ui_function</span><span class="p">(</span>
-    <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-    <span class="n">test_inputs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-    <span class="o">*</span><span class="p">,</span>
-    <span class="n">expected_output</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">expected_exception</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test a function with form-like input.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.test_ui_function">[docs]</a>
+</span><span data-line="281"><span class="k">def</span><span class="w"> </span><span class="nf">test_ui_function</span><span class="p">(</span>
+</span><span data-line="282">    <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+</span><span data-line="283">    <span class="n">test_inputs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+</span><span data-line="284">    <span class="o">*</span><span class="p">,</span>
+</span><span data-line="285">    <span class="n">expected_output</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="286">    <span class="n">expected_exception</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="287"><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="288"><span class="w">    </span><span class="sd">"""Test a function with form-like input.</span>
+</span><span data-line="289">
+</span><span data-line="290"><span class="sd">    Args:</span>
+</span><span data-line="291"><span class="sd">        func: Function to test</span>
+</span><span data-line="292"><span class="sd">        test_inputs: Dictionary of test parameters</span>
+</span><span data-line="293"><span class="sd">        expected_output: Expected return value (if any)</span>
+</span><span data-line="294"><span class="sd">        expected_exception: Expected exception type (if any)</span>
+</span><span data-line="295">
+</span><span data-line="296"><span class="sd">    Returns:</span>
+</span><span data-line="297"><span class="sd">        True if test passes</span>
+</span><span data-line="298">
+</span><span data-line="299"><span class="sd">    Raises:</span>
+</span><span data-line="300"><span class="sd">        AssertionError: If test fails</span>
+</span><span data-line="301">
+</span><span data-line="302"><span class="sd">    Example:</span>
+</span><span data-line="303"><span class="sd">        &gt;&gt;&gt; def add(x: int, y: int) -&gt; int:</span>
+</span><span data-line="304"><span class="sd">        ...     return x + y</span>
+</span><span data-line="305"><span class="sd">        &gt;&gt;&gt; test_ui_function(add, {'x': 10, 'y': 20}, expected_output=30)</span>
+</span><span data-line="306"><span class="sd">        True</span>
+</span><span data-line="307"><span class="sd">    """</span>
+</span><span data-line="308">    <span class="k">if</span> <span class="n">expected_exception</span><span class="p">:</span>
+</span><span data-line="309">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="310">            <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">test_inputs</span><span class="p">)</span>
+</span><span data-line="311">            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
+</span><span data-line="312">                <span class="sa">f</span><span class="s2">"Expected </span><span class="si">{</span><span class="n">expected_exception</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> but no exception was raised"</span>
+</span><span data-line="313">            <span class="p">)</span>
+</span><span data-line="314">        <span class="k">except</span> <span class="n">expected_exception</span><span class="p">:</span>
+</span><span data-line="315">            <span class="k">return</span> <span class="kc">True</span>
+</span><span data-line="316">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="317">            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
+</span><span data-line="318">                <span class="sa">f</span><span class="s2">"Expected </span><span class="si">{</span><span class="n">expected_exception</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span>
+</span><span data-line="319">            <span class="p">)</span>
+</span><span data-line="320">    <span class="k">else</span><span class="p">:</span>
+</span><span data-line="321">        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">test_inputs</span><span class="p">)</span>
+</span><span data-line="322">
+</span><span data-line="323">        <span class="k">if</span> <span class="n">expected_output</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="324">            <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="n">expected_output</span><span class="p">,</span> <span class="p">(</span>
+</span><span data-line="325">                <span class="sa">f</span><span class="s2">"Expected </span><span class="si">{</span><span class="n">expected_output</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">"</span>
+</span><span data-line="326">            <span class="p">)</span>
+</span><span data-line="327">
+</span><span data-line="328">        <span class="k">return</span> <span class="kc">True</span></div>
 
-<span class="sd">    Args:</span>
-<span class="sd">        func: Function to test</span>
-<span class="sd">        test_inputs: Dictionary of test parameters</span>
-<span class="sd">        expected_output: Expected return value (if any)</span>
-<span class="sd">        expected_exception: Expected exception type (if any)</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        True if test passes</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        AssertionError: If test fails</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; def add(x: int, y: int) -&gt; int:</span>
-<span class="sd">        ...     return x + y</span>
-<span class="sd">        &gt;&gt;&gt; test_ui_function(add, {&#39;x&#39;: 10, &#39;y&#39;: 20}, expected_output=30)</span>
-<span class="sd">        True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">expected_exception</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">test_inputs</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">expected_exception</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> but no exception was raised&quot;</span>
-            <span class="p">)</span>
-        <span class="k">except</span> <span class="n">expected_exception</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">expected_exception</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">test_inputs</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">expected_output</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="n">expected_output</span><span class="p">,</span> <span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">expected_output</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="p">)</span>
-
-        <span class="k">return</span> <span class="kc">True</span></div>
-
-
-
-<span class="n">test_ui_function</span><span class="o">.</span><span class="n">__test__</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># tell pytest this is a utility, not a test case</span>
-
-
+</span><span data-line="329">
+</span><span data-line="330">
+</span><span data-line="331"><span class="n">test_ui_function</span><span class="o">.</span><span class="n">__test__</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># tell pytest this is a utility, not a test case</span>
+</span><span data-line="332">
+</span><span data-line="333">
 <div class="viewcode-block" id="mock_function_response">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.mock_function_response">[docs]</a>
-<span class="nd">@contextmanager</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">mock_function_response</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mock_result</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Context manager to mock a function&#39;s response.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.mock_function_response">[docs]</a>
+</span><span data-line="334"><span class="nd">@contextmanager</span>
+</span><span data-line="335"><span class="k">def</span><span class="w"> </span><span class="nf">mock_function_response</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mock_result</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+</span><span data-line="336"><span class="w">    </span><span class="sd">"""Context manager to mock a function's response.</span>
+</span><span data-line="337">
+</span><span data-line="338"><span class="sd">    Args:</span>
+</span><span data-line="339"><span class="sd">        app: The uf application</span>
+</span><span data-line="340"><span class="sd">        func_name: Name of function to mock</span>
+</span><span data-line="341"><span class="sd">        mock_result: Value to return</span>
+</span><span data-line="342">
+</span><span data-line="343"><span class="sd">    Yields:</span>
+</span><span data-line="344"><span class="sd">        None</span>
+</span><span data-line="345">
+</span><span data-line="346"><span class="sd">    Example:</span>
+</span><span data-line="347"><span class="sd">        &gt;&gt;&gt; with mock_function_response(app, 'get_user', {'name': 'Test'}):</span>
+</span><span data-line="348"><span class="sd">        ...     # Calls to get_user will return {'name': 'Test'}</span>
+</span><span data-line="349"><span class="sd">        ...     result = client.call_function('get_user', {'id': 1})</span>
+</span><span data-line="350"><span class="sd">    """</span>
+</span><span data-line="351">    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s2">"function_specs"</span><span class="p">):</span>
+</span><span data-line="352">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"App does not have function_specs"</span><span class="p">)</span>
+</span><span data-line="353">
+</span><span data-line="354">    <span class="n">spec</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">function_specs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
+</span><span data-line="355">    <span class="n">original_func</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s2">"func"</span><span class="p">]</span>
+</span><span data-line="356">
+</span><span data-line="357">    <span class="c1"># Create mock function</span>
+</span><span data-line="358">    <span class="k">def</span><span class="w"> </span><span class="nf">mock_func</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span data-line="359">        <span class="k">return</span> <span class="n">mock_result</span>
+</span><span data-line="360">
+</span><span data-line="361">    <span class="c1"># Replace function</span>
+</span><span data-line="362">    <span class="n">spec</span><span class="p">[</span><span class="s2">"func"</span><span class="p">]</span> <span class="o">=</span> <span class="n">mock_func</span>
+</span><span data-line="363">
+</span><span data-line="364">    <span class="k">try</span><span class="p">:</span>
+</span><span data-line="365">        <span class="k">yield</span>
+</span><span data-line="366">    <span class="k">finally</span><span class="p">:</span>
+</span><span data-line="367">        <span class="c1"># Restore original function</span>
+</span><span data-line="368">        <span class="n">spec</span><span class="p">[</span><span class="s2">"func"</span><span class="p">]</span> <span class="o">=</span> <span class="n">original_func</span></div>
 
-<span class="sd">    Args:</span>
-<span class="sd">        app: The uf application</span>
-<span class="sd">        func_name: Name of function to mock</span>
-<span class="sd">        mock_result: Value to return</span>
-
-<span class="sd">    Yields:</span>
-<span class="sd">        None</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; with mock_function_response(app, &#39;get_user&#39;, {&#39;name&#39;: &#39;Test&#39;}):</span>
-<span class="sd">        ...     # Calls to get_user will return {&#39;name&#39;: &#39;Test&#39;}</span>
-<span class="sd">        ...     result = client.call_function(&#39;get_user&#39;, {&#39;id&#39;: 1})</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s2">&quot;function_specs&quot;</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;App does not have function_specs&quot;</span><span class="p">)</span>
-
-    <span class="n">spec</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">function_specs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
-    <span class="n">original_func</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s2">&quot;func&quot;</span><span class="p">]</span>
-
-    <span class="c1"># Create mock function</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">mock_func</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">mock_result</span>
-
-    <span class="c1"># Replace function</span>
-    <span class="n">spec</span><span class="p">[</span><span class="s2">&quot;func&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mock_func</span>
-
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">yield</span>
-    <span class="k">finally</span><span class="p">:</span>
-        <span class="c1"># Restore original function</span>
-        <span class="n">spec</span><span class="p">[</span><span class="s2">&quot;func&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">original_func</span></div>
-
-
-
+</span><span data-line="369">
+</span><span data-line="370">
 <div class="viewcode-block" id="FormDataBuilder">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.FormDataBuilder">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">FormDataBuilder</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Builder for constructing form data for tests.</span>
-
-<span class="sd">    Provides a fluent interface for building test form data.</span>
-
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; form_data = (</span>
-<span class="sd">        ...     FormDataBuilder()</span>
-<span class="sd">        ...     .field(&#39;name&#39;, &#39;John Doe&#39;)</span>
-<span class="sd">        ...     .field(&#39;email&#39;, &#39;john@example.com&#39;)</span>
-<span class="sd">        ...     .field(&#39;age&#39;, 30)</span>
-<span class="sd">        ...     .build()</span>
-<span class="sd">        ... )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the builder.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
-
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.FormDataBuilder">[docs]</a>
+</span><span data-line="371"><span class="k">class</span><span class="w"> </span><span class="nc">FormDataBuilder</span><span class="p">:</span>
+</span><span data-line="372"><span class="w">    </span><span class="sd">"""Builder for constructing form data for tests.</span>
+</span><span data-line="373">
+</span><span data-line="374"><span class="sd">    Provides a fluent interface for building test form data.</span>
+</span><span data-line="375">
+</span><span data-line="376"><span class="sd">    Example:</span>
+</span><span data-line="377"><span class="sd">        &gt;&gt;&gt; form_data = (</span>
+</span><span data-line="378"><span class="sd">        ...     FormDataBuilder()</span>
+</span><span data-line="379"><span class="sd">        ...     .field('name', 'John Doe')</span>
+</span><span data-line="380"><span class="sd">        ...     .field('email', 'john@example.com')</span>
+</span><span data-line="381"><span class="sd">        ...     .field('age', 30)</span>
+</span><span data-line="382"><span class="sd">        ...     .build()</span>
+</span><span data-line="383"><span class="sd">        ... )</span>
+</span><span data-line="384"><span class="sd">    """</span>
+</span><span data-line="385">
+</span><span data-line="386">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="387"><span class="w">        </span><span class="sd">"""Initialize the builder."""</span>
+</span><span data-line="388">        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="389">
 <div class="viewcode-block" id="FormDataBuilder.field">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.FormDataBuilder.field">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FormDataBuilder&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a field to the form data.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.FormDataBuilder.field">[docs]</a>
+</span><span data-line="390">    <span class="k">def</span><span class="w"> </span><span class="nf">field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"FormDataBuilder"</span><span class="p">:</span>
+</span><span data-line="391"><span class="w">        </span><span class="sd">"""Add a field to the form data.</span>
+</span><span data-line="392">
+</span><span data-line="393"><span class="sd">        Args:</span>
+</span><span data-line="394"><span class="sd">            name: Field name</span>
+</span><span data-line="395"><span class="sd">            value: Field value</span>
+</span><span data-line="396">
+</span><span data-line="397"><span class="sd">        Returns:</span>
+</span><span data-line="398"><span class="sd">            Self for method chaining</span>
+</span><span data-line="399"><span class="sd">        """</span>
+</span><span data-line="400">        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+</span><span data-line="401">        <span class="k">return</span> <span class="bp">self</span></div>
 
-<span class="sd">        Args:</span>
-<span class="sd">            name: Field name</span>
-<span class="sd">            value: Field value</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Self for method chaining</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-        <span class="k">return</span> <span class="bp">self</span></div>
-
-
+</span><span data-line="402">
 <div class="viewcode-block" id="FormDataBuilder.fields">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.FormDataBuilder.fields">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FormDataBuilder&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add multiple fields at once.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.FormDataBuilder.fields">[docs]</a>
+</span><span data-line="403">    <span class="k">def</span><span class="w"> </span><span class="nf">fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"FormDataBuilder"</span><span class="p">:</span>
+</span><span data-line="404"><span class="w">        </span><span class="sd">"""Add multiple fields at once.</span>
+</span><span data-line="405">
+</span><span data-line="406"><span class="sd">        Args:</span>
+</span><span data-line="407"><span class="sd">            **kwargs: Field name-value pairs</span>
+</span><span data-line="408">
+</span><span data-line="409"><span class="sd">        Returns:</span>
+</span><span data-line="410"><span class="sd">            Self for method chaining</span>
+</span><span data-line="411"><span class="sd">        """</span>
+</span><span data-line="412">        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span data-line="413">        <span class="k">return</span> <span class="bp">self</span></div>
 
-<span class="sd">        Args:</span>
-<span class="sd">            **kwargs: Field name-value pairs</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Self for method chaining</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span></div>
-
-
+</span><span data-line="414">
 <div class="viewcode-block" id="FormDataBuilder.build">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.FormDataBuilder.build">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Build and return the form data.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Dictionary of form data</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.FormDataBuilder.build">[docs]</a>
+</span><span data-line="415">    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span data-line="416"><span class="w">        </span><span class="sd">"""Build and return the form data.</span>
+</span><span data-line="417">
+</span><span data-line="418"><span class="sd">        Returns:</span>
+</span><span data-line="419"><span class="sd">            Dictionary of form data</span>
+</span><span data-line="420"><span class="sd">        """</span>
+</span><span data-line="421">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
 </div>
 
-
-
+</span><span data-line="422">
+</span><span data-line="423">
 <div class="viewcode-block" id="assert_valid_rjsf_spec">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.assert_valid_rjsf_spec">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">assert_valid_rjsf_spec</span><span class="p">(</span><span class="n">spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assert that a specification is valid RJSF format.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.assert_valid_rjsf_spec">[docs]</a>
+</span><span data-line="424"><span class="k">def</span><span class="w"> </span><span class="nf">assert_valid_rjsf_spec</span><span class="p">(</span><span class="n">spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+</span><span data-line="425"><span class="w">    </span><span class="sd">"""Assert that a specification is valid RJSF format.</span>
+</span><span data-line="426">
+</span><span data-line="427"><span class="sd">    Args:</span>
+</span><span data-line="428"><span class="sd">        spec: The specification to validate</span>
+</span><span data-line="429">
+</span><span data-line="430"><span class="sd">    Raises:</span>
+</span><span data-line="431"><span class="sd">        AssertionError: If spec is invalid</span>
+</span><span data-line="432"><span class="sd">    """</span>
+</span><span data-line="433">    <span class="k">assert</span> <span class="s2">"schema"</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">,</span> <span class="s2">"Spec must have 'schema' key"</span>
+</span><span data-line="434">    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="s2">"schema"</span><span class="p">],</span> <span class="nb">dict</span><span class="p">),</span> <span class="s2">"Schema must be a dict"</span>
+</span><span data-line="435">
+</span><span data-line="436">    <span class="n">schema</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s2">"schema"</span><span class="p">]</span>
+</span><span data-line="437">    <span class="k">assert</span> <span class="s2">"type"</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">,</span> <span class="s2">"Schema must have 'type'"</span>
+</span><span data-line="438">    <span class="k">assert</span> <span class="s2">"properties"</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">,</span> <span class="s2">"Schema must have 'properties'"</span>
+</span><span data-line="439">    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">schema</span><span class="p">[</span><span class="s2">"properties"</span><span class="p">],</span> <span class="nb">dict</span><span class="p">),</span> <span class="s2">"Properties must be a dict"</span></div>
 
-<span class="sd">    Args:</span>
-<span class="sd">        spec: The specification to validate</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        AssertionError: If spec is invalid</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">assert</span> <span class="s2">&quot;schema&quot;</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">,</span> <span class="s2">&quot;Spec must have &#39;schema&#39; key&quot;</span>
-    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="s2">&quot;schema&quot;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">),</span> <span class="s2">&quot;Schema must be a dict&quot;</span>
-
-    <span class="n">schema</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s2">&quot;schema&quot;</span><span class="p">]</span>
-    <span class="k">assert</span> <span class="s2">&quot;type&quot;</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">,</span> <span class="s2">&quot;Schema must have &#39;type&#39;&quot;</span>
-    <span class="k">assert</span> <span class="s2">&quot;properties&quot;</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">,</span> <span class="s2">&quot;Schema must have &#39;properties&#39;&quot;</span>
-    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">schema</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">),</span> <span class="s2">&quot;Properties must be a dict&quot;</span></div>
-
-
-
+</span><span data-line="440">
+</span><span data-line="441">
 <div class="viewcode-block" id="assert_has_field">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.assert_has_field">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">assert_has_field</span><span class="p">(</span><span class="n">spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assert that a spec has a specific field.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.assert_has_field">[docs]</a>
+</span><span data-line="442"><span class="k">def</span><span class="w"> </span><span class="nf">assert_has_field</span><span class="p">(</span><span class="n">spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span data-line="443"><span class="w">    </span><span class="sd">"""Assert that a spec has a specific field.</span>
+</span><span data-line="444">
+</span><span data-line="445"><span class="sd">    Args:</span>
+</span><span data-line="446"><span class="sd">        spec: The specification</span>
+</span><span data-line="447"><span class="sd">        field_name: Name of the field to check</span>
+</span><span data-line="448">
+</span><span data-line="449"><span class="sd">    Raises:</span>
+</span><span data-line="450"><span class="sd">        AssertionError: If field not found</span>
+</span><span data-line="451"><span class="sd">    """</span>
+</span><span data-line="452">    <span class="n">assert_valid_rjsf_spec</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+</span><span data-line="453">    <span class="n">properties</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s2">"schema"</span><span class="p">][</span><span class="s2">"properties"</span><span class="p">]</span>
+</span><span data-line="454">    <span class="k">assert</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">properties</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Field '</span><span class="si">{</span><span class="n">field_name</span><span class="si">}</span><span class="s2">' not found in schema"</span></div>
 
-<span class="sd">    Args:</span>
-<span class="sd">        spec: The specification</span>
-<span class="sd">        field_name: Name of the field to check</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        AssertionError: If field not found</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">assert_valid_rjsf_spec</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
-    <span class="n">properties</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s2">&quot;schema&quot;</span><span class="p">][</span><span class="s2">&quot;properties&quot;</span><span class="p">]</span>
-    <span class="k">assert</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">properties</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="n">field_name</span><span class="si">}</span><span class="s2">&#39; not found in schema&quot;</span></div>
-
-
-
+</span><span data-line="455">
+</span><span data-line="456">
 <div class="viewcode-block" id="assert_field_type">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.assert_field_type">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">assert_field_type</span><span class="p">(</span><span class="n">spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assert that a field has the expected type.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.assert_field_type">[docs]</a>
+</span><span data-line="457"><span class="k">def</span><span class="w"> </span><span class="nf">assert_field_type</span><span class="p">(</span><span class="n">spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span data-line="458"><span class="w">    </span><span class="sd">"""Assert that a field has the expected type.</span>
+</span><span data-line="459">
+</span><span data-line="460"><span class="sd">    Args:</span>
+</span><span data-line="461"><span class="sd">        spec: The specification</span>
+</span><span data-line="462"><span class="sd">        field_name: Name of the field</span>
+</span><span data-line="463"><span class="sd">        expected_type: Expected JSON Schema type</span>
+</span><span data-line="464">
+</span><span data-line="465"><span class="sd">    Raises:</span>
+</span><span data-line="466"><span class="sd">        AssertionError: If type doesn't match</span>
+</span><span data-line="467"><span class="sd">    """</span>
+</span><span data-line="468">    <span class="n">assert_has_field</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
+</span><span data-line="469">    <span class="n">field_schema</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s2">"schema"</span><span class="p">][</span><span class="s2">"properties"</span><span class="p">][</span><span class="n">field_name</span><span class="p">]</span>
+</span><span data-line="470">    <span class="n">actual_type</span> <span class="o">=</span> <span class="n">field_schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"type"</span><span class="p">)</span>
+</span><span data-line="471">    <span class="k">assert</span> <span class="n">actual_type</span> <span class="o">==</span> <span class="n">expected_type</span><span class="p">,</span> <span class="p">(</span>
+</span><span data-line="472">        <span class="sa">f</span><span class="s2">"Expected type '</span><span class="si">{</span><span class="n">expected_type</span><span class="si">}</span><span class="s2">', got '</span><span class="si">{</span><span class="n">actual_type</span><span class="si">}</span><span class="s2">'"</span>
+</span><span data-line="473">    <span class="p">)</span></div>
 
-<span class="sd">    Args:</span>
-<span class="sd">        spec: The specification</span>
-<span class="sd">        field_name: Name of the field</span>
-<span class="sd">        expected_type: Expected JSON Schema type</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        AssertionError: If type doesn&#39;t match</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">assert_has_field</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
-    <span class="n">field_schema</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s2">&quot;schema&quot;</span><span class="p">][</span><span class="s2">&quot;properties&quot;</span><span class="p">][</span><span class="n">field_name</span><span class="p">]</span>
-    <span class="n">actual_type</span> <span class="o">=</span> <span class="n">field_schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">actual_type</span> <span class="o">==</span> <span class="n">expected_type</span><span class="p">,</span> <span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;Expected type &#39;</span><span class="si">{</span><span class="n">expected_type</span><span class="si">}</span><span class="s2">&#39;, got &#39;</span><span class="si">{</span><span class="n">actual_type</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
-    <span class="p">)</span></div>
-
-
-
+</span><span data-line="474">
+</span><span data-line="475">
 <div class="viewcode-block" id="assert_field_required">
-<a class="viewcode-back" href="../../module_docs/uf/testing.html#uf.assert_field_required">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">assert_field_required</span><span class="p">(</span><span class="n">spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assert that a field is required.</span>
+<a class="viewcode-back" href="../../_autosummary/uf.testing.html#uf.assert_field_required">[docs]</a>
+</span><span data-line="476"><span class="k">def</span><span class="w"> </span><span class="nf">assert_field_required</span><span class="p">(</span><span class="n">spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span data-line="477"><span class="w">    </span><span class="sd">"""Assert that a field is required.</span>
+</span><span data-line="478">
+</span><span data-line="479"><span class="sd">    Args:</span>
+</span><span data-line="480"><span class="sd">        spec: The specification</span>
+</span><span data-line="481"><span class="sd">        field_name: Name of the field</span>
+</span><span data-line="482">
+</span><span data-line="483"><span class="sd">    Raises:</span>
+</span><span data-line="484"><span class="sd">        AssertionError: If field is not required</span>
+</span><span data-line="485"><span class="sd">    """</span>
+</span><span data-line="486">    <span class="n">assert_has_field</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
+</span><span data-line="487">    <span class="n">required</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s2">"schema"</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"required"</span><span class="p">,</span> <span class="p">[])</span>
+</span><span data-line="488">    <span class="k">assert</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">required</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Field '</span><span class="si">{</span><span class="n">field_name</span><span class="si">}</span><span class="s2">' is not required"</span></div>
 
-<span class="sd">    Args:</span>
-<span class="sd">        spec: The specification</span>
-<span class="sd">        field_name: Name of the field</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        AssertionError: If field is not required</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">assert_has_field</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">field_name</span><span class="p">)</span>
-    <span class="n">required</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s2">&quot;schema&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;required&quot;</span><span class="p">,</span> <span class="p">[])</span>
-    <span class="k">assert</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">required</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Field &#39;</span><span class="si">{</span><span class="n">field_name</span><span class="si">}</span><span class="s2">&#39; is not required&quot;</span></div>
-
-</pre></div>
-
-           </div>
-          </div>
-          <footer>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p></p>
+</span></pre></div>
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright">
+  <p>
+    Made with
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/i2mint/uf" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div>
+    </div>
   </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
 </footer>
-        </div>
-      </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+      <script src="../../_static/documentation_options.js?v=fd825880"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=fd10adb8"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
 
-</body>
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script></body>
 </html>

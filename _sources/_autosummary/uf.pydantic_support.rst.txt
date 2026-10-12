@@ -1,0 +1,28 @@
+uf.pydantic\_support
+====================
+
+.. automodule:: uf.pydantic_support
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      create_pydantic_spec
+      dict_to_pydantic
+      extract_field_validators
+      extract_pydantic_params
+      function_uses_pydantic
+      get_pydantic_registry
+      is_pydantic_model
+      pydantic_error_to_user_friendly
+      pydantic_model_to_json_schema
+      pydantic_to_dict
+      wrap_pydantic_function
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      PydanticRegistry
+   

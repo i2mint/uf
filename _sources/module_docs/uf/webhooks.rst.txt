@@ -1,4 +1,0 @@
-uf.webhooks
-===========
-.. automodule:: uf.webhooks
-   :members:

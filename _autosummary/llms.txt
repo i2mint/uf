@@ -1,0 +1,31 @@
+# uf
+
+> Minimal-boilerplate web UIs for Python functions
+
+
+## Pages in this subsection
+
+- [uf](uf.html.md): uf - UI Fast: Minimal-boilerplate web UIs for Python functions.
+- [uf.async_support](uf.async_support.html.md): Async function support for uf.
+- [uf.auth](uf.auth.html.md): Authentication and authorization for uf.
+- [uf.base](uf.base.html.md): Core functionality for uf - UI Fast.
+- [uf.caching](uf.caching.html.md): Result caching for uf.
+- [uf.decorators](uf.decorators.html.md): UI metadata decorators for uf.
+- [uf.field_interactions](uf.field_interactions.html.md): Field dependencies and interactions for uf.
+- [uf.history](uf.history.html.md): Call history and presets for uf.
+- [uf.openapi](uf.openapi.html.md): OpenAPI/Swagger integration for uf.
+- [uf.organization](uf.organization.html.md): Function grouping and organization for uf.
+- [uf.pydantic_support](uf.pydantic_support.html.md): Pydantic integration for uf.
+- [uf.renderers](uf.renderers.html.md): Result rendering system for uf.
+- [uf.rjsf_config](uf.rjsf_config.html.md): RJSF customization layer for uf.
+- [uf.routes](uf.routes.html.md): API routes for uf web interface.
+- [uf.specs](uf.specs.html.md): Function specification management for uf.
+- [uf.templates](uf.templates.html.md): HTML template generation for uf web interface.
+- [uf.testing](uf.testing.html.md): Testing utilities for uf applications.
+- [uf.themes](uf.themes.html.md): Theme and styling support for uf.
+- [uf.trans](uf.trans.html.md): Input transformation integration for uf.
+- [uf.webhooks](uf.webhooks.html.md): Webhook support for uf.
+
+## Optional
+
+- [Top-level llms.txt](../llms.txt): Complete documentation index.

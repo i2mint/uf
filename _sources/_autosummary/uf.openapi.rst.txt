@@ -1,0 +1,22 @@
+uf.openapi
+==========
+
+.. automodule:: uf.openapi
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      add_openapi_routes
+      function_to_openapi_operation
+      generate_openapi_spec
+      redoc_ui_html
+      swagger_ui_html
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      OpenAPIConfig
+   

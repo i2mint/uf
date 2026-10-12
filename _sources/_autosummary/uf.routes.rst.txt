@@ -1,0 +1,13 @@
+uf.routes
+=========
+
+.. automodule:: uf.routes
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      add_ui_routes
+      create_function_handler
+   

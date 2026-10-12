@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="pink" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>uf.async_support - uf</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="uf.auth" href="uf.auth.html" /><link rel="prev" title="uf" href="uf.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d88b86f9" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="uf.async_support"/>
+    <meta name="twitter:card" content="summary"/>
+  
+<link rel="alternate" type="text/markdown" href="uf.async_support.html.md">
+<link rel="describedby" href="../llms.txt" type="text/markdown">
+</head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>uf</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/i2mint/uf" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="uf.html">uf</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">uf.async_support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.auth.html">uf.auth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.base.html">uf.base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.caching.html">uf.caching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.decorators.html">uf.decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.history.html">uf.history</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.openapi.html">uf.openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.organization.html">uf.organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.renderers.html">uf.renderers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.rjsf_config.html">uf.rjsf_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.routes.html">uf.routes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.specs.html">uf.specs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.templates.html">uf.templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.testing.html">uf.testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.themes.html">uf.themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.trans.html">uf.trans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.webhooks.html">uf.webhooks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#uf.async_support.AsyncContext"><code class="docutils literal notranslate"><span class="pre">AsyncContext</span></code></a><ul>
+<li><a class="reference internal" href="#uf.async_support.AsyncContext.run"><code class="docutils literal notranslate"><span class="pre">AsyncContext.run()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.async_support.AsyncFunctionWrapper"><code class="docutils literal notranslate"><span class="pre">AsyncFunctionWrapper</span></code></a><ul>
+<li><a class="reference internal" href="#uf.async_support.AsyncFunctionWrapper.call_async"><code class="docutils literal notranslate"><span class="pre">AsyncFunctionWrapper.call_async()</span></code></a></li>
+<li><a class="reference internal" href="#uf.async_support.AsyncFunctionWrapper.call_sync"><code class="docutils literal notranslate"><span class="pre">AsyncFunctionWrapper.call_sync()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.async_support.async_to_sync"><code class="docutils literal notranslate"><span class="pre">async_to_sync()</span></code></a></li>
+<li><a class="reference internal" href="#uf.async_support.batch_async_calls"><code class="docutils literal notranslate"><span class="pre">batch_async_calls()</span></code></a></li>
+<li><a class="reference internal" href="#uf.async_support.create_async_handler"><code class="docutils literal notranslate"><span class="pre">create_async_handler()</span></code></a></li>
+<li><a class="reference internal" href="#uf.async_support.detect_async_framework"><code class="docutils literal notranslate"><span class="pre">detect_async_framework()</span></code></a></li>
+<li><a class="reference internal" href="#uf.async_support.is_async_function"><code class="docutils literal notranslate"><span class="pre">is_async_function()</span></code></a></li>
+<li><a class="reference internal" href="#uf.async_support.is_framework_async_capable"><code class="docutils literal notranslate"><span class="pre">is_framework_async_capable()</span></code></a></li>
+<li><a class="reference internal" href="#uf.async_support.make_sync_compatible"><code class="docutils literal notranslate"><span class="pre">make_sync_compatible()</span></code></a></li>
+<li><a class="reference internal" href="#uf.async_support.retry_async"><code class="docutils literal notranslate"><span class="pre">retry_async()</span></code></a></li>
+<li><a class="reference internal" href="#uf.async_support.timeout_async"><code class="docutils literal notranslate"><span class="pre">timeout_async()</span></code></a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">uf</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../api.html"><span itemprop="name">API reference</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="uf.html"><span itemprop="name">uf</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">uf.async_support</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section id="module-uf.async_support">
+<span id="uf-async-support"></span><h1>uf.async_support<a class="headerlink" href="#module-uf.async_support" title="Link to this heading">#</a></h1>
+<p>Async function support for uf.</p>
+<p>Provides utilities for detecting and handling async functions,
+allowing seamless integration of async def functions in uf apps.</p>
+<p class="rubric">Functions</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.async_support.async_to_sync" title="uf.async_support.async_to_sync"><code class="xref py py-obj docutils literal notranslate"><span class="pre">async_to_sync</span></code></a>(async_func)</p></td>
+<td><p>Convert an async function to a synchronous wrapper.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.async_support.batch_async_calls" title="uf.async_support.batch_async_calls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">batch_async_calls</span></code></a>(async_func, calls)</p></td>
+<td><p>Execute multiple async function calls concurrently.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.async_support.create_async_handler" title="uf.async_support.create_async_handler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_async_handler</span></code></a>(async_func)</p></td>
+<td><p>Create a handler for async functions in web frameworks.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.async_support.detect_async_framework" title="uf.async_support.detect_async_framework"><code class="xref py py-obj docutils literal notranslate"><span class="pre">detect_async_framework</span></code></a>(app)</p></td>
+<td><p>Detect if the web framework supports async natively.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.async_support.is_async_function" title="uf.async_support.is_async_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_async_function</span></code></a>(func)</p></td>
+<td><p>Check if a function is async.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.async_support.is_framework_async_capable" title="uf.async_support.is_framework_async_capable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_framework_async_capable</span></code></a>(app)</p></td>
+<td><p>Check if the framework supports async handlers natively.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.async_support.make_sync_compatible" title="uf.async_support.make_sync_compatible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_sync_compatible</span></code></a>(funcs)</p></td>
+<td><p>Convert any async functions in the list to sync wrappers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.async_support.retry_async" title="uf.async_support.retry_async"><code class="xref py py-obj docutils literal notranslate"><span class="pre">retry_async</span></code></a>([max_attempts, delay])</p></td>
+<td><p>Decorator to add retry logic to async functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.async_support.timeout_async" title="uf.async_support.timeout_async"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timeout_async</span></code></a>(seconds)</p></td>
+<td><p>Decorator to add timeout to async functions.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Classes</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.async_support.AsyncContext" title="uf.async_support.AsyncContext"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AsyncContext</span></code></a>()</p></td>
+<td><p>Context manager for handling async operations in uf.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.async_support.AsyncFunctionWrapper" title="uf.async_support.AsyncFunctionWrapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AsyncFunctionWrapper</span></code></a>(func)</p></td>
+<td><p>Wrapper for async functions that provides both sync and async access.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.async_support.AsyncContext">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.async_support.</span></span><span class="sig-name descname"><span class="pre">AsyncContext</span></span><a class="reference internal" href="../_modules/uf/async_support.html#AsyncContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.async_support.AsyncContext" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Context manager for handling async operations in uf.</p>
+<p>This helps manage event loops and async resources properly.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">AsyncContext</span><span class="p">()</span> <span class="k">as</span> <span class="n">ctx</span><span class="p">:</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">my_async_function</span><span class="p">(</span><span class="n">param</span><span class="p">))</span>
+</span></pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.async_support.AsyncContext.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coro</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/async_support.html#AsyncContext.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.async_support.AsyncContext.run" title="Link to this definition">#</a></dt>
+<dd><p>Run a coroutine in this context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>coro</strong> – Coroutine to run</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Result of the coroutine</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.async_support.AsyncFunctionWrapper">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.async_support.</span></span><span class="sig-name descname"><span class="pre">AsyncFunctionWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/async_support.html#AsyncFunctionWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.async_support.AsyncFunctionWrapper" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Wrapper for async functions that provides both sync and async access.</p>
+<p>This allows the same function to be called either way, depending on
+the context.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fetch_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="c1"># async database query</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="k">return</span> <span class="n">user_data</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt;</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">wrapper</span> <span class="o">=</span> <span class="n">AsyncFunctionWrapper</span><span class="p">(</span><span class="n">fetch_user</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Sync call</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">call_sync</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+</span><span data-line="8"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Async call</span>
+</span><span data-line="9"><span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="k">await</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">call_async</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.async_support.AsyncFunctionWrapper.call_async">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">call_async</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/async_support.html#AsyncFunctionWrapper.call_async"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.async_support.AsyncFunctionWrapper.call_async" title="Link to this definition">#</a></dt>
+<dd><p>Call the function asynchronously.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*args</strong> – Positional arguments</p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Function result</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.async_support.AsyncFunctionWrapper.call_sync">
+<span class="sig-name descname"><span class="pre">call_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/async_support.html#AsyncFunctionWrapper.call_sync"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.async_support.AsyncFunctionWrapper.call_sync" title="Link to this definition">#</a></dt>
+<dd><p>Call the function synchronously.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*args</strong> – Positional arguments</p></li>
+<li><p><strong>**kwargs</strong> – Keyword arguments</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Function result</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.async_support.async_to_sync">
+<span class="sig-prename descclassname"><span class="pre">uf.async_support.</span></span><span class="sig-name descname"><span class="pre">async_to_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">async_func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/async_support.html#async_to_sync"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.async_support.async_to_sync" title="Link to this definition">#</a></dt>
+<dd><p>Convert an async function to a synchronous wrapper.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>async_func</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) – Async function to wrap</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Synchronous wrapper function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fetch_data</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="c1"># async operations</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="k">return</span> <span class="n">data</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">sync_fetch</span> <span class="o">=</span> <span class="n">async_to_sync</span><span class="p">(</span><span class="n">fetch_data</span><span class="p">)</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">sync_fetch</span><span class="p">(</span><span class="s1">'https://example.com'</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.async_support.batch_async_calls">
+<span class="sig-prename descclassname"><span class="pre">uf.async_support.</span></span><span class="sig-name descname"><span class="pre">batch_async_calls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">async_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calls</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/async_support.html#batch_async_calls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.async_support.batch_async_calls" title="Link to this definition">#</a></dt>
+<dd><p>Execute multiple async function calls concurrently.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>async_func</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) – Async function to call</p></li>
+<li><p><strong>calls</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]</span>) – List of dicts with ‘args’ and ‘kwargs’ for each call</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of results in same order as calls</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fetch_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="k">return</span> <span class="k">await</span> <span class="n">db</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt;</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">calls</span> <span class="o">=</span> <span class="p">[</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="p">{</span><span class="s1">'args'</span><span class="p">:</span> <span class="p">(),</span> <span class="s1">'kwargs'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'user_id'</span><span class="p">:</span> <span class="mi">1</span><span class="p">}},</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="p">{</span><span class="s1">'args'</span><span class="p">:</span> <span class="p">(),</span> <span class="s1">'kwargs'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'user_id'</span><span class="p">:</span> <span class="mi">2</span><span class="p">}},</span>
+</span><span data-line="7"><span class="gp">... </span>    <span class="p">{</span><span class="s1">'args'</span><span class="p">:</span> <span class="p">(),</span> <span class="s1">'kwargs'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'user_id'</span><span class="p">:</span> <span class="mi">3</span><span class="p">}},</span>
+</span><span data-line="8"><span class="gp">... </span><span class="p">]</span>
+</span><span data-line="9"><span class="gp">&gt;&gt;&gt; </span><span class="n">users</span> <span class="o">=</span> <span class="n">batch_async_calls</span><span class="p">(</span><span class="n">fetch_user</span><span class="p">,</span> <span class="n">calls</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.async_support.create_async_handler">
+<span class="sig-prename descclassname"><span class="pre">uf.async_support.</span></span><span class="sig-name descname"><span class="pre">create_async_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">async_func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/async_support.html#create_async_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.async_support.create_async_handler" title="Link to this definition">#</a></dt>
+<dd><p>Create a handler for async functions in web frameworks.</p>
+<p>This is useful for integrating with frameworks that may or may not
+support async natively (like Bottle vs FastAPI).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>async_func</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) – Async function to create handler for</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Appropriate handler (async or sync wrapped)</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">my_endpoint</span><span class="p">(</span><span class="n">param</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">some_async_operation</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="k">return</span> <span class="n">result</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">handler</span> <span class="o">=</span> <span class="n">create_async_handler</span><span class="p">(</span><span class="n">my_endpoint</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.async_support.detect_async_framework">
+<span class="sig-prename descclassname"><span class="pre">uf.async_support.</span></span><span class="sig-name descname"><span class="pre">detect_async_framework</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/async_support.html#detect_async_framework"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.async_support.detect_async_framework" title="Link to this definition">#</a></dt>
+<dd><p>Detect if the web framework supports async natively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>app</strong> – The web application</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘fastapi’, ‘bottle’, ‘unknown’</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.async_support.is_async_function">
+<span class="sig-prename descclassname"><span class="pre">uf.async_support.</span></span><span class="sig-name descname"><span class="pre">is_async_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/async_support.html#is_async_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.async_support.is_async_function" title="Link to this definition">#</a></dt>
+<dd><p>Check if a function is async.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) – Function to check</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if function is async</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">my_async_func</span><span class="p">():</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="k">pass</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">is_async_function</span><span class="p">(</span><span class="n">my_async_func</span><span class="p">)</span>
+</span><span data-line="4"><span class="go">True</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.async_support.is_framework_async_capable">
+<span class="sig-prename descclassname"><span class="pre">uf.async_support.</span></span><span class="sig-name descname"><span class="pre">is_framework_async_capable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/async_support.html#is_framework_async_capable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.async_support.is_framework_async_capable" title="Link to this definition">#</a></dt>
+<dd><p>Check if the framework supports async handlers natively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>app</strong> – The web application</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if framework supports async</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.async_support.make_sync_compatible">
+<span class="sig-prename descclassname"><span class="pre">uf.async_support.</span></span><span class="sig-name descname"><span class="pre">make_sync_compatible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">funcs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/async_support.html#make_sync_compatible"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.async_support.make_sync_compatible" title="Link to this definition">#</a></dt>
+<dd><p>Convert any async functions in the list to sync wrappers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>funcs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>]</span>) – List of functions (may include async)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of functions (all synchronous)</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">sync_func</span><span class="p">,</span> <span class="n">async_func</span><span class="p">,</span> <span class="n">another_sync</span><span class="p">]</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">compatible</span> <span class="o">=</span> <span class="n">make_sync_compatible</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># All functions in compatible are now callable synchronously</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.async_support.retry_async">
+<span class="sig-prename descclassname"><span class="pre">uf.async_support.</span></span><span class="sig-name descname"><span class="pre">retry_async</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_attempts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/async_support.html#retry_async"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.async_support.retry_async" title="Link to this definition">#</a></dt>
+<dd><p>Decorator to add retry logic to async functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_attempts</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#int" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Maximum number of attempts</p></li>
+<li><p><strong>delay</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Delay between attempts in seconds</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="nd">@retry_async</span><span class="p">(</span><span class="n">max_attempts</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">... </span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">unreliable_api_call</span><span class="p">():</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="c1"># May fail, will retry</span>
+</span><span data-line="4"><span class="gp">... </span>    <span class="k">return</span> <span class="k">await</span> <span class="n">external_api</span><span class="o">.</span><span class="n">fetch</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.async_support.timeout_async">
+<span class="sig-prename descclassname"><span class="pre">uf.async_support.</span></span><span class="sig-name descname"><span class="pre">timeout_async</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/async_support.html#timeout_async"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.async_support.timeout_async" title="Link to this definition">#</a></dt>
+<dd><p>Decorator to add timeout to async functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>seconds</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></span>) – Timeout in seconds</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decorator function</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="nd">@timeout_async</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">... </span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">slow_operation</span><span class="p">():</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Will timeout after 5s</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="uf.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">uf</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="uf.auth.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">uf.auth</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright">
+  <p>
+    Made with
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/i2mint/uf" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=fd825880"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=fd10adb8"></script>
+      <script src="../_static/shibuya.js?v=50760d75"></script></body>
+</html>

@@ -1,0 +1,20 @@
+uf.trans
+========
+
+.. automodule:: uf.trans
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_global_registry
+      register_common_types
+      register_type
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      InputTransformRegistry
+   

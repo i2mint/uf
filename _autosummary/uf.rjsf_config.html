@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="pink" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>uf.rjsf_config - uf</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="uf.routes" href="uf.routes.html" /><link rel="prev" title="uf.renderers" href="uf.renderers.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d88b86f9" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="uf.rjsf_config"/>
+    <meta name="twitter:card" content="summary"/>
+  
+<link rel="alternate" type="text/markdown" href="uf.rjsf_config.html.md">
+<link rel="describedby" href="../llms.txt" type="text/markdown">
+</head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>uf</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/i2mint/uf" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="uf.html">uf</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="uf.async_support.html">uf.async_support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.auth.html">uf.auth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.base.html">uf.base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.caching.html">uf.caching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.decorators.html">uf.decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.field_interactions.html">uf.field_interactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.history.html">uf.history</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.openapi.html">uf.openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.organization.html">uf.organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.pydantic_support.html">uf.pydantic_support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.renderers.html">uf.renderers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">uf.rjsf_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.routes.html">uf.routes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.specs.html">uf.specs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.templates.html">uf.templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.testing.html">uf.testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.themes.html">uf.themes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.trans.html">uf.trans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uf.webhooks.html">uf.webhooks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#uf.rjsf_config.ConditionalFieldConfig"><code class="docutils literal notranslate"><span class="pre">ConditionalFieldConfig</span></code></a><ul>
+<li><a class="reference internal" href="#uf.rjsf_config.ConditionalFieldConfig.to_json_schema"><code class="docutils literal notranslate"><span class="pre">ConditionalFieldConfig.to_json_schema()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfConfigBuilder"><code class="docutils literal notranslate"><span class="pre">RjsfConfigBuilder</span></code></a><ul>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfConfigBuilder.build"><code class="docutils literal notranslate"><span class="pre">RjsfConfigBuilder.build()</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfConfigBuilder.class_names"><code class="docutils literal notranslate"><span class="pre">RjsfConfigBuilder.class_names()</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfConfigBuilder.field"><code class="docutils literal notranslate"><span class="pre">RjsfConfigBuilder.field()</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfConfigBuilder.order"><code class="docutils literal notranslate"><span class="pre">RjsfConfigBuilder.order()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig</span></code></a><ul>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig.widget"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig.widget</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig.ui_options"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig.ui_options</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig.format"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig.format</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig.enum"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig.enum</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig.description"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig.description</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig.placeholder"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig.placeholder</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig.title"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig.title</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig.disabled"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig.disabled</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig.readonly"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig.readonly</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig.hidden"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig.hidden</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig.default"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig.default</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig.to_json_schema_patch"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig.to_json_schema_patch()</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig.to_ui_schema_patch"><code class="docutils literal notranslate"><span class="pre">RjsfFieldConfig.to_ui_schema_patch()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#uf.rjsf_config.apply_field_configs"><code class="docutils literal notranslate"><span class="pre">apply_field_configs()</span></code></a></li>
+<li><a class="reference internal" href="#uf.rjsf_config.get_field_config"><code class="docutils literal notranslate"><span class="pre">get_field_config()</span></code></a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">uf</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../api.html"><span itemprop="name">API reference</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="uf.html"><span itemprop="name">uf</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">uf.rjsf_config</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue dark-code" role="main">
+          <section id="module-uf.rjsf_config">
+<span id="uf-rjsf-config"></span><h1>uf.rjsf_config<a class="headerlink" href="#module-uf.rjsf_config" title="Link to this heading">#</a></h1>
+<p>RJSF customization layer for uf.</p>
+<p>Provides configuration classes and builders for customizing RJSF form
+generation beyond the defaults, including field widgets, UI options,
+and validation rules.</p>
+<p class="rubric">Functions</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.rjsf_config.apply_field_configs" title="uf.rjsf_config.apply_field_configs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_field_configs</span></code></a>(schema, ui_schema, ...)</p></td>
+<td><p>Apply field configurations to existing schemas.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.rjsf_config.get_field_config" title="uf.rjsf_config.get_field_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_field_config</span></code></a>(config_name)</p></td>
+<td><p>Get a predefined field configuration by name.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Classes</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.rjsf_config.ConditionalFieldConfig" title="uf.rjsf_config.ConditionalFieldConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConditionalFieldConfig</span></code></a>(field_name, *, condition)</p></td>
+<td><p>Configuration for conditional field display.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.rjsf_config.RjsfConfigBuilder" title="uf.rjsf_config.RjsfConfigBuilder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RjsfConfigBuilder</span></code></a>()</p></td>
+<td><p>Builder for RJSF configurations with sensible defaults.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig" title="uf.rjsf_config.RjsfFieldConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RjsfFieldConfig</span></code></a>([widget, ui_options, ...])</p></td>
+<td><p>Configuration for individual form fields.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.rjsf_config.ConditionalFieldConfig">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.rjsf_config.</span></span><span class="sig-name descname"><span class="pre">ConditionalFieldConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field_name</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">then_schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">else_schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/rjsf_config.html#ConditionalFieldConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.rjsf_config.ConditionalFieldConfig" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Configuration for conditional field display.</p>
+<p>Allows fields to be shown/hidden based on the values of other fields.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show 'other_reason' field only when reason is 'other'</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">config</span> <span class="o">=</span> <span class="n">ConditionalFieldConfig</span><span class="p">(</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="s1">'other_reason'</span><span class="p">,</span>
+</span><span data-line="4"><span class="gp">... </span>    <span class="n">condition</span><span class="o">=</span><span class="p">{</span><span class="s1">'reason'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'const'</span><span class="p">:</span> <span class="s1">'other'</span><span class="p">}}</span>
+</span><span data-line="5"><span class="gp">... </span><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.rjsf_config.ConditionalFieldConfig.to_json_schema">
+<span class="sig-name descname"><span class="pre">to_json_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/rjsf_config.html#ConditionalFieldConfig.to_json_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.rjsf_config.ConditionalFieldConfig.to_json_schema" title="Link to this definition">#</a></dt>
+<dd><p>Convert to JSON Schema if/then/else structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JSON Schema conditional structure</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfConfigBuilder">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.rjsf_config.</span></span><span class="sig-name descname"><span class="pre">RjsfConfigBuilder</span></span><a class="reference internal" href="../_modules/uf/rjsf_config.html#RjsfConfigBuilder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.rjsf_config.RjsfConfigBuilder" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Builder for RJSF configurations with sensible defaults.</p>
+<p>This class helps construct RJSF specifications by providing a
+fluent interface for configuring fields.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span> <span class="o">=</span> <span class="n">RjsfConfigBuilder</span><span class="p">()</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">'email'</span><span class="p">,</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">'email'</span><span class="p">))</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">'message'</span><span class="p">,</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="s1">'textarea'</span><span class="p">))</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">spec</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">base_schema</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfConfigBuilder.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_ui_schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/rjsf_config.html#RjsfConfigBuilder.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.rjsf_config.RjsfConfigBuilder.build" title="Link to this definition">#</a></dt>
+<dd><p>Build the final RJSF specification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_schema</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – Base JSON Schema to augment</p></li>
+<li><p><strong>base_ui_schema</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]</span>) – Optional base UI Schema to augment</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary with ‘schema’ and ‘uiSchema’ keys</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfConfigBuilder.class_names">
+<span class="sig-name descname"><span class="pre">class_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">class_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/rjsf_config.html#RjsfConfigBuilder.class_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.rjsf_config.RjsfConfigBuilder.class_names" title="Link to this definition">#</a></dt>
+<dd><p>Set CSS class names for the form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>class_names</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Space-separated CSS class names</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.rjsf_config.RjsfConfigBuilder" title="uf.rjsf_config.RjsfConfigBuilder"><code class="xref py py-class docutils literal notranslate"><span class="pre">RjsfConfigBuilder</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfConfigBuilder.field">
+<span class="sig-name descname"><span class="pre">field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/rjsf_config.html#RjsfConfigBuilder.field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.rjsf_config.RjsfConfigBuilder.field" title="Link to this definition">#</a></dt>
+<dd><p>Configure a specific field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>param_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name of the parameter/field</p></li>
+<li><p><strong>config</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig" title="uf.rjsf_config.RjsfFieldConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">RjsfFieldConfig</span></code></a></span>) – Configuration for the field</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.rjsf_config.RjsfConfigBuilder" title="uf.rjsf_config.RjsfConfigBuilder"><code class="xref py py-class docutils literal notranslate"><span class="pre">RjsfConfigBuilder</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfConfigBuilder.order">
+<span class="sig-name descname"><span class="pre">order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field_order</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/rjsf_config.html#RjsfConfigBuilder.order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.rjsf_config.RjsfConfigBuilder.order" title="Link to this definition">#</a></dt>
+<dd><p>Set the order of fields in the form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>field_order</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#list" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – List of field names in desired order</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.rjsf_config.RjsfConfigBuilder" title="uf.rjsf_config.RjsfConfigBuilder"><code class="xref py py-class docutils literal notranslate"><span class="pre">RjsfConfigBuilder</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Self for method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfFieldConfig">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.rjsf_config.</span></span><span class="sig-name descname"><span class="pre">RjsfFieldConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ui_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">placeholder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readonly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/rjsf_config.html#RjsfFieldConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.rjsf_config.RjsfFieldConfig" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#object" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Configuration for individual form fields.</p>
+<p>This class allows fine-grained control over how form fields are
+rendered in the RJSF interface.</p>
+<dl class="field-list simple">
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfFieldConfig.widget">
+<span class="sig-name descname"><span class="pre">widget</span></span><a class="headerlink" href="#uf.rjsf_config.RjsfFieldConfig.widget" title="Link to this definition">#</a></dt>
+<dd><p>Widget type (e.g., ‘textarea’, ‘select’, ‘radio’, ‘date’)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfFieldConfig.ui_options">
+<span class="sig-name descname"><span class="pre">ui_options</span></span><a class="headerlink" href="#uf.rjsf_config.RjsfFieldConfig.ui_options" title="Link to this definition">#</a></dt>
+<dd><p>Additional UI options for the widget</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfFieldConfig.format">
+<span class="sig-name descname"><span class="pre">format</span></span><a class="headerlink" href="#uf.rjsf_config.RjsfFieldConfig.format" title="Link to this definition">#</a></dt>
+<dd><p>JSON Schema format (e.g., ‘email’, ‘uri’, ‘date-time’)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfFieldConfig.enum">
+<span class="sig-name descname"><span class="pre">enum</span></span><a class="headerlink" href="#uf.rjsf_config.RjsfFieldConfig.enum" title="Link to this definition">#</a></dt>
+<dd><p>List of allowed values (for dropdowns)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfFieldConfig.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#uf.rjsf_config.RjsfFieldConfig.description" title="Link to this definition">#</a></dt>
+<dd><p>Field description/help text</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfFieldConfig.placeholder">
+<span class="sig-name descname"><span class="pre">placeholder</span></span><a class="headerlink" href="#uf.rjsf_config.RjsfFieldConfig.placeholder" title="Link to this definition">#</a></dt>
+<dd><p>Placeholder text for the input</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfFieldConfig.title">
+<span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#uf.rjsf_config.RjsfFieldConfig.title" title="Link to this definition">#</a></dt>
+<dd><p>Custom title for the field</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfFieldConfig.disabled">
+<span class="sig-name descname"><span class="pre">disabled</span></span><a class="headerlink" href="#uf.rjsf_config.RjsfFieldConfig.disabled" title="Link to this definition">#</a></dt>
+<dd><p>Whether the field is disabled</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfFieldConfig.readonly">
+<span class="sig-name descname"><span class="pre">readonly</span></span><a class="headerlink" href="#uf.rjsf_config.RjsfFieldConfig.readonly" title="Link to this definition">#</a></dt>
+<dd><p>Whether the field is read-only</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfFieldConfig.hidden">
+<span class="sig-name descname"><span class="pre">hidden</span></span><a class="headerlink" href="#uf.rjsf_config.RjsfFieldConfig.hidden" title="Link to this definition">#</a></dt>
+<dd><p>Whether to hide the field</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfFieldConfig.default">
+<span class="sig-name descname"><span class="pre">default</span></span><a class="headerlink" href="#uf.rjsf_config.RjsfFieldConfig.default" title="Link to this definition">#</a></dt>
+<dd><p>Default value for the field</p>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">email_config</span> <span class="o">=</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="n">widget</span><span class="o">=</span><span class="s1">'email'</span><span class="p">,</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="nb">format</span><span class="o">=</span><span class="s1">'email'</span><span class="p">,</span>
+</span><span data-line="4"><span class="gp">... </span>    <span class="n">placeholder</span><span class="o">=</span><span class="s1">'user@example.com'</span>
+</span><span data-line="5"><span class="gp">... </span><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfFieldConfig.to_json_schema_patch">
+<span class="sig-name descname"><span class="pre">to_json_schema_patch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/rjsf_config.html#RjsfFieldConfig.to_json_schema_patch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.rjsf_config.RjsfFieldConfig.to_json_schema_patch" title="Link to this definition">#</a></dt>
+<dd><p>Convert to JSON Schema properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of JSON Schema properties to merge into schema</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="uf.rjsf_config.RjsfFieldConfig.to_ui_schema_patch">
+<span class="sig-name descname"><span class="pre">to_ui_schema_patch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/rjsf_config.html#RjsfFieldConfig.to_ui_schema_patch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.rjsf_config.RjsfFieldConfig.to_ui_schema_patch" title="Link to this definition">#</a></dt>
+<dd><p>Convert to RJSF UI Schema properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of UI Schema properties for this field</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.rjsf_config.apply_field_configs">
+<span class="sig-prename descclassname"><span class="pre">uf.rjsf_config.</span></span><span class="sig-name descname"><span class="pre">apply_field_configs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ui_schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_configs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/rjsf_config.html#apply_field_configs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.rjsf_config.apply_field_configs" title="Link to this definition">#</a></dt>
+<dd><p>Apply field configurations to existing schemas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – JSON Schema to modify</p></li>
+<li><p><strong>ui_schema</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span>) – UI Schema to modify</p></li>
+<li><p><strong>field_configs</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig" title="uf.rjsf_config.RjsfFieldConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">RjsfFieldConfig</span></code></a>]</span>) – Mapping of field names to configurations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#tuple" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, <a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple of (modified_schema, modified_ui_schema)</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">configs</span> <span class="o">=</span> <span class="p">{</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="s1">'email'</span><span class="p">:</span> <span class="n">get_field_config</span><span class="p">(</span><span class="s1">'email'</span><span class="p">),</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="s1">'bio'</span><span class="p">:</span> <span class="n">get_field_config</span><span class="p">(</span><span class="s1">'multiline_text'</span><span class="p">),</span>
+</span><span data-line="4"><span class="gp">... </span><span class="p">}</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span><span class="p">,</span> <span class="n">ui_schema</span> <span class="o">=</span> <span class="n">apply_field_configs</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">ui_schema</span><span class="p">,</span> <span class="n">configs</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.rjsf_config.get_field_config">
+<span class="sig-prename descclassname"><span class="pre">uf.rjsf_config.</span></span><span class="sig-name descname"><span class="pre">get_field_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/rjsf_config.html#get_field_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.rjsf_config.get_field_config" title="Link to this definition">#</a></dt>
+<dd><p>Get a predefined field configuration by name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name of the configuration (e.g., ‘email’, ‘multiline_text’)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.rjsf_config.RjsfFieldConfig" title="uf.rjsf_config.RjsfFieldConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">RjsfFieldConfig</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>RjsfFieldConfig instance</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#KeyError" title="(in Python v3.15)"><strong>KeyError</strong></a> – If config_name not found</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">email_config</span> <span class="o">=</span> <span class="n">get_field_config</span><span class="p">(</span><span class="s1">'email'</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">email_config</span><span class="o">.</span><span class="n">format</span>
+</span><span data-line="3"><span class="go">'email'</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="uf.renderers.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">uf.renderers</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="uf.routes.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">uf.routes</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright">
+  <p>
+    Made with
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+  <a href="https://github.com/i2mint/uf" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=fd825880"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=fd10adb8"></script>
+      <script src="../_static/shibuya.js?v=50760d75"></script></body>
+</html>

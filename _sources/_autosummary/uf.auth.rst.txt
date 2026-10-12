@@ -1,0 +1,30 @@
+uf.auth
+=======
+
+.. automodule:: uf.auth
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      get_global_api_key_manager
+      get_global_auth_backend
+      get_global_session_manager
+      require_auth
+      set_global_api_key_manager
+      set_global_auth_backend
+      set_global_session_manager
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      ApiKey
+      ApiKeyManager
+      AuthBackend
+      DictAuthBackend
+      PasswordHasher
+      SessionManager
+      User
+   

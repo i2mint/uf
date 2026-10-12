@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "built_at": "2026-10-12T21:50:32Z",
+  "package": {
+    "name": "uf",
+    "version": "0.1.4",
+    "display_name": "uf",
+    "source": "pyproject.toml"
+  },
+  "git": {
+    "available": true,
+    "commit": "0a7f57dfcef547dd45d780adcc8b554d6d5c3344",
+    "short_commit": "0a7f57d",
+    "branch": "master",
+    "tags": [
+      "0.1.4"
+    ],
+    "dirty": false,
+    "remote_url": "https://github.com/i2mint/uf",
+    "commit_url": "https://github.com/i2mint/uf/commit/0a7f57dfcef547dd45d780adcc8b554d6d5c3344",
+    "error": null
+  },
+  "ci": {
+    "provider": "github",
+    "repository": "i2mint/uf",
+    "sha": "aafe36d9bf8e66d0ab047ebfd4f4308e83c1a9cb",
+    "sha_in_history": true,
+    "ref": "refs/heads/master",
+    "ref_name": "master",
+    "run_id": "38312920930",
+    "run_url": "https://github.com/i2mint/uf/actions/runs/38312920930",
+    "server_url": "https://github.com"
+  },
+  "tools": {
+    "epythet": "0.2.12",
+    "sphinx": "9.1.0",
+    "docutils": "0.22.4",
+    "python": "3.12.15"
+  },
+  "config": {
+    "theme": "auto",
+    "html_theme": "shibuya",
+    "accent": "#87346a",
+    "mode": "auto",
+    "api_generator": "autosummary",
+    "ignore": [
+      "tests/",
+      "scrap/",
+      "examples/"
+    ],
+    "agent_outputs": true,
+    "aggregates": [
+      "md"
+    ],
+    "ai_artifacts": true,
+    "provenance": true,
+    "docs_dir": "docsrc"
+  },
+  "site": {
+    "modules_documented": 20,
+    "objects_documented": 688
+  },
+  "pypi": {
+    "checked": true,
+    "latest": "0.1.4",
+    "relation": "same",
+    "error": null
+  },
+  "reproduce": "git clone https://github.com/i2mint/uf && cd uf\ngit checkout 0a7f57dfcef547dd45d780adcc8b554d6d5c3344\npip install \"epythet==0.2.12\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
+  "warnings": [],
+  "alignment": {
+    "aligned": true,
+    "notes": []
+  }
+}

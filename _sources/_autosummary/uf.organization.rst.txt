@@ -1,0 +1,22 @@
+uf.organization
+===============
+
+.. automodule:: uf.organization
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      auto_group_by_module
+      auto_group_by_prefix
+      auto_group_by_tag
+      mk_grouped_app
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      FunctionGroup
+      FunctionOrganizer
+   

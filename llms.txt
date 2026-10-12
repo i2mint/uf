@@ -1,0 +1,38 @@
+# uf
+
+> Minimal-boilerplate web UIs for Python functions
+
+
+## Pages
+
+- [uf - UI Fast](index.html.md): &#42;&#42;Minimal-boilerplate web UIs for Python functions&#42;&#42;
+- [API reference](api.html.md): | &#96;uf&#96;   | uf - UI Fast: Minimal-boilerplate web UIs for Python functions.   |
+- [uf](_autosummary/uf.html.md): uf - UI Fast: Minimal-boilerplate web UIs for Python functions.
+- [uf.async_support](_autosummary/uf.async_support.html.md): Async function support for uf.
+- [uf.auth](_autosummary/uf.auth.html.md): Authentication and authorization for uf.
+- [uf.base](_autosummary/uf.base.html.md): Core functionality for uf - UI Fast.
+- [uf.caching](_autosummary/uf.caching.html.md): Result caching for uf.
+- [uf.decorators](_autosummary/uf.decorators.html.md): UI metadata decorators for uf.
+- [uf.field_interactions](_autosummary/uf.field_interactions.html.md): Field dependencies and interactions for uf.
+- [uf.history](_autosummary/uf.history.html.md): Call history and presets for uf.
+- [uf.openapi](_autosummary/uf.openapi.html.md): OpenAPI/Swagger integration for uf.
+- [uf.organization](_autosummary/uf.organization.html.md): Function grouping and organization for uf.
+- [uf.pydantic_support](_autosummary/uf.pydantic_support.html.md): Pydantic integration for uf.
+- [uf.renderers](_autosummary/uf.renderers.html.md): Result rendering system for uf.
+- [uf.rjsf_config](_autosummary/uf.rjsf_config.html.md): RJSF customization layer for uf.
+- [uf.routes](_autosummary/uf.routes.html.md): API routes for uf web interface.
+- [uf.specs](_autosummary/uf.specs.html.md): Function specification management for uf.
+- [uf.templates](_autosummary/uf.templates.html.md): HTML template generation for uf web interface.
+- [uf.testing](_autosummary/uf.testing.html.md): Testing utilities for uf applications.
+- [uf.themes](_autosummary/uf.themes.html.md): Theme and styling support for uf.
+- [uf.trans](_autosummary/uf.trans.html.md): Input transformation integration for uf.
+- [uf.webhooks](_autosummary/uf.webhooks.html.md): Webhook support for uf.
+- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-10-12 21:50 UTC&#42;&#42; from commit &lt;a href="https://github.com/i2m...
+
+## Optional
+
+- [uf.md](uf.md): Complete documentation in a single file.
+
+## Build
+
+- [build_info.json](build_info.json): build provenance (commit, version, tool versions, whether the docs match the package)
