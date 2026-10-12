@@ -4,9 +4,44 @@ Provides a Mapping-based interface to function specifications, including RJSF
 form specs and OpenAPI schemas.
 """
 
+import warnings
 from typing import Callable, Iterable, Optional, Any
 from collections.abc import Mapping
 from functools import cached_property
+
+# Modules whose absence means "ju is not installed" (fall back), as opposed to a
+# dependency *of* ju failing to import (a broken install: let it raise).
+_JU_MODULE_NAMES = ("ju", "ju.rjsf")
+
+
+class JuNotInstalledWarning(UserWarning):
+    """Emitted when ``ju`` is absent and uf falls back to basic form specs."""
+
+
+def _import_func_to_form_spec() -> Optional[Callable]:
+    """Return ``ju.rjsf.func_to_form_spec``, or ``None`` if ``ju`` is not installed.
+
+    Only the absence of ``ju`` itself is tolerated (with a visible warning).
+    Any other import failure -- a missing dependency of ``ju``, a renamed
+    symbol -- is a broken environment and propagates, so it fails loudly
+    instead of silently degrading every generated form.
+
+    >>> _import_func_to_form_spec() is None or callable(_import_func_to_form_spec())
+    True
+    """
+    try:
+        from ju.rjsf import func_to_form_spec
+    except ModuleNotFoundError as e:
+        if e.name not in _JU_MODULE_NAMES:
+            raise
+        warnings.warn(
+            f"{e.name!r} is not installed; uf is falling back to basic form "
+            "specs (no ju/RJSF features). Install it with `pip install ju`.",
+            JuNotInstalledWarning,
+            stacklevel=4,  # caller -> __getitem__ -> _generate_spec -> here
+        )
+        return None
+    return func_to_form_spec
 
 
 class FunctionSpecStore(Mapping):
@@ -88,39 +123,34 @@ class FunctionSpecStore(Mapping):
         """
         func = self._funcs[func_name]
 
-        try:
-            # Import ju.rjsf for form spec generation
-            from ju.rjsf import func_to_form_spec
-
-            # Generate form spec
-            # ju nests the spec under a "rjsf" field by default; uf wants it flat
-            rjsf_config = {"nest_under_field": None, **self._rjsf_config}
-            form_spec = func_to_form_spec(func, **rjsf_config)
-
-            # Apply custom UI schema factory if provided
-            if self._ui_schema_factory:
-                ui_schema = self._ui_schema_factory(func)
-                if "uiSchema" in form_spec:
-                    form_spec["uiSchema"].update(ui_schema)
-                else:
-                    form_spec["uiSchema"] = ui_schema
-
-            return {
-                "schema": form_spec.get("schema", {}),
-                "uiSchema": form_spec.get("uiSchema", {}),
-                "func": func,
-                "name": func_name,
-                "description": func.__doc__ or f"Execute {func_name}",
-            }
-
-        except ImportError:
-            # Fallback to basic spec if ju.rjsf not available
+        func_to_form_spec = _import_func_to_form_spec()
+        if func_to_form_spec is None:
             return self._generate_basic_spec(func_name, func)
+
+        # ju nests the spec under a "rjsf" field by default; uf wants it flat
+        rjsf_config = {"nest_under_field": None, **self._rjsf_config}
+        form_spec = func_to_form_spec(func, **rjsf_config)
+
+        # Apply custom UI schema factory if provided
+        if self._ui_schema_factory:
+            ui_schema = self._ui_schema_factory(func)
+            if "uiSchema" in form_spec:
+                form_spec["uiSchema"].update(ui_schema)
+            else:
+                form_spec["uiSchema"] = ui_schema
+
+        return {
+            "schema": form_spec.get("schema", {}),
+            "uiSchema": form_spec.get("uiSchema", {}),
+            "func": func,
+            "name": func_name,
+            "description": func.__doc__ or f"Execute {func_name}",
+        }
 
     def _generate_basic_spec(self, func_name: str, func: Callable) -> dict:
         """Generate a basic specification without ju.rjsf.
 
-        This is a fallback for when ju.rjsf is not available. It creates
+        This is the fallback used when ``ju`` is not installed. It creates
         a minimal JSON Schema from function signature.
 
         Args:
