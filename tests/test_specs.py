@@ -124,7 +124,7 @@ def _require_ju():
     try:
         return importlib.import_module('ju.rjsf')
     except ModuleNotFoundError as e:
-        if e.name in ('ju', 'ju.rjsf'):
+        if e.name == 'ju':
             pytest.skip(f'ju not installed ({e.name!r} missing)')
         raise
 
@@ -153,10 +153,19 @@ def test_ju_required_fields():
     assert schema['properties']['greeting'].get('default') == 'Hello'
 
 
+class _JuAbsentFinder(importlib.abc.MetaPathFinder):
+    """Make ``ju`` look uninstalled, exactly as a real absence does."""
+
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname == 'ju':
+            raise ModuleNotFoundError("No module named 'ju'", name='ju')
+        return None
+
+
 def _block_ju(monkeypatch):
     for name in [m for m in sys.modules if m == 'ju' or m.startswith('ju.')]:
         monkeypatch.delitem(sys.modules, name)
-    monkeypatch.setitem(sys.modules, 'ju', None)  # import -> ModuleNotFoundError
+    monkeypatch.setattr(sys, 'meta_path', [_JuAbsentFinder(), *sys.meta_path])
 
 
 def test_missing_ju_falls_back_with_visible_warning(monkeypatch):
@@ -184,6 +193,16 @@ def test_broken_ju_dependency_raises_instead_of_falling_back(monkeypatch):
     with pytest.raises(ModuleNotFoundError) as excinfo:
         _import_func_to_form_spec()
     assert excinfo.value.name == 'dill'
+
+
+def test_missing_ju_rjsf_submodule_raises(monkeypatch):
+    """ju present but ju.rjsf absent (too-old ju) is a broken install, not 'absent'."""
+    _require_ju()
+    monkeypatch.setitem(sys.modules, 'ju.rjsf', None)
+    monkeypatch.delattr(sys.modules['ju'], 'rjsf', raising=False)
+    with pytest.raises(ModuleNotFoundError) as excinfo:
+        _import_func_to_form_spec()
+    assert excinfo.value.name == 'ju.rjsf'
 
 
 def test_other_import_errors_propagate(monkeypatch):

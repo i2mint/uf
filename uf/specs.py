@@ -9,9 +9,10 @@ from typing import Callable, Iterable, Optional, Any
 from collections.abc import Mapping
 from functools import cached_property
 
-# Modules whose absence means "ju is not installed" (fall back), as opposed to a
-# dependency *of* ju failing to import (a broken install: let it raise).
-_JU_MODULE_NAMES = ("ju", "ju.rjsf")
+# Only the absence of top-level ``ju`` means "not installed" (fall back). A missing
+# ``ju.rjsf`` (too-old ju, stray namespace dir) or a missing dependency *of* ju is
+# a broken install: let it raise.
+_JU_MODULE_NAMES = ("ju",)
 
 
 class JuNotInstalledWarning(UserWarning):
