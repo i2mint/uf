@@ -32,7 +32,7 @@ classifiers = [
     "Topic :: Software Development :: User Interfaces",
     "Framework :: FastAPI",
 ]
-dependencies = ["qh", "ju", "i2", "dol", "meshed"]
+dependencies = ["qh", "ju>=0.1.33", "i2", "dol", "meshed"]
 
 [project.urls]
 Homepage = "https://github.com/i2mint/uf"
