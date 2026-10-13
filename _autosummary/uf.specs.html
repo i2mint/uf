@@ -113,6 +113,7 @@ data-aria-dark="Switch to auto color mode">
 <li><a class="reference internal" href="#uf.specs.doc_of_func"><code class="docutils literal notranslate"><span class="pre">doc_of_func()</span></code></a></li>
 <li><a class="reference internal" href="#uf.specs.name_funcs"><code class="docutils literal notranslate"><span class="pre">name_funcs()</span></code></a></li>
 <li><a class="reference internal" href="#uf.specs.name_of_func"><code class="docutils literal notranslate"><span class="pre">name_of_func()</span></code></a></li>
+<li><a class="reference internal" href="#uf.specs.unwrap_partials"><code class="docutils literal notranslate"><span class="pre">unwrap_partials()</span></code></a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -168,6 +169,9 @@ form specs and OpenAPI schemas.</p>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#uf.specs.name_of_func" title="uf.specs.name_of_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name_of_func</span></code></a>(func)</p></td>
 <td><p>The name a function is served under: its <code class="docutils literal notranslate"><span class="pre">__name__</span></code>; failing that, for a <code class="docutils literal notranslate"><span class="pre">functools.partial</span></code>, that of the function it wraps; for a callable instance, its class name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.specs.unwrap_partials" title="uf.specs.unwrap_partials"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unwrap_partials</span></code></a>(func)</p></td>
+<td><p>The function a (possibly nested) <code class="docutils literal notranslate"><span class="pre">functools.partial</span></code> wraps; anything else as is.</p></td>
 </tr>
 </tbody>
 </table>
@@ -361,6 +365,25 @@ class name.</p>
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.specs.unwrap_partials">
+<span class="sig-prename descclassname"><span class="pre">uf.specs.</span></span><span class="sig-name descname"><span class="pre">unwrap_partials</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/specs.html#unwrap_partials"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.specs.unwrap_partials" title="Link to this definition">#</a></dt>
+<dd><p>The function a (possibly nested) <code class="docutils literal notranslate"><span class="pre">functools.partial</span></code> wraps; anything else as is.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span></p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">unwrap_partials</span><span class="p">(</span><span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span> <span class="ow">is</span> <span class="n">f</span>
+</span><span data-line="4"><span class="go">True</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">unwrap_partials</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="ow">is</span> <span class="n">f</span>
+</span><span data-line="6"><span class="go">True</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
 </section>
 
         </article><button class="back-to-top" type="button">
@@ -403,7 +426,7 @@ class name.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=e2f3408e"></script>
+      <script src="../_static/documentation_options.js?v=d50bcae4"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

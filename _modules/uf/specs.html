@@ -257,406 +257,422 @@ data-aria-dark="Switch to auto color mode">
 
 </span><span data-line="113">
 </span><span data-line="114">
-<div class="viewcode-block" id="doc_of_func">
-<a class="viewcode-back" href="../../_autosummary/uf.specs.html#uf.doc_of_func">[docs]</a>
-</span><span data-line="115"><span class="k">def</span><span class="w"> </span><span class="nf">doc_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-</span><span data-line="116"><span class="w">    </span><span class="sd">"""The docstring of ``func``; for a ``functools.partial`` (whose own ``__doc__`` is</span>
-</span><span data-line="117"><span class="sd">    the generic one of ``partial``), that of the function it wraps.</span>
-</span><span data-line="118">
-</span><span data-line="119"><span class="sd">    &gt;&gt;&gt; import functools</span>
-</span><span data-line="120"><span class="sd">    &gt;&gt;&gt; def f(x, y):</span>
-</span><span data-line="121"><span class="sd">    ...     "Add."</span>
-</span><span data-line="122"><span class="sd">    &gt;&gt;&gt; doc_of_func(functools.partial(f, y=1))</span>
-</span><span data-line="123"><span class="sd">    'Add.'</span>
+<div class="viewcode-block" id="unwrap_partials">
+<a class="viewcode-back" href="../../_autosummary/uf.specs.html#uf.unwrap_partials">[docs]</a>
+</span><span data-line="115"><span class="k">def</span><span class="w"> </span><span class="nf">unwrap_partials</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span data-line="116"><span class="w">    </span><span class="sd">"""The function a (possibly nested) ``functools.partial`` wraps; anything else as is.</span>
+</span><span data-line="117">
+</span><span data-line="118"><span class="sd">    &gt;&gt;&gt; import functools</span>
+</span><span data-line="119"><span class="sd">    &gt;&gt;&gt; def f(x, y, z): ...</span>
+</span><span data-line="120"><span class="sd">    &gt;&gt;&gt; unwrap_partials(functools.partial(functools.partial(f, 1), 2)) is f</span>
+</span><span data-line="121"><span class="sd">    True</span>
+</span><span data-line="122"><span class="sd">    &gt;&gt;&gt; unwrap_partials(f) is f</span>
+</span><span data-line="123"><span class="sd">    True</span>
 </span><span data-line="124"><span class="sd">    """</span>
 </span><span data-line="125">    <span class="k">while</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">):</span>
 </span><span data-line="126">        <span class="n">func</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">func</span>
-</span><span data-line="127">    <span class="k">return</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span></div>
+</span><span data-line="127">    <span class="k">return</span> <span class="n">func</span></div>
 
 </span><span data-line="128">
 </span><span data-line="129">
+<div class="viewcode-block" id="doc_of_func">
+<a class="viewcode-back" href="../../_autosummary/uf.specs.html#uf.doc_of_func">[docs]</a>
+</span><span data-line="130"><span class="k">def</span><span class="w"> </span><span class="nf">doc_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="131"><span class="w">    </span><span class="sd">"""The docstring of ``func``; for a ``functools.partial`` (whose own ``__doc__`` is</span>
+</span><span data-line="132"><span class="sd">    the generic one of ``partial``), that of the function it wraps.</span>
+</span><span data-line="133">
+</span><span data-line="134"><span class="sd">    &gt;&gt;&gt; import functools</span>
+</span><span data-line="135"><span class="sd">    &gt;&gt;&gt; def f(x, y):</span>
+</span><span data-line="136"><span class="sd">    ...     "Add."</span>
+</span><span data-line="137"><span class="sd">    &gt;&gt;&gt; doc_of_func(functools.partial(f, y=1))</span>
+</span><span data-line="138"><span class="sd">    'Add.'</span>
+</span><span data-line="139"><span class="sd">    """</span>
+</span><span data-line="140">    <span class="k">return</span> <span class="n">unwrap_partials</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="vm">__doc__</span></div>
+
+</span><span data-line="141">
+</span><span data-line="142">
 <div class="viewcode-block" id="name_funcs">
 <a class="viewcode-back" href="../../_autosummary/uf.specs.html#uf.name_funcs">[docs]</a>
-</span><span data-line="130"><span class="k">def</span><span class="w"> </span><span class="nf">name_funcs</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span data-line="131"><span class="w">    </span><span class="sd">"""``{name: callable}`` from a mapping of explicit names, or an iterable of</span>
-</span><span data-line="132"><span class="sd">    callables (named by ``name_of_func``). Two different callables sharing a name</span>
-</span><span data-line="133"><span class="sd">    raise.</span>
-</span><span data-line="134">
-</span><span data-line="135"><span class="sd">    &gt;&gt;&gt; import functools</span>
-</span><span data-line="136"><span class="sd">    &gt;&gt;&gt; name_funcs([len, functools.partial(int, base=2)])  # doctest: +ELLIPSIS</span>
-</span><span data-line="137"><span class="sd">    {'len': &lt;built-in function len&gt;, 'int': functools.partial(&lt;class 'int'&gt;, base=2)}</span>
-</span><span data-line="138"><span class="sd">    &gt;&gt;&gt; name_funcs({'size': len})</span>
-</span><span data-line="139"><span class="sd">    {'size': &lt;built-in function len&gt;}</span>
-</span><span data-line="140"><span class="sd">    """</span>
-</span><span data-line="141">    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">):</span>
-</span><span data-line="142">        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
-</span><span data-line="143">    <span class="n">named</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="144">    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
-</span><span data-line="145">        <span class="n">name</span> <span class="o">=</span> <span class="n">name_of_func</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</span><span data-line="146">        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">named</span> <span class="ow">and</span> <span class="n">named</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">!=</span> <span class="n">f</span><span class="p">:</span>
-</span><span data-line="147">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span data-line="148">                <span class="sa">f</span><span class="s2">"two different callables are both named </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2">; pass a mapping "</span>
-</span><span data-line="149">                <span class="s2">"{name: callable} to name them explicitly"</span>
-</span><span data-line="150">            <span class="p">)</span>
-</span><span data-line="151">        <span class="n">named</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
-</span><span data-line="152">    <span class="k">return</span> <span class="n">named</span></div>
+</span><span data-line="143"><span class="k">def</span><span class="w"> </span><span class="nf">name_funcs</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span data-line="144"><span class="w">    </span><span class="sd">"""``{name: callable}`` from a mapping of explicit names, or an iterable of</span>
+</span><span data-line="145"><span class="sd">    callables (named by ``name_of_func``). Two different callables sharing a name</span>
+</span><span data-line="146"><span class="sd">    raise.</span>
+</span><span data-line="147">
+</span><span data-line="148"><span class="sd">    &gt;&gt;&gt; import functools</span>
+</span><span data-line="149"><span class="sd">    &gt;&gt;&gt; name_funcs([len, functools.partial(int, base=2)])  # doctest: +ELLIPSIS</span>
+</span><span data-line="150"><span class="sd">    {'len': &lt;built-in function len&gt;, 'int': functools.partial(&lt;class 'int'&gt;, base=2)}</span>
+</span><span data-line="151"><span class="sd">    &gt;&gt;&gt; name_funcs({'size': len})</span>
+</span><span data-line="152"><span class="sd">    {'size': &lt;built-in function len&gt;}</span>
+</span><span data-line="153"><span class="sd">    """</span>
+</span><span data-line="154">    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">):</span>
+</span><span data-line="155">        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
+</span><span data-line="156">    <span class="n">named</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="157">    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
+</span><span data-line="158">        <span class="n">name</span> <span class="o">=</span> <span class="n">name_of_func</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span data-line="159">        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">named</span> <span class="ow">and</span> <span class="n">named</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">!=</span> <span class="n">f</span><span class="p">:</span>
+</span><span data-line="160">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span><span data-line="161">                <span class="sa">f</span><span class="s2">"two different callables are both named </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2">; pass a mapping "</span>
+</span><span data-line="162">                <span class="s2">"{name: callable} to name them explicitly"</span>
+</span><span data-line="163">            <span class="p">)</span>
+</span><span data-line="164">        <span class="n">named</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
+</span><span data-line="165">    <span class="k">return</span> <span class="n">named</span></div>
 
-</span><span data-line="153">
-</span><span data-line="154">
-</span><span data-line="155"><span class="k">def</span><span class="w"> </span><span class="nf">_unfillable_names</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
-</span><span data-line="156"><span class="w">    </span><span class="sd">"""Names of ``func``'s parameters a keyword-only caller can't fill (``*args``,</span>
-</span><span data-line="157"><span class="sd">    ``**kwargs``, positional-only).</span>
-</span><span data-line="158">
-</span><span data-line="159"><span class="sd">    Both ``i2.Sig`` and ``inspect`` are asked: they name the variadic parameter of some</span>
-</span><span data-line="160"><span class="sd">    callables differently (``print``: ``*value`` vs ``*args``), and ju may use either.</span>
-</span><span data-line="161">
-</span><span data-line="162"><span class="sd">    &gt;&gt;&gt; sorted(_unfillable_names(lambda a, /, b, *args, **kw: None))</span>
-</span><span data-line="163"><span class="sd">    ['a', 'args', 'kw']</span>
-</span><span data-line="164"><span class="sd">    """</span>
-</span><span data-line="165">    <span class="n">names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-</span><span data-line="166">    <span class="k">try</span><span class="p">:</span>
-</span><span data-line="167">        <span class="kn">from</span><span class="w"> </span><span class="nn">i2</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sig</span>
-</span><span data-line="168">
-</span><span data-line="169">        <span class="n">names</span> <span class="o">|=</span> <span class="n">_non_keyword_names</span><span class="p">(</span><span class="n">Sig</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
-</span><span data-line="170">    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># no i2, or no introspectable signature</span>
-</span><span data-line="171">        <span class="k">pass</span>
-</span><span data-line="172">    <span class="k">try</span><span class="p">:</span>
-</span><span data-line="173">        <span class="n">names</span> <span class="o">|=</span> <span class="n">_non_keyword_names</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
-</span><span data-line="174">    <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-</span><span data-line="175">        <span class="k">pass</span>
-</span><span data-line="176">    <span class="k">return</span> <span class="n">names</span>
-</span><span data-line="177">
-</span><span data-line="178">
-</span><span data-line="179"><span class="k">def</span><span class="w"> </span><span class="nf">_non_keyword_names</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
-</span><span data-line="180">    <span class="k">return</span> <span class="p">{</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">kind</span> <span class="ow">in</span> <span class="n">_NON_KEYWORD_KINDS</span><span class="p">}</span>
+</span><span data-line="166">
+</span><span data-line="167">
+</span><span data-line="168"><span class="k">def</span><span class="w"> </span><span class="nf">_unfillable_names</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
+</span><span data-line="169"><span class="w">    </span><span class="sd">"""Names of ``func``'s parameters a keyword-only caller can't fill (``*args``,</span>
+</span><span data-line="170"><span class="sd">    ``**kwargs``, positional-only).</span>
+</span><span data-line="171">
+</span><span data-line="172"><span class="sd">    Both ``i2.Sig`` and ``inspect`` are asked: they name the variadic parameter of some</span>
+</span><span data-line="173"><span class="sd">    callables differently (``print``: ``*value`` vs ``*args``), and ju may use either.</span>
+</span><span data-line="174">
+</span><span data-line="175"><span class="sd">    &gt;&gt;&gt; sorted(_unfillable_names(lambda a, /, b, *args, **kw: None))</span>
+</span><span data-line="176"><span class="sd">    ['a', 'args', 'kw']</span>
+</span><span data-line="177"><span class="sd">    """</span>
+</span><span data-line="178">    <span class="n">names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</span><span data-line="179">    <span class="k">try</span><span class="p">:</span>
+</span><span data-line="180">        <span class="kn">from</span><span class="w"> </span><span class="nn">i2</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sig</span>
 </span><span data-line="181">
-</span><span data-line="182">
-</span><span data-line="183"><span class="k">def</span><span class="w"> </span><span class="nf">_drop_unfillable_fields</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">form_spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="184"><span class="w">    </span><span class="sd">"""Remove ``*args``/``**kwargs`` and positional-only parameters from a form spec's</span>
-</span><span data-line="185"><span class="sd">    schema and uiSchema (in place).</span>
-</span><span data-line="186">
-</span><span data-line="187"><span class="sd">    A form can't sensibly ask for them (``*args``/``**kwargs`` would show up as</span>
-</span><span data-line="188"><span class="sd">    required string fields), and uf calls functions with keyword arguments only.</span>
-</span><span data-line="189"><span class="sd">    """</span>
-</span><span data-line="190">    <span class="n">variadic</span> <span class="o">=</span> <span class="n">_unfillable_names</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="191">    <span class="n">schema</span> <span class="o">=</span> <span class="n">form_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"schema"</span><span class="p">,</span> <span class="p">{})</span>
-</span><span data-line="192">    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">variadic</span><span class="p">:</span>
-</span><span data-line="193">        <span class="n">schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"properties"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-</span><span data-line="194">    <span class="k">if</span> <span class="s2">"required"</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">:</span>
-</span><span data-line="195">        <span class="n">schema</span><span class="p">[</span><span class="s2">"required"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">[</span><span class="s2">"required"</span><span class="p">]</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">variadic</span><span class="p">]</span>
-</span><span data-line="196">    <span class="n">ui_schema</span> <span class="o">=</span> <span class="n">form_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"uiSchema"</span><span class="p">,</span> <span class="p">{})</span>
-</span><span data-line="197">    <span class="n">dropped</span> <span class="o">=</span> <span class="p">[</span><span class="n">ui_schema</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">variadic</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">ui_schema</span><span class="p">]</span>
-</span><span data-line="198">    <span class="c1"># ju puts the autofocus on the first parameter: hand it to the first one left</span>
-</span><span data-line="199">    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ui:autofocus"</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dropped</span><span class="p">):</span>
-</span><span data-line="200">        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"properties"</span><span class="p">,</span> <span class="p">{}):</span>
-</span><span data-line="201">            <span class="n">ui_schema</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">"ui:autofocus"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span data-line="202">            <span class="k">break</span>
-</span><span data-line="203">
-</span><span data-line="204">
+</span><span data-line="182">        <span class="n">names</span> <span class="o">|=</span> <span class="n">_non_keyword_names</span><span class="p">(</span><span class="n">Sig</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
+</span><span data-line="183">    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># no i2, or no introspectable signature</span>
+</span><span data-line="184">        <span class="k">pass</span>
+</span><span data-line="185">    <span class="k">try</span><span class="p">:</span>
+</span><span data-line="186">        <span class="n">names</span> <span class="o">|=</span> <span class="n">_non_keyword_names</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
+</span><span data-line="187">    <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+</span><span data-line="188">        <span class="k">pass</span>
+</span><span data-line="189">    <span class="k">return</span> <span class="n">names</span>
+</span><span data-line="190">
+</span><span data-line="191">
+</span><span data-line="192"><span class="k">def</span><span class="w"> </span><span class="nf">_non_keyword_names</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
+</span><span data-line="193">    <span class="k">return</span> <span class="p">{</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">kind</span> <span class="ow">in</span> <span class="n">_NON_KEYWORD_KINDS</span><span class="p">}</span>
+</span><span data-line="194">
+</span><span data-line="195">
+</span><span data-line="196"><span class="k">def</span><span class="w"> </span><span class="nf">_drop_unfillable_fields</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">form_spec</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="197"><span class="w">    </span><span class="sd">"""Remove ``*args``/``**kwargs`` and positional-only parameters from a form spec's</span>
+</span><span data-line="198"><span class="sd">    schema and uiSchema (in place).</span>
+</span><span data-line="199">
+</span><span data-line="200"><span class="sd">    A form can't sensibly ask for them (``*args``/``**kwargs`` would show up as</span>
+</span><span data-line="201"><span class="sd">    required string fields), and uf calls functions with keyword arguments only.</span>
+</span><span data-line="202"><span class="sd">    """</span>
+</span><span data-line="203">    <span class="n">variadic</span> <span class="o">=</span> <span class="n">_unfillable_names</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="204">    <span class="n">schema</span> <span class="o">=</span> <span class="n">form_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"schema"</span><span class="p">,</span> <span class="p">{})</span>
+</span><span data-line="205">    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">variadic</span><span class="p">:</span>
+</span><span data-line="206">        <span class="n">schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"properties"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span><span data-line="207">    <span class="k">if</span> <span class="s2">"required"</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">:</span>
+</span><span data-line="208">        <span class="n">schema</span><span class="p">[</span><span class="s2">"required"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">[</span><span class="s2">"required"</span><span class="p">]</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">variadic</span><span class="p">]</span>
+</span><span data-line="209">    <span class="n">ui_schema</span> <span class="o">=</span> <span class="n">form_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"uiSchema"</span><span class="p">,</span> <span class="p">{})</span>
+</span><span data-line="210">    <span class="n">dropped</span> <span class="o">=</span> <span class="p">[</span><span class="n">ui_schema</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">variadic</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">ui_schema</span><span class="p">]</span>
+</span><span data-line="211">    <span class="c1"># ju puts the autofocus on the first parameter: hand it to the first one left</span>
+</span><span data-line="212">    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ui:autofocus"</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dropped</span><span class="p">):</span>
+</span><span data-line="213">        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"properties"</span><span class="p">,</span> <span class="p">{}):</span>
+</span><span data-line="214">            <span class="n">ui_schema</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">{})[</span><span class="s2">"ui:autofocus"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span data-line="215">            <span class="k">break</span>
+</span><span data-line="216">
+</span><span data-line="217">
 <div class="viewcode-block" id="JuNotInstalledWarning">
 <a class="viewcode-back" href="../../_autosummary/uf.specs.html#uf.JuNotInstalledWarning">[docs]</a>
-</span><span data-line="205"><span class="k">class</span><span class="w"> </span><span class="nc">JuNotInstalledWarning</span><span class="p">(</span><span class="ne">UserWarning</span><span class="p">):</span>
-</span><span data-line="206"><span class="w">    </span><span class="sd">"""Emitted when ``ju`` is absent and uf falls back to basic form specs."""</span></div>
+</span><span data-line="218"><span class="k">class</span><span class="w"> </span><span class="nc">JuNotInstalledWarning</span><span class="p">(</span><span class="ne">UserWarning</span><span class="p">):</span>
+</span><span data-line="219"><span class="w">    </span><span class="sd">"""Emitted when ``ju`` is absent and uf falls back to basic form specs."""</span></div>
 
-</span><span data-line="207">
-</span><span data-line="208">
-</span><span data-line="209"><span class="k">def</span><span class="w"> </span><span class="nf">_warn_at_caller</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">category</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="ne">Warning</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="210"><span class="w">    </span><span class="sd">"""Warn, attributed to the first frame outside the ``uf`` package.</span>
-</span><span data-line="211">
-</span><span data-line="212"><span class="sd">    A hardcoded ``stacklevel`` is right for one call path only: the same warning</span>
-</span><span data-line="213"><span class="sd">    reached through ``mk_rjsf_app`` or ``UfApp`` would be attributed to uf's own</span>
-</span><span data-line="214"><span class="sd">    ``base.py``. Walking up to the first frame that is not uf's points at the</span>
-</span><span data-line="215"><span class="sd">    user's line however the store was built.</span>
-</span><span data-line="216">
-</span><span data-line="217"><span class="sd">    &gt;&gt;&gt; import warnings</span>
-</span><span data-line="218"><span class="sd">    &gt;&gt;&gt; with warnings.catch_warnings(record=True) as w:</span>
-</span><span data-line="219"><span class="sd">    ...     warnings.simplefilter("always")</span>
-</span><span data-line="220"><span class="sd">    ...     _warn_at_caller("hi", UserWarning)</span>
-</span><span data-line="221"><span class="sd">    &gt;&gt;&gt; w[0].filename.startswith("&lt;doctest")  # no uf frame above: the doctest itself</span>
-</span><span data-line="222"><span class="sd">    True</span>
-</span><span data-line="223"><span class="sd">    """</span>
-</span><span data-line="224">    <span class="n">frame</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_getframe</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span data-line="225">    <span class="n">stacklevel</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># 1 would be this function; 2 is its caller</span>
-</span><span data-line="226">    <span class="k">while</span> <span class="n">frame</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">_PACKAGE_PREFIX</span><span class="p">):</span>
-</span><span data-line="227">        <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_back</span>
-</span><span data-line="228">        <span class="n">stacklevel</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span data-line="229">    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">)</span>
-</span><span data-line="230">
-</span><span data-line="231">
-</span><span data-line="232"><span class="c1"># Taken from the code object, not ``__file__``: it is what the frames being compared carry</span>
-</span><span data-line="233"><span class="c1"># (they differ for a ``.pyc``-only install, and a freezer may leave ``__file__`` unset).</span>
-</span><span data-line="234"><span class="n">_PACKAGE_PREFIX</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">_warn_at_caller</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_filename</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
-</span><span data-line="235">
-</span><span data-line="236">
-</span><span data-line="237"><span class="k">def</span><span class="w"> </span><span class="nf">_import_func_to_form_spec</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]:</span>
-</span><span data-line="238"><span class="w">    </span><span class="sd">"""Return ``ju.rjsf.func_to_form_spec``, or ``None`` if ``ju`` is not installed.</span>
-</span><span data-line="239"><span class="sd">    (The warning is attributed to the first caller outside the ``uf`` package.)</span>
-</span><span data-line="240">
-</span><span data-line="241"><span class="sd">    Only the absence of ``ju`` itself is tolerated (with a visible warning).</span>
-</span><span data-line="242"><span class="sd">    Any other import failure -- a missing dependency of ``ju``, a renamed</span>
-</span><span data-line="243"><span class="sd">    symbol -- is a broken environment and propagates, so it fails loudly</span>
-</span><span data-line="244"><span class="sd">    instead of silently degrading every generated form.</span>
-</span><span data-line="245">
-</span><span data-line="246"><span class="sd">    &gt;&gt;&gt; _import_func_to_form_spec() is None or callable(_import_func_to_form_spec())</span>
-</span><span data-line="247"><span class="sd">    True</span>
-</span><span data-line="248"><span class="sd">    """</span>
-</span><span data-line="249">    <span class="n">rjsf</span> <span class="o">=</span> <span class="n">import_optional</span><span class="p">(</span><span class="s2">"ju.rjsf"</span><span class="p">,</span> <span class="n">absent</span><span class="o">=</span><span class="n">_JU_MODULE_NAMES</span><span class="p">)</span>
-</span><span data-line="250">    <span class="k">if</span> <span class="n">rjsf</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="251">        <span class="n">_warn_at_caller</span><span class="p">(</span>
-</span><span data-line="252">            <span class="s2">"'ju' is not installed; uf is falling back to basic form "</span>
-</span><span data-line="253">            <span class="s2">"specs (no ju/RJSF features). Install it with `pip install ju`."</span><span class="p">,</span>
-</span><span data-line="254">            <span class="n">JuNotInstalledWarning</span><span class="p">,</span>
-</span><span data-line="255">        <span class="p">)</span>
-</span><span data-line="256">        <span class="k">return</span> <span class="kc">None</span>
-</span><span data-line="257">    <span class="k">try</span><span class="p">:</span>
-</span><span data-line="258">        <span class="k">return</span> <span class="n">rjsf</span><span class="o">.</span><span class="n">func_to_form_spec</span>
-</span><span data-line="259">    <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># a renamed symbol: a broken ju, not an absent one</span>
-</span><span data-line="260">        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
-</span><span data-line="261">            <span class="s2">"cannot import name 'func_to_form_spec' from 'ju.rjsf'"</span>
-</span><span data-line="262">        <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
-</span><span data-line="263">
-</span><span data-line="264">
+</span><span data-line="220">
+</span><span data-line="221">
+</span><span data-line="222"><span class="k">def</span><span class="w"> </span><span class="nf">_warn_at_caller</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">category</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="ne">Warning</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="223"><span class="w">    </span><span class="sd">"""Warn, attributed to the first frame outside the ``uf`` package.</span>
+</span><span data-line="224">
+</span><span data-line="225"><span class="sd">    A hardcoded ``stacklevel`` is right for one call path only: the same warning</span>
+</span><span data-line="226"><span class="sd">    reached through ``mk_rjsf_app`` or ``UfApp`` would be attributed to uf's own</span>
+</span><span data-line="227"><span class="sd">    ``base.py``. Walking up to the first frame that is not uf's points at the</span>
+</span><span data-line="228"><span class="sd">    user's line however the store was built.</span>
+</span><span data-line="229">
+</span><span data-line="230"><span class="sd">    &gt;&gt;&gt; import warnings</span>
+</span><span data-line="231"><span class="sd">    &gt;&gt;&gt; with warnings.catch_warnings(record=True) as w:</span>
+</span><span data-line="232"><span class="sd">    ...     warnings.simplefilter("always")</span>
+</span><span data-line="233"><span class="sd">    ...     _warn_at_caller("hi", UserWarning)</span>
+</span><span data-line="234"><span class="sd">    &gt;&gt;&gt; w[0].filename.startswith("&lt;doctest")  # no uf frame above: the doctest itself</span>
+</span><span data-line="235"><span class="sd">    True</span>
+</span><span data-line="236"><span class="sd">    """</span>
+</span><span data-line="237">    <span class="n">frame</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_getframe</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span data-line="238">    <span class="n">stacklevel</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># 1 would be this function; 2 is its caller</span>
+</span><span data-line="239">    <span class="k">while</span> <span class="n">frame</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">_PACKAGE_PREFIX</span><span class="p">):</span>
+</span><span data-line="240">        <span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_back</span>
+</span><span data-line="241">        <span class="n">stacklevel</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span data-line="242">    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">)</span>
+</span><span data-line="243">
+</span><span data-line="244">
+</span><span data-line="245"><span class="c1"># Taken from the code object, not ``__file__``: it is what the frames being compared carry</span>
+</span><span data-line="246"><span class="c1"># (they differ for a ``.pyc``-only install, and a freezer may leave ``__file__`` unset).</span>
+</span><span data-line="247"><span class="n">_PACKAGE_PREFIX</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">_warn_at_caller</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_filename</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
+</span><span data-line="248">
+</span><span data-line="249">
+</span><span data-line="250"><span class="k">def</span><span class="w"> </span><span class="nf">_import_func_to_form_spec</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]:</span>
+</span><span data-line="251"><span class="w">    </span><span class="sd">"""Return ``ju.rjsf.func_to_form_spec``, or ``None`` if ``ju`` is not installed.</span>
+</span><span data-line="252"><span class="sd">    (The warning is attributed to the first caller outside the ``uf`` package.)</span>
+</span><span data-line="253">
+</span><span data-line="254"><span class="sd">    Only the absence of ``ju`` itself is tolerated (with a visible warning).</span>
+</span><span data-line="255"><span class="sd">    Any other import failure -- a missing dependency of ``ju``, a renamed</span>
+</span><span data-line="256"><span class="sd">    symbol -- is a broken environment and propagates, so it fails loudly</span>
+</span><span data-line="257"><span class="sd">    instead of silently degrading every generated form.</span>
+</span><span data-line="258">
+</span><span data-line="259"><span class="sd">    &gt;&gt;&gt; _import_func_to_form_spec() is None or callable(_import_func_to_form_spec())</span>
+</span><span data-line="260"><span class="sd">    True</span>
+</span><span data-line="261"><span class="sd">    """</span>
+</span><span data-line="262">    <span class="n">rjsf</span> <span class="o">=</span> <span class="n">import_optional</span><span class="p">(</span><span class="s2">"ju.rjsf"</span><span class="p">,</span> <span class="n">absent</span><span class="o">=</span><span class="n">_JU_MODULE_NAMES</span><span class="p">)</span>
+</span><span data-line="263">    <span class="k">if</span> <span class="n">rjsf</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="264">        <span class="n">_warn_at_caller</span><span class="p">(</span>
+</span><span data-line="265">            <span class="s2">"'ju' is not installed; uf is falling back to basic form "</span>
+</span><span data-line="266">            <span class="s2">"specs (no ju/RJSF features). Install it with `pip install ju`."</span><span class="p">,</span>
+</span><span data-line="267">            <span class="n">JuNotInstalledWarning</span><span class="p">,</span>
+</span><span data-line="268">        <span class="p">)</span>
+</span><span data-line="269">        <span class="k">return</span> <span class="kc">None</span>
+</span><span data-line="270">    <span class="k">try</span><span class="p">:</span>
+</span><span data-line="271">        <span class="k">return</span> <span class="n">rjsf</span><span class="o">.</span><span class="n">func_to_form_spec</span>
+</span><span data-line="272">    <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># a renamed symbol: a broken ju, not an absent one</span>
+</span><span data-line="273">        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+</span><span data-line="274">            <span class="s2">"cannot import name 'func_to_form_spec' from 'ju.rjsf'"</span>
+</span><span data-line="275">        <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+</span><span data-line="276">
+</span><span data-line="277">
 <div class="viewcode-block" id="FunctionSpecStore">
 <a class="viewcode-back" href="../../_autosummary/uf.specs.html#uf.FunctionSpecStore">[docs]</a>
-</span><span data-line="265"><span class="k">class</span><span class="w"> </span><span class="nc">FunctionSpecStore</span><span class="p">(</span><span class="n">Mapping</span><span class="p">):</span>
-</span><span data-line="266"><span class="w">    </span><span class="sd">"""A mapping from function names to their RJSF specifications.</span>
-</span><span data-line="267">
-</span><span data-line="268"><span class="sd">    Lazily generates and caches form specs for each function.</span>
-</span><span data-line="269">
-</span><span data-line="270"><span class="sd">    Args:</span>
-</span><span data-line="271"><span class="sd">        funcs: Iterable of callables to generate specs for (named by ``name_of_func``:</span>
-</span><span data-line="272"><span class="sd">            ``__name__``, the wrapped function's for a ``functools.partial``, the class</span>
-</span><span data-line="273"><span class="sd">            name for a callable instance), or a mapping ``{name: callable}`` to name</span>
-</span><span data-line="274"><span class="sd">            them explicitly</span>
-</span><span data-line="275"><span class="sd">        rjsf_config: Optional configuration dict for RJSF generation</span>
-</span><span data-line="276"><span class="sd">        ui_schema_factory: Optional callable to customize UI schema generation</span>
-</span><span data-line="277"><span class="sd">        param_to_prop_type: Optional callable to map parameters to property types</span>
-</span><span data-line="278"><span class="sd">        validate: If true, every function is checked and its spec generated at</span>
-</span><span data-line="279"><span class="sd">            construction, so a callable uf can't build a form for fails there, naming</span>
-</span><span data-line="280"><span class="sd">            it, rather than on the first request (default false: checked on first</span>
-</span><span data-line="281"><span class="sd">            access of its spec; ``mk_rjsf_app`` validates).</span>
+</span><span data-line="278"><span class="k">class</span><span class="w"> </span><span class="nc">FunctionSpecStore</span><span class="p">(</span><span class="n">Mapping</span><span class="p">):</span>
+</span><span data-line="279"><span class="w">    </span><span class="sd">"""A mapping from function names to their RJSF specifications.</span>
+</span><span data-line="280">
+</span><span data-line="281"><span class="sd">    Lazily generates and caches form specs for each function.</span>
 </span><span data-line="282">
-</span><span data-line="283"><span class="sd">    Example:</span>
-</span><span data-line="284"><span class="sd">        &gt;&gt;&gt; def add(x: int, y: int) -&gt; int:</span>
-</span><span data-line="285"><span class="sd">        ...     '''Add two numbers'''</span>
-</span><span data-line="286"><span class="sd">        ...     return x + y</span>
-</span><span data-line="287"><span class="sd">        &gt;&gt;&gt; specs = FunctionSpecStore([add])</span>
-</span><span data-line="288"><span class="sd">        &gt;&gt;&gt; 'add' in specs</span>
-</span><span data-line="289"><span class="sd">        True</span>
-</span><span data-line="290"><span class="sd">        &gt;&gt;&gt; spec = specs['add']</span>
-</span><span data-line="291"><span class="sd">        &gt;&gt;&gt; 'schema' in spec</span>
-</span><span data-line="292"><span class="sd">        True</span>
-</span><span data-line="293"><span class="sd">    """</span>
-</span><span data-line="294">
-</span><span data-line="295">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span data-line="296">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="297">        <span class="n">funcs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]],</span>
-</span><span data-line="298">        <span class="o">*</span><span class="p">,</span>
-</span><span data-line="299">        <span class="n">rjsf_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="300">        <span class="n">ui_schema_factory</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="301">        <span class="n">param_to_prop_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="302">        <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span data-line="303">    <span class="p">):</span>
-</span><span data-line="304">        <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span> <span class="o">=</span> <span class="n">name_funcs</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
-</span><span data-line="305">        <span class="k">if</span> <span class="n">validate</span><span class="p">:</span>  <span class="c1"># (before anything else can fail, so the function is named)</span>
-</span><span data-line="306">            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span data-line="307">                <span class="n">_check_servable</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-</span><span data-line="308">        <span class="bp">self</span><span class="o">.</span><span class="n">_rjsf_config</span> <span class="o">=</span> <span class="n">rjsf_config</span> <span class="ow">or</span> <span class="p">{}</span>
-</span><span data-line="309">        <span class="bp">self</span><span class="o">.</span><span class="n">_ui_schema_factory</span> <span class="o">=</span> <span class="n">ui_schema_factory</span>
-</span><span data-line="310">        <span class="bp">self</span><span class="o">.</span><span class="n">_param_to_prop_type</span> <span class="o">=</span> <span class="n">param_to_prop_type</span>
-</span><span data-line="311">        <span class="bp">self</span><span class="o">.</span><span class="n">_spec_cache</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="312">        <span class="c1"># Resolved once, here: a broken ju fails the build (with its traceback), not</span>
-</span><span data-line="313">        <span class="c1"># every request, and the absent-ju warning points at the code building the store.</span>
-</span><span data-line="314">        <span class="bp">self</span><span class="o">.</span><span class="n">_func_to_form_spec</span> <span class="o">=</span> <span class="n">_import_func_to_form_spec</span><span class="p">()</span>
-</span><span data-line="315">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func_to_form_spec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="316">            <span class="bp">self</span><span class="o">.</span><span class="n">_warn_ignored_options</span><span class="p">()</span>
-</span><span data-line="317">        <span class="k">if</span> <span class="n">validate</span><span class="p">:</span>
-</span><span data-line="318">            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="p">:</span>
-</span><span data-line="319">                <span class="k">try</span><span class="p">:</span>
-</span><span data-line="320">                    <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>  <span class="c1"># (generates and caches the spec)</span>
-</span><span data-line="321">                <span class="k">except</span> <span class="p">(</span><span class="n">UnservableCallableError</span><span class="p">,</span> <span class="n">UnintrospectableCallableError</span><span class="p">):</span>
-</span><span data-line="322">                    <span class="k">raise</span>
-</span><span data-line="323">                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span data-line="324">                    <span class="k">raise</span> <span class="n">FormSpecError</span><span class="p">(</span>
-</span><span data-line="325">                        <span class="sa">f</span><span class="s2">"could not generate the form spec of </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">!r}</span><span class="s2">"</span>
-</span><span data-line="326">                    <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
-</span><span data-line="327">
-</span><span data-line="328">    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span data-line="329"><span class="w">        </span><span class="sd">"""Get RJSF spec for a function.</span>
-</span><span data-line="330">
-</span><span data-line="331"><span class="sd">        Args:</span>
-</span><span data-line="332"><span class="sd">            func_name: Name of the function</span>
-</span><span data-line="333">
-</span><span data-line="334"><span class="sd">        Returns:</span>
-</span><span data-line="335"><span class="sd">            Dictionary containing the RJSF specification with keys:</span>
-</span><span data-line="336"><span class="sd">            - 'schema': JSON Schema for the function inputs</span>
-</span><span data-line="337"><span class="sd">            - 'uiSchema': UI Schema for rendering hints</span>
-</span><span data-line="338"><span class="sd">            - 'func': The original function object</span>
-</span><span data-line="339">
-</span><span data-line="340"><span class="sd">        Raises:</span>
-</span><span data-line="341"><span class="sd">            KeyError: If function name not found</span>
-</span><span data-line="342"><span class="sd">        """</span>
-</span><span data-line="343">        <span class="k">if</span> <span class="n">func_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="p">:</span>
-</span><span data-line="344">            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Function '</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">' not found"</span><span class="p">)</span>
-</span><span data-line="345">
-</span><span data-line="346">        <span class="k">if</span> <span class="n">func_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spec_cache</span><span class="p">:</span>
-</span><span data-line="347">            <span class="bp">self</span><span class="o">.</span><span class="n">_spec_cache</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_spec</span><span class="p">(</span><span class="n">func_name</span><span class="p">)</span>
-</span><span data-line="348">
-</span><span data-line="349">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spec_cache</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
-</span><span data-line="350">
-</span><span data-line="351">    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span data-line="352"><span class="w">        </span><span class="sd">"""Iterate over function names."""</span>
-</span><span data-line="353">        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="p">)</span>
-</span><span data-line="354">
-</span><span data-line="355">    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span data-line="356"><span class="w">        </span><span class="sd">"""Whether a function is served (does not generate its spec)."""</span>
-</span><span data-line="357">        <span class="k">return</span> <span class="n">func_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span>
+</span><span data-line="283"><span class="sd">    Args:</span>
+</span><span data-line="284"><span class="sd">        funcs: Iterable of callables to generate specs for (named by ``name_of_func``:</span>
+</span><span data-line="285"><span class="sd">            ``__name__``, the wrapped function's for a ``functools.partial``, the class</span>
+</span><span data-line="286"><span class="sd">            name for a callable instance), or a mapping ``{name: callable}`` to name</span>
+</span><span data-line="287"><span class="sd">            them explicitly</span>
+</span><span data-line="288"><span class="sd">        rjsf_config: Optional configuration dict for RJSF generation</span>
+</span><span data-line="289"><span class="sd">        ui_schema_factory: Optional callable to customize UI schema generation</span>
+</span><span data-line="290"><span class="sd">        param_to_prop_type: Optional callable to map parameters to property types</span>
+</span><span data-line="291"><span class="sd">        validate: If true, every function is checked and its spec generated at</span>
+</span><span data-line="292"><span class="sd">            construction, so a callable uf can't build a form for fails there, naming</span>
+</span><span data-line="293"><span class="sd">            it, rather than on the first request (default false: checked on first</span>
+</span><span data-line="294"><span class="sd">            access of its spec; ``mk_rjsf_app`` validates).</span>
+</span><span data-line="295">
+</span><span data-line="296"><span class="sd">    Example:</span>
+</span><span data-line="297"><span class="sd">        &gt;&gt;&gt; def add(x: int, y: int) -&gt; int:</span>
+</span><span data-line="298"><span class="sd">        ...     '''Add two numbers'''</span>
+</span><span data-line="299"><span class="sd">        ...     return x + y</span>
+</span><span data-line="300"><span class="sd">        &gt;&gt;&gt; specs = FunctionSpecStore([add])</span>
+</span><span data-line="301"><span class="sd">        &gt;&gt;&gt; 'add' in specs</span>
+</span><span data-line="302"><span class="sd">        True</span>
+</span><span data-line="303"><span class="sd">        &gt;&gt;&gt; spec = specs['add']</span>
+</span><span data-line="304"><span class="sd">        &gt;&gt;&gt; 'schema' in spec</span>
+</span><span data-line="305"><span class="sd">        True</span>
+</span><span data-line="306"><span class="sd">    """</span>
+</span><span data-line="307">
+</span><span data-line="308">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+</span><span data-line="309">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="310">        <span class="n">funcs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]],</span>
+</span><span data-line="311">        <span class="o">*</span><span class="p">,</span>
+</span><span data-line="312">        <span class="n">rjsf_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="313">        <span class="n">ui_schema_factory</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="314">        <span class="n">param_to_prop_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="315">        <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span data-line="316">    <span class="p">):</span>
+</span><span data-line="317">        <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span> <span class="o">=</span> <span class="n">name_funcs</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
+</span><span data-line="318">        <span class="k">if</span> <span class="n">validate</span><span class="p">:</span>  <span class="c1"># (before anything else can fail, so the function is named)</span>
+</span><span data-line="319">            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="320">                <span class="n">_check_servable</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</span><span data-line="321">        <span class="bp">self</span><span class="o">.</span><span class="n">_rjsf_config</span> <span class="o">=</span> <span class="n">rjsf_config</span> <span class="ow">or</span> <span class="p">{}</span>
+</span><span data-line="322">        <span class="bp">self</span><span class="o">.</span><span class="n">_ui_schema_factory</span> <span class="o">=</span> <span class="n">ui_schema_factory</span>
+</span><span data-line="323">        <span class="bp">self</span><span class="o">.</span><span class="n">_param_to_prop_type</span> <span class="o">=</span> <span class="n">param_to_prop_type</span>
+</span><span data-line="324">        <span class="bp">self</span><span class="o">.</span><span class="n">_spec_cache</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="325">        <span class="c1"># Resolved once, here: a broken ju fails the build (with its traceback), not</span>
+</span><span data-line="326">        <span class="c1"># every request, and the absent-ju warning points at the code building the store.</span>
+</span><span data-line="327">        <span class="bp">self</span><span class="o">.</span><span class="n">_func_to_form_spec</span> <span class="o">=</span> <span class="n">_import_func_to_form_spec</span><span class="p">()</span>
+</span><span data-line="328">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func_to_form_spec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="329">            <span class="bp">self</span><span class="o">.</span><span class="n">_warn_ignored_options</span><span class="p">()</span>
+</span><span data-line="330">        <span class="k">if</span> <span class="n">validate</span><span class="p">:</span>
+</span><span data-line="331">            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="p">:</span>
+</span><span data-line="332">                <span class="k">try</span><span class="p">:</span>
+</span><span data-line="333">                    <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>  <span class="c1"># (generates and caches the spec)</span>
+</span><span data-line="334">                <span class="k">except</span> <span class="p">(</span><span class="n">UnservableCallableError</span><span class="p">,</span> <span class="n">UnintrospectableCallableError</span><span class="p">):</span>
+</span><span data-line="335">                    <span class="k">raise</span>
+</span><span data-line="336">                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="337">                    <span class="k">raise</span> <span class="n">FormSpecError</span><span class="p">(</span>
+</span><span data-line="338">                        <span class="sa">f</span><span class="s2">"could not generate the form spec of </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">!r}</span><span class="s2">"</span>
+</span><span data-line="339">                    <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+</span><span data-line="340">
+</span><span data-line="341">    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span data-line="342"><span class="w">        </span><span class="sd">"""Get RJSF spec for a function.</span>
+</span><span data-line="343">
+</span><span data-line="344"><span class="sd">        Args:</span>
+</span><span data-line="345"><span class="sd">            func_name: Name of the function</span>
+</span><span data-line="346">
+</span><span data-line="347"><span class="sd">        Returns:</span>
+</span><span data-line="348"><span class="sd">            Dictionary containing the RJSF specification with keys:</span>
+</span><span data-line="349"><span class="sd">            - 'schema': JSON Schema for the function inputs</span>
+</span><span data-line="350"><span class="sd">            - 'uiSchema': UI Schema for rendering hints</span>
+</span><span data-line="351"><span class="sd">            - 'func': The original function object</span>
+</span><span data-line="352">
+</span><span data-line="353"><span class="sd">        Raises:</span>
+</span><span data-line="354"><span class="sd">            KeyError: If function name not found</span>
+</span><span data-line="355"><span class="sd">        """</span>
+</span><span data-line="356">        <span class="k">if</span> <span class="n">func_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="p">:</span>
+</span><span data-line="357">            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Function '</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">' not found"</span><span class="p">)</span>
 </span><span data-line="358">
-</span><span data-line="359">    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span data-line="360"><span class="w">        </span><span class="sd">"""Return number of functions."""</span>
-</span><span data-line="361">        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="p">)</span>
-</span><span data-line="362">
-</span><span data-line="363">    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span data-line="364"><span class="w">        </span><span class="sd">"""Generate RJSF specification for a function.</span>
-</span><span data-line="365">
-</span><span data-line="366"><span class="sd">        Args:</span>
-</span><span data-line="367"><span class="sd">            func_name: Name of the function to generate spec for</span>
-</span><span data-line="368">
-</span><span data-line="369"><span class="sd">        Returns:</span>
-</span><span data-line="370"><span class="sd">            Dictionary with schema, uiSchema, and function reference</span>
-</span><span data-line="371"><span class="sd">        """</span>
-</span><span data-line="372">        <span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
-</span><span data-line="373">        <span class="n">_check_servable</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">func_name</span><span class="p">)</span>
-</span><span data-line="374">
-</span><span data-line="375">        <span class="n">func_to_form_spec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func_to_form_spec</span>
-</span><span data-line="376">        <span class="k">if</span> <span class="n">func_to_form_spec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="377">            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_basic_spec</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>
+</span><span data-line="359">        <span class="k">if</span> <span class="n">func_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spec_cache</span><span class="p">:</span>
+</span><span data-line="360">            <span class="bp">self</span><span class="o">.</span><span class="n">_spec_cache</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_spec</span><span class="p">(</span><span class="n">func_name</span><span class="p">)</span>
+</span><span data-line="361">
+</span><span data-line="362">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spec_cache</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
+</span><span data-line="363">
+</span><span data-line="364">    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="365"><span class="w">        </span><span class="sd">"""Iterate over function names."""</span>
+</span><span data-line="366">        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="p">)</span>
+</span><span data-line="367">
+</span><span data-line="368">    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="369"><span class="w">        </span><span class="sd">"""Whether a function is served (does not generate its spec)."""</span>
+</span><span data-line="370">        <span class="k">return</span> <span class="n">func_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span>
+</span><span data-line="371">
+</span><span data-line="372">    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="373"><span class="w">        </span><span class="sd">"""Return number of functions."""</span>
+</span><span data-line="374">        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="p">)</span>
+</span><span data-line="375">
+</span><span data-line="376">    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span data-line="377"><span class="w">        </span><span class="sd">"""Generate RJSF specification for a function.</span>
 </span><span data-line="378">
-</span><span data-line="379">        <span class="c1"># ju nests the spec under a "rjsf" field by default; uf wants it flat</span>
-</span><span data-line="380">        <span class="n">rjsf_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"nest_under_field"</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
-</span><span data-line="381">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_param_to_prop_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="382">            <span class="n">rjsf_config</span><span class="p">[</span><span class="s2">"param_to_prop_type"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_param_to_prop_type</span>
-</span><span data-line="383">        <span class="n">rjsf_config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rjsf_config</span><span class="p">)</span>  <span class="c1"># explicit rjsf_config wins</span>
-</span><span data-line="384">        <span class="n">form_spec</span> <span class="o">=</span> <span class="n">func_to_form_spec</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">**</span><span class="n">rjsf_config</span><span class="p">)</span>
-</span><span data-line="385">        <span class="n">nest_under_field</span> <span class="o">=</span> <span class="n">rjsf_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"nest_under_field"</span><span class="p">)</span>
-</span><span data-line="386">        <span class="k">if</span> <span class="n">nest_under_field</span><span class="p">:</span>  <span class="c1"># the caller asked ju to nest it; uf reads it flat</span>
-</span><span data-line="387">            <span class="n">form_spec</span> <span class="o">=</span> <span class="n">form_spec</span><span class="p">[</span><span class="n">nest_under_field</span><span class="p">]</span>
-</span><span data-line="388">        <span class="n">_drop_unfillable_fields</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">form_spec</span><span class="p">)</span>
-</span><span data-line="389">
-</span><span data-line="390">        <span class="c1"># Apply custom UI schema factory if provided</span>
-</span><span data-line="391">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ui_schema_factory</span><span class="p">:</span>
-</span><span data-line="392">            <span class="n">ui_schema</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ui_schema_factory</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="393">            <span class="k">if</span> <span class="s2">"uiSchema"</span> <span class="ow">in</span> <span class="n">form_spec</span><span class="p">:</span>
-</span><span data-line="394">                <span class="n">form_spec</span><span class="p">[</span><span class="s2">"uiSchema"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ui_schema</span><span class="p">)</span>
-</span><span data-line="395">            <span class="k">else</span><span class="p">:</span>
-</span><span data-line="396">                <span class="n">form_spec</span><span class="p">[</span><span class="s2">"uiSchema"</span><span class="p">]</span> <span class="o">=</span> <span class="n">ui_schema</span>
-</span><span data-line="397">
-</span><span data-line="398">        <span class="k">return</span> <span class="p">{</span>
-</span><span data-line="399">            <span class="s2">"schema"</span><span class="p">:</span> <span class="n">form_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"schema"</span><span class="p">,</span> <span class="p">{}),</span>
-</span><span data-line="400">            <span class="s2">"uiSchema"</span><span class="p">:</span> <span class="n">form_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"uiSchema"</span><span class="p">,</span> <span class="p">{}),</span>
-</span><span data-line="401">            <span class="s2">"func"</span><span class="p">:</span> <span class="n">func</span><span class="p">,</span>
-</span><span data-line="402">            <span class="s2">"name"</span><span class="p">:</span> <span class="n">func_name</span><span class="p">,</span>
-</span><span data-line="403">            <span class="s2">"description"</span><span class="p">:</span> <span class="n">doc_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">"Execute </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
-</span><span data-line="404">        <span class="p">}</span>
-</span><span data-line="405">
-</span><span data-line="406">    <span class="k">def</span><span class="w"> </span><span class="nf">_warn_ignored_options</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="407"><span class="w">        </span><span class="sd">"""Warn about the options the basic fallback has no way to honour."""</span>
-</span><span data-line="408">        <span class="n">ignored</span> <span class="o">=</span> <span class="p">[</span>
-</span><span data-line="409">            <span class="n">name</span>
-</span><span data-line="410">            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span>
-</span><span data-line="411">                <span class="p">(</span><span class="s2">"rjsf_config"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rjsf_config</span><span class="p">),</span>
-</span><span data-line="412">                <span class="p">(</span><span class="s2">"ui_schema_factory"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ui_schema_factory</span><span class="p">),</span>
-</span><span data-line="413">                <span class="p">(</span><span class="s2">"param_to_prop_type"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_param_to_prop_type</span><span class="p">),</span>
-</span><span data-line="414">            <span class="p">)</span>
-</span><span data-line="415">            <span class="k">if</span> <span class="n">value</span>
-</span><span data-line="416">        <span class="p">]</span>
-</span><span data-line="417">        <span class="k">if</span> <span class="n">ignored</span><span class="p">:</span>
-</span><span data-line="418">            <span class="n">_warn_at_caller</span><span class="p">(</span>
-</span><span data-line="419">                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ignored</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'is'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">ignored</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'are'</span><span class="si">}</span><span class="s2"> ignored because "</span>
-</span><span data-line="420">                <span class="s2">"ju is not installed (basic form specs). Install it with "</span>
-</span><span data-line="421">                <span class="s2">"`pip install ju`."</span><span class="p">,</span>
-</span><span data-line="422">                <span class="n">JuNotInstalledWarning</span><span class="p">,</span>
-</span><span data-line="423">            <span class="p">)</span>
-</span><span data-line="424">
-</span><span data-line="425">    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_basic_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span data-line="426"><span class="w">        </span><span class="sd">"""Generate a basic specification without ju.rjsf.</span>
-</span><span data-line="427">
-</span><span data-line="428"><span class="sd">        This is the fallback used when ``ju`` is not installed. It creates</span>
-</span><span data-line="429"><span class="sd">        a minimal JSON Schema from function signature.</span>
-</span><span data-line="430">
-</span><span data-line="431"><span class="sd">        Args:</span>
-</span><span data-line="432"><span class="sd">            func_name: Name of the function</span>
-</span><span data-line="433"><span class="sd">            func: The function object</span>
-</span><span data-line="434">
-</span><span data-line="435"><span class="sd">        Returns:</span>
-</span><span data-line="436"><span class="sd">            Basic specification dictionary</span>
-</span><span data-line="437"><span class="sd">        """</span>
-</span><span data-line="438">        <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="439">        <span class="n">properties</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="440">        <span class="n">required</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span data-line="441">
-</span><span data-line="442">        <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span data-line="443">            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">kind</span> <span class="ow">in</span> <span class="n">_NON_KEYWORD_KINDS</span><span class="p">:</span>
-</span><span data-line="444">                <span class="k">continue</span>
-</span><span data-line="445">            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">default</span> <span class="ow">is</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Parameter</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
-</span><span data-line="446">                <span class="n">required</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param_name</span><span class="p">)</span>
+</span><span data-line="379"><span class="sd">        Args:</span>
+</span><span data-line="380"><span class="sd">            func_name: Name of the function to generate spec for</span>
+</span><span data-line="381">
+</span><span data-line="382"><span class="sd">        Returns:</span>
+</span><span data-line="383"><span class="sd">            Dictionary with schema, uiSchema, and function reference</span>
+</span><span data-line="384"><span class="sd">        """</span>
+</span><span data-line="385">        <span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
+</span><span data-line="386">        <span class="n">_check_servable</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">func_name</span><span class="p">)</span>
+</span><span data-line="387">
+</span><span data-line="388">        <span class="n">func_to_form_spec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_func_to_form_spec</span>
+</span><span data-line="389">        <span class="k">if</span> <span class="n">func_to_form_spec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="390">            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_basic_spec</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>
+</span><span data-line="391">
+</span><span data-line="392">        <span class="c1"># ju nests the spec under a "rjsf" field by default; uf wants it flat</span>
+</span><span data-line="393">        <span class="n">rjsf_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"nest_under_field"</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+</span><span data-line="394">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_param_to_prop_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="395">            <span class="n">rjsf_config</span><span class="p">[</span><span class="s2">"param_to_prop_type"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_param_to_prop_type</span>
+</span><span data-line="396">        <span class="n">rjsf_config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rjsf_config</span><span class="p">)</span>  <span class="c1"># explicit rjsf_config wins</span>
+</span><span data-line="397">        <span class="n">form_spec</span> <span class="o">=</span> <span class="n">func_to_form_spec</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">**</span><span class="n">rjsf_config</span><span class="p">)</span>
+</span><span data-line="398">        <span class="n">nest_under_field</span> <span class="o">=</span> <span class="n">rjsf_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"nest_under_field"</span><span class="p">)</span>
+</span><span data-line="399">        <span class="k">if</span> <span class="n">nest_under_field</span><span class="p">:</span>  <span class="c1"># the caller asked ju to nest it; uf reads it flat</span>
+</span><span data-line="400">            <span class="n">form_spec</span> <span class="o">=</span> <span class="n">form_spec</span><span class="p">[</span><span class="n">nest_under_field</span><span class="p">]</span>
+</span><span data-line="401">        <span class="n">_drop_unfillable_fields</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">form_spec</span><span class="p">)</span>
+</span><span data-line="402">
+</span><span data-line="403">        <span class="c1"># Apply custom UI schema factory if provided</span>
+</span><span data-line="404">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ui_schema_factory</span><span class="p">:</span>
+</span><span data-line="405">            <span class="n">ui_schema</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ui_schema_factory</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="406">            <span class="k">if</span> <span class="s2">"uiSchema"</span> <span class="ow">in</span> <span class="n">form_spec</span><span class="p">:</span>
+</span><span data-line="407">                <span class="n">form_spec</span><span class="p">[</span><span class="s2">"uiSchema"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ui_schema</span><span class="p">)</span>
+</span><span data-line="408">            <span class="k">else</span><span class="p">:</span>
+</span><span data-line="409">                <span class="n">form_spec</span><span class="p">[</span><span class="s2">"uiSchema"</span><span class="p">]</span> <span class="o">=</span> <span class="n">ui_schema</span>
+</span><span data-line="410">
+</span><span data-line="411">        <span class="k">return</span> <span class="p">{</span>
+</span><span data-line="412">            <span class="s2">"schema"</span><span class="p">:</span> <span class="n">form_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"schema"</span><span class="p">,</span> <span class="p">{}),</span>
+</span><span data-line="413">            <span class="s2">"uiSchema"</span><span class="p">:</span> <span class="n">form_spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"uiSchema"</span><span class="p">,</span> <span class="p">{}),</span>
+</span><span data-line="414">            <span class="s2">"func"</span><span class="p">:</span> <span class="n">func</span><span class="p">,</span>
+</span><span data-line="415">            <span class="s2">"name"</span><span class="p">:</span> <span class="n">func_name</span><span class="p">,</span>
+</span><span data-line="416">            <span class="s2">"description"</span><span class="p">:</span> <span class="n">doc_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">"Execute </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+</span><span data-line="417">        <span class="p">}</span>
+</span><span data-line="418">
+</span><span data-line="419">    <span class="k">def</span><span class="w"> </span><span class="nf">_warn_ignored_options</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="420"><span class="w">        </span><span class="sd">"""Warn about the options the basic fallback has no way to honour."""</span>
+</span><span data-line="421">        <span class="n">ignored</span> <span class="o">=</span> <span class="p">[</span>
+</span><span data-line="422">            <span class="n">name</span>
+</span><span data-line="423">            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span>
+</span><span data-line="424">                <span class="p">(</span><span class="s2">"rjsf_config"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rjsf_config</span><span class="p">),</span>
+</span><span data-line="425">                <span class="p">(</span><span class="s2">"ui_schema_factory"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ui_schema_factory</span><span class="p">),</span>
+</span><span data-line="426">                <span class="p">(</span><span class="s2">"param_to_prop_type"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_param_to_prop_type</span><span class="p">),</span>
+</span><span data-line="427">            <span class="p">)</span>
+</span><span data-line="428">            <span class="k">if</span> <span class="n">value</span>
+</span><span data-line="429">        <span class="p">]</span>
+</span><span data-line="430">        <span class="k">if</span> <span class="n">ignored</span><span class="p">:</span>
+</span><span data-line="431">            <span class="n">_warn_at_caller</span><span class="p">(</span>
+</span><span data-line="432">                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ignored</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'is'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">ignored</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'are'</span><span class="si">}</span><span class="s2"> ignored because "</span>
+</span><span data-line="433">                <span class="s2">"ju is not installed (basic form specs). Install it with "</span>
+</span><span data-line="434">                <span class="s2">"`pip install ju`."</span><span class="p">,</span>
+</span><span data-line="435">                <span class="n">JuNotInstalledWarning</span><span class="p">,</span>
+</span><span data-line="436">            <span class="p">)</span>
+</span><span data-line="437">
+</span><span data-line="438">    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_basic_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span data-line="439"><span class="w">        </span><span class="sd">"""Generate a basic specification without ju.rjsf.</span>
+</span><span data-line="440">
+</span><span data-line="441"><span class="sd">        This is the fallback used when ``ju`` is not installed. It creates</span>
+</span><span data-line="442"><span class="sd">        a minimal JSON Schema from function signature.</span>
+</span><span data-line="443">
+</span><span data-line="444"><span class="sd">        Args:</span>
+</span><span data-line="445"><span class="sd">            func_name: Name of the function</span>
+</span><span data-line="446"><span class="sd">            func: The function object</span>
 </span><span data-line="447">
-</span><span data-line="448">            <span class="c1"># Basic type mapping</span>
-</span><span data-line="449">            <span class="n">param_type</span> <span class="o">=</span> <span class="s2">"string"</span>  <span class="c1"># default</span>
-</span><span data-line="450">            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span> <span class="o">!=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Parameter</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
-</span><span data-line="451">                <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
-</span><span data-line="452">                    <span class="n">param_type</span> <span class="o">=</span> <span class="s2">"integer"</span>
-</span><span data-line="453">                <span class="k">elif</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span> <span class="o">==</span> <span class="nb">float</span><span class="p">:</span>
-</span><span data-line="454">                    <span class="n">param_type</span> <span class="o">=</span> <span class="s2">"number"</span>
-</span><span data-line="455">                <span class="k">elif</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span data-line="456">                    <span class="n">param_type</span> <span class="o">=</span> <span class="s2">"boolean"</span>
-</span><span data-line="457">
-</span><span data-line="458">            <span class="n">properties</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="n">param_type</span><span class="p">}</span>
-</span><span data-line="459">
-</span><span data-line="460">        <span class="k">return</span> <span class="p">{</span>
-</span><span data-line="461">            <span class="s2">"schema"</span><span class="p">:</span> <span class="p">{</span>
-</span><span data-line="462">                <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"object"</span><span class="p">,</span>
-</span><span data-line="463">                <span class="s2">"properties"</span><span class="p">:</span> <span class="n">properties</span><span class="p">,</span>
-</span><span data-line="464">                <span class="s2">"required"</span><span class="p">:</span> <span class="n">required</span><span class="p">,</span>
-</span><span data-line="465">                <span class="s2">"title"</span><span class="p">:</span> <span class="n">func_name</span><span class="p">,</span>
-</span><span data-line="466">                <span class="s2">"description"</span><span class="p">:</span> <span class="n">doc_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">,</span>
-</span><span data-line="467">            <span class="p">},</span>
-</span><span data-line="468">            <span class="s2">"uiSchema"</span><span class="p">:</span> <span class="p">{},</span>
-</span><span data-line="469">            <span class="s2">"func"</span><span class="p">:</span> <span class="n">func</span><span class="p">,</span>
-</span><span data-line="470">            <span class="s2">"name"</span><span class="p">:</span> <span class="n">func_name</span><span class="p">,</span>
-</span><span data-line="471">            <span class="s2">"description"</span><span class="p">:</span> <span class="n">doc_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">"Execute </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
-</span><span data-line="472">        <span class="p">}</span>
-</span><span data-line="473">
-</span><span data-line="474">    <span class="nd">@cached_property</span>
-</span><span data-line="475">    <span class="k">def</span><span class="w"> </span><span class="nf">function_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
-</span><span data-line="476"><span class="w">        </span><span class="sd">"""Get list of all functions with basic metadata.</span>
-</span><span data-line="477">
-</span><span data-line="478"><span class="sd">        Returns:</span>
-</span><span data-line="479"><span class="sd">            List of dictionaries with function name and description</span>
-</span><span data-line="480"><span class="sd">        """</span>
-</span><span data-line="481">        <span class="k">return</span> <span class="p">[</span>
-</span><span data-line="482">            <span class="p">{</span>
-</span><span data-line="483">                <span class="s2">"name"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
-</span><span data-line="484">                <span class="s2">"description"</span><span class="p">:</span> <span class="n">doc_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">"Execute </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
-</span><span data-line="485">            <span class="p">}</span>
-</span><span data-line="486">            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-</span><span data-line="487">        <span class="p">]</span>
-</span><span data-line="488">
+</span><span data-line="448"><span class="sd">        Returns:</span>
+</span><span data-line="449"><span class="sd">            Basic specification dictionary</span>
+</span><span data-line="450"><span class="sd">        """</span>
+</span><span data-line="451">        <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="452">        <span class="n">properties</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="453">        <span class="n">required</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span data-line="454">
+</span><span data-line="455">        <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="456">            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">kind</span> <span class="ow">in</span> <span class="n">_NON_KEYWORD_KINDS</span><span class="p">:</span>
+</span><span data-line="457">                <span class="k">continue</span>
+</span><span data-line="458">            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">default</span> <span class="ow">is</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Parameter</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+</span><span data-line="459">                <span class="n">required</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">param_name</span><span class="p">)</span>
+</span><span data-line="460">
+</span><span data-line="461">            <span class="c1"># Basic type mapping</span>
+</span><span data-line="462">            <span class="n">param_type</span> <span class="o">=</span> <span class="s2">"string"</span>  <span class="c1"># default</span>
+</span><span data-line="463">            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span> <span class="o">!=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Parameter</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+</span><span data-line="464">                <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="465">                    <span class="n">param_type</span> <span class="o">=</span> <span class="s2">"integer"</span>
+</span><span data-line="466">                <span class="k">elif</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span> <span class="o">==</span> <span class="nb">float</span><span class="p">:</span>
+</span><span data-line="467">                    <span class="n">param_type</span> <span class="o">=</span> <span class="s2">"number"</span>
+</span><span data-line="468">                <span class="k">elif</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="469">                    <span class="n">param_type</span> <span class="o">=</span> <span class="s2">"boolean"</span>
+</span><span data-line="470">
+</span><span data-line="471">            <span class="n">properties</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="n">param_type</span><span class="p">}</span>
+</span><span data-line="472">
+</span><span data-line="473">        <span class="k">return</span> <span class="p">{</span>
+</span><span data-line="474">            <span class="s2">"schema"</span><span class="p">:</span> <span class="p">{</span>
+</span><span data-line="475">                <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"object"</span><span class="p">,</span>
+</span><span data-line="476">                <span class="s2">"properties"</span><span class="p">:</span> <span class="n">properties</span><span class="p">,</span>
+</span><span data-line="477">                <span class="s2">"required"</span><span class="p">:</span> <span class="n">required</span><span class="p">,</span>
+</span><span data-line="478">                <span class="s2">"title"</span><span class="p">:</span> <span class="n">func_name</span><span class="p">,</span>
+</span><span data-line="479">                <span class="s2">"description"</span><span class="p">:</span> <span class="n">doc_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">,</span>
+</span><span data-line="480">            <span class="p">},</span>
+</span><span data-line="481">            <span class="s2">"uiSchema"</span><span class="p">:</span> <span class="p">{},</span>
+</span><span data-line="482">            <span class="s2">"func"</span><span class="p">:</span> <span class="n">func</span><span class="p">,</span>
+</span><span data-line="483">            <span class="s2">"name"</span><span class="p">:</span> <span class="n">func_name</span><span class="p">,</span>
+</span><span data-line="484">            <span class="s2">"description"</span><span class="p">:</span> <span class="n">doc_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">"Execute </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+</span><span data-line="485">        <span class="p">}</span>
+</span><span data-line="486">
+</span><span data-line="487">    <span class="nd">@cached_property</span>
+</span><span data-line="488">    <span class="k">def</span><span class="w"> </span><span class="nf">function_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+</span><span data-line="489"><span class="w">        </span><span class="sd">"""Get list of all functions with basic metadata.</span>
+</span><span data-line="490">
+</span><span data-line="491"><span class="sd">        Returns:</span>
+</span><span data-line="492"><span class="sd">            List of dictionaries with function name and description</span>
+</span><span data-line="493"><span class="sd">        """</span>
+</span><span data-line="494">        <span class="k">return</span> <span class="p">[</span>
+</span><span data-line="495">            <span class="p">{</span>
+</span><span data-line="496">                <span class="s2">"name"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+</span><span data-line="497">                <span class="s2">"description"</span><span class="p">:</span> <span class="n">doc_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">"Execute </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+</span><span data-line="498">            <span class="p">}</span>
+</span><span data-line="499">            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span><span data-line="500">        <span class="p">]</span>
+</span><span data-line="501">
 <div class="viewcode-block" id="FunctionSpecStore.get_func">
 <a class="viewcode-back" href="../../_autosummary/uf.specs.html#uf.FunctionSpecStore.get_func">[docs]</a>
-</span><span data-line="489">    <span class="k">def</span><span class="w"> </span><span class="nf">get_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span data-line="490"><span class="w">        </span><span class="sd">"""Get the original function object by name.</span>
-</span><span data-line="491">
-</span><span data-line="492"><span class="sd">        Args:</span>
-</span><span data-line="493"><span class="sd">            func_name: Name of the function</span>
-</span><span data-line="494">
-</span><span data-line="495"><span class="sd">        Returns:</span>
-</span><span data-line="496"><span class="sd">            The function object</span>
-</span><span data-line="497">
-</span><span data-line="498"><span class="sd">        Raises:</span>
-</span><span data-line="499"><span class="sd">            KeyError: If function name not found</span>
-</span><span data-line="500"><span class="sd">        """</span>
-</span><span data-line="501">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span></div>
+</span><span data-line="502">    <span class="k">def</span><span class="w"> </span><span class="nf">get_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span data-line="503"><span class="w">        </span><span class="sd">"""Get the original function object by name.</span>
+</span><span data-line="504">
+</span><span data-line="505"><span class="sd">        Args:</span>
+</span><span data-line="506"><span class="sd">            func_name: Name of the function</span>
+</span><span data-line="507">
+</span><span data-line="508"><span class="sd">        Returns:</span>
+</span><span data-line="509"><span class="sd">            The function object</span>
+</span><span data-line="510">
+</span><span data-line="511"><span class="sd">        Raises:</span>
+</span><span data-line="512"><span class="sd">            KeyError: If function name not found</span>
+</span><span data-line="513"><span class="sd">        """</span>
+</span><span data-line="514">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funcs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span></div>
 </div>
 
 </span></pre></div>
@@ -686,7 +702,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=e2f3408e"></script>
+      <script src="../../_static/documentation_options.js?v=d50bcae4"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

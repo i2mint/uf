@@ -7,10 +7,11 @@ form specs and OpenAPI schemas.
 
 ### Functions
 
-| [`doc_of_func`](#uf.specs.doc_of_func)(func)   | The docstring of `func`; for a `functools.partial` (whose own `__doc__` is the generic one of `partial`), that of the function it wraps.                              |
-|----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [`name_funcs`](#uf.specs.name_funcs)(funcs)   | `{name: callable}` from a mapping of explicit names, or an iterable of callables (named by `name_of_func`).                                                           |
-| [`name_of_func`](#uf.specs.name_of_func)(func)  | The name a function is served under: its `__name__`; failing that, for a `functools.partial`, that of the function it wraps; for a callable instance, its class name. |
+| [`doc_of_func`](#uf.specs.doc_of_func)(func)     | The docstring of `func`; for a `functools.partial` (whose own `__doc__` is the generic one of `partial`), that of the function it wraps.                              |
+|------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`name_funcs`](#uf.specs.name_funcs)(funcs)     | `{name: callable}` from a mapping of explicit names, or an iterable of callables (named by `name_of_func`).                                                           |
+| [`name_of_func`](#uf.specs.name_of_func)(func)    | The name a function is served under: its `__name__`; failing that, for a `functools.partial`, that of the function it wraps; for a callable instance, its class name. |
+| [`unwrap_partials`](#uf.specs.unwrap_partials)(func) | The function a (possibly nested) `functools.partial` wraps; anything else as is.                                                                                      |
 
 ### Classes
 
@@ -157,4 +158,20 @@ class name.
 ...     def __call__(self, x): return 2 * x
 >>> name_of_func(Doubler())
 'Doubler'
+```
+
+### uf.specs.unwrap_partials(func)
+
+The function a (possibly nested) `functools.partial` wraps; anything else as is.
+
+* **Return type:**
+  [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)
+
+```pycon
+>>> import functools
+>>> def f(x, y, z): ...
+>>> unwrap_partials(functools.partial(functools.partial(f, 1), 2)) is f
+True
+>>> unwrap_partials(f) is f
+True
 ```

@@ -211,7 +211,8 @@ Automatically group functions by their module.
 * **Return type:**
   [`FunctionOrganizer`](#uf.organization.FunctionOrganizer)
 * **Returns:**
-  FunctionOrganizer with module-based groups
+  FunctionOrganizer with module-based groups (a `functools.partial` goes with the
+  module of the function it wraps)
 
 ### Example
 

@@ -1,4 +1,4 @@
-> built 2026-10-13 17:52 UTC from 9065087 (master) · uf 0.1.15. Details: build_info.json
+> built 2026-10-13 17:57 UTC from cf171c5 (master) · uf 0.1.16. Details: build_info.json
 
 # index.html.md
 
@@ -5784,7 +5784,8 @@ Automatically group functions by their module.
 * **Return type:**
   [`FunctionOrganizer`](_autosummary/uf.organization.html.md#uf.organization.FunctionOrganizer)
 * **Returns:**
-  FunctionOrganizer with module-based groups
+  FunctionOrganizer with module-based groups (a `functools.partial` goes with the
+  module of the function it wraps)
 
 ### Example
 
@@ -7093,7 +7094,8 @@ Automatically group functions by their module.
 * **Return type:**
   [`FunctionOrganizer`](_autosummary/uf.organization.html.md#uf.organization.FunctionOrganizer)
 * **Returns:**
-  FunctionOrganizer with module-based groups
+  FunctionOrganizer with module-based groups (a `functools.partial` goes with the
+  module of the function it wraps)
 
 ### Example
 
@@ -8018,10 +8020,11 @@ form specs and OpenAPI schemas.
 
 ### Functions
 
-| [`doc_of_func`](_autosummary/uf.specs.html.md#uf.specs.doc_of_func)(func)   | The docstring of `func`; for a `functools.partial` (whose own `__doc__` is the generic one of `partial`), that of the function it wraps.                              |
-|----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [`name_funcs`](_autosummary/uf.specs.html.md#uf.specs.name_funcs)(funcs)   | `{name: callable}` from a mapping of explicit names, or an iterable of callables (named by `name_of_func`).                                                           |
-| [`name_of_func`](_autosummary/uf.specs.html.md#uf.specs.name_of_func)(func)  | The name a function is served under: its `__name__`; failing that, for a `functools.partial`, that of the function it wraps; for a callable instance, its class name. |
+| [`doc_of_func`](_autosummary/uf.specs.html.md#uf.specs.doc_of_func)(func)     | The docstring of `func`; for a `functools.partial` (whose own `__doc__` is the generic one of `partial`), that of the function it wraps.                              |
+|------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`name_funcs`](_autosummary/uf.specs.html.md#uf.specs.name_funcs)(funcs)     | `{name: callable}` from a mapping of explicit names, or an iterable of callables (named by `name_of_func`).                                                           |
+| [`name_of_func`](_autosummary/uf.specs.html.md#uf.specs.name_of_func)(func)    | The name a function is served under: its `__name__`; failing that, for a `functools.partial`, that of the function it wraps; for a callable instance, its class name. |
+| [`unwrap_partials`](_autosummary/uf.specs.html.md#uf.specs.unwrap_partials)(func) | The function a (possibly nested) `functools.partial` wraps; anything else as is.                                                                                      |
 
 ### Classes
 
@@ -8168,6 +8171,22 @@ class name.
 ...     def __call__(self, x): return 2 * x
 >>> name_of_func(Doubler())
 'Doubler'
+```
+
+### uf.specs.unwrap_partials(func)
+
+The function a (possibly nested) `functools.partial` wraps; anything else as is.
+
+* **Return type:**
+  [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)
+
+```pycon
+>>> import functools
+>>> def f(x, y, z): ...
+>>> unwrap_partials(functools.partial(functools.partial(f, 1), 2)) is f
+True
+>>> unwrap_partials(f) is f
+True
 ```
 
 
@@ -9051,7 +9070,7 @@ Decorator to add webhooks to a function.
 
 # About this build
 
-This documentation was built on **2026-10-13 17:52 UTC** from commit <a href="https://github.com/i2mint/uf/commit/90650879554eb0890acd277240ec8ccb805489a2"><code>9065087</code></a> on branch <code>master</code>, for **uf 0.1.15** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-13 17:57 UTC** from commit <a href="https://github.com/i2mint/uf/commit/cf171c58a91094483cc7e084fba9d33768669c29"><code>cf171c5</code></a> on branch <code>master</code>, for **uf 0.1.16** (from <code>pyproject.toml</code>).
 
 #### NOTE
 Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
@@ -9060,9 +9079,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 |                     |                                                                                                                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/uf/commit/90650879554eb0890acd277240ec8ccb805489a2"><code>90650879554eb0890acd277240ec8ccb805489a2</code></a> |
+| Commit              | <a href="https://github.com/i2mint/uf/commit/cf171c58a91094483cc7e084fba9d33768669c29"><code>cf171c58a91094483cc7e084fba9d33768669c29</code></a> |
 | Branch              | <code>master</code>                                                                                                                              |
-| Tags at this commit | <code>0.1.15</code>                                                                                                                              |
+| Tags at this commit | <code>0.1.16</code>                                                                                                                              |
 | Working tree        | clean                                                                                                                                            |
 | Remote              | <code>https://github.com/i2mint/uf</code>                                                                                                        |
 
@@ -9071,9 +9090,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/uf</code>                                                                     |
-| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38441889552">38441889552</a>            |
+| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38442522056">38442522056</a>            |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>a030ab0cc41bbeeb50391655f21522f2fdb18156</code> (in the history of the built commit) |
+| Event commit | <code>f42965f9ed442a3b7e9c14fb158b78599ac97fe2</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -9098,13 +9117,13 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.15/">0.1.15</a>, the same as the documented version.
+Latest release: <a href="https://pypi.org/project/uf/0.1.16/">0.1.16</a>, the same as the documented version.
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout 90650879554eb0890acd277240ec8ccb805489a2
+git checkout cf171c58a91094483cc7e084fba9d33768669c29
 pip install "epythet==0.2.17"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```
