@@ -345,11 +345,11 @@ def test_fallback_without_options_has_no_ignored_options_warning(monkeypatch):
 @pytest.mark.parametrize('with_ju', [True, False])
 def test_warnings_are_attributed_to_the_caller(with_ju, monkeypatch):
     _with_ju_or_not(with_ju, monkeypatch)
-    store = FunctionSpecStore(
-        [_required_positional_only_and_kw], param_to_prop_type=lambda p: 'string'
-    )
     with warnings.catch_warnings(record=True) as record:
         warnings.simplefilter('always')
+        store = FunctionSpecStore(
+            [_required_positional_only_and_kw], param_to_prop_type=lambda p: 'string'
+        )
         store['_required_positional_only_and_kw']
     assert record and all(w.filename == __file__ for w in record)
 
