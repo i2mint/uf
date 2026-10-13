@@ -1,7 +1,7 @@
 {
-  "collection_duration_seconds": 10.025753498077393,
-  "commit_message": "tests: invalidate import caches after creating a package on the fly (#25)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
-  "commit_sha": "426a0d466c3b6e6c59a2825fd6669898d09d5319",
+  "collection_duration_seconds": 9.163715600967407,
+  "commit_message": "tests: drop duplicate import",
+  "commit_sha": "5bbeaa43dc7c775bb9ab562b3d9ffc3cbb061f8d",
   "metrics": {
     "coverage": {
       "branch_coverage": 0.0,
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T16:20:21.811980Z",
+  "timestamp": "2026-10-13T16:20:30.138947Z",
   "workflow_status": {}
 }
