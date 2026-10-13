@@ -113,7 +113,6 @@ def test_get_func():
 
 import importlib
 import importlib.abc
-import importlib
 import sys
 import warnings
 
