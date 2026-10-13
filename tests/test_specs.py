@@ -411,8 +411,17 @@ def test_broken_optional_package_is_not_silently_ignored(package, monkeypatch):
     with pytest.raises(ModuleNotFoundError, match=f'{package}_dep'):
         probe()
     if package == 'pydantic':
-        with pytest.raises(ModuleNotFoundError):
-            pydantic_error_to_user_friendly(ValueError('x'))
+        from uf.pydantic_support import extract_pydantic_params, function_uses_pydantic
+
+        def f(x: int): ...
+
+        for call in (
+            lambda: pydantic_error_to_user_friendly(ValueError('x')),
+            lambda: function_uses_pydantic(f),
+            lambda: extract_pydantic_params(f),
+        ):
+            with pytest.raises(ModuleNotFoundError, match='pydantic_dep'):
+                call()
 
 
 @pytest.mark.parametrize('package', ['pandas', 'pydantic'])

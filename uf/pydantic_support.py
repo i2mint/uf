@@ -66,9 +66,9 @@ def function_uses_pydantic(func: Callable) -> bool:
     """
     try:
         type_hints = get_type_hints(func)
-        return any(is_pydantic_model(hint) for hint in type_hints.values())
-    except Exception:
+    except Exception:  # unresolvable annotations; (a broken pydantic must still raise)
         return False
+    return any(is_pydantic_model(hint) for hint in type_hints.values())
 
 
 def extract_pydantic_params(func: Callable) -> dict[str, Any]:
@@ -84,12 +84,12 @@ def extract_pydantic_params(func: Callable) -> dict[str, Any]:
 
     try:
         type_hints = get_type_hints(func)
-        for param_name, param_type in type_hints.items():
-            if is_pydantic_model(param_type):
-                pydantic_params[param_name] = param_type
-    except Exception:
-        pass
+    except Exception:  # unresolvable annotations; (a broken pydantic must still raise)
+        return pydantic_params
 
+    for param_name, param_type in type_hints.items():
+        if is_pydantic_model(param_type):
+            pydantic_params[param_name] = param_type
     return pydantic_params
 
 
