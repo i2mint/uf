@@ -330,9 +330,8 @@ def test_nest_under_field_is_unwrapped():
 )
 def test_fallback_warns_about_ignored_options(options, named, monkeypatch):
     _with_ju_or_not(False, monkeypatch)
-    store = FunctionSpecStore([sample_add], **options)
     with pytest.warns(JuNotInstalledWarning, match=named):
-        store['sample_add']
+        FunctionSpecStore([sample_add], **options)
 
 
 def test_fallback_without_options_has_no_ignored_options_warning(monkeypatch):
@@ -563,3 +562,29 @@ def test_import_optional_keeps_a_stub_package(monkeypatch):
     stub.__path__ = []  # looks like a package, has no spec
     monkeypatch.setitem(sys.modules, '_uf_stub_pkg_', stub)
     assert import_optional('_uf_stub_pkg_') is stub
+
+
+def test_broken_ju_fails_when_the_store_is_built_not_per_request(monkeypatch):
+    """A broken ju raises at construction, with its traceback (#8)."""
+    _require_ju()
+    monkeypatch.delitem(sys.modules, 'ju.rjsf', raising=False)
+    monkeypatch.setattr(sys, 'meta_path', [_BrokenJuRjsfFinder(), *sys.meta_path])
+    monkeypatch.delattr(sys.modules['ju'], 'rjsf', raising=False)
+    with pytest.raises(ModuleNotFoundError) as excinfo:
+        FunctionSpecStore([sample_add])
+    assert excinfo.value.name == 'dill'
+    from uf import mk_rjsf_app
+
+    with pytest.raises(ModuleNotFoundError):
+        mk_rjsf_app([sample_add])
+
+
+def test_absent_ju_warning_is_once_and_points_at_the_caller(monkeypatch):
+    _block_ju(monkeypatch)
+    with warnings.catch_warnings(record=True) as record:
+        warnings.simplefilter('always')
+        store = FunctionSpecStore([sample_add, sample_greet])
+        list(store.items())  # (Mapping.items(): not attributed to _collections_abc)
+    ju_warnings = [w for w in record if issubclass(w.category, JuNotInstalledWarning)]
+    assert len(ju_warnings) == 1
+    assert ju_warnings[0].filename == __file__
