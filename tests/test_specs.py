@@ -447,6 +447,93 @@ def test_missing_qh_gets_the_install_hint_but_broken_qh_propagates(monkeypatch):
         mk_rjsf_app([sample_add])
 
 
+# --- FunctionSpecStore: names, validation, positional-only (i2mint/uf#13) ----
+import functools
+import inspect
+
+from uf.specs import UnservableCallableError, name_of_func
+
+
+class _Doubler:
+    def __call__(self, x: int = 1):
+        return 2 * x
+
+
+def _po_only(a, b, /):
+    return a + b
+
+
+def test_names_of_partials_and_callable_instances():
+    store = FunctionSpecStore([functools.partial(sample_add, y=2), _Doubler()])
+    assert set(store) == {'sample_add', '_Doubler'}
+    assert 'x' in store['_Doubler']['schema']['properties']
+    assert name_of_func(functools.partial(functools.partial(int, base=2))) == 'int'
+
+
+def test_explicit_names_by_mapping():
+    store = FunctionSpecStore({'inc': functools.partial(sample_add, y=1), 'twice': _Doubler()})
+    assert set(store) == {'inc', 'twice'}
+    assert store['inc']['name'] == 'inc'
+
+
+def test_two_different_callables_with_one_name_raise():
+    with pytest.raises(ValueError, match="both named 'sample_add'"):
+        FunctionSpecStore([sample_add, functools.partial(sample_add, y=1)])
+    assert len(FunctionSpecStore([sample_add, sample_add])) == 1  # same one twice
+
+
+def test_validate_fails_fast_naming_the_function():
+    FunctionSpecStore([max])  # lazy by default
+    with pytest.raises(UnintrospectableCallableError, match="'max'"):
+        FunctionSpecStore([sample_add, max], validate=True)
+
+
+def test_function_with_only_required_positional_only_params_is_refused():
+    with pytest.raises(UnservableCallableError, match=r"\['a', 'b'\]"):
+        FunctionSpecStore([_po_only], validate=True)
+    with pytest.raises(UnservableCallableError):
+        FunctionSpecStore([_po_only])['_po_only']  # lazily, without validate
+    # a keyword-fillable param, or defaults, keep it servable
+    FunctionSpecStore([_required_positional_only_and_kw, _positional_only], validate=True)
+
+
+def test_mk_rjsf_app_validates_up_front():
+    pytest.importorskip('qh')
+    from uf import mk_rjsf_app
+
+    with pytest.raises(UnservableCallableError, match='_po_only'):
+        mk_rjsf_app([sample_add, _po_only])
+
+
+@pytest.mark.parametrize('with_ju', [True, False])
+def test_variadic_autofocus_moves_on_for_print(with_ju, monkeypatch):
+    # i2.Sig names print's *args 'value', inspect and ju name it 'args'
+    _with_ju_or_not(with_ju, monkeypatch)
+    try:
+        inspect.signature(print)
+    except ValueError:  # some platforms/versions have no signature for print
+        pytest.skip('print has no signature here')
+    spec = FunctionSpecStore([print])['print']
+    assert set(spec['schema']['properties']) == {'sep', 'end', 'file', 'flush'}
+    focused = [k for k, v in spec['uiSchema'].items() if isinstance(v, dict) and v.get('ui:autofocus')]
+    assert set(focused) <= set(spec['schema']['properties'])
+    assert 'args' not in spec['uiSchema'] and 'value' not in spec['uiSchema']
+
+
+def test_a_partial_with_its_own_name_keeps_it():
+    p = functools.partial(sample_add, y=3)
+    p.__name__ = 'add3'
+    assert set(FunctionSpecStore([sample_add, p])) == {'sample_add', 'add3'}
+
+
+def test_the_same_bound_method_twice_is_one_function():
+    class C:
+        def m(self, x: int = 1):
+            return x
+
+    c = C()
+    assert len(FunctionSpecStore([c.m, c.m])) == 1
+
 def test_import_optional_treats_a_namespace_directory_as_absent(tmp_path, monkeypatch):
     # a stray directory named like the optional package (no __init__.py)
     (tmp_path / '_uf_stray_dir_pkg_').mkdir()

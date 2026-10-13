@@ -94,6 +94,7 @@ def mk_rjsf_app(
         rjsf_config=rjsf_config or {},
         ui_schema_factory=ui_schema_factory,
         param_to_prop_type=param_to_prop_type,
+        validate=True,  # a function uf can't build a form for fails here, not on a request
     )
 
     # Create HTTP service using qh
