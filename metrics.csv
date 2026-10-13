@@ -1,26 +1,42 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T15:53:16.786498Z
-commit_sha,f5d0bd1ed3f349d73589301ebaf3c262ebe266d7
-commit_message,Merge 02ae2be90e05ebc5494168e6e95a01917942e06a into 24e267821437b424e10fd3426a69aa7b61cee2d7
+timestamp,2026-10-13T15:56:29.539577Z
+commit_sha,609b16ca0637b299d995456b1d5fbbd518372104
+commit_message,"mk_rjsf_app / UfApp: serve partials, callable instances and {name: callable} maps (#17) (#23)
+
+* mk_rjsf_app / UfApp serve partials, callable instances and {name: callable} maps (#17)
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+* Served callables: resolve string annotations, await async via partials/instances, wrap named instances (#17)
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+* Served classes: resolve string annotations from the class's __init__ (#17)
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
 python_version,3.10
-metrics.umpyre_stats.num_functions,31084
-metrics.umpyre_stats.num_classes,5998
-metrics.umpyre_stats.total_lines,894562
-metrics.umpyre_stats.empty_lines,126372
-metrics.umpyre_stats.comment_lines,44314
-metrics.umpyre_stats.docs_lines,113401
-metrics.umpyre_stats.function_lines,509821
-metrics.umpyre_stats.empty_lines_ratio,0.14126689933174
-metrics.umpyre_stats.comment_lines_ratio,0.04953709189525153
-metrics.umpyre_stats.function_lines_ratio,0.5699113085510004
-metrics.umpyre_stats.mean_lines_per_function,16.401396216703127
-metrics.umpyre_stats.files_analyzed,2169
+metrics.umpyre_stats.num_functions,30653
+metrics.umpyre_stats.num_classes,5993
+metrics.umpyre_stats.total_lines,884212
+metrics.umpyre_stats.empty_lines,125083
+metrics.umpyre_stats.comment_lines,43098
+metrics.umpyre_stats.docs_lines,112649
+metrics.umpyre_stats.function_lines,502242
+metrics.umpyre_stats.empty_lines_ratio,0.14146268089553185
+metrics.umpyre_stats.comment_lines_ratio,0.04874170447811158
+metrics.umpyre_stats.function_lines_ratio,0.568010839029554
+metrics.umpyre_stats.mean_lines_per_function,16.38475842495025
+metrics.umpyre_stats.files_analyzed,2180
 metrics.umpyre_stats.pypi_version,0.1.10
 metrics.workflow_status.last_run_status,success
-metrics.workflow_status.last_success_timestamp,2026-10-13T15:51:05Z
+metrics.workflow_status.last_success_timestamp,2026-10-13T15:54:32Z
 metrics.workflow_status.recent_failure_count,0
-metrics.workflow_status.run_url,https://github.com/i2mint/uf/actions/runs/38425349357
+metrics.workflow_status.run_url,https://github.com/i2mint/uf/actions/runs/38425710091
 metrics.workflow_status.total_runs_analyzed,10
 metrics.wily.cyclomatic_avg,0.0
 metrics.wily.maintainability_index,0.0
@@ -36,4 +52,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,8.443025827407837
+collection_duration_seconds,6.610632658004761
