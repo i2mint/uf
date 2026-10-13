@@ -614,6 +614,38 @@ def test_absent_ju_warning_is_once_and_points_at_the_caller(monkeypatch):
     assert ju_warnings[0].filename == __file__
 
 
+def _ju_warning_files(build, monkeypatch):
+    _block_ju(monkeypatch)
+    with warnings.catch_warnings(record=True) as record:
+        warnings.simplefilter('always')
+        build()
+    return [w.filename for w in record if issubclass(w.category, JuNotInstalledWarning)]
+
+
+def test_absent_ju_warning_through_mk_rjsf_app_points_at_the_caller(monkeypatch):
+    from uf import mk_rjsf_app
+
+    files = _ju_warning_files(lambda: mk_rjsf_app([sample_add]), monkeypatch)
+    assert files == [__file__]  # not uf/base.py
+
+
+def test_absent_ju_warning_through_ufapp_points_at_the_caller(monkeypatch):
+    from uf import UfApp
+
+    files = _ju_warning_files(lambda: UfApp([sample_add]), monkeypatch)
+    assert files == [__file__]
+
+
+def test_ignored_options_warning_points_at_the_caller(monkeypatch):
+    from uf import mk_rjsf_app
+
+    files = _ju_warning_files(
+        lambda: mk_rjsf_app([sample_add], rjsf_config={'liveValidate': True}),
+        monkeypatch,
+    )
+    assert files and set(files) == {__file__}
+
+
 # --- mk_rjsf_app / UfApp serve partials, callable instances, {name: callable} (#17) ---
 def _plus(x: int, y: int = 1) -> int:
     """Add."""
