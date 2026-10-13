@@ -19,7 +19,10 @@ Return the imported module, or `None` if the optional package is not installed.
 Only a `ModuleNotFoundError` naming the package itself (the first segment of
 `module_name`, or one of `absent`) counts as “not installed”. Every other
 failure – a missing submodule, a missing dependency *of* the package, a broken
-import inside it – is a broken environment and propagates.
+import inside it – is a broken environment and propagates. A *namespace* package
+(a bare directory of that name on `sys.path`, with no `__init__.py`) is not the
+package either, so it counts as not installed – which also means a package that is
+*legitimately* a namespace package (`google`) can’t be imported with this.
 
 * **Return type:**
   [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`ModuleType`](https://docs.python.org/3/library/types.html#types.ModuleType)]

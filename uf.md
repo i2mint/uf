@@ -1,4 +1,4 @@
-> built 2026-10-13 09:21 UTC from f141765 (master) · uf 0.1.7. Details: build_info.json
+> built 2026-10-13 14:23 UTC from 7cf33aa (master) · uf 0.1.8. Details: build_info.json
 
 # index.html.md
 
@@ -4189,7 +4189,7 @@ Convert organization to dictionary format.
 >>> # Can be used in templates or APIs
 ```
 
-### *class* uf.FunctionSpecStore(funcs, , rjsf_config=None, ui_schema_factory=None, param_to_prop_type=None)
+### *class* uf.FunctionSpecStore(funcs, , rjsf_config=None, ui_schema_factory=None, param_to_prop_type=None, validate=False)
 
 Bases: [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)
 
@@ -4198,10 +4198,17 @@ A mapping from function names to their RJSF specifications.
 Lazily generates and caches form specs for each function.
 
 * **Parameters:**
-  * **funcs** ([`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Iterable of callable functions to generate specs for
+  * **funcs** (`Union`[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to generate specs for (named by `name_of_func`:
+    `__name__`, the wrapped function’s for a `functools.partial`, the class
+    name for a callable instance), or a mapping `{name: callable}` to name
+    them explicitly
   * **rjsf_config** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)]) – Optional configuration dict for RJSF generation
   * **ui_schema_factory** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional callable to customize UI schema generation
   * **param_to_prop_type** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional callable to map parameters to property types
+  * **validate** ([`bool`](https://docs.python.org/3/builtins/functions.html#bool)) – If true, every function is checked at construction, so a callable
+    uf can’t build a form for fails there, naming it, rather than on the first
+    request (default false: checked on first access of its spec;
+    `mk_rjsf_app` validates).
 
 ### Example
 
@@ -6828,7 +6835,10 @@ Return the imported module, or `None` if the optional package is not installed.
 Only a `ModuleNotFoundError` naming the package itself (the first segment of
 `module_name`, or one of `absent`) counts as “not installed”. Every other
 failure – a missing submodule, a missing dependency *of* the package, a broken
-import inside it – is a broken environment and propagates.
+import inside it – is a broken environment and propagates. A *namespace* package
+(a bare directory of that name on `sys.path`, with no `__init__.py`) is not the
+package either, so it counts as not installed – which also means a package that is
+*legitimately* a namespace package (`google`) can’t be imported with this.
 
 * **Return type:**
   [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`ModuleType`](https://docs.python.org/3/library/types.html#types.ModuleType)]
@@ -7966,6 +7976,11 @@ Function specification management for uf.
 Provides a Mapping-based interface to function specifications, including RJSF
 form specs and OpenAPI schemas.
 
+### Functions
+
+| [`name_of_func`](_autosummary/uf.specs.html.md#uf.specs.name_of_func)(func)   | The name a function is served under: its `__name__`; failing that, for a `functools.partial`, that of the function it wraps; for a callable instance, its class name.   |
+|-----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
 ### Classes
 
 | [`FunctionSpecStore`](_autosummary/uf.specs.html.md#uf.specs.FunctionSpecStore)(funcs, \*[, rjsf_config, ...])   | A mapping from function names to their RJSF specifications.   |
@@ -7973,12 +7988,13 @@ form specs and OpenAPI schemas.
 
 ### Exceptions
 
-| [`JuNotInstalledWarning`](_autosummary/uf.specs.html.md#uf.specs.JuNotInstalledWarning)         | Emitted when `ju` is absent and uf falls back to basic form specs.             |
-|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| [`PositionalOnlyParamWarning`](_autosummary/uf.specs.html.md#uf.specs.PositionalOnlyParamWarning)    | A required positional-only parameter can't be filled by a keyword-only caller. |
-| [`UnintrospectableCallableError`](_autosummary/uf.specs.html.md#uf.specs.UnintrospectableCallableError) | A callable has no signature to build a form from (e.g. `max`, `getattr`).      |
+| [`JuNotInstalledWarning`](_autosummary/uf.specs.html.md#uf.specs.JuNotInstalledWarning)         | Emitted when `ju` is absent and uf falls back to basic form specs.                             |
+|--------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| [`PositionalOnlyParamWarning`](_autosummary/uf.specs.html.md#uf.specs.PositionalOnlyParamWarning)    | A required positional-only parameter can't be filled by a keyword-only caller.                 |
+| [`UnintrospectableCallableError`](_autosummary/uf.specs.html.md#uf.specs.UnintrospectableCallableError) | A callable has no signature to build a form from (e.g. `max`, `getattr`).                      |
+| [`UnservableCallableError`](_autosummary/uf.specs.html.md#uf.specs.UnservableCallableError)       | A callable can never be called from a uf form (e.g. only required positional-only parameters). |
 
-### *class* uf.specs.FunctionSpecStore(funcs, , rjsf_config=None, ui_schema_factory=None, param_to_prop_type=None)
+### *class* uf.specs.FunctionSpecStore(funcs, , rjsf_config=None, ui_schema_factory=None, param_to_prop_type=None, validate=False)
 
 Bases: [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)
 
@@ -7987,10 +8003,17 @@ A mapping from function names to their RJSF specifications.
 Lazily generates and caches form specs for each function.
 
 * **Parameters:**
-  * **funcs** ([`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Iterable of callable functions to generate specs for
+  * **funcs** (`Union`[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to generate specs for (named by `name_of_func`:
+    `__name__`, the wrapped function’s for a `functools.partial`, the class
+    name for a callable instance), or a mapping `{name: callable}` to name
+    them explicitly
   * **rjsf_config** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)]) – Optional configuration dict for RJSF generation
   * **ui_schema_factory** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional callable to customize UI schema generation
   * **param_to_prop_type** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional callable to map parameters to property types
+  * **validate** ([`bool`](https://docs.python.org/3/builtins/functions.html#bool)) – If true, every function is checked at construction, so a callable
+    uf can’t build a form for fails there, naming it, rather than on the first
+    request (default false: checked on first access of its spec;
+    `mk_rjsf_app` validates).
 
 ### Example
 
@@ -8043,6 +8066,34 @@ A required positional-only parameter can’t be filled by a keyword-only caller.
 Bases: [`ValueError`](https://docs.python.org/3/builtins/exceptions.html#ValueError)
 
 A callable has no signature to build a form from (e.g. `max`, `getattr`).
+
+### *exception* uf.specs.UnservableCallableError
+
+Bases: [`ValueError`](https://docs.python.org/3/builtins/exceptions.html#ValueError)
+
+A callable can never be called from a uf form (e.g. only required
+positional-only parameters).
+
+### uf.specs.name_of_func(func)
+
+The name a function is served under: its `__name__`; failing that, for a
+`functools.partial`, that of the function it wraps; for a callable instance, its
+class name.
+
+* **Return type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
+```pycon
+>>> import functools
+>>> name_of_func(len)
+'len'
+>>> name_of_func(functools.partial(int, base=2))
+'int'
+>>> class Doubler:
+...     def __call__(self, x): return 2 * x
+>>> name_of_func(Doubler())
+'Doubler'
+```
 
 
 # _autosummary/uf.templates.html.md
@@ -8925,20 +8976,18 @@ Decorator to add webhooks to a function.
 
 # About this build
 
-This documentation was built on **2026-10-13 09:21 UTC** from commit <a href="https://github.com/i2mint/uf/commit/f1417652bdffec546bbd334c25a5dde028b9e0d9"><code>f141765</code></a> on branch <code>master</code>, for **uf 0.1.7** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-13 14:23 UTC** from commit <a href="https://github.com/i2mint/uf/commit/7cf33aac65d1036529340bf845551aa7650f70d2"><code>7cf33aa</code></a> on branch <code>master</code>, for **uf 0.1.8** (from <code>pyproject.toml</code>).
 
-#### WARNING
-The documentation and the package may be misaligned:
-
-- The documented version (0.1.7) is ahead of the latest release on PyPI (0.1.5): these docs describe unreleased code.
+#### NOTE
+Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
 
 ## Source
 
 |                     |                                                                                                                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/uf/commit/f1417652bdffec546bbd334c25a5dde028b9e0d9"><code>f1417652bdffec546bbd334c25a5dde028b9e0d9</code></a> |
+| Commit              | <a href="https://github.com/i2mint/uf/commit/7cf33aac65d1036529340bf845551aa7650f70d2"><code>7cf33aac65d1036529340bf845551aa7650f70d2</code></a> |
 | Branch              | <code>master</code>                                                                                                                              |
-| Tags at this commit | <code>0.1.7</code>                                                                                                                               |
+| Tags at this commit | <code>0.1.8</code>                                                                                                                               |
 | Working tree        | clean                                                                                                                                            |
 | Remote              | <code>https://github.com/i2mint/uf</code>                                                                                                        |
 
@@ -8947,9 +8996,9 @@ The documentation and the package may be misaligned:
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/uf</code>                                                                     |
-| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38375484270">38375484270</a>            |
+| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38412612453">38412612453</a>            |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>0b715141de932644fc5ebd75909cb3d95804633d</code> (in the history of the built commit) |
+| Event commit | <code>0c89605386da70e415a69b7e218e36066e152e64</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -8974,13 +9023,13 @@ The documentation and the package may be misaligned:
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.5/">0.1.5</a>, older than the documented version (0.1.7).
+Latest release: <a href="https://pypi.org/project/uf/0.1.8/">0.1.8</a>, the same as the documented version.
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout f1417652bdffec546bbd334c25a5dde028b9e0d9
+git checkout 7cf33aac65d1036529340bf845551aa7650f70d2
 pip install "epythet==0.2.15"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

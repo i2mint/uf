@@ -4,6 +4,12 @@ uf.specs
 .. automodule:: uf.specs
 
    
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      name_of_func
+   
    .. rubric:: Classes
 
    .. autosummary::
@@ -17,4 +23,5 @@ uf.specs
       JuNotInstalledWarning
       PositionalOnlyParamWarning
       UnintrospectableCallableError
+      UnservableCallableError
    

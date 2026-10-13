@@ -140,39 +140,67 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="7"><span class="sd">"""</span>
 </span><span data-line="8">
 </span><span data-line="9"><span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
-</span><span data-line="10"><span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModuleType</span>
-</span><span data-line="11"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
-</span><span data-line="12">
+</span><span data-line="10"><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+</span><span data-line="11"><span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModuleType</span>
+</span><span data-line="12"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 </span><span data-line="13">
+</span><span data-line="14">
 <div class="viewcode-block" id="import_optional">
 <a class="viewcode-back" href="../../_autosummary/uf.optional.html#uf.optional.import_optional">[docs]</a>
-</span><span data-line="14"><span class="k">def</span><span class="w"> </span><span class="nf">import_optional</span><span class="p">(</span>
-</span><span data-line="15">    <span class="n">module_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">absent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="16"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ModuleType</span><span class="p">]:</span>
-</span><span data-line="17"><span class="w">    </span><span class="sd">"""Return the imported module, or ``None`` if the optional package is not installed.</span>
-</span><span data-line="18">
-</span><span data-line="19"><span class="sd">    Only a ``ModuleNotFoundError`` naming the package itself (the first segment of</span>
-</span><span data-line="20"><span class="sd">    ``module_name``, or one of ``absent``) counts as "not installed". Every other</span>
-</span><span data-line="21"><span class="sd">    failure -- a missing submodule, a missing dependency *of* the package, a broken</span>
-</span><span data-line="22"><span class="sd">    import inside it -- is a broken environment and propagates.</span>
-</span><span data-line="23">
-</span><span data-line="24"><span class="sd">    &gt;&gt;&gt; import_optional('json').__name__</span>
-</span><span data-line="25"><span class="sd">    'json'</span>
-</span><span data-line="26"><span class="sd">    &gt;&gt;&gt; import_optional('_uf_no_such_package_') is None</span>
-</span><span data-line="27"><span class="sd">    True</span>
-</span><span data-line="28"><span class="sd">    &gt;&gt;&gt; import_optional('json.no_such_submodule')</span>
-</span><span data-line="29"><span class="sd">    Traceback (most recent call last):</span>
-</span><span data-line="30"><span class="sd">      ...</span>
-</span><span data-line="31"><span class="sd">    ModuleNotFoundError: No module named 'json.no_such_submodule'</span>
-</span><span data-line="32"><span class="sd">    """</span>
-</span><span data-line="33">    <span class="n">absent</span> <span class="o">=</span> <span class="n">absent</span> <span class="ow">or</span> <span class="p">(</span><span class="n">module_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="mi">0</span><span class="p">],)</span>
-</span><span data-line="34">    <span class="k">try</span><span class="p">:</span>
-</span><span data-line="35">        <span class="k">return</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
-</span><span data-line="36">    <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span data-line="37">        <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">absent</span><span class="p">:</span>
-</span><span data-line="38">            <span class="k">raise</span>
-</span><span data-line="39">        <span class="k">return</span> <span class="kc">None</span></div>
+</span><span data-line="15"><span class="k">def</span><span class="w"> </span><span class="nf">import_optional</span><span class="p">(</span>
+</span><span data-line="16">    <span class="n">module_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">absent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="17"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ModuleType</span><span class="p">]:</span>
+</span><span data-line="18"><span class="w">    </span><span class="sd">"""Return the imported module, or ``None`` if the optional package is not installed.</span>
+</span><span data-line="19">
+</span><span data-line="20"><span class="sd">    Only a ``ModuleNotFoundError`` naming the package itself (the first segment of</span>
+</span><span data-line="21"><span class="sd">    ``module_name``, or one of ``absent``) counts as "not installed". Every other</span>
+</span><span data-line="22"><span class="sd">    failure -- a missing submodule, a missing dependency *of* the package, a broken</span>
+</span><span data-line="23"><span class="sd">    import inside it -- is a broken environment and propagates. A *namespace* package</span>
+</span><span data-line="24"><span class="sd">    (a bare directory of that name on ``sys.path``, with no ``__init__.py``) is not the</span>
+</span><span data-line="25"><span class="sd">    package either, so it counts as not installed -- which also means a package that is</span>
+</span><span data-line="26"><span class="sd">    *legitimately* a namespace package (``google``) can't be imported with this.</span>
+</span><span data-line="27">
+</span><span data-line="28"><span class="sd">    &gt;&gt;&gt; import_optional('json').__name__</span>
+</span><span data-line="29"><span class="sd">    'json'</span>
+</span><span data-line="30"><span class="sd">    &gt;&gt;&gt; import_optional('_uf_no_such_package_') is None</span>
+</span><span data-line="31"><span class="sd">    True</span>
+</span><span data-line="32"><span class="sd">    &gt;&gt;&gt; import_optional('json.no_such_submodule')</span>
+</span><span data-line="33"><span class="sd">    Traceback (most recent call last):</span>
+</span><span data-line="34"><span class="sd">      ...</span>
+</span><span data-line="35"><span class="sd">    ModuleNotFoundError: No module named 'json.no_such_submodule'</span>
+</span><span data-line="36"><span class="sd">    """</span>
+</span><span data-line="37">    <span class="n">absent</span> <span class="o">=</span> <span class="n">absent</span> <span class="ow">or</span> <span class="p">(</span><span class="n">module_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="mi">0</span><span class="p">],)</span>
+</span><span data-line="38">    <span class="k">try</span><span class="p">:</span>
+</span><span data-line="39">        <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+</span><span data-line="40">    <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="41">        <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">absent</span><span class="p">:</span>
+</span><span data-line="42">            <span class="k">return</span> <span class="kc">None</span>
+</span><span data-line="43">        <span class="c1"># ``a.b`` when ``a`` is a stray directory: ``a`` is not the package</span>
+</span><span data-line="44">        <span class="n">top</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">e</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+</span><span data-line="45">        <span class="k">if</span> <span class="n">top</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">top</span><span class="o">.</span><span class="vm">__name__</span> <span class="ow">in</span> <span class="n">absent</span> <span class="ow">and</span> <span class="n">_is_namespace_package</span><span class="p">(</span><span class="n">top</span><span class="p">):</span>
+</span><span data-line="46">            <span class="k">return</span> <span class="kc">None</span>
+</span><span data-line="47">        <span class="k">raise</span>
+</span><span data-line="48">    <span class="k">if</span> <span class="n">_is_namespace_package</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+</span><span data-line="49">        <span class="k">return</span> <span class="kc">None</span>
+</span><span data-line="50">    <span class="k">return</span> <span class="n">module</span></div>
 
+</span><span data-line="51">
+</span><span data-line="52">
+</span><span data-line="53"><span class="k">def</span><span class="w"> </span><span class="nf">_is_namespace_package</span><span class="p">(</span><span class="n">module</span><span class="p">:</span> <span class="n">ModuleType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="54"><span class="w">    </span><span class="sd">"""Whether ``module`` is a namespace package (no ``__init__.py``, so no origin).</span>
+</span><span data-line="55">
+</span><span data-line="56"><span class="sd">    &gt;&gt;&gt; import json, os</span>
+</span><span data-line="57"><span class="sd">    &gt;&gt;&gt; _is_namespace_package(json), _is_namespace_package(os.path)</span>
+</span><span data-line="58"><span class="sd">    (False, False)</span>
+</span><span data-line="59"><span class="sd">    &gt;&gt;&gt; import sys; _is_namespace_package(sys)  # built-in: no file, but no path either</span>
+</span><span data-line="60"><span class="sd">    False</span>
+</span><span data-line="61"><span class="sd">    """</span>
+</span><span data-line="62">    <span class="n">spec</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s2">"__spec__"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>  <span class="c1"># (a stub module may have none)</span>
+</span><span data-line="63">    <span class="k">return</span> <span class="p">(</span>
+</span><span data-line="64">        <span class="n">spec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+</span><span data-line="65">        <span class="ow">and</span> <span class="n">spec</span><span class="o">.</span><span class="n">origin</span> <span class="ow">is</span> <span class="kc">None</span>
+</span><span data-line="66">        <span class="ow">and</span> <span class="n">spec</span><span class="o">.</span><span class="n">submodule_search_locations</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+</span><span data-line="67">    <span class="p">)</span>
 </span></pre></div>
         </article><button class="back-to-top" type="button">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -200,7 +228,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=ca7ad2ea"></script>
+      <script src="../../_static/documentation_options.js?v=22607128"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

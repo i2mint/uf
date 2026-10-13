@@ -1171,7 +1171,7 @@ Convert organization to dictionary format.
 >>> # Can be used in templates or APIs
 ```
 
-### *class* uf.FunctionSpecStore(funcs, , rjsf_config=None, ui_schema_factory=None, param_to_prop_type=None)
+### *class* uf.FunctionSpecStore(funcs, , rjsf_config=None, ui_schema_factory=None, param_to_prop_type=None, validate=False)
 
 Bases: [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)
 
@@ -1180,10 +1180,17 @@ A mapping from function names to their RJSF specifications.
 Lazily generates and caches form specs for each function.
 
 * **Parameters:**
-  * **funcs** ([`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Iterable of callable functions to generate specs for
+  * **funcs** (`Union`[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to generate specs for (named by `name_of_func`:
+    `__name__`, the wrapped function’s for a `functools.partial`, the class
+    name for a callable instance), or a mapping `{name: callable}` to name
+    them explicitly
   * **rjsf_config** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)]) – Optional configuration dict for RJSF generation
   * **ui_schema_factory** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional callable to customize UI schema generation
   * **param_to_prop_type** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional callable to map parameters to property types
+  * **validate** ([`bool`](https://docs.python.org/3/builtins/functions.html#bool)) – If true, every function is checked at construction, so a callable
+    uf can’t build a form for fails there, naming it, rather than on the first
+    request (default false: checked on first access of its spec;
+    `mk_rjsf_app` validates).
 
 ### Example
 

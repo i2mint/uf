@@ -164,7 +164,10 @@ off. <code class="docutils literal notranslate"><span class="pre">import_optiona
 <p>Only a <code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code> naming the package itself (the first segment of
 <code class="docutils literal notranslate"><span class="pre">module_name</span></code>, or one of <code class="docutils literal notranslate"><span class="pre">absent</span></code>) counts as “not installed”. Every other
 failure – a missing submodule, a missing dependency <em>of</em> the package, a broken
-import inside it – is a broken environment and propagates.</p>
+import inside it – is a broken environment and propagates. A <em>namespace</em> package
+(a bare directory of that name on <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>, with no <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>) is not the
+package either, so it counts as not installed – which also means a package that is
+<em>legitimately</em> a namespace package (<code class="docutils literal notranslate"><span class="pre">google</span></code>) can’t be imported with this.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/types.html#types.ModuleType" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleType</span></code></a>]</span></p>
@@ -224,7 +227,7 @@ import inside it – is a broken environment and propagates.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=ca7ad2ea"></script>
+      <script src="../_static/documentation_options.js?v=22607128"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
