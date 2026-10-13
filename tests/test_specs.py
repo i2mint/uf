@@ -113,6 +113,7 @@ def test_get_func():
 
 import importlib
 import importlib.abc
+import importlib
 import sys
 import warnings
 
@@ -555,18 +556,23 @@ def test_the_same_bound_method_twice_is_one_function():
 def test_import_optional_treats_a_namespace_directory_as_absent(tmp_path, monkeypatch):
     # a stray directory named like the optional package (no __init__.py)
     (tmp_path / '_uf_stray_dir_pkg_').mkdir()
+    importlib.invalidate_caches()
     monkeypatch.syspath_prepend(str(tmp_path))
     monkeypatch.delitem(sys.modules, '_uf_stray_dir_pkg_', raising=False)
     assert import_optional('_uf_stray_dir_pkg_') is None
     # ... while a real package of that name is imported
     (tmp_path / '_uf_real_pkg_').mkdir()
     (tmp_path / '_uf_real_pkg_' / '__init__.py').write_text('X = 1\n')
+    # the path finder caches directory listings; a package created after the first
+    # import attempt can be invisible on filesystems with coarse mtimes (Windows CI)
+    importlib.invalidate_caches()
     monkeypatch.delitem(sys.modules, '_uf_real_pkg_', raising=False)
     assert import_optional('_uf_real_pkg_').X == 1
 
 
 def test_import_optional_dotted_name_under_a_namespace_directory(tmp_path, monkeypatch):
     (tmp_path / '_uf_stray_dir2_').mkdir()
+    importlib.invalidate_caches()
     monkeypatch.syspath_prepend(str(tmp_path))
     monkeypatch.delitem(sys.modules, '_uf_stray_dir2_', raising=False)
     assert import_optional('_uf_stray_dir2_.sub', absent=('_uf_stray_dir2_',)) is None
