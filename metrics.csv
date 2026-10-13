@@ -1,21 +1,23 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T17:54:10.911842Z
-commit_sha,2799edde3acfa0741b95e575a712478d2c4c9c87
-commit_message,Merge a406b96ca8caf1da106d6eb2e44cdbe30d933eeb into 90650879554eb0890acd277240ec8ccb805489a2
+timestamp,2026-10-13T17:56:17.608508Z
+commit_sha,f42965f9ed442a3b7e9c14fb158b78599ac97fe2
+commit_message,"fix(organization): auto_group_by_module/tag unwrap functools.partial (#26) (#31)
+
+Closes #26. Adversarial review: ship (two minor findings fixed). Follow-up: #32."
 python_version,3.10
-metrics.umpyre_stats.num_functions,30657
-metrics.umpyre_stats.num_classes,5993
-metrics.umpyre_stats.total_lines,884307
-metrics.umpyre_stats.empty_lines,125099
-metrics.umpyre_stats.comment_lines,43099
-metrics.umpyre_stats.docs_lines,112698
-metrics.umpyre_stats.function_lines,502318
-metrics.umpyre_stats.empty_lines_ratio,0.1414655769998428
-metrics.umpyre_stats.comment_lines_ratio,0.04873759904648499
-metrics.umpyre_stats.function_lines_ratio,0.568035761336278
-metrics.umpyre_stats.mean_lines_per_function,16.385099650976937
-metrics.umpyre_stats.files_analyzed,2180
+metrics.umpyre_stats.num_functions,31094
+metrics.umpyre_stats.num_classes,5998
+metrics.umpyre_stats.total_lines,894815
+metrics.umpyre_stats.empty_lines,126417
+metrics.umpyre_stats.comment_lines,44346
+metrics.umpyre_stats.docs_lines,113477
+metrics.umpyre_stats.function_lines,510042
+metrics.umpyre_stats.empty_lines_ratio,0.14127724725222532
+metrics.umpyre_stats.comment_lines_ratio,0.049558847359510064
+metrics.umpyre_stats.function_lines_ratio,0.5699971502489342
+metrics.umpyre_stats.mean_lines_per_function,16.403228918762462
+metrics.umpyre_stats.files_analyzed,2169
 metrics.umpyre_stats.pypi_version,0.1.15
 metrics.workflow_status.last_run_status,success
 metrics.workflow_status.last_success_timestamp,2026-10-13T17:53:28Z
@@ -36,4 +38,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,8.975085496902466
+collection_duration_seconds,10.103784561157227
