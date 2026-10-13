@@ -1,26 +1,38 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T09:19:04.252202Z
-commit_sha,b95ac0736289d70ea57d0cb8acb9bac1dc8c0589
-commit_message,Merge 7894a13be9a71c6fc534b1d85c02c9b5231e568d into dfb3311ebd47f90d98637eb511ef562bfce22775
+timestamp,2026-10-13T09:20:38.188330Z
+commit_sha,0b715141de932644fc5ebd75909cb3d95804633d
+commit_message,"Optional-dependency guards: only an absent package degrades (#7) (#14)
+
+* Optional-dependency guards tolerate only an absent package, not a broken one (#7)
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+* function_uses_pydantic/extract_pydantic_params: a broken pydantic raises (review of #7)
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
 python_version,3.10
-metrics.umpyre_stats.num_functions,30615
-metrics.umpyre_stats.num_classes,5992
-metrics.umpyre_stats.total_lines,883251
-metrics.umpyre_stats.empty_lines,124952
-metrics.umpyre_stats.comment_lines,43098
-metrics.umpyre_stats.docs_lines,112325
-metrics.umpyre_stats.function_lines,501351
-metrics.umpyre_stats.empty_lines_ratio,0.14146828025102717
-metrics.umpyre_stats.comment_lines_ratio,0.04879473671696947
-metrics.umpyre_stats.function_lines_ratio,0.5676200762863558
-metrics.umpyre_stats.mean_lines_per_function,16.375992160705536
-metrics.umpyre_stats.files_analyzed,2180
+metrics.umpyre_stats.num_functions,31046
+metrics.umpyre_stats.num_classes,5997
+metrics.umpyre_stats.total_lines,893601
+metrics.umpyre_stats.empty_lines,126241
+metrics.umpyre_stats.comment_lines,44314
+metrics.umpyre_stats.docs_lines,113077
+metrics.umpyre_stats.function_lines,508930
+metrics.umpyre_stats.empty_lines_ratio,0.1412722232853365
+metrics.umpyre_stats.comment_lines_ratio,0.04959036527488219
+metrics.umpyre_stats.function_lines_ratio,0.5695271155694768
+metrics.umpyre_stats.mean_lines_per_function,16.39277201571861
+metrics.umpyre_stats.files_analyzed,2169
 metrics.umpyre_stats.pypi_version,0.1.6
 metrics.workflow_status.last_run_status,success
-metrics.workflow_status.last_success_timestamp,2026-10-13T09:18:16Z
+metrics.workflow_status.last_success_timestamp,2026-10-13T09:19:10Z
 metrics.workflow_status.recent_failure_count,0
-metrics.workflow_status.run_url,https://github.com/i2mint/uf/actions/runs/38375290192
+metrics.workflow_status.run_url,https://github.com/i2mint/uf/actions/runs/38375291452
 metrics.workflow_status.total_runs_analyzed,10
 metrics.wily.cyclomatic_avg,0.0
 metrics.wily.maintainability_index,0.0
@@ -36,4 +48,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,10.59090256690979
+collection_duration_seconds,10.25736665725708
