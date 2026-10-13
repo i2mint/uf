@@ -1,28 +1,26 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T14:22:49.549135Z
-commit_sha,b4fd926abf6a2c60de9f6f511fe6a75a2a128ea1
-commit_message,"Merge master into fix/function-spec-store-13
-
-Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+timestamp,2026-10-13T14:23:20.064058Z
+commit_sha,4c607958cfc1dc887880ead12fb03cbbabdb0211
+commit_message,Merge b4fd926abf6a2c60de9f6f511fe6a75a2a128ea1 into 0c89605386da70e415a69b7e218e36066e152e64
 python_version,3.10
-metrics.umpyre_stats.num_functions,30647
-metrics.umpyre_stats.num_classes,5993
-metrics.umpyre_stats.total_lines,883974
-metrics.umpyre_stats.empty_lines,125060
-metrics.umpyre_stats.comment_lines,43092
-metrics.umpyre_stats.docs_lines,112585
-metrics.umpyre_stats.function_lines,502013
-metrics.umpyre_stats.empty_lines_ratio,0.1414747492573311
-metrics.umpyre_stats.comment_lines_ratio,0.04874804010072695
-metrics.umpyre_stats.function_lines_ratio,0.5679047121295423
-metrics.umpyre_stats.mean_lines_per_function,16.380494012464514
-metrics.umpyre_stats.files_analyzed,2180
+metrics.umpyre_stats.num_functions,31078
+metrics.umpyre_stats.num_classes,5998
+metrics.umpyre_stats.total_lines,894324
+metrics.umpyre_stats.empty_lines,126349
+metrics.umpyre_stats.comment_lines,44308
+metrics.umpyre_stats.docs_lines,113337
+metrics.umpyre_stats.function_lines,509592
+metrics.umpyre_stats.empty_lines_ratio,0.14127877592460897
+metrics.umpyre_stats.comment_lines_ratio,0.04954356586650923
+metrics.umpyre_stats.function_lines_ratio,0.5698069156144753
+metrics.umpyre_stats.mean_lines_per_function,16.397194156638136
+metrics.umpyre_stats.files_analyzed,2169
 metrics.umpyre_stats.pypi_version,0.1.7
 metrics.workflow_status.last_run_status,success
-metrics.workflow_status.last_success_timestamp,2026-10-13T14:21:42Z
+metrics.workflow_status.last_success_timestamp,2026-10-13T14:22:56Z
 metrics.workflow_status.recent_failure_count,3
-metrics.workflow_status.run_url,https://github.com/i2mint/uf/actions/runs/38412498038
+metrics.workflow_status.run_url,https://github.com/i2mint/uf/actions/runs/38412660491
 metrics.workflow_status.total_runs_analyzed,10
 metrics.wily.cyclomatic_avg,0.0
 metrics.wily.maintainability_index,0.0
@@ -38,4 +36,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,11.153704643249512
+collection_duration_seconds,11.090341567993164
