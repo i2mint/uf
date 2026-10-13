@@ -1,7 +1,7 @@
 {
-  "collection_duration_seconds": 8.040617942810059,
-  "commit_message": "Merge f60595f122b261c7fd6f698a5981978d0e21ccfd into 1ae5ff4cb50b24a4796413f2796a71b8b4f212fd",
-  "commit_sha": "05807c3f2a44231af64bb028614712d9a4de6234",
+  "collection_duration_seconds": 10.507995128631592,
+  "commit_message": "fix(organization): same bound method in two groups is no clash; materialize generators; add_function refuses a taken name (review)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
+  "commit_sha": "f60595f122b261c7fd6f698a5981978d0e21ccfd",
   "metrics": {
     "coverage": {
       "branch_coverage": 0.0,
@@ -11,19 +11,19 @@
       "statements_total": 0
     },
     "umpyre_stats": {
-      "comment_lines": 44346,
-      "comment_lines_ratio": 0.0495613951757381,
-      "docs_lines": 113441,
-      "empty_lines": 126407,
-      "empty_lines_ratio": 0.14127333423486957,
-      "files_analyzed": 2169,
-      "function_lines": 510008,
-      "function_lines_ratio": 0.5699884551208189,
-      "mean_lines_per_function": 16.403190531326388,
-      "num_classes": 5998,
-      "num_functions": 31092,
-      "pypi_version": "0.1.11",
-      "total_lines": 894769
+      "comment_lines": 43099,
+      "comment_lines_ratio": 0.04874013441732701,
+      "docs_lines": 112662,
+      "empty_lines": 125089,
+      "empty_lines_ratio": 0.1414616272797285,
+      "files_analyzed": 2180,
+      "function_lines": 502284,
+      "function_lines_ratio": 0.5680268608476456,
+      "mean_lines_per_function": 16.385059533518188,
+      "num_classes": 5993,
+      "num_functions": 30655,
+      "pypi_version": "0.1.10",
+      "total_lines": 884261
     },
     "wily": {
       "cyclomatic_avg": 0.0,
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T16:10:55.211082Z",
+  "timestamp": "2026-10-13T16:11:00.112528Z",
   "workflow_status": {}
 }
