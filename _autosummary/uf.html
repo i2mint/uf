@@ -2369,10 +2369,10 @@ them explicitly</p></li>
 <li><p><strong>rjsf_config</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]</span>) – Optional configuration dict for RJSF generation</p></li>
 <li><p><strong>ui_schema_factory</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>]</span>) – Optional callable to customize UI schema generation</p></li>
 <li><p><strong>param_to_prop_type</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>]</span>) – Optional callable to map parameters to property types</p></li>
-<li><p><strong>validate</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – If true, every function is checked at construction, so a callable
-uf can’t build a form for fails there, naming it, rather than on the first
-request (default false: checked on first access of its spec;
-<code class="docutils literal notranslate"><span class="pre">mk_rjsf_app</span></code> validates).</p></li>
+<li><p><strong>validate</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – If true, every function is checked and its spec generated at
+construction, so a callable uf can’t build a form for fails there, naming
+it, rather than on the first request (default false: checked on first
+access of its spec; <code class="docutils literal notranslate"><span class="pre">mk_rjsf_app</span></code> validates).</p></li>
 </ul>
 </dd>
 </dl>
@@ -5867,7 +5867,7 @@ the function, and converts Pydantic outputs back to dicts.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=297ad043"></script>
+      <script src="../_static/documentation_options.js?v=8d02545a"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

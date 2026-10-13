@@ -22,8 +22,8 @@ uf.specs
 
    .. autosummary::
    
+      FormSpecError
       JuNotInstalledWarning
-      PositionalOnlyParamWarning
       UnintrospectableCallableError
       UnservableCallableError
    

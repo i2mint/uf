@@ -19,11 +19,17 @@ form specs and OpenAPI schemas.
 
 ### Exceptions
 
-| [`JuNotInstalledWarning`](#uf.specs.JuNotInstalledWarning)         | Emitted when `ju` is absent and uf falls back to basic form specs.                             |
-|--------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| [`PositionalOnlyParamWarning`](#uf.specs.PositionalOnlyParamWarning)    | A required positional-only parameter can't be filled by a keyword-only caller.                 |
-| [`UnintrospectableCallableError`](#uf.specs.UnintrospectableCallableError) | A callable has no signature to build a form from (e.g. `max`, `getattr`).                      |
-| [`UnservableCallableError`](#uf.specs.UnservableCallableError)       | A callable can never be called from a uf form (e.g. only required positional-only parameters). |
+| [`FormSpecError`](#uf.specs.FormSpecError)                 | The form spec of a function could not be generated (the cause is chained).                        |
+|--------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| [`JuNotInstalledWarning`](#uf.specs.JuNotInstalledWarning)         | Emitted when `ju` is absent and uf falls back to basic form specs.                                |
+| [`UnintrospectableCallableError`](#uf.specs.UnintrospectableCallableError) | A callable has no signature to build a form from (e.g. `max`, `getattr`).                         |
+| [`UnservableCallableError`](#uf.specs.UnservableCallableError)       | A callable can never be called from a uf form (e.g. it has a required positional-only parameter). |
+
+### *exception* uf.specs.FormSpecError
+
+Bases: [`ValueError`](https://docs.python.org/3/builtins/exceptions.html#ValueError)
+
+The form spec of a function could not be generated (the cause is chained).
 
 ### *class* uf.specs.FunctionSpecStore(funcs, , rjsf_config=None, ui_schema_factory=None, param_to_prop_type=None, validate=False)
 
@@ -41,10 +47,10 @@ Lazily generates and caches form specs for each function.
   * **rjsf_config** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)]) – Optional configuration dict for RJSF generation
   * **ui_schema_factory** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional callable to customize UI schema generation
   * **param_to_prop_type** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional callable to map parameters to property types
-  * **validate** ([`bool`](https://docs.python.org/3/builtins/functions.html#bool)) – If true, every function is checked at construction, so a callable
-    uf can’t build a form for fails there, naming it, rather than on the first
-    request (default false: checked on first access of its spec;
-    `mk_rjsf_app` validates).
+  * **validate** ([`bool`](https://docs.python.org/3/builtins/functions.html#bool)) – If true, every function is checked and its spec generated at
+    construction, so a callable uf can’t build a form for fails there, naming
+    it, rather than on the first request (default false: checked on first
+    access of its spec; `mk_rjsf_app` validates).
 
 ### Example
 
@@ -86,12 +92,6 @@ Bases: [`UserWarning`](https://docs.python.org/3/builtins/exceptions.html#UserWa
 
 Emitted when `ju` is absent and uf falls back to basic form specs.
 
-### *exception* uf.specs.PositionalOnlyParamWarning
-
-Bases: [`UserWarning`](https://docs.python.org/3/builtins/exceptions.html#UserWarning)
-
-A required positional-only parameter can’t be filled by a keyword-only caller.
-
 ### *exception* uf.specs.UnintrospectableCallableError
 
 Bases: [`ValueError`](https://docs.python.org/3/builtins/exceptions.html#ValueError)
@@ -102,8 +102,8 @@ A callable has no signature to build a form from (e.g. `max`, `getattr`).
 
 Bases: [`ValueError`](https://docs.python.org/3/builtins/exceptions.html#ValueError)
 
-A callable can never be called from a uf form (e.g. only required
-positional-only parameters).
+A callable can never be called from a uf form (e.g. it has a required
+positional-only parameter).
 
 ### uf.specs.doc_of_func(func)
 

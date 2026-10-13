@@ -1204,10 +1204,10 @@ Lazily generates and caches form specs for each function.
   * **rjsf_config** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)]) – Optional configuration dict for RJSF generation
   * **ui_schema_factory** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional callable to customize UI schema generation
   * **param_to_prop_type** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional callable to map parameters to property types
-  * **validate** ([`bool`](https://docs.python.org/3/builtins/functions.html#bool)) – If true, every function is checked at construction, so a callable
-    uf can’t build a form for fails there, naming it, rather than on the first
-    request (default false: checked on first access of its spec;
-    `mk_rjsf_app` validates).
+  * **validate** ([`bool`](https://docs.python.org/3/builtins/functions.html#bool)) – If true, every function is checked and its spec generated at
+    construction, so a callable uf can’t build a form for fails there, naming
+    it, rather than on the first request (default false: checked on first
+    access of its spec; `mk_rjsf_app` validates).
 
 ### Example
 

@@ -1,4 +1,4 @@
-> built 2026-10-13 16:13 UTC from e7e6fe8 (master) · uf 0.1.12. Details: build_info.json
+> built 2026-10-13 16:19 UTC from 9498e06 (master) · uf 0.1.13. Details: build_info.json
 
 # index.html.md
 
@@ -4225,10 +4225,10 @@ Lazily generates and caches form specs for each function.
   * **rjsf_config** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)]) – Optional configuration dict for RJSF generation
   * **ui_schema_factory** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional callable to customize UI schema generation
   * **param_to_prop_type** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional callable to map parameters to property types
-  * **validate** ([`bool`](https://docs.python.org/3/builtins/functions.html#bool)) – If true, every function is checked at construction, so a callable
-    uf can’t build a form for fails there, naming it, rather than on the first
-    request (default false: checked on first access of its spec;
-    `mk_rjsf_app` validates).
+  * **validate** ([`bool`](https://docs.python.org/3/builtins/functions.html#bool)) – If true, every function is checked and its spec generated at
+    construction, so a callable uf can’t build a form for fails there, naming
+    it, rather than on the first request (default false: checked on first
+    access of its spec; `mk_rjsf_app` validates).
 
 ### Example
 
@@ -8030,11 +8030,17 @@ form specs and OpenAPI schemas.
 
 ### Exceptions
 
-| [`JuNotInstalledWarning`](_autosummary/uf.specs.html.md#uf.specs.JuNotInstalledWarning)         | Emitted when `ju` is absent and uf falls back to basic form specs.                             |
-|--------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| [`PositionalOnlyParamWarning`](_autosummary/uf.specs.html.md#uf.specs.PositionalOnlyParamWarning)    | A required positional-only parameter can't be filled by a keyword-only caller.                 |
-| [`UnintrospectableCallableError`](_autosummary/uf.specs.html.md#uf.specs.UnintrospectableCallableError) | A callable has no signature to build a form from (e.g. `max`, `getattr`).                      |
-| [`UnservableCallableError`](_autosummary/uf.specs.html.md#uf.specs.UnservableCallableError)       | A callable can never be called from a uf form (e.g. only required positional-only parameters). |
+| [`FormSpecError`](_autosummary/uf.specs.html.md#uf.specs.FormSpecError)                 | The form spec of a function could not be generated (the cause is chained).                        |
+|--------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| [`JuNotInstalledWarning`](_autosummary/uf.specs.html.md#uf.specs.JuNotInstalledWarning)         | Emitted when `ju` is absent and uf falls back to basic form specs.                                |
+| [`UnintrospectableCallableError`](_autosummary/uf.specs.html.md#uf.specs.UnintrospectableCallableError) | A callable has no signature to build a form from (e.g. `max`, `getattr`).                         |
+| [`UnservableCallableError`](_autosummary/uf.specs.html.md#uf.specs.UnservableCallableError)       | A callable can never be called from a uf form (e.g. it has a required positional-only parameter). |
+
+### *exception* uf.specs.FormSpecError
+
+Bases: [`ValueError`](https://docs.python.org/3/builtins/exceptions.html#ValueError)
+
+The form spec of a function could not be generated (the cause is chained).
 
 ### *class* uf.specs.FunctionSpecStore(funcs, , rjsf_config=None, ui_schema_factory=None, param_to_prop_type=None, validate=False)
 
@@ -8052,10 +8058,10 @@ Lazily generates and caches form specs for each function.
   * **rjsf_config** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)]) – Optional configuration dict for RJSF generation
   * **ui_schema_factory** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional callable to customize UI schema generation
   * **param_to_prop_type** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional callable to map parameters to property types
-  * **validate** ([`bool`](https://docs.python.org/3/builtins/functions.html#bool)) – If true, every function is checked at construction, so a callable
-    uf can’t build a form for fails there, naming it, rather than on the first
-    request (default false: checked on first access of its spec;
-    `mk_rjsf_app` validates).
+  * **validate** ([`bool`](https://docs.python.org/3/builtins/functions.html#bool)) – If true, every function is checked and its spec generated at
+    construction, so a callable uf can’t build a form for fails there, naming
+    it, rather than on the first request (default false: checked on first
+    access of its spec; `mk_rjsf_app` validates).
 
 ### Example
 
@@ -8097,12 +8103,6 @@ Bases: [`UserWarning`](https://docs.python.org/3/builtins/exceptions.html#UserWa
 
 Emitted when `ju` is absent and uf falls back to basic form specs.
 
-### *exception* uf.specs.PositionalOnlyParamWarning
-
-Bases: [`UserWarning`](https://docs.python.org/3/builtins/exceptions.html#UserWarning)
-
-A required positional-only parameter can’t be filled by a keyword-only caller.
-
 ### *exception* uf.specs.UnintrospectableCallableError
 
 Bases: [`ValueError`](https://docs.python.org/3/builtins/exceptions.html#ValueError)
@@ -8113,8 +8113,8 @@ A callable has no signature to build a form from (e.g. `max`, `getattr`).
 
 Bases: [`ValueError`](https://docs.python.org/3/builtins/exceptions.html#ValueError)
 
-A callable can never be called from a uf form (e.g. only required
-positional-only parameters).
+A callable can never be called from a uf form (e.g. it has a required
+positional-only parameter).
 
 ### uf.specs.doc_of_func(func)
 
@@ -9051,7 +9051,7 @@ Decorator to add webhooks to a function.
 
 # About this build
 
-This documentation was built on **2026-10-13 16:13 UTC** from commit <a href="https://github.com/i2mint/uf/commit/e7e6fe8fa334a1fc2ffb6f0743ec315b7d4af782"><code>e7e6fe8</code></a> on branch <code>master</code>, for **uf 0.1.12** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-13 16:19 UTC** from commit <a href="https://github.com/i2mint/uf/commit/9498e068ae5cbc275eb08653fc2262a3b5390049"><code>9498e06</code></a> on branch <code>master</code>, for **uf 0.1.13** (from <code>pyproject.toml</code>).
 
 #### NOTE
 Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
@@ -9060,9 +9060,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 |                     |                                                                                                                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/uf/commit/e7e6fe8fa334a1fc2ffb6f0743ec315b7d4af782"><code>e7e6fe8fa334a1fc2ffb6f0743ec315b7d4af782</code></a> |
+| Commit              | <a href="https://github.com/i2mint/uf/commit/9498e068ae5cbc275eb08653fc2262a3b5390049"><code>9498e068ae5cbc275eb08653fc2262a3b5390049</code></a> |
 | Branch              | <code>master</code>                                                                                                                              |
-| Tags at this commit | <code>0.1.12</code>                                                                                                                              |
+| Tags at this commit | <code>0.1.13</code>                                                                                                                              |
 | Working tree        | clean                                                                                                                                            |
 | Remote              | <code>https://github.com/i2mint/uf</code>                                                                                                        |
 
@@ -9071,9 +9071,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/uf</code>                                                                     |
-| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38428435254">38428435254</a>            |
+| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38429201311">38429201311</a>            |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>09dcefef72cee1ac2999d8d12abea65167b2786e</code> (in the history of the built commit) |
+| Event commit | <code>078fc7172c581d0e00595b0f70fab2fefeacd686</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -9098,13 +9098,13 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.12/">0.1.12</a>, the same as the documented version.
+Latest release: <a href="https://pypi.org/project/uf/0.1.13/">0.1.13</a>, the same as the documented version.
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout e7e6fe8fa334a1fc2ffb6f0743ec315b7d4af782
+git checkout 9498e068ae5cbc275eb08653fc2262a3b5390049
 pip install "epythet==0.2.17"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```
