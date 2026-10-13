@@ -1,5 +1,5 @@
 {
-  "collection_duration_seconds": 9.758707284927368,
+  "collection_duration_seconds": 10.044639110565186,
   "commit_message": "fix(organization): groups serve partials, callable instances and {name: callable} maps (#24) (#27)\n\n* fix(organization): groups serve partials, callable instances and {name: callable} maps (#24)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* fix(organization): same bound method in two groups is no clash; materialize generators; add_function refuses a taken name (review)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>",
   "commit_sha": "09dcefef72cee1ac2999d8d12abea65167b2786e",
   "metrics": {
@@ -11,19 +11,19 @@
       "statements_total": 0
     },
     "umpyre_stats": {
-      "comment_lines": 44346,
-      "comment_lines_ratio": 0.0495613951757381,
-      "docs_lines": 113441,
-      "empty_lines": 126407,
-      "empty_lines_ratio": 0.14127333423486957,
-      "files_analyzed": 2169,
-      "function_lines": 510008,
-      "function_lines_ratio": 0.5699884551208189,
-      "mean_lines_per_function": 16.403190531326388,
-      "num_classes": 5998,
-      "num_functions": 31092,
+      "comment_lines": 43099,
+      "comment_lines_ratio": 0.04874013441732701,
+      "docs_lines": 112662,
+      "empty_lines": 125089,
+      "empty_lines_ratio": 0.1414616272797285,
+      "files_analyzed": 2180,
+      "function_lines": 502284,
+      "function_lines_ratio": 0.5680268608476456,
+      "mean_lines_per_function": 16.385059533518188,
+      "num_classes": 5993,
+      "num_functions": 30655,
       "pypi_version": "0.1.11",
-      "total_lines": 894769
+      "total_lines": 884261
     },
     "wily": {
       "cyclomatic_avg": 0.0,
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T16:12:37.643783Z",
+  "timestamp": "2026-10-13T16:12:40.270464Z",
   "workflow_status": {}
 }
