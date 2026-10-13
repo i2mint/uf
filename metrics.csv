@@ -1,33 +1,23 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T09:16:26.569319Z
-commit_sha,39dce3c2e8bd9835f2efb60e27a8411b5cbc8843
-commit_message,"FunctionSpecStore edge cases: builtins, positional-only, nest_under_field, no ju (#10) (#12)
+timestamp,2026-10-13T09:17:05.022063Z
+commit_sha,c9616f3ebcdefea14f49a801ee2d7fae00092cff
+commit_message,"Optional-dependency guards tolerate only an absent package, not a broken one (#7)
 
-* FunctionSpecStore: clear error for un-introspectable callables, drop positional-only params, honour nest_under_field, warn on options ignored without ju (#10)
-
-Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
-
-* Attribute the positional-only warning to the caller on both paths (review of #10)
-
-Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
-
----------
-
-Co-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
 python_version,3.10
-metrics.umpyre_stats.num_functions,30614
+metrics.umpyre_stats.num_functions,30615
 metrics.umpyre_stats.num_classes,5992
-metrics.umpyre_stats.total_lines,883202
-metrics.umpyre_stats.empty_lines,124945
-metrics.umpyre_stats.comment_lines,43093
-metrics.umpyre_stats.docs_lines,112310
-metrics.umpyre_stats.function_lines,501333
-metrics.umpyre_stats.empty_lines_ratio,0.14146820319700362
-metrics.umpyre_stats.comment_lines_ratio,0.04879178262730383
-metrics.umpyre_stats.function_lines_ratio,0.5676311874293762
-metrics.umpyre_stats.mean_lines_per_function,16.3759391128242
-metrics.umpyre_stats.files_analyzed,2179
+metrics.umpyre_stats.total_lines,883251
+metrics.umpyre_stats.empty_lines,124952
+metrics.umpyre_stats.comment_lines,43098
+metrics.umpyre_stats.docs_lines,112325
+metrics.umpyre_stats.function_lines,501351
+metrics.umpyre_stats.empty_lines_ratio,0.14146828025102717
+metrics.umpyre_stats.comment_lines_ratio,0.04879473671696947
+metrics.umpyre_stats.function_lines_ratio,0.5676200762863558
+metrics.umpyre_stats.mean_lines_per_function,16.375992160705536
+metrics.umpyre_stats.files_analyzed,2180
 metrics.umpyre_stats.pypi_version,0.1.5
 metrics.workflow_status.last_run_status,success
 metrics.workflow_status.last_success_timestamp,2026-10-13T09:15:00Z
@@ -48,4 +38,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,10.327972173690796
+collection_duration_seconds,8.744540214538574
