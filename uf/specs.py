@@ -205,6 +205,8 @@ class JuNotInstalledWarning(UserWarning):
 
 def _import_func_to_form_spec() -> Optional[Callable]:
     """Return ``ju.rjsf.func_to_form_spec``, or ``None`` if ``ju`` is not installed.
+    (Meant to be called from ``FunctionSpecStore.__init__``, which is what the warning
+    is attributed to the caller of.)
 
     Only the absence of ``ju`` itself is tolerated (with a visible warning).
     Any other import failure -- a missing dependency of ``ju``, a renamed
@@ -220,7 +222,7 @@ def _import_func_to_form_spec() -> Optional[Callable]:
             "'ju' is not installed; uf is falling back to basic form "
             "specs (no ju/RJSF features). Install it with `pip install ju`.",
             JuNotInstalledWarning,
-            stacklevel=4,  # caller -> __getitem__ -> _generate_spec -> here
+            stacklevel=3,  # caller of FunctionSpecStore() -> __init__ -> here
         )
         return None
     try:
@@ -278,6 +280,11 @@ class FunctionSpecStore(Mapping):
         self._ui_schema_factory = ui_schema_factory
         self._param_to_prop_type = param_to_prop_type
         self._spec_cache = {}
+        # Resolved once, here: a broken ju fails the build (with its traceback), not
+        # every request, and the absent-ju warning points at the code building the store.
+        self._func_to_form_spec = _import_func_to_form_spec()
+        if self._func_to_form_spec is None:
+            self._warn_ignored_options()
 
     def __getitem__(self, func_name: str) -> dict:
         """Get RJSF spec for a function.
@@ -326,7 +333,7 @@ class FunctionSpecStore(Mapping):
         func = self._funcs[func_name]
         _check_servable(func, func_name)
 
-        func_to_form_spec = _import_func_to_form_spec()
+        func_to_form_spec = self._func_to_form_spec
         if func_to_form_spec is None:
             return self._generate_basic_spec(func_name, func)
 
@@ -376,7 +383,7 @@ class FunctionSpecStore(Mapping):
                 "ju is not installed (basic form specs). Install it with "
                 "`pip install ju`.",
                 JuNotInstalledWarning,
-                stacklevel=5,  # caller -> __getitem__ -> _generate_spec -> basic -> here
+                stacklevel=3,  # caller of FunctionSpecStore() -> __init__ -> here
             )
 
     def _generate_basic_spec(self, func_name: str, func: Callable) -> dict:
@@ -392,7 +399,6 @@ class FunctionSpecStore(Mapping):
         Returns:
             Basic specification dictionary
         """
-        self._warn_ignored_options()
         # caller -> __getitem__ -> _generate_spec -> basic spec -> warn helper
         _warn_required_positional_only(func, func_name, stacklevel=5)
         sig = inspect.signature(func)
