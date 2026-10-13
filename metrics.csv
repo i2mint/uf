@@ -1,6 +1,6 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T15:46:54.329413Z
+timestamp,2026-10-13T15:47:09.875337Z
 commit_sha,a487c1efb043cbca45d7f491088f7846dac49442
 commit_message,"Resolve ju when the store is built, not per request (#8) (#20)
 
@@ -18,18 +18,18 @@ Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
 
 Co-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
 python_version,3.10
-metrics.umpyre_stats.num_functions,30650
-metrics.umpyre_stats.num_classes,5993
-metrics.umpyre_stats.total_lines,884109
-metrics.umpyre_stats.empty_lines,125071
-metrics.umpyre_stats.comment_lines,43098
-metrics.umpyre_stats.docs_lines,112613
-metrics.umpyre_stats.function_lines,502144
-metrics.umpyre_stats.empty_lines_ratio,0.14146558851906268
-metrics.umpyre_stats.comment_lines_ratio,0.04874738295843612
-metrics.umpyre_stats.function_lines_ratio,0.5679661670676354
-metrics.umpyre_stats.mean_lines_per_function,16.383164763458403
-metrics.umpyre_stats.files_analyzed,2180
+metrics.umpyre_stats.num_functions,31078
+metrics.umpyre_stats.num_classes,5998
+metrics.umpyre_stats.total_lines,894338
+metrics.umpyre_stats.empty_lines,126350
+metrics.umpyre_stats.comment_lines,44314
+metrics.umpyre_stats.docs_lines,113339
+metrics.umpyre_stats.function_lines,509614
+metrics.umpyre_stats.empty_lines_ratio,0.14127768248693448
+metrics.umpyre_stats.comment_lines_ratio,0.049549499182635647
+metrics.umpyre_stats.function_lines_ratio,0.5698225950367758
+metrics.umpyre_stats.mean_lines_per_function,16.397902052899155
+metrics.umpyre_stats.files_analyzed,2169
 metrics.umpyre_stats.pypi_version,0.1.9
 metrics.workflow_status.last_run_status,success
 metrics.workflow_status.last_success_timestamp,2026-10-13T15:45:03Z
@@ -50,4 +50,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,7.405549764633179
+collection_duration_seconds,10.818519353866577
