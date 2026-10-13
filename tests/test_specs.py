@@ -253,3 +253,91 @@ def test_variadic_names_follow_ju_and_uiSchema_is_cleaned():
     spec = FunctionSpecStore([f])
     ui = spec['f']['uiSchema']
     assert 'args' not in ui and ui.get('x', {}).get('ui:autofocus')
+
+
+# --- edge cases (i2mint/uf#10) ----------------------------------------------
+from uf.specs import PositionalOnlyParamWarning, UnintrospectableCallableError
+
+
+def _positional_only(a=1, b=2, /, c=3):
+    """a and b can't be passed by keyword."""
+
+
+def _required_positional_only_and_kw(a, /, b: int):
+    """Needs a positionally."""
+
+
+def _with_ju_or_not(with_ju, monkeypatch):
+    import uf.specs
+
+    if with_ju:
+        _require_ju()
+    else:
+        monkeypatch.setattr(uf.specs, '_import_func_to_form_spec', lambda: None)
+
+
+@pytest.mark.parametrize('with_ju', [True, False])
+@pytest.mark.parametrize('func', [max, min, zip, getattr])
+def test_unintrospectable_callable_raises_clear_error(with_ju, func, monkeypatch):
+    _with_ju_or_not(with_ju, monkeypatch)
+    store = FunctionSpecStore([func])  # lazy: building the store is fine
+    assert func.__name__ in store  # membership does not generate the spec
+    with pytest.raises(UnintrospectableCallableError, match=func.__name__):
+        store[func.__name__]
+
+
+@pytest.mark.parametrize('with_ju', [True, False])
+def test_positional_only_params_are_dropped(with_ju, monkeypatch):
+    _with_ju_or_not(with_ju, monkeypatch)
+    with warnings.catch_warnings():
+        warnings.simplefilter('error', PositionalOnlyParamWarning)  # all defaulted
+        schema = FunctionSpecStore([_positional_only])['_positional_only']['schema']
+    assert set(schema['properties']) == {'c'}
+    assert schema.get('required', []) == []
+
+
+@pytest.mark.parametrize('with_ju', [True, False])
+def test_required_positional_only_param_warns(with_ju, monkeypatch):
+    _with_ju_or_not(with_ju, monkeypatch)
+    store = FunctionSpecStore([_required_positional_only_and_kw])
+    with pytest.warns(PositionalOnlyParamWarning, match=r"\['a'\]"):
+        schema = store['_required_positional_only_and_kw']['schema']
+    assert set(schema['properties']) == {'b'}
+    assert schema['required'] == ['b']
+
+
+def test_positional_only_uiSchema_autofocus_moves_on():
+    _require_ju()
+    ui = FunctionSpecStore([_positional_only])['_positional_only']['uiSchema']
+    assert 'a' not in ui and ui.get('c', {}).get('ui:autofocus')
+
+
+def test_nest_under_field_is_unwrapped():
+    _require_ju()
+    flat = FunctionSpecStore([sample_add])['sample_add']
+    nested = FunctionSpecStore([sample_add], rjsf_config={'nest_under_field': 'rjsf'})
+    assert nested['sample_add']['schema'] == flat['schema'] != {}
+    assert nested['sample_add']['uiSchema'] == flat['uiSchema']
+
+
+@pytest.mark.parametrize(
+    'options, named',
+    [
+        ({'rjsf_config': {'liveValidate': True}}, 'rjsf_config'),
+        ({'ui_schema_factory': lambda f: {}}, 'ui_schema_factory'),
+        ({'param_to_prop_type': lambda p: 'string'}, 'param_to_prop_type'),
+    ],
+)
+def test_fallback_warns_about_ignored_options(options, named, monkeypatch):
+    _with_ju_or_not(False, monkeypatch)
+    store = FunctionSpecStore([sample_add], **options)
+    with pytest.warns(JuNotInstalledWarning, match=named):
+        store['sample_add']
+
+
+def test_fallback_without_options_has_no_ignored_options_warning(monkeypatch):
+    _with_ju_or_not(False, monkeypatch)
+    with warnings.catch_warnings(record=True) as record:
+        warnings.simplefilter('always')
+        FunctionSpecStore([sample_add])['sample_add']
+    assert not any('ignored' in str(w.message) for w in record)

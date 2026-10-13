@@ -20,10 +20,40 @@ _VARIADIC_KINDS = (
     inspect.Parameter.VAR_POSITIONAL,  # *args
     inspect.Parameter.VAR_KEYWORD,  # **kwargs
 )
+# uf calls functions with keyword arguments only, so a form can't fill these
+_NON_KEYWORD_KINDS = _VARIADIC_KINDS + (inspect.Parameter.POSITIONAL_ONLY,)
 
 
-def _variadic_names(func: Callable) -> set:
-    """Names of ``func``'s ``*args``/``**kwargs``, as ju (``i2.Sig``) names them."""
+class UnintrospectableCallableError(ValueError):
+    """A callable has no signature to build a form from (e.g. ``max``, ``getattr``)."""
+
+
+class PositionalOnlyParamWarning(UserWarning):
+    """A required positional-only parameter can't be filled by a keyword-only caller."""
+
+
+def _check_introspectable(func: Callable) -> None:
+    """Raise ``UnintrospectableCallableError`` if ``func`` has no usable signature.
+
+    >>> _check_introspectable(len)
+    >>> _check_introspectable(max)
+    Traceback (most recent call last):
+      ...
+    uf.specs.UnintrospectableCallableError: 'max' has no introspectable signature; wrap it in a function with an explicit signature to serve it
+    """
+    try:
+        inspect.signature(func)
+    except (TypeError, ValueError) as e:
+        name = getattr(func, "__name__", repr(func))
+        raise UnintrospectableCallableError(
+            f"{name!r} has no introspectable signature; wrap it in a function "
+            "with an explicit signature to serve it"
+        ) from e
+
+
+def _unfillable_names(func: Callable) -> set:
+    """Names of ``func``'s parameters a keyword-only caller can't fill (``*args``,
+    ``**kwargs``, positional-only), as ju (``i2.Sig``) names them."""
     try:
         from i2 import Sig
 
@@ -33,16 +63,40 @@ def _variadic_names(func: Callable) -> set:
             params = inspect.signature(func).parameters
         except (TypeError, ValueError):
             return set()
-    return {n for n, p in params.items() if p.kind in _VARIADIC_KINDS}
+    return {n for n, p in params.items() if p.kind in _NON_KEYWORD_KINDS}
 
 
-def _drop_variadic_fields(func: Callable, form_spec: dict) -> None:
-    """Remove ``*args``/``**kwargs`` from a form spec's schema and uiSchema (in place).
+def _warn_required_positional_only(func: Callable, func_name: str) -> None:
+    """Warn if ``func`` has a required positional-only parameter (it is left out of the
+    form, so calling the function with keyword arguments fails)."""
+    try:
+        params = inspect.signature(func).parameters.values()
+    except (TypeError, ValueError):
+        return
+    required = [
+        p.name
+        for p in params
+        if p.kind is inspect.Parameter.POSITIONAL_ONLY
+        and p.default is inspect.Parameter.empty
+    ]
+    if required:
+        warnings.warn(
+            f"{func_name!r} has required positional-only parameter(s) {required}, "
+            "which uf can't pass (it calls functions with keyword arguments only); "
+            "they are left out of the form.",
+            PositionalOnlyParamWarning,
+            stacklevel=5,  # caller -> __getitem__ -> _generate_spec -> here
+        )
 
-    A form can't sensibly ask for them (they would show up as required string
-    fields), and uf calls functions with keyword arguments only.
+
+def _drop_unfillable_fields(func: Callable, form_spec: dict) -> None:
+    """Remove ``*args``/``**kwargs`` and positional-only parameters from a form spec's
+    schema and uiSchema (in place).
+
+    A form can't sensibly ask for them (``*args``/``**kwargs`` would show up as
+    required string fields), and uf calls functions with keyword arguments only.
     """
-    variadic = _variadic_names(func)
+    variadic = _unfillable_names(func)
     schema = form_spec.get("schema", {})
     for name in variadic:
         schema.get("properties", {}).pop(name, None)
@@ -151,6 +205,10 @@ class FunctionSpecStore(Mapping):
         """Iterate over function names."""
         return iter(self._funcs)
 
+    def __contains__(self, func_name) -> bool:
+        """Whether a function is served (does not generate its spec)."""
+        return func_name in self._funcs
+
     def __len__(self):
         """Return number of functions."""
         return len(self._funcs)
@@ -165,6 +223,7 @@ class FunctionSpecStore(Mapping):
             Dictionary with schema, uiSchema, and function reference
         """
         func = self._funcs[func_name]
+        _check_introspectable(func)
 
         func_to_form_spec = _import_func_to_form_spec()
         if func_to_form_spec is None:
@@ -176,7 +235,11 @@ class FunctionSpecStore(Mapping):
             rjsf_config["param_to_prop_type"] = self._param_to_prop_type
         rjsf_config.update(self._rjsf_config)  # explicit rjsf_config wins
         form_spec = func_to_form_spec(func, **rjsf_config)
-        _drop_variadic_fields(func, form_spec)
+        nest_under_field = rjsf_config.get("nest_under_field")
+        if nest_under_field:  # the caller asked ju to nest it; uf reads it flat
+            form_spec = form_spec[nest_under_field]
+        _warn_required_positional_only(func, func_name)
+        _drop_unfillable_fields(func, form_spec)
 
         # Apply custom UI schema factory if provided
         if self._ui_schema_factory:
@@ -194,6 +257,26 @@ class FunctionSpecStore(Mapping):
             "description": func.__doc__ or f"Execute {func_name}",
         }
 
+    def _warn_ignored_options(self) -> None:
+        """Warn about the options the basic fallback has no way to honour."""
+        ignored = [
+            name
+            for name, value in (
+                ("rjsf_config", self._rjsf_config),
+                ("ui_schema_factory", self._ui_schema_factory),
+                ("param_to_prop_type", self._param_to_prop_type),
+            )
+            if value
+        ]
+        if ignored:
+            warnings.warn(
+                f"{ignored} {'is' if len(ignored) == 1 else 'are'} ignored because "
+                "ju is not installed (basic form specs). Install it with "
+                "`pip install ju`.",
+                JuNotInstalledWarning,
+                stacklevel=5,  # caller -> __getitem__ -> _generate_spec -> basic -> here
+            )
+
     def _generate_basic_spec(self, func_name: str, func: Callable) -> dict:
         """Generate a basic specification without ju.rjsf.
 
@@ -207,12 +290,14 @@ class FunctionSpecStore(Mapping):
         Returns:
             Basic specification dictionary
         """
+        self._warn_ignored_options()
+        _warn_required_positional_only(func, func_name)
         sig = inspect.signature(func)
         properties = {}
         required = []
 
         for param_name, param in sig.parameters.items():
-            if param.kind in _VARIADIC_KINDS:
+            if param.kind in _NON_KEYWORD_KINDS:
                 continue
             if param.default is inspect.Parameter.empty:
                 required.append(param_name)
