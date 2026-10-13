@@ -213,3 +213,32 @@ def test_other_import_errors_propagate(monkeypatch):
     monkeypatch.setattr(sys.modules['ju'], 'rjsf', fake, raising=False)
     with pytest.raises(ImportError, match='func_to_form_spec'):
         _import_func_to_form_spec()
+
+
+def _variadic(a: int, b: str = "x", *args, c: float = 1.0, **kwargs):
+    """Has *args and **kwargs."""
+
+
+@pytest.mark.parametrize("with_ju", [True, False])
+def test_variadic_params_are_skipped(with_ju, monkeypatch):
+    """*args/**kwargs must not become required string fields (#9)."""
+    import uf.specs
+
+    if with_ju:
+        _require_ju()
+    else:
+        monkeypatch.setattr(uf.specs, '_import_func_to_form_spec', lambda: None)
+    schema = FunctionSpecStore([_variadic])['_variadic']['schema']
+    assert set(schema['properties']) == {'a', 'b', 'c'}
+    assert schema['required'] == ['a']
+
+
+def test_param_to_prop_type_reaches_ju():
+    """The param_to_prop_type option has an effect (#9)."""
+    _require_ju()
+    store = FunctionSpecStore([sample_add], param_to_prop_type=lambda param: 'string')
+    props = store['sample_add']['schema']['properties']
+    assert props['x']['type'] == 'string' and props['y']['type'] == 'string'
+    # default (None) leaves ju's own mapping alone
+    props = FunctionSpecStore([sample_add])['sample_add']['schema']['properties']
+    assert props['x']['type'] == 'integer'
