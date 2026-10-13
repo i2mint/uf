@@ -1,7 +1,7 @@
 {
-  "collection_duration_seconds": 8.871602296829224,
-  "commit_message": "FunctionSpecStore: clear error for un-introspectable callables, drop positional-only params, honour nest_under_field, warn on options ignored without ju (#10)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
-  "commit_sha": "4e4265aafd65ef72ec6c57be2be269752dad1037",
+  "collection_duration_seconds": 9.771151781082153,
+  "commit_message": "Merge 4e4265aafd65ef72ec6c57be2be269752dad1037 into 9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3",
+  "commit_sha": "1d93eaa56c639201c52e3b8f5040b309583d4d35",
   "metrics": {
     "coverage": {
       "branch_coverage": 0.0,
@@ -11,19 +11,19 @@
       "statements_total": 0
     },
     "umpyre_stats": {
-      "comment_lines": 44312,
-      "comment_lines_ratio": 0.04959034693770207,
-      "docs_lines": 113062,
-      "empty_lines": 126234,
-      "empty_lines_ratio": 0.1412707134711564,
-      "files_analyzed": 2168,
-      "function_lines": 508908,
-      "function_lines_ratio": 0.5695279896951635,
-      "mean_lines_per_function": 16.392591399581253,
-      "num_classes": 5997,
-      "num_functions": 31045,
+      "comment_lines": 43096,
+      "comment_lines_ratio": 0.048794682131449905,
+      "docs_lines": 112310,
+      "empty_lines": 124945,
+      "empty_lines_ratio": 0.14146676162321348,
+      "files_analyzed": 2179,
+      "function_lines": 501329,
+      "function_lines_ratio": 0.5676208742871183,
+      "mean_lines_per_function": 16.37580845364866,
+      "num_classes": 5992,
+      "num_functions": 30614,
       "pypi_version": "0.1.5",
-      "total_lines": 893561
+      "total_lines": 883211
     },
     "wily": {
       "cyclomatic_avg": 0.0,
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T09:13:12.759281Z",
+  "timestamp": "2026-10-13T09:13:16.714998Z",
   "workflow_status": {}
 }
