@@ -1,7 +1,7 @@
 {
-  "collection_duration_seconds": 9.694238185882568,
-  "commit_message": "Served classes: resolve string annotations from the class's __init__ (#17)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
-  "commit_sha": "02ae2be90e05ebc5494168e6e95a01917942e06a",
+  "collection_duration_seconds": 8.443025827407837,
+  "commit_message": "Merge 02ae2be90e05ebc5494168e6e95a01917942e06a into 24e267821437b424e10fd3426a69aa7b61cee2d7",
+  "commit_sha": "f5d0bd1ed3f349d73589301ebaf3c262ebe266d7",
   "metrics": {
     "coverage": {
       "branch_coverage": 0.0,
@@ -22,7 +22,7 @@
       "mean_lines_per_function": 16.401396216703127,
       "num_classes": 5998,
       "num_functions": 31084,
-      "pypi_version": "0.1.9",
+      "pypi_version": "0.1.10",
       "total_lines": 894562
     },
     "wily": {
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T15:53:13.246084Z",
+  "timestamp": "2026-10-13T15:53:16.786498Z",
   "workflow_status": {}
 }
