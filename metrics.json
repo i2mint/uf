@@ -1,7 +1,7 @@
 {
-  "collection_duration_seconds": 8.772988319396973,
-  "commit_message": "Merge 374866b8994d1fab39867a0cd21a04501c37abba into a487c1efb043cbca45d7f491088f7846dac49442",
-  "commit_sha": "b546cb942a795af73b1602c6d2e854ecbff97447",
+  "collection_duration_seconds": 6.95898175239563,
+  "commit_message": "Served callables: resolve string annotations, await async via partials/instances, wrap named instances (#17)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
+  "commit_sha": "151cf3726f81d48c3e1862f67aa30a5fc5130a02",
   "metrics": {
     "coverage": {
       "branch_coverage": 0.0,
@@ -11,37 +11,37 @@
       "statements_total": 0
     },
     "umpyre_stats": {
-      "comment_lines": 44314,
-      "comment_lines_ratio": 0.04954495650812817,
-      "docs_lines": 113373,
-      "empty_lines": 126362,
-      "empty_lines_ratio": 0.14127814673196037,
-      "files_analyzed": 2169,
-      "function_lines": 509692,
-      "function_lines_ratio": 0.5698575613246574,
-      "mean_lines_per_function": 16.398828866510087,
-      "num_classes": 5998,
-      "num_functions": 31081,
+      "comment_lines": 43098,
+      "comment_lines_ratio": 0.048741869852037246,
+      "docs_lines": 112649,
+      "empty_lines": 125083,
+      "empty_lines_ratio": 0.1414631608590277,
+      "files_analyzed": 2180,
+      "function_lines": 502239,
+      "function_lines_ratio": 0.5680093733495135,
+      "mean_lines_per_function": 16.384660555247446,
+      "num_classes": 5993,
+      "num_functions": 30653,
       "pypi_version": "0.1.9",
-      "total_lines": 894420
+      "total_lines": 884209
     },
     "wily": {
       "cyclomatic_avg": 0.0,
-      "error": "wily report failed: Usage: wily report [OPTIONS] FILE [METRICS]...\nTry 'wily report --help' for help.\n\nError: Invalid value for '-f' / '--format': 'json' is not one of 'CONSOLE', 'HTML'.\n",
+      "error": "wily build failed: \u001b[31mFailed to setup archiver: 'Dirty repository, make sure you commit/stash files first'\u001b[0m\n",
       "files_analyzed": 0,
       "maintainability_index": 0.0,
       "total_loc": 0
     },
     "workflow_status": {
       "last_run_status": "success",
-      "last_success_timestamp": "2026-10-13T15:48:02Z",
+      "last_success_timestamp": "2026-10-13T15:49:16Z",
       "recent_failure_count": 0,
-      "run_url": "https://github.com/i2mint/uf/actions/runs/38424978833",
+      "run_url": "https://github.com/i2mint/uf/actions/runs/38425241481",
       "total_runs_analyzed": 10
     }
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T15:48:16.436943Z",
+  "timestamp": "2026-10-13T15:50:35.175593Z",
   "workflow_status": {}
 }
