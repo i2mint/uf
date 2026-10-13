@@ -1,10 +1,8 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T09:14:48.325793Z
-commit_sha,7301ad7522bd900809786574e8c53e2173697255
-commit_message,"Attribute the positional-only warning to the caller on both paths (review of #10)
-
-Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+timestamp,2026-10-13T09:14:53.988787Z
+commit_sha,409a1780e2bf60270d0d2452c2bdcdf229dc0d5d
+commit_message,Merge 7301ad7522bd900809786574e8c53e2173697255 into 9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3
 python_version,3.10
 metrics.umpyre_stats.num_functions,30614
 metrics.umpyre_stats.num_classes,5992
@@ -38,4 +36,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,9.777544498443604
+collection_duration_seconds,8.581573963165283
