@@ -112,6 +112,21 @@ def name_of_func(func: Callable) -> str:
     return getattr(func, "__name__", None) or type(func).__name__
 
 
+def unwrap_partials(func: Callable) -> Callable:
+    """The function a (possibly nested) ``functools.partial`` wraps; anything else as is.
+
+    >>> import functools
+    >>> def f(x, y, z): ...
+    >>> unwrap_partials(functools.partial(functools.partial(f, 1), 2)) is f
+    True
+    >>> unwrap_partials(f) is f
+    True
+    """
+    while isinstance(func, functools.partial):
+        func = func.func
+    return func
+
+
 def doc_of_func(func: Callable) -> Optional[str]:
     """The docstring of ``func``; for a ``functools.partial`` (whose own ``__doc__`` is
     the generic one of ``partial``), that of the function it wraps.
@@ -122,9 +137,7 @@ def doc_of_func(func: Callable) -> Optional[str]:
     >>> doc_of_func(functools.partial(f, y=1))
     'Add.'
     """
-    while isinstance(func, functools.partial):
-        func = func.func
-    return func.__doc__
+    return unwrap_partials(func).__doc__
 
 
 def name_funcs(funcs) -> dict:

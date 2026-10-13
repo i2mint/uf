@@ -4,11 +4,12 @@ Provides tools for organizing functions into categories, groups, and
 hierarchies for better navigation in the UI.
 """
 
-from typing import Callable, Iterable, Optional, Union
+import functools
+from typing import Any, Callable, Iterable, Optional, Union
 from dataclasses import dataclass, field
 from collections.abc import Mapping
 
-from uf.specs import doc_of_func, name_funcs, name_of_func
+from uf.specs import doc_of_func, name_funcs, name_of_func, unwrap_partials
 
 
 @dataclass
@@ -344,6 +345,25 @@ def _add_group_routes(app, organizer: FunctionOrganizer):
             return JSONResponse(content=organizer.to_dict())
 
 
+def _attr_through_partials(func: Callable, attr: str, default: Any) -> Any:
+    """``attr`` of ``func``, else of the function it wraps, and so on down a chain of
+    ``functools.partial``: the outermost object that has it wins.
+
+    >>> import functools
+    >>> def f(): ...
+    >>> f.tag = "inner"
+    >>> p = functools.partial(functools.partial(f))
+    >>> _attr_through_partials(p, "tag", None)
+    'inner'
+    >>> p.tag = ""  # set, even if falsy: it wins
+    >>> _attr_through_partials(p, "tag", None)
+    ''
+    """
+    while not hasattr(func, attr) and isinstance(func, functools.partial):
+        func = func.func
+    return getattr(func, attr, default)
+
+
 def auto_group_by_prefix(
     funcs: Iterable[Callable],
     separator: str = "_",
@@ -403,7 +423,8 @@ def auto_group_by_module(funcs: Iterable[Callable]) -> FunctionOrganizer:
         funcs: Functions to organize
 
     Returns:
-        FunctionOrganizer with module-based groups
+        FunctionOrganizer with module-based groups (a ``functools.partial`` goes with the
+        module of the function it wraps)
 
     Example:
         >>> from myapp import user_ops, report_ops
@@ -415,7 +436,7 @@ def auto_group_by_module(funcs: Iterable[Callable]) -> FunctionOrganizer:
     groups_dict = defaultdict(list)
 
     for func in funcs:
-        module = func.__module__
+        module = unwrap_partials(func).__module__
         # Get last part of module name
         if "." in module:
             module_name = module.split(".")[-1]
@@ -465,7 +486,7 @@ def auto_group_by_tag(
     groups_dict = defaultdict(list)
 
     for func in funcs:
-        tag = getattr(func, tag_attr, "Other")
+        tag = _attr_through_partials(func, tag_attr, "Other")
         groups_dict[tag].append(func)
 
     # Create organizer

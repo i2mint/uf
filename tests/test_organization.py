@@ -90,3 +90,52 @@ def test_add_function_refuses_a_different_callable_with_a_taken_name():
             FunctionGroup("G", funcs).add_function(other)
     FunctionGroup("G", [add]).add_function(add)
     FunctionGroup("G", [add]).add_function(other, name="add5")
+
+
+# --- auto_group_by_module / auto_group_by_tag unwrap partials (i2mint/uf#26) ---
+
+from uf.organization import auto_group_by_module, auto_group_by_tag
+
+
+def _group_names(organizer):
+    return {g.name: g.get_function_names() for g in organizer.get_groups()}
+
+
+def test_auto_group_by_module_puts_a_partial_with_the_function_it_wraps():
+    groups = _group_names(auto_group_by_module([len, functools.partial(add, y=2)]))
+    assert groups == {"Builtins": ["len"], "Test Organization": ["add"]}  # no 'Functools' group
+
+
+def test_auto_group_by_tag_reads_the_tag_of_the_wrapped_function():
+    def tagged(x: int) -> int:
+        return x
+
+    tagged.__uf_group__ = "Admin"
+    assert _group_names(auto_group_by_tag([functools.partial(tagged, 1)])) == {"Admin": ["tagged"]}
+
+
+def test_a_tag_on_the_partial_itself_wins():
+    def tagged(x: int) -> int:
+        return x
+
+    tagged.__uf_group__ = "Admin"
+    p = functools.partial(tagged, 1)
+    p.__uf_group__ = "Mine"
+    assert _group_names(auto_group_by_tag([p])) == {"Mine": ["tagged"]}
+
+
+def test_an_untagged_partial_still_goes_to_other():
+    assert _group_names(auto_group_by_tag([functools.partial(add)])) == {"Other": ["add"]}
+
+
+def test_the_outermost_partial_with_a_tag_wins_even_a_falsy_one():
+    def tagged(x: int, y: int, z: int) -> int:
+        return x
+
+    tagged.__uf_group__ = "Admin"
+    mid = functools.partial(tagged, 1)
+    mid.__uf_group__ = "Mid"
+    outer = functools.partial(mid, 2)
+    assert _group_names(auto_group_by_tag([outer])) == {"Mid": ["tagged"]}
+    mid.__uf_group__ = ""
+    assert _group_names(auto_group_by_tag([outer])) == {"": ["tagged"]}
