@@ -1,5 +1,5 @@
 {
-  "collection_duration_seconds": 10.174025774002075,
+  "collection_duration_seconds": 8.649905443191528,
   "commit_message": "import_optional: keep stub packages without a spec; dotted names under a stray directory are absent (#15 review)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
   "commit_sha": "f577d3f8eb26ba768a5dba40eaa396605f4b378a",
   "metrics": {
@@ -11,19 +11,19 @@
       "statements_total": 0
     },
     "umpyre_stats": {
-      "comment_lines": 43092,
-      "comment_lines_ratio": 0.04876017534291217,
-      "docs_lines": 112493,
-      "empty_lines": 125031,
-      "empty_lines_ratio": 0.14147715314442708,
-      "files_analyzed": 2180,
-      "function_lines": 501824,
-      "function_lines_ratio": 0.5678322248046402,
-      "mean_lines_per_function": 16.379137019387688,
-      "num_classes": 5992,
-      "num_functions": 30638,
+      "comment_lines": 44308,
+      "comment_lines_ratio": 0.04955575637733418,
+      "docs_lines": 113245,
+      "empty_lines": 126320,
+      "empty_lines_ratio": 0.14128110376421535,
+      "files_analyzed": 2169,
+      "function_lines": 509403,
+      "function_lines_ratio": 0.5697357354401725,
+      "mean_lines_per_function": 16.395860825903632,
+      "num_classes": 5997,
+      "num_functions": 31069,
       "pypi_version": "0.1.7",
-      "total_lines": 883754
+      "total_lines": 894104
     },
     "wily": {
       "cyclomatic_avg": 0.0,
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T14:18:31.335214Z",
+  "timestamp": "2026-10-13T14:18:35.865926Z",
   "workflow_status": {}
 }
