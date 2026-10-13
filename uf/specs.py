@@ -32,12 +32,12 @@ class UnintrospectableCallableError(ValueError):
 
 
 class UnservableCallableError(ValueError):
-    """A callable can never be called from a uf form (e.g. only required
-    positional-only parameters)."""
+    """A callable can never be called from a uf form (e.g. it has a required
+    positional-only parameter)."""
 
 
-class PositionalOnlyParamWarning(UserWarning):
-    """A required positional-only parameter can't be filled by a keyword-only caller."""
+class FormSpecError(ValueError):
+    """The form spec of a function could not be generated (the cause is chained)."""
 
 
 def _check_introspectable(func: Callable) -> None:
@@ -61,13 +61,18 @@ def _check_introspectable(func: Callable) -> None:
 
 def _check_servable(func: Callable, name: str) -> None:
     """Raise if ``func`` can never be called from a form: no signature, or a required
-    positional-only parameter and nothing a keyword-only caller could fill.
+    positional-only parameter (uf calls functions with keyword arguments only, so
+    every submission would fail).
 
     >>> _check_servable(len, 'len')
     Traceback (most recent call last):
       ...
-    uf.specs.UnservableCallableError: 'len' takes only required positional-only parameter(s) ['obj']; uf calls functions with keyword arguments only, so its form could never be submitted successfully
+    uf.specs.UnservableCallableError: 'len' takes required positional-only parameter(s) ['obj']; uf calls functions with keyword arguments only, so its form could never be submitted successfully
     >>> _check_servable(lambda a, /, b: None, 'f')
+    Traceback (most recent call last):
+      ...
+    uf.specs.UnservableCallableError: 'f' takes required positional-only parameter(s) ['a']; uf calls functions with keyword arguments only, so its form could never be submitted successfully
+    >>> _check_servable(lambda a=1, /, b=2: None, 'f')
     """
     _check_introspectable(func)
     params = inspect.signature(func).parameters.values()
@@ -77,10 +82,9 @@ def _check_servable(func: Callable, name: str) -> None:
         if p.kind is inspect.Parameter.POSITIONAL_ONLY
         and p.default is inspect.Parameter.empty
     ]
-    fillable = [p for p in params if p.kind not in _NON_KEYWORD_KINDS]
-    if required_po and not fillable:
+    if required_po:
         raise UnservableCallableError(
-            f"{name!r} takes only required positional-only parameter(s) {required_po}; "
+            f"{name!r} takes required positional-only parameter(s) {required_po}; "
             "uf calls functions with keyword arguments only, so its form could never "
             "be submitted successfully"
         )
@@ -174,31 +178,6 @@ def _non_keyword_names(params) -> set:
     return {n for n, p in params.items() if p.kind in _NON_KEYWORD_KINDS}
 
 
-def _warn_required_positional_only(
-    func: Callable, func_name: str, *, stacklevel: int
-) -> None:
-    """Warn if ``func`` has a required positional-only parameter (it is left out of the
-    form, so calling the function with keyword arguments fails)."""
-    try:
-        params = inspect.signature(func).parameters.values()
-    except (TypeError, ValueError):
-        return
-    required = [
-        p.name
-        for p in params
-        if p.kind is inspect.Parameter.POSITIONAL_ONLY
-        and p.default is inspect.Parameter.empty
-    ]
-    if required:
-        warnings.warn(
-            f"{func_name!r} has required positional-only parameter(s) {required}, "
-            "which uf can't pass (it calls functions with keyword arguments only); "
-            "they are left out of the form.",
-            PositionalOnlyParamWarning,
-            stacklevel=stacklevel,
-        )
-
-
 def _drop_unfillable_fields(func: Callable, form_spec: dict) -> None:
     """Remove ``*args``/``**kwargs`` and positional-only parameters from a form spec's
     schema and uiSchema (in place).
@@ -268,10 +247,10 @@ class FunctionSpecStore(Mapping):
         rjsf_config: Optional configuration dict for RJSF generation
         ui_schema_factory: Optional callable to customize UI schema generation
         param_to_prop_type: Optional callable to map parameters to property types
-        validate: If true, every function is checked at construction, so a callable
-            uf can't build a form for fails there, naming it, rather than on the first
-            request (default false: checked on first access of its spec;
-            ``mk_rjsf_app`` validates).
+        validate: If true, every function is checked and its spec generated at
+            construction, so a callable uf can't build a form for fails there, naming
+            it, rather than on the first request (default false: checked on first
+            access of its spec; ``mk_rjsf_app`` validates).
 
     Example:
         >>> def add(x: int, y: int) -> int:
@@ -295,9 +274,6 @@ class FunctionSpecStore(Mapping):
         validate: bool = False,
     ):
         self._funcs = name_funcs(funcs)
-        if validate:
-            for name, func in self._funcs.items():
-                _check_servable(func, name)
         self._rjsf_config = rjsf_config or {}
         self._ui_schema_factory = ui_schema_factory
         self._param_to_prop_type = param_to_prop_type
@@ -307,6 +283,16 @@ class FunctionSpecStore(Mapping):
         self._func_to_form_spec = _import_func_to_form_spec()
         if self._func_to_form_spec is None:
             self._warn_ignored_options()
+        if validate:
+            for name in self._funcs:
+                try:
+                    self[name]  # (generates and caches the spec)
+                except (UnservableCallableError, UnintrospectableCallableError):
+                    raise
+                except Exception as e:
+                    raise FormSpecError(
+                        f"could not generate the form spec of {name!r}: {e!r}"
+                    ) from e
 
     def __getitem__(self, func_name: str) -> dict:
         """Get RJSF spec for a function.
@@ -368,8 +354,6 @@ class FunctionSpecStore(Mapping):
         nest_under_field = rjsf_config.get("nest_under_field")
         if nest_under_field:  # the caller asked ju to nest it; uf reads it flat
             form_spec = form_spec[nest_under_field]
-        # caller -> __getitem__ -> _generate_spec -> warn helper
-        _warn_required_positional_only(func, func_name, stacklevel=4)
         _drop_unfillable_fields(func, form_spec)
 
         # Apply custom UI schema factory if provided
@@ -421,8 +405,6 @@ class FunctionSpecStore(Mapping):
         Returns:
             Basic specification dictionary
         """
-        # caller -> __getitem__ -> _generate_spec -> basic spec -> warn helper
-        _warn_required_positional_only(func, func_name, stacklevel=5)
         sig = inspect.signature(func)
         properties = {}
         required = []

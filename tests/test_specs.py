@@ -256,7 +256,7 @@ def test_variadic_names_follow_ju_and_uiSchema_is_cleaned():
 
 
 # --- edge cases (i2mint/uf#10) ----------------------------------------------
-from uf.specs import PositionalOnlyParamWarning, UnintrospectableCallableError
+from uf.specs import UnintrospectableCallableError
 
 
 def _positional_only(a=1, b=2, /, c=3):
@@ -290,20 +290,21 @@ def test_unintrospectable_callable_raises_clear_error(with_ju, func, monkeypatch
 def test_positional_only_params_are_dropped(with_ju, monkeypatch):
     _with_ju_or_not(with_ju, monkeypatch)
     with warnings.catch_warnings():
-        warnings.simplefilter('error', PositionalOnlyParamWarning)  # all defaulted
+        warnings.simplefilter('error')  # (all defaulted: nothing to warn about)
         schema = FunctionSpecStore([_positional_only])['_positional_only']['schema']
     assert set(schema['properties']) == {'c'}
     assert schema.get('required', []) == []
 
 
 @pytest.mark.parametrize('with_ju', [True, False])
-def test_required_positional_only_param_warns(with_ju, monkeypatch):
+def test_required_positional_only_param_is_refused(with_ju, monkeypatch):
+    # (i2mint/uf#22: it used to warn and drop it, so every submission failed)
+    from uf.specs import UnservableCallableError
+
     _with_ju_or_not(with_ju, monkeypatch)
     store = FunctionSpecStore([_required_positional_only_and_kw])
-    with pytest.warns(PositionalOnlyParamWarning, match=r"\['a'\]"):
-        schema = store['_required_positional_only_and_kw']['schema']
-    assert set(schema['properties']) == {'b'}
-    assert schema['required'] == ['b']
+    with pytest.raises(UnservableCallableError, match=r"\['a'\]"):
+        store['_required_positional_only_and_kw']
 
 
 def test_positional_only_uiSchema_autofocus_moves_on():
@@ -342,15 +343,12 @@ def test_fallback_without_options_has_no_ignored_options_warning(monkeypatch):
     assert not any('ignored' in str(w.message) for w in record)
 
 
-@pytest.mark.parametrize('with_ju', [True, False])
-def test_warnings_are_attributed_to_the_caller(with_ju, monkeypatch):
-    _with_ju_or_not(with_ju, monkeypatch)
+def test_warnings_are_attributed_to_the_caller(monkeypatch):
+    _with_ju_or_not(False, monkeypatch)
     with warnings.catch_warnings(record=True) as record:
         warnings.simplefilter('always')
-        store = FunctionSpecStore(
-            [_required_positional_only_and_kw], param_to_prop_type=lambda p: 'string'
-        )
-        store['_required_positional_only_and_kw']
+        store = FunctionSpecStore([sample_add], param_to_prop_type=lambda p: 'string')
+        store['sample_add']
     assert record and all(w.filename == __file__ for w in record)
 
 
@@ -492,8 +490,29 @@ def test_function_with_only_required_positional_only_params_is_refused():
         FunctionSpecStore([_po_only], validate=True)
     with pytest.raises(UnservableCallableError):
         FunctionSpecStore([_po_only])['_po_only']  # lazily, without validate
-    # a keyword-fillable param, or defaults, keep it servable
-    FunctionSpecStore([_required_positional_only_and_kw, _positional_only], validate=True)
+    # a required positional-only param is refused even when others are fillable
+    # (i2mint/uf#22): `a` could never be passed
+    with pytest.raises(UnservableCallableError, match=r"\['a'\]"):
+        FunctionSpecStore([_required_positional_only_and_kw], validate=True)
+    # defaults keep it servable
+    FunctionSpecStore([_positional_only], validate=True)
+
+
+def test_validate_generates_the_specs_and_names_the_function_that_fails(monkeypatch):
+    from uf.specs import FormSpecError
+
+    def broken(func, **kw):
+        if func is sample_add:
+            raise RuntimeError('boom')
+        return {'schema': {}, 'uiSchema': {}}
+
+    monkeypatch.setattr('uf.specs._import_func_to_form_spec', lambda: broken)
+    store = FunctionSpecStore([_Doubler()])  # lazy: nothing generated yet
+    assert len(store) == 1
+    with pytest.raises(FormSpecError, match="'sample_add'.*boom") as exc:
+        FunctionSpecStore([_Doubler(), sample_add], validate=True)
+    assert isinstance(exc.value.__cause__, RuntimeError)
+    assert FunctionSpecStore([_Doubler()], validate=True)['_Doubler']['name'] == '_Doubler'
 
 
 def test_mk_rjsf_app_validates_up_front():
