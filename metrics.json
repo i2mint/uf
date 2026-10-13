@@ -1,7 +1,7 @@
 {
-  "collection_duration_seconds": 10.732755661010742,
-  "commit_message": "import_optional: a stray namespace directory is not the package (#15) (#16)\n\n* import_optional: a namespace directory is not the package (#15)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* import_optional: keep stub packages without a spec; dotted names under a stray directory are absent (#15 review)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>",
-  "commit_sha": "0c89605386da70e415a69b7e218e36066e152e64",
+  "collection_duration_seconds": 11.153704643249512,
+  "commit_message": "Merge master into fix/function-spec-store-13\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
+  "commit_sha": "b4fd926abf6a2c60de9f6f511fe6a75a2a128ea1",
   "metrics": {
     "coverage": {
       "branch_coverage": 0.0,
@@ -11,19 +11,19 @@
       "statements_total": 0
     },
     "umpyre_stats": {
-      "comment_lines": 44308,
-      "comment_lines_ratio": 0.04955575637733418,
-      "docs_lines": 113245,
-      "empty_lines": 126320,
-      "empty_lines_ratio": 0.14128110376421535,
-      "files_analyzed": 2169,
-      "function_lines": 509403,
-      "function_lines_ratio": 0.5697357354401725,
-      "mean_lines_per_function": 16.395860825903632,
-      "num_classes": 5997,
-      "num_functions": 31069,
+      "comment_lines": 43092,
+      "comment_lines_ratio": 0.04874804010072695,
+      "docs_lines": 112585,
+      "empty_lines": 125060,
+      "empty_lines_ratio": 0.1414747492573311,
+      "files_analyzed": 2180,
+      "function_lines": 502013,
+      "function_lines_ratio": 0.5679047121295423,
+      "mean_lines_per_function": 16.380494012464514,
+      "num_classes": 5993,
+      "num_functions": 30647,
       "pypi_version": "0.1.7",
-      "total_lines": 894104
+      "total_lines": 883974
     },
     "wily": {
       "cyclomatic_avg": 0.0,
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T14:22:32.130447Z",
+  "timestamp": "2026-10-13T14:22:49.549135Z",
   "workflow_status": {}
 }
