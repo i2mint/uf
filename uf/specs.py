@@ -206,9 +206,6 @@ class JuNotInstalledWarning(UserWarning):
     """Emitted when ``ju`` is absent and uf falls back to basic form specs."""
 
 
-_PACKAGE_PREFIX = os.path.dirname(os.path.abspath(__file__)) + os.sep
-
-
 def _warn_at_caller(message: str, category: type[Warning]) -> None:
     """Warn, attributed to the first frame outside the ``uf`` package.
 
@@ -230,6 +227,11 @@ def _warn_at_caller(message: str, category: type[Warning]) -> None:
         frame = frame.f_back
         stacklevel += 1
     warnings.warn(message, category, stacklevel=stacklevel)
+
+
+# Taken from the code object, not ``__file__``: it is what the frames being compared carry
+# (they differ for a ``.pyc``-only install, and a freezer may leave ``__file__`` unset).
+_PACKAGE_PREFIX = os.path.dirname(_warn_at_caller.__code__.co_filename) + os.sep
 
 
 def _import_func_to_form_spec() -> Optional[Callable]:
