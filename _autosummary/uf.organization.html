@@ -110,6 +110,7 @@ data-aria-dark="Switch to auto color mode">
 <li><a class="reference internal" href="#uf.organization.FunctionGroup.collapsed"><code class="docutils literal notranslate"><span class="pre">FunctionGroup.collapsed</span></code></a></li>
 <li><a class="reference internal" href="#uf.organization.FunctionGroup.add_function"><code class="docutils literal notranslate"><span class="pre">FunctionGroup.add_function()</span></code></a></li>
 <li><a class="reference internal" href="#uf.organization.FunctionGroup.get_function_names"><code class="docutils literal notranslate"><span class="pre">FunctionGroup.get_function_names()</span></code></a></li>
+<li><a class="reference internal" href="#uf.organization.FunctionGroup.named_funcs"><code class="docutils literal notranslate"><span class="pre">FunctionGroup.named_funcs</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#uf.organization.FunctionOrganizer"><code class="docutils literal notranslate"><span class="pre">FunctionOrganizer</span></code></a><ul>
@@ -216,7 +217,9 @@ hierarchies for better navigation in the UI.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="uf.organization.FunctionGroup.funcs">
 <span class="sig-name descname"><span class="pre">funcs</span></span><a class="headerlink" href="#uf.organization.FunctionGroup.funcs" title="Link to this definition">#</a></dt>
-<dd><p>Functions in this group</p>
+<dd><p>Functions in this group: callables (partials and callable instances
+are fine; they are named as <code class="docutils literal notranslate"><span class="pre">uf.specs.name_of_func</span></code> does), or a
+<code class="docutils literal notranslate"><span class="pre">{name:</span> <span class="pre">callable}</span></code> mapping to name them explicitly</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -254,17 +257,24 @@ hierarchies for better navigation in the UI.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="uf.organization.FunctionGroup.add_function">
-<span class="sig-name descname"><span class="pre">add_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/organization.html#FunctionGroup.add_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.FunctionGroup.add_function" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">add_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/organization.html#FunctionGroup.add_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.organization.FunctionGroup.add_function" title="Link to this definition">#</a></dt>
 <dd><p>Add a function to this group.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>func</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) – Function to add</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) – Function to add</p></li>
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – Explicit name to serve it under (default: its own name).
+Giving one turns <code class="docutils literal notranslate"><span class="pre">funcs</span></code> into a <code class="docutils literal notranslate"><span class="pre">{name:</span> <span class="pre">callable}</span></code> mapping.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.organization.FunctionGroup" title="uf.organization.FunctionGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionGroup</span></code></a></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Self for method chaining</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.15)"><strong>ValueError</strong></a> – If a different callable already has that name in the group</p>
 </dd>
 </dl>
 </dd></dl>
@@ -281,6 +291,18 @@ hierarchies for better navigation in the UI.</p>
 <dd class="field-even"><p>List of function name strings</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="uf.organization.FunctionGroup.named_funcs">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">named_funcs</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><span class="pre">Callable</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#uf.organization.FunctionGroup.named_funcs" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">{name:</span> <span class="pre">callable}</span></code> of this group, named the way the app serves them.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span><span class="s1">'G'</span><span class="p">,</span> <span class="p">[</span><span class="nb">len</span><span class="p">,</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)])</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">named_funcs</span><span class="p">)</span>
+</span><span data-line="4"><span class="go">['len', 'int']</span>
+</span></pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -571,7 +593,7 @@ For example, with separator=”_”:</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=1e825a29"></script>
+      <script src="../_static/documentation_options.js?v=297ad043"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

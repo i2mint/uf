@@ -1017,7 +1017,9 @@ Name of the group
 
 #### funcs
 
-Functions in this group
+Functions in this group: callables (partials and callable instances
+are fine; they are named as `uf.specs.name_of_func` does), or a
+`{name: callable}` mapping to name them explicitly
 
 #### description
 
@@ -1046,16 +1048,20 @@ Whether the group starts collapsed in UI
 ... )
 ```
 
-#### add_function(func)
+#### add_function(func, , name=None)
 
 Add a function to this group.
 
 * **Parameters:**
-  **func** ([`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)) – Function to add
+  * **func** ([`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)) – Function to add
+  * **name** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]) – Explicit name to serve it under (default: its own name).
+    Giving one turns `funcs` into a `{name: callable}` mapping.
 * **Return type:**
   [`FunctionGroup`](uf.organization.html.md#uf.organization.FunctionGroup)
 * **Returns:**
   Self for method chaining
+* **Raises:**
+  [**ValueError**](https://docs.python.org/3/builtins/exceptions.html#ValueError) – If a different callable already has that name in the group
 
 #### get_function_names()
 
@@ -1065,6 +1071,17 @@ Get names of all functions in this group.
   [`list`](https://docs.python.org/3/builtins/stdtypes.html#list)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
 * **Returns:**
   List of function name strings
+
+#### *property* named_funcs *: [dict](https://docs.python.org/3/builtins/stdtypes.html#dict)[[str](https://docs.python.org/3/builtins/stdtypes.html#str), [Callable](https://docs.python.org/3/library/typing.html#typing.Callable)]*
+
+`{name: callable}` of this group, named the way the app serves them.
+
+```pycon
+>>> import functools
+>>> g = FunctionGroup('G', [len, functools.partial(int, base=2)])
+>>> list(g.named_funcs)
+['len', 'int']
+```
 
 ### *class* uf.FunctionOrganizer
 

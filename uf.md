@@ -1,4 +1,4 @@
-> built 2026-10-13 15:57 UTC from 1ae5ff4 (master) · uf 0.1.11. Details: build_info.json
+> built 2026-10-13 16:13 UTC from e7e6fe8 (master) · uf 0.1.12. Details: build_info.json
 
 # index.html.md
 
@@ -4038,7 +4038,9 @@ Name of the group
 
 #### funcs
 
-Functions in this group
+Functions in this group: callables (partials and callable instances
+are fine; they are named as `uf.specs.name_of_func` does), or a
+`{name: callable}` mapping to name them explicitly
 
 #### description
 
@@ -4067,16 +4069,20 @@ Whether the group starts collapsed in UI
 ... )
 ```
 
-#### add_function(func)
+#### add_function(func, , name=None)
 
 Add a function to this group.
 
 * **Parameters:**
-  **func** ([`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)) – Function to add
+  * **func** ([`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)) – Function to add
+  * **name** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]) – Explicit name to serve it under (default: its own name).
+    Giving one turns `funcs` into a `{name: callable}` mapping.
 * **Return type:**
   [`FunctionGroup`](_autosummary/uf.organization.html.md#uf.organization.FunctionGroup)
 * **Returns:**
   Self for method chaining
+* **Raises:**
+  [**ValueError**](https://docs.python.org/3/builtins/exceptions.html#ValueError) – If a different callable already has that name in the group
 
 #### get_function_names()
 
@@ -4086,6 +4092,17 @@ Get names of all functions in this group.
   [`list`](https://docs.python.org/3/builtins/stdtypes.html#list)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
 * **Returns:**
   List of function name strings
+
+#### *property* named_funcs *: [dict](https://docs.python.org/3/builtins/stdtypes.html#dict)[[str](https://docs.python.org/3/builtins/stdtypes.html#str), [Callable](https://docs.python.org/3/library/typing.html#typing.Callable)]*
+
+`{name: callable}` of this group, named the way the app serves them.
+
+```pycon
+>>> import functools
+>>> g = FunctionGroup('G', [len, functools.partial(int, base=2)])
+>>> list(g.named_funcs)
+['len', 'int']
+```
 
 ### *class* uf.FunctionOrganizer
 
@@ -6896,7 +6913,9 @@ Name of the group
 
 #### funcs
 
-Functions in this group
+Functions in this group: callables (partials and callable instances
+are fine; they are named as `uf.specs.name_of_func` does), or a
+`{name: callable}` mapping to name them explicitly
 
 #### description
 
@@ -6925,16 +6944,20 @@ Whether the group starts collapsed in UI
 ... )
 ```
 
-#### add_function(func)
+#### add_function(func, , name=None)
 
 Add a function to this group.
 
 * **Parameters:**
-  **func** ([`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)) – Function to add
+  * **func** ([`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)) – Function to add
+  * **name** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]) – Explicit name to serve it under (default: its own name).
+    Giving one turns `funcs` into a `{name: callable}` mapping.
 * **Return type:**
   [`FunctionGroup`](_autosummary/uf.organization.html.md#uf.organization.FunctionGroup)
 * **Returns:**
   Self for method chaining
+* **Raises:**
+  [**ValueError**](https://docs.python.org/3/builtins/exceptions.html#ValueError) – If a different callable already has that name in the group
 
 #### get_function_names()
 
@@ -6944,6 +6967,17 @@ Get names of all functions in this group.
   [`list`](https://docs.python.org/3/builtins/stdtypes.html#list)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
 * **Returns:**
   List of function name strings
+
+#### *property* named_funcs *: [dict](https://docs.python.org/3/builtins/stdtypes.html#dict)[[str](https://docs.python.org/3/builtins/stdtypes.html#str), [Callable](https://docs.python.org/3/library/typing.html#typing.Callable)]*
+
+`{name: callable}` of this group, named the way the app serves them.
+
+```pycon
+>>> import functools
+>>> g = FunctionGroup('G', [len, functools.partial(int, base=2)])
+>>> list(g.named_funcs)
+['len', 'int']
+```
 
 ### *class* uf.organization.FunctionOrganizer
 
@@ -9017,20 +9051,18 @@ Decorator to add webhooks to a function.
 
 # About this build
 
-This documentation was built on **2026-10-13 15:57 UTC** from commit <a href="https://github.com/i2mint/uf/commit/1ae5ff4cb50b24a4796413f2796a71b8b4f212fd"><code>1ae5ff4</code></a> on branch <code>master</code>, for **uf 0.1.11** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-13 16:13 UTC** from commit <a href="https://github.com/i2mint/uf/commit/e7e6fe8fa334a1fc2ffb6f0743ec315b7d4af782"><code>e7e6fe8</code></a> on branch <code>master</code>, for **uf 0.1.12** (from <code>pyproject.toml</code>).
 
-#### WARNING
-The documentation and the package may be misaligned:
-
-- The documented version (0.1.11) is ahead of the latest release on PyPI (0.1.10): these docs describe unreleased code.
+#### NOTE
+Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
 
 ## Source
 
 |                     |                                                                                                                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/uf/commit/1ae5ff4cb50b24a4796413f2796a71b8b4f212fd"><code>1ae5ff4cb50b24a4796413f2796a71b8b4f212fd</code></a> |
+| Commit              | <a href="https://github.com/i2mint/uf/commit/e7e6fe8fa334a1fc2ffb6f0743ec315b7d4af782"><code>e7e6fe8fa334a1fc2ffb6f0743ec315b7d4af782</code></a> |
 | Branch              | <code>master</code>                                                                                                                              |
-| Tags at this commit | <code>0.1.11</code>                                                                                                                              |
+| Tags at this commit | <code>0.1.12</code>                                                                                                                              |
 | Working tree        | clean                                                                                                                                            |
 | Remote              | <code>https://github.com/i2mint/uf</code>                                                                                                        |
 
@@ -9039,9 +9071,9 @@ The documentation and the package may be misaligned:
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/uf</code>                                                                     |
-| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38426200027">38426200027</a>            |
+| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38428435254">38428435254</a>            |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>609b16ca0637b299d995456b1d5fbbd518372104</code> (in the history of the built commit) |
+| Event commit | <code>09dcefef72cee1ac2999d8d12abea65167b2786e</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -9066,13 +9098,13 @@ The documentation and the package may be misaligned:
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.10/">0.1.10</a>, older than the documented version (0.1.11).
+Latest release: <a href="https://pypi.org/project/uf/0.1.12/">0.1.12</a>, the same as the documented version.
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout 1ae5ff4cb50b24a4796413f2796a71b8b4f212fd
+git checkout e7e6fe8fa334a1fc2ffb6f0743ec315b7d4af782
 pip install "epythet==0.2.17"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```
