@@ -1,5 +1,5 @@
 {
-  "collection_duration_seconds": 6.427951097488403,
+  "collection_duration_seconds": 10.026889562606812,
   "commit_message": "fix(specs): refuse any required positional-only param; validate=True generates the specs (#22)\n\nDrops PositionalOnlyParamWarning (and its hardcoded stacklevels, #21's remaining case).\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
   "commit_sha": "79e73c82cc64f1a8883732ba088a28f64f537362",
   "metrics": {
@@ -11,19 +11,19 @@
       "statements_total": 0
     },
     "umpyre_stats": {
-      "comment_lines": 43097,
-      "comment_lines_ratio": 0.04873886476907366,
-      "docs_lines": 112665,
-      "empty_lines": 125087,
-      "empty_lines_ratio": 0.1414622451068315,
-      "files_analyzed": 2180,
-      "function_lines": 502268,
-      "function_lines_ratio": 0.568020329253384,
-      "mean_lines_per_function": 16.38507209499576,
-      "num_classes": 5993,
-      "num_functions": 30654,
+      "comment_lines": 44344,
+      "comment_lines_ratio": 0.04956015695986928,
+      "docs_lines": 113444,
+      "empty_lines": 126405,
+      "empty_lines_ratio": 0.1412739410182274,
+      "files_analyzed": 2169,
+      "function_lines": 509992,
+      "function_lines_ratio": 0.5699820396959601,
+      "mean_lines_per_function": 16.403203499404974,
+      "num_classes": 5998,
+      "num_functions": 31091,
       "pypi_version": "0.1.11",
-      "total_lines": 884243
+      "total_lines": 894751
     },
     "wily": {
       "cyclomatic_avg": 0.0,
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T16:13:32.961768Z",
+  "timestamp": "2026-10-13T16:13:49.297176Z",
   "workflow_status": {}
 }
