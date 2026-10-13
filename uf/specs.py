@@ -274,6 +274,9 @@ class FunctionSpecStore(Mapping):
         validate: bool = False,
     ):
         self._funcs = name_funcs(funcs)
+        if validate:  # (before anything else can fail, so the function is named)
+            for name, func in self._funcs.items():
+                _check_servable(func, name)
         self._rjsf_config = rjsf_config or {}
         self._ui_schema_factory = ui_schema_factory
         self._param_to_prop_type = param_to_prop_type
