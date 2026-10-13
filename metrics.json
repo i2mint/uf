@@ -1,5 +1,5 @@
 {
-  "collection_duration_seconds": 8.085241794586182,
+  "collection_duration_seconds": 10.079552412033081,
   "commit_message": "fix(organization): groups serve partials, callable instances and {name: callable} maps (#24)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
   "commit_sha": "affdccc3fa232c1e1e486425d81af7cad623fe33",
   "metrics": {
@@ -11,19 +11,19 @@
       "statements_total": 0
     },
     "umpyre_stats": {
-      "comment_lines": 44345,
-      "comment_lines_ratio": 0.04956121919816888,
-      "docs_lines": 113437,
-      "empty_lines": 126405,
-      "empty_lines_ratio": 0.14127378312649763,
-      "files_analyzed": 2169,
-      "function_lines": 509992,
-      "function_lines_ratio": 0.5699814026680019,
-      "mean_lines_per_function": 16.403203499404974,
-      "num_classes": 5998,
-      "num_functions": 31091,
+      "comment_lines": 43098,
+      "comment_lines_ratio": 0.04873994055939311,
+      "docs_lines": 112658,
+      "empty_lines": 125087,
+      "empty_lines_ratio": 0.141462085125825,
+      "files_analyzed": 2180,
+      "function_lines": 502268,
+      "function_lines_ratio": 0.5680196868737588,
+      "mean_lines_per_function": 16.38507209499576,
+      "num_classes": 5993,
+      "num_functions": 30654,
       "pypi_version": "0.1.10",
-      "total_lines": 894752
+      "total_lines": 884244
     },
     "wily": {
       "cyclomatic_avg": 0.0,
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T16:08:42.940685Z",
+  "timestamp": "2026-10-13T16:08:44.690667Z",
   "workflow_status": {}
 }
