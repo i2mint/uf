@@ -1,10 +1,8 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T16:11:00.112528Z
-commit_sha,f60595f122b261c7fd6f698a5981978d0e21ccfd
-commit_message,"fix(organization): same bound method in two groups is no clash; materialize generators; add_function refuses a taken name (review)
-
-Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+timestamp,2026-10-13T16:11:04.639082Z
+commit_sha,05807c3f2a44231af64bb028614712d9a4de6234
+commit_message,Merge f60595f122b261c7fd6f698a5981978d0e21ccfd into 1ae5ff4cb50b24a4796413f2796a71b8b4f212fd
 python_version,3.10
 metrics.umpyre_stats.num_functions,30655
 metrics.umpyre_stats.num_classes,5993
@@ -18,7 +16,7 @@ metrics.umpyre_stats.comment_lines_ratio,0.04874013441732701
 metrics.umpyre_stats.function_lines_ratio,0.5680268608476456
 metrics.umpyre_stats.mean_lines_per_function,16.385059533518188
 metrics.umpyre_stats.files_analyzed,2180
-metrics.umpyre_stats.pypi_version,0.1.10
+metrics.umpyre_stats.pypi_version,0.1.11
 metrics.workflow_status.last_run_status,success
 metrics.workflow_status.last_success_timestamp,2026-10-13T16:08:52Z
 metrics.workflow_status.recent_failure_count,0
@@ -38,4 +36,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,10.507995128631592
+collection_duration_seconds,10.507635593414307
