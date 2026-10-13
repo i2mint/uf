@@ -1,10 +1,8 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T15:50:42.545262Z
-commit_sha,151cf3726f81d48c3e1862f67aa30a5fc5130a02
-commit_message,"Served callables: resolve string annotations, await async via partials/instances, wrap named instances (#17)
-
-Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+timestamp,2026-10-13T15:50:52.200926Z
+commit_sha,51820cd4a85532de4f7f0ee7ab6579a1d9942330
+commit_message,Merge 151cf3726f81d48c3e1862f67aa30a5fc5130a02 into 24e267821437b424e10fd3426a69aa7b61cee2d7
 python_version,3.10
 metrics.umpyre_stats.num_functions,31084
 metrics.umpyre_stats.num_classes,5998
@@ -18,7 +16,7 @@ metrics.umpyre_stats.comment_lines_ratio,0.04953725802322709
 metrics.umpyre_stats.function_lines_ratio,0.5699098662022293
 metrics.umpyre_stats.mean_lines_per_function,16.401299704027796
 metrics.umpyre_stats.files_analyzed,2169
-metrics.umpyre_stats.pypi_version,0.1.9
+metrics.umpyre_stats.pypi_version,0.1.10
 metrics.workflow_status.last_run_status,success
 metrics.workflow_status.last_success_timestamp,2026-10-13T15:49:16Z
 metrics.workflow_status.recent_failure_count,0
@@ -35,4 +33,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,9.442959785461426
+collection_duration_seconds,9.623530864715576
