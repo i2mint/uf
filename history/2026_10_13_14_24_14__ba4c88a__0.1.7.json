@@ -1,0 +1,47 @@
+{
+  "collection_duration_seconds": 6.654217004776001,
+  "commit_message": "FunctionSpecStore: names for partials/callable instances, validate=, refuse unservable callables (#13) (#19)\n\n* FunctionSpecStore: name partials/callable instances, explicit names, validate=, refuse unservable callables (#13)\n\n- names: __name__, the wrapped function's for a partial, the class name for a callable instance; or a {name: callable} mapping; two different callables under one name raise\n- validate=True checks every function at construction (mk_rjsf_app does), so one bad function fails app construction, not the index page\n- a function whose only parameters are required positional-only is refused (UnservableCallableError)\n- variadic parameters are dropped by both i2.Sig's and inspect's names, so uiSchema autofocus no longer stays on a dropped field\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* FunctionSpecStore: a partial keeps its own __name__; bound methods compare by == (#13 review)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* test: skip the print autofocus test where print has no signature\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>",
+  "commit_sha": "ba4c88adb0afa0f2ea24bd87193072ea79ebd212",
+  "metrics": {
+    "coverage": {
+      "branch_coverage": 0.0,
+      "error": "No coverage file found",
+      "line_coverage": 0.0,
+      "statements_covered": 0,
+      "statements_total": 0
+    },
+    "umpyre_stats": {
+      "comment_lines": 43092,
+      "comment_lines_ratio": 0.04874804010072695,
+      "docs_lines": 112585,
+      "empty_lines": 125060,
+      "empty_lines_ratio": 0.1414747492573311,
+      "files_analyzed": 2180,
+      "function_lines": 502013,
+      "function_lines_ratio": 0.5679047121295423,
+      "mean_lines_per_function": 16.380494012464514,
+      "num_classes": 5993,
+      "num_functions": 30647,
+      "pypi_version": "0.1.7",
+      "total_lines": 883974
+    },
+    "wily": {
+      "cyclomatic_avg": 0.0,
+      "error": "wily report failed: Usage: wily report [OPTIONS] FILE [METRICS]...\nTry 'wily report --help' for help.\n\nError: Invalid value for '-f' / '--format': 'json' is not one of 'CONSOLE', 'HTML'.\n",
+      "files_analyzed": 0,
+      "maintainability_index": 0.0,
+      "total_loc": 0
+    },
+    "workflow_status": {
+      "last_run_status": "success",
+      "last_success_timestamp": "2026-10-13T14:23:29Z",
+      "recent_failure_count": 2,
+      "run_url": "https://github.com/i2mint/uf/actions/runs/38412742134",
+      "total_runs_analyzed": 10
+    }
+  },
+  "python_version": "3.10",
+  "schema_version": "1.0",
+  "timestamp": "2026-10-13T14:24:13.880669Z",
+  "workflow_status": {}
+}
