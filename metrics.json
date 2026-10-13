@@ -1,5 +1,5 @@
 {
-  "collection_duration_seconds": 9.8847975730896,
+  "collection_duration_seconds": 9.828462839126587,
   "commit_message": "Resolve ju once when the FunctionSpecStore is built (#8)\n\nA broken ju fails mk_rjsf_app / the store at construction with its traceback, not every request. The absent-ju and ignored-options warnings are emitted once, attributed to the caller building the store.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
   "commit_sha": "4e46d373701312b21f276bb80aa5ff20bf5211b8",
   "metrics": {
@@ -11,19 +11,19 @@
       "statements_total": 0
     },
     "umpyre_stats": {
-      "comment_lines": 44314,
-      "comment_lines_ratio": 0.049549499182635647,
-      "docs_lines": 113339,
-      "empty_lines": 126350,
-      "empty_lines_ratio": 0.14127768248693448,
-      "files_analyzed": 2169,
-      "function_lines": 509614,
-      "function_lines_ratio": 0.5698225950367758,
-      "mean_lines_per_function": 16.397902052899155,
-      "num_classes": 5998,
-      "num_functions": 31078,
+      "comment_lines": 43098,
+      "comment_lines_ratio": 0.048754055484916084,
+      "docs_lines": 112587,
+      "empty_lines": 125061,
+      "empty_lines_ratio": 0.141473639913664,
+      "files_analyzed": 2180,
+      "function_lines": 502035,
+      "function_lines_ratio": 0.567920605257085,
+      "mean_lines_per_function": 16.381211864130258,
+      "num_classes": 5993,
+      "num_functions": 30647,
       "pypi_version": "0.1.9",
-      "total_lines": 894338
+      "total_lines": 883988
     },
     "wily": {
       "cyclomatic_avg": 0.0,
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T15:41:56.976054Z",
+  "timestamp": "2026-10-13T15:41:59.784967Z",
   "workflow_status": {}
 }
