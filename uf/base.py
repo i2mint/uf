@@ -10,6 +10,7 @@ defaults while allowing customization where needed.
 
 import functools
 import inspect
+import typing
 from typing import Callable, Iterable, Optional, Any, Union, Mapping as MappingType
 from uf.optional import import_optional
 from uf.specs import FunctionSpecStore, doc_of_func, name_funcs
@@ -22,8 +23,10 @@ def _serve_as(func: Callable, name: str) -> Callable:
     qh names a route after ``func.__name__``, which a ``functools.partial``, a callable
     instance, or a function served under another name (a ``{name: callable}`` mapping)
     doesn't have. Such a callable is wrapped in a function carrying the name and the
-    signature, annotations and docstring of ``func``; anything already named ``name``
-    is returned as it is.
+    signature, annotations (string ones resolved in the module of ``func``) and
+    docstring of ``func``; a function, method, builtin or class already named ``name``
+    is returned as it is. (So qh options that refer to a function, like
+    ``async_funcs``, must use the served name when one was given.)
 
     >>> import functools
     >>> def plus(x: int, y: int = 1) -> int:
@@ -34,14 +37,27 @@ def _serve_as(func: Callable, name: str) -> Callable:
     >>> _serve_as(plus, 'plus') is plus
     True
     """
-    if getattr(func, "__name__", None) == name and not isinstance(
-        func, functools.partial
+    if getattr(func, "__name__", None) == name and (
+        inspect.isroutine(func) or inspect.isclass(func)
     ):
         return func
+    inner = func  # what the signature, annotations and awaiting are those of
+    while isinstance(inner, functools.partial):
+        inner = inner.func
+    target = inner if inspect.isroutine(inner) else getattr(type(inner), "__call__", inner)
+    try:  # string annotations name things of the user's module, not of this one
+        hints = typing.get_type_hints(target)
+    except Exception:
+        hints = {}
     sig = inspect.signature(func)
-    if inspect.iscoroutinefunction(func) or inspect.iscoroutinefunction(
-        getattr(func, "__call__", None)
-    ):
+    sig = sig.replace(
+        parameters=[
+            p.replace(annotation=hints.get(p.name, p.annotation))
+            for p in sig.parameters.values()
+        ],
+        return_annotation=hints.get("return", sig.return_annotation),
+    )
+    if inspect.iscoroutinefunction(target):
 
         async def served(*args, **kwargs):
             return await func(*args, **kwargs)
@@ -53,7 +69,7 @@ def _serve_as(func: Callable, name: str) -> Callable:
 
     served.__name__ = served.__qualname__ = name
     served.__doc__ = doc_of_func(func)
-    served.__module__ = getattr(func, "__module__", None) or served.__module__
+    served.__module__ = getattr(inner, "__module__", None) or served.__module__
     served.__signature__ = sig
     served.__annotations__ = {
         **{

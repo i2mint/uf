@@ -651,3 +651,27 @@ def test_ufapp_accepts_partials_instances_and_mappings():
     named = UfApp({'inc': functools.partial(_plus, y=1)})
     assert named.list_functions() == ['inc']
     assert _client(named.app).post('/inc', json={'x': 1}).json() == 2
+
+
+def test_served_callables_resolve_string_annotations_of_their_own_module():
+    from uf import mk_rjsf_app
+    from . import annotated_funcs as af
+
+    client = _client(mk_rjsf_app({'sh': af.shift}))  # (renamed, so wrapped)
+    assert client.post('/sh', json={'p': {'x': 1}, 'dx': 5}).json() == 5
+
+
+def test_async_callables_are_awaited_however_they_are_wrapped():
+    from uf import mk_rjsf_app
+    from . import annotated_funcs as af
+
+    client = _client(
+        mk_rjsf_app(
+            {
+                'partial_of_instance': functools.partial(af.AsyncDoubler(), x=2),
+                'tripler': af.NamedAsyncTripler(),
+            }
+        )
+    )
+    assert client.post('/partial_of_instance', json={}).json() == 4
+    assert client.post('/tripler', json={'x': 2}).json() == 6
