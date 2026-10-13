@@ -1,5 +1,5 @@
 {
-  "collection_duration_seconds": 6.610632658004761,
+  "collection_duration_seconds": 11.009642839431763,
   "commit_message": "mk_rjsf_app / UfApp: serve partials, callable instances and {name: callable} maps (#17) (#23)\n\n* mk_rjsf_app / UfApp serve partials, callable instances and {name: callable} maps (#17)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* Served callables: resolve string annotations, await async via partials/instances, wrap named instances (#17)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* Served classes: resolve string annotations from the class's __init__ (#17)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>",
   "commit_sha": "609b16ca0637b299d995456b1d5fbbd518372104",
   "metrics": {
@@ -11,19 +11,19 @@
       "statements_total": 0
     },
     "umpyre_stats": {
-      "comment_lines": 43098,
-      "comment_lines_ratio": 0.04874170447811158,
-      "docs_lines": 112649,
-      "empty_lines": 125083,
-      "empty_lines_ratio": 0.14146268089553185,
-      "files_analyzed": 2180,
-      "function_lines": 502242,
-      "function_lines_ratio": 0.568010839029554,
-      "mean_lines_per_function": 16.38475842495025,
-      "num_classes": 5993,
-      "num_functions": 30653,
+      "comment_lines": 44314,
+      "comment_lines_ratio": 0.04953709189525153,
+      "docs_lines": 113401,
+      "empty_lines": 126372,
+      "empty_lines_ratio": 0.14126689933174,
+      "files_analyzed": 2169,
+      "function_lines": 509821,
+      "function_lines_ratio": 0.5699113085510004,
+      "mean_lines_per_function": 16.401396216703127,
+      "num_classes": 5998,
+      "num_functions": 31084,
       "pypi_version": "0.1.10",
-      "total_lines": 884212
+      "total_lines": 894562
     },
     "wily": {
       "cyclomatic_avg": 0.0,
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T15:56:29.539577Z",
+  "timestamp": "2026-10-13T15:56:41.865887Z",
   "workflow_status": {}
 }
