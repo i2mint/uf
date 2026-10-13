@@ -44,7 +44,12 @@ def _serve_as(func: Callable, name: str) -> Callable:
     inner = func  # what the signature, annotations and awaiting are those of
     while isinstance(inner, functools.partial):
         inner = inner.func
-    target = inner if inspect.isroutine(inner) else getattr(type(inner), "__call__", inner)
+    if inspect.isroutine(inner):
+        target = inner
+    elif inspect.isclass(inner):
+        target = inner.__init__  # (its globals are those of the class's module)
+    else:
+        target = getattr(type(inner), "__call__", inner)
     try:  # string annotations name things of the user's module, not of this one
         hints = typing.get_type_hints(target)
     except Exception:

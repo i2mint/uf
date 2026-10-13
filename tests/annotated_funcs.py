@@ -25,3 +25,9 @@ class NamedAsyncTripler:
 
     async def __call__(self, x: int = 1) -> int:
         return 3 * x
+
+
+@dataclass
+class Box:
+    p: Pt = None
+    n: int = 1

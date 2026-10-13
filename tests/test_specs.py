@@ -675,3 +675,14 @@ def test_async_callables_are_awaited_however_they_are_wrapped():
     )
     assert client.post('/partial_of_instance', json={}).json() == 4
     assert client.post('/tripler', json={'x': 2}).json() == 6
+
+
+def test_a_renamed_class_or_partial_of_a_class_resolves_string_annotations():
+    from uf import mk_rjsf_app
+    from . import annotated_funcs as af
+
+    client = _client(
+        mk_rjsf_app({'mk': af.Box, 'mk5': functools.partial(af.Box, n=5)})
+    )
+    assert client.post('/mk', json={'n': 2}).status_code == 200
+    assert client.post('/mk5', json={}).status_code == 200
