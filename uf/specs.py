@@ -87,7 +87,7 @@ def _check_servable(func: Callable, name: str) -> None:
 
 
 def name_of_func(func: Callable) -> str:
-    """The name a function is served under: its ``__name__``; for a
+    """The name a function is served under: its ``__name__``; failing that, for a
     ``functools.partial``, that of the function it wraps; for a callable instance, its
     class name.
 
@@ -101,7 +101,7 @@ def name_of_func(func: Callable) -> str:
     >>> name_of_func(Doubler())
     'Doubler'
     """
-    while isinstance(func, functools.partial):
+    while not hasattr(func, "__name__") and isinstance(func, functools.partial):
         func = func.func
     return getattr(func, "__name__", None) or type(func).__name__
 
@@ -115,7 +115,7 @@ def _name_funcs(funcs) -> dict:
     named = {}
     for f in funcs:
         name = name_of_func(f)
-        if name in named and named[name] is not f:
+        if name in named and named[name] != f:
             raise ValueError(
                 f"two different callables are both named {name!r}; pass a mapping "
                 "{name: callable} to name them explicitly"

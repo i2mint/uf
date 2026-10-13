@@ -513,3 +513,18 @@ def test_variadic_autofocus_moves_on_for_print(with_ju, monkeypatch):
     focused = [k for k, v in spec['uiSchema'].items() if isinstance(v, dict) and v.get('ui:autofocus')]
     assert set(focused) <= set(spec['schema']['properties'])
     assert 'args' not in spec['uiSchema'] and 'value' not in spec['uiSchema']
+
+
+def test_a_partial_with_its_own_name_keeps_it():
+    p = functools.partial(sample_add, y=3)
+    p.__name__ = 'add3'
+    assert set(FunctionSpecStore([sample_add, p])) == {'sample_add', 'add3'}
+
+
+def test_the_same_bound_method_twice_is_one_function():
+    class C:
+        def m(self, x: int = 1):
+            return x
+
+    c = C()
+    assert len(FunctionSpecStore([c.m, c.m])) == 1
