@@ -5,6 +5,8 @@ form specs and OpenAPI schemas.
 """
 
 import inspect
+import os
+import sys
 import warnings
 import functools
 from typing import Callable, Iterable, Optional, Any, Union
@@ -204,10 +206,37 @@ class JuNotInstalledWarning(UserWarning):
     """Emitted when ``ju`` is absent and uf falls back to basic form specs."""
 
 
+def _warn_at_caller(message: str, category: type[Warning]) -> None:
+    """Warn, attributed to the first frame outside the ``uf`` package.
+
+    A hardcoded ``stacklevel`` is right for one call path only: the same warning
+    reached through ``mk_rjsf_app`` or ``UfApp`` would be attributed to uf's own
+    ``base.py``. Walking up to the first frame that is not uf's points at the
+    user's line however the store was built.
+
+    >>> import warnings
+    >>> with warnings.catch_warnings(record=True) as w:
+    ...     warnings.simplefilter("always")
+    ...     _warn_at_caller("hi", UserWarning)
+    >>> w[0].filename.startswith("<doctest")  # no uf frame above: the doctest itself
+    True
+    """
+    frame = sys._getframe(1)
+    stacklevel = 2  # 1 would be this function; 2 is its caller
+    while frame is not None and frame.f_code.co_filename.startswith(_PACKAGE_PREFIX):
+        frame = frame.f_back
+        stacklevel += 1
+    warnings.warn(message, category, stacklevel=stacklevel)
+
+
+# Taken from the code object, not ``__file__``: it is what the frames being compared carry
+# (they differ for a ``.pyc``-only install, and a freezer may leave ``__file__`` unset).
+_PACKAGE_PREFIX = os.path.dirname(_warn_at_caller.__code__.co_filename) + os.sep
+
+
 def _import_func_to_form_spec() -> Optional[Callable]:
     """Return ``ju.rjsf.func_to_form_spec``, or ``None`` if ``ju`` is not installed.
-    (Meant to be called from ``FunctionSpecStore.__init__``, which is what the warning
-    is attributed to the caller of.)
+    (The warning is attributed to the first caller outside the ``uf`` package.)
 
     Only the absence of ``ju`` itself is tolerated (with a visible warning).
     Any other import failure -- a missing dependency of ``ju``, a renamed
@@ -219,11 +248,10 @@ def _import_func_to_form_spec() -> Optional[Callable]:
     """
     rjsf = import_optional("ju.rjsf", absent=_JU_MODULE_NAMES)
     if rjsf is None:
-        warnings.warn(
+        _warn_at_caller(
             "'ju' is not installed; uf is falling back to basic form "
             "specs (no ju/RJSF features). Install it with `pip install ju`.",
             JuNotInstalledWarning,
-            stacklevel=3,  # caller of FunctionSpecStore() -> __init__ -> here
         )
         return None
     try:
@@ -387,12 +415,11 @@ class FunctionSpecStore(Mapping):
             if value
         ]
         if ignored:
-            warnings.warn(
+            _warn_at_caller(
                 f"{ignored} {'is' if len(ignored) == 1 else 'are'} ignored because "
                 "ju is not installed (basic form specs). Install it with "
                 "`pip install ju`.",
                 JuNotInstalledWarning,
-                stacklevel=3,  # caller of FunctionSpecStore() -> __init__ -> here
             )
 
     def _generate_basic_spec(self, func_name: str, func: Callable) -> dict:
