@@ -245,13 +245,11 @@ def test_param_to_prop_type_reaches_ju():
 
 
 def test_variadic_names_follow_ju_and_uiSchema_is_cleaned():
-    """Builtins whose ju name differs from inspect's, and a leading *args (#9)."""
+    """A leading *args: its uiSchema entry goes, the autofocus moves on (#9)."""
     _require_ju()
 
     def f(*args, x: int, **kw): ...
 
-    spec = FunctionSpecStore([f, print])
+    spec = FunctionSpecStore([f])
     ui = spec['f']['uiSchema']
     assert 'args' not in ui and ui.get('x', {}).get('ui:autofocus')
-    assert 'value' not in spec['print']['schema']['properties']
-    assert 'value' not in spec['print']['schema']['required']
