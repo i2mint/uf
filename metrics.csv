@@ -1,8 +1,10 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T14:18:20.869603Z
-commit_sha,42346f134318e71a513e0b5e4e21571eae2b7c7e
-commit_message,Merge f577d3f8eb26ba768a5dba40eaa396605f4b378a into f1417652bdffec546bbd334c25a5dde028b9e0d9
+timestamp,2026-10-13T14:18:31.335214Z
+commit_sha,f577d3f8eb26ba768a5dba40eaa396605f4b378a
+commit_message,"import_optional: keep stub packages without a spec; dotted names under a stray directory are absent (#15 review)
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
 python_version,3.10
 metrics.umpyre_stats.num_functions,30638
 metrics.umpyre_stats.num_classes,5992
@@ -36,4 +38,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,6.319079160690308
+collection_duration_seconds,10.174025774002075
