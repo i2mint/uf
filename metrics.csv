@@ -1,10 +1,8 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T14:18:51.562958Z
-commit_sha,c6e2a597e02be94cebbaa3a467d2af600b8cad9d
-commit_message,"FunctionSpecStore: a partial keeps its own __name__; bound methods compare by == (#13 review)
-
-Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+timestamp,2026-10-13T14:19:18.892474Z
+commit_sha,fab21a88fa52f1709990917c459e39e984c936b7
+commit_message,Merge c6e2a597e02be94cebbaa3a467d2af600b8cad9d into f1417652bdffec546bbd334c25a5dde028b9e0d9
 python_version,3.10
 metrics.umpyre_stats.num_functions,31072
 metrics.umpyre_stats.num_classes,5998
@@ -38,4 +36,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,7.163973808288574
+collection_duration_seconds,9.479146003723145
