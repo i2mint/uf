@@ -1,0 +1,12 @@
+uf.optional
+===========
+
+.. automodule:: uf.optional
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      import_optional
+   

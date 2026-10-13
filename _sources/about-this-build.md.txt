@@ -5,21 +5,21 @@ orphan: true
 
 # About this build
 
-This documentation was built on **2026-10-13 09:17 UTC** from commit <a href="https://github.com/i2mint/uf/commit/dfb3311ebd47f90d98637eb511ef562bfce22775"><code>dfb3311</code></a> on branch <code>master</code>, for **uf 0.1.6** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-13 09:21 UTC** from commit <a href="https://github.com/i2mint/uf/commit/f1417652bdffec546bbd334c25a5dde028b9e0d9"><code>f141765</code></a> on branch <code>master</code>, for **uf 0.1.7** (from <code>pyproject.toml</code>).
 
 :::{warning}
 The documentation and the package may be misaligned:
 
-- The documented version (0.1.6) is ahead of the latest release on PyPI (0.1.5): these docs describe unreleased code.
+- The documented version (0.1.7) is ahead of the latest release on PyPI (0.1.5): these docs describe unreleased code.
 :::
 
 ## Source
 
 | | |
 |---|---|
-| Commit | <a href="https://github.com/i2mint/uf/commit/dfb3311ebd47f90d98637eb511ef562bfce22775"><code>dfb3311ebd47f90d98637eb511ef562bfce22775</code></a> |
+| Commit | <a href="https://github.com/i2mint/uf/commit/f1417652bdffec546bbd334c25a5dde028b9e0d9"><code>f1417652bdffec546bbd334c25a5dde028b9e0d9</code></a> |
 | Branch | <code>master</code> |
-| Tags at this commit | <code>0.1.6</code> |
+| Tags at this commit | <code>0.1.7</code> |
 | Working tree | clean |
 | Remote | <code>https://github.com/i2mint/uf</code> |
 
@@ -28,9 +28,9 @@ The documentation and the package may be misaligned:
 | | |
 |---|---|
 | Repository | <code>i2mint/uf</code> |
-| Run | <a href="https://github.com/i2mint/uf/actions/runs/38374981397">38374981397</a> |
+| Run | <a href="https://github.com/i2mint/uf/actions/runs/38375484270">38375484270</a> |
 | Ref | <code>refs/heads/master</code> |
-| Event commit | <code>39dce3c2e8bd9835f2efb60e27a8411b5cbc8843</code> (in the history of the built commit) |
+| Event commit | <code>0b715141de932644fc5ebd75909cb3d95804633d</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -55,13 +55,13 @@ The documentation and the package may be misaligned:
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.5/">0.1.5</a>, older than the documented version (0.1.6).
+Latest release: <a href="https://pypi.org/project/uf/0.1.5/">0.1.5</a>, older than the documented version (0.1.7).
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout dfb3311ebd47f90d98637eb511ef562bfce22775
+git checkout f1417652bdffec546bbd334c25a5dde028b9e0d9
 pip install "epythet==0.2.15"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

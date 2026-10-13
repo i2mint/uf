@@ -3649,23 +3649,24 @@ the function, and converts Pydantic outputs back to dicts.
 
 ### Modules
 
-| [`async_support`](uf.async_support.html.md#module-uf.async_support)           | Async function support for uf.                 |
-|--------------------------------------------------------------------------------------------------|------------------------------------------------|
-| [`auth`](uf.auth.html.md#module-uf.auth)                             | Authentication and authorization for uf.       |
-| [`base`](uf.base.html.md#module-uf.base)                             | Core functionality for uf - UI Fast.           |
-| [`caching`](uf.caching.html.md#module-uf.caching)                       | Result caching for uf.                         |
-| [`decorators`](uf.decorators.html.md#module-uf.decorators)                 | UI metadata decorators for uf.                 |
-| [`field_interactions`](uf.field_interactions.html.md#module-uf.field_interactions) | Field dependencies and interactions for uf.    |
-| [`history`](uf.history.html.md#module-uf.history)                       | Call history and presets for uf.               |
-| [`openapi`](uf.openapi.html.md#module-uf.openapi)                       | OpenAPI/Swagger integration for uf.            |
-| [`organization`](uf.organization.html.md#module-uf.organization)             | Function grouping and organization for uf.     |
-| [`pydantic_support`](uf.pydantic_support.html.md#module-uf.pydantic_support)     | Pydantic integration for uf.                   |
-| [`renderers`](uf.renderers.html.md#module-uf.renderers)                   | Result rendering system for uf.                |
-| [`rjsf_config`](uf.rjsf_config.html.md#module-uf.rjsf_config)               | RJSF customization layer for uf.               |
-| [`routes`](uf.routes.html.md#module-uf.routes)                         | API routes for uf web interface.               |
-| [`specs`](uf.specs.html.md#module-uf.specs)                           | Function specification management for uf.      |
-| [`templates`](uf.templates.html.md#module-uf.templates)                   | HTML template generation for uf web interface. |
-| [`testing`](uf.testing.html.md#module-uf.testing)                       | Testing utilities for uf applications.         |
-| [`themes`](uf.themes.html.md#module-uf.themes)                         | Theme and styling support for uf.              |
-| [`trans`](uf.trans.html.md#module-uf.trans)                           | Input transformation integration for uf.       |
-| [`webhooks`](uf.webhooks.html.md#module-uf.webhooks)                     | Webhook support for uf.                        |
+| [`async_support`](uf.async_support.html.md#module-uf.async_support)           | Async function support for uf.                                |
+|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------|
+| [`auth`](uf.auth.html.md#module-uf.auth)                             | Authentication and authorization for uf.                      |
+| [`base`](uf.base.html.md#module-uf.base)                             | Core functionality for uf - UI Fast.                          |
+| [`caching`](uf.caching.html.md#module-uf.caching)                       | Result caching for uf.                                        |
+| [`decorators`](uf.decorators.html.md#module-uf.decorators)                 | UI metadata decorators for uf.                                |
+| [`field_interactions`](uf.field_interactions.html.md#module-uf.field_interactions) | Field dependencies and interactions for uf.                   |
+| [`history`](uf.history.html.md#module-uf.history)                       | Call history and presets for uf.                              |
+| [`openapi`](uf.openapi.html.md#module-uf.openapi)                       | OpenAPI/Swagger integration for uf.                           |
+| [`optional`](uf.optional.html.md#module-uf.optional)                     | Import optional dependencies without masking broken installs. |
+| [`organization`](uf.organization.html.md#module-uf.organization)             | Function grouping and organization for uf.                    |
+| [`pydantic_support`](uf.pydantic_support.html.md#module-uf.pydantic_support)     | Pydantic integration for uf.                                  |
+| [`renderers`](uf.renderers.html.md#module-uf.renderers)                   | Result rendering system for uf.                               |
+| [`rjsf_config`](uf.rjsf_config.html.md#module-uf.rjsf_config)               | RJSF customization layer for uf.                              |
+| [`routes`](uf.routes.html.md#module-uf.routes)                         | API routes for uf web interface.                              |
+| [`specs`](uf.specs.html.md#module-uf.specs)                           | Function specification management for uf.                     |
+| [`templates`](uf.templates.html.md#module-uf.templates)                   | HTML template generation for uf web interface.                |
+| [`testing`](uf.testing.html.md#module-uf.testing)                       | Testing utilities for uf applications.                        |
+| [`themes`](uf.themes.html.md#module-uf.themes)                         | Theme and styling support for uf.                             |
+| [`trans`](uf.trans.html.md#module-uf.trans)                           | Input transformation integration for uf.                      |
+| [`webhooks`](uf.webhooks.html.md#module-uf.webhooks)                     | Webhook support for uf.                                       |

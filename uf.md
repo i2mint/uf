@@ -1,4 +1,4 @@
-> built 2026-10-13 09:17 UTC from dfb3311 (master) · uf 0.1.6. Details: build_info.json
+> built 2026-10-13 09:21 UTC from f141765 (master) · uf 0.1.7. Details: build_info.json
 
 # index.html.md
 
@@ -6667,26 +6667,27 @@ the function, and converts Pydantic outputs back to dicts.
 
 ### Modules
 
-| [`async_support`](_autosummary/uf.async_support.html.md#module-uf.async_support)           | Async function support for uf.                 |
-|--------------------------------------------------------------------------------------------------|------------------------------------------------|
-| [`auth`](_autosummary/uf.auth.html.md#module-uf.auth)                             | Authentication and authorization for uf.       |
-| [`base`](_autosummary/uf.base.html.md#module-uf.base)                             | Core functionality for uf - UI Fast.           |
-| [`caching`](_autosummary/uf.caching.html.md#module-uf.caching)                       | Result caching for uf.                         |
-| [`decorators`](_autosummary/uf.decorators.html.md#module-uf.decorators)                 | UI metadata decorators for uf.                 |
-| [`field_interactions`](_autosummary/uf.field_interactions.html.md#module-uf.field_interactions) | Field dependencies and interactions for uf.    |
-| [`history`](_autosummary/uf.history.html.md#module-uf.history)                       | Call history and presets for uf.               |
-| [`openapi`](_autosummary/uf.openapi.html.md#module-uf.openapi)                       | OpenAPI/Swagger integration for uf.            |
-| [`organization`](_autosummary/uf.organization.html.md#module-uf.organization)             | Function grouping and organization for uf.     |
-| [`pydantic_support`](_autosummary/uf.pydantic_support.html.md#module-uf.pydantic_support)     | Pydantic integration for uf.                   |
-| [`renderers`](_autosummary/uf.renderers.html.md#module-uf.renderers)                   | Result rendering system for uf.                |
-| [`rjsf_config`](_autosummary/uf.rjsf_config.html.md#module-uf.rjsf_config)               | RJSF customization layer for uf.               |
-| [`routes`](_autosummary/uf.routes.html.md#module-uf.routes)                         | API routes for uf web interface.               |
-| [`specs`](_autosummary/uf.specs.html.md#module-uf.specs)                           | Function specification management for uf.      |
-| [`templates`](_autosummary/uf.templates.html.md#module-uf.templates)                   | HTML template generation for uf web interface. |
-| [`testing`](_autosummary/uf.testing.html.md#module-uf.testing)                       | Testing utilities for uf applications.         |
-| [`themes`](_autosummary/uf.themes.html.md#module-uf.themes)                         | Theme and styling support for uf.              |
-| [`trans`](_autosummary/uf.trans.html.md#module-uf.trans)                           | Input transformation integration for uf.       |
-| [`webhooks`](_autosummary/uf.webhooks.html.md#module-uf.webhooks)                     | Webhook support for uf.                        |
+| [`async_support`](_autosummary/uf.async_support.html.md#module-uf.async_support)           | Async function support for uf.                                |
+|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------|
+| [`auth`](_autosummary/uf.auth.html.md#module-uf.auth)                             | Authentication and authorization for uf.                      |
+| [`base`](_autosummary/uf.base.html.md#module-uf.base)                             | Core functionality for uf - UI Fast.                          |
+| [`caching`](_autosummary/uf.caching.html.md#module-uf.caching)                       | Result caching for uf.                                        |
+| [`decorators`](_autosummary/uf.decorators.html.md#module-uf.decorators)                 | UI metadata decorators for uf.                                |
+| [`field_interactions`](_autosummary/uf.field_interactions.html.md#module-uf.field_interactions) | Field dependencies and interactions for uf.                   |
+| [`history`](_autosummary/uf.history.html.md#module-uf.history)                       | Call history and presets for uf.                              |
+| [`openapi`](_autosummary/uf.openapi.html.md#module-uf.openapi)                       | OpenAPI/Swagger integration for uf.                           |
+| [`optional`](_autosummary/uf.optional.html.md#module-uf.optional)                     | Import optional dependencies without masking broken installs. |
+| [`organization`](_autosummary/uf.organization.html.md#module-uf.organization)             | Function grouping and organization for uf.                    |
+| [`pydantic_support`](_autosummary/uf.pydantic_support.html.md#module-uf.pydantic_support)     | Pydantic integration for uf.                                  |
+| [`renderers`](_autosummary/uf.renderers.html.md#module-uf.renderers)                   | Result rendering system for uf.                               |
+| [`rjsf_config`](_autosummary/uf.rjsf_config.html.md#module-uf.rjsf_config)               | RJSF customization layer for uf.                              |
+| [`routes`](_autosummary/uf.routes.html.md#module-uf.routes)                         | API routes for uf web interface.                              |
+| [`specs`](_autosummary/uf.specs.html.md#module-uf.specs)                           | Function specification management for uf.                     |
+| [`templates`](_autosummary/uf.templates.html.md#module-uf.templates)                   | HTML template generation for uf web interface.                |
+| [`testing`](_autosummary/uf.testing.html.md#module-uf.testing)                       | Testing utilities for uf applications.                        |
+| [`themes`](_autosummary/uf.themes.html.md#module-uf.themes)                         | Theme and styling support for uf.                             |
+| [`trans`](_autosummary/uf.trans.html.md#module-uf.trans)                           | Input transformation integration for uf.                      |
+| [`webhooks`](_autosummary/uf.webhooks.html.md#module-uf.webhooks)                     | Webhook support for uf.                                       |
 
 
 # _autosummary/uf.openapi.html.md
@@ -6802,6 +6803,46 @@ Generate Swagger UI HTML.
   [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 * **Returns:**
   HTML string for Swagger UI
+
+
+# _autosummary/uf.optional.html.md
+
+# uf.optional
+
+Import optional dependencies without masking broken installs.
+
+A bare `except ImportError` around `import pandas` also swallows the
+`ImportError` of a pandas that *is* installed but fails to import (a missing
+dependency of pandas, an incompatible binary). The feature then silently turns itself
+off. `import_optional` tolerates only the absence of the named package itself.
+
+### Functions
+
+| [`import_optional`](_autosummary/uf.optional.html.md#uf.optional.import_optional)(module_name, \*[, absent])   | Return the imported module, or `None` if the optional package is not installed.   |
+|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+
+### uf.optional.import_optional(module_name, , absent=None)
+
+Return the imported module, or `None` if the optional package is not installed.
+
+Only a `ModuleNotFoundError` naming the package itself (the first segment of
+`module_name`, or one of `absent`) counts as “not installed”. Every other
+failure – a missing submodule, a missing dependency *of* the package, a broken
+import inside it – is a broken environment and propagates.
+
+* **Return type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`ModuleType`](https://docs.python.org/3/library/types.html#types.ModuleType)]
+
+```pycon
+>>> import_optional('json').__name__
+'json'
+>>> import_optional('_uf_no_such_package_') is None
+True
+>>> import_optional('json.no_such_submodule')
+Traceback (most recent call last):
+  ...
+ModuleNotFoundError: No module named 'json.no_such_submodule'
+```
 
 
 # _autosummary/uf.organization.html.md
@@ -8884,20 +8925,20 @@ Decorator to add webhooks to a function.
 
 # About this build
 
-This documentation was built on **2026-10-13 09:17 UTC** from commit <a href="https://github.com/i2mint/uf/commit/dfb3311ebd47f90d98637eb511ef562bfce22775"><code>dfb3311</code></a> on branch <code>master</code>, for **uf 0.1.6** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-13 09:21 UTC** from commit <a href="https://github.com/i2mint/uf/commit/f1417652bdffec546bbd334c25a5dde028b9e0d9"><code>f141765</code></a> on branch <code>master</code>, for **uf 0.1.7** (from <code>pyproject.toml</code>).
 
 #### WARNING
 The documentation and the package may be misaligned:
 
-- The documented version (0.1.6) is ahead of the latest release on PyPI (0.1.5): these docs describe unreleased code.
+- The documented version (0.1.7) is ahead of the latest release on PyPI (0.1.5): these docs describe unreleased code.
 
 ## Source
 
 |                     |                                                                                                                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/uf/commit/dfb3311ebd47f90d98637eb511ef562bfce22775"><code>dfb3311ebd47f90d98637eb511ef562bfce22775</code></a> |
+| Commit              | <a href="https://github.com/i2mint/uf/commit/f1417652bdffec546bbd334c25a5dde028b9e0d9"><code>f1417652bdffec546bbd334c25a5dde028b9e0d9</code></a> |
 | Branch              | <code>master</code>                                                                                                                              |
-| Tags at this commit | <code>0.1.6</code>                                                                                                                               |
+| Tags at this commit | <code>0.1.7</code>                                                                                                                               |
 | Working tree        | clean                                                                                                                                            |
 | Remote              | <code>https://github.com/i2mint/uf</code>                                                                                                        |
 
@@ -8906,9 +8947,9 @@ The documentation and the package may be misaligned:
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/uf</code>                                                                     |
-| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38374981397">38374981397</a>            |
+| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38375484270">38375484270</a>            |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>39dce3c2e8bd9835f2efb60e27a8411b5cbc8843</code> (in the history of the built commit) |
+| Event commit | <code>0b715141de932644fc5ebd75909cb3d95804633d</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -8933,13 +8974,13 @@ The documentation and the package may be misaligned:
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.5/">0.1.5</a>, older than the documented version (0.1.6).
+Latest release: <a href="https://pypi.org/project/uf/0.1.5/">0.1.5</a>, older than the documented version (0.1.7).
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout dfb3311ebd47f90d98637eb511ef562bfce22775
+git checkout f1417652bdffec546bbd334c25a5dde028b9e0d9
 pip install "epythet==0.2.15"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

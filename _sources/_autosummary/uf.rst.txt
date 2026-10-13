@@ -126,6 +126,7 @@
    field_interactions
    history
    openapi
+   optional
    organization
    pydantic_support
    renderers

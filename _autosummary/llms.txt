@@ -14,6 +14,7 @@
 - [uf.field_interactions](uf.field_interactions.html.md): Field dependencies and interactions for uf.
 - [uf.history](uf.history.html.md): Call history and presets for uf.
 - [uf.openapi](uf.openapi.html.md): OpenAPI/Swagger integration for uf.
+- [uf.optional](uf.optional.html.md): Import optional dependencies without masking broken installs.
 - [uf.organization](uf.organization.html.md): Function grouping and organization for uf.
 - [uf.pydantic_support](uf.pydantic_support.html.md): Pydantic integration for uf.
 - [uf.renderers](uf.renderers.html.md): Result rendering system for uf.

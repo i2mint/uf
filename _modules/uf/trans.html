@@ -70,6 +70,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.field_interactions.html">uf.field_interactions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.history.html">uf.history</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.openapi.html">uf.openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.optional.html">uf.optional</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.organization.html">uf.organization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.pydantic_support.html">uf.pydantic_support</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/uf.renderers.html">uf.renderers</a></li>
@@ -512,11 +513,8 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="344">
 </span><span data-line="345">
 </span><span data-line="346"><span class="c1"># Auto-register common types on import</span>
-</span><span data-line="347"><span class="k">try</span><span class="p">:</span>
-</span><span data-line="348">    <span class="n">register_common_types</span><span class="p">()</span>
-</span><span data-line="349"><span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-</span><span data-line="350">    <span class="c1"># Some types might not be available, that's okay</span>
-</span><span data-line="351">    <span class="k">pass</span>
+</span><span data-line="347"><span class="c1"># (stdlib types only: an ImportError here is a bug, so it is not swallowed)</span>
+</span><span data-line="348"><span class="n">register_common_types</span><span class="p">()</span>
 </span></pre></div>
         </article><button class="back-to-top" type="button">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -544,7 +542,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=6e0256f3"></script>
+      <script src="../../_static/documentation_options.js?v=ca7ad2ea"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

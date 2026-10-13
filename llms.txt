@@ -16,6 +16,7 @@
 - [uf.field_interactions](_autosummary/uf.field_interactions.html.md): Field dependencies and interactions for uf.
 - [uf.history](_autosummary/uf.history.html.md): Call history and presets for uf.
 - [uf.openapi](_autosummary/uf.openapi.html.md): OpenAPI/Swagger integration for uf.
+- [uf.optional](_autosummary/uf.optional.html.md): Import optional dependencies without masking broken installs.
 - [uf.organization](_autosummary/uf.organization.html.md): Function grouping and organization for uf.
 - [uf.pydantic_support](_autosummary/uf.pydantic_support.html.md): Pydantic integration for uf.
 - [uf.renderers](_autosummary/uf.renderers.html.md): Result rendering system for uf.
@@ -27,7 +28,7 @@
 - [uf.themes](_autosummary/uf.themes.html.md): Theme and styling support for uf.
 - [uf.trans](_autosummary/uf.trans.html.md): Input transformation integration for uf.
 - [uf.webhooks](_autosummary/uf.webhooks.html.md): Webhook support for uf.
-- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-10-13 09:17 UTC&#42;&#42; from commit &lt;a href="https://github.com/i2m...
+- [About this build](about-this-build.html.md): This documentation was built on &#42;&#42;2026-10-13 09:21 UTC&#42;&#42; from commit &lt;a href="https://github.com/i2m...
 
 ## Optional
 
