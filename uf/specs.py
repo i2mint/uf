@@ -66,7 +66,9 @@ def _unfillable_names(func: Callable) -> set:
     return {n for n, p in params.items() if p.kind in _NON_KEYWORD_KINDS}
 
 
-def _warn_required_positional_only(func: Callable, func_name: str) -> None:
+def _warn_required_positional_only(
+    func: Callable, func_name: str, *, stacklevel: int
+) -> None:
     """Warn if ``func`` has a required positional-only parameter (it is left out of the
     form, so calling the function with keyword arguments fails)."""
     try:
@@ -85,7 +87,7 @@ def _warn_required_positional_only(func: Callable, func_name: str) -> None:
             "which uf can't pass (it calls functions with keyword arguments only); "
             "they are left out of the form.",
             PositionalOnlyParamWarning,
-            stacklevel=5,  # caller -> __getitem__ -> _generate_spec -> here
+            stacklevel=stacklevel,
         )
 
 
@@ -238,7 +240,8 @@ class FunctionSpecStore(Mapping):
         nest_under_field = rjsf_config.get("nest_under_field")
         if nest_under_field:  # the caller asked ju to nest it; uf reads it flat
             form_spec = form_spec[nest_under_field]
-        _warn_required_positional_only(func, func_name)
+        # caller -> __getitem__ -> _generate_spec -> warn helper
+        _warn_required_positional_only(func, func_name, stacklevel=4)
         _drop_unfillable_fields(func, form_spec)
 
         # Apply custom UI schema factory if provided
@@ -291,7 +294,8 @@ class FunctionSpecStore(Mapping):
             Basic specification dictionary
         """
         self._warn_ignored_options()
-        _warn_required_positional_only(func, func_name)
+        # caller -> __getitem__ -> _generate_spec -> basic spec -> warn helper
+        _warn_required_positional_only(func, func_name, stacklevel=5)
         sig = inspect.signature(func)
         properties = {}
         required = []
