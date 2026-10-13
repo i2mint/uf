@@ -4,9 +4,11 @@ Provides tools for organizing functions into categories, groups, and
 hierarchies for better navigation in the UI.
 """
 
-from typing import Callable, Iterable, Optional
+from typing import Callable, Iterable, Optional, Union
 from dataclasses import dataclass, field
 from collections.abc import Mapping
+
+from uf.specs import doc_of_func, name_funcs, name_of_func
 
 
 @dataclass
@@ -15,7 +17,9 @@ class FunctionGroup:
 
     Attributes:
         name: Name of the group
-        funcs: Functions in this group
+        funcs: Functions in this group: callables (partials and callable instances
+            are fine; they are named as ``uf.specs.name_of_func`` does), or a
+            ``{name: callable}`` mapping to name them explicitly
         description: Description of the group
         icon: Optional icon identifier for the group
         order: Display order (lower numbers first)
@@ -31,22 +35,41 @@ class FunctionGroup:
     """
 
     name: str
-    funcs: list[Callable] = field(default_factory=list)
+    funcs: Union[list[Callable], Mapping[str, Callable]] = field(default_factory=list)
     description: str = ""
     icon: Optional[str] = None
     order: int = 0
     collapsed: bool = False
 
-    def add_function(self, func: Callable) -> "FunctionGroup":
+    @property
+    def named_funcs(self) -> dict[str, Callable]:
+        """``{name: callable}`` of this group, named the way the app serves them.
+
+        >>> import functools
+        >>> g = FunctionGroup('G', [len, functools.partial(int, base=2)])
+        >>> list(g.named_funcs)
+        ['len', 'int']
+        """
+        return name_funcs(self.funcs)
+
+    def add_function(
+        self, func: Callable, *, name: Optional[str] = None
+    ) -> "FunctionGroup":
         """Add a function to this group.
 
         Args:
             func: Function to add
+            name: Explicit name to serve it under (default: its own name)
 
         Returns:
             Self for method chaining
         """
-        self.funcs.append(func)
+        if name is not None:
+            self.funcs = {**self.named_funcs, name: func}
+        elif isinstance(self.funcs, Mapping):
+            self.funcs = {**self.funcs, name_of_func(func): func}
+        else:
+            self.funcs.append(func)
         return self
 
     def get_function_names(self) -> list[str]:
@@ -55,7 +78,7 @@ class FunctionGroup:
         Returns:
             List of function name strings
         """
-        return [f.__name__ for f in self.funcs]
+        return list(self.named_funcs)
 
 
 class FunctionOrganizer:
@@ -110,7 +133,7 @@ class FunctionOrganizer:
         """
         func_group = FunctionGroup(
             name=name,
-            funcs=list(funcs or []),
+            funcs=dict(funcs) if isinstance(funcs, Mapping) else list(funcs or []),
             description=description,
             icon=icon,
             order=order,
@@ -179,7 +202,7 @@ class FunctionOrganizer:
         """
         all_funcs = []
         for group in self._groups:
-            all_funcs.extend(group.funcs)
+            all_funcs.extend(group.named_funcs.values())
         all_funcs.extend(self._ungrouped_funcs)
         return all_funcs
 
@@ -203,10 +226,10 @@ class FunctionOrganizer:
                     "collapsed": group.collapsed,
                     "functions": [
                         {
-                            "name": func.__name__,
-                            "description": func.__doc__ or "",
+                            "name": name,
+                            "description": doc_of_func(func) or "",
                         }
-                        for func in group.funcs
+                        for name, func in group.named_funcs.items()
                     ],
                 }
                 for group in self.get_groups()
@@ -234,16 +257,25 @@ def mk_grouped_app(
     """
     from uf.base import mk_rjsf_app
 
-    # Collect all functions from all groups
-    all_funcs = []
+    groups = list(groups)
+
+    # Collect all functions from all groups, under the names the groups show
+    all_funcs = {}
     for group in groups:
-        all_funcs.extend(group.funcs)
+        for name, func in group.named_funcs.items():
+            if name in all_funcs and all_funcs[name] is not func:
+                raise ValueError(
+                    f"two different callables are both named {name!r} (group "
+                    f"{group.name!r}); pass a {{name: callable}} mapping as the "
+                    "group's funcs to name them explicitly"
+                )
+            all_funcs[name] = func
 
     # Create the app
     app = mk_rjsf_app(all_funcs, **mk_rjsf_app_kwargs)
 
     # Store organization metadata on the app
-    app.function_groups = list(groups)
+    app.function_groups = groups
 
     # Create organizer for serialization
     organizer = FunctionOrganizer()
@@ -324,7 +356,7 @@ def auto_group_by_prefix(
     groups_dict = defaultdict(list)
 
     for func in funcs:
-        name = func.__name__
+        name = name_of_func(func)
         if separator in name:
             prefix = name.split(separator)[0]
             groups_dict[prefix].append(func)
