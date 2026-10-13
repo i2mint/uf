@@ -1,4 +1,4 @@
-> built 2026-10-13 14:25 UTC from 467db7d (master) · uf 0.1.9. Details: build_info.json
+> built 2026-10-13 15:48 UTC from 24e2678 (master) · uf 0.1.10. Details: build_info.json
 
 # index.html.md
 
@@ -8976,20 +8976,18 @@ Decorator to add webhooks to a function.
 
 # About this build
 
-This documentation was built on **2026-10-13 14:25 UTC** from commit <a href="https://github.com/i2mint/uf/commit/467db7dc09d4958a35ba5991e06c3cc02b0b8093"><code>467db7d</code></a> on branch <code>master</code>, for **uf 0.1.9** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-13 15:48 UTC** from commit <a href="https://github.com/i2mint/uf/commit/24e267821437b424e10fd3426a69aa7b61cee2d7"><code>24e2678</code></a> on branch <code>master</code>, for **uf 0.1.10** (from <code>pyproject.toml</code>).
 
-#### WARNING
-The documentation and the package may be misaligned:
-
-- The documented version (0.1.9) is ahead of the latest release on PyPI (0.1.7): these docs describe unreleased code.
+#### NOTE
+Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
 
 ## Source
 
 |                     |                                                                                                                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/uf/commit/467db7dc09d4958a35ba5991e06c3cc02b0b8093"><code>467db7dc09d4958a35ba5991e06c3cc02b0b8093</code></a> |
+| Commit              | <a href="https://github.com/i2mint/uf/commit/24e267821437b424e10fd3426a69aa7b61cee2d7"><code>24e267821437b424e10fd3426a69aa7b61cee2d7</code></a> |
 | Branch              | <code>master</code>                                                                                                                              |
-| Tags at this commit | <code>0.1.9</code>                                                                                                                               |
+| Tags at this commit | <code>0.1.10</code>                                                                                                                              |
 | Working tree        | clean                                                                                                                                            |
 | Remote              | <code>https://github.com/i2mint/uf</code>                                                                                                        |
 
@@ -8998,15 +8996,15 @@ The documentation and the package may be misaligned:
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/uf</code>                                                                     |
-| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38412881303">38412881303</a>            |
+| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38424786197">38424786197</a>            |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>ba4c88adb0afa0f2ea24bd87193072ea79ebd212</code> (in the history of the built commit) |
+| Event commit | <code>a487c1efb043cbca45d7f491088f7846dac49442</code> (in the history of the built commit) |
 
 ## Tools
 
 |          |         |
 |----------|---------|
-| epythet  | 0.2.15  |
+| epythet  | 0.2.16  |
 | Sphinx   | 9.1.0   |
 | docutils | 0.22.4  |
 | Python   | 3.12.15 |
@@ -9025,14 +9023,14 @@ The documentation and the package may be misaligned:
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.7/">0.1.7</a>, older than the documented version (0.1.9).
+Latest release: <a href="https://pypi.org/project/uf/0.1.10/">0.1.10</a>, the same as the documented version.
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout 467db7dc09d4958a35ba5991e06c3cc02b0b8093
-pip install "epythet==0.2.15"
+git checkout 24e267821437b424e10fd3426a69aa7b61cee2d7
+pip install "epythet==0.2.16"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```
 
