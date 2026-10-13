@@ -1,23 +1,28 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T14:16:52.793941Z
-commit_sha,99e78823f6e630ebda3d4718d64a77e69600ba92
-commit_message,"import_optional: a namespace directory is not the package (#15)
+timestamp,2026-10-13T14:16:54.874644Z
+commit_sha,d809b339f867cd2c7dec2eab0c386bd98b29fcad
+commit_message,"FunctionSpecStore: name partials/callable instances, explicit names, validate=, refuse unservable callables (#13)
+
+- names: __name__, the wrapped function's for a partial, the class name for a callable instance; or a {name: callable} mapping; two different callables under one name raise
+- validate=True checks every function at construction (mk_rjsf_app does), so one bad function fails app construction, not the index page
+- a function whose only parameters are required positional-only is refused (UnservableCallableError)
+- variadic parameters are dropped by both i2.Sig's and inspect's names, so uiSchema autofocus no longer stays on a dropped field
 
 Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
 python_version,3.10
-metrics.umpyre_stats.num_functions,30638
-metrics.umpyre_stats.num_classes,5992
-metrics.umpyre_stats.total_lines,883744
-metrics.umpyre_stats.empty_lines,125031
-metrics.umpyre_stats.comment_lines,43091
-metrics.umpyre_stats.docs_lines,112492
-metrics.umpyre_stats.function_lines,501815
-metrics.umpyre_stats.empty_lines_ratio,0.1414787540283159
-metrics.umpyre_stats.comment_lines_ratio,0.048759595538979614
-metrics.umpyre_stats.function_lines_ratio,0.5678284661621466
-metrics.umpyre_stats.mean_lines_per_function,16.378843266531756
-metrics.umpyre_stats.files_analyzed,2180
+metrics.umpyre_stats.num_functions,31072
+metrics.umpyre_stats.num_classes,5998
+metrics.umpyre_stats.total_lines,894172
+metrics.umpyre_stats.empty_lines,126331
+metrics.umpyre_stats.comment_lines,44307
+metrics.umpyre_stats.docs_lines,113274
+metrics.umpyre_stats.function_lines,509453
+metrics.umpyre_stats.empty_lines_ratio,0.14128266150136662
+metrics.umpyre_stats.comment_lines_ratio,0.04955086940767548
+metrics.umpyre_stats.function_lines_ratio,0.5697483258254564
+metrics.umpyre_stats.mean_lines_per_function,16.395886972193615
+metrics.umpyre_stats.files_analyzed,2169
 metrics.umpyre_stats.pypi_version,0.1.7
 metrics.workflow_status.last_run_status,success
 metrics.workflow_status.last_success_timestamp,2026-10-13T09:22:58Z
@@ -38,4 +43,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,5.945409536361694
+collection_duration_seconds,10.176862716674805

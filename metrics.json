@@ -1,7 +1,7 @@
 {
-  "collection_duration_seconds": 5.945409536361694,
-  "commit_message": "import_optional: a namespace directory is not the package (#15)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
-  "commit_sha": "99e78823f6e630ebda3d4718d64a77e69600ba92",
+  "collection_duration_seconds": 10.176862716674805,
+  "commit_message": "FunctionSpecStore: name partials/callable instances, explicit names, validate=, refuse unservable callables (#13)\n\n- names: __name__, the wrapped function's for a partial, the class name for a callable instance; or a {name: callable} mapping; two different callables under one name raise\n- validate=True checks every function at construction (mk_rjsf_app does), so one bad function fails app construction, not the index page\n- a function whose only parameters are required positional-only is refused (UnservableCallableError)\n- variadic parameters are dropped by both i2.Sig's and inspect's names, so uiSchema autofocus no longer stays on a dropped field\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
+  "commit_sha": "d809b339f867cd2c7dec2eab0c386bd98b29fcad",
   "metrics": {
     "coverage": {
       "branch_coverage": 0.0,
@@ -11,19 +11,19 @@
       "statements_total": 0
     },
     "umpyre_stats": {
-      "comment_lines": 43091,
-      "comment_lines_ratio": 0.048759595538979614,
-      "docs_lines": 112492,
-      "empty_lines": 125031,
-      "empty_lines_ratio": 0.1414787540283159,
-      "files_analyzed": 2180,
-      "function_lines": 501815,
-      "function_lines_ratio": 0.5678284661621466,
-      "mean_lines_per_function": 16.378843266531756,
-      "num_classes": 5992,
-      "num_functions": 30638,
+      "comment_lines": 44307,
+      "comment_lines_ratio": 0.04955086940767548,
+      "docs_lines": 113274,
+      "empty_lines": 126331,
+      "empty_lines_ratio": 0.14128266150136662,
+      "files_analyzed": 2169,
+      "function_lines": 509453,
+      "function_lines_ratio": 0.5697483258254564,
+      "mean_lines_per_function": 16.395886972193615,
+      "num_classes": 5998,
+      "num_functions": 31072,
       "pypi_version": "0.1.7",
-      "total_lines": 883744
+      "total_lines": 894172
     },
     "wily": {
       "cyclomatic_avg": 0.0,
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T14:16:52.793941Z",
+  "timestamp": "2026-10-13T14:16:54.874644Z",
   "workflow_status": {}
 }
