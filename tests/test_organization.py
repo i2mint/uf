@@ -63,3 +63,30 @@ def test_clashing_names_across_groups_raise_and_the_same_function_is_fine():
     with pytest.raises(ValueError, match="both named 'add'"):
         mk_grouped_app([FunctionGroup("A", [add]), FunctionGroup("B", [other])])
     mk_grouped_app([FunctionGroup("A", [add]), FunctionGroup("B", [add])])
+
+
+def test_the_same_bound_method_in_two_groups_is_not_a_clash():
+    pytest.importorskip("bottle")
+
+    class C:
+        def meth(self, x: int) -> int:
+            return x
+
+    c = C()
+    mk_grouped_app([FunctionGroup("A", [c.meth]), FunctionGroup("B", [c.meth])])
+
+
+def test_generator_funcs_are_materialized():
+    group = FunctionGroup("G", (f for f in [add, Doubler()]))
+    assert (
+        group.get_function_names() == group.get_function_names() == ["add", "Doubler"]
+    )
+
+
+def test_add_function_refuses_a_different_callable_with_a_taken_name():
+    other = functools.partial(add, y=5)
+    for funcs in ([add], {"add": add}):
+        with pytest.raises(ValueError, match="already has a different callable"):
+            FunctionGroup("G", funcs).add_function(other)
+    FunctionGroup("G", [add]).add_function(add)
+    FunctionGroup("G", [add]).add_function(other, name="add5")

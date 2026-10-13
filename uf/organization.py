@@ -52,6 +52,12 @@ class FunctionGroup:
         """
         return name_funcs(self.funcs)
 
+    def __post_init__(self):
+        # (materialize now: a generator would be used up by the first read)
+        self.funcs = (
+            dict(self.funcs) if isinstance(self.funcs, Mapping) else list(self.funcs)
+        )
+
     def add_function(
         self, func: Callable, *, name: Optional[str] = None
     ) -> "FunctionGroup":
@@ -59,15 +65,26 @@ class FunctionGroup:
 
         Args:
             func: Function to add
-            name: Explicit name to serve it under (default: its own name)
+            name: Explicit name to serve it under (default: its own name).
+                Giving one turns ``funcs`` into a ``{name: callable}`` mapping.
 
         Returns:
             Self for method chaining
+
+        Raises:
+            ValueError: If a different callable already has that name in the group
         """
+        new_name = name if name is not None else name_of_func(func)
+        existing = self.named_funcs.get(new_name)
+        if existing is not None and existing != func:
+            raise ValueError(
+                f"group {self.name!r} already has a different callable named "
+                f"{new_name!r}; pass name= to name this one explicitly"
+            )
         if name is not None:
             self.funcs = {**self.named_funcs, name: func}
         elif isinstance(self.funcs, Mapping):
-            self.funcs = {**self.funcs, name_of_func(func): func}
+            self.funcs = {**self.funcs, new_name: func}
         else:
             self.funcs.append(func)
         return self
@@ -263,7 +280,7 @@ def mk_grouped_app(
     all_funcs = {}
     for group in groups:
         for name, func in group.named_funcs.items():
-            if name in all_funcs and all_funcs[name] is not func:
+            if name in all_funcs and all_funcs[name] != func:
                 raise ValueError(
                     f"two different callables are both named {name!r} (group "
                     f"{group.name!r}); pass a {{name: callable}} mapping as the "
