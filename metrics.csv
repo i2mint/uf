@@ -1,10 +1,8 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T17:49:15.077672Z
-commit_sha,995c5fb8edd3cd10fe2334fdab05106ea66824da
-commit_message,"fix(specs): take the package prefix from the code object's filename (#21)
-
-Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+timestamp,2026-10-13T17:49:24.306042Z
+commit_sha,2fdc243e9a7abbff83026e1ca1076eac5bc500cf
+commit_message,Merge 995c5fb8edd3cd10fe2334fdab05106ea66824da into d3ea4983e87cbe9c6e388e06366310027607c072
 python_version,3.10
 metrics.umpyre_stats.num_functions,31092
 metrics.umpyre_stats.num_classes,5998
@@ -38,4 +36,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,8.560962200164795
+collection_duration_seconds,10.759836673736572
