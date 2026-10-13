@@ -4,6 +4,7 @@ Provides a Mapping-based interface to function specifications, including RJSF
 form specs and OpenAPI schemas.
 """
 
+import inspect
 import warnings
 from typing import Callable, Iterable, Optional, Any
 from collections.abc import Mapping
@@ -13,6 +14,47 @@ from functools import cached_property
 # ``ju.rjsf`` (too-old ju, stray namespace dir) or a missing dependency *of* ju is
 # a broken install: let it raise.
 _JU_MODULE_NAMES = ("ju",)
+
+
+_VARIADIC_KINDS = (
+    inspect.Parameter.VAR_POSITIONAL,  # *args
+    inspect.Parameter.VAR_KEYWORD,  # **kwargs
+)
+
+
+def _variadic_names(func: Callable) -> set:
+    """Names of ``func``'s ``*args``/``**kwargs``, as ju (``i2.Sig``) names them."""
+    try:
+        from i2 import Sig
+
+        params = Sig(func).parameters
+    except Exception:  # no i2, or no introspectable signature
+        try:
+            params = inspect.signature(func).parameters
+        except (TypeError, ValueError):
+            return set()
+    return {n for n, p in params.items() if p.kind in _VARIADIC_KINDS}
+
+
+def _drop_variadic_fields(func: Callable, form_spec: dict) -> None:
+    """Remove ``*args``/``**kwargs`` from a form spec's schema and uiSchema (in place).
+
+    A form can't sensibly ask for them (they would show up as required string
+    fields), and uf calls functions with keyword arguments only.
+    """
+    variadic = _variadic_names(func)
+    schema = form_spec.get("schema", {})
+    for name in variadic:
+        schema.get("properties", {}).pop(name, None)
+    if "required" in schema:
+        schema["required"] = [n for n in schema["required"] if n not in variadic]
+    ui_schema = form_spec.get("uiSchema", {})
+    dropped = [ui_schema.pop(name) for name in variadic if name in ui_schema]
+    # ju puts the autofocus on the first parameter: hand it to the first one left
+    if any(isinstance(d, dict) and d.get("ui:autofocus") for d in dropped):
+        for name in schema.get("properties", {}):
+            ui_schema.setdefault(name, {})["ui:autofocus"] = True
+            break
 
 
 class JuNotInstalledWarning(UserWarning):
@@ -129,8 +171,12 @@ class FunctionSpecStore(Mapping):
             return self._generate_basic_spec(func_name, func)
 
         # ju nests the spec under a "rjsf" field by default; uf wants it flat
-        rjsf_config = {"nest_under_field": None, **self._rjsf_config}
+        rjsf_config = {"nest_under_field": None}
+        if self._param_to_prop_type is not None:
+            rjsf_config["param_to_prop_type"] = self._param_to_prop_type
+        rjsf_config.update(self._rjsf_config)  # explicit rjsf_config wins
         form_spec = func_to_form_spec(func, **rjsf_config)
+        _drop_variadic_fields(func, form_spec)
 
         # Apply custom UI schema factory if provided
         if self._ui_schema_factory:
@@ -161,13 +207,13 @@ class FunctionSpecStore(Mapping):
         Returns:
             Basic specification dictionary
         """
-        import inspect
-
         sig = inspect.signature(func)
         properties = {}
         required = []
 
         for param_name, param in sig.parameters.items():
+            if param.kind in _VARIADIC_KINDS:
+                continue
             if param.default is inspect.Parameter.empty:
                 required.append(param_name)
 
