@@ -1,6 +1,6 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T14:24:13.880669Z
+timestamp,2026-10-13T14:24:18.672979Z
 commit_sha,ba4c88adb0afa0f2ea24bd87193072ea79ebd212
 commit_message,"FunctionSpecStore: names for partials/callable instances, validate=, refuse unservable callables (#13) (#19)
 
@@ -25,18 +25,18 @@ Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
 
 Co-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
 python_version,3.10
-metrics.umpyre_stats.num_functions,30647
-metrics.umpyre_stats.num_classes,5993
-metrics.umpyre_stats.total_lines,883974
-metrics.umpyre_stats.empty_lines,125060
-metrics.umpyre_stats.comment_lines,43092
-metrics.umpyre_stats.docs_lines,112585
-metrics.umpyre_stats.function_lines,502013
-metrics.umpyre_stats.empty_lines_ratio,0.1414747492573311
-metrics.umpyre_stats.comment_lines_ratio,0.04874804010072695
-metrics.umpyre_stats.function_lines_ratio,0.5679047121295423
-metrics.umpyre_stats.mean_lines_per_function,16.380494012464514
-metrics.umpyre_stats.files_analyzed,2180
+metrics.umpyre_stats.num_functions,31078
+metrics.umpyre_stats.num_classes,5998
+metrics.umpyre_stats.total_lines,894324
+metrics.umpyre_stats.empty_lines,126349
+metrics.umpyre_stats.comment_lines,44308
+metrics.umpyre_stats.docs_lines,113337
+metrics.umpyre_stats.function_lines,509592
+metrics.umpyre_stats.empty_lines_ratio,0.14127877592460897
+metrics.umpyre_stats.comment_lines_ratio,0.04954356586650923
+metrics.umpyre_stats.function_lines_ratio,0.5698069156144753
+metrics.umpyre_stats.mean_lines_per_function,16.397194156638136
+metrics.umpyre_stats.files_analyzed,2169
 metrics.umpyre_stats.pypi_version,0.1.7
 metrics.workflow_status.last_run_status,success
 metrics.workflow_status.last_success_timestamp,2026-10-13T14:23:29Z
@@ -57,4 +57,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,6.654217004776001
+collection_duration_seconds,10.76341438293457
