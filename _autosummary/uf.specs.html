@@ -106,6 +106,8 @@ data-aria-dark="Switch to auto color mode">
 </ul>
 </li>
 <li><a class="reference internal" href="#uf.specs.JuNotInstalledWarning"><code class="docutils literal notranslate"><span class="pre">JuNotInstalledWarning</span></code></a></li>
+<li><a class="reference internal" href="#uf.specs.PositionalOnlyParamWarning"><code class="docutils literal notranslate"><span class="pre">PositionalOnlyParamWarning</span></code></a></li>
+<li><a class="reference internal" href="#uf.specs.UnintrospectableCallableError"><code class="docutils literal notranslate"><span class="pre">UnintrospectableCallableError</span></code></a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -165,6 +167,12 @@ form specs and OpenAPI schemas.</p>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#uf.specs.JuNotInstalledWarning" title="uf.specs.JuNotInstalledWarning"><code class="xref py py-obj docutils literal notranslate"><span class="pre">JuNotInstalledWarning</span></code></a></p></td>
 <td><p>Emitted when <code class="docutils literal notranslate"><span class="pre">ju</span></code> is absent and uf falls back to basic form specs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.specs.PositionalOnlyParamWarning" title="uf.specs.PositionalOnlyParamWarning"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PositionalOnlyParamWarning</span></code></a></p></td>
+<td><p>A required positional-only parameter can't be filled by a keyword-only caller.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.specs.UnintrospectableCallableError" title="uf.specs.UnintrospectableCallableError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnintrospectableCallableError</span></code></a></p></td>
+<td><p>A callable has no signature to build a form from (e.g. <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">getattr</span></code>).</p></td>
 </tr>
 </tbody>
 </table>
@@ -237,6 +245,20 @@ form specs and OpenAPI schemas.</p>
 <p>Emitted when <code class="docutils literal notranslate"><span class="pre">ju</span></code> is absent and uf falls back to basic form specs.</p>
 </dd></dl>
 
+<dl class="py exception">
+<dt class="sig sig-object py" id="uf.specs.PositionalOnlyParamWarning">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.specs.</span></span><span class="sig-name descname"><span class="pre">PositionalOnlyParamWarning</span></span><a class="reference internal" href="../_modules/uf/specs.html#PositionalOnlyParamWarning"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.specs.PositionalOnlyParamWarning" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#UserWarning" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserWarning</span></code></a></p>
+<p>A required positional-only parameter can’t be filled by a keyword-only caller.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="uf.specs.UnintrospectableCallableError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">uf.specs.</span></span><span class="sig-name descname"><span class="pre">UnintrospectableCallableError</span></span><a class="reference internal" href="../_modules/uf/specs.html#UnintrospectableCallableError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.specs.UnintrospectableCallableError" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/builtins/exceptions.html#ValueError" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></a></p>
+<p>A callable has no signature to build a form from (e.g. <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">getattr</span></code>).</p>
+</dd></dl>
+
 </section>
 
         </article><button class="back-to-top" type="button">
@@ -279,7 +301,7 @@ form specs and OpenAPI schemas.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=59fadc99"></script>
+      <script src="../_static/documentation_options.js?v=6e0256f3"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

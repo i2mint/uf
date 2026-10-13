@@ -1,4 +1,4 @@
-> built 2026-10-13 03:06 UTC from 9fa2fea (master) · uf 0.1.5. Details: build_info.json
+> built 2026-10-13 09:17 UTC from dfb3311 (master) · uf 0.1.6. Details: build_info.json
 
 # index.html.md
 
@@ -7932,8 +7932,10 @@ form specs and OpenAPI schemas.
 
 ### Exceptions
 
-| [`JuNotInstalledWarning`](_autosummary/uf.specs.html.md#uf.specs.JuNotInstalledWarning)   | Emitted when `ju` is absent and uf falls back to basic form specs.   |
-|--------------------------------------------------------------------------|----------------------------------------------------------------------|
+| [`JuNotInstalledWarning`](_autosummary/uf.specs.html.md#uf.specs.JuNotInstalledWarning)         | Emitted when `ju` is absent and uf falls back to basic form specs.             |
+|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| [`PositionalOnlyParamWarning`](_autosummary/uf.specs.html.md#uf.specs.PositionalOnlyParamWarning)    | A required positional-only parameter can't be filled by a keyword-only caller. |
+| [`UnintrospectableCallableError`](_autosummary/uf.specs.html.md#uf.specs.UnintrospectableCallableError) | A callable has no signature to build a form from (e.g. `max`, `getattr`).      |
 
 ### *class* uf.specs.FunctionSpecStore(funcs, , rjsf_config=None, ui_schema_factory=None, param_to_prop_type=None)
 
@@ -7988,6 +7990,18 @@ Get the original function object by name.
 Bases: [`UserWarning`](https://docs.python.org/3/builtins/exceptions.html#UserWarning)
 
 Emitted when `ju` is absent and uf falls back to basic form specs.
+
+### *exception* uf.specs.PositionalOnlyParamWarning
+
+Bases: [`UserWarning`](https://docs.python.org/3/builtins/exceptions.html#UserWarning)
+
+A required positional-only parameter can’t be filled by a keyword-only caller.
+
+### *exception* uf.specs.UnintrospectableCallableError
+
+Bases: [`ValueError`](https://docs.python.org/3/builtins/exceptions.html#ValueError)
+
+A callable has no signature to build a form from (e.g. `max`, `getattr`).
 
 
 # _autosummary/uf.templates.html.md
@@ -8870,20 +8884,20 @@ Decorator to add webhooks to a function.
 
 # About this build
 
-This documentation was built on **2026-10-13 03:06 UTC** from commit <a href="https://github.com/i2mint/uf/commit/9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3"><code>9fa2fea</code></a> on branch <code>master</code>, for **uf 0.1.5** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-13 09:17 UTC** from commit <a href="https://github.com/i2mint/uf/commit/dfb3311ebd47f90d98637eb511ef562bfce22775"><code>dfb3311</code></a> on branch <code>master</code>, for **uf 0.1.6** (from <code>pyproject.toml</code>).
 
 #### WARNING
 The documentation and the package may be misaligned:
 
-- The documented version (0.1.5) is ahead of the latest release on PyPI (0.1.4): these docs describe unreleased code.
+- The documented version (0.1.6) is ahead of the latest release on PyPI (0.1.5): these docs describe unreleased code.
 
 ## Source
 
 |                     |                                                                                                                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/uf/commit/9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3"><code>9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3</code></a> |
+| Commit              | <a href="https://github.com/i2mint/uf/commit/dfb3311ebd47f90d98637eb511ef562bfce22775"><code>dfb3311ebd47f90d98637eb511ef562bfce22775</code></a> |
 | Branch              | <code>master</code>                                                                                                                              |
-| Tags at this commit | <code>0.1.5</code>                                                                                                                               |
+| Tags at this commit | <code>0.1.6</code>                                                                                                                               |
 | Working tree        | clean                                                                                                                                            |
 | Remote              | <code>https://github.com/i2mint/uf</code>                                                                                                        |
 
@@ -8892,15 +8906,15 @@ The documentation and the package may be misaligned:
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/uf</code>                                                                     |
-| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38339974275">38339974275</a>            |
+| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38374981397">38374981397</a>            |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>44cc74fb971aa7cdb62f3c24ded422c7736308bd</code> (in the history of the built commit) |
+| Event commit | <code>39dce3c2e8bd9835f2efb60e27a8411b5cbc8843</code> (in the history of the built commit) |
 
 ## Tools
 
 |          |         |
 |----------|---------|
-| epythet  | 0.2.12  |
+| epythet  | 0.2.15  |
 | Sphinx   | 9.1.0   |
 | docutils | 0.22.4  |
 | Python   | 3.12.15 |
@@ -8919,14 +8933,14 @@ The documentation and the package may be misaligned:
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.4/">0.1.4</a>, older than the documented version (0.1.5).
+Latest release: <a href="https://pypi.org/project/uf/0.1.5/">0.1.5</a>, older than the documented version (0.1.6).
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout 9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3
-pip install "epythet==0.2.12"
+git checkout dfb3311ebd47f90d98637eb511ef562bfce22775
+pip install "epythet==0.2.15"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```
 

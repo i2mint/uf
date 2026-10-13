@@ -12,8 +12,10 @@ form specs and OpenAPI schemas.
 
 ### Exceptions
 
-| [`JuNotInstalledWarning`](#uf.specs.JuNotInstalledWarning)   | Emitted when `ju` is absent and uf falls back to basic form specs.   |
-|--------------------------------------------------------------------------|----------------------------------------------------------------------|
+| [`JuNotInstalledWarning`](#uf.specs.JuNotInstalledWarning)         | Emitted when `ju` is absent and uf falls back to basic form specs.             |
+|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| [`PositionalOnlyParamWarning`](#uf.specs.PositionalOnlyParamWarning)    | A required positional-only parameter can't be filled by a keyword-only caller. |
+| [`UnintrospectableCallableError`](#uf.specs.UnintrospectableCallableError) | A callable has no signature to build a form from (e.g. `max`, `getattr`).      |
 
 ### *class* uf.specs.FunctionSpecStore(funcs, , rjsf_config=None, ui_schema_factory=None, param_to_prop_type=None)
 
@@ -68,3 +70,15 @@ Get the original function object by name.
 Bases: [`UserWarning`](https://docs.python.org/3/builtins/exceptions.html#UserWarning)
 
 Emitted when `ju` is absent and uf falls back to basic form specs.
+
+### *exception* uf.specs.PositionalOnlyParamWarning
+
+Bases: [`UserWarning`](https://docs.python.org/3/builtins/exceptions.html#UserWarning)
+
+A required positional-only parameter can’t be filled by a keyword-only caller.
+
+### *exception* uf.specs.UnintrospectableCallableError
+
+Bases: [`ValueError`](https://docs.python.org/3/builtins/exceptions.html#ValueError)
+
+A callable has no signature to build a form from (e.g. `max`, `getattr`).

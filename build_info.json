@@ -1,38 +1,38 @@
 {
   "schema_version": 1,
-  "built_at": "2026-10-13T03:06:42Z",
+  "built_at": "2026-10-13T09:17:31Z",
   "package": {
     "name": "uf",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "display_name": "uf",
     "source": "pyproject.toml"
   },
   "git": {
     "available": true,
-    "commit": "9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3",
-    "short_commit": "9fa2fea",
+    "commit": "dfb3311ebd47f90d98637eb511ef562bfce22775",
+    "short_commit": "dfb3311",
     "branch": "master",
     "tags": [
-      "0.1.5"
+      "0.1.6"
     ],
     "dirty": false,
     "remote_url": "https://github.com/i2mint/uf",
-    "commit_url": "https://github.com/i2mint/uf/commit/9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3",
+    "commit_url": "https://github.com/i2mint/uf/commit/dfb3311ebd47f90d98637eb511ef562bfce22775",
     "error": null
   },
   "ci": {
     "provider": "github",
     "repository": "i2mint/uf",
-    "sha": "44cc74fb971aa7cdb62f3c24ded422c7736308bd",
+    "sha": "39dce3c2e8bd9835f2efb60e27a8411b5cbc8843",
     "sha_in_history": true,
     "ref": "refs/heads/master",
     "ref_name": "master",
-    "run_id": "38339974275",
-    "run_url": "https://github.com/i2mint/uf/actions/runs/38339974275",
+    "run_id": "38374981397",
+    "run_url": "https://github.com/i2mint/uf/actions/runs/38374981397",
     "server_url": "https://github.com"
   },
   "tools": {
-    "epythet": "0.2.12",
+    "epythet": "0.2.15",
     "sphinx": "9.1.0",
     "docutils": "0.22.4",
     "python": "3.12.15"
@@ -58,20 +58,20 @@
   },
   "site": {
     "modules_documented": 20,
-    "objects_documented": 688
+    "objects_documented": 690
   },
   "pypi": {
     "checked": true,
-    "latest": "0.1.4",
+    "latest": "0.1.5",
     "relation": "ahead",
     "error": null
   },
-  "reproduce": "git clone https://github.com/i2mint/uf && cd uf\ngit checkout 9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3\npip install \"epythet==0.2.12\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
+  "reproduce": "git clone https://github.com/i2mint/uf && cd uf\ngit checkout dfb3311ebd47f90d98637eb511ef562bfce22775\npip install \"epythet==0.2.15\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
   "warnings": [],
   "alignment": {
     "aligned": false,
     "notes": [
-      "The documented version (0.1.5) is ahead of the latest release on PyPI (0.1.4): these docs describe unreleased code."
+      "The documented version (0.1.6) is ahead of the latest release on PyPI (0.1.5): these docs describe unreleased code."
     ]
   }
 }
