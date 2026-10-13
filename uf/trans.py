@@ -344,8 +344,5 @@ def register_common_types():
 
 
 # Auto-register common types on import
-try:
-    register_common_types()
-except ImportError:
-    # Some types might not be available, that's okay
-    pass
+# (stdlib types only: an ImportError here is a bug, so it is not swallowed)
+register_common_types()

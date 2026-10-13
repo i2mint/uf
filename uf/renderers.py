@@ -8,6 +8,8 @@ from typing import Callable, Any, Optional, Type
 from collections.abc import Mapping
 import json
 
+from uf.optional import import_optional
+
 
 class ResultRenderer:
     """Base class for result renderers.
@@ -93,12 +95,8 @@ class DataFrameRenderer(ResultRenderer):
 
     def can_render(self, result: Any) -> bool:
         """Can render pandas DataFrame."""
-        try:
-            import pandas as pd
-
-            return isinstance(result, pd.DataFrame)
-        except ImportError:
-            return False
+        pd = import_optional("pandas")  # a broken pandas raises, not "can't render"
+        return pd is not None and isinstance(result, pd.DataFrame)
 
     def render(self, result: Any) -> dict:
         """Render DataFrame as table."""

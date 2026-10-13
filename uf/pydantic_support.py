@@ -7,6 +7,8 @@ generating forms with validation from Pydantic models.
 from typing import Callable, Any, Optional, get_type_hints, get_args, get_origin
 import inspect
 
+from uf.optional import import_optional
+
 
 def is_pydantic_model(obj: Any) -> bool:
     """Check if an object is a Pydantic model.
@@ -17,14 +19,12 @@ def is_pydantic_model(obj: Any) -> bool:
     Returns:
         True if object is a Pydantic BaseModel
     """
-    try:
-        from pydantic import BaseModel
-
-        if inspect.isclass(obj):
-            return issubclass(obj, BaseModel)
-        return isinstance(obj, BaseModel)
-    except ImportError:
+    pydantic = import_optional("pydantic")  # a broken pydantic raises, not "no"
+    if pydantic is None:
         return False
+    if inspect.isclass(obj):
+        return issubclass(obj, pydantic.BaseModel)
+    return isinstance(obj, pydantic.BaseModel)
 
 
 def pydantic_model_to_json_schema(model_class) -> dict:
@@ -321,12 +321,8 @@ def pydantic_error_to_user_friendly(error) -> dict:
     Returns:
         Dictionary with field-level errors
     """
-    try:
-        from pydantic import ValidationError
-    except ImportError:
-        return {"error": str(error)}
-
-    if not isinstance(error, ValidationError):
+    pydantic = import_optional("pydantic")
+    if pydantic is None or not isinstance(error, pydantic.ValidationError):
         return {"error": str(error)}
 
     field_errors = {}

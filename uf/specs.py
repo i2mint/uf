@@ -10,6 +10,8 @@ from typing import Callable, Iterable, Optional, Any
 from collections.abc import Mapping
 from functools import cached_property
 
+from uf.optional import import_optional
+
 # Only the absence of top-level ``ju`` means "not installed" (fall back). A missing
 # ``ju.rjsf`` (too-old ju, stray namespace dir) or a missing dependency *of* ju is
 # a broken install: let it raise.
@@ -128,19 +130,21 @@ def _import_func_to_form_spec() -> Optional[Callable]:
     >>> _import_func_to_form_spec() is None or callable(_import_func_to_form_spec())
     True
     """
-    try:
-        from ju.rjsf import func_to_form_spec
-    except ModuleNotFoundError as e:
-        if e.name not in _JU_MODULE_NAMES:
-            raise
+    rjsf = import_optional("ju.rjsf", absent=_JU_MODULE_NAMES)
+    if rjsf is None:
         warnings.warn(
-            f"{e.name!r} is not installed; uf is falling back to basic form "
+            "'ju' is not installed; uf is falling back to basic form "
             "specs (no ju/RJSF features). Install it with `pip install ju`.",
             JuNotInstalledWarning,
             stacklevel=4,  # caller -> __getitem__ -> _generate_spec -> here
         )
         return None
-    return func_to_form_spec
+    try:
+        return rjsf.func_to_form_spec
+    except AttributeError as e:  # a renamed symbol: a broken ju, not an absent one
+        raise ImportError(
+            "cannot import name 'func_to_form_spec' from 'ju.rjsf'"
+        ) from e
 
 
 class FunctionSpecStore(Mapping):

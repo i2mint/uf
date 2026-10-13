@@ -9,6 +9,7 @@ defaults while allowing customization where needed.
 """
 
 from typing import Callable, Iterable, Optional, Any, Mapping as MappingType
+from uf.optional import import_optional
 from uf.specs import FunctionSpecStore
 from uf.routes import add_ui_routes
 
@@ -96,12 +97,12 @@ def mk_rjsf_app(
     )
 
     # Create HTTP service using qh
-    try:
-        from qh import mk_app
-    except ImportError:
+    qh = import_optional("qh")  # a qh that fails to import is raised as it is
+    if qh is None:
         raise ImportError(
             "qh is required for mk_rjsf_app. Install it with: pip install qh"
         )
+    mk_app = qh.mk_app
 
     # Build the qh app with function endpoints
     app = mk_app(

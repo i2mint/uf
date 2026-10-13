@@ -353,3 +353,86 @@ def test_warnings_are_attributed_to_the_caller(with_ju, monkeypatch):
         warnings.simplefilter('always')
         store['_required_positional_only_and_kw']
     assert record and all(w.filename == __file__ for w in record)
+
+
+# --- optional-dependency guards (i2mint/uf#7) -------------------------------
+from uf.optional import import_optional
+
+
+class _AbsentFinder(importlib.abc.MetaPathFinder):
+    """Make ``import <name>`` fail as if the package were not installed."""
+
+    def __init__(self, name):
+        self.name = name
+
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname == self.name:
+            raise ModuleNotFoundError(f'No module named {self.name!r}', name=self.name)
+
+
+class _BrokenPackageFinder(importlib.abc.MetaPathFinder):
+    """Make ``import <name>`` fail as an installed-but-broken package would: with a
+    ModuleNotFoundError naming a missing dependency *of* it."""
+
+    def __init__(self, name):
+        self.name = name
+
+    def find_spec(self, fullname, path, target=None):
+        if fullname == self.name:
+            raise ModuleNotFoundError(
+                f'No module named {self.name + "_dep"!r}', name=self.name + '_dep'
+            )
+
+
+def _break(monkeypatch, name):
+    monkeypatch.delitem(sys.modules, name, raising=False)
+    monkeypatch.setattr(sys, 'meta_path', [_BrokenPackageFinder(name), *sys.meta_path])
+
+
+def test_import_optional_absent_and_broken(monkeypatch):
+    assert import_optional('_uf_no_such_package_') is None
+    _break(monkeypatch, 'fakepkg')
+    with pytest.raises(ModuleNotFoundError, match='fakepkg_dep'):
+        import_optional('fakepkg')
+
+
+@pytest.mark.parametrize('package', ['pandas', 'pydantic'])
+def test_broken_optional_package_is_not_silently_ignored(package, monkeypatch):
+    pytest.importorskip(package)
+    from uf.pydantic_support import pydantic_error_to_user_friendly, is_pydantic_model
+    from uf.renderers import DataFrameRenderer
+
+    probe = {
+        'pandas': lambda: DataFrameRenderer().can_render(object()),
+        'pydantic': lambda: is_pydantic_model(object()),
+    }[package]
+    assert probe() is False  # healthy install: plain answer
+    _break(monkeypatch, package)
+    with pytest.raises(ModuleNotFoundError, match=f'{package}_dep'):
+        probe()
+    if package == 'pydantic':
+        with pytest.raises(ModuleNotFoundError):
+            pydantic_error_to_user_friendly(ValueError('x'))
+
+
+@pytest.mark.parametrize('package', ['pandas', 'pydantic'])
+def test_absent_optional_package_degrades(package, monkeypatch):
+    from uf.pydantic_support import pydantic_error_to_user_friendly, is_pydantic_model
+    from uf.renderers import DataFrameRenderer
+
+    monkeypatch.delitem(sys.modules, package, raising=False)
+    monkeypatch.setattr(sys, 'meta_path', [_AbsentFinder(package), *sys.meta_path])
+    assert DataFrameRenderer().can_render(object()) is False
+    assert is_pydantic_model(object()) is False
+    assert pydantic_error_to_user_friendly(ValueError('x')) == {'error': 'x'}
+
+
+def test_missing_qh_gets_the_install_hint_but_broken_qh_propagates(monkeypatch):
+    from uf import mk_rjsf_app
+
+    _break(monkeypatch, 'qh')
+    with pytest.raises(ModuleNotFoundError, match='qh_dep'):
+        mk_rjsf_app([sample_add])
+    monkeypatch.setattr(sys, 'meta_path', [_AbsentFinder('qh'), *sys.meta_path[1:]])
+    with pytest.raises(ImportError, match='pip install qh'):
+        mk_rjsf_app([sample_add])
