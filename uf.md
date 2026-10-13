@@ -1,4 +1,4 @@
-> built 2026-10-13 16:24 UTC from d3ea498 (master) · uf 0.1.14. Details: build_info.json
+> built 2026-10-13 17:52 UTC from 9065087 (master) · uf 0.1.15. Details: build_info.json
 
 # index.html.md
 
@@ -9051,7 +9051,7 @@ Decorator to add webhooks to a function.
 
 # About this build
 
-This documentation was built on **2026-10-13 16:24 UTC** from commit <a href="https://github.com/i2mint/uf/commit/d3ea4983e87cbe9c6e388e06366310027607c072"><code>d3ea498</code></a> on branch <code>master</code>, for **uf 0.1.14** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-13 17:52 UTC** from commit <a href="https://github.com/i2mint/uf/commit/90650879554eb0890acd277240ec8ccb805489a2"><code>9065087</code></a> on branch <code>master</code>, for **uf 0.1.15** (from <code>pyproject.toml</code>).
 
 #### NOTE
 Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
@@ -9060,9 +9060,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 |                     |                                                                                                                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/uf/commit/d3ea4983e87cbe9c6e388e06366310027607c072"><code>d3ea4983e87cbe9c6e388e06366310027607c072</code></a> |
+| Commit              | <a href="https://github.com/i2mint/uf/commit/90650879554eb0890acd277240ec8ccb805489a2"><code>90650879554eb0890acd277240ec8ccb805489a2</code></a> |
 | Branch              | <code>master</code>                                                                                                                              |
-| Tags at this commit | <code>0.1.14</code>                                                                                                                              |
+| Tags at this commit | <code>0.1.15</code>                                                                                                                              |
 | Working tree        | clean                                                                                                                                            |
 | Remote              | <code>https://github.com/i2mint/uf</code>                                                                                                        |
 
@@ -9071,9 +9071,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/uf</code>                                                                     |
-| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38429958041">38429958041</a>            |
+| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38441889552">38441889552</a>            |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>bf43b8c4eff57fbae89e14113a298da11a8b10e8</code> (in the history of the built commit) |
+| Event commit | <code>a030ab0cc41bbeeb50391655f21522f2fdb18156</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -9098,13 +9098,13 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.14/">0.1.14</a>, the same as the documented version.
+Latest release: <a href="https://pypi.org/project/uf/0.1.15/">0.1.15</a>, the same as the documented version.
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout d3ea4983e87cbe9c6e388e06366310027607c072
+git checkout 90650879554eb0890acd277240ec8ccb805489a2
 pip install "epythet==0.2.17"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

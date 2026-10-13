@@ -1,34 +1,34 @@
 {
   "schema_version": 1,
-  "built_at": "2026-10-13T16:24:44Z",
+  "built_at": "2026-10-13T17:52:42Z",
   "package": {
     "name": "uf",
-    "version": "0.1.14",
+    "version": "0.1.15",
     "display_name": "uf",
     "source": "pyproject.toml"
   },
   "git": {
     "available": true,
-    "commit": "d3ea4983e87cbe9c6e388e06366310027607c072",
-    "short_commit": "d3ea498",
+    "commit": "90650879554eb0890acd277240ec8ccb805489a2",
+    "short_commit": "9065087",
     "branch": "master",
     "tags": [
-      "0.1.14"
+      "0.1.15"
     ],
     "dirty": false,
     "remote_url": "https://github.com/i2mint/uf",
-    "commit_url": "https://github.com/i2mint/uf/commit/d3ea4983e87cbe9c6e388e06366310027607c072",
+    "commit_url": "https://github.com/i2mint/uf/commit/90650879554eb0890acd277240ec8ccb805489a2",
     "error": null
   },
   "ci": {
     "provider": "github",
     "repository": "i2mint/uf",
-    "sha": "bf43b8c4eff57fbae89e14113a298da11a8b10e8",
+    "sha": "a030ab0cc41bbeeb50391655f21522f2fdb18156",
     "sha_in_history": true,
     "ref": "refs/heads/master",
     "ref_name": "master",
-    "run_id": "38429958041",
-    "run_url": "https://github.com/i2mint/uf/actions/runs/38429958041",
+    "run_id": "38441889552",
+    "run_url": "https://github.com/i2mint/uf/actions/runs/38441889552",
     "server_url": "https://github.com"
   },
   "tools": {
@@ -62,11 +62,11 @@
   },
   "pypi": {
     "checked": true,
-    "latest": "0.1.14",
+    "latest": "0.1.15",
     "relation": "same",
     "error": null
   },
-  "reproduce": "git clone https://github.com/i2mint/uf && cd uf\ngit checkout d3ea4983e87cbe9c6e388e06366310027607c072\npip install \"epythet==0.2.17\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
+  "reproduce": "git clone https://github.com/i2mint/uf && cd uf\ngit checkout 90650879554eb0890acd277240ec8ccb805489a2\npip install \"epythet==0.2.17\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
   "warnings": [],
   "alignment": {
     "aligned": true,
