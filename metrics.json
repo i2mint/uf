@@ -1,7 +1,7 @@
 {
-  "collection_duration_seconds": 10.424610137939453,
-  "commit_message": "Merge f577d3f8eb26ba768a5dba40eaa396605f4b378a into f1417652bdffec546bbd334c25a5dde028b9e0d9",
-  "commit_sha": "42346f134318e71a513e0b5e4e21571eae2b7c7e",
+  "collection_duration_seconds": 7.163973808288574,
+  "commit_message": "FunctionSpecStore: a partial keeps its own __name__; bound methods compare by == (#13 review)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
+  "commit_sha": "c6e2a597e02be94cebbaa3a467d2af600b8cad9d",
   "metrics": {
     "coverage": {
       "branch_coverage": 0.0,
@@ -11,19 +11,19 @@
       "statements_total": 0
     },
     "umpyre_stats": {
-      "comment_lines": 44308,
-      "comment_lines_ratio": 0.04955575637733418,
-      "docs_lines": 113245,
-      "empty_lines": 126320,
-      "empty_lines_ratio": 0.14128110376421535,
+      "comment_lines": 44307,
+      "comment_lines_ratio": 0.04955086940767548,
+      "docs_lines": 113274,
+      "empty_lines": 126331,
+      "empty_lines_ratio": 0.14128266150136662,
       "files_analyzed": 2169,
-      "function_lines": 509403,
-      "function_lines_ratio": 0.5697357354401725,
-      "mean_lines_per_function": 16.395860825903632,
-      "num_classes": 5997,
-      "num_functions": 31069,
+      "function_lines": 509453,
+      "function_lines_ratio": 0.5697483258254564,
+      "mean_lines_per_function": 16.395886972193615,
+      "num_classes": 5998,
+      "num_functions": 31072,
       "pypi_version": "0.1.7",
-      "total_lines": 894104
+      "total_lines": 894172
     },
     "wily": {
       "cyclomatic_avg": 0.0,
@@ -34,14 +34,14 @@
     },
     "workflow_status": {
       "last_run_status": "success",
-      "last_success_timestamp": "2026-10-13T14:17:20Z",
-      "recent_failure_count": 0,
-      "run_url": "https://github.com/i2mint/uf/actions/runs/38411860247",
+      "last_success_timestamp": "2026-10-13T14:18:46Z",
+      "recent_failure_count": 1,
+      "run_url": "https://github.com/i2mint/uf/actions/runs/38412087446",
       "total_runs_analyzed": 10
     }
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T14:18:41.448131Z",
+  "timestamp": "2026-10-13T14:18:51.562958Z",
   "workflow_status": {}
 }
