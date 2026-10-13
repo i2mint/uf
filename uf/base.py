@@ -94,6 +94,7 @@ def mk_rjsf_app(
         rjsf_config=rjsf_config or {},
         ui_schema_factory=ui_schema_factory,
         param_to_prop_type=param_to_prop_type,
+        validate=True,  # one bad function must fail here, not 500 the index page
     )
 
     # Create HTTP service using qh

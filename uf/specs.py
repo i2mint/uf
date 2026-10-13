@@ -6,7 +6,8 @@ form specs and OpenAPI schemas.
 
 import inspect
 import warnings
-from typing import Callable, Iterable, Optional, Any
+import functools
+from typing import Callable, Iterable, Optional, Any, Union
 from collections.abc import Mapping
 from functools import cached_property
 
@@ -28,6 +29,11 @@ _NON_KEYWORD_KINDS = _VARIADIC_KINDS + (inspect.Parameter.POSITIONAL_ONLY,)
 
 class UnintrospectableCallableError(ValueError):
     """A callable has no signature to build a form from (e.g. ``max``, ``getattr``)."""
+
+
+class UnservableCallableError(ValueError):
+    """A callable can never be called from a uf form (e.g. only required
+    positional-only parameters)."""
 
 
 class PositionalOnlyParamWarning(UserWarning):
@@ -53,18 +59,96 @@ def _check_introspectable(func: Callable) -> None:
         ) from e
 
 
+def _check_servable(func: Callable, name: str) -> None:
+    """Raise if ``func`` can never be called from a form: no signature, or a required
+    positional-only parameter and nothing a keyword-only caller could fill.
+
+    >>> _check_servable(len, 'len')
+    Traceback (most recent call last):
+      ...
+    uf.specs.UnservableCallableError: 'len' takes only required positional-only parameter(s) ['obj']; uf calls functions with keyword arguments only, so its form could never be submitted successfully
+    >>> _check_servable(lambda a, /, b: None, 'f')
+    """
+    _check_introspectable(func)
+    params = inspect.signature(func).parameters.values()
+    required_po = [
+        p.name
+        for p in params
+        if p.kind is inspect.Parameter.POSITIONAL_ONLY
+        and p.default is inspect.Parameter.empty
+    ]
+    fillable = [p for p in params if p.kind not in _NON_KEYWORD_KINDS]
+    if required_po and not fillable:
+        raise UnservableCallableError(
+            f"{name!r} takes only required positional-only parameter(s) {required_po}; "
+            "uf calls functions with keyword arguments only, so its form could never "
+            "be submitted successfully"
+        )
+
+
+def name_of_func(func: Callable) -> str:
+    """The name a function is served under: its ``__name__``; for a
+    ``functools.partial``, that of the function it wraps; for a callable instance, its
+    class name.
+
+    >>> import functools
+    >>> name_of_func(len)
+    'len'
+    >>> name_of_func(functools.partial(int, base=2))
+    'int'
+    >>> class Doubler:
+    ...     def __call__(self, x): return 2 * x
+    >>> name_of_func(Doubler())
+    'Doubler'
+    """
+    while isinstance(func, functools.partial):
+        func = func.func
+    return getattr(func, "__name__", None) or type(func).__name__
+
+
+def _name_funcs(funcs) -> dict:
+    """``{name: callable}`` from a mapping of explicit names, or an iterable of
+    callables (named by ``name_of_func``). Two different callables sharing a name
+    raise."""
+    if isinstance(funcs, Mapping):
+        return dict(funcs)
+    named = {}
+    for f in funcs:
+        name = name_of_func(f)
+        if name in named and named[name] is not f:
+            raise ValueError(
+                f"two different callables are both named {name!r}; pass a mapping "
+                "{name: callable} to name them explicitly"
+            )
+        named[name] = f
+    return named
+
+
 def _unfillable_names(func: Callable) -> set:
     """Names of ``func``'s parameters a keyword-only caller can't fill (``*args``,
-    ``**kwargs``, positional-only), as ju (``i2.Sig``) names them."""
+    ``**kwargs``, positional-only).
+
+    Both ``i2.Sig`` and ``inspect`` are asked: they name the variadic parameter of some
+    callables differently (``print``: ``*value`` vs ``*args``), and ju may use either.
+
+    >>> sorted(_unfillable_names(lambda a, /, b, *args, **kw: None))
+    ['a', 'args', 'kw']
+    """
+    names = set()
     try:
         from i2 import Sig
 
-        params = Sig(func).parameters
+        names |= _non_keyword_names(Sig(func).parameters)
     except Exception:  # no i2, or no introspectable signature
-        try:
-            params = inspect.signature(func).parameters
-        except (TypeError, ValueError):
-            return set()
+        pass
+    try:
+        names |= _non_keyword_names(inspect.signature(func).parameters)
+    except (TypeError, ValueError):
+        pass
+    return names
+
+
+def _non_keyword_names(params) -> set:
     return {n for n, p in params.items() if p.kind in _NON_KEYWORD_KINDS}
 
 
@@ -153,10 +237,17 @@ class FunctionSpecStore(Mapping):
     Lazily generates and caches form specs for each function.
 
     Args:
-        funcs: Iterable of callable functions to generate specs for
+        funcs: Iterable of callables to generate specs for (named by ``name_of_func``:
+            ``__name__``, the wrapped function's for a ``functools.partial``, the class
+            name for a callable instance), or a mapping ``{name: callable}`` to name
+            them explicitly
         rjsf_config: Optional configuration dict for RJSF generation
         ui_schema_factory: Optional callable to customize UI schema generation
         param_to_prop_type: Optional callable to map parameters to property types
+        validate: If true, every function is checked at construction, so a callable
+            uf can't build a form for fails there, naming it, rather than on the first
+            request (default false: checked on first access of its spec;
+            ``mk_rjsf_app`` validates).
 
     Example:
         >>> def add(x: int, y: int) -> int:
@@ -172,13 +263,17 @@ class FunctionSpecStore(Mapping):
 
     def __init__(
         self,
-        funcs: Iterable[Callable],
+        funcs: Union[Iterable[Callable], Mapping[str, Callable]],
         *,
         rjsf_config: Optional[dict] = None,
         ui_schema_factory: Optional[Callable] = None,
         param_to_prop_type: Optional[Callable] = None,
+        validate: bool = False,
     ):
-        self._funcs = {f.__name__: f for f in funcs}
+        self._funcs = _name_funcs(funcs)
+        if validate:
+            for name, func in self._funcs.items():
+                _check_servable(func, name)
         self._rjsf_config = rjsf_config or {}
         self._ui_schema_factory = ui_schema_factory
         self._param_to_prop_type = param_to_prop_type
@@ -229,7 +324,7 @@ class FunctionSpecStore(Mapping):
             Dictionary with schema, uiSchema, and function reference
         """
         func = self._funcs[func_name]
-        _check_introspectable(func)
+        _check_servable(func, func_name)
 
         func_to_form_spec = _import_func_to_form_spec()
         if func_to_form_spec is None:
