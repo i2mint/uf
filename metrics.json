@@ -1,5 +1,5 @@
 {
-  "collection_duration_seconds": 5.997691869735718,
+  "collection_duration_seconds": 10.732755661010742,
   "commit_message": "import_optional: a stray namespace directory is not the package (#15) (#16)\n\n* import_optional: a namespace directory is not the package (#15)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n* import_optional: keep stub packages without a spec; dotted names under a stray directory are absent (#15 review)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n\n---------\n\nCo-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>",
   "commit_sha": "0c89605386da70e415a69b7e218e36066e152e64",
   "metrics": {
@@ -11,19 +11,19 @@
       "statements_total": 0
     },
     "umpyre_stats": {
-      "comment_lines": 43092,
-      "comment_lines_ratio": 0.04875333473624188,
-      "docs_lines": 112546,
-      "empty_lines": 125046,
-      "empty_lines_ratio": 0.1414742758616008,
-      "files_analyzed": 2180,
-      "function_lines": 501938,
-      "function_lines_ratio": 0.5678815402125633,
-      "mean_lines_per_function": 16.3801847077636,
-      "num_classes": 5992,
-      "num_functions": 30643,
+      "comment_lines": 44308,
+      "comment_lines_ratio": 0.04955575637733418,
+      "docs_lines": 113245,
+      "empty_lines": 126320,
+      "empty_lines_ratio": 0.14128110376421535,
+      "files_analyzed": 2169,
+      "function_lines": 509403,
+      "function_lines_ratio": 0.5697357354401725,
+      "mean_lines_per_function": 16.395860825903632,
+      "num_classes": 5997,
+      "num_functions": 31069,
       "pypi_version": "0.1.7",
-      "total_lines": 883878
+      "total_lines": 894104
     },
     "wily": {
       "cyclomatic_avg": 0.0,
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T14:22:15.599485Z",
+  "timestamp": "2026-10-13T14:22:32.130447Z",
   "workflow_status": {}
 }
