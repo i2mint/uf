@@ -449,6 +449,7 @@ def test_missing_qh_gets_the_install_hint_but_broken_qh_propagates(monkeypatch):
 
 # --- FunctionSpecStore: names, validation, positional-only (i2mint/uf#13) ----
 import functools
+import inspect
 
 from uf.specs import UnservableCallableError, name_of_func
 
@@ -508,6 +509,10 @@ def test_mk_rjsf_app_validates_up_front():
 def test_variadic_autofocus_moves_on_for_print(with_ju, monkeypatch):
     # i2.Sig names print's *args 'value', inspect and ju name it 'args'
     _with_ju_or_not(with_ju, monkeypatch)
+    try:
+        inspect.signature(print)
+    except ValueError:  # some platforms/versions have no signature for print
+        pytest.skip('print has no signature here')
     spec = FunctionSpecStore([print])['print']
     assert set(spec['schema']['properties']) == {'sep', 'end', 'file', 'flush'}
     focused = [k for k, v in spec['uiSchema'].items() if isinstance(v, dict) and v.get('ui:autofocus')]
