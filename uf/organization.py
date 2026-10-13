@@ -8,7 +8,7 @@ from typing import Callable, Iterable, Optional, Union
 from dataclasses import dataclass, field
 from collections.abc import Mapping
 
-from uf.specs import doc_of_func, name_funcs, name_of_func
+from uf.specs import doc_of_func, name_funcs, name_of_func, unwrap_partials
 
 
 @dataclass
@@ -403,7 +403,8 @@ def auto_group_by_module(funcs: Iterable[Callable]) -> FunctionOrganizer:
         funcs: Functions to organize
 
     Returns:
-        FunctionOrganizer with module-based groups
+        FunctionOrganizer with module-based groups (a ``functools.partial`` goes with the
+        module of the function it wraps)
 
     Example:
         >>> from myapp import user_ops, report_ops
@@ -415,7 +416,7 @@ def auto_group_by_module(funcs: Iterable[Callable]) -> FunctionOrganizer:
     groups_dict = defaultdict(list)
 
     for func in funcs:
-        module = func.__module__
+        module = unwrap_partials(func).__module__
         # Get last part of module name
         if "." in module:
             module_name = module.split(".")[-1]
@@ -465,7 +466,8 @@ def auto_group_by_tag(
     groups_dict = defaultdict(list)
 
     for func in funcs:
-        tag = getattr(func, tag_attr, "Other")
+        # a tag on the partial itself wins over one on the function it wraps
+        tag = getattr(func, tag_attr, None) or getattr(unwrap_partials(func), tag_attr, "Other")
         groups_dict[tag].append(func)
 
     # Create organizer
