@@ -1,4 +1,4 @@
-> built 2026-10-13 15:48 UTC from 24e2678 (master) · uf 0.1.10. Details: build_info.json
+> built 2026-10-13 15:57 UTC from 1ae5ff4 (master) · uf 0.1.11. Details: build_info.json
 
 # index.html.md
 
@@ -1607,7 +1607,10 @@ generation with ju’s RJSF form generation to create a complete
 web interface for your functions.
 
 * **Parameters:**
-  * **funcs** ([`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Iterable of callable functions to expose via web UI
+  * **funcs** (`Union`[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/typing.html#typing.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to expose via web UI – functions, partials,
+    callable instances (named by `uf.specs.name_of_func`) – or a mapping
+    `{name: callable}` to name them yourself. The name is the route and the
+    key of the form spec
   * **config** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]) – Optional qh.AppConfig for HTTP service configuration
   * **input_trans** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional input transformation function for qh
   * **output_trans** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional output transformation function for qh
@@ -6301,7 +6304,10 @@ generation with ju’s RJSF form generation to create a complete
 web interface for your functions.
 
 * **Parameters:**
-  * **funcs** ([`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Iterable of callable functions to expose via web UI
+  * **funcs** (`Union`[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/typing.html#typing.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to expose via web UI – functions, partials,
+    callable instances (named by `uf.specs.name_of_func`) – or a mapping
+    `{name: callable}` to name them yourself. The name is the route and the
+    key of the form spec
   * **config** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]) – Optional qh.AppConfig for HTTP service configuration
   * **input_trans** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional input transformation function for qh
   * **output_trans** ([`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]) – Optional output transformation function for qh
@@ -7978,8 +7984,10 @@ form specs and OpenAPI schemas.
 
 ### Functions
 
-| [`name_of_func`](_autosummary/uf.specs.html.md#uf.specs.name_of_func)(func)   | The name a function is served under: its `__name__`; failing that, for a `functools.partial`, that of the function it wraps; for a callable instance, its class name.   |
-|-----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`doc_of_func`](_autosummary/uf.specs.html.md#uf.specs.doc_of_func)(func)   | The docstring of `func`; for a `functools.partial` (whose own `__doc__` is the generic one of `partial`), that of the function it wraps.                              |
+|----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`name_funcs`](_autosummary/uf.specs.html.md#uf.specs.name_funcs)(funcs)   | `{name: callable}` from a mapping of explicit names, or an iterable of callables (named by `name_of_func`).                                                           |
+| [`name_of_func`](_autosummary/uf.specs.html.md#uf.specs.name_of_func)(func)  | The name a function is served under: its `__name__`; failing that, for a `functools.partial`, that of the function it wraps; for a callable instance, its class name. |
 
 ### Classes
 
@@ -8073,6 +8081,39 @@ Bases: [`ValueError`](https://docs.python.org/3/builtins/exceptions.html#ValueEr
 
 A callable can never be called from a uf form (e.g. only required
 positional-only parameters).
+
+### uf.specs.doc_of_func(func)
+
+The docstring of `func`; for a `functools.partial` (whose own `__doc__` is
+the generic one of `partial`), that of the function it wraps.
+
+* **Return type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
+```pycon
+>>> import functools
+>>> def f(x, y):
+...     "Add."
+>>> doc_of_func(functools.partial(f, y=1))
+'Add.'
+```
+
+### uf.specs.name_funcs(funcs)
+
+`{name: callable}` from a mapping of explicit names, or an iterable of
+callables (named by `name_of_func`). Two different callables sharing a name
+raise.
+
+* **Return type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)
+
+```pycon
+>>> import functools
+>>> name_funcs([len, functools.partial(int, base=2)])
+{'len': <built-in function len>, 'int': functools.partial(<class 'int'>, base=2)}
+>>> name_funcs({'size': len})
+{'size': <built-in function len>}
+```
 
 ### uf.specs.name_of_func(func)
 
@@ -8976,18 +9017,20 @@ Decorator to add webhooks to a function.
 
 # About this build
 
-This documentation was built on **2026-10-13 15:48 UTC** from commit <a href="https://github.com/i2mint/uf/commit/24e267821437b424e10fd3426a69aa7b61cee2d7"><code>24e2678</code></a> on branch <code>master</code>, for **uf 0.1.10** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-13 15:57 UTC** from commit <a href="https://github.com/i2mint/uf/commit/1ae5ff4cb50b24a4796413f2796a71b8b4f212fd"><code>1ae5ff4</code></a> on branch <code>master</code>, for **uf 0.1.11** (from <code>pyproject.toml</code>).
 
-#### NOTE
-Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
+#### WARNING
+The documentation and the package may be misaligned:
+
+- The documented version (0.1.11) is ahead of the latest release on PyPI (0.1.10): these docs describe unreleased code.
 
 ## Source
 
 |                     |                                                                                                                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/uf/commit/24e267821437b424e10fd3426a69aa7b61cee2d7"><code>24e267821437b424e10fd3426a69aa7b61cee2d7</code></a> |
+| Commit              | <a href="https://github.com/i2mint/uf/commit/1ae5ff4cb50b24a4796413f2796a71b8b4f212fd"><code>1ae5ff4cb50b24a4796413f2796a71b8b4f212fd</code></a> |
 | Branch              | <code>master</code>                                                                                                                              |
-| Tags at this commit | <code>0.1.10</code>                                                                                                                              |
+| Tags at this commit | <code>0.1.11</code>                                                                                                                              |
 | Working tree        | clean                                                                                                                                            |
 | Remote              | <code>https://github.com/i2mint/uf</code>                                                                                                        |
 
@@ -8996,15 +9039,15 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/uf</code>                                                                     |
-| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38424786197">38424786197</a>            |
+| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38426200027">38426200027</a>            |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>a487c1efb043cbca45d7f491088f7846dac49442</code> (in the history of the built commit) |
+| Event commit | <code>609b16ca0637b299d995456b1d5fbbd518372104</code> (in the history of the built commit) |
 
 ## Tools
 
 |          |         |
 |----------|---------|
-| epythet  | 0.2.16  |
+| epythet  | 0.2.17  |
 | Sphinx   | 9.1.0   |
 | docutils | 0.22.4  |
 | Python   | 3.12.15 |
@@ -9023,14 +9066,14 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.10/">0.1.10</a>, the same as the documented version.
+Latest release: <a href="https://pypi.org/project/uf/0.1.10/">0.1.10</a>, older than the documented version (0.1.11).
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout 24e267821437b424e10fd3426a69aa7b61cee2d7
-pip install "epythet==0.2.16"
+git checkout 1ae5ff4cb50b24a4796413f2796a71b8b4f212fd
+pip install "epythet==0.2.17"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```
 

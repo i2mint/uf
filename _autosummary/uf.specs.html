@@ -110,6 +110,8 @@ data-aria-dark="Switch to auto color mode">
 <li><a class="reference internal" href="#uf.specs.PositionalOnlyParamWarning"><code class="docutils literal notranslate"><span class="pre">PositionalOnlyParamWarning</span></code></a></li>
 <li><a class="reference internal" href="#uf.specs.UnintrospectableCallableError"><code class="docutils literal notranslate"><span class="pre">UnintrospectableCallableError</span></code></a></li>
 <li><a class="reference internal" href="#uf.specs.UnservableCallableError"><code class="docutils literal notranslate"><span class="pre">UnservableCallableError</span></code></a></li>
+<li><a class="reference internal" href="#uf.specs.doc_of_func"><code class="docutils literal notranslate"><span class="pre">doc_of_func()</span></code></a></li>
+<li><a class="reference internal" href="#uf.specs.name_funcs"><code class="docutils literal notranslate"><span class="pre">name_funcs()</span></code></a></li>
 <li><a class="reference internal" href="#uf.specs.name_of_func"><code class="docutils literal notranslate"><span class="pre">name_of_func()</span></code></a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
@@ -158,6 +160,12 @@ form specs and OpenAPI schemas.</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.specs.doc_of_func" title="uf.specs.doc_of_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">doc_of_func</span></code></a>(func)</p></td>
+<td><p>The docstring of <code class="docutils literal notranslate"><span class="pre">func</span></code>; for a <code class="docutils literal notranslate"><span class="pre">functools.partial</span></code> (whose own <code class="docutils literal notranslate"><span class="pre">__doc__</span></code> is the generic one of <code class="docutils literal notranslate"><span class="pre">partial</span></code>), that of the function it wraps.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.specs.name_funcs" title="uf.specs.name_funcs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name_funcs</span></code></a>(funcs)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{name:</span> <span class="pre">callable}</span></code> from a mapping of explicit names, or an iterable of callables (named by <code class="docutils literal notranslate"><span class="pre">name_of_func</span></code>).</p></td>
+</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#uf.specs.name_of_func" title="uf.specs.name_of_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name_of_func</span></code></a>(func)</p></td>
 <td><p>The name a function is served under: its <code class="docutils literal notranslate"><span class="pre">__name__</span></code>; failing that, for a <code class="docutils literal notranslate"><span class="pre">functools.partial</span></code>, that of the function it wraps; for a callable instance, its class name.</p></td>
 </tr>
@@ -291,6 +299,45 @@ positional-only parameters).</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="uf.specs.doc_of_func">
+<span class="sig-prename descclassname"><span class="pre">uf.specs.</span></span><span class="sig-name descname"><span class="pre">doc_of_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/specs.html#doc_of_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.specs.doc_of_func" title="Link to this definition">#</a></dt>
+<dd><p>The docstring of <code class="docutils literal notranslate"><span class="pre">func</span></code>; for a <code class="docutils literal notranslate"><span class="pre">functools.partial</span></code> (whose own <code class="docutils literal notranslate"><span class="pre">__doc__</span></code> is
+the generic one of <code class="docutils literal notranslate"><span class="pre">partial</span></code>), that of the function it wraps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span></p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="s2">"Add."</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">doc_of_func</span><span class="p">(</span><span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</span><span data-line="5"><span class="go">'Add.'</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.specs.name_funcs">
+<span class="sig-prename descclassname"><span class="pre">uf.specs.</span></span><span class="sig-name descname"><span class="pre">name_funcs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">funcs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/specs.html#name_funcs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.specs.name_funcs" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">{name:</span> <span class="pre">callable}</span></code> from a mapping of explicit names, or an iterable of
+callables (named by <code class="docutils literal notranslate"><span class="pre">name_of_func</span></code>). Two different callables sharing a name
+raise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></span></p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">name_funcs</span><span class="p">([</span><span class="nb">len</span><span class="p">,</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)])</span>
+</span><span data-line="3"><span class="go">{'len': &lt;built-in function len&gt;, 'int': functools.partial(&lt;class 'int'&gt;, base=2)}</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">name_funcs</span><span class="p">({</span><span class="s1">'size'</span><span class="p">:</span> <span class="nb">len</span><span class="p">})</span>
+</span><span data-line="5"><span class="go">{'size': &lt;built-in function len&gt;}</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="uf.specs.name_of_func">
 <span class="sig-prename descclassname"><span class="pre">uf.specs.</span></span><span class="sig-name descname"><span class="pre">name_of_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/specs.html#name_of_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.specs.name_of_func" title="Link to this definition">#</a></dt>
 <dd><p>The name a function is served under: its <code class="docutils literal notranslate"><span class="pre">__name__</span></code>; failing that, for a
@@ -356,7 +403,7 @@ class name.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=bafade30"></script>
+      <script src="../_static/documentation_options.js?v=1e825a29"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

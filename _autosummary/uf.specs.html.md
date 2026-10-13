@@ -7,8 +7,10 @@ form specs and OpenAPI schemas.
 
 ### Functions
 
-| [`name_of_func`](#uf.specs.name_of_func)(func)   | The name a function is served under: its `__name__`; failing that, for a `functools.partial`, that of the function it wraps; for a callable instance, its class name.   |
-|-----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`doc_of_func`](#uf.specs.doc_of_func)(func)   | The docstring of `func`; for a `functools.partial` (whose own `__doc__` is the generic one of `partial`), that of the function it wraps.                              |
+|----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`name_funcs`](#uf.specs.name_funcs)(funcs)   | `{name: callable}` from a mapping of explicit names, or an iterable of callables (named by `name_of_func`).                                                           |
+| [`name_of_func`](#uf.specs.name_of_func)(func)  | The name a function is served under: its `__name__`; failing that, for a `functools.partial`, that of the function it wraps; for a callable instance, its class name. |
 
 ### Classes
 
@@ -102,6 +104,39 @@ Bases: [`ValueError`](https://docs.python.org/3/builtins/exceptions.html#ValueEr
 
 A callable can never be called from a uf form (e.g. only required
 positional-only parameters).
+
+### uf.specs.doc_of_func(func)
+
+The docstring of `func`; for a `functools.partial` (whose own `__doc__` is
+the generic one of `partial`), that of the function it wraps.
+
+* **Return type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
+```pycon
+>>> import functools
+>>> def f(x, y):
+...     "Add."
+>>> doc_of_func(functools.partial(f, y=1))
+'Add.'
+```
+
+### uf.specs.name_funcs(funcs)
+
+`{name: callable}` from a mapping of explicit names, or an iterable of
+callables (named by `name_of_func`). Two different callables sharing a name
+raise.
+
+* **Return type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)
+
+```pycon
+>>> import functools
+>>> name_funcs([len, functools.partial(int, base=2)])
+{'len': <built-in function len>, 'int': functools.partial(<class 'int'>, base=2)}
+>>> name_funcs({'size': len})
+{'size': <built-in function len>}
+```
 
 ### uf.specs.name_of_func(func)
 

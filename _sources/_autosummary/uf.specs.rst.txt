@@ -8,6 +8,8 @@ uf.specs
 
    .. autosummary::
    
+      doc_of_func
+      name_funcs
       name_of_func
    
    .. rubric:: Classes
