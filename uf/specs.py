@@ -106,10 +106,32 @@ def name_of_func(func: Callable) -> str:
     return getattr(func, "__name__", None) or type(func).__name__
 
 
-def _name_funcs(funcs) -> dict:
+def doc_of_func(func: Callable) -> Optional[str]:
+    """The docstring of ``func``; for a ``functools.partial`` (whose own ``__doc__`` is
+    the generic one of ``partial``), that of the function it wraps.
+
+    >>> import functools
+    >>> def f(x, y):
+    ...     "Add."
+    >>> doc_of_func(functools.partial(f, y=1))
+    'Add.'
+    """
+    while isinstance(func, functools.partial):
+        func = func.func
+    return func.__doc__
+
+
+def name_funcs(funcs) -> dict:
     """``{name: callable}`` from a mapping of explicit names, or an iterable of
     callables (named by ``name_of_func``). Two different callables sharing a name
-    raise."""
+    raise.
+
+    >>> import functools
+    >>> name_funcs([len, functools.partial(int, base=2)])  # doctest: +ELLIPSIS
+    {'len': <built-in function len>, 'int': functools.partial(<class 'int'>, base=2)}
+    >>> name_funcs({'size': len})
+    {'size': <built-in function len>}
+    """
     if isinstance(funcs, Mapping):
         return dict(funcs)
     named = {}
@@ -272,7 +294,7 @@ class FunctionSpecStore(Mapping):
         param_to_prop_type: Optional[Callable] = None,
         validate: bool = False,
     ):
-        self._funcs = _name_funcs(funcs)
+        self._funcs = name_funcs(funcs)
         if validate:
             for name, func in self._funcs.items():
                 _check_servable(func, name)
@@ -363,7 +385,7 @@ class FunctionSpecStore(Mapping):
             "uiSchema": form_spec.get("uiSchema", {}),
             "func": func,
             "name": func_name,
-            "description": func.__doc__ or f"Execute {func_name}",
+            "description": doc_of_func(func) or f"Execute {func_name}",
         }
 
     def _warn_ignored_options(self) -> None:
@@ -429,12 +451,12 @@ class FunctionSpecStore(Mapping):
                 "properties": properties,
                 "required": required,
                 "title": func_name,
-                "description": func.__doc__ or "",
+                "description": doc_of_func(func) or "",
             },
             "uiSchema": {},
             "func": func,
             "name": func_name,
-            "description": func.__doc__ or f"Execute {func_name}",
+            "description": doc_of_func(func) or f"Execute {func_name}",
         }
 
     @cached_property
@@ -447,7 +469,7 @@ class FunctionSpecStore(Mapping):
         return [
             {
                 "name": name,
-                "description": func.__doc__ or f"Execute {name}",
+                "description": doc_of_func(func) or f"Execute {name}",
             }
             for name, func in self._funcs.items()
         ]
