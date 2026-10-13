@@ -2,18 +2,20 @@
 
 # About this build
 
-This documentation was built on **2026-10-12 21:50 UTC** from commit <a href="https://github.com/i2mint/uf/commit/0a7f57dfcef547dd45d780adcc8b554d6d5c3344"><code>0a7f57d</code></a> on branch <code>master</code>, for **uf 0.1.4** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-13 03:06 UTC** from commit <a href="https://github.com/i2mint/uf/commit/9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3"><code>9fa2fea</code></a> on branch <code>master</code>, for **uf 0.1.5** (from <code>pyproject.toml</code>).
 
-#### NOTE
-Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
+#### WARNING
+The documentation and the package may be misaligned:
+
+- The documented version (0.1.5) is ahead of the latest release on PyPI (0.1.4): these docs describe unreleased code.
 
 ## Source
 
 |                     |                                                                                                                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/uf/commit/0a7f57dfcef547dd45d780adcc8b554d6d5c3344"><code>0a7f57dfcef547dd45d780adcc8b554d6d5c3344</code></a> |
+| Commit              | <a href="https://github.com/i2mint/uf/commit/9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3"><code>9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3</code></a> |
 | Branch              | <code>master</code>                                                                                                                              |
-| Tags at this commit | <code>0.1.4</code>                                                                                                                               |
+| Tags at this commit | <code>0.1.5</code>                                                                                                                               |
 | Working tree        | clean                                                                                                                                            |
 | Remote              | <code>https://github.com/i2mint/uf</code>                                                                                                        |
 
@@ -22,9 +24,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/uf</code>                                                                     |
-| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38312920930">38312920930</a>            |
+| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38339974275">38339974275</a>            |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>aafe36d9bf8e66d0ab047ebfd4f4308e83c1a9cb</code> (in the history of the built commit) |
+| Event commit | <code>44cc74fb971aa7cdb62f3c24ded422c7736308bd</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -49,13 +51,13 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.4/">0.1.4</a>, the same as the documented version.
+Latest release: <a href="https://pypi.org/project/uf/0.1.4/">0.1.4</a>, older than the documented version (0.1.5).
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout 0a7f57dfcef547dd45d780adcc8b554d6d5c3344
+git checkout 9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3
 pip install "epythet==0.2.12"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

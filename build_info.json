@@ -1,34 +1,34 @@
 {
   "schema_version": 1,
-  "built_at": "2026-10-12T21:50:32Z",
+  "built_at": "2026-10-13T03:06:42Z",
   "package": {
     "name": "uf",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "display_name": "uf",
     "source": "pyproject.toml"
   },
   "git": {
     "available": true,
-    "commit": "0a7f57dfcef547dd45d780adcc8b554d6d5c3344",
-    "short_commit": "0a7f57d",
+    "commit": "9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3",
+    "short_commit": "9fa2fea",
     "branch": "master",
     "tags": [
-      "0.1.4"
+      "0.1.5"
     ],
     "dirty": false,
     "remote_url": "https://github.com/i2mint/uf",
-    "commit_url": "https://github.com/i2mint/uf/commit/0a7f57dfcef547dd45d780adcc8b554d6d5c3344",
+    "commit_url": "https://github.com/i2mint/uf/commit/9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3",
     "error": null
   },
   "ci": {
     "provider": "github",
     "repository": "i2mint/uf",
-    "sha": "aafe36d9bf8e66d0ab047ebfd4f4308e83c1a9cb",
+    "sha": "44cc74fb971aa7cdb62f3c24ded422c7736308bd",
     "sha_in_history": true,
     "ref": "refs/heads/master",
     "ref_name": "master",
-    "run_id": "38312920930",
-    "run_url": "https://github.com/i2mint/uf/actions/runs/38312920930",
+    "run_id": "38339974275",
+    "run_url": "https://github.com/i2mint/uf/actions/runs/38339974275",
     "server_url": "https://github.com"
   },
   "tools": {
@@ -63,13 +63,15 @@
   "pypi": {
     "checked": true,
     "latest": "0.1.4",
-    "relation": "same",
+    "relation": "ahead",
     "error": null
   },
-  "reproduce": "git clone https://github.com/i2mint/uf && cd uf\ngit checkout 0a7f57dfcef547dd45d780adcc8b554d6d5c3344\npip install \"epythet==0.2.12\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
+  "reproduce": "git clone https://github.com/i2mint/uf && cd uf\ngit checkout 9fa2fea51d6cbefef24efacbd649e0a7e2aa4ab3\npip install \"epythet==0.2.12\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
   "warnings": [],
   "alignment": {
-    "aligned": true,
-    "notes": []
+    "aligned": false,
+    "notes": [
+      "The documented version (0.1.5) is ahead of the latest release on PyPI (0.1.4): these docs describe unreleased code."
+    ]
   }
 }
