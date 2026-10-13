@@ -8,14 +8,91 @@ Following the "convention over configuration" philosophy, it provides sensible
 defaults while allowing customization where needed.
 """
 
-from typing import Callable, Iterable, Optional, Any, Mapping as MappingType
+import functools
+import inspect
+import typing
+from typing import Callable, Iterable, Optional, Any, Union, Mapping as MappingType
 from uf.optional import import_optional
-from uf.specs import FunctionSpecStore
+from uf.specs import FunctionSpecStore, doc_of_func, name_funcs
 from uf.routes import add_ui_routes
 
 
+def _serve_as(func: Callable, name: str) -> Callable:
+    """``func`` as something qh can route: a function whose ``__name__`` is ``name``.
+
+    qh names a route after ``func.__name__``, which a ``functools.partial``, a callable
+    instance, or a function served under another name (a ``{name: callable}`` mapping)
+    doesn't have. Such a callable is wrapped in a function carrying the name and the
+    signature, annotations (string ones resolved in the module of ``func``) and
+    docstring of ``func``; a function, method, builtin or class already named ``name``
+    is returned as it is. (So qh options that refer to a function, like
+    ``async_funcs``, must use the served name when one was given.)
+
+    >>> import functools
+    >>> def plus(x: int, y: int = 1) -> int:
+    ...     return x + y
+    >>> served = _serve_as(functools.partial(plus, y=10), 'plus_ten')
+    >>> served.__name__, str(inspect.signature(served)), served(x=1)
+    ('plus_ten', '(x: int, *, y: int = 10) -> int', 11)
+    >>> _serve_as(plus, 'plus') is plus
+    True
+    """
+    if getattr(func, "__name__", None) == name and (
+        inspect.isroutine(func) or inspect.isclass(func)
+    ):
+        return func
+    inner = func  # what the signature, annotations and awaiting are those of
+    while isinstance(inner, functools.partial):
+        inner = inner.func
+    if inspect.isroutine(inner):
+        target = inner
+    elif inspect.isclass(inner):
+        target = inner.__init__  # (its globals are those of the class's module)
+    else:
+        target = getattr(type(inner), "__call__", inner)
+    try:  # string annotations name things of the user's module, not of this one
+        hints = typing.get_type_hints(target)
+    except Exception:
+        hints = {}
+    sig = inspect.signature(func)
+    sig = sig.replace(
+        parameters=[
+            p.replace(annotation=hints.get(p.name, p.annotation))
+            for p in sig.parameters.values()
+        ],
+        return_annotation=hints.get("return", sig.return_annotation),
+    )
+    if inspect.iscoroutinefunction(target):
+
+        async def served(*args, **kwargs):
+            return await func(*args, **kwargs)
+
+    else:
+
+        def served(*args, **kwargs):
+            return func(*args, **kwargs)
+
+    served.__name__ = served.__qualname__ = name
+    served.__doc__ = doc_of_func(func)
+    served.__module__ = getattr(inner, "__module__", None) or served.__module__
+    served.__signature__ = sig
+    served.__annotations__ = {
+        **{
+            p.name: p.annotation
+            for p in sig.parameters.values()
+            if p.annotation is not inspect.Parameter.empty
+        },
+        **(
+            {"return": sig.return_annotation}
+            if sig.return_annotation is not inspect.Signature.empty
+            else {}
+        ),
+    }
+    return served
+
+
 def mk_rjsf_app(
-    funcs: Iterable[Callable],
+    funcs: Union[Iterable[Callable], MappingType[str, Callable]],
     *,
     # qh-related kwargs
     config: Optional[Any] = None,
@@ -40,7 +117,10 @@ def mk_rjsf_app(
     web interface for your functions.
 
     Args:
-        funcs: Iterable of callable functions to expose via web UI
+        funcs: Iterable of callables to expose via web UI -- functions, partials,
+            callable instances (named by ``uf.specs.name_of_func``) -- or a mapping
+            ``{name: callable}`` to name them yourself. The name is the route and the
+            key of the form spec
         config: Optional qh.AppConfig for HTTP service configuration
         input_trans: Optional input transformation function for qh
         output_trans: Optional output transformation function for qh
@@ -85,12 +165,12 @@ def mk_rjsf_app(
         ...     custom_css="body { background: #f0f0f0; }",
         ... )
     """
-    # Convert to list to allow multiple iterations
-    funcs = list(funcs)
+    # Name the callables once; the spec store and qh are given the same names
+    named_funcs = name_funcs(funcs)
 
     # Create function specification store
     function_specs = FunctionSpecStore(
-        funcs,
+        named_funcs,
         rjsf_config=rjsf_config or {},
         ui_schema_factory=ui_schema_factory,
         param_to_prop_type=param_to_prop_type,
@@ -107,7 +187,7 @@ def mk_rjsf_app(
 
     # Build the qh app with function endpoints
     app = mk_app(
-        funcs,
+        [_serve_as(func, name) for name, func in named_funcs.items()],
         config=config,
         input_trans=input_trans,
         output_trans=output_trans,
@@ -144,17 +224,18 @@ class UfApp:
 
     def __init__(
         self,
-        funcs: Iterable[Callable],
+        funcs: Union[Iterable[Callable], MappingType[str, Callable]],
         **mk_rjsf_app_kwargs,
     ):
         """Initialize UfApp.
 
         Args:
-            funcs: Iterable of callable functions
+            funcs: Iterable of callables, or a mapping ``{name: callable}`` (see
+                ``mk_rjsf_app``)
             **mk_rjsf_app_kwargs: Arguments passed to mk_rjsf_app
         """
-        self.funcs = {f.__name__: f for f in funcs}
-        self.app = mk_rjsf_app(list(self.funcs.values()), **mk_rjsf_app_kwargs)
+        self.funcs = name_funcs(funcs)
+        self.app = mk_rjsf_app(self.funcs, **mk_rjsf_app_kwargs)
         self.function_specs = self.app.function_specs
 
     def run(self, host: str = "localhost", port: int = 8080, **kwargs):

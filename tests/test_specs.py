@@ -588,3 +588,101 @@ def test_absent_ju_warning_is_once_and_points_at_the_caller(monkeypatch):
     ju_warnings = [w for w in record if issubclass(w.category, JuNotInstalledWarning)]
     assert len(ju_warnings) == 1
     assert ju_warnings[0].filename == __file__
+
+
+# --- mk_rjsf_app / UfApp serve partials, callable instances, {name: callable} (#17) ---
+def _plus(x: int, y: int = 1) -> int:
+    """Add."""
+    return x + y
+
+
+class _AsyncDoubler:
+    async def __call__(self, x: int = 1) -> int:
+        return 2 * x
+
+
+def _client(app):
+    pytest.importorskip('qh')
+    testclient = pytest.importorskip('fastapi.testclient')
+    return testclient.TestClient(app)
+
+
+def test_mk_rjsf_app_serves_partials_instances_and_mappings():
+    from uf import mk_rjsf_app
+
+    client = _client(mk_rjsf_app([functools.partial(_plus, y=10), _Doubler()]))
+    assert client.post('/_plus', json={'x': 1}).json() == 11  # (named after _plus)
+    assert client.post('/_Doubler', json={'x': 4}).json() == 8
+    client = _client(
+        mk_rjsf_app({'plus_ten': functools.partial(_plus, y=10), 'plus': _plus})
+    )
+    assert client.post('/plus_ten', json={'x': 1}).json() == 11
+    assert client.post('/plus', json={'x': 1, 'y': 5}).json() == 6
+    names = {f['name']: f for f in client.get('/api/functions').json()}
+    assert set(names) == {'plus_ten', 'plus'}
+    assert names['plus_ten']['description'] == 'Add.'  # not partial's own docstring
+    spec = client.get('/api/functions/plus_ten/spec').json()
+    assert spec['name'] == 'plus_ten' and 'x' in spec['schema']['properties']
+
+
+def test_two_different_unnamed_callables_with_one_name_raise_in_mk_rjsf_app():
+    from uf import mk_rjsf_app
+
+    pytest.importorskip('qh')
+    with pytest.raises(ValueError, match="both named '_plus'"):
+        mk_rjsf_app([_plus, functools.partial(_plus, y=2)])
+
+
+def test_async_callable_instance_is_served_as_async():
+    from uf import mk_rjsf_app
+
+    client = _client(mk_rjsf_app({'twice': _AsyncDoubler()}))
+    assert client.post('/twice', json={'x': 3}).json() == 6
+
+
+def test_ufapp_accepts_partials_instances_and_mappings():
+    from uf import UfApp
+
+    pytest.importorskip('qh')
+    app = UfApp([functools.partial(_plus, y=3), _Doubler()])
+    assert app.list_functions() == ['_plus', '_Doubler']
+    assert app.call('_plus', x=1) == 4 and app.call('_Doubler', x=2) == 4
+    assert app.get_spec('_plus')['name'] == '_plus'
+    named = UfApp({'inc': functools.partial(_plus, y=1)})
+    assert named.list_functions() == ['inc']
+    assert _client(named.app).post('/inc', json={'x': 1}).json() == 2
+
+
+def test_served_callables_resolve_string_annotations_of_their_own_module():
+    from uf import mk_rjsf_app
+    from . import annotated_funcs as af
+
+    client = _client(mk_rjsf_app({'sh': af.shift}))  # (renamed, so wrapped)
+    assert client.post('/sh', json={'p': {'x': 1}, 'dx': 5}).json() == 5
+
+
+def test_async_callables_are_awaited_however_they_are_wrapped():
+    from uf import mk_rjsf_app
+    from . import annotated_funcs as af
+
+    client = _client(
+        mk_rjsf_app(
+            {
+                'partial_of_instance': functools.partial(af.AsyncDoubler(), x=2),
+                'tripler': af.NamedAsyncTripler(),
+            }
+        )
+    )
+    assert client.post('/partial_of_instance', json={}).json() == 4
+    assert client.post('/tripler', json={'x': 2}).json() == 6
+
+
+def test_a_renamed_class_or_partial_of_a_class_resolves_string_annotations():
+    from uf import mk_rjsf_app
+    from . import annotated_funcs as af
+
+    client = _client(
+        mk_rjsf_app({'mk': af.Box, 'mk5': functools.partial(af.Box, n=5)})
+    )
+    assert client.post('/mk', json={'n': 2}).status_code == 200
+    assert client.post('/mk5', json={}).status_code == 200
