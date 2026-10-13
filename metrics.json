@@ -1,7 +1,7 @@
 {
-  "collection_duration_seconds": 7.883087635040283,
-  "commit_message": "fix(organization): the outermost partial with a tag wins, falsy tags included (#26)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
-  "commit_sha": "a406b96ca8caf1da106d6eb2e44cdbe30d933eeb",
+  "collection_duration_seconds": 9.319270849227905,
+  "commit_message": "Merge a406b96ca8caf1da106d6eb2e44cdbe30d933eeb into 90650879554eb0890acd277240ec8ccb805489a2",
+  "commit_sha": "2799edde3acfa0741b95e575a712478d2c4c9c87",
   "metrics": {
     "coverage": {
       "branch_coverage": 0.0,
@@ -22,7 +22,7 @@
       "mean_lines_per_function": 16.403228918762462,
       "num_classes": 5998,
       "num_functions": 31094,
-      "pypi_version": "0.1.14",
+      "pypi_version": "0.1.15",
       "total_lines": 894815
     },
     "wily": {
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-13T17:53:58.062754Z",
+  "timestamp": "2026-10-13T17:54:05.388296Z",
   "workflow_status": {}
 }

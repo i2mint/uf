@@ -1,10 +1,8 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-13T17:53:58.062754Z
-commit_sha,a406b96ca8caf1da106d6eb2e44cdbe30d933eeb
-commit_message,"fix(organization): the outermost partial with a tag wins, falsy tags included (#26)
-
-Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+timestamp,2026-10-13T17:54:05.388296Z
+commit_sha,2799edde3acfa0741b95e575a712478d2c4c9c87
+commit_message,Merge a406b96ca8caf1da106d6eb2e44cdbe30d933eeb into 90650879554eb0890acd277240ec8ccb805489a2
 python_version,3.10
 metrics.umpyre_stats.num_functions,31094
 metrics.umpyre_stats.num_classes,5998
@@ -18,7 +16,7 @@ metrics.umpyre_stats.comment_lines_ratio,0.049558847359510064
 metrics.umpyre_stats.function_lines_ratio,0.5699971502489342
 metrics.umpyre_stats.mean_lines_per_function,16.403228918762462
 metrics.umpyre_stats.files_analyzed,2169
-metrics.umpyre_stats.pypi_version,0.1.14
+metrics.umpyre_stats.pypi_version,0.1.15
 metrics.workflow_status.last_run_status,success
 metrics.workflow_status.last_success_timestamp,2026-10-13T17:53:28Z
 metrics.workflow_status.recent_failure_count,0
@@ -38,4 +36,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,7.883087635040283
+collection_duration_seconds,9.319270849227905
