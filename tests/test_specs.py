@@ -445,3 +445,34 @@ def test_missing_qh_gets_the_install_hint_but_broken_qh_propagates(monkeypatch):
     monkeypatch.setattr(sys, 'meta_path', [_AbsentFinder('qh'), *sys.meta_path[1:]])
     with pytest.raises(ImportError, match='pip install qh'):
         mk_rjsf_app([sample_add])
+
+
+def test_import_optional_treats_a_namespace_directory_as_absent(tmp_path, monkeypatch):
+    # a stray directory named like the optional package (no __init__.py)
+    (tmp_path / '_uf_stray_dir_pkg_').mkdir()
+    monkeypatch.syspath_prepend(str(tmp_path))
+    monkeypatch.delitem(sys.modules, '_uf_stray_dir_pkg_', raising=False)
+    assert import_optional('_uf_stray_dir_pkg_') is None
+    # ... while a real package of that name is imported
+    (tmp_path / '_uf_real_pkg_').mkdir()
+    (tmp_path / '_uf_real_pkg_' / '__init__.py').write_text('X = 1\n')
+    monkeypatch.delitem(sys.modules, '_uf_real_pkg_', raising=False)
+    assert import_optional('_uf_real_pkg_').X == 1
+
+
+def test_import_optional_dotted_name_under_a_namespace_directory(tmp_path, monkeypatch):
+    (tmp_path / '_uf_stray_dir2_').mkdir()
+    monkeypatch.syspath_prepend(str(tmp_path))
+    monkeypatch.delitem(sys.modules, '_uf_stray_dir2_', raising=False)
+    assert import_optional('_uf_stray_dir2_.sub', absent=('_uf_stray_dir2_',)) is None
+    monkeypatch.delitem(sys.modules, '_uf_stray_dir2_', raising=False)
+    assert import_optional('_uf_stray_dir2_.sub') is None
+
+
+def test_import_optional_keeps_a_stub_package(monkeypatch):
+    import types
+
+    stub = types.ModuleType('_uf_stub_pkg_')
+    stub.__path__ = []  # looks like a package, has no spec
+    monkeypatch.setitem(sys.modules, '_uf_stub_pkg_', stub)
+    assert import_optional('_uf_stub_pkg_') is stub
