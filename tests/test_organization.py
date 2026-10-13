@@ -126,3 +126,16 @@ def test_a_tag_on_the_partial_itself_wins():
 
 def test_an_untagged_partial_still_goes_to_other():
     assert _group_names(auto_group_by_tag([functools.partial(add)])) == {"Other": ["add"]}
+
+
+def test_the_outermost_partial_with_a_tag_wins_even_a_falsy_one():
+    def tagged(x: int, y: int, z: int) -> int:
+        return x
+
+    tagged.__uf_group__ = "Admin"
+    mid = functools.partial(tagged, 1)
+    mid.__uf_group__ = "Mid"
+    outer = functools.partial(mid, 2)
+    assert _group_names(auto_group_by_tag([outer])) == {"Mid": ["tagged"]}
+    mid.__uf_group__ = ""
+    assert _group_names(auto_group_by_tag([outer])) == {"": ["tagged"]}
