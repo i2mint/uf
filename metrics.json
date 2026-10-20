@@ -1,7 +1,7 @@
 {
-  "collection_duration_seconds": 11.616825342178345,
-  "commit_message": "Merge 320865a0478011cd95a103e0c95f06ccd71c20c7 into bd0c02b56799e1fc4b9fdc94c4efaff2108c6c33",
-  "commit_sha": "a4736477d4a103603b0e540c1a3b90432497924b",
+  "collection_duration_seconds": 11.09554147720337,
+  "commit_message": "Widen testpaths again; drop None input/output_trans before qh.mk_app; dependency-free pydantic doctest (#5)",
+  "commit_sha": "320865a0478011cd95a103e0c95f06ccd71c20c7",
   "metrics": {
     "coverage": {
       "branch_coverage": 0.0,
@@ -42,6 +42,6 @@
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-20T03:27:11.049064Z",
+  "timestamp": "2026-10-20T03:27:13.730340Z",
   "workflow_status": {}
 }
