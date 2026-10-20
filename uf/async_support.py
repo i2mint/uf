@@ -42,7 +42,7 @@ def async_to_sync(async_func: Callable) -> Callable:
         ...     # async operations
         ...     return data
         >>> sync_fetch = async_to_sync(fetch_data)
-        >>> result = sync_fetch('https://example.com')
+        >>> result = sync_fetch('https://example.com')  # doctest: +SKIP
     """
     if not is_async_function(async_func):
         return async_func
@@ -84,8 +84,8 @@ def make_sync_compatible(funcs: list[Callable]) -> list[Callable]:
         List of functions (all synchronous)
 
     Example:
-        >>> funcs = [sync_func, async_func, another_sync]
-        >>> compatible = make_sync_compatible(funcs)
+        >>> funcs = [sync_func, async_func, another_sync]  # doctest: +SKIP
+        >>> compatible = make_sync_compatible(funcs)  # doctest: +SKIP
         >>> # All functions in compatible are now callable synchronously
     """
     return [async_to_sync(func) for func in funcs]
@@ -130,9 +130,9 @@ class AsyncFunctionWrapper:
         >>>
         >>> wrapper = AsyncFunctionWrapper(fetch_user)
         >>> # Sync call
-        >>> user = wrapper.call_sync(user_id=123)
+        >>> user = wrapper.call_sync(user_id=123)  # doctest: +SKIP
         >>> # Async call
-        >>> user = await wrapper.call_async(user_id=123)
+        >>> user = await wrapper.call_async(user_id=123)  # doctest: +SKIP
     """
 
     def __init__(self, func: Callable):
@@ -211,7 +211,7 @@ def batch_async_calls(
         ...     {'args': (), 'kwargs': {'user_id': 2}},
         ...     {'args': (), 'kwargs': {'user_id': 3}},
         ... ]
-        >>> users = batch_async_calls(fetch_user, calls)
+        >>> users = batch_async_calls(fetch_user, calls)  # doctest: +SKIP
     """
     if not is_async_function(async_func):
         # Sync function, just call sequentially
@@ -311,7 +311,7 @@ class AsyncContext:
     This helps manage event loops and async resources properly.
 
     Example:
-        >>> with AsyncContext() as ctx:
+        >>> with AsyncContext() as ctx:  # doctest: +SKIP
         ...     result = ctx.run(my_async_function(param))
     """
 

@@ -221,7 +221,8 @@ def wrap_pydantic_function(func: Callable) -> Callable:
         >>> def create_user(user: User) -> User:
         ...     return user
         >>> wrapped = wrap_pydantic_function(create_user)
-        >>> result = wrapped({'name': 'Alice'})  # Pass dict, not User
+        >>> wrapped(user={'name': 'Alice'})  # Pass a dict, not a User
+        {'name': 'Alice'}
     """
     pydantic_params = extract_pydantic_params(func)
 

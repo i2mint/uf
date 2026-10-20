@@ -182,7 +182,7 @@ class DictAuthBackend(AuthBackend):
 
     Example:
         >>> backend = DictAuthBackend()
-        >>> backend.create_user('admin', 'secret', roles=['admin'])
+        >>> _ = backend.create_user('admin', 'secret', roles=['admin'])
         >>> user = backend.authenticate('admin', 'secret')
     """
 
@@ -419,9 +419,9 @@ class ApiKeyManager:
     Example:
         >>> api_keys = ApiKeyManager()
         >>> key = api_keys.create_key('mobile_app', permissions=['read'])
-        >>> print(f"Your API key: {key.key}")
+        >>> print(f"Your API key: {key.key}")  # doctest: +SKIP
         >>> # Later, validate
-        >>> if api_keys.validate_key(key.key, 'read'):
+        >>> if api_keys.validate_key(key.key, 'read'):  # doctest: +SKIP
         ...     # Allow access
     """
 

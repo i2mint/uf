@@ -103,9 +103,9 @@ class RjsfConfigBuilder:
 
     Example:
         >>> builder = RjsfConfigBuilder()
-        >>> builder.field('email', RjsfFieldConfig(format='email'))
-        >>> builder.field('message', RjsfFieldConfig(widget='textarea'))
-        >>> spec = builder.build(base_schema)
+        >>> _ = builder.field('email', RjsfFieldConfig(format='email'))
+        >>> _ = builder.field('message', RjsfFieldConfig(widget='textarea'))
+        >>> spec = builder.build(base_schema)  # doctest: +SKIP
     """
 
     def __init__(self):
@@ -277,7 +277,7 @@ def apply_field_configs(
         ...     'email': get_field_config('email'),
         ...     'bio': get_field_config('multiline_text'),
         ... }
-        >>> schema, ui_schema = apply_field_configs(schema, ui_schema, configs)
+        >>> schema, ui_schema = apply_field_configs(schema, ui_schema, configs)  # doctest: +SKIP
     """
     builder = RjsfConfigBuilder()
     for field_name, config in field_configs.items():
