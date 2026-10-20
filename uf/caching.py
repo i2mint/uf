@@ -187,8 +187,11 @@ class DiskCache(CacheBackend):
     across restarts.
 
     Example:
-        >>> cache = DiskCache(cache_dir='/tmp/uf_cache')
-        >>> cache.set('expensive_result', big_data)  # doctest: +SKIP
+        >>> import tempfile
+        >>> cache = DiskCache(cache_dir=tempfile.mkdtemp())
+        >>> cache.set('expensive_result', [1, 2, 3])
+        >>> cache.get('expensive_result')
+        [1, 2, 3]
     """
 
     def __init__(self, cache_dir: str = ".uf_cache", default_ttl: int = 3600):
@@ -320,10 +323,14 @@ def cached(
         >>> @cached(ttl=3600)
         ... def expensive_calculation(x: int, y: int) -> int:
         ...     # Only runs once per unique (x, y) combination
-        ...     return heavy_computation(x, y)
+        ...     print("computing")
+        ...     return x + y
         >>>
-        >>> result = expensive_calculation(10, 20)  # Computes  # doctest: +SKIP
-        >>> result2 = expensive_calculation(10, 20)  # From cache  # doctest: +SKIP
+        >>> expensive_calculation(10, 20)  # computes
+        computing
+        30
+        >>> expensive_calculation(10, 20)  # from cache
+        30
     """
     if backend is None:
         backend = get_global_cache_backend()

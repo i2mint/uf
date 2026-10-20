@@ -419,10 +419,12 @@ class ApiKeyManager:
     Example:
         >>> api_keys = ApiKeyManager()
         >>> key = api_keys.create_key('mobile_app', permissions=['read'])
-        >>> print(f"Your API key: {key.key}")  # doctest: +SKIP
+        >>> key.key.startswith('sk_')
+        True
         >>> # Later, validate
-        >>> if api_keys.validate_key(key.key, 'read'):  # doctest: +SKIP
-        ...     # Allow access
+        >>> if api_keys.validate_key(key.key, 'read'):
+        ...     print("access allowed")
+        access allowed
     """
 
     def __init__(self, key_prefix: str = "sk_"):

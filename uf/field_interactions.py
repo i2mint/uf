@@ -384,7 +384,10 @@ def add_field_dependencies(
         ...                    lambda v: v == 'other',
         ...                    DependencyAction.SHOW)
         ... ]
-        >>> spec = add_field_dependencies(my_func, deps)  # doctest: +SKIP
+        >>> def my_func(reason: str, other_reason: str = ''): ...
+        >>> spec = add_field_dependencies(my_func, deps)
+        >>> sorted(spec)
+        ['schema_additions', 'ui_schema_additions']
     """
     # This would typically be called during spec generation
     # For now, return a structure that can be merged

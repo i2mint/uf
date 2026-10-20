@@ -105,7 +105,10 @@ class RjsfConfigBuilder:
         >>> builder = RjsfConfigBuilder()
         >>> _ = builder.field('email', RjsfFieldConfig(format='email'))
         >>> _ = builder.field('message', RjsfFieldConfig(widget='textarea'))
-        >>> spec = builder.build(base_schema)  # doctest: +SKIP
+        >>> base_schema = {'type': 'object', 'properties': {'email': {'type': 'string'}}}
+        >>> spec = builder.build(base_schema)
+        >>> spec['schema']['properties']['email']['format']
+        'email'
     """
 
     def __init__(self):
@@ -273,11 +276,13 @@ def apply_field_configs(
         Tuple of (modified_schema, modified_ui_schema)
 
     Example:
-        >>> configs = {
-        ...     'email': get_field_config('email'),
-        ...     'bio': get_field_config('multiline_text'),
-        ... }
-        >>> schema, ui_schema = apply_field_configs(schema, ui_schema, configs)  # doctest: +SKIP
+        >>> schema = {'type': 'object', 'properties': {'email': {'type': 'string'}}}
+        >>> configs = {'email': get_field_config('email')}
+        >>> schema, ui_schema = apply_field_configs(schema, {}, configs)
+        >>> schema['properties']['email']['format']
+        'email'
+        >>> ui_schema['email']['ui:widget']
+        'email'
     """
     builder = RjsfConfigBuilder()
     for field_name, config in field_configs.items():
