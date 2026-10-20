@@ -96,10 +96,14 @@ Get example arguments from a function.
 ### Example
 
 ```pycon
+>>> @with_example(2, y=3)
+... def my_function(x, y): return x * y
 >>> example = get_example(my_function)
 >>> if example:
 ...     args, kwargs = example
 ...     result = my_function(*args, **kwargs)
+>>> result
+6
 ```
 
 ### uf.decorators.get_field_configs(func)
@@ -116,9 +120,12 @@ Get field configurations from a function.
 ### Example
 
 ```pycon
+>>> @ui_config(fields={'email': RjsfFieldConfig(format='email')})
+... def my_function(email: str): ...
 >>> field_configs = get_field_configs(my_function)
 >>> if 'email' in field_configs:
 ...     print(field_configs['email'].format)
+email
 ```
 
 ### uf.decorators.get_group(func)
@@ -135,9 +142,12 @@ Get group name from a function.
 ### Example
 
 ```pycon
+>>> @ui_config(group="Admin")
+... def my_function(name: str): ...
 >>> group = get_group(my_function)
 >>> if group:
 ...     print(f"Function is in group: {group}")
+Function is in group: Admin
 ```
 
 ### uf.decorators.get_ui_config(func)
@@ -154,9 +164,12 @@ Get UI configuration from a function.
 ### Example
 
 ```pycon
+>>> @ui_config(title="Greeting")
+... def my_function(name: str): ...
 >>> config = get_ui_config(my_function)
 >>> if config:
 ...     print(config['title'])
+Greeting
 ```
 
 ### uf.decorators.group(group_name)
@@ -214,9 +227,10 @@ Check if a function is hidden from UI.
 ### Example
 
 ```pycon
+>>> def my_function(): ...
 >>> if not is_hidden(my_function):
-...     # Show in UI
-...     pass
+...     print("show in UI")
+show in UI
 ```
 
 ### uf.decorators.rate_limit(calls, period)

@@ -310,7 +310,9 @@ Manage parameter presets for functions.
 >>> presets = PresetManager()
 >>> _ = presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')
 >>> preset = presets.get('quick_add', 'add')
->>> result = my_func(**preset.params)
+>>> def add(x, y): return x + y
+>>> add(**preset.params)
+30
 ```
 
 #### delete(preset_name, func_name)

@@ -292,11 +292,14 @@ qh.mk_app as the input_trans parameter.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">uf</span><span class="w"> </span><span class="kn">import</span> <span class="n">mk_rjsf_app</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 </span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">registry</span> <span class="o">=</span> <span class="n">InputTransformRegistry</span><span class="p">()</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># ... register types ...</span>
-</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">input_trans</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">mk_input_trans_for_funcs</span><span class="p">([</span><span class="n">my_func</span><span class="p">])</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">([</span><span class="n">my_func</span><span class="p">],</span> <span class="n">input_trans</span><span class="o">=</span><span class="n">input_trans</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span><span class="n">Path</span><span class="p">,</span> <span class="n">to_json</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">from_json</span><span class="o">=</span><span class="n">Path</span><span class="p">,</span> <span class="n">json_schema_type</span><span class="o">=</span><span class="s1">'string'</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">my_func</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">input_trans</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">mk_input_trans_for_funcs</span><span class="p">([</span><span class="n">my_func</span><span class="p">])</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="nb">callable</span><span class="p">(</span><span class="n">input_trans</span><span class="p">)</span>  <span class="c1"># pass it as ``mk_rjsf_app([my_func], input_trans=...)``</span>
+</span><span data-line="8"><span class="go">True</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -314,8 +317,14 @@ qh.mk_app as the input_trans parameter.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">output_trans</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">mk_output_trans</span><span class="p">()</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">([</span><span class="n">my_func</span><span class="p">],</span> <span class="n">output_trans</span><span class="o">=</span><span class="n">output_trans</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">registry</span> <span class="o">=</span> <span class="n">InputTransformRegistry</span><span class="p">()</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span><span class="n">Decimal</span><span class="p">,</span> <span class="n">to_json</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">from_json</span><span class="o">=</span><span class="n">Decimal</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">my_func</span><span class="p">():</span> <span class="k">return</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">'1.50'</span><span class="p">)</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">output_trans</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">mk_output_trans</span><span class="p">()</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">output_trans</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">'1.50'</span><span class="p">))</span>
+</span><span data-line="7"><span class="go">'1.50'</span>
+</span><span data-line="8"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># pass it as ``mk_rjsf_app([my_func], output_trans=output_trans)``</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -342,13 +351,14 @@ qh.mk_app as the input_trans parameter.</p>
 </dl>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="n">Path</span><span class="p">,</span>
-</span><span data-line="4"><span class="gp">... </span>    <span class="n">to_json</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-</span><span data-line="5"><span class="gp">... </span>    <span class="n">from_json</span><span class="o">=</span><span class="n">Path</span><span class="p">,</span>
-</span><span data-line="6"><span class="gp">... </span>    <span class="n">ui_widget</span><span class="o">=</span><span class="s1">'text'</span><span class="p">,</span>
-</span><span data-line="7"><span class="gp">... </span>    <span class="n">json_schema_type</span><span class="o">=</span><span class="s1">'string'</span>
-</span><span data-line="8"><span class="gp">... </span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">registry</span> <span class="o">=</span> <span class="n">InputTransformRegistry</span><span class="p">()</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span>
+</span><span data-line="4"><span class="gp">... </span>    <span class="n">Path</span><span class="p">,</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="n">to_json</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="n">from_json</span><span class="o">=</span><span class="n">Path</span><span class="p">,</span>
+</span><span data-line="7"><span class="gp">... </span>    <span class="n">ui_widget</span><span class="o">=</span><span class="s1">'text'</span><span class="p">,</span>
+</span><span data-line="8"><span class="gp">... </span>    <span class="n">json_schema_type</span><span class="o">=</span><span class="s1">'string'</span>
+</span><span data-line="9"><span class="gp">... </span><span class="p">)</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -454,7 +464,7 @@ See InputTransformRegistry.register_type for full documentation.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=9969ed3f"></script>
+      <script src="../_static/documentation_options.js?v=3d116926"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

@@ -132,8 +132,11 @@ across restarts.
 ### Example
 
 ```pycon
->>> cache = DiskCache(cache_dir='/tmp/uf_cache')
->>> cache.set('expensive_result', big_data)
+>>> import tempfile
+>>> cache = DiskCache(cache_dir=tempfile.mkdtemp())
+>>> cache.set('expensive_result', [1, 2, 3])
+>>> cache.get('expensive_result')
+[1, 2, 3]
 ```
 
 #### clear()
@@ -264,10 +267,14 @@ Decorator to cache function results.
 >>> @cached(ttl=3600)
 ... def expensive_calculation(x: int, y: int) -> int:
 ...     # Only runs once per unique (x, y) combination
-...     return heavy_computation(x, y)
+...     print("computing")
+...     return x + y
 >>>
->>> result = expensive_calculation(10, 20)  # Computes
->>> result2 = expensive_calculation(10, 20)  # From cache
+>>> expensive_calculation(10, 20)  # computes
+computing
+30
+>>> expensive_calculation(10, 20)  # from cache
+30
 ```
 
 ### uf.caching.get_global_cache_backend()

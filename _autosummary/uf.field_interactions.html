@@ -644,7 +644,10 @@ conditional display, dynamic validation, and field dependencies.</p>
 </span><span data-line="3"><span class="gp">... </span>                   <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="o">==</span> <span class="s1">'other'</span><span class="p">,</span>
 </span><span data-line="4"><span class="gp">... </span>                   <span class="n">DependencyAction</span><span class="o">.</span><span class="n">SHOW</span><span class="p">)</span>
 </span><span data-line="5"><span class="gp">... </span><span class="p">]</span>
-</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">spec</span> <span class="o">=</span> <span class="n">add_field_dependencies</span><span class="p">(</span><span class="n">my_func</span><span class="p">,</span> <span class="n">deps</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">my_func</span><span class="p">(</span><span class="n">reason</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">other_reason</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">''</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="n">spec</span> <span class="o">=</span> <span class="n">add_field_dependencies</span><span class="p">(</span><span class="n">my_func</span><span class="p">,</span> <span class="n">deps</span><span class="p">)</span>
+</span><span data-line="8"><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+</span><span data-line="9"><span class="go">['schema_additions', 'ui_schema_additions']</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -732,7 +735,7 @@ conditional display, dynamic validation, and field dependencies.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=9969ed3f"></script>
+      <script src="../_static/documentation_options.js?v=3d116926"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

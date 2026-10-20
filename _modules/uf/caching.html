@@ -362,344 +362,351 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="187"><span class="sd">    across restarts.</span>
 </span><span data-line="188">
 </span><span data-line="189"><span class="sd">    Example:</span>
-</span><span data-line="190"><span class="sd">        &gt;&gt;&gt; cache = DiskCache(cache_dir='/tmp/uf_cache')</span>
-</span><span data-line="191"><span class="sd">        &gt;&gt;&gt; cache.set('expensive_result', big_data)  # doctest: +SKIP</span>
-</span><span data-line="192"><span class="sd">    """</span>
-</span><span data-line="193">
-</span><span data-line="194">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">".uf_cache"</span><span class="p">,</span> <span class="n">default_ttl</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3600</span><span class="p">):</span>
-</span><span data-line="195"><span class="w">        </span><span class="sd">"""Initialize disk cache.</span>
+</span><span data-line="190"><span class="sd">        &gt;&gt;&gt; import tempfile</span>
+</span><span data-line="191"><span class="sd">        &gt;&gt;&gt; cache = DiskCache(cache_dir=tempfile.mkdtemp())</span>
+</span><span data-line="192"><span class="sd">        &gt;&gt;&gt; cache.set('expensive_result', [1, 2, 3])</span>
+</span><span data-line="193"><span class="sd">        &gt;&gt;&gt; cache.get('expensive_result')</span>
+</span><span data-line="194"><span class="sd">        [1, 2, 3]</span>
+</span><span data-line="195"><span class="sd">    """</span>
 </span><span data-line="196">
-</span><span data-line="197"><span class="sd">        Args:</span>
-</span><span data-line="198"><span class="sd">            cache_dir: Directory to store cache files</span>
-</span><span data-line="199"><span class="sd">            default_ttl: Default TTL in seconds</span>
-</span><span data-line="200"><span class="sd">        """</span>
-</span><span data-line="201">        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-</span><span data-line="202">
-</span><span data-line="203">        <span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span> <span class="o">=</span> <span class="n">cache_dir</span>
-</span><span data-line="204">        <span class="bp">self</span><span class="o">.</span><span class="n">default_ttl</span> <span class="o">=</span> <span class="n">default_ttl</span>
+</span><span data-line="197">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">".uf_cache"</span><span class="p">,</span> <span class="n">default_ttl</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3600</span><span class="p">):</span>
+</span><span data-line="198"><span class="w">        </span><span class="sd">"""Initialize disk cache.</span>
+</span><span data-line="199">
+</span><span data-line="200"><span class="sd">        Args:</span>
+</span><span data-line="201"><span class="sd">            cache_dir: Directory to store cache files</span>
+</span><span data-line="202"><span class="sd">            default_ttl: Default TTL in seconds</span>
+</span><span data-line="203"><span class="sd">        """</span>
+</span><span data-line="204">        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 </span><span data-line="205">
-</span><span data-line="206">        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span data-line="207">
-</span><span data-line="208">    <span class="k">def</span><span class="w"> </span><span class="nf">_get_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span data-line="209"><span class="w">        </span><span class="sd">"""Get file path for a key."""</span>
-</span><span data-line="210">        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-</span><span data-line="211">
-</span><span data-line="212">        <span class="c1"># Hash the key to create valid filename</span>
-</span><span data-line="213">        <span class="n">key_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
-</span><span data-line="214">        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key_hash</span><span class="si">}</span><span class="s2">.cache"</span><span class="p">)</span>
-</span><span data-line="215">
+</span><span data-line="206">        <span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span> <span class="o">=</span> <span class="n">cache_dir</span>
+</span><span data-line="207">        <span class="bp">self</span><span class="o">.</span><span class="n">default_ttl</span> <span class="o">=</span> <span class="n">default_ttl</span>
+</span><span data-line="208">
+</span><span data-line="209">        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span data-line="210">
+</span><span data-line="211">    <span class="k">def</span><span class="w"> </span><span class="nf">_get_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="212"><span class="w">        </span><span class="sd">"""Get file path for a key."""</span>
+</span><span data-line="213">        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span data-line="214">
+</span><span data-line="215">        <span class="c1"># Hash the key to create valid filename</span>
+</span><span data-line="216">        <span class="n">key_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+</span><span data-line="217">        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key_hash</span><span class="si">}</span><span class="s2">.cache"</span><span class="p">)</span>
+</span><span data-line="218">
 <div class="viewcode-block" id="DiskCache.get">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.DiskCache.get">[docs]</a>
-</span><span data-line="216">    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-</span><span data-line="217"><span class="w">        </span><span class="sd">"""Get a value from cache."""</span>
-</span><span data-line="218">        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-</span><span data-line="219">
-</span><span data-line="220">        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_path</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</span><span data-line="221">        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-</span><span data-line="222">            <span class="k">return</span> <span class="kc">None</span>
-</span><span data-line="223">
-</span><span data-line="224">        <span class="k">try</span><span class="p">:</span>
-</span><span data-line="225">            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span><span data-line="226">                <span class="n">entry</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</span><span data-line="227">
-</span><span data-line="228">            <span class="c1"># Check expiration</span>
-</span><span data-line="229">            <span class="k">if</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"expires_at"</span><span class="p">]</span> <span class="ow">and</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"expires_at"</span><span class="p">]:</span>
-</span><span data-line="230">                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-</span><span data-line="231">                <span class="k">return</span> <span class="kc">None</span>
-</span><span data-line="232">
-</span><span data-line="233">            <span class="k">return</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"value"</span><span class="p">]</span>
-</span><span data-line="234">        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-</span><span data-line="235">            <span class="k">return</span> <span class="kc">None</span></div>
+</span><span data-line="219">    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+</span><span data-line="220"><span class="w">        </span><span class="sd">"""Get a value from cache."""</span>
+</span><span data-line="221">        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span data-line="222">
+</span><span data-line="223">        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_path</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span data-line="224">        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+</span><span data-line="225">            <span class="k">return</span> <span class="kc">None</span>
+</span><span data-line="226">
+</span><span data-line="227">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="228">            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span data-line="229">                <span class="n">entry</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span data-line="230">
+</span><span data-line="231">            <span class="c1"># Check expiration</span>
+</span><span data-line="232">            <span class="k">if</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"expires_at"</span><span class="p">]</span> <span class="ow">and</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"expires_at"</span><span class="p">]:</span>
+</span><span data-line="233">                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</span><span data-line="234">                <span class="k">return</span> <span class="kc">None</span>
+</span><span data-line="235">
+</span><span data-line="236">            <span class="k">return</span> <span class="n">entry</span><span class="p">[</span><span class="s2">"value"</span><span class="p">]</span>
+</span><span data-line="237">        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+</span><span data-line="238">            <span class="k">return</span> <span class="kc">None</span></div>
 
-</span><span data-line="236">
+</span><span data-line="239">
 <div class="viewcode-block" id="DiskCache.set">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.DiskCache.set">[docs]</a>
-</span><span data-line="237">    <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="238"><span class="w">        </span><span class="sd">"""Set a value in cache."""</span>
-</span><span data-line="239">        <span class="k">if</span> <span class="n">ttl</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="240">            <span class="n">ttl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_ttl</span>
-</span><span data-line="241">
-</span><span data-line="242">        <span class="n">expires_at</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="243">        <span class="k">if</span> <span class="n">ttl</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span data-line="244">            <span class="n">expires_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">ttl</span><span class="p">)</span>
-</span><span data-line="245">
-</span><span data-line="246">        <span class="n">entry</span> <span class="o">=</span> <span class="p">{</span>
-</span><span data-line="247">            <span class="s2">"value"</span><span class="p">:</span> <span class="n">value</span><span class="p">,</span>
-</span><span data-line="248">            <span class="s2">"expires_at"</span><span class="p">:</span> <span class="n">expires_at</span><span class="p">,</span>
-</span><span data-line="249">            <span class="s2">"created_at"</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
-</span><span data-line="250">        <span class="p">}</span>
-</span><span data-line="251">
-</span><span data-line="252">        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_path</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</span><span data-line="253">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span><span data-line="254">            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span></div>
+</span><span data-line="240">    <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="241"><span class="w">        </span><span class="sd">"""Set a value in cache."""</span>
+</span><span data-line="242">        <span class="k">if</span> <span class="n">ttl</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="243">            <span class="n">ttl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_ttl</span>
+</span><span data-line="244">
+</span><span data-line="245">        <span class="n">expires_at</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="246">        <span class="k">if</span> <span class="n">ttl</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span data-line="247">            <span class="n">expires_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">ttl</span><span class="p">)</span>
+</span><span data-line="248">
+</span><span data-line="249">        <span class="n">entry</span> <span class="o">=</span> <span class="p">{</span>
+</span><span data-line="250">            <span class="s2">"value"</span><span class="p">:</span> <span class="n">value</span><span class="p">,</span>
+</span><span data-line="251">            <span class="s2">"expires_at"</span><span class="p">:</span> <span class="n">expires_at</span><span class="p">,</span>
+</span><span data-line="252">            <span class="s2">"created_at"</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+</span><span data-line="253">        <span class="p">}</span>
+</span><span data-line="254">
+</span><span data-line="255">        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_path</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span data-line="256">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span data-line="257">            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span></div>
 
-</span><span data-line="255">
+</span><span data-line="258">
 <div class="viewcode-block" id="DiskCache.delete">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.DiskCache.delete">[docs]</a>
-</span><span data-line="256">    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span data-line="257"><span class="w">        </span><span class="sd">"""Delete a key from cache."""</span>
-</span><span data-line="258">        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-</span><span data-line="259">
-</span><span data-line="260">        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_path</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</span><span data-line="261">        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-</span><span data-line="262">            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-</span><span data-line="263">            <span class="k">return</span> <span class="kc">True</span>
-</span><span data-line="264">        <span class="k">return</span> <span class="kc">False</span></div>
+</span><span data-line="259">    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="260"><span class="w">        </span><span class="sd">"""Delete a key from cache."""</span>
+</span><span data-line="261">        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span data-line="262">
+</span><span data-line="263">        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_path</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span data-line="264">        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+</span><span data-line="265">            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</span><span data-line="266">            <span class="k">return</span> <span class="kc">True</span>
+</span><span data-line="267">        <span class="k">return</span> <span class="kc">False</span></div>
 
-</span><span data-line="265">
+</span><span data-line="268">
 <div class="viewcode-block" id="DiskCache.clear">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.DiskCache.clear">[docs]</a>
-</span><span data-line="266">    <span class="k">def</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="267"><span class="w">        </span><span class="sd">"""Clear all cache entries."""</span>
-</span><span data-line="268">        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-</span><span data-line="269">        <span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
-</span><span data-line="270">
-</span><span data-line="271">        <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="s2">"*.cache"</span><span class="p">)):</span>
-</span><span data-line="272">            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span></div>
+</span><span data-line="269">    <span class="k">def</span><span class="w"> </span><span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="270"><span class="w">        </span><span class="sd">"""Clear all cache entries."""</span>
+</span><span data-line="271">        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span data-line="272">        <span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+</span><span data-line="273">
+</span><span data-line="274">        <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span><span class="p">,</span> <span class="s2">"*.cache"</span><span class="p">)):</span>
+</span><span data-line="275">            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span></div>
 </div>
 
-</span><span data-line="273">
-</span><span data-line="274">
+</span><span data-line="276">
+</span><span data-line="277">
 <div class="viewcode-block" id="make_cache_key">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.make_cache_key">[docs]</a>
-</span><span data-line="275"><span class="k">def</span><span class="w"> </span><span class="nf">make_cache_key</span><span class="p">(</span><span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span data-line="276"><span class="w">    </span><span class="sd">"""Create a cache key from function call.</span>
-</span><span data-line="277">
-</span><span data-line="278"><span class="sd">    Args:</span>
-</span><span data-line="279"><span class="sd">        func_name: Function name</span>
-</span><span data-line="280"><span class="sd">        args: Positional arguments</span>
-</span><span data-line="281"><span class="sd">        kwargs: Keyword arguments</span>
-</span><span data-line="282">
-</span><span data-line="283"><span class="sd">    Returns:</span>
-</span><span data-line="284"><span class="sd">        Cache key string</span>
-</span><span data-line="285"><span class="sd">    """</span>
-</span><span data-line="286">    <span class="c1"># Create a deterministic key from arguments</span>
-</span><span data-line="287">    <span class="n">key_data</span> <span class="o">=</span> <span class="p">{</span>
-</span><span data-line="288">        <span class="s2">"func"</span><span class="p">:</span> <span class="n">func_name</span><span class="p">,</span>
-</span><span data-line="289">        <span class="s2">"args"</span><span class="p">:</span> <span class="n">args</span><span class="p">,</span>
-</span><span data-line="290">        <span class="s2">"kwargs"</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span>
-</span><span data-line="291">    <span class="p">}</span>
-</span><span data-line="292">
-</span><span data-line="293">    <span class="c1"># Serialize to JSON for hashing</span>
-</span><span data-line="294">    <span class="k">try</span><span class="p">:</span>
-</span><span data-line="295">        <span class="n">key_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">key_data</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
-</span><span data-line="296">    <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
-</span><span data-line="297">        <span class="c1"># Fallback to string representation</span>
-</span><span data-line="298">        <span class="n">key_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span>
-</span><span data-line="299">
-</span><span data-line="300">    <span class="c1"># Hash for compact key</span>
-</span><span data-line="301">    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">key_str</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span></div>
-
+</span><span data-line="278"><span class="k">def</span><span class="w"> </span><span class="nf">make_cache_key</span><span class="p">(</span><span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="279"><span class="w">    </span><span class="sd">"""Create a cache key from function call.</span>
+</span><span data-line="280">
+</span><span data-line="281"><span class="sd">    Args:</span>
+</span><span data-line="282"><span class="sd">        func_name: Function name</span>
+</span><span data-line="283"><span class="sd">        args: Positional arguments</span>
+</span><span data-line="284"><span class="sd">        kwargs: Keyword arguments</span>
+</span><span data-line="285">
+</span><span data-line="286"><span class="sd">    Returns:</span>
+</span><span data-line="287"><span class="sd">        Cache key string</span>
+</span><span data-line="288"><span class="sd">    """</span>
+</span><span data-line="289">    <span class="c1"># Create a deterministic key from arguments</span>
+</span><span data-line="290">    <span class="n">key_data</span> <span class="o">=</span> <span class="p">{</span>
+</span><span data-line="291">        <span class="s2">"func"</span><span class="p">:</span> <span class="n">func_name</span><span class="p">,</span>
+</span><span data-line="292">        <span class="s2">"args"</span><span class="p">:</span> <span class="n">args</span><span class="p">,</span>
+</span><span data-line="293">        <span class="s2">"kwargs"</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span>
+</span><span data-line="294">    <span class="p">}</span>
+</span><span data-line="295">
+</span><span data-line="296">    <span class="c1"># Serialize to JSON for hashing</span>
+</span><span data-line="297">    <span class="k">try</span><span class="p">:</span>
+</span><span data-line="298">        <span class="n">key_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">key_data</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+</span><span data-line="299">    <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+</span><span data-line="300">        <span class="c1"># Fallback to string representation</span>
+</span><span data-line="301">        <span class="n">key_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span>
 </span><span data-line="302">
-</span><span data-line="303">
+</span><span data-line="303">    <span class="c1"># Hash for compact key</span>
+</span><span data-line="304">    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">key_str</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span></div>
+
+</span><span data-line="305">
+</span><span data-line="306">
 <div class="viewcode-block" id="cached">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.cached">[docs]</a>
-</span><span data-line="304"><span class="k">def</span><span class="w"> </span><span class="nf">cached</span><span class="p">(</span>
-</span><span data-line="305">    <span class="n">ttl</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3600</span><span class="p">,</span>
-</span><span data-line="306">    <span class="n">backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="307">    <span class="n">key_func</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="308"><span class="p">):</span>
-</span><span data-line="309"><span class="w">    </span><span class="sd">"""Decorator to cache function results.</span>
-</span><span data-line="310">
-</span><span data-line="311"><span class="sd">    Args:</span>
-</span><span data-line="312"><span class="sd">        ttl: Time to live in seconds</span>
-</span><span data-line="313"><span class="sd">        backend: Cache backend (uses global MemoryCache if None)</span>
-</span><span data-line="314"><span class="sd">        key_func: Optional function to generate cache key</span>
-</span><span data-line="315">
-</span><span data-line="316"><span class="sd">    Returns:</span>
-</span><span data-line="317"><span class="sd">        Decorator function</span>
+</span><span data-line="307"><span class="k">def</span><span class="w"> </span><span class="nf">cached</span><span class="p">(</span>
+</span><span data-line="308">    <span class="n">ttl</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3600</span><span class="p">,</span>
+</span><span data-line="309">    <span class="n">backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="310">    <span class="n">key_func</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="311"><span class="p">):</span>
+</span><span data-line="312"><span class="w">    </span><span class="sd">"""Decorator to cache function results.</span>
+</span><span data-line="313">
+</span><span data-line="314"><span class="sd">    Args:</span>
+</span><span data-line="315"><span class="sd">        ttl: Time to live in seconds</span>
+</span><span data-line="316"><span class="sd">        backend: Cache backend (uses global MemoryCache if None)</span>
+</span><span data-line="317"><span class="sd">        key_func: Optional function to generate cache key</span>
 </span><span data-line="318">
-</span><span data-line="319"><span class="sd">    Example:</span>
-</span><span data-line="320"><span class="sd">        &gt;&gt;&gt; @cached(ttl=3600)</span>
-</span><span data-line="321"><span class="sd">        ... def expensive_calculation(x: int, y: int) -&gt; int:</span>
-</span><span data-line="322"><span class="sd">        ...     # Only runs once per unique (x, y) combination</span>
-</span><span data-line="323"><span class="sd">        ...     return heavy_computation(x, y)</span>
-</span><span data-line="324"><span class="sd">        &gt;&gt;&gt;</span>
-</span><span data-line="325"><span class="sd">        &gt;&gt;&gt; result = expensive_calculation(10, 20)  # Computes  # doctest: +SKIP</span>
-</span><span data-line="326"><span class="sd">        &gt;&gt;&gt; result2 = expensive_calculation(10, 20)  # From cache  # doctest: +SKIP</span>
-</span><span data-line="327"><span class="sd">    """</span>
-</span><span data-line="328">    <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="329">        <span class="n">backend</span> <span class="o">=</span> <span class="n">get_global_cache_backend</span><span class="p">()</span>
-</span><span data-line="330">        <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="331">            <span class="n">backend</span> <span class="o">=</span> <span class="n">MemoryCache</span><span class="p">(</span><span class="n">default_ttl</span><span class="o">=</span><span class="n">ttl</span><span class="p">)</span>
-</span><span data-line="332">            <span class="n">set_global_cache_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
-</span><span data-line="333">
-</span><span data-line="334">    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span data-line="335">        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="336">        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span data-line="337">            <span class="c1"># Generate cache key</span>
-</span><span data-line="338">            <span class="k">if</span> <span class="n">key_func</span><span class="p">:</span>
-</span><span data-line="339">                <span class="n">cache_key</span> <span class="o">=</span> <span class="n">key_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span data-line="340">            <span class="k">else</span><span class="p">:</span>
-</span><span data-line="341">                <span class="n">cache_key</span> <span class="o">=</span> <span class="n">make_cache_key</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-</span><span data-line="342">
-</span><span data-line="343">            <span class="c1"># Try to get from cache</span>
-</span><span data-line="344">            <span class="n">cached_result</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
-</span><span data-line="345">            <span class="k">if</span> <span class="n">cached_result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="346">                <span class="k">return</span> <span class="n">cached_result</span>
-</span><span data-line="347">
-</span><span data-line="348">            <span class="c1"># Compute result</span>
-</span><span data-line="349">            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span data-line="350">
-</span><span data-line="351">            <span class="c1"># Store in cache</span>
-</span><span data-line="352">            <span class="n">backend</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cache_key</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="n">ttl</span><span class="p">)</span>
-</span><span data-line="353">
-</span><span data-line="354">            <span class="k">return</span> <span class="n">result</span>
-</span><span data-line="355">
-</span><span data-line="356">        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_cached__</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span data-line="357">        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_cache_backend__</span> <span class="o">=</span> <span class="n">backend</span>
-</span><span data-line="358">        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_cache_ttl__</span> <span class="o">=</span> <span class="n">ttl</span>
-</span><span data-line="359">
-</span><span data-line="360">        <span class="c1"># Add cache control methods</span>
-</span><span data-line="361">        <span class="k">def</span><span class="w"> </span><span class="nf">clear_cache</span><span class="p">():</span>
-</span><span data-line="362"><span class="w">            </span><span class="sd">"""Clear all cached results for this function."""</span>
-</span><span data-line="363">            <span class="c1"># This is a simplified version</span>
-</span><span data-line="364">            <span class="c1"># Full implementation would track keys per function</span>
-</span><span data-line="365">            <span class="n">backend</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</span><span data-line="319"><span class="sd">    Returns:</span>
+</span><span data-line="320"><span class="sd">        Decorator function</span>
+</span><span data-line="321">
+</span><span data-line="322"><span class="sd">    Example:</span>
+</span><span data-line="323"><span class="sd">        &gt;&gt;&gt; @cached(ttl=3600)</span>
+</span><span data-line="324"><span class="sd">        ... def expensive_calculation(x: int, y: int) -&gt; int:</span>
+</span><span data-line="325"><span class="sd">        ...     # Only runs once per unique (x, y) combination</span>
+</span><span data-line="326"><span class="sd">        ...     print("computing")</span>
+</span><span data-line="327"><span class="sd">        ...     return x + y</span>
+</span><span data-line="328"><span class="sd">        &gt;&gt;&gt;</span>
+</span><span data-line="329"><span class="sd">        &gt;&gt;&gt; expensive_calculation(10, 20)  # computes</span>
+</span><span data-line="330"><span class="sd">        computing</span>
+</span><span data-line="331"><span class="sd">        30</span>
+</span><span data-line="332"><span class="sd">        &gt;&gt;&gt; expensive_calculation(10, 20)  # from cache</span>
+</span><span data-line="333"><span class="sd">        30</span>
+</span><span data-line="334"><span class="sd">    """</span>
+</span><span data-line="335">    <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="336">        <span class="n">backend</span> <span class="o">=</span> <span class="n">get_global_cache_backend</span><span class="p">()</span>
+</span><span data-line="337">        <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="338">            <span class="n">backend</span> <span class="o">=</span> <span class="n">MemoryCache</span><span class="p">(</span><span class="n">default_ttl</span><span class="o">=</span><span class="n">ttl</span><span class="p">)</span>
+</span><span data-line="339">            <span class="n">set_global_cache_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+</span><span data-line="340">
+</span><span data-line="341">    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span data-line="342">        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="343">        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span data-line="344">            <span class="c1"># Generate cache key</span>
+</span><span data-line="345">            <span class="k">if</span> <span class="n">key_func</span><span class="p">:</span>
+</span><span data-line="346">                <span class="n">cache_key</span> <span class="o">=</span> <span class="n">key_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span data-line="347">            <span class="k">else</span><span class="p">:</span>
+</span><span data-line="348">                <span class="n">cache_key</span> <span class="o">=</span> <span class="n">make_cache_key</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+</span><span data-line="349">
+</span><span data-line="350">            <span class="c1"># Try to get from cache</span>
+</span><span data-line="351">            <span class="n">cached_result</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
+</span><span data-line="352">            <span class="k">if</span> <span class="n">cached_result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="353">                <span class="k">return</span> <span class="n">cached_result</span>
+</span><span data-line="354">
+</span><span data-line="355">            <span class="c1"># Compute result</span>
+</span><span data-line="356">            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span data-line="357">
+</span><span data-line="358">            <span class="c1"># Store in cache</span>
+</span><span data-line="359">            <span class="n">backend</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cache_key</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="n">ttl</span><span class="p">)</span>
+</span><span data-line="360">
+</span><span data-line="361">            <span class="k">return</span> <span class="n">result</span>
+</span><span data-line="362">
+</span><span data-line="363">        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_cached__</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span data-line="364">        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_cache_backend__</span> <span class="o">=</span> <span class="n">backend</span>
+</span><span data-line="365">        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_cache_ttl__</span> <span class="o">=</span> <span class="n">ttl</span>
 </span><span data-line="366">
-</span><span data-line="367">        <span class="n">wrapper</span><span class="o">.</span><span class="n">clear_cache</span> <span class="o">=</span> <span class="n">clear_cache</span>
-</span><span data-line="368">
-</span><span data-line="369">        <span class="k">return</span> <span class="n">wrapper</span>
-</span><span data-line="370">
-</span><span data-line="371">    <span class="k">return</span> <span class="n">decorator</span></div>
-
-</span><span data-line="372">
+</span><span data-line="367">        <span class="c1"># Add cache control methods</span>
+</span><span data-line="368">        <span class="k">def</span><span class="w"> </span><span class="nf">clear_cache</span><span class="p">():</span>
+</span><span data-line="369"><span class="w">            </span><span class="sd">"""Clear all cached results for this function."""</span>
+</span><span data-line="370">            <span class="c1"># This is a simplified version</span>
+</span><span data-line="371">            <span class="c1"># Full implementation would track keys per function</span>
+</span><span data-line="372">            <span class="n">backend</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 </span><span data-line="373">
+</span><span data-line="374">        <span class="n">wrapper</span><span class="o">.</span><span class="n">clear_cache</span> <span class="o">=</span> <span class="n">clear_cache</span>
+</span><span data-line="375">
+</span><span data-line="376">        <span class="k">return</span> <span class="n">wrapper</span>
+</span><span data-line="377">
+</span><span data-line="378">    <span class="k">return</span> <span class="n">decorator</span></div>
+
+</span><span data-line="379">
+</span><span data-line="380">
 <div class="viewcode-block" id="cache_invalidate">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.cache_invalidate">[docs]</a>
-</span><span data-line="374"><span class="k">def</span><span class="w"> </span><span class="nf">cache_invalidate</span><span class="p">(</span><span class="n">cache_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span data-line="375"><span class="w">    </span><span class="sd">"""Invalidate a specific cache entry.</span>
-</span><span data-line="376">
-</span><span data-line="377"><span class="sd">    Args:</span>
-</span><span data-line="378"><span class="sd">        cache_key: Cache key to invalidate</span>
-</span><span data-line="379"><span class="sd">        backend: Cache backend (uses global if None)</span>
-</span><span data-line="380">
-</span><span data-line="381"><span class="sd">    Returns:</span>
-</span><span data-line="382"><span class="sd">        True if invalidated</span>
-</span><span data-line="383"><span class="sd">    """</span>
-</span><span data-line="384">    <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="385">        <span class="n">backend</span> <span class="o">=</span> <span class="n">get_global_cache_backend</span><span class="p">()</span>
-</span><span data-line="386">
-</span><span data-line="387">    <span class="k">if</span> <span class="n">backend</span><span class="p">:</span>
-</span><span data-line="388">        <span class="k">return</span> <span class="n">backend</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
-</span><span data-line="389">
-</span><span data-line="390">    <span class="k">return</span> <span class="kc">False</span></div>
+</span><span data-line="381"><span class="k">def</span><span class="w"> </span><span class="nf">cache_invalidate</span><span class="p">(</span><span class="n">cache_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="382"><span class="w">    </span><span class="sd">"""Invalidate a specific cache entry.</span>
+</span><span data-line="383">
+</span><span data-line="384"><span class="sd">    Args:</span>
+</span><span data-line="385"><span class="sd">        cache_key: Cache key to invalidate</span>
+</span><span data-line="386"><span class="sd">        backend: Cache backend (uses global if None)</span>
+</span><span data-line="387">
+</span><span data-line="388"><span class="sd">    Returns:</span>
+</span><span data-line="389"><span class="sd">        True if invalidated</span>
+</span><span data-line="390"><span class="sd">    """</span>
+</span><span data-line="391">    <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="392">        <span class="n">backend</span> <span class="o">=</span> <span class="n">get_global_cache_backend</span><span class="p">()</span>
+</span><span data-line="393">
+</span><span data-line="394">    <span class="k">if</span> <span class="n">backend</span><span class="p">:</span>
+</span><span data-line="395">        <span class="k">return</span> <span class="n">backend</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
+</span><span data-line="396">
+</span><span data-line="397">    <span class="k">return</span> <span class="kc">False</span></div>
 
-</span><span data-line="391">
-</span><span data-line="392">
+</span><span data-line="398">
+</span><span data-line="399">
 <div class="viewcode-block" id="cache_clear_all">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.cache_clear_all">[docs]</a>
-</span><span data-line="393"><span class="k">def</span><span class="w"> </span><span class="nf">cache_clear_all</span><span class="p">(</span><span class="n">backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="394"><span class="w">    </span><span class="sd">"""Clear all cache entries.</span>
-</span><span data-line="395">
-</span><span data-line="396"><span class="sd">    Args:</span>
-</span><span data-line="397"><span class="sd">        backend: Cache backend (uses global if None)</span>
-</span><span data-line="398"><span class="sd">    """</span>
-</span><span data-line="399">    <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="400">        <span class="n">backend</span> <span class="o">=</span> <span class="n">get_global_cache_backend</span><span class="p">()</span>
-</span><span data-line="401">
-</span><span data-line="402">    <span class="k">if</span> <span class="n">backend</span><span class="p">:</span>
-</span><span data-line="403">        <span class="n">backend</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+</span><span data-line="400"><span class="k">def</span><span class="w"> </span><span class="nf">cache_clear_all</span><span class="p">(</span><span class="n">backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="401"><span class="w">    </span><span class="sd">"""Clear all cache entries.</span>
+</span><span data-line="402">
+</span><span data-line="403"><span class="sd">    Args:</span>
+</span><span data-line="404"><span class="sd">        backend: Cache backend (uses global if None)</span>
+</span><span data-line="405"><span class="sd">    """</span>
+</span><span data-line="406">    <span class="k">if</span> <span class="n">backend</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="407">        <span class="n">backend</span> <span class="o">=</span> <span class="n">get_global_cache_backend</span><span class="p">()</span>
+</span><span data-line="408">
+</span><span data-line="409">    <span class="k">if</span> <span class="n">backend</span><span class="p">:</span>
+</span><span data-line="410">        <span class="n">backend</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
 
-</span><span data-line="404">
-</span><span data-line="405">
+</span><span data-line="411">
+</span><span data-line="412">
 <div class="viewcode-block" id="CacheStats">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.CacheStats">[docs]</a>
-</span><span data-line="406"><span class="k">class</span><span class="w"> </span><span class="nc">CacheStats</span><span class="p">:</span>
-</span><span data-line="407"><span class="w">    </span><span class="sd">"""Track cache hit/miss statistics."""</span>
-</span><span data-line="408">
-</span><span data-line="409">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span data-line="410"><span class="w">        </span><span class="sd">"""Initialize cache stats."""</span>
-</span><span data-line="411">        <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span data-line="412">        <span class="bp">self</span><span class="o">.</span><span class="n">misses</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span data-line="413">        <span class="bp">self</span><span class="o">.</span><span class="n">sets</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span data-line="414">
+</span><span data-line="413"><span class="k">class</span><span class="w"> </span><span class="nc">CacheStats</span><span class="p">:</span>
+</span><span data-line="414"><span class="w">    </span><span class="sd">"""Track cache hit/miss statistics."""</span>
+</span><span data-line="415">
+</span><span data-line="416">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="417"><span class="w">        </span><span class="sd">"""Initialize cache stats."""</span>
+</span><span data-line="418">        <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span data-line="419">        <span class="bp">self</span><span class="o">.</span><span class="n">misses</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span data-line="420">        <span class="bp">self</span><span class="o">.</span><span class="n">sets</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span data-line="421">
 <div class="viewcode-block" id="CacheStats.record_hit">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.CacheStats.record_hit">[docs]</a>
-</span><span data-line="415">    <span class="k">def</span><span class="w"> </span><span class="nf">record_hit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span data-line="416"><span class="w">        </span><span class="sd">"""Record a cache hit."""</span>
-</span><span data-line="417">        <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">+=</span> <span class="mi">1</span></div>
+</span><span data-line="422">    <span class="k">def</span><span class="w"> </span><span class="nf">record_hit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="423"><span class="w">        </span><span class="sd">"""Record a cache hit."""</span>
+</span><span data-line="424">        <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">+=</span> <span class="mi">1</span></div>
 
-</span><span data-line="418">
+</span><span data-line="425">
 <div class="viewcode-block" id="CacheStats.record_miss">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.CacheStats.record_miss">[docs]</a>
-</span><span data-line="419">    <span class="k">def</span><span class="w"> </span><span class="nf">record_miss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span data-line="420"><span class="w">        </span><span class="sd">"""Record a cache miss."""</span>
-</span><span data-line="421">        <span class="bp">self</span><span class="o">.</span><span class="n">misses</span> <span class="o">+=</span> <span class="mi">1</span></div>
+</span><span data-line="426">    <span class="k">def</span><span class="w"> </span><span class="nf">record_miss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="427"><span class="w">        </span><span class="sd">"""Record a cache miss."""</span>
+</span><span data-line="428">        <span class="bp">self</span><span class="o">.</span><span class="n">misses</span> <span class="o">+=</span> <span class="mi">1</span></div>
 
-</span><span data-line="422">
+</span><span data-line="429">
 <div class="viewcode-block" id="CacheStats.record_set">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.CacheStats.record_set">[docs]</a>
-</span><span data-line="423">    <span class="k">def</span><span class="w"> </span><span class="nf">record_set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span data-line="424"><span class="w">        </span><span class="sd">"""Record a cache set."""</span>
-</span><span data-line="425">        <span class="bp">self</span><span class="o">.</span><span class="n">sets</span> <span class="o">+=</span> <span class="mi">1</span></div>
+</span><span data-line="430">    <span class="k">def</span><span class="w"> </span><span class="nf">record_set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="431"><span class="w">        </span><span class="sd">"""Record a cache set."""</span>
+</span><span data-line="432">        <span class="bp">self</span><span class="o">.</span><span class="n">sets</span> <span class="o">+=</span> <span class="mi">1</span></div>
 
-</span><span data-line="426">
+</span><span data-line="433">
 <div class="viewcode-block" id="CacheStats.hit_rate">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.CacheStats.hit_rate">[docs]</a>
-</span><span data-line="427">    <span class="k">def</span><span class="w"> </span><span class="nf">hit_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-</span><span data-line="428"><span class="w">        </span><span class="sd">"""Calculate hit rate.</span>
-</span><span data-line="429">
-</span><span data-line="430"><span class="sd">        Returns:</span>
-</span><span data-line="431"><span class="sd">            Hit rate as a percentage (0-100)</span>
-</span><span data-line="432"><span class="sd">        """</span>
-</span><span data-line="433">        <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">misses</span>
-</span><span data-line="434">        <span class="k">if</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span data-line="435">            <span class="k">return</span> <span class="mf">0.0</span>
-</span><span data-line="436">        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">/</span> <span class="n">total</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span></div>
+</span><span data-line="434">    <span class="k">def</span><span class="w"> </span><span class="nf">hit_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span data-line="435"><span class="w">        </span><span class="sd">"""Calculate hit rate.</span>
+</span><span data-line="436">
+</span><span data-line="437"><span class="sd">        Returns:</span>
+</span><span data-line="438"><span class="sd">            Hit rate as a percentage (0-100)</span>
+</span><span data-line="439"><span class="sd">        """</span>
+</span><span data-line="440">        <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">misses</span>
+</span><span data-line="441">        <span class="k">if</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span data-line="442">            <span class="k">return</span> <span class="mf">0.0</span>
+</span><span data-line="443">        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">/</span> <span class="n">total</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span></div>
 
-</span><span data-line="437">
+</span><span data-line="444">
 <div class="viewcode-block" id="CacheStats.reset">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.CacheStats.reset">[docs]</a>
-</span><span data-line="438">    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span data-line="439"><span class="w">        </span><span class="sd">"""Reset all statistics."""</span>
-</span><span data-line="440">        <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span data-line="441">        <span class="bp">self</span><span class="o">.</span><span class="n">misses</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span data-line="442">        <span class="bp">self</span><span class="o">.</span><span class="n">sets</span> <span class="o">=</span> <span class="mi">0</span></div>
+</span><span data-line="445">    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="446"><span class="w">        </span><span class="sd">"""Reset all statistics."""</span>
+</span><span data-line="447">        <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span data-line="448">        <span class="bp">self</span><span class="o">.</span><span class="n">misses</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span data-line="449">        <span class="bp">self</span><span class="o">.</span><span class="n">sets</span> <span class="o">=</span> <span class="mi">0</span></div>
 
-</span><span data-line="443">
+</span><span data-line="450">
 <div class="viewcode-block" id="CacheStats.to_dict">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.CacheStats.to_dict">[docs]</a>
-</span><span data-line="444">    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span data-line="445"><span class="w">        </span><span class="sd">"""Convert to dictionary.</span>
-</span><span data-line="446">
-</span><span data-line="447"><span class="sd">        Returns:</span>
-</span><span data-line="448"><span class="sd">            Statistics dictionary</span>
-</span><span data-line="449"><span class="sd">        """</span>
-</span><span data-line="450">        <span class="k">return</span> <span class="p">{</span>
-</span><span data-line="451">            <span class="s2">"hits"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hits</span><span class="p">,</span>
-</span><span data-line="452">            <span class="s2">"misses"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">misses</span><span class="p">,</span>
-</span><span data-line="453">            <span class="s2">"sets"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sets</span><span class="p">,</span>
-</span><span data-line="454">            <span class="s2">"hit_rate"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hit_rate</span><span class="p">(),</span>
-</span><span data-line="455">            <span class="s2">"total_requests"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">misses</span><span class="p">,</span>
-</span><span data-line="456">        <span class="p">}</span></div>
+</span><span data-line="451">    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span data-line="452"><span class="w">        </span><span class="sd">"""Convert to dictionary.</span>
+</span><span data-line="453">
+</span><span data-line="454"><span class="sd">        Returns:</span>
+</span><span data-line="455"><span class="sd">            Statistics dictionary</span>
+</span><span data-line="456"><span class="sd">        """</span>
+</span><span data-line="457">        <span class="k">return</span> <span class="p">{</span>
+</span><span data-line="458">            <span class="s2">"hits"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hits</span><span class="p">,</span>
+</span><span data-line="459">            <span class="s2">"misses"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">misses</span><span class="p">,</span>
+</span><span data-line="460">            <span class="s2">"sets"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sets</span><span class="p">,</span>
+</span><span data-line="461">            <span class="s2">"hit_rate"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hit_rate</span><span class="p">(),</span>
+</span><span data-line="462">            <span class="s2">"total_requests"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hits</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">misses</span><span class="p">,</span>
+</span><span data-line="463">        <span class="p">}</span></div>
 </div>
 
-</span><span data-line="457">
-</span><span data-line="458">
-</span><span data-line="459"><span class="c1"># Global cache backend</span>
-</span><span data-line="460"><span class="n">_global_cache_backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="461">
-</span><span data-line="462">
+</span><span data-line="464">
+</span><span data-line="465">
+</span><span data-line="466"><span class="c1"># Global cache backend</span>
+</span><span data-line="467"><span class="n">_global_cache_backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="468">
+</span><span data-line="469">
 <div class="viewcode-block" id="set_global_cache_backend">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.set_global_cache_backend">[docs]</a>
-</span><span data-line="463"><span class="k">def</span><span class="w"> </span><span class="nf">set_global_cache_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">:</span> <span class="n">CacheBackend</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="464"><span class="w">    </span><span class="sd">"""Set the global cache backend."""</span>
-</span><span data-line="465">    <span class="k">global</span> <span class="n">_global_cache_backend</span>
-</span><span data-line="466">    <span class="n">_global_cache_backend</span> <span class="o">=</span> <span class="n">backend</span></div>
+</span><span data-line="470"><span class="k">def</span><span class="w"> </span><span class="nf">set_global_cache_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">:</span> <span class="n">CacheBackend</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="471"><span class="w">    </span><span class="sd">"""Set the global cache backend."""</span>
+</span><span data-line="472">    <span class="k">global</span> <span class="n">_global_cache_backend</span>
+</span><span data-line="473">    <span class="n">_global_cache_backend</span> <span class="o">=</span> <span class="n">backend</span></div>
 
-</span><span data-line="467">
-</span><span data-line="468">
+</span><span data-line="474">
+</span><span data-line="475">
 <div class="viewcode-block" id="get_global_cache_backend">
 <a class="viewcode-back" href="../../_autosummary/uf.caching.html#uf.get_global_cache_backend">[docs]</a>
-</span><span data-line="469"><span class="k">def</span><span class="w"> </span><span class="nf">get_global_cache_backend</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]:</span>
-</span><span data-line="470"><span class="w">    </span><span class="sd">"""Get the global cache backend."""</span>
-</span><span data-line="471">    <span class="k">return</span> <span class="n">_global_cache_backend</span></div>
+</span><span data-line="476"><span class="k">def</span><span class="w"> </span><span class="nf">get_global_cache_backend</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CacheBackend</span><span class="p">]:</span>
+</span><span data-line="477"><span class="w">    </span><span class="sd">"""Get the global cache backend."""</span>
+</span><span data-line="478">    <span class="k">return</span> <span class="n">_global_cache_backend</span></div>
 
-</span><span data-line="472">
-</span><span data-line="473">
-</span><span data-line="474"><span class="c1"># Initialize default global backend</span>
-</span><span data-line="475"><span class="n">set_global_cache_backend</span><span class="p">(</span><span class="n">MemoryCache</span><span class="p">())</span>
+</span><span data-line="479">
+</span><span data-line="480">
+</span><span data-line="481"><span class="c1"># Initialize default global backend</span>
+</span><span data-line="482"><span class="n">set_global_cache_backend</span><span class="p">(</span><span class="n">MemoryCache</span><span class="p">())</span>
 </span></pre></div>
         </article><button class="back-to-top" type="button">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -727,7 +734,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=9969ed3f"></script>
+      <script src="../../_static/documentation_options.js?v=3d116926"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

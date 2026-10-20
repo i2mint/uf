@@ -278,12 +278,18 @@ are fine; they are named as <code class="docutils literal notranslate"><span cla
 </dd></dl>
 
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">math_funcs</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span>
-</span><span data-line="2"><span class="gp">... </span>    <span class="s1">'Math'</span><span class="p">,</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="p">[</span><span class="n">add</span><span class="p">,</span> <span class="n">subtract</span><span class="p">,</span> <span class="n">multiply</span><span class="p">,</span> <span class="n">divide</span><span class="p">],</span>
-</span><span data-line="4"><span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s1">'Mathematical operations'</span><span class="p">,</span>
-</span><span data-line="5"><span class="gp">... </span>    <span class="n">icon</span><span class="o">=</span><span class="s1">'calculator'</span>
-</span><span data-line="6"><span class="gp">... </span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">subtract</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="4"><span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">math_funcs</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="s1">'Math'</span><span class="p">,</span>
+</span><span data-line="7"><span class="gp">... </span>    <span class="p">[</span><span class="n">add</span><span class="p">,</span> <span class="n">subtract</span><span class="p">],</span>
+</span><span data-line="8"><span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s1">'Mathematical operations'</span><span class="p">,</span>
+</span><span data-line="9"><span class="gp">... </span>    <span class="n">icon</span><span class="o">=</span><span class="s1">'calculator'</span>
+</span><span data-line="10"><span class="gp">... </span><span class="p">)</span>
+</span><span data-line="11"><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">math_funcs</span><span class="o">.</span><span class="n">named_funcs</span><span class="p">)</span>
+</span><span data-line="12"><span class="go">['add', 'subtract']</span>
 </span></pre></div>
 </div>
 <dl class="py method">
@@ -347,10 +353,14 @@ Giving one turns <code class="docutils literal notranslate"><span class="pre">fu
 organization structures that can be used to generate grouped
 navigation in the UI.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'Admin'</span><span class="p">,</span> <span class="p">[</span><span class="n">user_create</span><span class="p">,</span> <span class="n">user_delete</span><span class="p">],</span> <span class="n">icon</span><span class="o">=</span><span class="s1">'shield'</span><span class="p">)</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'Reports'</span><span class="p">,</span> <span class="p">[</span><span class="n">generate_report</span><span class="p">,</span> <span class="n">export_csv</span><span class="p">],</span> <span class="n">icon</span><span class="o">=</span><span class="s1">'file'</span><span class="p">)</span>
-</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">groups</span> <span class="o">=</span> <span class="n">organizer</span><span class="o">.</span><span class="n">get_groups</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">user_create</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">user_delete</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">generate_report</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'Admin'</span><span class="p">,</span> <span class="p">[</span><span class="n">user_create</span><span class="p">,</span> <span class="n">user_delete</span><span class="p">],</span> <span class="n">icon</span><span class="o">=</span><span class="s1">'shield'</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'Reports'</span><span class="p">,</span> <span class="p">[</span><span class="n">generate_report</span><span class="p">],</span> <span class="n">icon</span><span class="o">=</span><span class="s1">'file'</span><span class="p">)</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">organizer</span><span class="o">.</span><span class="n">get_groups</span><span class="p">()]</span>
+</span><span data-line="8"><span class="go">['Admin', 'Reports']</span>
 </span></pre></div>
 </div>
 <dl class="py method">
@@ -444,12 +454,17 @@ navigation in the UI.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
-</span><span data-line="2"><span class="gp">... </span>    <span class="s1">'Database'</span><span class="p">,</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="p">[</span><span class="n">save_record</span><span class="p">,</span> <span class="n">load_record</span><span class="p">],</span>
-</span><span data-line="4"><span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s1">'Database operations'</span><span class="p">,</span>
-</span><span data-line="5"><span class="gp">... </span>    <span class="n">icon</span><span class="o">=</span><span class="s1">'database'</span>
-</span><span data-line="6"><span class="gp">... </span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">save_record</span><span class="p">(</span><span class="n">record</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">load_record</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">group</span> <span class="o">=</span> <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="s1">'Database'</span><span class="p">,</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="p">[</span><span class="n">save_record</span><span class="p">,</span> <span class="n">load_record</span><span class="p">],</span>
+</span><span data-line="7"><span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s1">'Database operations'</span><span class="p">,</span>
+</span><span data-line="8"><span class="gp">... </span>    <span class="n">icon</span><span class="o">=</span><span class="s1">'database'</span>
+</span><span data-line="9"><span class="gp">... </span><span class="p">)</span>
+</span><span data-line="10"><span class="gp">&gt;&gt;&gt; </span><span class="n">group</span><span class="o">.</span><span class="n">icon</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">named_funcs</span><span class="p">)</span>
+</span><span data-line="11"><span class="go">('database', ['save_record', 'load_record'])</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -467,8 +482,11 @@ navigation in the UI.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">org_dict</span> <span class="o">=</span> <span class="n">organizer</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Can be used in templates or APIs</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">ping</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'Ops'</span><span class="p">,</span> <span class="p">[</span><span class="n">ping</span><span class="p">])</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s1">'groups'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">'functions'</span><span class="p">]</span>
+</span><span data-line="5"><span class="go">[{'name': 'ping', 'description': ''}]</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -492,9 +510,13 @@ module of the function it wraps)</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">myapp</span><span class="w"> </span><span class="kn">import</span> <span class="n">user_ops</span><span class="p">,</span> <span class="n">report_ops</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">user_ops</span><span class="o">.</span><span class="n">create</span><span class="p">,</span> <span class="n">user_ops</span><span class="o">.</span><span class="n">delete</span><span class="p">,</span> <span class="n">report_ops</span><span class="o">.</span><span class="n">generate</span><span class="p">]</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_module</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">=</span> <span class="s1">'myapp.user_ops'</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">generate</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">=</span> <span class="s1">'myapp.report_ops'</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_module</span><span class="p">([</span><span class="n">create</span><span class="p">,</span> <span class="n">generate</span><span class="p">])</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">organizer</span><span class="o">.</span><span class="n">get_groups</span><span class="p">()]</span>
+</span><span data-line="7"><span class="go">['Report Ops', 'User Ops']</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -524,9 +546,14 @@ For example, with separator=”_”:</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">user_create</span><span class="p">,</span> <span class="n">user_delete</span><span class="p">,</span> <span class="n">report_generate</span><span class="p">,</span> <span class="n">admin_reset</span><span class="p">]</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_prefix</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Creates groups: 'user', 'report', 'admin'</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">user_create</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">user_delete</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">report_generate</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">admin_reset</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">user_create</span><span class="p">,</span> <span class="n">user_delete</span><span class="p">,</span> <span class="n">report_generate</span><span class="p">,</span> <span class="n">admin_reset</span><span class="p">]</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_prefix</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">organizer</span><span class="o">.</span><span class="n">get_groups</span><span class="p">()]</span>
+</span><span data-line="8"><span class="go">['Admin', 'Report', 'User']</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -555,7 +582,10 @@ For example, with separator=”_”:</p>
 </span><span data-line="2"><span class="gp">... </span>    <span class="k">pass</span>
 </span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">create_user</span><span class="o">.</span><span class="n">__uf_group__</span> <span class="o">=</span> <span class="s1">'Admin'</span>
 </span><span data-line="4"><span class="gp">&gt;&gt;&gt;</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_tag</span><span class="p">([</span><span class="n">create_user</span><span class="p">,</span> <span class="n">other_func</span><span class="p">])</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">other_func</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_tag</span><span class="p">([</span><span class="n">create_user</span><span class="p">,</span> <span class="n">other_func</span><span class="p">])</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">organizer</span><span class="o">.</span><span class="n">get_groups</span><span class="p">()]</span>
+</span><span data-line="8"><span class="go">['Admin', 'Other']</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -576,9 +606,13 @@ For example, with separator=”_”:</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">admin_group</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span><span class="s1">'Admin'</span><span class="p">,</span> <span class="p">[</span><span class="n">user_create</span><span class="p">,</span> <span class="n">user_delete</span><span class="p">])</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">reports_group</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span><span class="s1">'Reports'</span><span class="p">,</span> <span class="p">[</span><span class="n">generate_report</span><span class="p">])</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_grouped_app</span><span class="p">([</span><span class="n">admin_group</span><span class="p">,</span> <span class="n">reports_group</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">user_create</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">generate_report</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">admin_group</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span><span class="s1">'Admin'</span><span class="p">,</span> <span class="p">[</span><span class="n">user_create</span><span class="p">])</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">reports_group</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span><span class="s1">'Reports'</span><span class="p">,</span> <span class="p">[</span><span class="n">generate_report</span><span class="p">])</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_grouped_app</span><span class="p">([</span><span class="n">admin_group</span><span class="p">,</span> <span class="n">reports_group</span><span class="p">])</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">app</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+</span><span data-line="7"><span class="go">'FastAPI'</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -625,7 +659,7 @@ For example, with separator=”_”:</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=9969ed3f"></script>
+      <script src="../_static/documentation_options.js?v=3d116926"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

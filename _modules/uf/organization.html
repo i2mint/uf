@@ -164,498 +164,532 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="28"><span class="sd">        collapsed: Whether the group starts collapsed in UI</span>
 </span><span data-line="29">
 </span><span data-line="30"><span class="sd">    Example:</span>
-</span><span data-line="31"><span class="sd">        &gt;&gt;&gt; math_funcs = FunctionGroup(  # doctest: +SKIP</span>
-</span><span data-line="32"><span class="sd">        ...     'Math',</span>
-</span><span data-line="33"><span class="sd">        ...     [add, subtract, multiply, divide],</span>
-</span><span data-line="34"><span class="sd">        ...     description='Mathematical operations',</span>
-</span><span data-line="35"><span class="sd">        ...     icon='calculator'</span>
-</span><span data-line="36"><span class="sd">        ... )</span>
-</span><span data-line="37"><span class="sd">    """</span>
-</span><span data-line="38">
-</span><span data-line="39">    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-</span><span data-line="40">    <span class="n">funcs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
-</span><span data-line="41">    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
-</span><span data-line="42">    <span class="n">icon</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="43">    <span class="n">order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span data-line="44">    <span class="n">collapsed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span data-line="45">
-</span><span data-line="46">    <span class="nd">@property</span>
-</span><span data-line="47">    <span class="k">def</span><span class="w"> </span><span class="nf">named_funcs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]:</span>
-</span><span data-line="48"><span class="w">        </span><span class="sd">"""``{name: callable}`` of this group, named the way the app serves them.</span>
-</span><span data-line="49">
-</span><span data-line="50"><span class="sd">        &gt;&gt;&gt; import functools</span>
-</span><span data-line="51"><span class="sd">        &gt;&gt;&gt; g = FunctionGroup('G', [len, functools.partial(int, base=2)])</span>
-</span><span data-line="52"><span class="sd">        &gt;&gt;&gt; list(g.named_funcs)</span>
-</span><span data-line="53"><span class="sd">        ['len', 'int']</span>
-</span><span data-line="54"><span class="sd">        """</span>
-</span><span data-line="55">        <span class="k">return</span> <span class="n">name_funcs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">)</span>
-</span><span data-line="56">
-</span><span data-line="57">    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span data-line="58">        <span class="c1"># (materialize now: a generator would be used up by the first read)</span>
-</span><span data-line="59">        <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span> <span class="o">=</span> <span class="p">(</span>
-</span><span data-line="60">            <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">)</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">)</span>
-</span><span data-line="61">        <span class="p">)</span>
+</span><span data-line="31"><span class="sd">        &gt;&gt;&gt; def add(x: int, y: int) -&gt; int:</span>
+</span><span data-line="32"><span class="sd">        ...     return x + y</span>
+</span><span data-line="33"><span class="sd">        &gt;&gt;&gt; def subtract(x: int, y: int) -&gt; int:</span>
+</span><span data-line="34"><span class="sd">        ...     return x - y</span>
+</span><span data-line="35"><span class="sd">        &gt;&gt;&gt; math_funcs = FunctionGroup(</span>
+</span><span data-line="36"><span class="sd">        ...     'Math',</span>
+</span><span data-line="37"><span class="sd">        ...     [add, subtract],</span>
+</span><span data-line="38"><span class="sd">        ...     description='Mathematical operations',</span>
+</span><span data-line="39"><span class="sd">        ...     icon='calculator'</span>
+</span><span data-line="40"><span class="sd">        ... )</span>
+</span><span data-line="41"><span class="sd">        &gt;&gt;&gt; list(math_funcs.named_funcs)</span>
+</span><span data-line="42"><span class="sd">        ['add', 'subtract']</span>
+</span><span data-line="43"><span class="sd">    """</span>
+</span><span data-line="44">
+</span><span data-line="45">    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+</span><span data-line="46">    <span class="n">funcs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+</span><span data-line="47">    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+</span><span data-line="48">    <span class="n">icon</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="49">    <span class="n">order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span data-line="50">    <span class="n">collapsed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span data-line="51">
+</span><span data-line="52">    <span class="nd">@property</span>
+</span><span data-line="53">    <span class="k">def</span><span class="w"> </span><span class="nf">named_funcs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]:</span>
+</span><span data-line="54"><span class="w">        </span><span class="sd">"""``{name: callable}`` of this group, named the way the app serves them.</span>
+</span><span data-line="55">
+</span><span data-line="56"><span class="sd">        &gt;&gt;&gt; import functools</span>
+</span><span data-line="57"><span class="sd">        &gt;&gt;&gt; g = FunctionGroup('G', [len, functools.partial(int, base=2)])</span>
+</span><span data-line="58"><span class="sd">        &gt;&gt;&gt; list(g.named_funcs)</span>
+</span><span data-line="59"><span class="sd">        ['len', 'int']</span>
+</span><span data-line="60"><span class="sd">        """</span>
+</span><span data-line="61">        <span class="k">return</span> <span class="n">name_funcs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">)</span>
 </span><span data-line="62">
+</span><span data-line="63">    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="64">        <span class="c1"># (materialize now: a generator would be used up by the first read)</span>
+</span><span data-line="65">        <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span> <span class="o">=</span> <span class="p">(</span>
+</span><span data-line="66">            <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">)</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">)</span>
+</span><span data-line="67">        <span class="p">)</span>
+</span><span data-line="68">
 <div class="viewcode-block" id="FunctionGroup.add_function">
 <a class="viewcode-back" href="../../_autosummary/uf.organization.html#uf.FunctionGroup.add_function">[docs]</a>
-</span><span data-line="63">    <span class="k">def</span><span class="w"> </span><span class="nf">add_function</span><span class="p">(</span>
-</span><span data-line="64">        <span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="65">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"FunctionGroup"</span><span class="p">:</span>
-</span><span data-line="66"><span class="w">        </span><span class="sd">"""Add a function to this group.</span>
-</span><span data-line="67">
-</span><span data-line="68"><span class="sd">        Args:</span>
-</span><span data-line="69"><span class="sd">            func: Function to add</span>
-</span><span data-line="70"><span class="sd">            name: Explicit name to serve it under (default: its own name).</span>
-</span><span data-line="71"><span class="sd">                Giving one turns ``funcs`` into a ``{name: callable}`` mapping.</span>
-</span><span data-line="72">
-</span><span data-line="73"><span class="sd">        Returns:</span>
-</span><span data-line="74"><span class="sd">            Self for method chaining</span>
-</span><span data-line="75">
-</span><span data-line="76"><span class="sd">        Raises:</span>
-</span><span data-line="77"><span class="sd">            ValueError: If a different callable already has that name in the group</span>
-</span><span data-line="78"><span class="sd">        """</span>
-</span><span data-line="79">        <span class="n">new_name</span> <span class="o">=</span> <span class="n">name</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">name_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="80">        <span class="n">existing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_funcs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">new_name</span><span class="p">)</span>
-</span><span data-line="81">        <span class="k">if</span> <span class="n">existing</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">existing</span> <span class="o">!=</span> <span class="n">func</span><span class="p">:</span>
-</span><span data-line="82">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span data-line="83">                <span class="sa">f</span><span class="s2">"group </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">!r}</span><span class="s2"> already has a different callable named "</span>
-</span><span data-line="84">                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">new_name</span><span class="si">!r}</span><span class="s2">; pass name= to name this one explicitly"</span>
-</span><span data-line="85">            <span class="p">)</span>
-</span><span data-line="86">        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="87">            <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">named_funcs</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">func</span><span class="p">}</span>
-</span><span data-line="88">        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">):</span>
-</span><span data-line="89">            <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">,</span> <span class="n">new_name</span><span class="p">:</span> <span class="n">func</span><span class="p">}</span>
-</span><span data-line="90">        <span class="k">else</span><span class="p">:</span>
-</span><span data-line="91">            <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="92">        <span class="k">return</span> <span class="bp">self</span></div>
+</span><span data-line="69">    <span class="k">def</span><span class="w"> </span><span class="nf">add_function</span><span class="p">(</span>
+</span><span data-line="70">        <span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="71">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"FunctionGroup"</span><span class="p">:</span>
+</span><span data-line="72"><span class="w">        </span><span class="sd">"""Add a function to this group.</span>
+</span><span data-line="73">
+</span><span data-line="74"><span class="sd">        Args:</span>
+</span><span data-line="75"><span class="sd">            func: Function to add</span>
+</span><span data-line="76"><span class="sd">            name: Explicit name to serve it under (default: its own name).</span>
+</span><span data-line="77"><span class="sd">                Giving one turns ``funcs`` into a ``{name: callable}`` mapping.</span>
+</span><span data-line="78">
+</span><span data-line="79"><span class="sd">        Returns:</span>
+</span><span data-line="80"><span class="sd">            Self for method chaining</span>
+</span><span data-line="81">
+</span><span data-line="82"><span class="sd">        Raises:</span>
+</span><span data-line="83"><span class="sd">            ValueError: If a different callable already has that name in the group</span>
+</span><span data-line="84"><span class="sd">        """</span>
+</span><span data-line="85">        <span class="n">new_name</span> <span class="o">=</span> <span class="n">name</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">name_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="86">        <span class="n">existing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_funcs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">new_name</span><span class="p">)</span>
+</span><span data-line="87">        <span class="k">if</span> <span class="n">existing</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">existing</span> <span class="o">!=</span> <span class="n">func</span><span class="p">:</span>
+</span><span data-line="88">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span><span data-line="89">                <span class="sa">f</span><span class="s2">"group </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">!r}</span><span class="s2"> already has a different callable named "</span>
+</span><span data-line="90">                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">new_name</span><span class="si">!r}</span><span class="s2">; pass name= to name this one explicitly"</span>
+</span><span data-line="91">            <span class="p">)</span>
+</span><span data-line="92">        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="93">            <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">named_funcs</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">func</span><span class="p">}</span>
+</span><span data-line="94">        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">):</span>
+</span><span data-line="95">            <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">,</span> <span class="n">new_name</span><span class="p">:</span> <span class="n">func</span><span class="p">}</span>
+</span><span data-line="96">        <span class="k">else</span><span class="p">:</span>
+</span><span data-line="97">            <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="98">        <span class="k">return</span> <span class="bp">self</span></div>
 
-</span><span data-line="93">
+</span><span data-line="99">
 <div class="viewcode-block" id="FunctionGroup.get_function_names">
 <a class="viewcode-back" href="../../_autosummary/uf.organization.html#uf.FunctionGroup.get_function_names">[docs]</a>
-</span><span data-line="94">    <span class="k">def</span><span class="w"> </span><span class="nf">get_function_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-</span><span data-line="95"><span class="w">        </span><span class="sd">"""Get names of all functions in this group.</span>
-</span><span data-line="96">
-</span><span data-line="97"><span class="sd">        Returns:</span>
-</span><span data-line="98"><span class="sd">            List of function name strings</span>
-</span><span data-line="99"><span class="sd">        """</span>
-</span><span data-line="100">        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">named_funcs</span><span class="p">)</span></div>
+</span><span data-line="100">    <span class="k">def</span><span class="w"> </span><span class="nf">get_function_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="101"><span class="w">        </span><span class="sd">"""Get names of all functions in this group.</span>
+</span><span data-line="102">
+</span><span data-line="103"><span class="sd">        Returns:</span>
+</span><span data-line="104"><span class="sd">            List of function name strings</span>
+</span><span data-line="105"><span class="sd">        """</span>
+</span><span data-line="106">        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">named_funcs</span><span class="p">)</span></div>
 </div>
 
-</span><span data-line="101">
-</span><span data-line="102">
+</span><span data-line="107">
+</span><span data-line="108">
 <div class="viewcode-block" id="FunctionOrganizer">
 <a class="viewcode-back" href="../../_autosummary/uf.organization.html#uf.FunctionOrganizer">[docs]</a>
-</span><span data-line="103"><span class="k">class</span><span class="w"> </span><span class="nc">FunctionOrganizer</span><span class="p">:</span>
-</span><span data-line="104"><span class="w">    </span><span class="sd">"""Organize functions into groups and hierarchies.</span>
-</span><span data-line="105">
-</span><span data-line="106"><span class="sd">    This class provides a fluent interface for building function</span>
-</span><span data-line="107"><span class="sd">    organization structures that can be used to generate grouped</span>
-</span><span data-line="108"><span class="sd">    navigation in the UI.</span>
-</span><span data-line="109">
-</span><span data-line="110"><span class="sd">    Example:</span>
-</span><span data-line="111"><span class="sd">        &gt;&gt;&gt; organizer = FunctionOrganizer()</span>
-</span><span data-line="112"><span class="sd">        &gt;&gt;&gt; organizer.group('Admin', [user_create, user_delete], icon='shield')  # doctest: +SKIP</span>
-</span><span data-line="113"><span class="sd">        &gt;&gt;&gt; organizer.group('Reports', [generate_report, export_csv], icon='file')  # doctest: +SKIP</span>
-</span><span data-line="114"><span class="sd">        &gt;&gt;&gt; groups = organizer.get_groups()</span>
-</span><span data-line="115"><span class="sd">    """</span>
-</span><span data-line="116">
-</span><span data-line="117">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span data-line="118"><span class="w">        </span><span class="sd">"""Initialize the organizer."""</span>
-</span><span data-line="119">        <span class="bp">self</span><span class="o">.</span><span class="n">_groups</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">FunctionGroup</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span data-line="120">        <span class="bp">self</span><span class="o">.</span><span class="n">_ungrouped_funcs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span data-line="121">
+</span><span data-line="109"><span class="k">class</span><span class="w"> </span><span class="nc">FunctionOrganizer</span><span class="p">:</span>
+</span><span data-line="110"><span class="w">    </span><span class="sd">"""Organize functions into groups and hierarchies.</span>
+</span><span data-line="111">
+</span><span data-line="112"><span class="sd">    This class provides a fluent interface for building function</span>
+</span><span data-line="113"><span class="sd">    organization structures that can be used to generate grouped</span>
+</span><span data-line="114"><span class="sd">    navigation in the UI.</span>
+</span><span data-line="115">
+</span><span data-line="116"><span class="sd">    Example:</span>
+</span><span data-line="117"><span class="sd">        &gt;&gt;&gt; def user_create(name: str): ...</span>
+</span><span data-line="118"><span class="sd">        &gt;&gt;&gt; def user_delete(name: str): ...</span>
+</span><span data-line="119"><span class="sd">        &gt;&gt;&gt; def generate_report(): ...</span>
+</span><span data-line="120"><span class="sd">        &gt;&gt;&gt; organizer = FunctionOrganizer()</span>
+</span><span data-line="121"><span class="sd">        &gt;&gt;&gt; g = organizer.group('Admin', [user_create, user_delete], icon='shield')</span>
+</span><span data-line="122"><span class="sd">        &gt;&gt;&gt; g = organizer.group('Reports', [generate_report], icon='file')</span>
+</span><span data-line="123"><span class="sd">        &gt;&gt;&gt; [group.name for group in organizer.get_groups()]</span>
+</span><span data-line="124"><span class="sd">        ['Admin', 'Reports']</span>
+</span><span data-line="125"><span class="sd">    """</span>
+</span><span data-line="126">
+</span><span data-line="127">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="128"><span class="w">        </span><span class="sd">"""Initialize the organizer."""</span>
+</span><span data-line="129">        <span class="bp">self</span><span class="o">.</span><span class="n">_groups</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">FunctionGroup</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span data-line="130">        <span class="bp">self</span><span class="o">.</span><span class="n">_ungrouped_funcs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span data-line="131">
 <div class="viewcode-block" id="FunctionOrganizer.group">
 <a class="viewcode-back" href="../../_autosummary/uf.organization.html#uf.FunctionOrganizer.group">[docs]</a>
-</span><span data-line="122">    <span class="k">def</span><span class="w"> </span><span class="nf">group</span><span class="p">(</span>
-</span><span data-line="123">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="124">        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span data-line="125">        <span class="n">funcs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="126">        <span class="o">*</span><span class="p">,</span>
-</span><span data-line="127">        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
-</span><span data-line="128">        <span class="n">icon</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="129">        <span class="n">order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-</span><span data-line="130">        <span class="n">collapsed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span data-line="131">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FunctionGroup</span><span class="p">:</span>
-</span><span data-line="132"><span class="w">        </span><span class="sd">"""Create and add a function group.</span>
-</span><span data-line="133">
-</span><span data-line="134"><span class="sd">        Args:</span>
-</span><span data-line="135"><span class="sd">            name: Name of the group</span>
-</span><span data-line="136"><span class="sd">            funcs: Optional functions to add to group</span>
-</span><span data-line="137"><span class="sd">            description: Description of the group</span>
-</span><span data-line="138"><span class="sd">            icon: Optional icon identifier</span>
-</span><span data-line="139"><span class="sd">            order: Display order</span>
-</span><span data-line="140"><span class="sd">            collapsed: Whether to start collapsed</span>
-</span><span data-line="141">
-</span><span data-line="142"><span class="sd">        Returns:</span>
-</span><span data-line="143"><span class="sd">            The created FunctionGroup</span>
-</span><span data-line="144">
-</span><span data-line="145"><span class="sd">        Example:</span>
-</span><span data-line="146"><span class="sd">            &gt;&gt;&gt; organizer.group(  # doctest: +SKIP</span>
-</span><span data-line="147"><span class="sd">            ...     'Database',</span>
-</span><span data-line="148"><span class="sd">            ...     [save_record, load_record],</span>
-</span><span data-line="149"><span class="sd">            ...     description='Database operations',</span>
-</span><span data-line="150"><span class="sd">            ...     icon='database'</span>
-</span><span data-line="151"><span class="sd">            ... )</span>
-</span><span data-line="152"><span class="sd">        """</span>
-</span><span data-line="153">        <span class="n">func_group</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span>
-</span><span data-line="154">            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
-</span><span data-line="155">            <span class="n">funcs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">)</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">funcs</span> <span class="ow">or</span> <span class="p">[]),</span>
-</span><span data-line="156">            <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
-</span><span data-line="157">            <span class="n">icon</span><span class="o">=</span><span class="n">icon</span><span class="p">,</span>
-</span><span data-line="158">            <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
-</span><span data-line="159">            <span class="n">collapsed</span><span class="o">=</span><span class="n">collapsed</span><span class="p">,</span>
-</span><span data-line="160">        <span class="p">)</span>
-</span><span data-line="161">        <span class="bp">self</span><span class="o">.</span><span class="n">_groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func_group</span><span class="p">)</span>
-</span><span data-line="162">        <span class="k">return</span> <span class="n">func_group</span></div>
+</span><span data-line="132">    <span class="k">def</span><span class="w"> </span><span class="nf">group</span><span class="p">(</span>
+</span><span data-line="133">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="134">        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span data-line="135">        <span class="n">funcs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="136">        <span class="o">*</span><span class="p">,</span>
+</span><span data-line="137">        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+</span><span data-line="138">        <span class="n">icon</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="139">        <span class="n">order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</span><span data-line="140">        <span class="n">collapsed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span data-line="141">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FunctionGroup</span><span class="p">:</span>
+</span><span data-line="142"><span class="w">        </span><span class="sd">"""Create and add a function group.</span>
+</span><span data-line="143">
+</span><span data-line="144"><span class="sd">        Args:</span>
+</span><span data-line="145"><span class="sd">            name: Name of the group</span>
+</span><span data-line="146"><span class="sd">            funcs: Optional functions to add to group</span>
+</span><span data-line="147"><span class="sd">            description: Description of the group</span>
+</span><span data-line="148"><span class="sd">            icon: Optional icon identifier</span>
+</span><span data-line="149"><span class="sd">            order: Display order</span>
+</span><span data-line="150"><span class="sd">            collapsed: Whether to start collapsed</span>
+</span><span data-line="151">
+</span><span data-line="152"><span class="sd">        Returns:</span>
+</span><span data-line="153"><span class="sd">            The created FunctionGroup</span>
+</span><span data-line="154">
+</span><span data-line="155"><span class="sd">        Example:</span>
+</span><span data-line="156"><span class="sd">            &gt;&gt;&gt; def save_record(record: dict): ...</span>
+</span><span data-line="157"><span class="sd">            &gt;&gt;&gt; def load_record(key: str): ...</span>
+</span><span data-line="158"><span class="sd">            &gt;&gt;&gt; organizer = FunctionOrganizer()</span>
+</span><span data-line="159"><span class="sd">            &gt;&gt;&gt; group = organizer.group(</span>
+</span><span data-line="160"><span class="sd">            ...     'Database',</span>
+</span><span data-line="161"><span class="sd">            ...     [save_record, load_record],</span>
+</span><span data-line="162"><span class="sd">            ...     description='Database operations',</span>
+</span><span data-line="163"><span class="sd">            ...     icon='database'</span>
+</span><span data-line="164"><span class="sd">            ... )</span>
+</span><span data-line="165"><span class="sd">            &gt;&gt;&gt; group.icon, list(group.named_funcs)</span>
+</span><span data-line="166"><span class="sd">            ('database', ['save_record', 'load_record'])</span>
+</span><span data-line="167"><span class="sd">        """</span>
+</span><span data-line="168">        <span class="n">func_group</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span>
+</span><span data-line="169">            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+</span><span data-line="170">            <span class="n">funcs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">funcs</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">)</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">funcs</span> <span class="ow">or</span> <span class="p">[]),</span>
+</span><span data-line="171">            <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+</span><span data-line="172">            <span class="n">icon</span><span class="o">=</span><span class="n">icon</span><span class="p">,</span>
+</span><span data-line="173">            <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+</span><span data-line="174">            <span class="n">collapsed</span><span class="o">=</span><span class="n">collapsed</span><span class="p">,</span>
+</span><span data-line="175">        <span class="p">)</span>
+</span><span data-line="176">        <span class="bp">self</span><span class="o">.</span><span class="n">_groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func_group</span><span class="p">)</span>
+</span><span data-line="177">        <span class="k">return</span> <span class="n">func_group</span></div>
 
-</span><span data-line="163">
+</span><span data-line="178">
 <div class="viewcode-block" id="FunctionOrganizer.add_to_group">
 <a class="viewcode-back" href="../../_autosummary/uf.organization.html#uf.FunctionOrganizer.add_to_group">[docs]</a>
-</span><span data-line="164">    <span class="k">def</span><span class="w"> </span><span class="nf">add_to_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"FunctionOrganizer"</span><span class="p">:</span>
-</span><span data-line="165"><span class="w">        </span><span class="sd">"""Add a function to an existing group.</span>
-</span><span data-line="166">
-</span><span data-line="167"><span class="sd">        Args:</span>
-</span><span data-line="168"><span class="sd">            group_name: Name of the group</span>
-</span><span data-line="169"><span class="sd">            func: Function to add</span>
-</span><span data-line="170">
-</span><span data-line="171"><span class="sd">        Returns:</span>
-</span><span data-line="172"><span class="sd">            Self for method chaining</span>
-</span><span data-line="173">
-</span><span data-line="174"><span class="sd">        Raises:</span>
-</span><span data-line="175"><span class="sd">            ValueError: If group doesn't exist</span>
-</span><span data-line="176"><span class="sd">        """</span>
-</span><span data-line="177">        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_groups</span><span class="p">:</span>
-</span><span data-line="178">            <span class="k">if</span> <span class="n">group</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">group_name</span><span class="p">:</span>
-</span><span data-line="179">                <span class="n">group</span><span class="o">.</span><span class="n">add_function</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="180">                <span class="k">return</span> <span class="bp">self</span>
+</span><span data-line="179">    <span class="k">def</span><span class="w"> </span><span class="nf">add_to_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"FunctionOrganizer"</span><span class="p">:</span>
+</span><span data-line="180"><span class="w">        </span><span class="sd">"""Add a function to an existing group.</span>
 </span><span data-line="181">
-</span><span data-line="182">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Group '</span><span class="si">{</span><span class="n">group_name</span><span class="si">}</span><span class="s2">' not found"</span><span class="p">)</span></div>
+</span><span data-line="182"><span class="sd">        Args:</span>
+</span><span data-line="183"><span class="sd">            group_name: Name of the group</span>
+</span><span data-line="184"><span class="sd">            func: Function to add</span>
+</span><span data-line="185">
+</span><span data-line="186"><span class="sd">        Returns:</span>
+</span><span data-line="187"><span class="sd">            Self for method chaining</span>
+</span><span data-line="188">
+</span><span data-line="189"><span class="sd">        Raises:</span>
+</span><span data-line="190"><span class="sd">            ValueError: If group doesn't exist</span>
+</span><span data-line="191"><span class="sd">        """</span>
+</span><span data-line="192">        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_groups</span><span class="p">:</span>
+</span><span data-line="193">            <span class="k">if</span> <span class="n">group</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">group_name</span><span class="p">:</span>
+</span><span data-line="194">                <span class="n">group</span><span class="o">.</span><span class="n">add_function</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="195">                <span class="k">return</span> <span class="bp">self</span>
+</span><span data-line="196">
+</span><span data-line="197">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Group '</span><span class="si">{</span><span class="n">group_name</span><span class="si">}</span><span class="s2">' not found"</span><span class="p">)</span></div>
 
-</span><span data-line="183">
+</span><span data-line="198">
 <div class="viewcode-block" id="FunctionOrganizer.add_ungrouped">
 <a class="viewcode-back" href="../../_autosummary/uf.organization.html#uf.FunctionOrganizer.add_ungrouped">[docs]</a>
-</span><span data-line="184">    <span class="k">def</span><span class="w"> </span><span class="nf">add_ungrouped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"FunctionOrganizer"</span><span class="p">:</span>
-</span><span data-line="185"><span class="w">        </span><span class="sd">"""Add a function without a group.</span>
-</span><span data-line="186">
-</span><span data-line="187"><span class="sd">        Args:</span>
-</span><span data-line="188"><span class="sd">            func: Function to add</span>
-</span><span data-line="189">
-</span><span data-line="190"><span class="sd">        Returns:</span>
-</span><span data-line="191"><span class="sd">            Self for method chaining</span>
-</span><span data-line="192"><span class="sd">        """</span>
-</span><span data-line="193">        <span class="bp">self</span><span class="o">.</span><span class="n">_ungrouped_funcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="194">        <span class="k">return</span> <span class="bp">self</span></div>
+</span><span data-line="199">    <span class="k">def</span><span class="w"> </span><span class="nf">add_ungrouped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"FunctionOrganizer"</span><span class="p">:</span>
+</span><span data-line="200"><span class="w">        </span><span class="sd">"""Add a function without a group.</span>
+</span><span data-line="201">
+</span><span data-line="202"><span class="sd">        Args:</span>
+</span><span data-line="203"><span class="sd">            func: Function to add</span>
+</span><span data-line="204">
+</span><span data-line="205"><span class="sd">        Returns:</span>
+</span><span data-line="206"><span class="sd">            Self for method chaining</span>
+</span><span data-line="207"><span class="sd">        """</span>
+</span><span data-line="208">        <span class="bp">self</span><span class="o">.</span><span class="n">_ungrouped_funcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="209">        <span class="k">return</span> <span class="bp">self</span></div>
 
-</span><span data-line="195">
+</span><span data-line="210">
 <div class="viewcode-block" id="FunctionOrganizer.get_groups">
 <a class="viewcode-back" href="../../_autosummary/uf.organization.html#uf.FunctionOrganizer.get_groups">[docs]</a>
-</span><span data-line="196">    <span class="k">def</span><span class="w"> </span><span class="nf">get_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FunctionGroup</span><span class="p">]:</span>
-</span><span data-line="197"><span class="w">        </span><span class="sd">"""Get all groups, sorted by order.</span>
-</span><span data-line="198">
-</span><span data-line="199"><span class="sd">        Returns:</span>
-</span><span data-line="200"><span class="sd">            List of FunctionGroup objects sorted by order</span>
-</span><span data-line="201"><span class="sd">        """</span>
-</span><span data-line="202">        <span class="n">groups</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_groups</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">g</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
-</span><span data-line="203">
-</span><span data-line="204">        <span class="c1"># Add ungrouped functions if any</span>
-</span><span data-line="205">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ungrouped_funcs</span><span class="p">:</span>
-</span><span data-line="206">            <span class="n">ungrouped</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span>
-</span><span data-line="207">                <span class="n">name</span><span class="o">=</span><span class="s2">"Other"</span><span class="p">,</span>
-</span><span data-line="208">                <span class="n">funcs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ungrouped_funcs</span><span class="p">,</span>
-</span><span data-line="209">                <span class="n">description</span><span class="o">=</span><span class="s2">"Uncategorized functions"</span><span class="p">,</span>
-</span><span data-line="210">                <span class="n">order</span><span class="o">=</span><span class="mi">999</span><span class="p">,</span>
-</span><span data-line="211">            <span class="p">)</span>
-</span><span data-line="212">            <span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ungrouped</span><span class="p">)</span>
+</span><span data-line="211">    <span class="k">def</span><span class="w"> </span><span class="nf">get_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FunctionGroup</span><span class="p">]:</span>
+</span><span data-line="212"><span class="w">        </span><span class="sd">"""Get all groups, sorted by order.</span>
 </span><span data-line="213">
-</span><span data-line="214">        <span class="k">return</span> <span class="n">groups</span></div>
+</span><span data-line="214"><span class="sd">        Returns:</span>
+</span><span data-line="215"><span class="sd">            List of FunctionGroup objects sorted by order</span>
+</span><span data-line="216"><span class="sd">        """</span>
+</span><span data-line="217">        <span class="n">groups</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_groups</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">g</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
+</span><span data-line="218">
+</span><span data-line="219">        <span class="c1"># Add ungrouped functions if any</span>
+</span><span data-line="220">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ungrouped_funcs</span><span class="p">:</span>
+</span><span data-line="221">            <span class="n">ungrouped</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span>
+</span><span data-line="222">                <span class="n">name</span><span class="o">=</span><span class="s2">"Other"</span><span class="p">,</span>
+</span><span data-line="223">                <span class="n">funcs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ungrouped_funcs</span><span class="p">,</span>
+</span><span data-line="224">                <span class="n">description</span><span class="o">=</span><span class="s2">"Uncategorized functions"</span><span class="p">,</span>
+</span><span data-line="225">                <span class="n">order</span><span class="o">=</span><span class="mi">999</span><span class="p">,</span>
+</span><span data-line="226">            <span class="p">)</span>
+</span><span data-line="227">            <span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ungrouped</span><span class="p">)</span>
+</span><span data-line="228">
+</span><span data-line="229">        <span class="k">return</span> <span class="n">groups</span></div>
 
-</span><span data-line="215">
+</span><span data-line="230">
 <div class="viewcode-block" id="FunctionOrganizer.get_all_functions">
 <a class="viewcode-back" href="../../_autosummary/uf.organization.html#uf.FunctionOrganizer.get_all_functions">[docs]</a>
-</span><span data-line="216">    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">]:</span>
-</span><span data-line="217"><span class="w">        </span><span class="sd">"""Get all functions across all groups.</span>
-</span><span data-line="218">
-</span><span data-line="219"><span class="sd">        Returns:</span>
-</span><span data-line="220"><span class="sd">            List of all functions</span>
-</span><span data-line="221"><span class="sd">        """</span>
-</span><span data-line="222">        <span class="n">all_funcs</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span data-line="223">        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_groups</span><span class="p">:</span>
-</span><span data-line="224">            <span class="n">all_funcs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">named_funcs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-</span><span data-line="225">        <span class="n">all_funcs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ungrouped_funcs</span><span class="p">)</span>
-</span><span data-line="226">        <span class="k">return</span> <span class="n">all_funcs</span></div>
+</span><span data-line="231">    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">]:</span>
+</span><span data-line="232"><span class="w">        </span><span class="sd">"""Get all functions across all groups.</span>
+</span><span data-line="233">
+</span><span data-line="234"><span class="sd">        Returns:</span>
+</span><span data-line="235"><span class="sd">            List of all functions</span>
+</span><span data-line="236"><span class="sd">        """</span>
+</span><span data-line="237">        <span class="n">all_funcs</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span data-line="238">        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_groups</span><span class="p">:</span>
+</span><span data-line="239">            <span class="n">all_funcs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">named_funcs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</span><span data-line="240">        <span class="n">all_funcs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ungrouped_funcs</span><span class="p">)</span>
+</span><span data-line="241">        <span class="k">return</span> <span class="n">all_funcs</span></div>
 
-</span><span data-line="227">
+</span><span data-line="242">
 <div class="viewcode-block" id="FunctionOrganizer.to_dict">
 <a class="viewcode-back" href="../../_autosummary/uf.organization.html#uf.FunctionOrganizer.to_dict">[docs]</a>
-</span><span data-line="228">    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span data-line="229"><span class="w">        </span><span class="sd">"""Convert organization to dictionary format.</span>
-</span><span data-line="230">
-</span><span data-line="231"><span class="sd">        Returns:</span>
-</span><span data-line="232"><span class="sd">            Dictionary representation suitable for JSON serialization</span>
-</span><span data-line="233">
-</span><span data-line="234"><span class="sd">        Example:</span>
-</span><span data-line="235"><span class="sd">            &gt;&gt;&gt; org_dict = organizer.to_dict()  # doctest: +SKIP</span>
-</span><span data-line="236"><span class="sd">            &gt;&gt;&gt; # Can be used in templates or APIs</span>
-</span><span data-line="237"><span class="sd">        """</span>
-</span><span data-line="238">        <span class="k">return</span> <span class="p">{</span>
-</span><span data-line="239">            <span class="s2">"groups"</span><span class="p">:</span> <span class="p">[</span>
-</span><span data-line="240">                <span class="p">{</span>
-</span><span data-line="241">                    <span class="s2">"name"</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-</span><span data-line="242">                    <span class="s2">"description"</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
-</span><span data-line="243">                    <span class="s2">"icon"</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">icon</span><span class="p">,</span>
-</span><span data-line="244">                    <span class="s2">"order"</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">order</span><span class="p">,</span>
-</span><span data-line="245">                    <span class="s2">"collapsed"</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">collapsed</span><span class="p">,</span>
-</span><span data-line="246">                    <span class="s2">"functions"</span><span class="p">:</span> <span class="p">[</span>
-</span><span data-line="247">                        <span class="p">{</span>
-</span><span data-line="248">                            <span class="s2">"name"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
-</span><span data-line="249">                            <span class="s2">"description"</span><span class="p">:</span> <span class="n">doc_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">,</span>
-</span><span data-line="250">                        <span class="p">}</span>
-</span><span data-line="251">                        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">named_funcs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-</span><span data-line="252">                    <span class="p">],</span>
-</span><span data-line="253">                <span class="p">}</span>
-</span><span data-line="254">                <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_groups</span><span class="p">()</span>
-</span><span data-line="255">            <span class="p">]</span>
-</span><span data-line="256">        <span class="p">}</span></div>
+</span><span data-line="243">    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span data-line="244"><span class="w">        </span><span class="sd">"""Convert organization to dictionary format.</span>
+</span><span data-line="245">
+</span><span data-line="246"><span class="sd">        Returns:</span>
+</span><span data-line="247"><span class="sd">            Dictionary representation suitable for JSON serialization</span>
+</span><span data-line="248">
+</span><span data-line="249"><span class="sd">        Example:</span>
+</span><span data-line="250"><span class="sd">            &gt;&gt;&gt; def ping(): ...</span>
+</span><span data-line="251"><span class="sd">            &gt;&gt;&gt; organizer = FunctionOrganizer()</span>
+</span><span data-line="252"><span class="sd">            &gt;&gt;&gt; g = organizer.group('Ops', [ping])</span>
+</span><span data-line="253"><span class="sd">            &gt;&gt;&gt; organizer.to_dict()['groups'][0]['functions']</span>
+</span><span data-line="254"><span class="sd">            [{'name': 'ping', 'description': ''}]</span>
+</span><span data-line="255"><span class="sd">        """</span>
+</span><span data-line="256">        <span class="k">return</span> <span class="p">{</span>
+</span><span data-line="257">            <span class="s2">"groups"</span><span class="p">:</span> <span class="p">[</span>
+</span><span data-line="258">                <span class="p">{</span>
+</span><span data-line="259">                    <span class="s2">"name"</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+</span><span data-line="260">                    <span class="s2">"description"</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+</span><span data-line="261">                    <span class="s2">"icon"</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">icon</span><span class="p">,</span>
+</span><span data-line="262">                    <span class="s2">"order"</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">order</span><span class="p">,</span>
+</span><span data-line="263">                    <span class="s2">"collapsed"</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">collapsed</span><span class="p">,</span>
+</span><span data-line="264">                    <span class="s2">"functions"</span><span class="p">:</span> <span class="p">[</span>
+</span><span data-line="265">                        <span class="p">{</span>
+</span><span data-line="266">                            <span class="s2">"name"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+</span><span data-line="267">                            <span class="s2">"description"</span><span class="p">:</span> <span class="n">doc_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">""</span><span class="p">,</span>
+</span><span data-line="268">                        <span class="p">}</span>
+</span><span data-line="269">                        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">named_funcs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span><span data-line="270">                    <span class="p">],</span>
+</span><span data-line="271">                <span class="p">}</span>
+</span><span data-line="272">                <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_groups</span><span class="p">()</span>
+</span><span data-line="273">            <span class="p">]</span>
+</span><span data-line="274">        <span class="p">}</span></div>
 </div>
 
-</span><span data-line="257">
-</span><span data-line="258">
+</span><span data-line="275">
+</span><span data-line="276">
 <div class="viewcode-block" id="mk_grouped_app">
 <a class="viewcode-back" href="../../_autosummary/uf.organization.html#uf.mk_grouped_app">[docs]</a>
-</span><span data-line="259"><span class="k">def</span><span class="w"> </span><span class="nf">mk_grouped_app</span><span class="p">(</span>
-</span><span data-line="260">    <span class="n">groups</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">FunctionGroup</span><span class="p">],</span>
-</span><span data-line="261">    <span class="o">**</span><span class="n">mk_rjsf_app_kwargs</span><span class="p">,</span>
-</span><span data-line="262"><span class="p">):</span>
-</span><span data-line="263"><span class="w">    </span><span class="sd">"""Create a uf app with grouped function navigation.</span>
-</span><span data-line="264">
-</span><span data-line="265"><span class="sd">    Args:</span>
-</span><span data-line="266"><span class="sd">        groups: Iterable of FunctionGroup objects</span>
-</span><span data-line="267"><span class="sd">        **mk_rjsf_app_kwargs: Arguments passed to mk_rjsf_app</span>
-</span><span data-line="268">
-</span><span data-line="269"><span class="sd">    Returns:</span>
-</span><span data-line="270"><span class="sd">        Configured web application with grouped navigation</span>
-</span><span data-line="271">
-</span><span data-line="272"><span class="sd">    Example:</span>
-</span><span data-line="273"><span class="sd">        &gt;&gt;&gt; admin_group = FunctionGroup('Admin', [user_create, user_delete])  # doctest: +SKIP</span>
-</span><span data-line="274"><span class="sd">        &gt;&gt;&gt; reports_group = FunctionGroup('Reports', [generate_report])  # doctest: +SKIP</span>
-</span><span data-line="275"><span class="sd">        &gt;&gt;&gt; app = mk_grouped_app([admin_group, reports_group])  # doctest: +SKIP</span>
-</span><span data-line="276"><span class="sd">    """</span>
-</span><span data-line="277">    <span class="kn">from</span><span class="w"> </span><span class="nn">uf.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">mk_rjsf_app</span>
-</span><span data-line="278">
-</span><span data-line="279">    <span class="n">groups</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span>
-</span><span data-line="280">
-</span><span data-line="281">    <span class="c1"># Collect all functions from all groups, under the names the groups show</span>
-</span><span data-line="282">    <span class="n">all_funcs</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="283">    <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
-</span><span data-line="284">        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">named_funcs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span data-line="285">            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">all_funcs</span> <span class="ow">and</span> <span class="n">all_funcs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">!=</span> <span class="n">func</span><span class="p">:</span>
-</span><span data-line="286">                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span data-line="287">                    <span class="sa">f</span><span class="s2">"two different callables are both named </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2"> (group "</span>
-</span><span data-line="288">                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="si">!r}</span><span class="s2">); pass a </span><span class="se">{{</span><span class="s2">name: callable</span><span class="se">}}</span><span class="s2"> mapping as the "</span>
-</span><span data-line="289">                    <span class="s2">"group's funcs to name them explicitly"</span>
-</span><span data-line="290">                <span class="p">)</span>
-</span><span data-line="291">            <span class="n">all_funcs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span>
-</span><span data-line="292">
-</span><span data-line="293">    <span class="c1"># Create the app</span>
-</span><span data-line="294">    <span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">(</span><span class="n">all_funcs</span><span class="p">,</span> <span class="o">**</span><span class="n">mk_rjsf_app_kwargs</span><span class="p">)</span>
-</span><span data-line="295">
-</span><span data-line="296">    <span class="c1"># Store organization metadata on the app</span>
-</span><span data-line="297">    <span class="n">app</span><span class="o">.</span><span class="n">function_groups</span> <span class="o">=</span> <span class="n">groups</span>
-</span><span data-line="298">
-</span><span data-line="299">    <span class="c1"># Create organizer for serialization</span>
-</span><span data-line="300">    <span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
-</span><span data-line="301">    <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
-</span><span data-line="302">        <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
-</span><span data-line="303">            <span class="n">name</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-</span><span data-line="304">            <span class="n">funcs</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">funcs</span><span class="p">,</span>
-</span><span data-line="305">            <span class="n">description</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
-</span><span data-line="306">            <span class="n">icon</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">icon</span><span class="p">,</span>
-</span><span data-line="307">            <span class="n">order</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">order</span><span class="p">,</span>
-</span><span data-line="308">            <span class="n">collapsed</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">collapsed</span><span class="p">,</span>
-</span><span data-line="309">        <span class="p">)</span>
-</span><span data-line="310">
-</span><span data-line="311">    <span class="n">app</span><span class="o">.</span><span class="n">organization</span> <span class="o">=</span> <span class="n">organizer</span>
-</span><span data-line="312">
-</span><span data-line="313">    <span class="c1"># Add route to get group information</span>
-</span><span data-line="314">    <span class="n">_add_group_routes</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">organizer</span><span class="p">)</span>
-</span><span data-line="315">
-</span><span data-line="316">    <span class="k">return</span> <span class="n">app</span></div>
-
+</span><span data-line="277"><span class="k">def</span><span class="w"> </span><span class="nf">mk_grouped_app</span><span class="p">(</span>
+</span><span data-line="278">    <span class="n">groups</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">FunctionGroup</span><span class="p">],</span>
+</span><span data-line="279">    <span class="o">**</span><span class="n">mk_rjsf_app_kwargs</span><span class="p">,</span>
+</span><span data-line="280"><span class="p">):</span>
+</span><span data-line="281"><span class="w">    </span><span class="sd">"""Create a uf app with grouped function navigation.</span>
+</span><span data-line="282">
+</span><span data-line="283"><span class="sd">    Args:</span>
+</span><span data-line="284"><span class="sd">        groups: Iterable of FunctionGroup objects</span>
+</span><span data-line="285"><span class="sd">        **mk_rjsf_app_kwargs: Arguments passed to mk_rjsf_app</span>
+</span><span data-line="286">
+</span><span data-line="287"><span class="sd">    Returns:</span>
+</span><span data-line="288"><span class="sd">        Configured web application with grouped navigation</span>
+</span><span data-line="289">
+</span><span data-line="290"><span class="sd">    Example:</span>
+</span><span data-line="291"><span class="sd">        &gt;&gt;&gt; def user_create(name: str): ...</span>
+</span><span data-line="292"><span class="sd">        &gt;&gt;&gt; def generate_report(): ...</span>
+</span><span data-line="293"><span class="sd">        &gt;&gt;&gt; admin_group = FunctionGroup('Admin', [user_create])</span>
+</span><span data-line="294"><span class="sd">        &gt;&gt;&gt; reports_group = FunctionGroup('Reports', [generate_report])</span>
+</span><span data-line="295"><span class="sd">        &gt;&gt;&gt; app = mk_grouped_app([admin_group, reports_group])</span>
+</span><span data-line="296"><span class="sd">        &gt;&gt;&gt; type(app).__name__</span>
+</span><span data-line="297"><span class="sd">        'FastAPI'</span>
+</span><span data-line="298"><span class="sd">    """</span>
+</span><span data-line="299">    <span class="kn">from</span><span class="w"> </span><span class="nn">uf.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">mk_rjsf_app</span>
+</span><span data-line="300">
+</span><span data-line="301">    <span class="n">groups</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span>
+</span><span data-line="302">
+</span><span data-line="303">    <span class="c1"># Collect all functions from all groups, under the names the groups show</span>
+</span><span data-line="304">    <span class="n">all_funcs</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="305">    <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+</span><span data-line="306">        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">named_funcs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="307">            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">all_funcs</span> <span class="ow">and</span> <span class="n">all_funcs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">!=</span> <span class="n">func</span><span class="p">:</span>
+</span><span data-line="308">                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span><span data-line="309">                    <span class="sa">f</span><span class="s2">"two different callables are both named </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2"> (group "</span>
+</span><span data-line="310">                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="si">!r}</span><span class="s2">); pass a </span><span class="se">{{</span><span class="s2">name: callable</span><span class="se">}}</span><span class="s2"> mapping as the "</span>
+</span><span data-line="311">                    <span class="s2">"group's funcs to name them explicitly"</span>
+</span><span data-line="312">                <span class="p">)</span>
+</span><span data-line="313">            <span class="n">all_funcs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span>
+</span><span data-line="314">
+</span><span data-line="315">    <span class="c1"># Create the app</span>
+</span><span data-line="316">    <span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">(</span><span class="n">all_funcs</span><span class="p">,</span> <span class="o">**</span><span class="n">mk_rjsf_app_kwargs</span><span class="p">)</span>
 </span><span data-line="317">
-</span><span data-line="318">
-</span><span data-line="319"><span class="k">def</span><span class="w"> </span><span class="nf">_add_group_routes</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">organizer</span><span class="p">:</span> <span class="n">FunctionOrganizer</span><span class="p">):</span>
-</span><span data-line="320"><span class="w">    </span><span class="sd">"""Add routes for accessing group information.</span>
-</span><span data-line="321">
-</span><span data-line="322"><span class="sd">    Args:</span>
-</span><span data-line="323"><span class="sd">        app: The web application</span>
-</span><span data-line="324"><span class="sd">        organizer: FunctionOrganizer instance</span>
-</span><span data-line="325"><span class="sd">    """</span>
-</span><span data-line="326">    <span class="c1"># Detect framework</span>
-</span><span data-line="327">    <span class="n">is_bottle</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s2">"route"</span><span class="p">)</span>
-</span><span data-line="328">
-</span><span data-line="329">    <span class="k">if</span> <span class="n">is_bottle</span><span class="p">:</span>
-</span><span data-line="330">
-</span><span data-line="331">        <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/api/groups"</span><span class="p">)</span>
-</span><span data-line="332">        <span class="k">def</span><span class="w"> </span><span class="nf">get_groups</span><span class="p">():</span>
-</span><span data-line="333"><span class="w">            </span><span class="sd">"""Get function group organization."""</span>
-</span><span data-line="334">            <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-</span><span data-line="335">            <span class="kn">from</span><span class="w"> </span><span class="nn">bottle</span><span class="w"> </span><span class="kn">import</span> <span class="n">response</span>
-</span><span data-line="336">
-</span><span data-line="337">            <span class="n">response</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="s2">"application/json"</span>
-</span><span data-line="338">            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">organizer</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
-</span><span data-line="339">    <span class="k">else</span><span class="p">:</span>
-</span><span data-line="340">        <span class="c1"># FastAPI</span>
-</span><span data-line="341">        <span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.responses</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSONResponse</span>
-</span><span data-line="342">
-</span><span data-line="343">        <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"/api/groups"</span><span class="p">)</span>
-</span><span data-line="344">        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_groups</span><span class="p">():</span>
-</span><span data-line="345"><span class="w">            </span><span class="sd">"""Get function group organization."""</span>
-</span><span data-line="346">            <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">organizer</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
-</span><span data-line="347">
-</span><span data-line="348">
-</span><span data-line="349"><span class="n">_attr_through_partials</span> <span class="o">=</span> <span class="n">attr_through_partials</span>  <span class="c1"># backward-compatible alias</span>
+</span><span data-line="318">    <span class="c1"># Store organization metadata on the app</span>
+</span><span data-line="319">    <span class="n">app</span><span class="o">.</span><span class="n">function_groups</span> <span class="o">=</span> <span class="n">groups</span>
+</span><span data-line="320">
+</span><span data-line="321">    <span class="c1"># Create organizer for serialization</span>
+</span><span data-line="322">    <span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
+</span><span data-line="323">    <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+</span><span data-line="324">        <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
+</span><span data-line="325">            <span class="n">name</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+</span><span data-line="326">            <span class="n">funcs</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">funcs</span><span class="p">,</span>
+</span><span data-line="327">            <span class="n">description</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+</span><span data-line="328">            <span class="n">icon</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">icon</span><span class="p">,</span>
+</span><span data-line="329">            <span class="n">order</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">order</span><span class="p">,</span>
+</span><span data-line="330">            <span class="n">collapsed</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">collapsed</span><span class="p">,</span>
+</span><span data-line="331">        <span class="p">)</span>
+</span><span data-line="332">
+</span><span data-line="333">    <span class="n">app</span><span class="o">.</span><span class="n">organization</span> <span class="o">=</span> <span class="n">organizer</span>
+</span><span data-line="334">
+</span><span data-line="335">    <span class="c1"># Add route to get group information</span>
+</span><span data-line="336">    <span class="n">_add_group_routes</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">organizer</span><span class="p">)</span>
+</span><span data-line="337">
+</span><span data-line="338">    <span class="k">return</span> <span class="n">app</span></div>
+
+</span><span data-line="339">
+</span><span data-line="340">
+</span><span data-line="341"><span class="k">def</span><span class="w"> </span><span class="nf">_add_group_routes</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">organizer</span><span class="p">:</span> <span class="n">FunctionOrganizer</span><span class="p">):</span>
+</span><span data-line="342"><span class="w">    </span><span class="sd">"""Add routes for accessing group information.</span>
+</span><span data-line="343">
+</span><span data-line="344"><span class="sd">    Args:</span>
+</span><span data-line="345"><span class="sd">        app: The web application</span>
+</span><span data-line="346"><span class="sd">        organizer: FunctionOrganizer instance</span>
+</span><span data-line="347"><span class="sd">    """</span>
+</span><span data-line="348">    <span class="c1"># Detect framework</span>
+</span><span data-line="349">    <span class="n">is_bottle</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s2">"route"</span><span class="p">)</span>
 </span><span data-line="350">
-</span><span data-line="351">
+</span><span data-line="351">    <span class="k">if</span> <span class="n">is_bottle</span><span class="p">:</span>
+</span><span data-line="352">
+</span><span data-line="353">        <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/api/groups"</span><span class="p">)</span>
+</span><span data-line="354">        <span class="k">def</span><span class="w"> </span><span class="nf">get_groups</span><span class="p">():</span>
+</span><span data-line="355"><span class="w">            </span><span class="sd">"""Get function group organization."""</span>
+</span><span data-line="356">            <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span data-line="357">            <span class="kn">from</span><span class="w"> </span><span class="nn">bottle</span><span class="w"> </span><span class="kn">import</span> <span class="n">response</span>
+</span><span data-line="358">
+</span><span data-line="359">            <span class="n">response</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="s2">"application/json"</span>
+</span><span data-line="360">            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">organizer</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</span><span data-line="361">    <span class="k">else</span><span class="p">:</span>
+</span><span data-line="362">        <span class="c1"># FastAPI</span>
+</span><span data-line="363">        <span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.responses</span><span class="w"> </span><span class="kn">import</span> <span class="n">JSONResponse</span>
+</span><span data-line="364">
+</span><span data-line="365">        <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"/api/groups"</span><span class="p">)</span>
+</span><span data-line="366">        <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_groups</span><span class="p">():</span>
+</span><span data-line="367"><span class="w">            </span><span class="sd">"""Get function group organization."""</span>
+</span><span data-line="368">            <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">organizer</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</span><span data-line="369">
+</span><span data-line="370">
+</span><span data-line="371"><span class="n">_attr_through_partials</span> <span class="o">=</span> <span class="n">attr_through_partials</span>  <span class="c1"># backward-compatible alias</span>
+</span><span data-line="372">
+</span><span data-line="373">
 <div class="viewcode-block" id="auto_group_by_prefix">
 <a class="viewcode-back" href="../../_autosummary/uf.organization.html#uf.auto_group_by_prefix">[docs]</a>
-</span><span data-line="352"><span class="k">def</span><span class="w"> </span><span class="nf">auto_group_by_prefix</span><span class="p">(</span>
-</span><span data-line="353">    <span class="n">funcs</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span>
-</span><span data-line="354">    <span class="n">separator</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"_"</span><span class="p">,</span>
-</span><span data-line="355"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FunctionOrganizer</span><span class="p">:</span>
-</span><span data-line="356"><span class="w">    </span><span class="sd">"""Automatically group functions by name prefix.</span>
-</span><span data-line="357">
-</span><span data-line="358"><span class="sd">    Groups functions based on the part of their name before the separator.</span>
-</span><span data-line="359"><span class="sd">    For example, with separator="_":</span>
-</span><span data-line="360"><span class="sd">    - user_create, user_delete → "user" group</span>
-</span><span data-line="361"><span class="sd">    - report_generate, report_export → "report" group</span>
-</span><span data-line="362">
-</span><span data-line="363"><span class="sd">    Args:</span>
-</span><span data-line="364"><span class="sd">        funcs: Functions to organize</span>
-</span><span data-line="365"><span class="sd">        separator: Separator character (default: "_")</span>
-</span><span data-line="366">
-</span><span data-line="367"><span class="sd">    Returns:</span>
-</span><span data-line="368"><span class="sd">        FunctionOrganizer with auto-generated groups</span>
-</span><span data-line="369">
-</span><span data-line="370"><span class="sd">    Example:</span>
-</span><span data-line="371"><span class="sd">        &gt;&gt;&gt; funcs = [user_create, user_delete, report_generate, admin_reset]  # doctest: +SKIP</span>
-</span><span data-line="372"><span class="sd">        &gt;&gt;&gt; organizer = auto_group_by_prefix(funcs)  # doctest: +SKIP</span>
-</span><span data-line="373"><span class="sd">        &gt;&gt;&gt; # Creates groups: 'user', 'report', 'admin'</span>
-</span><span data-line="374"><span class="sd">    """</span>
-</span><span data-line="375">    <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
-</span><span data-line="376">
-</span><span data-line="377">    <span class="c1"># Group functions by prefix</span>
-</span><span data-line="378">    <span class="n">groups_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span><span data-line="374"><span class="k">def</span><span class="w"> </span><span class="nf">auto_group_by_prefix</span><span class="p">(</span>
+</span><span data-line="375">    <span class="n">funcs</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span>
+</span><span data-line="376">    <span class="n">separator</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"_"</span><span class="p">,</span>
+</span><span data-line="377"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FunctionOrganizer</span><span class="p">:</span>
+</span><span data-line="378"><span class="w">    </span><span class="sd">"""Automatically group functions by name prefix.</span>
 </span><span data-line="379">
-</span><span data-line="380">    <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
-</span><span data-line="381">        <span class="n">name</span> <span class="o">=</span> <span class="n">name_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="382">        <span class="k">if</span> <span class="n">separator</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
-</span><span data-line="383">            <span class="n">prefix</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">separator</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</span><span data-line="384">            <span class="n">groups_dict</span><span class="p">[</span><span class="n">prefix</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="385">        <span class="k">else</span><span class="p">:</span>
-</span><span data-line="386">            <span class="n">groups_dict</span><span class="p">[</span><span class="s2">"other"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="387">
-</span><span data-line="388">    <span class="c1"># Create organizer</span>
-</span><span data-line="389">    <span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
-</span><span data-line="390">
-</span><span data-line="391">    <span class="k">for</span> <span class="n">group_name</span><span class="p">,</span> <span class="n">group_funcs</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">groups_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-</span><span data-line="392">        <span class="c1"># Capitalize group name</span>
-</span><span data-line="393">        <span class="n">display_name</span> <span class="o">=</span> <span class="n">group_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"_"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
-</span><span data-line="394">
-</span><span data-line="395">        <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
-</span><span data-line="396">            <span class="n">display_name</span><span class="p">,</span>
-</span><span data-line="397">            <span class="n">group_funcs</span><span class="p">,</span>
-</span><span data-line="398">            <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">display_name</span><span class="si">}</span><span class="s2"> operations"</span><span class="p">,</span>
-</span><span data-line="399">        <span class="p">)</span>
-</span><span data-line="400">
-</span><span data-line="401">    <span class="k">return</span> <span class="n">organizer</span></div>
-
-</span><span data-line="402">
+</span><span data-line="380"><span class="sd">    Groups functions based on the part of their name before the separator.</span>
+</span><span data-line="381"><span class="sd">    For example, with separator="_":</span>
+</span><span data-line="382"><span class="sd">    - user_create, user_delete → "user" group</span>
+</span><span data-line="383"><span class="sd">    - report_generate, report_export → "report" group</span>
+</span><span data-line="384">
+</span><span data-line="385"><span class="sd">    Args:</span>
+</span><span data-line="386"><span class="sd">        funcs: Functions to organize</span>
+</span><span data-line="387"><span class="sd">        separator: Separator character (default: "_")</span>
+</span><span data-line="388">
+</span><span data-line="389"><span class="sd">    Returns:</span>
+</span><span data-line="390"><span class="sd">        FunctionOrganizer with auto-generated groups</span>
+</span><span data-line="391">
+</span><span data-line="392"><span class="sd">    Example:</span>
+</span><span data-line="393"><span class="sd">        &gt;&gt;&gt; def user_create(): ...</span>
+</span><span data-line="394"><span class="sd">        &gt;&gt;&gt; def user_delete(): ...</span>
+</span><span data-line="395"><span class="sd">        &gt;&gt;&gt; def report_generate(): ...</span>
+</span><span data-line="396"><span class="sd">        &gt;&gt;&gt; def admin_reset(): ...</span>
+</span><span data-line="397"><span class="sd">        &gt;&gt;&gt; funcs = [user_create, user_delete, report_generate, admin_reset]</span>
+</span><span data-line="398"><span class="sd">        &gt;&gt;&gt; organizer = auto_group_by_prefix(funcs)</span>
+</span><span data-line="399"><span class="sd">        &gt;&gt;&gt; [group.name for group in organizer.get_groups()]</span>
+</span><span data-line="400"><span class="sd">        ['Admin', 'Report', 'User']</span>
+</span><span data-line="401"><span class="sd">    """</span>
+</span><span data-line="402">    <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
 </span><span data-line="403">
+</span><span data-line="404">    <span class="c1"># Group functions by prefix</span>
+</span><span data-line="405">    <span class="n">groups_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span><span data-line="406">
+</span><span data-line="407">    <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
+</span><span data-line="408">        <span class="n">name</span> <span class="o">=</span> <span class="n">name_of_func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="409">        <span class="k">if</span> <span class="n">separator</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+</span><span data-line="410">            <span class="n">prefix</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">separator</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span><span data-line="411">            <span class="n">groups_dict</span><span class="p">[</span><span class="n">prefix</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="412">        <span class="k">else</span><span class="p">:</span>
+</span><span data-line="413">            <span class="n">groups_dict</span><span class="p">[</span><span class="s2">"other"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="414">
+</span><span data-line="415">    <span class="c1"># Create organizer</span>
+</span><span data-line="416">    <span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
+</span><span data-line="417">
+</span><span data-line="418">    <span class="k">for</span> <span class="n">group_name</span><span class="p">,</span> <span class="n">group_funcs</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">groups_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+</span><span data-line="419">        <span class="c1"># Capitalize group name</span>
+</span><span data-line="420">        <span class="n">display_name</span> <span class="o">=</span> <span class="n">group_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"_"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+</span><span data-line="421">
+</span><span data-line="422">        <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
+</span><span data-line="423">            <span class="n">display_name</span><span class="p">,</span>
+</span><span data-line="424">            <span class="n">group_funcs</span><span class="p">,</span>
+</span><span data-line="425">            <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">display_name</span><span class="si">}</span><span class="s2"> operations"</span><span class="p">,</span>
+</span><span data-line="426">        <span class="p">)</span>
+</span><span data-line="427">
+</span><span data-line="428">    <span class="k">return</span> <span class="n">organizer</span></div>
+
+</span><span data-line="429">
+</span><span data-line="430">
 <div class="viewcode-block" id="auto_group_by_module">
 <a class="viewcode-back" href="../../_autosummary/uf.organization.html#uf.auto_group_by_module">[docs]</a>
-</span><span data-line="404"><span class="k">def</span><span class="w"> </span><span class="nf">auto_group_by_module</span><span class="p">(</span><span class="n">funcs</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">FunctionOrganizer</span><span class="p">:</span>
-</span><span data-line="405"><span class="w">    </span><span class="sd">"""Automatically group functions by their module.</span>
-</span><span data-line="406">
-</span><span data-line="407"><span class="sd">    Args:</span>
-</span><span data-line="408"><span class="sd">        funcs: Functions to organize</span>
-</span><span data-line="409">
-</span><span data-line="410"><span class="sd">    Returns:</span>
-</span><span data-line="411"><span class="sd">        FunctionOrganizer with module-based groups (a ``functools.partial`` goes with the</span>
-</span><span data-line="412"><span class="sd">        module of the function it wraps)</span>
-</span><span data-line="413">
-</span><span data-line="414"><span class="sd">    Example:</span>
-</span><span data-line="415"><span class="sd">        &gt;&gt;&gt; from myapp import user_ops, report_ops  # doctest: +SKIP</span>
-</span><span data-line="416"><span class="sd">        &gt;&gt;&gt; funcs = [user_ops.create, user_ops.delete, report_ops.generate]  # doctest: +SKIP</span>
-</span><span data-line="417"><span class="sd">        &gt;&gt;&gt; organizer = auto_group_by_module(funcs)  # doctest: +SKIP</span>
-</span><span data-line="418"><span class="sd">    """</span>
-</span><span data-line="419">    <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
-</span><span data-line="420">
-</span><span data-line="421">    <span class="n">groups_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-</span><span data-line="422">
-</span><span data-line="423">    <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
-</span><span data-line="424">        <span class="n">module</span> <span class="o">=</span> <span class="n">unwrap_partials</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="vm">__module__</span>
-</span><span data-line="425">        <span class="c1"># Get last part of module name</span>
-</span><span data-line="426">        <span class="k">if</span> <span class="s2">"."</span> <span class="ow">in</span> <span class="n">module</span><span class="p">:</span>
-</span><span data-line="427">            <span class="n">module_name</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</span><span data-line="428">        <span class="k">else</span><span class="p">:</span>
-</span><span data-line="429">            <span class="n">module_name</span> <span class="o">=</span> <span class="n">module</span>
-</span><span data-line="430">
-</span><span data-line="431">        <span class="n">groups_dict</span><span class="p">[</span><span class="n">module_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="432">
-</span><span data-line="433">    <span class="c1"># Create organizer</span>
-</span><span data-line="434">    <span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
-</span><span data-line="435">
-</span><span data-line="436">    <span class="k">for</span> <span class="n">module_name</span><span class="p">,</span> <span class="n">group_funcs</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">groups_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-</span><span data-line="437">        <span class="n">display_name</span> <span class="o">=</span> <span class="n">module_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"_"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
-</span><span data-line="438">
-</span><span data-line="439">        <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
-</span><span data-line="440">            <span class="n">display_name</span><span class="p">,</span>
-</span><span data-line="441">            <span class="n">group_funcs</span><span class="p">,</span>
-</span><span data-line="442">            <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Functions from </span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
-</span><span data-line="443">        <span class="p">)</span>
-</span><span data-line="444">
-</span><span data-line="445">    <span class="k">return</span> <span class="n">organizer</span></div>
+</span><span data-line="431"><span class="k">def</span><span class="w"> </span><span class="nf">auto_group_by_module</span><span class="p">(</span><span class="n">funcs</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">FunctionOrganizer</span><span class="p">:</span>
+</span><span data-line="432"><span class="w">    </span><span class="sd">"""Automatically group functions by their module.</span>
+</span><span data-line="433">
+</span><span data-line="434"><span class="sd">    Args:</span>
+</span><span data-line="435"><span class="sd">        funcs: Functions to organize</span>
+</span><span data-line="436">
+</span><span data-line="437"><span class="sd">    Returns:</span>
+</span><span data-line="438"><span class="sd">        FunctionOrganizer with module-based groups (a ``functools.partial`` goes with the</span>
+</span><span data-line="439"><span class="sd">        module of the function it wraps)</span>
+</span><span data-line="440">
+</span><span data-line="441"><span class="sd">    Example:</span>
+</span><span data-line="442"><span class="sd">        &gt;&gt;&gt; def create(): ...</span>
+</span><span data-line="443"><span class="sd">        &gt;&gt;&gt; create.__module__ = 'myapp.user_ops'</span>
+</span><span data-line="444"><span class="sd">        &gt;&gt;&gt; def generate(): ...</span>
+</span><span data-line="445"><span class="sd">        &gt;&gt;&gt; generate.__module__ = 'myapp.report_ops'</span>
+</span><span data-line="446"><span class="sd">        &gt;&gt;&gt; organizer = auto_group_by_module([create, generate])</span>
+</span><span data-line="447"><span class="sd">        &gt;&gt;&gt; [group.name for group in organizer.get_groups()]</span>
+</span><span data-line="448"><span class="sd">        ['Report Ops', 'User Ops']</span>
+</span><span data-line="449"><span class="sd">    """</span>
+</span><span data-line="450">    <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+</span><span data-line="451">
+</span><span data-line="452">    <span class="n">groups_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span><span data-line="453">
+</span><span data-line="454">    <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
+</span><span data-line="455">        <span class="n">module</span> <span class="o">=</span> <span class="n">unwrap_partials</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="vm">__module__</span>
+</span><span data-line="456">        <span class="c1"># Get last part of module name</span>
+</span><span data-line="457">        <span class="k">if</span> <span class="s2">"."</span> <span class="ow">in</span> <span class="n">module</span><span class="p">:</span>
+</span><span data-line="458">            <span class="n">module_name</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span><span data-line="459">        <span class="k">else</span><span class="p">:</span>
+</span><span data-line="460">            <span class="n">module_name</span> <span class="o">=</span> <span class="n">module</span>
+</span><span data-line="461">
+</span><span data-line="462">        <span class="n">groups_dict</span><span class="p">[</span><span class="n">module_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="463">
+</span><span data-line="464">    <span class="c1"># Create organizer</span>
+</span><span data-line="465">    <span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
+</span><span data-line="466">
+</span><span data-line="467">    <span class="k">for</span> <span class="n">module_name</span><span class="p">,</span> <span class="n">group_funcs</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">groups_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+</span><span data-line="468">        <span class="n">display_name</span> <span class="o">=</span> <span class="n">module_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"_"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+</span><span data-line="469">
+</span><span data-line="470">        <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
+</span><span data-line="471">            <span class="n">display_name</span><span class="p">,</span>
+</span><span data-line="472">            <span class="n">group_funcs</span><span class="p">,</span>
+</span><span data-line="473">            <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Functions from </span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+</span><span data-line="474">        <span class="p">)</span>
+</span><span data-line="475">
+</span><span data-line="476">    <span class="k">return</span> <span class="n">organizer</span></div>
 
-</span><span data-line="446">
-</span><span data-line="447">
+</span><span data-line="477">
+</span><span data-line="478">
 <div class="viewcode-block" id="auto_group_by_tag">
 <a class="viewcode-back" href="../../_autosummary/uf.organization.html#uf.auto_group_by_tag">[docs]</a>
-</span><span data-line="448"><span class="k">def</span><span class="w"> </span><span class="nf">auto_group_by_tag</span><span class="p">(</span>
-</span><span data-line="449">    <span class="n">funcs</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">tag_attr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"__uf_group__"</span>
-</span><span data-line="450"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FunctionOrganizer</span><span class="p">:</span>
-</span><span data-line="451"><span class="w">    </span><span class="sd">"""Automatically group functions by a tag attribute.</span>
-</span><span data-line="452">
-</span><span data-line="453"><span class="sd">    Functions can be tagged with a group name using an attribute.</span>
-</span><span data-line="454">
-</span><span data-line="455"><span class="sd">    Args:</span>
-</span><span data-line="456"><span class="sd">        funcs: Functions to organize</span>
-</span><span data-line="457"><span class="sd">        tag_attr: Name of the attribute to use for grouping</span>
-</span><span data-line="458">
-</span><span data-line="459"><span class="sd">    Returns:</span>
-</span><span data-line="460"><span class="sd">        FunctionOrganizer with tag-based groups</span>
-</span><span data-line="461">
-</span><span data-line="462"><span class="sd">    Example:</span>
-</span><span data-line="463"><span class="sd">        &gt;&gt;&gt; def create_user(name: str):</span>
-</span><span data-line="464"><span class="sd">        ...     pass</span>
-</span><span data-line="465"><span class="sd">        &gt;&gt;&gt; create_user.__uf_group__ = 'Admin'</span>
-</span><span data-line="466"><span class="sd">        &gt;&gt;&gt;</span>
-</span><span data-line="467"><span class="sd">        &gt;&gt;&gt; organizer = auto_group_by_tag([create_user, other_func])  # doctest: +SKIP</span>
-</span><span data-line="468"><span class="sd">    """</span>
-</span><span data-line="469">    <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
-</span><span data-line="470">
-</span><span data-line="471">    <span class="n">groups_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-</span><span data-line="472">
-</span><span data-line="473">    <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
-</span><span data-line="474">        <span class="n">tag</span> <span class="o">=</span> <span class="n">_attr_through_partials</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">tag_attr</span><span class="p">,</span> <span class="s2">"Other"</span><span class="p">)</span>
-</span><span data-line="475">        <span class="n">groups_dict</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="476">
-</span><span data-line="477">    <span class="c1"># Create organizer</span>
-</span><span data-line="478">    <span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
-</span><span data-line="479">
-</span><span data-line="480">    <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">group_funcs</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">groups_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-</span><span data-line="481">        <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">group_funcs</span><span class="p">)</span>
-</span><span data-line="482">
-</span><span data-line="483">    <span class="k">return</span> <span class="n">organizer</span></div>
+</span><span data-line="479"><span class="k">def</span><span class="w"> </span><span class="nf">auto_group_by_tag</span><span class="p">(</span>
+</span><span data-line="480">    <span class="n">funcs</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">tag_attr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"__uf_group__"</span>
+</span><span data-line="481"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FunctionOrganizer</span><span class="p">:</span>
+</span><span data-line="482"><span class="w">    </span><span class="sd">"""Automatically group functions by a tag attribute.</span>
+</span><span data-line="483">
+</span><span data-line="484"><span class="sd">    Functions can be tagged with a group name using an attribute.</span>
+</span><span data-line="485">
+</span><span data-line="486"><span class="sd">    Args:</span>
+</span><span data-line="487"><span class="sd">        funcs: Functions to organize</span>
+</span><span data-line="488"><span class="sd">        tag_attr: Name of the attribute to use for grouping</span>
+</span><span data-line="489">
+</span><span data-line="490"><span class="sd">    Returns:</span>
+</span><span data-line="491"><span class="sd">        FunctionOrganizer with tag-based groups</span>
+</span><span data-line="492">
+</span><span data-line="493"><span class="sd">    Example:</span>
+</span><span data-line="494"><span class="sd">        &gt;&gt;&gt; def create_user(name: str):</span>
+</span><span data-line="495"><span class="sd">        ...     pass</span>
+</span><span data-line="496"><span class="sd">        &gt;&gt;&gt; create_user.__uf_group__ = 'Admin'</span>
+</span><span data-line="497"><span class="sd">        &gt;&gt;&gt;</span>
+</span><span data-line="498"><span class="sd">        &gt;&gt;&gt; def other_func(): ...</span>
+</span><span data-line="499"><span class="sd">        &gt;&gt;&gt; organizer = auto_group_by_tag([create_user, other_func])</span>
+</span><span data-line="500"><span class="sd">        &gt;&gt;&gt; [group.name for group in organizer.get_groups()]</span>
+</span><span data-line="501"><span class="sd">        ['Admin', 'Other']</span>
+</span><span data-line="502"><span class="sd">    """</span>
+</span><span data-line="503">    <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+</span><span data-line="504">
+</span><span data-line="505">    <span class="n">groups_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span><span data-line="506">
+</span><span data-line="507">    <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
+</span><span data-line="508">        <span class="n">tag</span> <span class="o">=</span> <span class="n">_attr_through_partials</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">tag_attr</span><span class="p">,</span> <span class="s2">"Other"</span><span class="p">)</span>
+</span><span data-line="509">        <span class="n">groups_dict</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="510">
+</span><span data-line="511">    <span class="c1"># Create organizer</span>
+</span><span data-line="512">    <span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
+</span><span data-line="513">
+</span><span data-line="514">    <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">group_funcs</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">groups_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+</span><span data-line="515">        <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">group_funcs</span><span class="p">)</span>
+</span><span data-line="516">
+</span><span data-line="517">    <span class="k">return</span> <span class="n">organizer</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">
@@ -684,7 +718,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=9969ed3f"></script>
+      <script src="../../_static/documentation_options.js?v=3d116926"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

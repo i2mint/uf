@@ -61,7 +61,10 @@ fluent interface for configuring fields.
 >>> builder = RjsfConfigBuilder()
 >>> _ = builder.field('email', RjsfFieldConfig(format='email'))
 >>> _ = builder.field('message', RjsfFieldConfig(widget='textarea'))
+>>> base_schema = {'type': 'object', 'properties': {'email': {'type': 'string'}}}
 >>> spec = builder.build(base_schema)
+>>> spec['schema']['properties']['email']['format']
+'email'
 ```
 
 #### build(base_schema, base_ui_schema=None)
@@ -240,11 +243,13 @@ Apply field configurations to existing schemas.
 ### Example
 
 ```pycon
->>> configs = {
-...     'email': get_field_config('email'),
-...     'bio': get_field_config('multiline_text'),
-... }
->>> schema, ui_schema = apply_field_configs(schema, ui_schema, configs)
+>>> schema = {'type': 'object', 'properties': {'email': {'type': 'string'}}}
+>>> configs = {'email': get_field_config('email')}
+>>> schema, ui_schema = apply_field_configs(schema, {}, configs)
+>>> schema['properties']['email']['format']
+'email'
+>>> ui_schema['email']['ui:widget']
+'email'
 ```
 
 ### uf.rjsf_config.get_field_config(config_name)

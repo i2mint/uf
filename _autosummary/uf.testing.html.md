@@ -85,6 +85,10 @@ Provides a testing context with common utilities and assertions.
 ### Example
 
 ```pycon
+>>> from uf import mk_rjsf_app
+>>> def add(x: int, y: int) -> int:
+...     return x + y
+>>> app = mk_rjsf_app([add])
 >>> with UfAppTester(app) as tester:
 ...     result = tester.submit_form('add', {'x': 10, 'y': 20})
 ...     tester.assert_success(result)
@@ -165,10 +169,14 @@ running a web server.
 
 ```pycon
 >>> from uf import mk_rjsf_app
+>>> def my_func(x: int, y: int) -> int:
+...     return x + y
 >>> app = mk_rjsf_app([my_func])
 >>> client = UfTestClient(app)
 >>> response = client.call_function('my_func', {'x': 10, 'y': 20})
 >>> assert response['success']
+>>> response['result']
+30
 ```
 
 #### call_function(func_name, params, , expect_success=True)
@@ -274,9 +282,14 @@ Context manager to mock a function’s response.
 ### Example
 
 ```pycon
+>>> from uf import mk_rjsf_app
+>>> def get_user(id: int):
+...     return {'name': 'Real'}
+>>> app = mk_rjsf_app([get_user])
+>>> client = UfTestClient(app)
 >>> with mock_function_response(app, 'get_user', {'name': 'Test'}):
-...     # Calls to get_user will return {'name': 'Test'}
-...     result = client.call_function('get_user', {'id': 1})
+...     client.call_function('get_user', {'id': 1})['result']
+{'name': 'Test'}
 ```
 
 ### uf.testing.test_ui_function(func, test_inputs, , expected_output=None, expected_exception=None)

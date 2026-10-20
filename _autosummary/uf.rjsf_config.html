@@ -247,7 +247,10 @@ fluent interface for configuring fields.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span> <span class="o">=</span> <span class="n">RjsfConfigBuilder</span><span class="p">()</span>
 </span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">'email'</span><span class="p">,</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">'email'</span><span class="p">))</span>
 </span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">'message'</span><span class="p">,</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="s1">'textarea'</span><span class="p">))</span>
-</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">spec</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">base_schema</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">base_schema</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'object'</span><span class="p">,</span> <span class="s1">'properties'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'email'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">}}}</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">spec</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">base_schema</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">spec</span><span class="p">[</span><span class="s1">'schema'</span><span class="p">][</span><span class="s1">'properties'</span><span class="p">][</span><span class="s1">'email'</span><span class="p">][</span><span class="s1">'format'</span><span class="p">]</span>
+</span><span data-line="7"><span class="go">'email'</span>
 </span></pre></div>
 </div>
 <dl class="py method">
@@ -514,11 +517,13 @@ rendered in the RJSF interface.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">configs</span> <span class="o">=</span> <span class="p">{</span>
-</span><span data-line="2"><span class="gp">... </span>    <span class="s1">'email'</span><span class="p">:</span> <span class="n">get_field_config</span><span class="p">(</span><span class="s1">'email'</span><span class="p">),</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="s1">'bio'</span><span class="p">:</span> <span class="n">get_field_config</span><span class="p">(</span><span class="s1">'multiline_text'</span><span class="p">),</span>
-</span><span data-line="4"><span class="gp">... </span><span class="p">}</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span><span class="p">,</span> <span class="n">ui_schema</span> <span class="o">=</span> <span class="n">apply_field_configs</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">ui_schema</span><span class="p">,</span> <span class="n">configs</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'object'</span><span class="p">,</span> <span class="s1">'properties'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'email'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">}}}</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">configs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'email'</span><span class="p">:</span> <span class="n">get_field_config</span><span class="p">(</span><span class="s1">'email'</span><span class="p">)}</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span><span class="p">,</span> <span class="n">ui_schema</span> <span class="o">=</span> <span class="n">apply_field_configs</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="p">{},</span> <span class="n">configs</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span><span class="p">[</span><span class="s1">'properties'</span><span class="p">][</span><span class="s1">'email'</span><span class="p">][</span><span class="s1">'format'</span><span class="p">]</span>
+</span><span data-line="5"><span class="go">'email'</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">ui_schema</span><span class="p">[</span><span class="s1">'email'</span><span class="p">][</span><span class="s1">'ui:widget'</span><span class="p">]</span>
+</span><span data-line="7"><span class="go">'email'</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -591,7 +596,7 @@ rendered in the RJSF interface.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=9969ed3f"></script>
+      <script src="../_static/documentation_options.js?v=3d116926"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

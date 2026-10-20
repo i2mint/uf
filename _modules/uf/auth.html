@@ -642,210 +642,212 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="419"><span class="sd">    Example:</span>
 </span><span data-line="420"><span class="sd">        &gt;&gt;&gt; api_keys = ApiKeyManager()</span>
 </span><span data-line="421"><span class="sd">        &gt;&gt;&gt; key = api_keys.create_key('mobile_app', permissions=['read'])</span>
-</span><span data-line="422"><span class="sd">        &gt;&gt;&gt; print(f"Your API key: {key.key}")  # doctest: +SKIP</span>
-</span><span data-line="423"><span class="sd">        &gt;&gt;&gt; # Later, validate</span>
-</span><span data-line="424"><span class="sd">        &gt;&gt;&gt; if api_keys.validate_key(key.key, 'read'):  # doctest: +SKIP</span>
-</span><span data-line="425"><span class="sd">        ...     # Allow access</span>
-</span><span data-line="426"><span class="sd">    """</span>
-</span><span data-line="427">
-</span><span data-line="428">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"sk_"</span><span class="p">):</span>
-</span><span data-line="429"><span class="w">        </span><span class="sd">"""Initialize API key manager.</span>
-</span><span data-line="430">
-</span><span data-line="431"><span class="sd">        Args:</span>
-</span><span data-line="432"><span class="sd">            key_prefix: Prefix for generated keys</span>
-</span><span data-line="433"><span class="sd">        """</span>
-</span><span data-line="434">        <span class="bp">self</span><span class="o">.</span><span class="n">key_prefix</span> <span class="o">=</span> <span class="n">key_prefix</span>
-</span><span data-line="435">        <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ApiKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="436">
+</span><span data-line="422"><span class="sd">        &gt;&gt;&gt; key.key.startswith('sk_')</span>
+</span><span data-line="423"><span class="sd">        True</span>
+</span><span data-line="424"><span class="sd">        &gt;&gt;&gt; # Later, validate</span>
+</span><span data-line="425"><span class="sd">        &gt;&gt;&gt; if api_keys.validate_key(key.key, 'read'):</span>
+</span><span data-line="426"><span class="sd">        ...     print("access allowed")</span>
+</span><span data-line="427"><span class="sd">        access allowed</span>
+</span><span data-line="428"><span class="sd">    """</span>
+</span><span data-line="429">
+</span><span data-line="430">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"sk_"</span><span class="p">):</span>
+</span><span data-line="431"><span class="w">        </span><span class="sd">"""Initialize API key manager.</span>
+</span><span data-line="432">
+</span><span data-line="433"><span class="sd">        Args:</span>
+</span><span data-line="434"><span class="sd">            key_prefix: Prefix for generated keys</span>
+</span><span data-line="435"><span class="sd">        """</span>
+</span><span data-line="436">        <span class="bp">self</span><span class="o">.</span><span class="n">key_prefix</span> <span class="o">=</span> <span class="n">key_prefix</span>
+</span><span data-line="437">        <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ApiKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="438">
 <div class="viewcode-block" id="ApiKeyManager.create_key">
 <a class="viewcode-back" href="../../_autosummary/uf.auth.html#uf.ApiKeyManager.create_key">[docs]</a>
-</span><span data-line="437">    <span class="k">def</span><span class="w"> </span><span class="nf">create_key</span><span class="p">(</span>
-</span><span data-line="438">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="439">        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span data-line="440">        <span class="n">permissions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="441">        <span class="n">expires_in_days</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="442">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ApiKey</span><span class="p">:</span>
-</span><span data-line="443"><span class="w">        </span><span class="sd">"""Create a new API key.</span>
-</span><span data-line="444">
-</span><span data-line="445"><span class="sd">        Args:</span>
-</span><span data-line="446"><span class="sd">            name: Descriptive name for the key</span>
-</span><span data-line="447"><span class="sd">            permissions: List of allowed permissions</span>
-</span><span data-line="448"><span class="sd">            expires_in_days: Optional expiration in days</span>
-</span><span data-line="449">
-</span><span data-line="450"><span class="sd">        Returns:</span>
-</span><span data-line="451"><span class="sd">            Created ApiKey object</span>
-</span><span data-line="452"><span class="sd">        """</span>
-</span><span data-line="453">        <span class="n">key_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">key_prefix</span><span class="si">}{</span><span class="n">secrets</span><span class="o">.</span><span class="n">token_urlsafe</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
-</span><span data-line="454">
-</span><span data-line="455">        <span class="n">expires_at</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="456">        <span class="k">if</span> <span class="n">expires_in_days</span><span class="p">:</span>
-</span><span data-line="457">            <span class="n">expires_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">expires_in_days</span><span class="p">)</span>
-</span><span data-line="458">
-</span><span data-line="459">        <span class="n">api_key</span> <span class="o">=</span> <span class="n">ApiKey</span><span class="p">(</span>
-</span><span data-line="460">            <span class="n">key</span><span class="o">=</span><span class="n">key_str</span><span class="p">,</span>
-</span><span data-line="461">            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
-</span><span data-line="462">            <span class="n">permissions</span><span class="o">=</span><span class="n">permissions</span><span class="p">,</span>
-</span><span data-line="463">            <span class="n">expires_at</span><span class="o">=</span><span class="n">expires_at</span><span class="p">,</span>
-</span><span data-line="464">        <span class="p">)</span>
-</span><span data-line="465">
-</span><span data-line="466">        <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="p">[</span><span class="n">key_str</span><span class="p">]</span> <span class="o">=</span> <span class="n">api_key</span>
-</span><span data-line="467">        <span class="k">return</span> <span class="n">api_key</span></div>
+</span><span data-line="439">    <span class="k">def</span><span class="w"> </span><span class="nf">create_key</span><span class="p">(</span>
+</span><span data-line="440">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="441">        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span data-line="442">        <span class="n">permissions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="443">        <span class="n">expires_in_days</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="444">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ApiKey</span><span class="p">:</span>
+</span><span data-line="445"><span class="w">        </span><span class="sd">"""Create a new API key.</span>
+</span><span data-line="446">
+</span><span data-line="447"><span class="sd">        Args:</span>
+</span><span data-line="448"><span class="sd">            name: Descriptive name for the key</span>
+</span><span data-line="449"><span class="sd">            permissions: List of allowed permissions</span>
+</span><span data-line="450"><span class="sd">            expires_in_days: Optional expiration in days</span>
+</span><span data-line="451">
+</span><span data-line="452"><span class="sd">        Returns:</span>
+</span><span data-line="453"><span class="sd">            Created ApiKey object</span>
+</span><span data-line="454"><span class="sd">        """</span>
+</span><span data-line="455">        <span class="n">key_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">key_prefix</span><span class="si">}{</span><span class="n">secrets</span><span class="o">.</span><span class="n">token_urlsafe</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+</span><span data-line="456">
+</span><span data-line="457">        <span class="n">expires_at</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="458">        <span class="k">if</span> <span class="n">expires_in_days</span><span class="p">:</span>
+</span><span data-line="459">            <span class="n">expires_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">expires_in_days</span><span class="p">)</span>
+</span><span data-line="460">
+</span><span data-line="461">        <span class="n">api_key</span> <span class="o">=</span> <span class="n">ApiKey</span><span class="p">(</span>
+</span><span data-line="462">            <span class="n">key</span><span class="o">=</span><span class="n">key_str</span><span class="p">,</span>
+</span><span data-line="463">            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+</span><span data-line="464">            <span class="n">permissions</span><span class="o">=</span><span class="n">permissions</span><span class="p">,</span>
+</span><span data-line="465">            <span class="n">expires_at</span><span class="o">=</span><span class="n">expires_at</span><span class="p">,</span>
+</span><span data-line="466">        <span class="p">)</span>
+</span><span data-line="467">
+</span><span data-line="468">        <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="p">[</span><span class="n">key_str</span><span class="p">]</span> <span class="o">=</span> <span class="n">api_key</span>
+</span><span data-line="469">        <span class="k">return</span> <span class="n">api_key</span></div>
 
-</span><span data-line="468">
+</span><span data-line="470">
 <div class="viewcode-block" id="ApiKeyManager.validate_key">
 <a class="viewcode-back" href="../../_autosummary/uf.auth.html#uf.ApiKeyManager.validate_key">[docs]</a>
-</span><span data-line="469">    <span class="k">def</span><span class="w"> </span><span class="nf">validate_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">permission</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span data-line="470"><span class="w">        </span><span class="sd">"""Validate an API key.</span>
-</span><span data-line="471">
-</span><span data-line="472"><span class="sd">        Args:</span>
-</span><span data-line="473"><span class="sd">            key: API key string</span>
-</span><span data-line="474"><span class="sd">            permission: Optional permission to check</span>
-</span><span data-line="475">
-</span><span data-line="476"><span class="sd">        Returns:</span>
-</span><span data-line="477"><span class="sd">            True if valid</span>
-</span><span data-line="478"><span class="sd">        """</span>
-</span><span data-line="479">        <span class="n">api_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</span><span data-line="480">        <span class="k">if</span> <span class="ow">not</span> <span class="n">api_key</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">api_key</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
-</span><span data-line="481">            <span class="k">return</span> <span class="kc">False</span>
-</span><span data-line="482">
-</span><span data-line="483">        <span class="k">if</span> <span class="n">api_key</span><span class="o">.</span><span class="n">is_expired</span><span class="p">():</span>
-</span><span data-line="484">            <span class="k">return</span> <span class="kc">False</span>
-</span><span data-line="485">
-</span><span data-line="486">        <span class="k">if</span> <span class="n">permission</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">api_key</span><span class="o">.</span><span class="n">has_permission</span><span class="p">(</span><span class="n">permission</span><span class="p">):</span>
-</span><span data-line="487">            <span class="k">return</span> <span class="kc">False</span>
-</span><span data-line="488">
-</span><span data-line="489">        <span class="k">return</span> <span class="kc">True</span></div>
-
+</span><span data-line="471">    <span class="k">def</span><span class="w"> </span><span class="nf">validate_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">permission</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="472"><span class="w">        </span><span class="sd">"""Validate an API key.</span>
+</span><span data-line="473">
+</span><span data-line="474"><span class="sd">        Args:</span>
+</span><span data-line="475"><span class="sd">            key: API key string</span>
+</span><span data-line="476"><span class="sd">            permission: Optional permission to check</span>
+</span><span data-line="477">
+</span><span data-line="478"><span class="sd">        Returns:</span>
+</span><span data-line="479"><span class="sd">            True if valid</span>
+</span><span data-line="480"><span class="sd">        """</span>
+</span><span data-line="481">        <span class="n">api_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span data-line="482">        <span class="k">if</span> <span class="ow">not</span> <span class="n">api_key</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">api_key</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+</span><span data-line="483">            <span class="k">return</span> <span class="kc">False</span>
+</span><span data-line="484">
+</span><span data-line="485">        <span class="k">if</span> <span class="n">api_key</span><span class="o">.</span><span class="n">is_expired</span><span class="p">():</span>
+</span><span data-line="486">            <span class="k">return</span> <span class="kc">False</span>
+</span><span data-line="487">
+</span><span data-line="488">        <span class="k">if</span> <span class="n">permission</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">api_key</span><span class="o">.</span><span class="n">has_permission</span><span class="p">(</span><span class="n">permission</span><span class="p">):</span>
+</span><span data-line="489">            <span class="k">return</span> <span class="kc">False</span>
 </span><span data-line="490">
+</span><span data-line="491">        <span class="k">return</span> <span class="kc">True</span></div>
+
+</span><span data-line="492">
 <div class="viewcode-block" id="ApiKeyManager.revoke_key">
 <a class="viewcode-back" href="../../_autosummary/uf.auth.html#uf.ApiKeyManager.revoke_key">[docs]</a>
-</span><span data-line="491">    <span class="k">def</span><span class="w"> </span><span class="nf">revoke_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span data-line="492"><span class="w">        </span><span class="sd">"""Revoke an API key.</span>
-</span><span data-line="493">
-</span><span data-line="494"><span class="sd">        Args:</span>
-</span><span data-line="495"><span class="sd">            key: API key string</span>
-</span><span data-line="496">
-</span><span data-line="497"><span class="sd">        Returns:</span>
-</span><span data-line="498"><span class="sd">            True if revoked</span>
-</span><span data-line="499"><span class="sd">        """</span>
-</span><span data-line="500">        <span class="n">api_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</span><span data-line="501">        <span class="k">if</span> <span class="n">api_key</span><span class="p">:</span>
-</span><span data-line="502">            <span class="n">api_key</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span data-line="503">            <span class="k">return</span> <span class="kc">True</span>
-</span><span data-line="504">        <span class="k">return</span> <span class="kc">False</span></div>
+</span><span data-line="493">    <span class="k">def</span><span class="w"> </span><span class="nf">revoke_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="494"><span class="w">        </span><span class="sd">"""Revoke an API key.</span>
+</span><span data-line="495">
+</span><span data-line="496"><span class="sd">        Args:</span>
+</span><span data-line="497"><span class="sd">            key: API key string</span>
+</span><span data-line="498">
+</span><span data-line="499"><span class="sd">        Returns:</span>
+</span><span data-line="500"><span class="sd">            True if revoked</span>
+</span><span data-line="501"><span class="sd">        """</span>
+</span><span data-line="502">        <span class="n">api_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span data-line="503">        <span class="k">if</span> <span class="n">api_key</span><span class="p">:</span>
+</span><span data-line="504">            <span class="n">api_key</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span data-line="505">            <span class="k">return</span> <span class="kc">True</span>
+</span><span data-line="506">        <span class="k">return</span> <span class="kc">False</span></div>
 
-</span><span data-line="505">
+</span><span data-line="507">
 <div class="viewcode-block" id="ApiKeyManager.list_keys">
 <a class="viewcode-back" href="../../_autosummary/uf.auth.html#uf.ApiKeyManager.list_keys">[docs]</a>
-</span><span data-line="506">    <span class="k">def</span><span class="w"> </span><span class="nf">list_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">ApiKey</span><span class="p">]:</span>
-</span><span data-line="507"><span class="w">        </span><span class="sd">"""List all API keys.</span>
-</span><span data-line="508">
-</span><span data-line="509"><span class="sd">        Returns:</span>
-</span><span data-line="510"><span class="sd">            List of ApiKey objects</span>
-</span><span data-line="511"><span class="sd">        """</span>
-</span><span data-line="512">        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
+</span><span data-line="508">    <span class="k">def</span><span class="w"> </span><span class="nf">list_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">ApiKey</span><span class="p">]:</span>
+</span><span data-line="509"><span class="w">        </span><span class="sd">"""List all API keys.</span>
+</span><span data-line="510">
+</span><span data-line="511"><span class="sd">        Returns:</span>
+</span><span data-line="512"><span class="sd">            List of ApiKey objects</span>
+</span><span data-line="513"><span class="sd">        """</span>
+</span><span data-line="514">        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
 </div>
 
-</span><span data-line="513">
-</span><span data-line="514">
+</span><span data-line="515">
+</span><span data-line="516">
 <div class="viewcode-block" id="require_auth">
 <a class="viewcode-back" href="../../_autosummary/uf.auth.html#uf.require_auth">[docs]</a>
-</span><span data-line="515"><span class="k">def</span><span class="w"> </span><span class="nf">require_auth</span><span class="p">(</span>
-</span><span data-line="516">    <span class="n">backend</span><span class="p">:</span> <span class="n">AuthBackend</span><span class="p">,</span>
-</span><span data-line="517">    <span class="n">roles</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="518">    <span class="n">permissions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="519"><span class="p">):</span>
-</span><span data-line="520"><span class="w">    </span><span class="sd">"""Decorator to require authentication for a function.</span>
-</span><span data-line="521">
-</span><span data-line="522"><span class="sd">    Args:</span>
-</span><span data-line="523"><span class="sd">        backend: Authentication backend</span>
-</span><span data-line="524"><span class="sd">        roles: Required roles (any)</span>
-</span><span data-line="525"><span class="sd">        permissions: Required permissions (all)</span>
-</span><span data-line="526">
-</span><span data-line="527"><span class="sd">    Returns:</span>
-</span><span data-line="528"><span class="sd">        Decorator function</span>
-</span><span data-line="529">
-</span><span data-line="530"><span class="sd">    Example:</span>
-</span><span data-line="531"><span class="sd">        &gt;&gt;&gt; backend = DictAuthBackend.from_dict({</span>
-</span><span data-line="532"><span class="sd">        ...     'admin': {'password': 'secret', 'roles': ['admin']}</span>
-</span><span data-line="533"><span class="sd">        ... })</span>
-</span><span data-line="534"><span class="sd">        &gt;&gt;&gt; @require_auth(backend, roles=['admin'])</span>
-</span><span data-line="535"><span class="sd">        ... def delete_all():</span>
-</span><span data-line="536"><span class="sd">        ...     pass</span>
-</span><span data-line="537"><span class="sd">    """</span>
-</span><span data-line="538">
-</span><span data-line="539">    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span data-line="540">        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="541">        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span data-line="542">            <span class="c1"># This is metadata-only in current implementation</span>
-</span><span data-line="543">            <span class="c1"># Actual enforcement would require middleware integration</span>
-</span><span data-line="544">            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span data-line="545">
-</span><span data-line="546">        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_auth_required__</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span data-line="547">        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_auth_roles__</span> <span class="o">=</span> <span class="n">roles</span> <span class="ow">or</span> <span class="p">[]</span>
-</span><span data-line="548">        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_auth_permissions__</span> <span class="o">=</span> <span class="n">permissions</span> <span class="ow">or</span> <span class="p">[]</span>
-</span><span data-line="549">        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_auth_backend__</span> <span class="o">=</span> <span class="n">backend</span>
-</span><span data-line="550">
-</span><span data-line="551">        <span class="k">return</span> <span class="n">wrapper</span>
+</span><span data-line="517"><span class="k">def</span><span class="w"> </span><span class="nf">require_auth</span><span class="p">(</span>
+</span><span data-line="518">    <span class="n">backend</span><span class="p">:</span> <span class="n">AuthBackend</span><span class="p">,</span>
+</span><span data-line="519">    <span class="n">roles</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="520">    <span class="n">permissions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="521"><span class="p">):</span>
+</span><span data-line="522"><span class="w">    </span><span class="sd">"""Decorator to require authentication for a function.</span>
+</span><span data-line="523">
+</span><span data-line="524"><span class="sd">    Args:</span>
+</span><span data-line="525"><span class="sd">        backend: Authentication backend</span>
+</span><span data-line="526"><span class="sd">        roles: Required roles (any)</span>
+</span><span data-line="527"><span class="sd">        permissions: Required permissions (all)</span>
+</span><span data-line="528">
+</span><span data-line="529"><span class="sd">    Returns:</span>
+</span><span data-line="530"><span class="sd">        Decorator function</span>
+</span><span data-line="531">
+</span><span data-line="532"><span class="sd">    Example:</span>
+</span><span data-line="533"><span class="sd">        &gt;&gt;&gt; backend = DictAuthBackend.from_dict({</span>
+</span><span data-line="534"><span class="sd">        ...     'admin': {'password': 'secret', 'roles': ['admin']}</span>
+</span><span data-line="535"><span class="sd">        ... })</span>
+</span><span data-line="536"><span class="sd">        &gt;&gt;&gt; @require_auth(backend, roles=['admin'])</span>
+</span><span data-line="537"><span class="sd">        ... def delete_all():</span>
+</span><span data-line="538"><span class="sd">        ...     pass</span>
+</span><span data-line="539"><span class="sd">    """</span>
+</span><span data-line="540">
+</span><span data-line="541">    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span data-line="542">        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="543">        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span data-line="544">            <span class="c1"># This is metadata-only in current implementation</span>
+</span><span data-line="545">            <span class="c1"># Actual enforcement would require middleware integration</span>
+</span><span data-line="546">            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span data-line="547">
+</span><span data-line="548">        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_auth_required__</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span data-line="549">        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_auth_roles__</span> <span class="o">=</span> <span class="n">roles</span> <span class="ow">or</span> <span class="p">[]</span>
+</span><span data-line="550">        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_auth_permissions__</span> <span class="o">=</span> <span class="n">permissions</span> <span class="ow">or</span> <span class="p">[]</span>
+</span><span data-line="551">        <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_auth_backend__</span> <span class="o">=</span> <span class="n">backend</span>
 </span><span data-line="552">
-</span><span data-line="553">    <span class="k">return</span> <span class="n">decorator</span></div>
-
+</span><span data-line="553">        <span class="k">return</span> <span class="n">wrapper</span>
 </span><span data-line="554">
-</span><span data-line="555">
-</span><span data-line="556"><span class="c1"># Global instances for convenience</span>
-</span><span data-line="557"><span class="n">_global_auth_backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AuthBackend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="558"><span class="n">_global_session_manager</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SessionManager</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="559"><span class="n">_global_api_key_manager</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ApiKeyManager</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span data-line="560">
-</span><span data-line="561">
+</span><span data-line="555">    <span class="k">return</span> <span class="n">decorator</span></div>
+
+</span><span data-line="556">
+</span><span data-line="557">
+</span><span data-line="558"><span class="c1"># Global instances for convenience</span>
+</span><span data-line="559"><span class="n">_global_auth_backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AuthBackend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="560"><span class="n">_global_session_manager</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SessionManager</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="561"><span class="n">_global_api_key_manager</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ApiKeyManager</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="562">
+</span><span data-line="563">
 <div class="viewcode-block" id="set_global_auth_backend">
 <a class="viewcode-back" href="../../_autosummary/uf.auth.html#uf.set_global_auth_backend">[docs]</a>
-</span><span data-line="562"><span class="k">def</span><span class="w"> </span><span class="nf">set_global_auth_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">:</span> <span class="n">AuthBackend</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="563"><span class="w">    </span><span class="sd">"""Set the global authentication backend."""</span>
-</span><span data-line="564">    <span class="k">global</span> <span class="n">_global_auth_backend</span>
-</span><span data-line="565">    <span class="n">_global_auth_backend</span> <span class="o">=</span> <span class="n">backend</span></div>
+</span><span data-line="564"><span class="k">def</span><span class="w"> </span><span class="nf">set_global_auth_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">:</span> <span class="n">AuthBackend</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="565"><span class="w">    </span><span class="sd">"""Set the global authentication backend."""</span>
+</span><span data-line="566">    <span class="k">global</span> <span class="n">_global_auth_backend</span>
+</span><span data-line="567">    <span class="n">_global_auth_backend</span> <span class="o">=</span> <span class="n">backend</span></div>
 
-</span><span data-line="566">
-</span><span data-line="567">
+</span><span data-line="568">
+</span><span data-line="569">
 <div class="viewcode-block" id="get_global_auth_backend">
 <a class="viewcode-back" href="../../_autosummary/uf.auth.html#uf.get_global_auth_backend">[docs]</a>
-</span><span data-line="568"><span class="k">def</span><span class="w"> </span><span class="nf">get_global_auth_backend</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AuthBackend</span><span class="p">]:</span>
-</span><span data-line="569"><span class="w">    </span><span class="sd">"""Get the global authentication backend."""</span>
-</span><span data-line="570">    <span class="k">return</span> <span class="n">_global_auth_backend</span></div>
+</span><span data-line="570"><span class="k">def</span><span class="w"> </span><span class="nf">get_global_auth_backend</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AuthBackend</span><span class="p">]:</span>
+</span><span data-line="571"><span class="w">    </span><span class="sd">"""Get the global authentication backend."""</span>
+</span><span data-line="572">    <span class="k">return</span> <span class="n">_global_auth_backend</span></div>
 
-</span><span data-line="571">
-</span><span data-line="572">
+</span><span data-line="573">
+</span><span data-line="574">
 <div class="viewcode-block" id="set_global_session_manager">
 <a class="viewcode-back" href="../../_autosummary/uf.auth.html#uf.set_global_session_manager">[docs]</a>
-</span><span data-line="573"><span class="k">def</span><span class="w"> </span><span class="nf">set_global_session_manager</span><span class="p">(</span><span class="n">manager</span><span class="p">:</span> <span class="n">SessionManager</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="574"><span class="w">    </span><span class="sd">"""Set the global session manager."""</span>
-</span><span data-line="575">    <span class="k">global</span> <span class="n">_global_session_manager</span>
-</span><span data-line="576">    <span class="n">_global_session_manager</span> <span class="o">=</span> <span class="n">manager</span></div>
+</span><span data-line="575"><span class="k">def</span><span class="w"> </span><span class="nf">set_global_session_manager</span><span class="p">(</span><span class="n">manager</span><span class="p">:</span> <span class="n">SessionManager</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="576"><span class="w">    </span><span class="sd">"""Set the global session manager."""</span>
+</span><span data-line="577">    <span class="k">global</span> <span class="n">_global_session_manager</span>
+</span><span data-line="578">    <span class="n">_global_session_manager</span> <span class="o">=</span> <span class="n">manager</span></div>
 
-</span><span data-line="577">
-</span><span data-line="578">
+</span><span data-line="579">
+</span><span data-line="580">
 <div class="viewcode-block" id="get_global_session_manager">
 <a class="viewcode-back" href="../../_autosummary/uf.auth.html#uf.get_global_session_manager">[docs]</a>
-</span><span data-line="579"><span class="k">def</span><span class="w"> </span><span class="nf">get_global_session_manager</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SessionManager</span><span class="p">]:</span>
-</span><span data-line="580"><span class="w">    </span><span class="sd">"""Get the global session manager."""</span>
-</span><span data-line="581">    <span class="k">return</span> <span class="n">_global_session_manager</span></div>
+</span><span data-line="581"><span class="k">def</span><span class="w"> </span><span class="nf">get_global_session_manager</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SessionManager</span><span class="p">]:</span>
+</span><span data-line="582"><span class="w">    </span><span class="sd">"""Get the global session manager."""</span>
+</span><span data-line="583">    <span class="k">return</span> <span class="n">_global_session_manager</span></div>
 
-</span><span data-line="582">
-</span><span data-line="583">
+</span><span data-line="584">
+</span><span data-line="585">
 <div class="viewcode-block" id="set_global_api_key_manager">
 <a class="viewcode-back" href="../../_autosummary/uf.auth.html#uf.set_global_api_key_manager">[docs]</a>
-</span><span data-line="584"><span class="k">def</span><span class="w"> </span><span class="nf">set_global_api_key_manager</span><span class="p">(</span><span class="n">manager</span><span class="p">:</span> <span class="n">ApiKeyManager</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="585"><span class="w">    </span><span class="sd">"""Set the global API key manager."""</span>
-</span><span data-line="586">    <span class="k">global</span> <span class="n">_global_api_key_manager</span>
-</span><span data-line="587">    <span class="n">_global_api_key_manager</span> <span class="o">=</span> <span class="n">manager</span></div>
+</span><span data-line="586"><span class="k">def</span><span class="w"> </span><span class="nf">set_global_api_key_manager</span><span class="p">(</span><span class="n">manager</span><span class="p">:</span> <span class="n">ApiKeyManager</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="587"><span class="w">    </span><span class="sd">"""Set the global API key manager."""</span>
+</span><span data-line="588">    <span class="k">global</span> <span class="n">_global_api_key_manager</span>
+</span><span data-line="589">    <span class="n">_global_api_key_manager</span> <span class="o">=</span> <span class="n">manager</span></div>
 
-</span><span data-line="588">
-</span><span data-line="589">
+</span><span data-line="590">
+</span><span data-line="591">
 <div class="viewcode-block" id="get_global_api_key_manager">
 <a class="viewcode-back" href="../../_autosummary/uf.auth.html#uf.get_global_api_key_manager">[docs]</a>
-</span><span data-line="590"><span class="k">def</span><span class="w"> </span><span class="nf">get_global_api_key_manager</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ApiKeyManager</span><span class="p">]:</span>
-</span><span data-line="591"><span class="w">    </span><span class="sd">"""Get the global API key manager."""</span>
-</span><span data-line="592">    <span class="k">return</span> <span class="n">_global_api_key_manager</span></div>
+</span><span data-line="592"><span class="k">def</span><span class="w"> </span><span class="nf">get_global_api_key_manager</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ApiKeyManager</span><span class="p">]:</span>
+</span><span data-line="593"><span class="w">    </span><span class="sd">"""Get the global API key manager."""</span>
+</span><span data-line="594">    <span class="k">return</span> <span class="n">_global_api_key_manager</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">
@@ -874,7 +876,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=9969ed3f"></script>
+      <script src="../../_static/documentation_options.js?v=3d116926"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

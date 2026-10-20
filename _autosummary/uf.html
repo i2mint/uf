@@ -940,10 +940,12 @@ following the “convention over configuration” philosophy.</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">api_keys</span> <span class="o">=</span> <span class="n">ApiKeyManager</span><span class="p">()</span>
 </span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">key</span> <span class="o">=</span> <span class="n">api_keys</span><span class="o">.</span><span class="n">create_key</span><span class="p">(</span><span class="s1">'mobile_app'</span><span class="p">,</span> <span class="n">permissions</span><span class="o">=</span><span class="p">[</span><span class="s1">'read'</span><span class="p">])</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Your API key: </span><span class="si">{</span><span class="n">key</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Later, validate</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">api_keys</span><span class="o">.</span><span class="n">validate_key</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="s1">'read'</span><span class="p">):</span>
-</span><span data-line="6"><span class="gp">... </span>    <span class="c1"># Allow access</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'sk_'</span><span class="p">)</span>
+</span><span data-line="4"><span class="go">True</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Later, validate</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">api_keys</span><span class="o">.</span><span class="n">validate_key</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="s1">'read'</span><span class="p">):</span>
+</span><span data-line="7"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">"access allowed"</span><span class="p">)</span>
+</span><span data-line="8"><span class="go">access allowed</span>
 </span></pre></div>
 </div>
 <dl class="field-list simple">
@@ -1031,14 +1033,14 @@ following the “convention over configuration” philosophy.</p>
 the context.</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fetch_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-</span><span data-line="2"><span class="gp">... </span>    <span class="c1"># async database query</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="k">return</span> <span class="n">user_data</span>
-</span><span data-line="4"><span class="gp">&gt;&gt;&gt;</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">wrapper</span> <span class="o">=</span> <span class="n">AsyncFunctionWrapper</span><span class="p">(</span><span class="n">fetch_user</span><span class="p">)</span>
-</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Sync call</span>
-</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">call_sync</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
-</span><span data-line="8"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Async call</span>
-</span><span data-line="9"><span class="gp">&gt;&gt;&gt; </span><span class="n">user</span> <span class="o">=</span> <span class="k">await</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">call_async</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="k">return</span> <span class="p">{</span><span class="s1">'id'</span><span class="p">:</span> <span class="n">user_id</span><span class="p">}</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt;</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">wrapper</span> <span class="o">=</span> <span class="n">AsyncFunctionWrapper</span><span class="p">(</span><span class="n">fetch_user</span><span class="p">)</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">wrapper</span><span class="o">.</span><span class="n">call_sync</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>  <span class="c1"># sync call</span>
+</span><span data-line="6"><span class="go">{'id': 123}</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+</span><span data-line="8"><span class="gp">&gt;&gt;&gt; </span><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">wrapper</span><span class="o">.</span><span class="n">call_async</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="mi">123</span><span class="p">))</span>  <span class="c1"># async call (use await in async code)</span>
+</span><span data-line="9"><span class="go">{'id': 123}</span>
 </span></pre></div>
 </div>
 <dl class="field-list simple">
@@ -1815,8 +1817,11 @@ the context.</p>
 <p>Persists cache to disk, suitable for larger datasets or persistence
 across restarts.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span> <span class="o">=</span> <span class="n">DiskCache</span><span class="p">(</span><span class="n">cache_dir</span><span class="o">=</span><span class="s1">'/tmp/uf_cache'</span><span class="p">)</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">'expensive_result'</span><span class="p">,</span> <span class="n">big_data</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span> <span class="o">=</span> <span class="n">DiskCache</span><span class="p">(</span><span class="n">cache_dir</span><span class="o">=</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">())</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">'expensive_result'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'expensive_result'</span><span class="p">)</span>
+</span><span data-line="5"><span class="go">[1, 2, 3]</span>
 </span></pre></div>
 </div>
 <dl class="field-list simple">
@@ -2212,12 +2217,18 @@ are fine; they are named as <code class="docutils literal notranslate"><span cla
 </dd></dl>
 
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">math_funcs</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span>
-</span><span data-line="2"><span class="gp">... </span>    <span class="s1">'Math'</span><span class="p">,</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="p">[</span><span class="n">add</span><span class="p">,</span> <span class="n">subtract</span><span class="p">,</span> <span class="n">multiply</span><span class="p">,</span> <span class="n">divide</span><span class="p">],</span>
-</span><span data-line="4"><span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s1">'Mathematical operations'</span><span class="p">,</span>
-</span><span data-line="5"><span class="gp">... </span>    <span class="n">icon</span><span class="o">=</span><span class="s1">'calculator'</span>
-</span><span data-line="6"><span class="gp">... </span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">subtract</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="4"><span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">math_funcs</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="s1">'Math'</span><span class="p">,</span>
+</span><span data-line="7"><span class="gp">... </span>    <span class="p">[</span><span class="n">add</span><span class="p">,</span> <span class="n">subtract</span><span class="p">],</span>
+</span><span data-line="8"><span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s1">'Mathematical operations'</span><span class="p">,</span>
+</span><span data-line="9"><span class="gp">... </span>    <span class="n">icon</span><span class="o">=</span><span class="s1">'calculator'</span>
+</span><span data-line="10"><span class="gp">... </span><span class="p">)</span>
+</span><span data-line="11"><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">math_funcs</span><span class="o">.</span><span class="n">named_funcs</span><span class="p">)</span>
+</span><span data-line="12"><span class="go">['add', 'subtract']</span>
 </span></pre></div>
 </div>
 <dl class="py method">
@@ -2281,10 +2292,14 @@ Giving one turns <code class="docutils literal notranslate"><span class="pre">fu
 organization structures that can be used to generate grouped
 navigation in the UI.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'Admin'</span><span class="p">,</span> <span class="p">[</span><span class="n">user_create</span><span class="p">,</span> <span class="n">user_delete</span><span class="p">],</span> <span class="n">icon</span><span class="o">=</span><span class="s1">'shield'</span><span class="p">)</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'Reports'</span><span class="p">,</span> <span class="p">[</span><span class="n">generate_report</span><span class="p">,</span> <span class="n">export_csv</span><span class="p">],</span> <span class="n">icon</span><span class="o">=</span><span class="s1">'file'</span><span class="p">)</span>
-</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">groups</span> <span class="o">=</span> <span class="n">organizer</span><span class="o">.</span><span class="n">get_groups</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">user_create</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">user_delete</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">generate_report</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'Admin'</span><span class="p">,</span> <span class="p">[</span><span class="n">user_create</span><span class="p">,</span> <span class="n">user_delete</span><span class="p">],</span> <span class="n">icon</span><span class="o">=</span><span class="s1">'shield'</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'Reports'</span><span class="p">,</span> <span class="p">[</span><span class="n">generate_report</span><span class="p">],</span> <span class="n">icon</span><span class="o">=</span><span class="s1">'file'</span><span class="p">)</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">organizer</span><span class="o">.</span><span class="n">get_groups</span><span class="p">()]</span>
+</span><span data-line="8"><span class="go">['Admin', 'Reports']</span>
 </span></pre></div>
 </div>
 <dl class="py method">
@@ -2378,12 +2393,17 @@ navigation in the UI.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
-</span><span data-line="2"><span class="gp">... </span>    <span class="s1">'Database'</span><span class="p">,</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="p">[</span><span class="n">save_record</span><span class="p">,</span> <span class="n">load_record</span><span class="p">],</span>
-</span><span data-line="4"><span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s1">'Database operations'</span><span class="p">,</span>
-</span><span data-line="5"><span class="gp">... </span>    <span class="n">icon</span><span class="o">=</span><span class="s1">'database'</span>
-</span><span data-line="6"><span class="gp">... </span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">save_record</span><span class="p">(</span><span class="n">record</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">load_record</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">group</span> <span class="o">=</span> <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="s1">'Database'</span><span class="p">,</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="p">[</span><span class="n">save_record</span><span class="p">,</span> <span class="n">load_record</span><span class="p">],</span>
+</span><span data-line="7"><span class="gp">... </span>    <span class="n">description</span><span class="o">=</span><span class="s1">'Database operations'</span><span class="p">,</span>
+</span><span data-line="8"><span class="gp">... </span>    <span class="n">icon</span><span class="o">=</span><span class="s1">'database'</span>
+</span><span data-line="9"><span class="gp">... </span><span class="p">)</span>
+</span><span data-line="10"><span class="gp">&gt;&gt;&gt; </span><span class="n">group</span><span class="o">.</span><span class="n">icon</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">named_funcs</span><span class="p">)</span>
+</span><span data-line="11"><span class="go">('database', ['save_record', 'load_record'])</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -2401,8 +2421,11 @@ navigation in the UI.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">org_dict</span> <span class="o">=</span> <span class="n">organizer</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Can be used in templates or APIs</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">ping</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">FunctionOrganizer</span><span class="p">()</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">organizer</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'Ops'</span><span class="p">,</span> <span class="p">[</span><span class="n">ping</span><span class="p">])</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s1">'groups'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">'functions'</span><span class="p">]</span>
+</span><span data-line="5"><span class="go">[{'name': 'ping', 'description': ''}]</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -2735,11 +2758,14 @@ qh.mk_app as the input_trans parameter.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">uf</span><span class="w"> </span><span class="kn">import</span> <span class="n">mk_rjsf_app</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 </span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">registry</span> <span class="o">=</span> <span class="n">InputTransformRegistry</span><span class="p">()</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># ... register types ...</span>
-</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">input_trans</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">mk_input_trans_for_funcs</span><span class="p">([</span><span class="n">my_func</span><span class="p">])</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">([</span><span class="n">my_func</span><span class="p">],</span> <span class="n">input_trans</span><span class="o">=</span><span class="n">input_trans</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span><span class="n">Path</span><span class="p">,</span> <span class="n">to_json</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">from_json</span><span class="o">=</span><span class="n">Path</span><span class="p">,</span> <span class="n">json_schema_type</span><span class="o">=</span><span class="s1">'string'</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">my_func</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">input_trans</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">mk_input_trans_for_funcs</span><span class="p">([</span><span class="n">my_func</span><span class="p">])</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="nb">callable</span><span class="p">(</span><span class="n">input_trans</span><span class="p">)</span>  <span class="c1"># pass it as ``mk_rjsf_app([my_func], input_trans=...)``</span>
+</span><span data-line="8"><span class="go">True</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -2757,8 +2783,14 @@ qh.mk_app as the input_trans parameter.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">output_trans</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">mk_output_trans</span><span class="p">()</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">([</span><span class="n">my_func</span><span class="p">],</span> <span class="n">output_trans</span><span class="o">=</span><span class="n">output_trans</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">registry</span> <span class="o">=</span> <span class="n">InputTransformRegistry</span><span class="p">()</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span><span class="n">Decimal</span><span class="p">,</span> <span class="n">to_json</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">from_json</span><span class="o">=</span><span class="n">Decimal</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">my_func</span><span class="p">():</span> <span class="k">return</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">'1.50'</span><span class="p">)</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">output_trans</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">mk_output_trans</span><span class="p">()</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">output_trans</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">'1.50'</span><span class="p">))</span>
+</span><span data-line="7"><span class="go">'1.50'</span>
+</span><span data-line="8"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># pass it as ``mk_rjsf_app([my_func], output_trans=output_trans)``</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -2785,13 +2817,14 @@ qh.mk_app as the input_trans parameter.</p>
 </dl>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="n">Path</span><span class="p">,</span>
-</span><span data-line="4"><span class="gp">... </span>    <span class="n">to_json</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-</span><span data-line="5"><span class="gp">... </span>    <span class="n">from_json</span><span class="o">=</span><span class="n">Path</span><span class="p">,</span>
-</span><span data-line="6"><span class="gp">... </span>    <span class="n">ui_widget</span><span class="o">=</span><span class="s1">'text'</span><span class="p">,</span>
-</span><span data-line="7"><span class="gp">... </span>    <span class="n">json_schema_type</span><span class="o">=</span><span class="s1">'string'</span>
-</span><span data-line="8"><span class="gp">... </span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">registry</span> <span class="o">=</span> <span class="n">InputTransformRegistry</span><span class="p">()</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">registry</span><span class="o">.</span><span class="n">register_type</span><span class="p">(</span>
+</span><span data-line="4"><span class="gp">... </span>    <span class="n">Path</span><span class="p">,</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="n">to_json</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="n">from_json</span><span class="o">=</span><span class="n">Path</span><span class="p">,</span>
+</span><span data-line="7"><span class="gp">... </span>    <span class="n">ui_widget</span><span class="o">=</span><span class="s1">'text'</span><span class="p">,</span>
+</span><span data-line="8"><span class="gp">... </span>    <span class="n">json_schema_type</span><span class="o">=</span><span class="s1">'string'</span>
+</span><span data-line="9"><span class="gp">... </span><span class="p">)</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -3016,7 +3049,9 @@ qh.mk_app as the input_trans parameter.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">presets</span> <span class="o">=</span> <span class="n">PresetManager</span><span class="p">()</span>
 </span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">presets</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">'quick_add'</span><span class="p">,</span> <span class="s1">'add'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span> <span class="s1">'Quick test'</span><span class="p">)</span>
 </span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">preset</span> <span class="o">=</span> <span class="n">presets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'quick_add'</span><span class="p">,</span> <span class="s1">'add'</span><span class="p">)</span>
-</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">my_func</span><span class="p">(</span><span class="o">**</span><span class="n">preset</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">(</span><span class="o">**</span><span class="n">preset</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+</span><span data-line="6"><span class="go">30</span>
 </span></pre></div>
 </div>
 <dl class="py method">
@@ -3252,7 +3287,10 @@ fluent interface for configuring fields.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span> <span class="o">=</span> <span class="n">RjsfConfigBuilder</span><span class="p">()</span>
 </span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">'email'</span><span class="p">,</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">'email'</span><span class="p">))</span>
 </span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="s1">'message'</span><span class="p">,</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span><span class="n">widget</span><span class="o">=</span><span class="s1">'textarea'</span><span class="p">))</span>
-</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">spec</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">base_schema</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">base_schema</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'object'</span><span class="p">,</span> <span class="s1">'properties'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'email'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">}}}</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">spec</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">base_schema</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">spec</span><span class="p">[</span><span class="s1">'schema'</span><span class="p">][</span><span class="s1">'properties'</span><span class="p">][</span><span class="s1">'email'</span><span class="p">][</span><span class="s1">'format'</span><span class="p">]</span>
+</span><span data-line="7"><span class="go">'email'</span>
 </span></pre></div>
 </div>
 <dl class="py method">
@@ -3716,9 +3754,15 @@ rendered in the RJSF interface.</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">task_queue</span> <span class="o">=</span> <span class="n">TaskQueue</span><span class="p">(</span><span class="n">num_workers</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">task_queue</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task_queue</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">expensive_function</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">status</span> <span class="o">=</span> <span class="n">task_queue</span><span class="o">.</span><span class="n">get_status</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">task_queue</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">expensive_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+</span><span data-line="4"><span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task_queue</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">expensive_function</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">task_queue</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
+</span><span data-line="8"><span class="go">30</span>
+</span><span data-line="9"><span class="gp">&gt;&gt;&gt; </span><span class="n">task_queue</span><span class="o">.</span><span class="n">get_status</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+</span><span data-line="10"><span class="go">'completed'</span>
+</span><span data-line="11"><span class="gp">&gt;&gt;&gt; </span><span class="n">task_queue</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 </span></pre></div>
 </div>
 <dl class="field-list simple">
@@ -4127,10 +4171,14 @@ beyond the raw qh app.</p>
 <p>Context manager for testing uf apps.</p>
 <p>Provides a testing context with common utilities and assertions.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">UfAppTester</span><span class="p">(</span><span class="n">app</span><span class="p">)</span> <span class="k">as</span> <span class="n">tester</span><span class="p">:</span>
-</span><span data-line="2"><span class="gp">... </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">tester</span><span class="o">.</span><span class="n">submit_form</span><span class="p">(</span><span class="s1">'add'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="n">tester</span><span class="o">.</span><span class="n">assert_success</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</span><span data-line="4"><span class="gp">... </span>    <span class="n">tester</span><span class="o">.</span><span class="n">assert_result_equals</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">uf</span><span class="w"> </span><span class="kn">import</span> <span class="n">mk_rjsf_app</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">([</span><span class="n">add</span><span class="p">])</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">UfAppTester</span><span class="p">(</span><span class="n">app</span><span class="p">)</span> <span class="k">as</span> <span class="n">tester</span><span class="p">:</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">tester</span><span class="o">.</span><span class="n">submit_form</span><span class="p">(</span><span class="s1">'add'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+</span><span data-line="7"><span class="gp">... </span>    <span class="n">tester</span><span class="o">.</span><span class="n">assert_success</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span><span data-line="8"><span class="gp">... </span>    <span class="n">tester</span><span class="o">.</span><span class="n">assert_result_equals</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 </span></pre></div>
 </div>
 <dl class="py method">
@@ -4246,10 +4294,14 @@ beyond the raw qh app.</p>
 running a web server.</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">uf</span><span class="w"> </span><span class="kn">import</span> <span class="n">mk_rjsf_app</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">([</span><span class="n">my_func</span><span class="p">])</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">UfTestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">call_function</span><span class="p">(</span><span class="s1">'my_func'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">'success'</span><span class="p">]</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">my_func</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">([</span><span class="n">my_func</span><span class="p">])</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">UfTestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">call_function</span><span class="p">(</span><span class="s1">'my_func'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">'success'</span><span class="p">]</span>
+</span><span data-line="8"><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span><span class="p">[</span><span class="s1">'result'</span><span class="p">]</span>
+</span><span data-line="9"><span class="go">30</span>
 </span></pre></div>
 </div>
 <dl class="py method">
@@ -4686,11 +4738,13 @@ running a web server.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">configs</span> <span class="o">=</span> <span class="p">{</span>
-</span><span data-line="2"><span class="gp">... </span>    <span class="s1">'email'</span><span class="p">:</span> <span class="n">get_field_config</span><span class="p">(</span><span class="s1">'email'</span><span class="p">),</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="s1">'bio'</span><span class="p">:</span> <span class="n">get_field_config</span><span class="p">(</span><span class="s1">'multiline_text'</span><span class="p">),</span>
-</span><span data-line="4"><span class="gp">... </span><span class="p">}</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span><span class="p">,</span> <span class="n">ui_schema</span> <span class="o">=</span> <span class="n">apply_field_configs</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">ui_schema</span><span class="p">,</span> <span class="n">configs</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'object'</span><span class="p">,</span> <span class="s1">'properties'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'email'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'type'</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">}}}</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">configs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'email'</span><span class="p">:</span> <span class="n">get_field_config</span><span class="p">(</span><span class="s1">'email'</span><span class="p">)}</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span><span class="p">,</span> <span class="n">ui_schema</span> <span class="o">=</span> <span class="n">apply_field_configs</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="p">{},</span> <span class="n">configs</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">schema</span><span class="p">[</span><span class="s1">'properties'</span><span class="p">][</span><span class="s1">'email'</span><span class="p">][</span><span class="s1">'format'</span><span class="p">]</span>
+</span><span data-line="5"><span class="go">'email'</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">ui_schema</span><span class="p">[</span><span class="s1">'email'</span><span class="p">][</span><span class="s1">'ui:widget'</span><span class="p">]</span>
+</span><span data-line="7"><span class="go">'email'</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -4778,10 +4832,10 @@ running a web server.</p>
 </dl>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fetch_data</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span data-line="2"><span class="gp">... </span>    <span class="c1"># async operations</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="k">return</span> <span class="n">data</span>
-</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">sync_fetch</span> <span class="o">=</span> <span class="n">async_to_sync</span><span class="p">(</span><span class="n">fetch_data</span><span class="p">)</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">sync_fetch</span><span class="p">(</span><span class="s1">'https://example.com'</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="k">return</span> <span class="p">{</span><span class="s1">'url'</span><span class="p">:</span> <span class="n">url</span><span class="p">}</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">sync_fetch</span> <span class="o">=</span> <span class="n">async_to_sync</span><span class="p">(</span><span class="n">fetch_data</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">sync_fetch</span><span class="p">(</span><span class="s1">'https://example.com'</span><span class="p">)</span>
+</span><span data-line="5"><span class="go">{'url': 'https://example.com'}</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -4803,9 +4857,13 @@ module of the function it wraps)</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">myapp</span><span class="w"> </span><span class="kn">import</span> <span class="n">user_ops</span><span class="p">,</span> <span class="n">report_ops</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">user_ops</span><span class="o">.</span><span class="n">create</span><span class="p">,</span> <span class="n">user_ops</span><span class="o">.</span><span class="n">delete</span><span class="p">,</span> <span class="n">report_ops</span><span class="o">.</span><span class="n">generate</span><span class="p">]</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_module</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">=</span> <span class="s1">'myapp.user_ops'</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">generate</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">=</span> <span class="s1">'myapp.report_ops'</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_module</span><span class="p">([</span><span class="n">create</span><span class="p">,</span> <span class="n">generate</span><span class="p">])</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">organizer</span><span class="o">.</span><span class="n">get_groups</span><span class="p">()]</span>
+</span><span data-line="7"><span class="go">['Report Ops', 'User Ops']</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -4835,9 +4893,14 @@ For example, with separator=”_”:</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">user_create</span><span class="p">,</span> <span class="n">user_delete</span><span class="p">,</span> <span class="n">report_generate</span><span class="p">,</span> <span class="n">admin_reset</span><span class="p">]</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_prefix</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Creates groups: 'user', 'report', 'admin'</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">user_create</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">user_delete</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">report_generate</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">admin_reset</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">user_create</span><span class="p">,</span> <span class="n">user_delete</span><span class="p">,</span> <span class="n">report_generate</span><span class="p">,</span> <span class="n">admin_reset</span><span class="p">]</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_prefix</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">organizer</span><span class="o">.</span><span class="n">get_groups</span><span class="p">()]</span>
+</span><span data-line="8"><span class="go">['Admin', 'Report', 'User']</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -4866,7 +4929,10 @@ For example, with separator=”_”:</p>
 </span><span data-line="2"><span class="gp">... </span>    <span class="k">pass</span>
 </span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">create_user</span><span class="o">.</span><span class="n">__uf_group__</span> <span class="o">=</span> <span class="s1">'Admin'</span>
 </span><span data-line="4"><span class="gp">&gt;&gt;&gt;</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_tag</span><span class="p">([</span><span class="n">create_user</span><span class="p">,</span> <span class="n">other_func</span><span class="p">])</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">other_func</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">organizer</span> <span class="o">=</span> <span class="n">auto_group_by_tag</span><span class="p">([</span><span class="n">create_user</span><span class="p">,</span> <span class="n">other_func</span><span class="p">])</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">organizer</span><span class="o">.</span><span class="n">get_groups</span><span class="p">()]</span>
+</span><span data-line="8"><span class="go">['Admin', 'Other']</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -4918,10 +4984,14 @@ For example, with separator=”_”:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="nd">@cached</span><span class="p">(</span><span class="n">ttl</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
 </span><span data-line="2"><span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">expensive_calculation</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span data-line="3"><span class="gp">... </span>    <span class="c1"># Only runs once per unique (x, y) combination</span>
-</span><span data-line="4"><span class="gp">... </span>    <span class="k">return</span> <span class="n">heavy_computation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt;</span>
-</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">expensive_calculation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># Computes</span>
-</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="n">result2</span> <span class="o">=</span> <span class="n">expensive_calculation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># From cache</span>
+</span><span data-line="4"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">"computing"</span><span class="p">)</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt;</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="n">expensive_calculation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># computes</span>
+</span><span data-line="8"><span class="go">computing</span>
+</span><span data-line="9"><span class="go">30</span>
+</span><span data-line="10"><span class="gp">&gt;&gt;&gt; </span><span class="n">expensive_calculation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># from cache</span>
+</span><span data-line="11"><span class="go">30</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -5073,10 +5143,14 @@ For example, with separator=”_”:</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span> <span class="o">=</span> <span class="n">get_example</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">example</span><span class="p">:</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="n">example</span>
-</span><span data-line="4"><span class="gp">... </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">my_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="nd">@with_example</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span> <span class="o">=</span> <span class="n">get_example</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">example</span><span class="p">:</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="n">example</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">my_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
+</span><span data-line="8"><span class="go">6</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -5123,9 +5197,12 @@ For example, with separator=”_”:</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">field_configs</span> <span class="o">=</span> <span class="n">get_field_configs</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="s1">'email'</span> <span class="ow">in</span> <span class="n">field_configs</span><span class="p">:</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">field_configs</span><span class="p">[</span><span class="s1">'email'</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="nd">@ui_config</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">{</span><span class="s1">'email'</span><span class="p">:</span> <span class="n">RjsfFieldConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">'email'</span><span class="p">)})</span>
+</span><span data-line="2"><span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">field_configs</span> <span class="o">=</span> <span class="n">get_field_configs</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="s1">'email'</span> <span class="ow">in</span> <span class="n">field_configs</span><span class="p">:</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">field_configs</span><span class="p">[</span><span class="s1">'email'</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+</span><span data-line="6"><span class="go">email</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -5255,9 +5332,12 @@ For example, with separator=”_”:</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">group</span> <span class="o">=</span> <span class="n">get_group</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">group</span><span class="p">:</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Function is in group: </span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="nd">@ui_config</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s2">"Admin"</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">group</span> <span class="o">=</span> <span class="n">get_group</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">group</span><span class="p">:</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Function is in group: </span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span data-line="6"><span class="go">Function is in group: Admin</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -5317,9 +5397,12 @@ For example, with separator=”_”:</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">config</span> <span class="o">=</span> <span class="n">get_ui_config</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">config</span><span class="p">:</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">'title'</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="nd">@ui_config</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Greeting"</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">config</span> <span class="o">=</span> <span class="n">get_ui_config</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">config</span><span class="p">:</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">'title'</span><span class="p">])</span>
+</span><span data-line="6"><span class="go">Greeting</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -5410,9 +5493,10 @@ in the UI navigation.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="ow">not</span> <span class="n">is_hidden</span><span class="p">(</span><span class="n">my_function</span><span class="p">):</span>
-</span><span data-line="2"><span class="gp">... </span>    <span class="c1"># Show in UI</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="k">pass</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="ow">not</span> <span class="n">is_hidden</span><span class="p">(</span><span class="n">my_function</span><span class="p">):</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">"show in UI"</span><span class="p">)</span>
+</span><span data-line="4"><span class="go">show in UI</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -5450,9 +5534,11 @@ in the UI navigation.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">sync_func</span><span class="p">,</span> <span class="n">async_func</span><span class="p">,</span> <span class="n">another_sync</span><span class="p">]</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">compatible</span> <span class="o">=</span> <span class="n">make_sync_compatible</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># All functions in compatible are now callable synchronously</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">sync_func</span><span class="p">():</span> <span class="k">return</span> <span class="mi">1</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">async_func</span><span class="p">():</span> <span class="k">return</span> <span class="mi">2</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">compatible</span> <span class="o">=</span> <span class="n">make_sync_compatible</span><span class="p">([</span><span class="n">sync_func</span><span class="p">,</span> <span class="n">async_func</span><span class="p">])</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">f</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">compatible</span><span class="p">]</span>  <span class="c1"># all callable synchronously</span>
+</span><span data-line="5"><span class="go">[1, 2]</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -5473,9 +5559,13 @@ in the UI navigation.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">admin_group</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span><span class="s1">'Admin'</span><span class="p">,</span> <span class="p">[</span><span class="n">user_create</span><span class="p">,</span> <span class="n">user_delete</span><span class="p">])</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">reports_group</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span><span class="s1">'Reports'</span><span class="p">,</span> <span class="p">[</span><span class="n">generate_report</span><span class="p">])</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_grouped_app</span><span class="p">([</span><span class="n">admin_group</span><span class="p">,</span> <span class="n">reports_group</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">user_create</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span> <span class="o">...</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">generate_report</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">admin_group</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span><span class="s1">'Admin'</span><span class="p">,</span> <span class="p">[</span><span class="n">user_create</span><span class="p">])</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">reports_group</span> <span class="o">=</span> <span class="n">FunctionGroup</span><span class="p">(</span><span class="s1">'Reports'</span><span class="p">,</span> <span class="p">[</span><span class="n">generate_report</span><span class="p">])</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_grouped_app</span><span class="p">([</span><span class="n">admin_group</span><span class="p">,</span> <span class="n">reports_group</span><span class="p">])</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">app</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+</span><span data-line="7"><span class="go">'FastAPI'</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -6055,7 +6145,7 @@ the function, and converts Pydantic outputs back to dicts.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=9969ed3f"></script>
+      <script src="../_static/documentation_options.js?v=3d116926"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

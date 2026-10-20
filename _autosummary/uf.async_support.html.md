@@ -35,8 +35,11 @@ This helps manage event loops and async resources properly.
 ### Example
 
 ```pycon
+>>> async def my_async_function(param):
+...     return param * 2
 >>> with AsyncContext() as ctx:
-...     result = ctx.run(my_async_function(param))
+...     ctx.run(my_async_function(21))
+42
 ```
 
 #### run(coro)
@@ -61,14 +64,14 @@ the context.
 
 ```pycon
 >>> async def fetch_user(user_id: int):
-...     # async database query
-...     return user_data
+...     return {'id': user_id}
 >>>
 >>> wrapper = AsyncFunctionWrapper(fetch_user)
->>> # Sync call
->>> user = wrapper.call_sync(user_id=123)
->>> # Async call
->>> user = await wrapper.call_async(user_id=123)
+>>> wrapper.call_sync(user_id=123)  # sync call
+{'id': 123}
+>>> import asyncio
+>>> asyncio.run(wrapper.call_async(user_id=123))  # async call (use await in async code)
+{'id': 123}
 ```
 
 #### *async* call_async(\*args, \*\*kwargs)
@@ -110,10 +113,10 @@ Convert an async function to a synchronous wrapper.
 
 ```pycon
 >>> async def fetch_data(url: str):
-...     # async operations
-...     return data
+...     return {'url': url}
 >>> sync_fetch = async_to_sync(fetch_data)
->>> result = sync_fetch('https://example.com')
+>>> sync_fetch('https://example.com')
+{'url': 'https://example.com'}
 ```
 
 ### uf.async_support.batch_async_calls(async_func, calls)
@@ -132,14 +135,15 @@ Execute multiple async function calls concurrently.
 
 ```pycon
 >>> async def fetch_user(user_id: int):
-...     return await db.get_user(user_id)
+...     return {'id': user_id}
 >>>
 >>> calls = [
 ...     {'args': (), 'kwargs': {'user_id': 1}},
 ...     {'args': (), 'kwargs': {'user_id': 2}},
 ...     {'args': (), 'kwargs': {'user_id': 3}},
 ... ]
->>> users = batch_async_calls(fetch_user, calls)
+>>> batch_async_calls(fetch_user, calls)
+[{'id': 1}, {'id': 2}, {'id': 3}]
 ```
 
 ### uf.async_support.create_async_handler(async_func)
@@ -221,9 +225,11 @@ Convert any async functions in the list to sync wrappers.
 ### Example
 
 ```pycon
->>> funcs = [sync_func, async_func, another_sync]
->>> compatible = make_sync_compatible(funcs)
->>> # All functions in compatible are now callable synchronously
+>>> def sync_func(): return 1
+>>> async def async_func(): return 2
+>>> compatible = make_sync_compatible([sync_func, async_func])
+>>> [f() for f in compatible]  # all callable synchronously
+[1, 2]
 ```
 
 ### uf.async_support.retry_async(max_attempts=3, delay=1.0)

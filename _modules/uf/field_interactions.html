@@ -586,80 +586,83 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="384"><span class="sd">        ...                    lambda v: v == 'other',</span>
 </span><span data-line="385"><span class="sd">        ...                    DependencyAction.SHOW)</span>
 </span><span data-line="386"><span class="sd">        ... ]</span>
-</span><span data-line="387"><span class="sd">        &gt;&gt;&gt; spec = add_field_dependencies(my_func, deps)  # doctest: +SKIP</span>
-</span><span data-line="388"><span class="sd">    """</span>
-</span><span data-line="389">    <span class="c1"># This would typically be called during spec generation</span>
-</span><span data-line="390">    <span class="c1"># For now, return a structure that can be merged</span>
-</span><span data-line="391">    <span class="n">schema_additions</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"allOf"</span><span class="p">:</span> <span class="p">[]}</span>
-</span><span data-line="392">    <span class="n">ui_schema_additions</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="393">
-</span><span data-line="394">    <span class="k">for</span> <span class="n">dep</span> <span class="ow">in</span> <span class="n">dependencies</span><span class="p">:</span>
-</span><span data-line="395">        <span class="c1"># Add JSON Schema dependencies</span>
-</span><span data-line="396">        <span class="n">schema_dep</span> <span class="o">=</span> <span class="n">dep</span><span class="o">.</span><span class="n">to_json_schema</span><span class="p">()</span>
-</span><span data-line="397">        <span class="k">if</span> <span class="n">schema_dep</span><span class="p">:</span>
-</span><span data-line="398">            <span class="n">schema_additions</span><span class="p">[</span><span class="s2">"allOf"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">schema_dep</span><span class="p">)</span>
-</span><span data-line="399">
-</span><span data-line="400">        <span class="c1"># Add UI Schema dependencies</span>
-</span><span data-line="401">        <span class="n">ui_dep</span> <span class="o">=</span> <span class="n">dep</span><span class="o">.</span><span class="n">to_ui_schema</span><span class="p">()</span>
-</span><span data-line="402">        <span class="k">if</span> <span class="n">ui_dep</span><span class="p">:</span>
-</span><span data-line="403">            <span class="n">ui_schema_additions</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ui_dep</span><span class="p">)</span>
-</span><span data-line="404">
-</span><span data-line="405">    <span class="k">return</span> <span class="p">{</span>
-</span><span data-line="406">        <span class="s2">"schema_additions"</span><span class="p">:</span> <span class="n">schema_additions</span><span class="p">,</span>
-</span><span data-line="407">        <span class="s2">"ui_schema_additions"</span><span class="p">:</span> <span class="n">ui_schema_additions</span><span class="p">,</span>
-</span><span data-line="408">    <span class="p">}</span></div>
+</span><span data-line="387"><span class="sd">        &gt;&gt;&gt; def my_func(reason: str, other_reason: str = ''): ...</span>
+</span><span data-line="388"><span class="sd">        &gt;&gt;&gt; spec = add_field_dependencies(my_func, deps)</span>
+</span><span data-line="389"><span class="sd">        &gt;&gt;&gt; sorted(spec)</span>
+</span><span data-line="390"><span class="sd">        ['schema_additions', 'ui_schema_additions']</span>
+</span><span data-line="391"><span class="sd">    """</span>
+</span><span data-line="392">    <span class="c1"># This would typically be called during spec generation</span>
+</span><span data-line="393">    <span class="c1"># For now, return a structure that can be merged</span>
+</span><span data-line="394">    <span class="n">schema_additions</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"allOf"</span><span class="p">:</span> <span class="p">[]}</span>
+</span><span data-line="395">    <span class="n">ui_schema_additions</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="396">
+</span><span data-line="397">    <span class="k">for</span> <span class="n">dep</span> <span class="ow">in</span> <span class="n">dependencies</span><span class="p">:</span>
+</span><span data-line="398">        <span class="c1"># Add JSON Schema dependencies</span>
+</span><span data-line="399">        <span class="n">schema_dep</span> <span class="o">=</span> <span class="n">dep</span><span class="o">.</span><span class="n">to_json_schema</span><span class="p">()</span>
+</span><span data-line="400">        <span class="k">if</span> <span class="n">schema_dep</span><span class="p">:</span>
+</span><span data-line="401">            <span class="n">schema_additions</span><span class="p">[</span><span class="s2">"allOf"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">schema_dep</span><span class="p">)</span>
+</span><span data-line="402">
+</span><span data-line="403">        <span class="c1"># Add UI Schema dependencies</span>
+</span><span data-line="404">        <span class="n">ui_dep</span> <span class="o">=</span> <span class="n">dep</span><span class="o">.</span><span class="n">to_ui_schema</span><span class="p">()</span>
+</span><span data-line="405">        <span class="k">if</span> <span class="n">ui_dep</span><span class="p">:</span>
+</span><span data-line="406">            <span class="n">ui_schema_additions</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ui_dep</span><span class="p">)</span>
+</span><span data-line="407">
+</span><span data-line="408">    <span class="k">return</span> <span class="p">{</span>
+</span><span data-line="409">        <span class="s2">"schema_additions"</span><span class="p">:</span> <span class="n">schema_additions</span><span class="p">,</span>
+</span><span data-line="410">        <span class="s2">"ui_schema_additions"</span><span class="p">:</span> <span class="n">ui_schema_additions</span><span class="p">,</span>
+</span><span data-line="411">    <span class="p">}</span></div>
 
-</span><span data-line="409">
-</span><span data-line="410">
+</span><span data-line="412">
+</span><span data-line="413">
 <div class="viewcode-block" id="with_dependencies">
 <a class="viewcode-back" href="../../_autosummary/uf.field_interactions.html#uf.with_dependencies">[docs]</a>
-</span><span data-line="411"><span class="k">def</span><span class="w"> </span><span class="nf">with_dependencies</span><span class="p">(</span><span class="o">*</span><span class="n">dependencies</span><span class="p">:</span> <span class="n">FieldDependency</span><span class="p">):</span>
-</span><span data-line="412"><span class="w">    </span><span class="sd">"""Decorator to attach field dependencies to a function.</span>
-</span><span data-line="413">
-</span><span data-line="414"><span class="sd">    Args:</span>
-</span><span data-line="415"><span class="sd">        *dependencies: FieldDependency objects</span>
+</span><span data-line="414"><span class="k">def</span><span class="w"> </span><span class="nf">with_dependencies</span><span class="p">(</span><span class="o">*</span><span class="n">dependencies</span><span class="p">:</span> <span class="n">FieldDependency</span><span class="p">):</span>
+</span><span data-line="415"><span class="w">    </span><span class="sd">"""Decorator to attach field dependencies to a function.</span>
 </span><span data-line="416">
-</span><span data-line="417"><span class="sd">    Returns:</span>
-</span><span data-line="418"><span class="sd">        Decorator function</span>
+</span><span data-line="417"><span class="sd">    Args:</span>
+</span><span data-line="418"><span class="sd">        *dependencies: FieldDependency objects</span>
 </span><span data-line="419">
-</span><span data-line="420"><span class="sd">    Example:</span>
-</span><span data-line="421"><span class="sd">        &gt;&gt;&gt; @with_dependencies(</span>
-</span><span data-line="422"><span class="sd">        ...     FieldDependency('reason', 'other_reason',</span>
-</span><span data-line="423"><span class="sd">        ...                    lambda v: v == 'other',</span>
-</span><span data-line="424"><span class="sd">        ...                    DependencyAction.SHOW)</span>
-</span><span data-line="425"><span class="sd">        ... )</span>
-</span><span data-line="426"><span class="sd">        ... def submit_feedback(reason: str, other_reason: str = ''):</span>
-</span><span data-line="427"><span class="sd">        ...     pass</span>
-</span><span data-line="428"><span class="sd">    """</span>
-</span><span data-line="429">    <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
-</span><span data-line="430">
-</span><span data-line="431">    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span data-line="432">        <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">"__uf_field_dependencies__"</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">dependencies</span><span class="p">))</span>
+</span><span data-line="420"><span class="sd">    Returns:</span>
+</span><span data-line="421"><span class="sd">        Decorator function</span>
+</span><span data-line="422">
+</span><span data-line="423"><span class="sd">    Example:</span>
+</span><span data-line="424"><span class="sd">        &gt;&gt;&gt; @with_dependencies(</span>
+</span><span data-line="425"><span class="sd">        ...     FieldDependency('reason', 'other_reason',</span>
+</span><span data-line="426"><span class="sd">        ...                    lambda v: v == 'other',</span>
+</span><span data-line="427"><span class="sd">        ...                    DependencyAction.SHOW)</span>
+</span><span data-line="428"><span class="sd">        ... )</span>
+</span><span data-line="429"><span class="sd">        ... def submit_feedback(reason: str, other_reason: str = ''):</span>
+</span><span data-line="430"><span class="sd">        ...     pass</span>
+</span><span data-line="431"><span class="sd">    """</span>
+</span><span data-line="432">    <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
 </span><span data-line="433">
-</span><span data-line="434">        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="435">        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span data-line="436">            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span data-line="437">
-</span><span data-line="438">        <span class="nb">setattr</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="s2">"__uf_field_dependencies__"</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">dependencies</span><span class="p">))</span>
-</span><span data-line="439">
-</span><span data-line="440">        <span class="k">return</span> <span class="n">wrapper</span>
-</span><span data-line="441">
-</span><span data-line="442">    <span class="k">return</span> <span class="n">decorator</span></div>
-
-</span><span data-line="443">
+</span><span data-line="434">    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span data-line="435">        <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">"__uf_field_dependencies__"</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">dependencies</span><span class="p">))</span>
+</span><span data-line="436">
+</span><span data-line="437">        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="438">        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span data-line="439">            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span data-line="440">
+</span><span data-line="441">        <span class="nb">setattr</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="s2">"__uf_field_dependencies__"</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">dependencies</span><span class="p">))</span>
+</span><span data-line="442">
+</span><span data-line="443">        <span class="k">return</span> <span class="n">wrapper</span>
 </span><span data-line="444">
+</span><span data-line="445">    <span class="k">return</span> <span class="n">decorator</span></div>
+
+</span><span data-line="446">
+</span><span data-line="447">
 <div class="viewcode-block" id="get_field_dependencies">
 <a class="viewcode-back" href="../../_autosummary/uf.field_interactions.html#uf.get_field_dependencies">[docs]</a>
-</span><span data-line="445"><span class="k">def</span><span class="w"> </span><span class="nf">get_field_dependencies</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FieldDependency</span><span class="p">]:</span>
-</span><span data-line="446"><span class="w">    </span><span class="sd">"""Get field dependencies from a function.</span>
-</span><span data-line="447">
-</span><span data-line="448"><span class="sd">    Args:</span>
-</span><span data-line="449"><span class="sd">        func: Function to get dependencies from</span>
+</span><span data-line="448"><span class="k">def</span><span class="w"> </span><span class="nf">get_field_dependencies</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FieldDependency</span><span class="p">]:</span>
+</span><span data-line="449"><span class="w">    </span><span class="sd">"""Get field dependencies from a function.</span>
 </span><span data-line="450">
-</span><span data-line="451"><span class="sd">    Returns:</span>
-</span><span data-line="452"><span class="sd">        List of FieldDependency objects</span>
-</span><span data-line="453"><span class="sd">    """</span>
-</span><span data-line="454">    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">"__uf_field_dependencies__"</span><span class="p">,</span> <span class="p">[])</span></div>
+</span><span data-line="451"><span class="sd">    Args:</span>
+</span><span data-line="452"><span class="sd">        func: Function to get dependencies from</span>
+</span><span data-line="453">
+</span><span data-line="454"><span class="sd">    Returns:</span>
+</span><span data-line="455"><span class="sd">        List of FieldDependency objects</span>
+</span><span data-line="456"><span class="sd">    """</span>
+</span><span data-line="457">    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">"__uf_field_dependencies__"</span><span class="p">,</span> <span class="p">[])</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">
@@ -688,7 +691,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=9969ed3f"></script>
+      <script src="../../_static/documentation_options.js?v=3d116926"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

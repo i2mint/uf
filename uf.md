@@ -1,4 +1,4 @@
-> built 2026-10-20 09:55 UTC from 20b2876 (master) · uf 0.1.18. Details: build_info.json
+> built 2026-10-20 10:47 UTC from 7b38b8d (master) · uf 0.1.19. Details: build_info.json
 
 # index.html.md
 
@@ -789,8 +789,11 @@ This helps manage event loops and async resources properly.
 ### Example
 
 ```pycon
+>>> async def my_async_function(param):
+...     return param * 2
 >>> with AsyncContext() as ctx:
-...     result = ctx.run(my_async_function(param))
+...     ctx.run(my_async_function(21))
+42
 ```
 
 #### run(coro)
@@ -815,14 +818,14 @@ the context.
 
 ```pycon
 >>> async def fetch_user(user_id: int):
-...     # async database query
-...     return user_data
+...     return {'id': user_id}
 >>>
 >>> wrapper = AsyncFunctionWrapper(fetch_user)
->>> # Sync call
->>> user = wrapper.call_sync(user_id=123)
->>> # Async call
->>> user = await wrapper.call_async(user_id=123)
+>>> wrapper.call_sync(user_id=123)  # sync call
+{'id': 123}
+>>> import asyncio
+>>> asyncio.run(wrapper.call_async(user_id=123))  # async call (use await in async code)
+{'id': 123}
 ```
 
 #### *async* call_async(\*args, \*\*kwargs)
@@ -864,10 +867,10 @@ Convert an async function to a synchronous wrapper.
 
 ```pycon
 >>> async def fetch_data(url: str):
-...     # async operations
-...     return data
+...     return {'url': url}
 >>> sync_fetch = async_to_sync(fetch_data)
->>> result = sync_fetch('https://example.com')
+>>> sync_fetch('https://example.com')
+{'url': 'https://example.com'}
 ```
 
 ### uf.async_support.batch_async_calls(async_func, calls)
@@ -886,14 +889,15 @@ Execute multiple async function calls concurrently.
 
 ```pycon
 >>> async def fetch_user(user_id: int):
-...     return await db.get_user(user_id)
+...     return {'id': user_id}
 >>>
 >>> calls = [
 ...     {'args': (), 'kwargs': {'user_id': 1}},
 ...     {'args': (), 'kwargs': {'user_id': 2}},
 ...     {'args': (), 'kwargs': {'user_id': 3}},
 ... ]
->>> users = batch_async_calls(fetch_user, calls)
+>>> batch_async_calls(fetch_user, calls)
+[{'id': 1}, {'id': 2}, {'id': 3}]
 ```
 
 ### uf.async_support.create_async_handler(async_func)
@@ -975,9 +979,11 @@ Convert any async functions in the list to sync wrappers.
 ### Example
 
 ```pycon
->>> funcs = [sync_func, async_func, another_sync]
->>> compatible = make_sync_compatible(funcs)
->>> # All functions in compatible are now callable synchronously
+>>> def sync_func(): return 1
+>>> async def async_func(): return 2
+>>> compatible = make_sync_compatible([sync_func, async_func])
+>>> [f() for f in compatible]  # all callable synchronously
+[1, 2]
 ```
 
 ### uf.async_support.retry_async(max_attempts=3, delay=1.0)
@@ -1103,10 +1109,12 @@ Manage API keys for programmatic access.
 ```pycon
 >>> api_keys = ApiKeyManager()
 >>> key = api_keys.create_key('mobile_app', permissions=['read'])
->>> print(f"Your API key: {key.key}")
+>>> key.key.startswith('sk_')
+True
 >>> # Later, validate
 >>> if api_keys.validate_key(key.key, 'read'):
-...     # Allow access
+...     print("access allowed")
+access allowed
 ```
 
 #### create_key(name, permissions=None, expires_in_days=None)
@@ -1819,8 +1827,11 @@ across restarts.
 ### Example
 
 ```pycon
->>> cache = DiskCache(cache_dir='/tmp/uf_cache')
->>> cache.set('expensive_result', big_data)
+>>> import tempfile
+>>> cache = DiskCache(cache_dir=tempfile.mkdtemp())
+>>> cache.set('expensive_result', [1, 2, 3])
+>>> cache.get('expensive_result')
+[1, 2, 3]
 ```
 
 #### clear()
@@ -1951,10 +1962,14 @@ Decorator to cache function results.
 >>> @cached(ttl=3600)
 ... def expensive_calculation(x: int, y: int) -> int:
 ...     # Only runs once per unique (x, y) combination
-...     return heavy_computation(x, y)
+...     print("computing")
+...     return x + y
 >>>
->>> result = expensive_calculation(10, 20)  # Computes
->>> result2 = expensive_calculation(10, 20)  # From cache
+>>> expensive_calculation(10, 20)  # computes
+computing
+30
+>>> expensive_calculation(10, 20)  # from cache
+30
 ```
 
 ### uf.caching.get_global_cache_backend()
@@ -2085,10 +2100,14 @@ Get example arguments from a function.
 ### Example
 
 ```pycon
+>>> @with_example(2, y=3)
+... def my_function(x, y): return x * y
 >>> example = get_example(my_function)
 >>> if example:
 ...     args, kwargs = example
 ...     result = my_function(*args, **kwargs)
+>>> result
+6
 ```
 
 ### uf.decorators.get_field_configs(func)
@@ -2105,9 +2124,12 @@ Get field configurations from a function.
 ### Example
 
 ```pycon
+>>> @ui_config(fields={'email': RjsfFieldConfig(format='email')})
+... def my_function(email: str): ...
 >>> field_configs = get_field_configs(my_function)
 >>> if 'email' in field_configs:
 ...     print(field_configs['email'].format)
+email
 ```
 
 ### uf.decorators.get_group(func)
@@ -2124,9 +2146,12 @@ Get group name from a function.
 ### Example
 
 ```pycon
+>>> @ui_config(group="Admin")
+... def my_function(name: str): ...
 >>> group = get_group(my_function)
 >>> if group:
 ...     print(f"Function is in group: {group}")
+Function is in group: Admin
 ```
 
 ### uf.decorators.get_ui_config(func)
@@ -2143,9 +2168,12 @@ Get UI configuration from a function.
 ### Example
 
 ```pycon
+>>> @ui_config(title="Greeting")
+... def my_function(name: str): ...
 >>> config = get_ui_config(my_function)
 >>> if config:
 ...     print(config['title'])
+Greeting
 ```
 
 ### uf.decorators.group(group_name)
@@ -2203,9 +2231,10 @@ Check if a function is hidden from UI.
 ### Example
 
 ```pycon
+>>> def my_function(): ...
 >>> if not is_hidden(my_function):
-...     # Show in UI
-...     pass
+...     print("show in UI")
+show in UI
 ```
 
 ### uf.decorators.rate_limit(calls, period)
@@ -2623,7 +2652,10 @@ Augment RJSF spec with field dependencies.
 ...                    lambda v: v == 'other',
 ...                    DependencyAction.SHOW)
 ... ]
+>>> def my_func(reason: str, other_reason: str = ''): ...
 >>> spec = add_field_dependencies(my_func, deps)
+>>> sorted(spec)
+['schema_additions', 'ui_schema_additions']
 ```
 
 ### uf.field_interactions.get_field_dependencies(func)
@@ -2973,7 +3005,9 @@ Manage parameter presets for functions.
 >>> presets = PresetManager()
 >>> _ = presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')
 >>> preset = presets.get('quick_add', 'add')
->>> result = my_func(**preset.params)
+>>> def add(x, y): return x + y
+>>> add(**preset.params)
+30
 ```
 
 #### delete(preset_name, func_name)
@@ -3272,10 +3306,12 @@ Manage API keys for programmatic access.
 ```pycon
 >>> api_keys = ApiKeyManager()
 >>> key = api_keys.create_key('mobile_app', permissions=['read'])
->>> print(f"Your API key: {key.key}")
+>>> key.key.startswith('sk_')
+True
 >>> # Later, validate
 >>> if api_keys.validate_key(key.key, 'read'):
-...     # Allow access
+...     print("access allowed")
+access allowed
 ```
 
 #### create_key(name, permissions=None, expires_in_days=None)
@@ -3336,14 +3372,14 @@ the context.
 
 ```pycon
 >>> async def fetch_user(user_id: int):
-...     # async database query
-...     return user_data
+...     return {'id': user_id}
 >>>
 >>> wrapper = AsyncFunctionWrapper(fetch_user)
->>> # Sync call
->>> user = wrapper.call_sync(user_id=123)
->>> # Async call
->>> user = await wrapper.call_async(user_id=123)
+>>> wrapper.call_sync(user_id=123)  # sync call
+{'id': 123}
+>>> import asyncio
+>>> asyncio.run(wrapper.call_async(user_id=123))  # async call (use await in async code)
+{'id': 123}
 ```
 
 #### *async* call_async(\*args, \*\*kwargs)
@@ -3878,8 +3914,11 @@ across restarts.
 ### Example
 
 ```pycon
->>> cache = DiskCache(cache_dir='/tmp/uf_cache')
->>> cache.set('expensive_result', big_data)
+>>> import tempfile
+>>> cache = DiskCache(cache_dir=tempfile.mkdtemp())
+>>> cache.set('expensive_result', [1, 2, 3])
+>>> cache.get('expensive_result')
+[1, 2, 3]
 ```
 
 #### clear()
@@ -4151,12 +4190,18 @@ Whether the group starts collapsed in UI
 ### Example
 
 ```pycon
+>>> def add(x: int, y: int) -> int:
+...     return x + y
+>>> def subtract(x: int, y: int) -> int:
+...     return x - y
 >>> math_funcs = FunctionGroup(
 ...     'Math',
-...     [add, subtract, multiply, divide],
+...     [add, subtract],
 ...     description='Mathematical operations',
 ...     icon='calculator'
 ... )
+>>> list(math_funcs.named_funcs)
+['add', 'subtract']
 ```
 
 #### add_function(func, , name=None)
@@ -4207,10 +4252,14 @@ navigation in the UI.
 ### Example
 
 ```pycon
+>>> def user_create(name: str): ...
+>>> def user_delete(name: str): ...
+>>> def generate_report(): ...
 >>> organizer = FunctionOrganizer()
->>> organizer.group('Admin', [user_create, user_delete], icon='shield')
->>> organizer.group('Reports', [generate_report, export_csv], icon='file')
->>> groups = organizer.get_groups()
+>>> g = organizer.group('Admin', [user_create, user_delete], icon='shield')
+>>> g = organizer.group('Reports', [generate_report], icon='file')
+>>> [group.name for group in organizer.get_groups()]
+['Admin', 'Reports']
 ```
 
 #### add_to_group(group_name, func)
@@ -4275,12 +4324,17 @@ Create and add a function group.
 ### Example
 
 ```pycon
->>> organizer.group(
+>>> def save_record(record: dict): ...
+>>> def load_record(key: str): ...
+>>> organizer = FunctionOrganizer()
+>>> group = organizer.group(
 ...     'Database',
 ...     [save_record, load_record],
 ...     description='Database operations',
 ...     icon='database'
 ... )
+>>> group.icon, list(group.named_funcs)
+('database', ['save_record', 'load_record'])
 ```
 
 #### to_dict()
@@ -4295,8 +4349,11 @@ Convert organization to dictionary format.
 ### Example
 
 ```pycon
->>> org_dict = organizer.to_dict()
->>> # Can be used in templates or APIs
+>>> def ping(): ...
+>>> organizer = FunctionOrganizer()
+>>> g = organizer.group('Ops', [ping])
+>>> organizer.to_dict()['groups'][0]['functions']
+[{'name': 'ping', 'description': ''}]
 ```
 
 ### *class* uf.FunctionSpecStore(funcs, , rjsf_config=None, ui_schema_factory=None, param_to_prop_type=None, validate=False)
@@ -4540,11 +4597,14 @@ qh.mk_app as the input_trans parameter.
 ### Example
 
 ```pycon
->>> from uf import mk_rjsf_app
+>>> from pathlib import Path
 >>> registry = InputTransformRegistry()
->>> # ... register types ...
+>>> registry.register_type(Path, to_json=str, from_json=Path, json_schema_type='string')
+>>> def my_func(path: Path):
+...     return str(path)
 >>> input_trans = registry.mk_input_trans_for_funcs([my_func])
->>> app = mk_rjsf_app([my_func], input_trans=input_trans)
+>>> callable(input_trans)  # pass it as ``mk_rjsf_app([my_func], input_trans=...)``
+True
 ```
 
 #### mk_output_trans()
@@ -4559,8 +4619,14 @@ Create output transformation for qh.
 ### Example
 
 ```pycon
+>>> from decimal import Decimal
+>>> registry = InputTransformRegistry()
+>>> registry.register_type(Decimal, to_json=str, from_json=Decimal)
+>>> def my_func(): return Decimal('1.50')
 >>> output_trans = registry.mk_output_trans()
->>> app = mk_rjsf_app([my_func], output_trans=output_trans)
+>>> output_trans(Decimal('1.50'))
+'1.50'
+>>> # pass it as ``mk_rjsf_app([my_func], output_trans=output_trans)``
 ```
 
 #### register_type(py_type, , to_json=None, from_json=None, ui_widget=None, ui_config=None, json_schema_type=None, json_schema_format=None)
@@ -4582,6 +4648,7 @@ Register a type with both qh and UI configuration.
 
 ```pycon
 >>> from pathlib import Path
+>>> registry = InputTransformRegistry()
 >>> registry.register_type(
 ...     Path,
 ...     to_json=str,
@@ -4748,7 +4815,9 @@ Manage parameter presets for functions.
 >>> presets = PresetManager()
 >>> _ = presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')
 >>> preset = presets.get('quick_add', 'add')
->>> result = my_func(**preset.params)
+>>> def add(x, y): return x + y
+>>> add(**preset.params)
+30
 ```
 
 #### delete(preset_name, func_name)
@@ -4908,7 +4977,10 @@ fluent interface for configuring fields.
 >>> builder = RjsfConfigBuilder()
 >>> _ = builder.field('email', RjsfFieldConfig(format='email'))
 >>> _ = builder.field('message', RjsfFieldConfig(widget='textarea'))
+>>> base_schema = {'type': 'object', 'properties': {'email': {'type': 'string'}}}
 >>> spec = builder.build(base_schema)
+>>> spec['schema']['properties']['email']['format']
+'email'
 ```
 
 #### build(base_schema, base_ui_schema=None)
@@ -5221,9 +5293,15 @@ FIFO queue for background tasks.
 ```pycon
 >>> task_queue = TaskQueue(num_workers=2)
 >>> task_queue.start()
+>>> def expensive_function(x, y):
+...     return x + y
 >>> task_id = task_queue.submit(expensive_function, x=10, y=20)
->>> status = task_queue.get_status(task_id)
->>> result = task_queue.get_result(task_id)
+>>> result = task_queue.get_result(task_id, wait=True, timeout=10)
+>>> result
+30
+>>> task_queue.get_status(task_id).value
+'completed'
+>>> task_queue.stop()
 ```
 
 #### cancel_task(task_id)
@@ -5498,6 +5576,10 @@ Provides a testing context with common utilities and assertions.
 ### Example
 
 ```pycon
+>>> from uf import mk_rjsf_app
+>>> def add(x: int, y: int) -> int:
+...     return x + y
+>>> app = mk_rjsf_app([add])
 >>> with UfAppTester(app) as tester:
 ...     result = tester.submit_form('add', {'x': 10, 'y': 20})
 ...     tester.assert_success(result)
@@ -5578,10 +5660,14 @@ running a web server.
 
 ```pycon
 >>> from uf import mk_rjsf_app
+>>> def my_func(x: int, y: int) -> int:
+...     return x + y
 >>> app = mk_rjsf_app([my_func])
 >>> client = UfTestClient(app)
 >>> response = client.call_function('my_func', {'x': 10, 'y': 20})
 >>> assert response['success']
+>>> response['result']
+30
 ```
 
 #### call_function(func_name, params, , expect_success=True)
@@ -5875,11 +5961,13 @@ Apply field configurations to existing schemas.
 ### Example
 
 ```pycon
->>> configs = {
-...     'email': get_field_config('email'),
-...     'bio': get_field_config('multiline_text'),
-... }
->>> schema, ui_schema = apply_field_configs(schema, ui_schema, configs)
+>>> schema = {'type': 'object', 'properties': {'email': {'type': 'string'}}}
+>>> configs = {'email': get_field_config('email')}
+>>> schema, ui_schema = apply_field_configs(schema, {}, configs)
+>>> schema['properties']['email']['format']
+'email'
+>>> ui_schema['email']['ui:widget']
+'email'
 ```
 
 ### uf.assert_field_required(spec, field_name)
@@ -5937,10 +6025,10 @@ Convert an async function to a synchronous wrapper.
 
 ```pycon
 >>> async def fetch_data(url: str):
-...     # async operations
-...     return data
+...     return {'url': url}
 >>> sync_fetch = async_to_sync(fetch_data)
->>> result = sync_fetch('https://example.com')
+>>> sync_fetch('https://example.com')
+{'url': 'https://example.com'}
 ```
 
 ### uf.auto_group_by_module(funcs)
@@ -5958,9 +6046,13 @@ Automatically group functions by their module.
 ### Example
 
 ```pycon
->>> from myapp import user_ops, report_ops
->>> funcs = [user_ops.create, user_ops.delete, report_ops.generate]
->>> organizer = auto_group_by_module(funcs)
+>>> def create(): ...
+>>> create.__module__ = 'myapp.user_ops'
+>>> def generate(): ...
+>>> generate.__module__ = 'myapp.report_ops'
+>>> organizer = auto_group_by_module([create, generate])
+>>> [group.name for group in organizer.get_groups()]
+['Report Ops', 'User Ops']
 ```
 
 ### uf.auto_group_by_prefix(funcs, separator='_')
@@ -5984,9 +6076,14 @@ For example, with separator=”_”:
 ### Example
 
 ```pycon
+>>> def user_create(): ...
+>>> def user_delete(): ...
+>>> def report_generate(): ...
+>>> def admin_reset(): ...
 >>> funcs = [user_create, user_delete, report_generate, admin_reset]
 >>> organizer = auto_group_by_prefix(funcs)
->>> # Creates groups: 'user', 'report', 'admin'
+>>> [group.name for group in organizer.get_groups()]
+['Admin', 'Report', 'User']
 ```
 
 ### uf.auto_group_by_tag(funcs, tag_attr='_\_uf_group_\_')
@@ -6010,7 +6107,10 @@ Functions can be tagged with a group name using an attribute.
 ...     pass
 >>> create_user.__uf_group__ = 'Admin'
 >>>
+>>> def other_func(): ...
 >>> organizer = auto_group_by_tag([create_user, other_func])
+>>> [group.name for group in organizer.get_groups()]
+['Admin', 'Other']
 ```
 
 ### uf.background(queue_name='default', task_queue=None)
@@ -6052,10 +6152,14 @@ Decorator to cache function results.
 >>> @cached(ttl=3600)
 ... def expensive_calculation(x: int, y: int) -> int:
 ...     # Only runs once per unique (x, y) combination
-...     return heavy_computation(x, y)
+...     print("computing")
+...     return x + y
 >>>
->>> result = expensive_calculation(10, 20)  # Computes
->>> result2 = expensive_calculation(10, 20)  # From cache
+>>> expensive_calculation(10, 20)  # computes
+computing
+30
+>>> expensive_calculation(10, 20)  # from cache
+30
 ```
 
 ### uf.deprecated(message=None)
@@ -6170,10 +6274,14 @@ Get example arguments from a function.
 ### Example
 
 ```pycon
+>>> @with_example(2, y=3)
+... def my_function(x, y): return x * y
 >>> example = get_example(my_function)
 >>> if example:
 ...     args, kwargs = example
 ...     result = my_function(*args, **kwargs)
+>>> result
+6
 ```
 
 ### uf.get_field_config(config_name)
@@ -6211,9 +6319,12 @@ Get field configurations from a function.
 ### Example
 
 ```pycon
+>>> @ui_config(fields={'email': RjsfFieldConfig(format='email')})
+... def my_function(email: str): ...
 >>> field_configs = get_field_configs(my_function)
 >>> if 'email' in field_configs:
 ...     print(field_configs['email'].format)
+email
 ```
 
 ### uf.get_field_dependencies(func)
@@ -6300,9 +6411,12 @@ Get group name from a function.
 ### Example
 
 ```pycon
+>>> @ui_config(group="Admin")
+... def my_function(name: str): ...
 >>> group = get_group(my_function)
 >>> if group:
 ...     print(f"Function is in group: {group}")
+Function is in group: Admin
 ```
 
 ### uf.get_result_renderer(func)
@@ -6348,9 +6462,12 @@ Get UI configuration from a function.
 ### Example
 
 ```pycon
+>>> @ui_config(title="Greeting")
+... def my_function(name: str): ...
 >>> config = get_ui_config(my_function)
 >>> if config:
 ...     print(config['title'])
+Greeting
 ```
 
 ### uf.group(group_name)
@@ -6428,9 +6545,10 @@ Check if a function is hidden from UI.
 ### Example
 
 ```pycon
+>>> def my_function(): ...
 >>> if not is_hidden(my_function):
-...     # Show in UI
-...     pass
+...     print("show in UI")
+show in UI
 ```
 
 ### uf.is_pydantic_model(obj)
@@ -6458,9 +6576,11 @@ Convert any async functions in the list to sync wrappers.
 ### Example
 
 ```pycon
->>> funcs = [sync_func, async_func, another_sync]
->>> compatible = make_sync_compatible(funcs)
->>> # All functions in compatible are now callable synchronously
+>>> def sync_func(): return 1
+>>> async def async_func(): return 2
+>>> compatible = make_sync_compatible([sync_func, async_func])
+>>> [f() for f in compatible]  # all callable synchronously
+[1, 2]
 ```
 
 ### uf.mk_grouped_app(groups, \*\*mk_rjsf_app_kwargs)
@@ -6476,9 +6596,13 @@ Create a uf app with grouped function navigation.
 ### Example
 
 ```pycon
->>> admin_group = FunctionGroup('Admin', [user_create, user_delete])
+>>> def user_create(name: str): ...
+>>> def generate_report(): ...
+>>> admin_group = FunctionGroup('Admin', [user_create])
 >>> reports_group = FunctionGroup('Reports', [generate_report])
 >>> app = mk_grouped_app([admin_group, reports_group])
+>>> type(app).__name__
+'FastAPI'
 ```
 
 ### uf.mk_rjsf_app(funcs, , config=None, input_trans=None, output_trans=None, rjsf_config=None, ui_schema_factory=None, param_to_prop_type=None, page_title='Function Interface', function_display_names=None, custom_css=None, rjsf_theme='default', add_ui=True, \*\*qh_kwargs)
@@ -7124,12 +7248,18 @@ Whether the group starts collapsed in UI
 ### Example
 
 ```pycon
+>>> def add(x: int, y: int) -> int:
+...     return x + y
+>>> def subtract(x: int, y: int) -> int:
+...     return x - y
 >>> math_funcs = FunctionGroup(
 ...     'Math',
-...     [add, subtract, multiply, divide],
+...     [add, subtract],
 ...     description='Mathematical operations',
 ...     icon='calculator'
 ... )
+>>> list(math_funcs.named_funcs)
+['add', 'subtract']
 ```
 
 #### add_function(func, , name=None)
@@ -7180,10 +7310,14 @@ navigation in the UI.
 ### Example
 
 ```pycon
+>>> def user_create(name: str): ...
+>>> def user_delete(name: str): ...
+>>> def generate_report(): ...
 >>> organizer = FunctionOrganizer()
->>> organizer.group('Admin', [user_create, user_delete], icon='shield')
->>> organizer.group('Reports', [generate_report, export_csv], icon='file')
->>> groups = organizer.get_groups()
+>>> g = organizer.group('Admin', [user_create, user_delete], icon='shield')
+>>> g = organizer.group('Reports', [generate_report], icon='file')
+>>> [group.name for group in organizer.get_groups()]
+['Admin', 'Reports']
 ```
 
 #### add_to_group(group_name, func)
@@ -7248,12 +7382,17 @@ Create and add a function group.
 ### Example
 
 ```pycon
->>> organizer.group(
+>>> def save_record(record: dict): ...
+>>> def load_record(key: str): ...
+>>> organizer = FunctionOrganizer()
+>>> group = organizer.group(
 ...     'Database',
 ...     [save_record, load_record],
 ...     description='Database operations',
 ...     icon='database'
 ... )
+>>> group.icon, list(group.named_funcs)
+('database', ['save_record', 'load_record'])
 ```
 
 #### to_dict()
@@ -7268,8 +7407,11 @@ Convert organization to dictionary format.
 ### Example
 
 ```pycon
->>> org_dict = organizer.to_dict()
->>> # Can be used in templates or APIs
+>>> def ping(): ...
+>>> organizer = FunctionOrganizer()
+>>> g = organizer.group('Ops', [ping])
+>>> organizer.to_dict()['groups'][0]['functions']
+[{'name': 'ping', 'description': ''}]
 ```
 
 ### uf.organization.auto_group_by_module(funcs)
@@ -7287,9 +7429,13 @@ Automatically group functions by their module.
 ### Example
 
 ```pycon
->>> from myapp import user_ops, report_ops
->>> funcs = [user_ops.create, user_ops.delete, report_ops.generate]
->>> organizer = auto_group_by_module(funcs)
+>>> def create(): ...
+>>> create.__module__ = 'myapp.user_ops'
+>>> def generate(): ...
+>>> generate.__module__ = 'myapp.report_ops'
+>>> organizer = auto_group_by_module([create, generate])
+>>> [group.name for group in organizer.get_groups()]
+['Report Ops', 'User Ops']
 ```
 
 ### uf.organization.auto_group_by_prefix(funcs, separator='_')
@@ -7313,9 +7459,14 @@ For example, with separator=”_”:
 ### Example
 
 ```pycon
+>>> def user_create(): ...
+>>> def user_delete(): ...
+>>> def report_generate(): ...
+>>> def admin_reset(): ...
 >>> funcs = [user_create, user_delete, report_generate, admin_reset]
 >>> organizer = auto_group_by_prefix(funcs)
->>> # Creates groups: 'user', 'report', 'admin'
+>>> [group.name for group in organizer.get_groups()]
+['Admin', 'Report', 'User']
 ```
 
 ### uf.organization.auto_group_by_tag(funcs, tag_attr='_\_uf_group_\_')
@@ -7339,7 +7490,10 @@ Functions can be tagged with a group name using an attribute.
 ...     pass
 >>> create_user.__uf_group__ = 'Admin'
 >>>
+>>> def other_func(): ...
 >>> organizer = auto_group_by_tag([create_user, other_func])
+>>> [group.name for group in organizer.get_groups()]
+['Admin', 'Other']
 ```
 
 ### uf.organization.mk_grouped_app(groups, \*\*mk_rjsf_app_kwargs)
@@ -7355,9 +7509,13 @@ Create a uf app with grouped function navigation.
 ### Example
 
 ```pycon
->>> admin_group = FunctionGroup('Admin', [user_create, user_delete])
+>>> def user_create(name: str): ...
+>>> def generate_report(): ...
+>>> admin_group = FunctionGroup('Admin', [user_create])
 >>> reports_group = FunctionGroup('Reports', [generate_report])
 >>> app = mk_grouped_app([admin_group, reports_group])
+>>> type(app).__name__
+'FastAPI'
 ```
 
 
@@ -7969,7 +8127,10 @@ fluent interface for configuring fields.
 >>> builder = RjsfConfigBuilder()
 >>> _ = builder.field('email', RjsfFieldConfig(format='email'))
 >>> _ = builder.field('message', RjsfFieldConfig(widget='textarea'))
+>>> base_schema = {'type': 'object', 'properties': {'email': {'type': 'string'}}}
 >>> spec = builder.build(base_schema)
+>>> spec['schema']['properties']['email']['format']
+'email'
 ```
 
 #### build(base_schema, base_ui_schema=None)
@@ -8148,11 +8309,13 @@ Apply field configurations to existing schemas.
 ### Example
 
 ```pycon
->>> configs = {
-...     'email': get_field_config('email'),
-...     'bio': get_field_config('multiline_text'),
-... }
->>> schema, ui_schema = apply_field_configs(schema, ui_schema, configs)
+>>> schema = {'type': 'object', 'properties': {'email': {'type': 'string'}}}
+>>> configs = {'email': get_field_config('email')}
+>>> schema, ui_schema = apply_field_configs(schema, {}, configs)
+>>> schema['properties']['email']['format']
+'email'
+>>> ui_schema['email']['ui:widget']
+'email'
 ```
 
 ### uf.rjsf_config.get_field_config(config_name)
@@ -8550,6 +8713,10 @@ Provides a testing context with common utilities and assertions.
 ### Example
 
 ```pycon
+>>> from uf import mk_rjsf_app
+>>> def add(x: int, y: int) -> int:
+...     return x + y
+>>> app = mk_rjsf_app([add])
 >>> with UfAppTester(app) as tester:
 ...     result = tester.submit_form('add', {'x': 10, 'y': 20})
 ...     tester.assert_success(result)
@@ -8630,10 +8797,14 @@ running a web server.
 
 ```pycon
 >>> from uf import mk_rjsf_app
+>>> def my_func(x: int, y: int) -> int:
+...     return x + y
 >>> app = mk_rjsf_app([my_func])
 >>> client = UfTestClient(app)
 >>> response = client.call_function('my_func', {'x': 10, 'y': 20})
 >>> assert response['success']
+>>> response['result']
+30
 ```
 
 #### call_function(func_name, params, , expect_success=True)
@@ -8739,9 +8910,14 @@ Context manager to mock a function’s response.
 ### Example
 
 ```pycon
+>>> from uf import mk_rjsf_app
+>>> def get_user(id: int):
+...     return {'name': 'Real'}
+>>> app = mk_rjsf_app([get_user])
+>>> client = UfTestClient(app)
 >>> with mock_function_response(app, 'get_user', {'name': 'Test'}):
-...     # Calls to get_user will return {'name': 'Test'}
-...     result = client.call_function('get_user', {'id': 1})
+...     client.call_function('get_user', {'id': 1})['result']
+{'name': 'Test'}
 ```
 
 ### uf.testing.test_ui_function(func, test_inputs, , expected_output=None, expected_exception=None)
@@ -9020,11 +9196,14 @@ qh.mk_app as the input_trans parameter.
 ### Example
 
 ```pycon
->>> from uf import mk_rjsf_app
+>>> from pathlib import Path
 >>> registry = InputTransformRegistry()
->>> # ... register types ...
+>>> registry.register_type(Path, to_json=str, from_json=Path, json_schema_type='string')
+>>> def my_func(path: Path):
+...     return str(path)
 >>> input_trans = registry.mk_input_trans_for_funcs([my_func])
->>> app = mk_rjsf_app([my_func], input_trans=input_trans)
+>>> callable(input_trans)  # pass it as ``mk_rjsf_app([my_func], input_trans=...)``
+True
 ```
 
 #### mk_output_trans()
@@ -9039,8 +9218,14 @@ Create output transformation for qh.
 ### Example
 
 ```pycon
+>>> from decimal import Decimal
+>>> registry = InputTransformRegistry()
+>>> registry.register_type(Decimal, to_json=str, from_json=Decimal)
+>>> def my_func(): return Decimal('1.50')
 >>> output_trans = registry.mk_output_trans()
->>> app = mk_rjsf_app([my_func], output_trans=output_trans)
+>>> output_trans(Decimal('1.50'))
+'1.50'
+>>> # pass it as ``mk_rjsf_app([my_func], output_trans=output_trans)``
 ```
 
 #### register_type(py_type, , to_json=None, from_json=None, ui_widget=None, ui_config=None, json_schema_type=None, json_schema_format=None)
@@ -9062,6 +9247,7 @@ Register a type with both qh and UI configuration.
 
 ```pycon
 >>> from pathlib import Path
+>>> registry = InputTransformRegistry()
 >>> registry.register_type(
 ...     Path,
 ...     to_json=str,
@@ -9303,20 +9489,20 @@ Decorator to add webhooks to a function.
 
 # About this build
 
-This documentation was built on **2026-10-20 09:55 UTC** from commit <a href="https://github.com/i2mint/uf/commit/20b28767b29b62fbf1dea91652cb0c5c7db70015"><code>20b2876</code></a> on branch <code>master</code>, for **uf 0.1.18** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-20 10:47 UTC** from commit <a href="https://github.com/i2mint/uf/commit/7b38b8d0a741af1153b9625a2af05d79abbb83af"><code>7b38b8d</code></a> on branch <code>master</code>, for **uf 0.1.19** (from <code>pyproject.toml</code>).
 
 #### WARNING
 The documentation and the package may be misaligned:
 
-- The documented version (0.1.18) is ahead of the latest release on PyPI (0.1.17): these docs describe unreleased code.
+- The documented version (0.1.19) is ahead of the latest release on PyPI (0.1.18): these docs describe unreleased code.
 
 ## Source
 
 |                     |                                                                                                                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/uf/commit/20b28767b29b62fbf1dea91652cb0c5c7db70015"><code>20b28767b29b62fbf1dea91652cb0c5c7db70015</code></a> |
+| Commit              | <a href="https://github.com/i2mint/uf/commit/7b38b8d0a741af1153b9625a2af05d79abbb83af"><code>7b38b8d0a741af1153b9625a2af05d79abbb83af</code></a> |
 | Branch              | <code>master</code>                                                                                                                              |
-| Tags at this commit | <code>0.1.18</code>                                                                                                                              |
+| Tags at this commit | <code>0.1.19</code>                                                                                                                              |
 | Working tree        | clean                                                                                                                                            |
 | Remote              | <code>https://github.com/i2mint/uf</code>                                                                                                        |
 
@@ -9325,15 +9511,15 @@ The documentation and the package may be misaligned:
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/uf</code>                                                                     |
-| Run          | <a href="https://github.com/i2mint/uf/actions/runs/39404000170">39404000170</a>            |
+| Run          | <a href="https://github.com/i2mint/uf/actions/runs/39410233346">39410233346</a>            |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>3e92070833fd7c679f4b8ffece09b00159256f87</code> (in the history of the built commit) |
+| Event commit | <code>055bd2cfc73e2940b858d9cf51ab52164b409b33</code> (in the history of the built commit) |
 
 ## Tools
 
 |          |         |
 |----------|---------|
-| epythet  | 0.2.18  |
+| epythet  | 0.2.19  |
 | Sphinx   | 9.1.1   |
 | docutils | 0.22.4  |
 | Python   | 3.12.15 |
@@ -9352,14 +9538,14 @@ The documentation and the package may be misaligned:
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.17/">0.1.17</a>, older than the documented version (0.1.18).
+Latest release: <a href="https://pypi.org/project/uf/0.1.18/">0.1.18</a>, older than the documented version (0.1.19).
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout 20b28767b29b62fbf1dea91652cb0c5c7db70015
-pip install "epythet==0.2.18"
+git checkout 7b38b8d0a741af1153b9625a2af05d79abbb83af
+pip install "epythet==0.2.19"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```
 

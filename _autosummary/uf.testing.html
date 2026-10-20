@@ -290,10 +290,14 @@ and assertion helpers.</p>
 <p>Context manager for testing uf apps.</p>
 <p>Provides a testing context with common utilities and assertions.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">UfAppTester</span><span class="p">(</span><span class="n">app</span><span class="p">)</span> <span class="k">as</span> <span class="n">tester</span><span class="p">:</span>
-</span><span data-line="2"><span class="gp">... </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">tester</span><span class="o">.</span><span class="n">submit_form</span><span class="p">(</span><span class="s1">'add'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="n">tester</span><span class="o">.</span><span class="n">assert_success</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</span><span data-line="4"><span class="gp">... </span>    <span class="n">tester</span><span class="o">.</span><span class="n">assert_result_equals</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">uf</span><span class="w"> </span><span class="kn">import</span> <span class="n">mk_rjsf_app</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">([</span><span class="n">add</span><span class="p">])</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">UfAppTester</span><span class="p">(</span><span class="n">app</span><span class="p">)</span> <span class="k">as</span> <span class="n">tester</span><span class="p">:</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">tester</span><span class="o">.</span><span class="n">submit_form</span><span class="p">(</span><span class="s1">'add'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+</span><span data-line="7"><span class="gp">... </span>    <span class="n">tester</span><span class="o">.</span><span class="n">assert_success</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span><span data-line="8"><span class="gp">... </span>    <span class="n">tester</span><span class="o">.</span><span class="n">assert_result_equals</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 </span></pre></div>
 </div>
 <dl class="py method">
@@ -409,10 +413,14 @@ and assertion helpers.</p>
 running a web server.</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">uf</span><span class="w"> </span><span class="kn">import</span> <span class="n">mk_rjsf_app</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">([</span><span class="n">my_func</span><span class="p">])</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">UfTestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">call_function</span><span class="p">(</span><span class="s1">'my_func'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">'success'</span><span class="p">]</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">my_func</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">([</span><span class="n">my_func</span><span class="p">])</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">UfTestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">call_function</span><span class="p">(</span><span class="s1">'my_func'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">response</span><span class="p">[</span><span class="s1">'success'</span><span class="p">]</span>
+</span><span data-line="8"><span class="gp">&gt;&gt;&gt; </span><span class="n">response</span><span class="p">[</span><span class="s1">'result'</span><span class="p">]</span>
+</span><span data-line="9"><span class="go">30</span>
 </span></pre></div>
 </div>
 <dl class="py method">
@@ -578,9 +586,14 @@ running a web server.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">mock_function_response</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">'get_user'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Test'</span><span class="p">}):</span>
-</span><span data-line="2"><span class="gp">... </span>    <span class="c1"># Calls to get_user will return {'name': 'Test'}</span>
-</span><span data-line="3"><span class="gp">... </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">call_function</span><span class="p">(</span><span class="s1">'get_user'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'id'</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">uf</span><span class="w"> </span><span class="kn">import</span> <span class="n">mk_rjsf_app</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">get_user</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="k">return</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Real'</span><span class="p">}</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">([</span><span class="n">get_user</span><span class="p">])</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">UfTestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">mock_function_response</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">'get_user'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Test'</span><span class="p">}):</span>
+</span><span data-line="7"><span class="gp">... </span>    <span class="n">client</span><span class="o">.</span><span class="n">call_function</span><span class="p">(</span><span class="s1">'get_user'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'id'</span><span class="p">:</span> <span class="mi">1</span><span class="p">})[</span><span class="s1">'result'</span><span class="p">]</span>
+</span><span data-line="8"><span class="go">{'name': 'Test'}</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -659,7 +672,7 @@ running a web server.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=9969ed3f"></script>
+      <script src="../_static/documentation_options.js?v=3d116926"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

@@ -382,8 +382,11 @@ improving performance for expensive operations.</p>
 <p>Persists cache to disk, suitable for larger datasets or persistence
 across restarts.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span> <span class="o">=</span> <span class="n">DiskCache</span><span class="p">(</span><span class="n">cache_dir</span><span class="o">=</span><span class="s1">'/tmp/uf_cache'</span><span class="p">)</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">'expensive_result'</span><span class="p">,</span> <span class="n">big_data</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span> <span class="o">=</span> <span class="n">DiskCache</span><span class="p">(</span><span class="n">cache_dir</span><span class="o">=</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">())</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">'expensive_result'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'expensive_result'</span><span class="p">)</span>
+</span><span data-line="5"><span class="go">[1, 2, 3]</span>
 </span></pre></div>
 </div>
 <dl class="field-list simple">
@@ -576,10 +579,14 @@ across restarts.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="nd">@cached</span><span class="p">(</span><span class="n">ttl</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
 </span><span data-line="2"><span class="gp">... </span><span class="k">def</span><span class="w"> </span><span class="nf">expensive_calculation</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 </span><span data-line="3"><span class="gp">... </span>    <span class="c1"># Only runs once per unique (x, y) combination</span>
-</span><span data-line="4"><span class="gp">... </span>    <span class="k">return</span> <span class="n">heavy_computation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt;</span>
-</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">expensive_calculation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># Computes</span>
-</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="n">result2</span> <span class="o">=</span> <span class="n">expensive_calculation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># From cache</span>
+</span><span data-line="4"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">"computing"</span><span class="p">)</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt;</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="n">expensive_calculation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># computes</span>
+</span><span data-line="8"><span class="go">computing</span>
+</span><span data-line="9"><span class="go">30</span>
+</span><span data-line="10"><span class="gp">&gt;&gt;&gt; </span><span class="n">expensive_calculation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># from cache</span>
+</span><span data-line="11"><span class="go">30</span>
 </span></pre></div>
 </div>
 </dd></dl>
@@ -669,7 +676,7 @@ across restarts.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=9969ed3f"></script>
+      <script src="../_static/documentation_options.js?v=3d116926"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

@@ -102,11 +102,14 @@ qh.mk_app as the input_trans parameter.
 ### Example
 
 ```pycon
->>> from uf import mk_rjsf_app
+>>> from pathlib import Path
 >>> registry = InputTransformRegistry()
->>> # ... register types ...
+>>> registry.register_type(Path, to_json=str, from_json=Path, json_schema_type='string')
+>>> def my_func(path: Path):
+...     return str(path)
 >>> input_trans = registry.mk_input_trans_for_funcs([my_func])
->>> app = mk_rjsf_app([my_func], input_trans=input_trans)
+>>> callable(input_trans)  # pass it as ``mk_rjsf_app([my_func], input_trans=...)``
+True
 ```
 
 #### mk_output_trans()
@@ -121,8 +124,14 @@ Create output transformation for qh.
 ### Example
 
 ```pycon
+>>> from decimal import Decimal
+>>> registry = InputTransformRegistry()
+>>> registry.register_type(Decimal, to_json=str, from_json=Decimal)
+>>> def my_func(): return Decimal('1.50')
 >>> output_trans = registry.mk_output_trans()
->>> app = mk_rjsf_app([my_func], output_trans=output_trans)
+>>> output_trans(Decimal('1.50'))
+'1.50'
+>>> # pass it as ``mk_rjsf_app([my_func], output_trans=output_trans)``
 ```
 
 #### register_type(py_type, , to_json=None, from_json=None, ui_widget=None, ui_config=None, json_schema_type=None, json_schema_format=None)
@@ -144,6 +153,7 @@ Register a type with both qh and UI configuration.
 
 ```pycon
 >>> from pathlib import Path
+>>> registry = InputTransformRegistry()
 >>> registry.register_type(
 ...     Path,
 ...     to_json=str,

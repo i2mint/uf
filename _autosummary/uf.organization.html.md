@@ -72,12 +72,18 @@ Whether the group starts collapsed in UI
 ### Example
 
 ```pycon
+>>> def add(x: int, y: int) -> int:
+...     return x + y
+>>> def subtract(x: int, y: int) -> int:
+...     return x - y
 >>> math_funcs = FunctionGroup(
 ...     'Math',
-...     [add, subtract, multiply, divide],
+...     [add, subtract],
 ...     description='Mathematical operations',
 ...     icon='calculator'
 ... )
+>>> list(math_funcs.named_funcs)
+['add', 'subtract']
 ```
 
 #### add_function(func, , name=None)
@@ -128,10 +134,14 @@ navigation in the UI.
 ### Example
 
 ```pycon
+>>> def user_create(name: str): ...
+>>> def user_delete(name: str): ...
+>>> def generate_report(): ...
 >>> organizer = FunctionOrganizer()
->>> organizer.group('Admin', [user_create, user_delete], icon='shield')
->>> organizer.group('Reports', [generate_report, export_csv], icon='file')
->>> groups = organizer.get_groups()
+>>> g = organizer.group('Admin', [user_create, user_delete], icon='shield')
+>>> g = organizer.group('Reports', [generate_report], icon='file')
+>>> [group.name for group in organizer.get_groups()]
+['Admin', 'Reports']
 ```
 
 #### add_to_group(group_name, func)
@@ -196,12 +206,17 @@ Create and add a function group.
 ### Example
 
 ```pycon
->>> organizer.group(
+>>> def save_record(record: dict): ...
+>>> def load_record(key: str): ...
+>>> organizer = FunctionOrganizer()
+>>> group = organizer.group(
 ...     'Database',
 ...     [save_record, load_record],
 ...     description='Database operations',
 ...     icon='database'
 ... )
+>>> group.icon, list(group.named_funcs)
+('database', ['save_record', 'load_record'])
 ```
 
 #### to_dict()
@@ -216,8 +231,11 @@ Convert organization to dictionary format.
 ### Example
 
 ```pycon
->>> org_dict = organizer.to_dict()
->>> # Can be used in templates or APIs
+>>> def ping(): ...
+>>> organizer = FunctionOrganizer()
+>>> g = organizer.group('Ops', [ping])
+>>> organizer.to_dict()['groups'][0]['functions']
+[{'name': 'ping', 'description': ''}]
 ```
 
 ### uf.organization.auto_group_by_module(funcs)
@@ -235,9 +253,13 @@ Automatically group functions by their module.
 ### Example
 
 ```pycon
->>> from myapp import user_ops, report_ops
->>> funcs = [user_ops.create, user_ops.delete, report_ops.generate]
->>> organizer = auto_group_by_module(funcs)
+>>> def create(): ...
+>>> create.__module__ = 'myapp.user_ops'
+>>> def generate(): ...
+>>> generate.__module__ = 'myapp.report_ops'
+>>> organizer = auto_group_by_module([create, generate])
+>>> [group.name for group in organizer.get_groups()]
+['Report Ops', 'User Ops']
 ```
 
 ### uf.organization.auto_group_by_prefix(funcs, separator='_')
@@ -261,9 +283,14 @@ For example, with separator=”_”:
 ### Example
 
 ```pycon
+>>> def user_create(): ...
+>>> def user_delete(): ...
+>>> def report_generate(): ...
+>>> def admin_reset(): ...
 >>> funcs = [user_create, user_delete, report_generate, admin_reset]
 >>> organizer = auto_group_by_prefix(funcs)
->>> # Creates groups: 'user', 'report', 'admin'
+>>> [group.name for group in organizer.get_groups()]
+['Admin', 'Report', 'User']
 ```
 
 ### uf.organization.auto_group_by_tag(funcs, tag_attr='_\_uf_group_\_')
@@ -287,7 +314,10 @@ Functions can be tagged with a group name using an attribute.
 ...     pass
 >>> create_user.__uf_group__ = 'Admin'
 >>>
+>>> def other_func(): ...
 >>> organizer = auto_group_by_tag([create_user, other_func])
+>>> [group.name for group in organizer.get_groups()]
+['Admin', 'Other']
 ```
 
 ### uf.organization.mk_grouped_app(groups, \*\*mk_rjsf_app_kwargs)
@@ -303,7 +333,11 @@ Create a uf app with grouped function navigation.
 ### Example
 
 ```pycon
->>> admin_group = FunctionGroup('Admin', [user_create, user_delete])
+>>> def user_create(name: str): ...
+>>> def generate_report(): ...
+>>> admin_group = FunctionGroup('Admin', [user_create])
 >>> reports_group = FunctionGroup('Reports', [generate_report])
 >>> app = mk_grouped_app([admin_group, reports_group])
+>>> type(app).__name__
+'FastAPI'
 ```

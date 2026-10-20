@@ -344,10 +344,12 @@ access control for uf applications.</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">api_keys</span> <span class="o">=</span> <span class="n">ApiKeyManager</span><span class="p">()</span>
 </span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">key</span> <span class="o">=</span> <span class="n">api_keys</span><span class="o">.</span><span class="n">create_key</span><span class="p">(</span><span class="s1">'mobile_app'</span><span class="p">,</span> <span class="n">permissions</span><span class="o">=</span><span class="p">[</span><span class="s1">'read'</span><span class="p">])</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Your API key: </span><span class="si">{</span><span class="n">key</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Later, validate</span>
-</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">api_keys</span><span class="o">.</span><span class="n">validate_key</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="s1">'read'</span><span class="p">):</span>
-</span><span data-line="6"><span class="gp">... </span>    <span class="c1"># Allow access</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'sk_'</span><span class="p">)</span>
+</span><span data-line="4"><span class="go">True</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Later, validate</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">api_keys</span><span class="o">.</span><span class="n">validate_key</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="s1">'read'</span><span class="p">):</span>
+</span><span data-line="7"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">"access allowed"</span><span class="p">)</span>
+</span><span data-line="8"><span class="go">access allowed</span>
 </span></pre></div>
 </div>
 <dl class="field-list simple">
@@ -1017,7 +1019,7 @@ access control for uf applications.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=9969ed3f"></script>
+      <script src="../_static/documentation_options.js?v=3d116926"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

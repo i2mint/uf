@@ -318,7 +318,10 @@ Augment RJSF spec with field dependencies.
 ...                    lambda v: v == 'other',
 ...                    DependencyAction.SHOW)
 ... ]
+>>> def my_func(reason: str, other_reason: str = ''): ...
 >>> spec = add_field_dependencies(my_func, deps)
+>>> sorted(spec)
+['schema_additions', 'ui_schema_additions']
 ```
 
 ### uf.field_interactions.get_field_dependencies(func)

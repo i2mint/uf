@@ -1,38 +1,38 @@
 {
   "schema_version": 1,
-  "built_at": "2026-10-20T09:55:55Z",
+  "built_at": "2026-10-20T10:47:56Z",
   "package": {
     "name": "uf",
-    "version": "0.1.18",
+    "version": "0.1.19",
     "display_name": "uf",
     "source": "pyproject.toml"
   },
   "git": {
     "available": true,
-    "commit": "20b28767b29b62fbf1dea91652cb0c5c7db70015",
-    "short_commit": "20b2876",
+    "commit": "7b38b8d0a741af1153b9625a2af05d79abbb83af",
+    "short_commit": "7b38b8d",
     "branch": "master",
     "tags": [
-      "0.1.18"
+      "0.1.19"
     ],
     "dirty": false,
     "remote_url": "https://github.com/i2mint/uf",
-    "commit_url": "https://github.com/i2mint/uf/commit/20b28767b29b62fbf1dea91652cb0c5c7db70015",
+    "commit_url": "https://github.com/i2mint/uf/commit/7b38b8d0a741af1153b9625a2af05d79abbb83af",
     "error": null
   },
   "ci": {
     "provider": "github",
     "repository": "i2mint/uf",
-    "sha": "3e92070833fd7c679f4b8ffece09b00159256f87",
+    "sha": "055bd2cfc73e2940b858d9cf51ab52164b409b33",
     "sha_in_history": true,
     "ref": "refs/heads/master",
     "ref_name": "master",
-    "run_id": "39404000170",
-    "run_url": "https://github.com/i2mint/uf/actions/runs/39404000170",
+    "run_id": "39410233346",
+    "run_url": "https://github.com/i2mint/uf/actions/runs/39410233346",
     "server_url": "https://github.com"
   },
   "tools": {
-    "epythet": "0.2.18",
+    "epythet": "0.2.19",
     "sphinx": "9.1.1",
     "docutils": "0.22.4",
     "python": "3.12.15"
@@ -62,16 +62,16 @@
   },
   "pypi": {
     "checked": true,
-    "latest": "0.1.17",
+    "latest": "0.1.18",
     "relation": "ahead",
     "error": null
   },
-  "reproduce": "git clone https://github.com/i2mint/uf && cd uf\ngit checkout 20b28767b29b62fbf1dea91652cb0c5c7db70015\npip install \"epythet==0.2.18\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
+  "reproduce": "git clone https://github.com/i2mint/uf && cd uf\ngit checkout 7b38b8d0a741af1153b9625a2af05d79abbb83af\npip install \"epythet==0.2.19\"\nepythet quickstart . --ignore tests/ scrap/ examples/",
   "warnings": [],
   "alignment": {
     "aligned": false,
     "notes": [
-      "The documented version (0.1.18) is ahead of the latest release on PyPI (0.1.17): these docs describe unreleased code."
+      "The documented version (0.1.19) is ahead of the latest release on PyPI (0.1.18): these docs describe unreleased code."
     ]
   }
 }

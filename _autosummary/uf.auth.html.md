@@ -82,10 +82,12 @@ Manage API keys for programmatic access.
 ```pycon
 >>> api_keys = ApiKeyManager()
 >>> key = api_keys.create_key('mobile_app', permissions=['read'])
->>> print(f"Your API key: {key.key}")
+>>> key.key.startswith('sk_')
+True
 >>> # Later, validate
 >>> if api_keys.validate_key(key.key, 'read'):
-...     # Allow access
+...     print("access allowed")
+access allowed
 ```
 
 #### create_key(name, permissions=None, expires_in_days=None)

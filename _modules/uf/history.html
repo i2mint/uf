@@ -452,346 +452,348 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="277"><span class="sd">        &gt;&gt;&gt; presets = PresetManager()</span>
 </span><span data-line="278"><span class="sd">        &gt;&gt;&gt; _ = presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')</span>
 </span><span data-line="279"><span class="sd">        &gt;&gt;&gt; preset = presets.get('quick_add', 'add')</span>
-</span><span data-line="280"><span class="sd">        &gt;&gt;&gt; result = my_func(**preset.params)  # doctest: +SKIP</span>
-</span><span data-line="281"><span class="sd">    """</span>
-</span><span data-line="282">
-</span><span data-line="283">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span data-line="284"><span class="w">        </span><span class="sd">"""Initialize preset manager."""</span>
-</span><span data-line="285">        <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Preset</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
-</span><span data-line="286">
+</span><span data-line="280"><span class="sd">        &gt;&gt;&gt; def add(x, y): return x + y</span>
+</span><span data-line="281"><span class="sd">        &gt;&gt;&gt; add(**preset.params)</span>
+</span><span data-line="282"><span class="sd">        30</span>
+</span><span data-line="283"><span class="sd">    """</span>
+</span><span data-line="284">
+</span><span data-line="285">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="286"><span class="w">        </span><span class="sd">"""Initialize preset manager."""</span>
+</span><span data-line="287">        <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Preset</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+</span><span data-line="288">
 <div class="viewcode-block" id="PresetManager.save">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.PresetManager.save">[docs]</a>
-</span><span data-line="287">    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span>
-</span><span data-line="288">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="289">        <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span data-line="290">        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span data-line="291">        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-</span><span data-line="292">        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
-</span><span data-line="293">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Preset</span><span class="p">:</span>
-</span><span data-line="294"><span class="w">        </span><span class="sd">"""Save a parameter preset.</span>
-</span><span data-line="295">
-</span><span data-line="296"><span class="sd">        Args:</span>
-</span><span data-line="297"><span class="sd">            preset_name: Name for this preset</span>
-</span><span data-line="298"><span class="sd">            func_name: Function this preset is for</span>
-</span><span data-line="299"><span class="sd">            params: Parameter values</span>
-</span><span data-line="300"><span class="sd">            description: Optional description</span>
-</span><span data-line="301">
-</span><span data-line="302"><span class="sd">        Returns:</span>
-</span><span data-line="303"><span class="sd">            Created Preset object</span>
-</span><span data-line="304"><span class="sd">        """</span>
-</span><span data-line="305">        <span class="n">preset</span> <span class="o">=</span> <span class="n">Preset</span><span class="p">(</span>
-</span><span data-line="306">            <span class="n">name</span><span class="o">=</span><span class="n">preset_name</span><span class="p">,</span>
-</span><span data-line="307">            <span class="n">func_name</span><span class="o">=</span><span class="n">func_name</span><span class="p">,</span>
-</span><span data-line="308">            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-</span><span data-line="309">            <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
-</span><span data-line="310">        <span class="p">)</span>
-</span><span data-line="311">
-</span><span data-line="312">        <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="n">preset_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">preset</span>
-</span><span data-line="313">        <span class="k">return</span> <span class="n">preset</span></div>
+</span><span data-line="289">    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span>
+</span><span data-line="290">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="291">        <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span data-line="292">        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span data-line="293">        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+</span><span data-line="294">        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+</span><span data-line="295">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Preset</span><span class="p">:</span>
+</span><span data-line="296"><span class="w">        </span><span class="sd">"""Save a parameter preset.</span>
+</span><span data-line="297">
+</span><span data-line="298"><span class="sd">        Args:</span>
+</span><span data-line="299"><span class="sd">            preset_name: Name for this preset</span>
+</span><span data-line="300"><span class="sd">            func_name: Function this preset is for</span>
+</span><span data-line="301"><span class="sd">            params: Parameter values</span>
+</span><span data-line="302"><span class="sd">            description: Optional description</span>
+</span><span data-line="303">
+</span><span data-line="304"><span class="sd">        Returns:</span>
+</span><span data-line="305"><span class="sd">            Created Preset object</span>
+</span><span data-line="306"><span class="sd">        """</span>
+</span><span data-line="307">        <span class="n">preset</span> <span class="o">=</span> <span class="n">Preset</span><span class="p">(</span>
+</span><span data-line="308">            <span class="n">name</span><span class="o">=</span><span class="n">preset_name</span><span class="p">,</span>
+</span><span data-line="309">            <span class="n">func_name</span><span class="o">=</span><span class="n">func_name</span><span class="p">,</span>
+</span><span data-line="310">            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+</span><span data-line="311">            <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+</span><span data-line="312">        <span class="p">)</span>
+</span><span data-line="313">
+</span><span data-line="314">        <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="n">preset_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">preset</span>
+</span><span data-line="315">        <span class="k">return</span> <span class="n">preset</span></div>
 
-</span><span data-line="314">
+</span><span data-line="316">
 <div class="viewcode-block" id="PresetManager.get">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.PresetManager.get">[docs]</a>
-</span><span data-line="315">    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Preset</span><span class="p">]:</span>
-</span><span data-line="316"><span class="w">        </span><span class="sd">"""Get a preset.</span>
-</span><span data-line="317">
-</span><span data-line="318"><span class="sd">        Args:</span>
-</span><span data-line="319"><span class="sd">            preset_name: Name of preset</span>
-</span><span data-line="320"><span class="sd">            func_name: Function name</span>
-</span><span data-line="321">
-</span><span data-line="322"><span class="sd">        Returns:</span>
-</span><span data-line="323"><span class="sd">            Preset object or None</span>
-</span><span data-line="324"><span class="sd">        """</span>
-</span><span data-line="325">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">preset_name</span><span class="p">)</span></div>
+</span><span data-line="317">    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Preset</span><span class="p">]:</span>
+</span><span data-line="318"><span class="w">        </span><span class="sd">"""Get a preset.</span>
+</span><span data-line="319">
+</span><span data-line="320"><span class="sd">        Args:</span>
+</span><span data-line="321"><span class="sd">            preset_name: Name of preset</span>
+</span><span data-line="322"><span class="sd">            func_name: Function name</span>
+</span><span data-line="323">
+</span><span data-line="324"><span class="sd">        Returns:</span>
+</span><span data-line="325"><span class="sd">            Preset object or None</span>
+</span><span data-line="326"><span class="sd">        """</span>
+</span><span data-line="327">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">preset_name</span><span class="p">)</span></div>
 
-</span><span data-line="326">
+</span><span data-line="328">
 <div class="viewcode-block" id="PresetManager.list_presets">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.PresetManager.list_presets">[docs]</a>
-</span><span data-line="327">    <span class="k">def</span><span class="w"> </span><span class="nf">list_presets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Preset</span><span class="p">]:</span>
-</span><span data-line="328"><span class="w">        </span><span class="sd">"""List all presets for a function.</span>
-</span><span data-line="329">
-</span><span data-line="330"><span class="sd">        Args:</span>
-</span><span data-line="331"><span class="sd">            func_name: Function name</span>
-</span><span data-line="332">
-</span><span data-line="333"><span class="sd">        Returns:</span>
-</span><span data-line="334"><span class="sd">            List of Preset objects</span>
-</span><span data-line="335"><span class="sd">        """</span>
-</span><span data-line="336">        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
+</span><span data-line="329">    <span class="k">def</span><span class="w"> </span><span class="nf">list_presets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Preset</span><span class="p">]:</span>
+</span><span data-line="330"><span class="w">        </span><span class="sd">"""List all presets for a function.</span>
+</span><span data-line="331">
+</span><span data-line="332"><span class="sd">        Args:</span>
+</span><span data-line="333"><span class="sd">            func_name: Function name</span>
+</span><span data-line="334">
+</span><span data-line="335"><span class="sd">        Returns:</span>
+</span><span data-line="336"><span class="sd">            List of Preset objects</span>
+</span><span data-line="337"><span class="sd">        """</span>
+</span><span data-line="338">        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
 
-</span><span data-line="337">
+</span><span data-line="339">
 <div class="viewcode-block" id="PresetManager.delete">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.PresetManager.delete">[docs]</a>
-</span><span data-line="338">    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span data-line="339"><span class="w">        </span><span class="sd">"""Delete a preset.</span>
-</span><span data-line="340">
-</span><span data-line="341"><span class="sd">        Args:</span>
-</span><span data-line="342"><span class="sd">            preset_name: Name of preset</span>
-</span><span data-line="343"><span class="sd">            func_name: Function name</span>
-</span><span data-line="344">
-</span><span data-line="345"><span class="sd">        Returns:</span>
-</span><span data-line="346"><span class="sd">            True if deleted, False if not found</span>
-</span><span data-line="347"><span class="sd">        """</span>
-</span><span data-line="348">        <span class="k">if</span> <span class="n">func_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span> <span class="ow">and</span> <span class="n">preset_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="p">[</span><span class="n">func_name</span><span class="p">]:</span>
-</span><span data-line="349">            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="n">preset_name</span><span class="p">]</span>
-</span><span data-line="350">            <span class="k">return</span> <span class="kc">True</span>
-</span><span data-line="351">        <span class="k">return</span> <span class="kc">False</span></div>
+</span><span data-line="340">    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span data-line="341"><span class="w">        </span><span class="sd">"""Delete a preset.</span>
+</span><span data-line="342">
+</span><span data-line="343"><span class="sd">        Args:</span>
+</span><span data-line="344"><span class="sd">            preset_name: Name of preset</span>
+</span><span data-line="345"><span class="sd">            func_name: Function name</span>
+</span><span data-line="346">
+</span><span data-line="347"><span class="sd">        Returns:</span>
+</span><span data-line="348"><span class="sd">            True if deleted, False if not found</span>
+</span><span data-line="349"><span class="sd">        """</span>
+</span><span data-line="350">        <span class="k">if</span> <span class="n">func_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span> <span class="ow">and</span> <span class="n">preset_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="p">[</span><span class="n">func_name</span><span class="p">]:</span>
+</span><span data-line="351">            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="n">preset_name</span><span class="p">]</span>
+</span><span data-line="352">            <span class="k">return</span> <span class="kc">True</span>
+</span><span data-line="353">        <span class="k">return</span> <span class="kc">False</span></div>
 
-</span><span data-line="352">
+</span><span data-line="354">
 <div class="viewcode-block" id="PresetManager.to_dict">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.PresetManager.to_dict">[docs]</a>
-</span><span data-line="353">    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span data-line="354"><span class="w">        </span><span class="sd">"""Convert to dictionary.</span>
-</span><span data-line="355">
-</span><span data-line="356"><span class="sd">        Returns:</span>
-</span><span data-line="357"><span class="sd">            Dictionary representation</span>
-</span><span data-line="358"><span class="sd">        """</span>
-</span><span data-line="359">        <span class="k">return</span> <span class="p">{</span>
-</span><span data-line="360">            <span class="n">func_name</span><span class="p">:</span> <span class="p">{</span>
-</span><span data-line="361">                <span class="n">preset_name</span><span class="p">:</span> <span class="n">preset</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">preset_name</span><span class="p">,</span> <span class="n">preset</span> <span class="ow">in</span> <span class="n">presets</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-</span><span data-line="362">            <span class="p">}</span>
-</span><span data-line="363">            <span class="k">for</span> <span class="n">func_name</span><span class="p">,</span> <span class="n">presets</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-</span><span data-line="364">        <span class="p">}</span></div>
+</span><span data-line="355">    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span data-line="356"><span class="w">        </span><span class="sd">"""Convert to dictionary.</span>
+</span><span data-line="357">
+</span><span data-line="358"><span class="sd">        Returns:</span>
+</span><span data-line="359"><span class="sd">            Dictionary representation</span>
+</span><span data-line="360"><span class="sd">        """</span>
+</span><span data-line="361">        <span class="k">return</span> <span class="p">{</span>
+</span><span data-line="362">            <span class="n">func_name</span><span class="p">:</span> <span class="p">{</span>
+</span><span data-line="363">                <span class="n">preset_name</span><span class="p">:</span> <span class="n">preset</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">preset_name</span><span class="p">,</span> <span class="n">preset</span> <span class="ow">in</span> <span class="n">presets</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span><span data-line="364">            <span class="p">}</span>
+</span><span data-line="365">            <span class="k">for</span> <span class="n">func_name</span><span class="p">,</span> <span class="n">presets</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_presets</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span><span data-line="366">        <span class="p">}</span></div>
 
-</span><span data-line="365">
+</span><span data-line="367">
 <div class="viewcode-block" id="PresetManager.from_dict">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.PresetManager.from_dict">[docs]</a>
-</span><span data-line="366">    <span class="nd">@classmethod</span>
-</span><span data-line="367">    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"PresetManager"</span><span class="p">:</span>
-</span><span data-line="368"><span class="w">        </span><span class="sd">"""Create from dictionary.</span>
-</span><span data-line="369">
-</span><span data-line="370"><span class="sd">        Args:</span>
-</span><span data-line="371"><span class="sd">            data: Dictionary with preset data</span>
-</span><span data-line="372">
-</span><span data-line="373"><span class="sd">        Returns:</span>
-</span><span data-line="374"><span class="sd">            PresetManager instance</span>
-</span><span data-line="375"><span class="sd">        """</span>
-</span><span data-line="376">        <span class="n">manager</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
-</span><span data-line="377">
-</span><span data-line="378">        <span class="k">for</span> <span class="n">func_name</span><span class="p">,</span> <span class="n">presets_data</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span data-line="379">            <span class="k">for</span> <span class="n">preset_name</span><span class="p">,</span> <span class="n">preset_data</span> <span class="ow">in</span> <span class="n">presets_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span data-line="380">                <span class="n">preset</span> <span class="o">=</span> <span class="n">Preset</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">preset_data</span><span class="p">)</span>
-</span><span data-line="381">                <span class="n">manager</span><span class="o">.</span><span class="n">_presets</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="n">preset_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">preset</span>
-</span><span data-line="382">
-</span><span data-line="383">        <span class="k">return</span> <span class="n">manager</span></div>
+</span><span data-line="368">    <span class="nd">@classmethod</span>
+</span><span data-line="369">    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"PresetManager"</span><span class="p">:</span>
+</span><span data-line="370"><span class="w">        </span><span class="sd">"""Create from dictionary.</span>
+</span><span data-line="371">
+</span><span data-line="372"><span class="sd">        Args:</span>
+</span><span data-line="373"><span class="sd">            data: Dictionary with preset data</span>
+</span><span data-line="374">
+</span><span data-line="375"><span class="sd">        Returns:</span>
+</span><span data-line="376"><span class="sd">            PresetManager instance</span>
+</span><span data-line="377"><span class="sd">        """</span>
+</span><span data-line="378">        <span class="n">manager</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+</span><span data-line="379">
+</span><span data-line="380">        <span class="k">for</span> <span class="n">func_name</span><span class="p">,</span> <span class="n">presets_data</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="381">            <span class="k">for</span> <span class="n">preset_name</span><span class="p">,</span> <span class="n">preset_data</span> <span class="ow">in</span> <span class="n">presets_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="382">                <span class="n">preset</span> <span class="o">=</span> <span class="n">Preset</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">preset_data</span><span class="p">)</span>
+</span><span data-line="383">                <span class="n">manager</span><span class="o">.</span><span class="n">_presets</span><span class="p">[</span><span class="n">func_name</span><span class="p">][</span><span class="n">preset_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">preset</span>
+</span><span data-line="384">
+</span><span data-line="385">        <span class="k">return</span> <span class="n">manager</span></div>
 </div>
 
-</span><span data-line="384">
-</span><span data-line="385">
+</span><span data-line="386">
+</span><span data-line="387">
 <div class="viewcode-block" id="HistoryManager">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.HistoryManager">[docs]</a>
-</span><span data-line="386"><span class="k">class</span><span class="w"> </span><span class="nc">HistoryManager</span><span class="p">:</span>
-</span><span data-line="387"><span class="w">    </span><span class="sd">"""Combined manager for history and presets.</span>
-</span><span data-line="388">
-</span><span data-line="389"><span class="sd">    Provides a unified interface for tracking calls and managing presets.</span>
+</span><span data-line="388"><span class="k">class</span><span class="w"> </span><span class="nc">HistoryManager</span><span class="p">:</span>
+</span><span data-line="389"><span class="w">    </span><span class="sd">"""Combined manager for history and presets.</span>
 </span><span data-line="390">
-</span><span data-line="391"><span class="sd">    Example:</span>
-</span><span data-line="392"><span class="sd">        &gt;&gt;&gt; manager = HistoryManager()</span>
-</span><span data-line="393"><span class="sd">        &gt;&gt;&gt; manager.record_call('add', {'x': 10, 'y': 20}, result=30)</span>
-</span><span data-line="394"><span class="sd">        &gt;&gt;&gt; _ = manager.save_preset('quick', 'add', {'x': 10, 'y': 20})</span>
-</span><span data-line="395"><span class="sd">        &gt;&gt;&gt; recent = manager.get_recent_calls('add')</span>
-</span><span data-line="396"><span class="sd">        &gt;&gt;&gt; presets = manager.get_presets('add')</span>
-</span><span data-line="397"><span class="sd">    """</span>
-</span><span data-line="398">
-</span><span data-line="399">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_history</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
-</span><span data-line="400"><span class="w">        </span><span class="sd">"""Initialize history manager.</span>
-</span><span data-line="401">
-</span><span data-line="402"><span class="sd">        Args:</span>
-</span><span data-line="403"><span class="sd">            max_history: Maximum history size per function</span>
-</span><span data-line="404"><span class="sd">        """</span>
-</span><span data-line="405">        <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="n">CallHistory</span><span class="p">(</span><span class="n">max_size</span><span class="o">=</span><span class="n">max_history</span><span class="p">)</span>
-</span><span data-line="406">        <span class="bp">self</span><span class="o">.</span><span class="n">presets</span> <span class="o">=</span> <span class="n">PresetManager</span><span class="p">()</span>
-</span><span data-line="407">
+</span><span data-line="391"><span class="sd">    Provides a unified interface for tracking calls and managing presets.</span>
+</span><span data-line="392">
+</span><span data-line="393"><span class="sd">    Example:</span>
+</span><span data-line="394"><span class="sd">        &gt;&gt;&gt; manager = HistoryManager()</span>
+</span><span data-line="395"><span class="sd">        &gt;&gt;&gt; manager.record_call('add', {'x': 10, 'y': 20}, result=30)</span>
+</span><span data-line="396"><span class="sd">        &gt;&gt;&gt; _ = manager.save_preset('quick', 'add', {'x': 10, 'y': 20})</span>
+</span><span data-line="397"><span class="sd">        &gt;&gt;&gt; recent = manager.get_recent_calls('add')</span>
+</span><span data-line="398"><span class="sd">        &gt;&gt;&gt; presets = manager.get_presets('add')</span>
+</span><span data-line="399"><span class="sd">    """</span>
+</span><span data-line="400">
+</span><span data-line="401">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_history</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+</span><span data-line="402"><span class="w">        </span><span class="sd">"""Initialize history manager.</span>
+</span><span data-line="403">
+</span><span data-line="404"><span class="sd">        Args:</span>
+</span><span data-line="405"><span class="sd">            max_history: Maximum history size per function</span>
+</span><span data-line="406"><span class="sd">        """</span>
+</span><span data-line="407">        <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="n">CallHistory</span><span class="p">(</span><span class="n">max_size</span><span class="o">=</span><span class="n">max_history</span><span class="p">)</span>
+</span><span data-line="408">        <span class="bp">self</span><span class="o">.</span><span class="n">presets</span> <span class="o">=</span> <span class="n">PresetManager</span><span class="p">()</span>
+</span><span data-line="409">
 <div class="viewcode-block" id="HistoryManager.record_call">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.HistoryManager.record_call">[docs]</a>
-</span><span data-line="408">    <span class="k">def</span><span class="w"> </span><span class="nf">record_call</span><span class="p">(</span>
-</span><span data-line="409">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="410">        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span data-line="411">        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-</span><span data-line="412">        <span class="n">result</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="413">        <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span data-line="414">        <span class="n">error</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="415">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="416"><span class="w">        </span><span class="sd">"""Record a function call.</span>
-</span><span data-line="417">
-</span><span data-line="418"><span class="sd">        Args:</span>
-</span><span data-line="419"><span class="sd">            func_name: Function name</span>
-</span><span data-line="420"><span class="sd">            params: Parameters used</span>
-</span><span data-line="421"><span class="sd">            result: Result returned</span>
-</span><span data-line="422"><span class="sd">            success: Whether call succeeded</span>
-</span><span data-line="423"><span class="sd">            error: Error message if failed</span>
-</span><span data-line="424"><span class="sd">        """</span>
-</span><span data-line="425">        <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">success</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div>
+</span><span data-line="410">    <span class="k">def</span><span class="w"> </span><span class="nf">record_call</span><span class="p">(</span>
+</span><span data-line="411">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="412">        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span data-line="413">        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+</span><span data-line="414">        <span class="n">result</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="415">        <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span data-line="416">        <span class="n">error</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="417">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="418"><span class="w">        </span><span class="sd">"""Record a function call.</span>
+</span><span data-line="419">
+</span><span data-line="420"><span class="sd">        Args:</span>
+</span><span data-line="421"><span class="sd">            func_name: Function name</span>
+</span><span data-line="422"><span class="sd">            params: Parameters used</span>
+</span><span data-line="423"><span class="sd">            result: Result returned</span>
+</span><span data-line="424"><span class="sd">            success: Whether call succeeded</span>
+</span><span data-line="425"><span class="sd">            error: Error message if failed</span>
+</span><span data-line="426"><span class="sd">        """</span>
+</span><span data-line="427">        <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">record</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">success</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div>
 
-</span><span data-line="426">
+</span><span data-line="428">
 <div class="viewcode-block" id="HistoryManager.get_recent_calls">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.HistoryManager.get_recent_calls">[docs]</a>
-</span><span data-line="427">    <span class="k">def</span><span class="w"> </span><span class="nf">get_recent_calls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FunctionCall</span><span class="p">]:</span>
-</span><span data-line="428"><span class="w">        </span><span class="sd">"""Get recent calls.</span>
-</span><span data-line="429">
-</span><span data-line="430"><span class="sd">        Args:</span>
-</span><span data-line="431"><span class="sd">            func_name: Function name</span>
-</span><span data-line="432"><span class="sd">            limit: Maximum number to return</span>
-</span><span data-line="433">
-</span><span data-line="434"><span class="sd">        Returns:</span>
-</span><span data-line="435"><span class="sd">            List of recent FunctionCall objects</span>
-</span><span data-line="436"><span class="sd">        """</span>
-</span><span data-line="437">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">get_recent</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span></div>
+</span><span data-line="429">    <span class="k">def</span><span class="w"> </span><span class="nf">get_recent_calls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FunctionCall</span><span class="p">]:</span>
+</span><span data-line="430"><span class="w">        </span><span class="sd">"""Get recent calls.</span>
+</span><span data-line="431">
+</span><span data-line="432"><span class="sd">        Args:</span>
+</span><span data-line="433"><span class="sd">            func_name: Function name</span>
+</span><span data-line="434"><span class="sd">            limit: Maximum number to return</span>
+</span><span data-line="435">
+</span><span data-line="436"><span class="sd">        Returns:</span>
+</span><span data-line="437"><span class="sd">            List of recent FunctionCall objects</span>
+</span><span data-line="438"><span class="sd">        """</span>
+</span><span data-line="439">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">get_recent</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span></div>
 
-</span><span data-line="438">
+</span><span data-line="440">
 <div class="viewcode-block" id="HistoryManager.save_preset">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.HistoryManager.save_preset">[docs]</a>
-</span><span data-line="439">    <span class="k">def</span><span class="w"> </span><span class="nf">save_preset</span><span class="p">(</span>
-</span><span data-line="440">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="441">        <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span data-line="442">        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span data-line="443">        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-</span><span data-line="444">        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
-</span><span data-line="445">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Preset</span><span class="p">:</span>
-</span><span data-line="446"><span class="w">        </span><span class="sd">"""Save a preset.</span>
-</span><span data-line="447">
-</span><span data-line="448"><span class="sd">        Args:</span>
-</span><span data-line="449"><span class="sd">            preset_name: Name for preset</span>
-</span><span data-line="450"><span class="sd">            func_name: Function name</span>
-</span><span data-line="451"><span class="sd">            params: Parameter values</span>
-</span><span data-line="452"><span class="sd">            description: Optional description</span>
-</span><span data-line="453">
-</span><span data-line="454"><span class="sd">        Returns:</span>
-</span><span data-line="455"><span class="sd">            Created Preset object</span>
-</span><span data-line="456"><span class="sd">        """</span>
-</span><span data-line="457">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">presets</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">preset_name</span><span class="p">,</span> <span class="n">func_name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span></div>
+</span><span data-line="441">    <span class="k">def</span><span class="w"> </span><span class="nf">save_preset</span><span class="p">(</span>
+</span><span data-line="442">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="443">        <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span data-line="444">        <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span data-line="445">        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+</span><span data-line="446">        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+</span><span data-line="447">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Preset</span><span class="p">:</span>
+</span><span data-line="448"><span class="w">        </span><span class="sd">"""Save a preset.</span>
+</span><span data-line="449">
+</span><span data-line="450"><span class="sd">        Args:</span>
+</span><span data-line="451"><span class="sd">            preset_name: Name for preset</span>
+</span><span data-line="452"><span class="sd">            func_name: Function name</span>
+</span><span data-line="453"><span class="sd">            params: Parameter values</span>
+</span><span data-line="454"><span class="sd">            description: Optional description</span>
+</span><span data-line="455">
+</span><span data-line="456"><span class="sd">        Returns:</span>
+</span><span data-line="457"><span class="sd">            Created Preset object</span>
+</span><span data-line="458"><span class="sd">        """</span>
+</span><span data-line="459">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">presets</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">preset_name</span><span class="p">,</span> <span class="n">func_name</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span></div>
 
-</span><span data-line="458">
+</span><span data-line="460">
 <div class="viewcode-block" id="HistoryManager.get_preset">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.HistoryManager.get_preset">[docs]</a>
-</span><span data-line="459">    <span class="k">def</span><span class="w"> </span><span class="nf">get_preset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Preset</span><span class="p">]:</span>
-</span><span data-line="460"><span class="w">        </span><span class="sd">"""Get a preset.</span>
-</span><span data-line="461">
-</span><span data-line="462"><span class="sd">        Args:</span>
-</span><span data-line="463"><span class="sd">            preset_name: Name of preset</span>
-</span><span data-line="464"><span class="sd">            func_name: Function name</span>
-</span><span data-line="465">
-</span><span data-line="466"><span class="sd">        Returns:</span>
-</span><span data-line="467"><span class="sd">            Preset object or None</span>
-</span><span data-line="468"><span class="sd">        """</span>
-</span><span data-line="469">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">presets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">preset_name</span><span class="p">,</span> <span class="n">func_name</span><span class="p">)</span></div>
+</span><span data-line="461">    <span class="k">def</span><span class="w"> </span><span class="nf">get_preset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Preset</span><span class="p">]:</span>
+</span><span data-line="462"><span class="w">        </span><span class="sd">"""Get a preset.</span>
+</span><span data-line="463">
+</span><span data-line="464"><span class="sd">        Args:</span>
+</span><span data-line="465"><span class="sd">            preset_name: Name of preset</span>
+</span><span data-line="466"><span class="sd">            func_name: Function name</span>
+</span><span data-line="467">
+</span><span data-line="468"><span class="sd">        Returns:</span>
+</span><span data-line="469"><span class="sd">            Preset object or None</span>
+</span><span data-line="470"><span class="sd">        """</span>
+</span><span data-line="471">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">presets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">preset_name</span><span class="p">,</span> <span class="n">func_name</span><span class="p">)</span></div>
 
-</span><span data-line="470">
+</span><span data-line="472">
 <div class="viewcode-block" id="HistoryManager.get_presets">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.HistoryManager.get_presets">[docs]</a>
-</span><span data-line="471">    <span class="k">def</span><span class="w"> </span><span class="nf">get_presets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Preset</span><span class="p">]:</span>
-</span><span data-line="472"><span class="w">        </span><span class="sd">"""Get all presets for a function.</span>
-</span><span data-line="473">
-</span><span data-line="474"><span class="sd">        Args:</span>
-</span><span data-line="475"><span class="sd">            func_name: Function name</span>
-</span><span data-line="476">
-</span><span data-line="477"><span class="sd">        Returns:</span>
-</span><span data-line="478"><span class="sd">            List of Preset objects</span>
-</span><span data-line="479"><span class="sd">        """</span>
-</span><span data-line="480">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">presets</span><span class="o">.</span><span class="n">list_presets</span><span class="p">(</span><span class="n">func_name</span><span class="p">)</span></div>
+</span><span data-line="473">    <span class="k">def</span><span class="w"> </span><span class="nf">get_presets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Preset</span><span class="p">]:</span>
+</span><span data-line="474"><span class="w">        </span><span class="sd">"""Get all presets for a function.</span>
+</span><span data-line="475">
+</span><span data-line="476"><span class="sd">        Args:</span>
+</span><span data-line="477"><span class="sd">            func_name: Function name</span>
+</span><span data-line="478">
+</span><span data-line="479"><span class="sd">        Returns:</span>
+</span><span data-line="480"><span class="sd">            List of Preset objects</span>
+</span><span data-line="481"><span class="sd">        """</span>
+</span><span data-line="482">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">presets</span><span class="o">.</span><span class="n">list_presets</span><span class="p">(</span><span class="n">func_name</span><span class="p">)</span></div>
 
-</span><span data-line="481">
+</span><span data-line="483">
 <div class="viewcode-block" id="HistoryManager.save_to_file">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.HistoryManager.save_to_file">[docs]</a>
-</span><span data-line="482">    <span class="k">def</span><span class="w"> </span><span class="nf">save_to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="483"><span class="w">        </span><span class="sd">"""Save history and presets to file.</span>
-</span><span data-line="484">
-</span><span data-line="485"><span class="sd">        Args:</span>
-</span><span data-line="486"><span class="sd">            filepath: Path to save to</span>
-</span><span data-line="487"><span class="sd">        """</span>
-</span><span data-line="488">        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-</span><span data-line="489">            <span class="s2">"history"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
-</span><span data-line="490">            <span class="s2">"presets"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">presets</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
-</span><span data-line="491">        <span class="p">}</span>
-</span><span data-line="492">
-</span><span data-line="493">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span><span data-line="494">            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
+</span><span data-line="484">    <span class="k">def</span><span class="w"> </span><span class="nf">save_to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="485"><span class="w">        </span><span class="sd">"""Save history and presets to file.</span>
+</span><span data-line="486">
+</span><span data-line="487"><span class="sd">        Args:</span>
+</span><span data-line="488"><span class="sd">            filepath: Path to save to</span>
+</span><span data-line="489"><span class="sd">        """</span>
+</span><span data-line="490">        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+</span><span data-line="491">            <span class="s2">"history"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+</span><span data-line="492">            <span class="s2">"presets"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">presets</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span>
+</span><span data-line="493">        <span class="p">}</span>
+</span><span data-line="494">
+</span><span data-line="495">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span data-line="496">            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
-</span><span data-line="495">
+</span><span data-line="497">
 <div class="viewcode-block" id="HistoryManager.load_from_file">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.HistoryManager.load_from_file">[docs]</a>
-</span><span data-line="496">    <span class="nd">@classmethod</span>
-</span><span data-line="497">    <span class="k">def</span><span class="w"> </span><span class="nf">load_from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_history</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"HistoryManager"</span><span class="p">:</span>
-</span><span data-line="498"><span class="w">        </span><span class="sd">"""Load from file.</span>
-</span><span data-line="499">
-</span><span data-line="500"><span class="sd">        Args:</span>
-</span><span data-line="501"><span class="sd">            filepath: Path to load from</span>
-</span><span data-line="502"><span class="sd">            max_history: Maximum history size</span>
-</span><span data-line="503">
-</span><span data-line="504"><span class="sd">        Returns:</span>
-</span><span data-line="505"><span class="sd">            HistoryManager instance</span>
-</span><span data-line="506"><span class="sd">        """</span>
-</span><span data-line="507">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span><span data-line="508">            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</span><span data-line="509">
-</span><span data-line="510">        <span class="n">manager</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">max_history</span><span class="o">=</span><span class="n">max_history</span><span class="p">)</span>
-</span><span data-line="511">        <span class="n">manager</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="n">CallHistory</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"history"</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">max_history</span><span class="p">)</span>
-</span><span data-line="512">        <span class="n">manager</span><span class="o">.</span><span class="n">presets</span> <span class="o">=</span> <span class="n">PresetManager</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"presets"</span><span class="p">,</span> <span class="p">{}))</span>
-</span><span data-line="513">
-</span><span data-line="514">        <span class="k">return</span> <span class="n">manager</span></div>
+</span><span data-line="498">    <span class="nd">@classmethod</span>
+</span><span data-line="499">    <span class="k">def</span><span class="w"> </span><span class="nf">load_from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_history</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"HistoryManager"</span><span class="p">:</span>
+</span><span data-line="500"><span class="w">        </span><span class="sd">"""Load from file.</span>
+</span><span data-line="501">
+</span><span data-line="502"><span class="sd">        Args:</span>
+</span><span data-line="503"><span class="sd">            filepath: Path to load from</span>
+</span><span data-line="504"><span class="sd">            max_history: Maximum history size</span>
+</span><span data-line="505">
+</span><span data-line="506"><span class="sd">        Returns:</span>
+</span><span data-line="507"><span class="sd">            HistoryManager instance</span>
+</span><span data-line="508"><span class="sd">        """</span>
+</span><span data-line="509">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span data-line="510">            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span data-line="511">
+</span><span data-line="512">        <span class="n">manager</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">max_history</span><span class="o">=</span><span class="n">max_history</span><span class="p">)</span>
+</span><span data-line="513">        <span class="n">manager</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="n">CallHistory</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"history"</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">max_history</span><span class="p">)</span>
+</span><span data-line="514">        <span class="n">manager</span><span class="o">.</span><span class="n">presets</span> <span class="o">=</span> <span class="n">PresetManager</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"presets"</span><span class="p">,</span> <span class="p">{}))</span>
+</span><span data-line="515">
+</span><span data-line="516">        <span class="k">return</span> <span class="n">manager</span></div>
 </div>
 
-</span><span data-line="515">
-</span><span data-line="516">
-</span><span data-line="517"><span class="c1"># Global instance</span>
-</span><span data-line="518"><span class="n">_global_history_manager</span> <span class="o">=</span> <span class="n">HistoryManager</span><span class="p">()</span>
-</span><span data-line="519">
-</span><span data-line="520">
+</span><span data-line="517">
+</span><span data-line="518">
+</span><span data-line="519"><span class="c1"># Global instance</span>
+</span><span data-line="520"><span class="n">_global_history_manager</span> <span class="o">=</span> <span class="n">HistoryManager</span><span class="p">()</span>
+</span><span data-line="521">
+</span><span data-line="522">
 <div class="viewcode-block" id="get_global_history_manager">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.get_global_history_manager">[docs]</a>
-</span><span data-line="521"><span class="k">def</span><span class="w"> </span><span class="nf">get_global_history_manager</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">HistoryManager</span><span class="p">:</span>
-</span><span data-line="522"><span class="w">    </span><span class="sd">"""Get the global history manager.</span>
-</span><span data-line="523">
-</span><span data-line="524"><span class="sd">    Returns:</span>
-</span><span data-line="525"><span class="sd">        Global HistoryManager instance</span>
-</span><span data-line="526"><span class="sd">    """</span>
-</span><span data-line="527">    <span class="k">return</span> <span class="n">_global_history_manager</span></div>
+</span><span data-line="523"><span class="k">def</span><span class="w"> </span><span class="nf">get_global_history_manager</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">HistoryManager</span><span class="p">:</span>
+</span><span data-line="524"><span class="w">    </span><span class="sd">"""Get the global history manager.</span>
+</span><span data-line="525">
+</span><span data-line="526"><span class="sd">    Returns:</span>
+</span><span data-line="527"><span class="sd">        Global HistoryManager instance</span>
+</span><span data-line="528"><span class="sd">    """</span>
+</span><span data-line="529">    <span class="k">return</span> <span class="n">_global_history_manager</span></div>
 
-</span><span data-line="528">
-</span><span data-line="529">
+</span><span data-line="530">
+</span><span data-line="531">
 <div class="viewcode-block" id="enable_history">
 <a class="viewcode-back" href="../../_autosummary/uf.history.html#uf.enable_history">[docs]</a>
-</span><span data-line="530"><span class="k">def</span><span class="w"> </span><span class="nf">enable_history</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">max_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-</span><span data-line="531"><span class="w">    </span><span class="sd">"""Decorator to enable call history for a function.</span>
-</span><span data-line="532">
-</span><span data-line="533"><span class="sd">    Args:</span>
-</span><span data-line="534"><span class="sd">        max_size: Maximum history size</span>
-</span><span data-line="535">
-</span><span data-line="536"><span class="sd">    Returns:</span>
-</span><span data-line="537"><span class="sd">        Decorator function</span>
-</span><span data-line="538">
-</span><span data-line="539"><span class="sd">    Example:</span>
-</span><span data-line="540"><span class="sd">        &gt;&gt;&gt; @enable_history</span>
-</span><span data-line="541"><span class="sd">        ... def my_function(x: int):</span>
-</span><span data-line="542"><span class="sd">        ...     return x * 2</span>
-</span><span data-line="543"><span class="sd">    """</span>
-</span><span data-line="544">
-</span><span data-line="545">    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span data-line="546"><span class="w">        </span><span class="sd">"""Wrapper that records calls."""</span>
-</span><span data-line="547">        <span class="n">manager</span> <span class="o">=</span> <span class="n">get_global_history_manager</span><span class="p">()</span>
-</span><span data-line="548">
-</span><span data-line="549">        <span class="k">try</span><span class="p">:</span>
-</span><span data-line="550">            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span data-line="551">            <span class="n">manager</span><span class="o">.</span><span class="n">record_call</span><span class="p">(</span>
-</span><span data-line="552">                <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-</span><span data-line="553">                <span class="n">kwargs</span><span class="p">,</span>
-</span><span data-line="554">                <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span>
-</span><span data-line="555">                <span class="n">success</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span data-line="556">            <span class="p">)</span>
-</span><span data-line="557">            <span class="k">return</span> <span class="n">result</span>
-</span><span data-line="558">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span data-line="559">            <span class="n">manager</span><span class="o">.</span><span class="n">record_call</span><span class="p">(</span>
-</span><span data-line="560">                <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
-</span><span data-line="561">                <span class="n">kwargs</span><span class="p">,</span>
-</span><span data-line="562">                <span class="n">success</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-</span><span data-line="563">                <span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
-</span><span data-line="564">            <span class="p">)</span>
-</span><span data-line="565">            <span class="k">raise</span>
-</span><span data-line="566">
-</span><span data-line="567">    <span class="n">wrapper</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
-</span><span data-line="568">    <span class="n">wrapper</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span>
-</span><span data-line="569">    <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_history_enabled__</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span data-line="570">
-</span><span data-line="571">    <span class="k">return</span> <span class="n">wrapper</span></div>
+</span><span data-line="532"><span class="k">def</span><span class="w"> </span><span class="nf">enable_history</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">max_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+</span><span data-line="533"><span class="w">    </span><span class="sd">"""Decorator to enable call history for a function.</span>
+</span><span data-line="534">
+</span><span data-line="535"><span class="sd">    Args:</span>
+</span><span data-line="536"><span class="sd">        max_size: Maximum history size</span>
+</span><span data-line="537">
+</span><span data-line="538"><span class="sd">    Returns:</span>
+</span><span data-line="539"><span class="sd">        Decorator function</span>
+</span><span data-line="540">
+</span><span data-line="541"><span class="sd">    Example:</span>
+</span><span data-line="542"><span class="sd">        &gt;&gt;&gt; @enable_history</span>
+</span><span data-line="543"><span class="sd">        ... def my_function(x: int):</span>
+</span><span data-line="544"><span class="sd">        ...     return x * 2</span>
+</span><span data-line="545"><span class="sd">    """</span>
+</span><span data-line="546">
+</span><span data-line="547">    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span data-line="548"><span class="w">        </span><span class="sd">"""Wrapper that records calls."""</span>
+</span><span data-line="549">        <span class="n">manager</span> <span class="o">=</span> <span class="n">get_global_history_manager</span><span class="p">()</span>
+</span><span data-line="550">
+</span><span data-line="551">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="552">            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span data-line="553">            <span class="n">manager</span><span class="o">.</span><span class="n">record_call</span><span class="p">(</span>
+</span><span data-line="554">                <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+</span><span data-line="555">                <span class="n">kwargs</span><span class="p">,</span>
+</span><span data-line="556">                <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span>
+</span><span data-line="557">                <span class="n">success</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span data-line="558">            <span class="p">)</span>
+</span><span data-line="559">            <span class="k">return</span> <span class="n">result</span>
+</span><span data-line="560">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="561">            <span class="n">manager</span><span class="o">.</span><span class="n">record_call</span><span class="p">(</span>
+</span><span data-line="562">                <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+</span><span data-line="563">                <span class="n">kwargs</span><span class="p">,</span>
+</span><span data-line="564">                <span class="n">success</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span><span data-line="565">                <span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+</span><span data-line="566">            <span class="p">)</span>
+</span><span data-line="567">            <span class="k">raise</span>
+</span><span data-line="568">
+</span><span data-line="569">    <span class="n">wrapper</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+</span><span data-line="570">    <span class="n">wrapper</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span>
+</span><span data-line="571">    <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_history_enabled__</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span data-line="572">
+</span><span data-line="573">    <span class="k">return</span> <span class="n">wrapper</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">
@@ -820,7 +822,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=9969ed3f"></script>
+      <script src="../../_static/documentation_options.js?v=3d116926"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
