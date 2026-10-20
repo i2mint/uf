@@ -5,8 +5,28 @@ grouping, and field specifications.
 """
 
 from typing import Callable, Optional, Any
+import functools
 from functools import wraps
 from uf.rjsf_config import RjsfFieldConfig
+
+
+def attr_through_partials(func: Callable, attr: str, default: Any) -> Any:
+    """``attr`` of ``func``, else of the function it wraps, and so on down a chain of
+    ``functools.partial``: the outermost object that has it wins.
+
+    >>> import functools
+    >>> def f(): ...
+    >>> f.tag = "inner"
+    >>> p = functools.partial(functools.partial(f))
+    >>> attr_through_partials(p, "tag", None)
+    'inner'
+    >>> p.tag = ""  # set, even if falsy: it wins
+    >>> attr_through_partials(p, "tag", None)
+    ''
+    """
+    while not hasattr(func, attr) and isinstance(func, functools.partial):
+        func = func.func
+    return getattr(func, attr, default)
 
 
 # Attribute names for storing metadata
@@ -171,7 +191,7 @@ def get_ui_config(func: Callable) -> Optional[dict]:
         >>> if config:  # doctest: +SKIP
         ...     print(config['title'])
     """
-    return getattr(func, _UI_CONFIG_ATTR, None)
+    return attr_through_partials(func, _UI_CONFIG_ATTR, None)
 
 
 def get_group(func: Callable) -> Optional[str]:
@@ -191,7 +211,7 @@ def get_group(func: Callable) -> Optional[str]:
     config = get_ui_config(func)
     if config:
         return config.get("group")
-    return getattr(func, _GROUP_ATTR, None)
+    return attr_through_partials(func, _GROUP_ATTR, None)
 
 
 def get_field_configs(func: Callable) -> dict[str, RjsfFieldConfig]:
@@ -211,7 +231,7 @@ def get_field_configs(func: Callable) -> dict[str, RjsfFieldConfig]:
     config = get_ui_config(func)
     if config:
         return config.get("fields", {})
-    return getattr(func, _FIELD_CONFIGS_ATTR, {})
+    return attr_through_partials(func, _FIELD_CONFIGS_ATTR, {})
 
 
 def is_hidden(func: Callable) -> bool:
@@ -231,7 +251,7 @@ def is_hidden(func: Callable) -> bool:
     config = get_ui_config(func)
     if config:
         return config.get("hidden", False)
-    return getattr(func, _HIDDEN_ATTR, False)
+    return attr_through_partials(func, _HIDDEN_ATTR, False)
 
 
 def with_example(*example_args, **example_kwargs):
@@ -283,8 +303,8 @@ def get_example(func: Callable) -> Optional[tuple[tuple, dict]]:
         ...     args, kwargs = example
         ...     result = my_function(*args, **kwargs)
     """
-    args = getattr(func, "__uf_example_args__", None)
-    kwargs = getattr(func, "__uf_example_kwargs__", None)
+    args = attr_through_partials(func, "__uf_example_args__", None)
+    kwargs = attr_through_partials(func, "__uf_example_kwargs__", None)
 
     if args is not None or kwargs is not None:
         return (args or (), kwargs or {})

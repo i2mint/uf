@@ -9,6 +9,7 @@ from typing import Any, Callable, Iterable, Optional, Union
 from dataclasses import dataclass, field
 from collections.abc import Mapping
 
+from uf.decorators import attr_through_partials
 from uf.specs import doc_of_func, name_funcs, name_of_func, unwrap_partials
 
 
@@ -345,23 +346,7 @@ def _add_group_routes(app, organizer: FunctionOrganizer):
             return JSONResponse(content=organizer.to_dict())
 
 
-def _attr_through_partials(func: Callable, attr: str, default: Any) -> Any:
-    """``attr`` of ``func``, else of the function it wraps, and so on down a chain of
-    ``functools.partial``: the outermost object that has it wins.
-
-    >>> import functools
-    >>> def f(): ...
-    >>> f.tag = "inner"
-    >>> p = functools.partial(functools.partial(f))
-    >>> _attr_through_partials(p, "tag", None)
-    'inner'
-    >>> p.tag = ""  # set, even if falsy: it wins
-    >>> _attr_through_partials(p, "tag", None)
-    ''
-    """
-    while not hasattr(func, attr) and isinstance(func, functools.partial):
-        func = func.func
-    return getattr(func, attr, default)
+_attr_through_partials = attr_through_partials  # backward-compatible alias
 
 
 def auto_group_by_prefix(

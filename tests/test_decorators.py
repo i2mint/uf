@@ -124,3 +124,18 @@ def test_decorator_preserves_function():
     assert test_func(5) == 10
     # And should have the config
     assert get_ui_config(test_func)['title'] == "Test"
+
+
+def test_getters_see_through_partials():
+    from functools import partial
+    from uf.decorators import get_group, get_ui_config, get_field_configs, ui_config, group
+
+    @group("g")
+    @ui_config(title="T")
+    def f(x):
+        return x
+
+    p = partial(partial(f))
+    assert get_group(p) == "g"
+    assert get_ui_config(p) == get_ui_config(f) != None
+    assert get_field_configs(p) == get_field_configs(f)
