@@ -8,6 +8,7 @@ uf.decorators
 
    .. autosummary::
    
+      attr_through_partials
       deprecated
       field_config
       get_example

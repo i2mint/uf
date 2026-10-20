@@ -7,20 +7,41 @@ grouping, and field specifications.
 
 ### Functions
 
-| [`deprecated`](#uf.decorators.deprecated)([message])                            | Decorator to mark a function as deprecated.               |
-|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| [`field_config`](#uf.decorators.field_config)(\*\*field_configs)                  | Decorator to configure specific fields of a function.     |
-| [`get_example`](#uf.decorators.get_example)(func)                                | Get example arguments from a function.                    |
-| [`get_field_configs`](#uf.decorators.get_field_configs)(func)                          | Get field configurations from a function.                 |
-| [`get_group`](#uf.decorators.get_group)(func)                                  | Get group name from a function.                           |
-| [`get_ui_config`](#uf.decorators.get_ui_config)(func)                              | Get UI configuration from a function.                     |
-| [`group`](#uf.decorators.group)(group_name)                                | Decorator to assign a function to a group.                |
-| [`hidden`](#uf.decorators.hidden)(func)                                     | Decorator to hide a function from the UI.                 |
-| [`is_hidden`](#uf.decorators.is_hidden)(func)                                  | Check if a function is hidden from UI.                    |
-| [`rate_limit`](#uf.decorators.rate_limit)(calls, period)                        | Decorator to mark a function with rate limiting metadata. |
-| [`requires_auth`](#uf.decorators.requires_auth)(\*[, roles, permissions])          | Decorator to mark a function as requiring authentication. |
-| [`ui_config`](#uf.decorators.ui_config)(\*[, title, description, group, ...])  | Decorator to add UI configuration to functions.           |
-| [`with_example`](#uf.decorators.with_example)(\*example_args, \*\*example_kwargs) | Decorator to attach example arguments to a function.      |
+| [`attr_through_partials`](#uf.decorators.attr_through_partials)(func, attr, default)       | `attr` of `func`, else of the function it wraps, and so on down a chain of `functools.partial`: the outermost object that has it wins.   |
+|---------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| [`deprecated`](#uf.decorators.deprecated)([message])                            | Decorator to mark a function as deprecated.                                                                                              |
+| [`field_config`](#uf.decorators.field_config)(\*\*field_configs)                  | Decorator to configure specific fields of a function.                                                                                    |
+| [`get_example`](#uf.decorators.get_example)(func)                                | Get example arguments from a function.                                                                                                   |
+| [`get_field_configs`](#uf.decorators.get_field_configs)(func)                          | Get field configurations from a function.                                                                                                |
+| [`get_group`](#uf.decorators.get_group)(func)                                  | Get group name from a function.                                                                                                          |
+| [`get_ui_config`](#uf.decorators.get_ui_config)(func)                              | Get UI configuration from a function.                                                                                                    |
+| [`group`](#uf.decorators.group)(group_name)                                | Decorator to assign a function to a group.                                                                                               |
+| [`hidden`](#uf.decorators.hidden)(func)                                     | Decorator to hide a function from the UI.                                                                                                |
+| [`is_hidden`](#uf.decorators.is_hidden)(func)                                  | Check if a function is hidden from UI.                                                                                                   |
+| [`rate_limit`](#uf.decorators.rate_limit)(calls, period)                        | Decorator to mark a function with rate limiting metadata.                                                                                |
+| [`requires_auth`](#uf.decorators.requires_auth)(\*[, roles, permissions])          | Decorator to mark a function as requiring authentication.                                                                                |
+| [`ui_config`](#uf.decorators.ui_config)(\*[, title, description, group, ...])  | Decorator to add UI configuration to functions.                                                                                          |
+| [`with_example`](#uf.decorators.with_example)(\*example_args, \*\*example_kwargs) | Decorator to attach example arguments to a function.                                                                                     |
+
+### uf.decorators.attr_through_partials(func, attr, default)
+
+`attr` of `func`, else of the function it wraps, and so on down a chain of
+`functools.partial`: the outermost object that has it wins.
+
+```pycon
+>>> import functools
+>>> def f(): ...
+>>> f.tag = "inner"
+>>> p = functools.partial(functools.partial(f))
+>>> attr_through_partials(p, "tag", None)
+'inner'
+>>> p.tag = ""  # set, even if falsy: it wins
+>>> attr_through_partials(p, "tag", None)
+''
+```
+
+* **Return type:**
+  [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)
 
 ### uf.decorators.deprecated(message=None)
 

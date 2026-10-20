@@ -1,4 +1,4 @@
-> built 2026-10-20 03:29 UTC from bb2db02 (master) · uf 0.1.17. Details: build_info.json
+> built 2026-10-20 09:55 UTC from 20b2876 (master) · uf 0.1.18. Details: build_info.json
 
 # index.html.md
 
@@ -1996,20 +1996,41 @@ grouping, and field specifications.
 
 ### Functions
 
-| [`deprecated`](_autosummary/uf.decorators.html.md#uf.decorators.deprecated)([message])                            | Decorator to mark a function as deprecated.               |
-|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| [`field_config`](_autosummary/uf.decorators.html.md#uf.decorators.field_config)(\*\*field_configs)                  | Decorator to configure specific fields of a function.     |
-| [`get_example`](_autosummary/uf.decorators.html.md#uf.decorators.get_example)(func)                                | Get example arguments from a function.                    |
-| [`get_field_configs`](_autosummary/uf.decorators.html.md#uf.decorators.get_field_configs)(func)                          | Get field configurations from a function.                 |
-| [`get_group`](_autosummary/uf.decorators.html.md#uf.decorators.get_group)(func)                                  | Get group name from a function.                           |
-| [`get_ui_config`](_autosummary/uf.decorators.html.md#uf.decorators.get_ui_config)(func)                              | Get UI configuration from a function.                     |
-| [`group`](_autosummary/uf.decorators.html.md#uf.decorators.group)(group_name)                                | Decorator to assign a function to a group.                |
-| [`hidden`](_autosummary/uf.decorators.html.md#uf.decorators.hidden)(func)                                     | Decorator to hide a function from the UI.                 |
-| [`is_hidden`](_autosummary/uf.decorators.html.md#uf.decorators.is_hidden)(func)                                  | Check if a function is hidden from UI.                    |
-| [`rate_limit`](_autosummary/uf.decorators.html.md#uf.decorators.rate_limit)(calls, period)                        | Decorator to mark a function with rate limiting metadata. |
-| [`requires_auth`](_autosummary/uf.decorators.html.md#uf.decorators.requires_auth)(\*[, roles, permissions])          | Decorator to mark a function as requiring authentication. |
-| [`ui_config`](_autosummary/uf.decorators.html.md#uf.decorators.ui_config)(\*[, title, description, group, ...])  | Decorator to add UI configuration to functions.           |
-| [`with_example`](_autosummary/uf.decorators.html.md#uf.decorators.with_example)(\*example_args, \*\*example_kwargs) | Decorator to attach example arguments to a function.      |
+| [`attr_through_partials`](_autosummary/uf.decorators.html.md#uf.decorators.attr_through_partials)(func, attr, default)       | `attr` of `func`, else of the function it wraps, and so on down a chain of `functools.partial`: the outermost object that has it wins.   |
+|---------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| [`deprecated`](_autosummary/uf.decorators.html.md#uf.decorators.deprecated)([message])                            | Decorator to mark a function as deprecated.                                                                                              |
+| [`field_config`](_autosummary/uf.decorators.html.md#uf.decorators.field_config)(\*\*field_configs)                  | Decorator to configure specific fields of a function.                                                                                    |
+| [`get_example`](_autosummary/uf.decorators.html.md#uf.decorators.get_example)(func)                                | Get example arguments from a function.                                                                                                   |
+| [`get_field_configs`](_autosummary/uf.decorators.html.md#uf.decorators.get_field_configs)(func)                          | Get field configurations from a function.                                                                                                |
+| [`get_group`](_autosummary/uf.decorators.html.md#uf.decorators.get_group)(func)                                  | Get group name from a function.                                                                                                          |
+| [`get_ui_config`](_autosummary/uf.decorators.html.md#uf.decorators.get_ui_config)(func)                              | Get UI configuration from a function.                                                                                                    |
+| [`group`](_autosummary/uf.decorators.html.md#uf.decorators.group)(group_name)                                | Decorator to assign a function to a group.                                                                                               |
+| [`hidden`](_autosummary/uf.decorators.html.md#uf.decorators.hidden)(func)                                     | Decorator to hide a function from the UI.                                                                                                |
+| [`is_hidden`](_autosummary/uf.decorators.html.md#uf.decorators.is_hidden)(func)                                  | Check if a function is hidden from UI.                                                                                                   |
+| [`rate_limit`](_autosummary/uf.decorators.html.md#uf.decorators.rate_limit)(calls, period)                        | Decorator to mark a function with rate limiting metadata.                                                                                |
+| [`requires_auth`](_autosummary/uf.decorators.html.md#uf.decorators.requires_auth)(\*[, roles, permissions])          | Decorator to mark a function as requiring authentication.                                                                                |
+| [`ui_config`](_autosummary/uf.decorators.html.md#uf.decorators.ui_config)(\*[, title, description, group, ...])  | Decorator to add UI configuration to functions.                                                                                          |
+| [`with_example`](_autosummary/uf.decorators.html.md#uf.decorators.with_example)(\*example_args, \*\*example_kwargs) | Decorator to attach example arguments to a function.                                                                                     |
+
+### uf.decorators.attr_through_partials(func, attr, default)
+
+`attr` of `func`, else of the function it wraps, and so on down a chain of
+`functools.partial`: the outermost object that has it wins.
+
+```pycon
+>>> import functools
+>>> def f(): ...
+>>> f.tag = "inner"
+>>> p = functools.partial(functools.partial(f))
+>>> attr_through_partials(p, "tag", None)
+'inner'
+>>> p.tag = ""  # set, even if falsy: it wins
+>>> attr_through_partials(p, "tag", None)
+''
+```
+
+* **Return type:**
+  [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)
 
 ### uf.decorators.deprecated(message=None)
 
@@ -9282,18 +9303,20 @@ Decorator to add webhooks to a function.
 
 # About this build
 
-This documentation was built on **2026-10-20 03:29 UTC** from commit <a href="https://github.com/i2mint/uf/commit/bb2db026dabf3049cf63670142fb4626ca0bdc4d"><code>bb2db02</code></a> on branch <code>master</code>, for **uf 0.1.17** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-20 09:55 UTC** from commit <a href="https://github.com/i2mint/uf/commit/20b28767b29b62fbf1dea91652cb0c5c7db70015"><code>20b2876</code></a> on branch <code>master</code>, for **uf 0.1.18** (from <code>pyproject.toml</code>).
 
-#### NOTE
-Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
+#### WARNING
+The documentation and the package may be misaligned:
+
+- The documented version (0.1.18) is ahead of the latest release on PyPI (0.1.17): these docs describe unreleased code.
 
 ## Source
 
 |                     |                                                                                                                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/uf/commit/bb2db026dabf3049cf63670142fb4626ca0bdc4d"><code>bb2db026dabf3049cf63670142fb4626ca0bdc4d</code></a> |
+| Commit              | <a href="https://github.com/i2mint/uf/commit/20b28767b29b62fbf1dea91652cb0c5c7db70015"><code>20b28767b29b62fbf1dea91652cb0c5c7db70015</code></a> |
 | Branch              | <code>master</code>                                                                                                                              |
-| Tags at this commit | <code>0.1.17</code>                                                                                                                              |
+| Tags at this commit | <code>0.1.18</code>                                                                                                                              |
 | Working tree        | clean                                                                                                                                            |
 | Remote              | <code>https://github.com/i2mint/uf</code>                                                                                                        |
 
@@ -9302,9 +9325,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/uf</code>                                                                     |
-| Run          | <a href="https://github.com/i2mint/uf/actions/runs/39364402279">39364402279</a>            |
+| Run          | <a href="https://github.com/i2mint/uf/actions/runs/39404000170">39404000170</a>            |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>576123928847e16a47c9d81fedd3800f6f2c3296</code> (in the history of the built commit) |
+| Event commit | <code>3e92070833fd7c679f4b8ffece09b00159256f87</code> (in the history of the built commit) |
 
 ## Tools
 
@@ -9329,13 +9352,13 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.17/">0.1.17</a>, the same as the documented version.
+Latest release: <a href="https://pypi.org/project/uf/0.1.17/">0.1.17</a>, older than the documented version (0.1.18).
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout bb2db026dabf3049cf63670142fb4626ca0bdc4d
+git checkout 20b28767b29b62fbf1dea91652cb0c5c7db70015
 pip install "epythet==0.2.18"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```

@@ -102,6 +102,7 @@ data-aria-dark="Switch to auto color mode">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#uf.decorators.attr_through_partials"><code class="docutils literal notranslate"><span class="pre">attr_through_partials()</span></code></a></li>
 <li><a class="reference internal" href="#uf.decorators.deprecated"><code class="docutils literal notranslate"><span class="pre">deprecated()</span></code></a></li>
 <li><a class="reference internal" href="#uf.decorators.field_config"><code class="docutils literal notranslate"><span class="pre">field_config()</span></code></a></li>
 <li><a class="reference internal" href="#uf.decorators.get_example"><code class="docutils literal notranslate"><span class="pre">get_example()</span></code></a></li>
@@ -162,48 +163,74 @@ grouping, and field specifications.</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#uf.decorators.deprecated" title="uf.decorators.deprecated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deprecated</span></code></a>([message])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.decorators.attr_through_partials" title="uf.decorators.attr_through_partials"><code class="xref py py-obj docutils literal notranslate"><span class="pre">attr_through_partials</span></code></a>(func, attr, default)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">attr</span></code> of <code class="docutils literal notranslate"><span class="pre">func</span></code>, else of the function it wraps, and so on down a chain of <code class="docutils literal notranslate"><span class="pre">functools.partial</span></code>: the outermost object that has it wins.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.decorators.deprecated" title="uf.decorators.deprecated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deprecated</span></code></a>([message])</p></td>
 <td><p>Decorator to mark a function as deprecated.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#uf.decorators.field_config" title="uf.decorators.field_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_config</span></code></a>(**field_configs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.decorators.field_config" title="uf.decorators.field_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_config</span></code></a>(**field_configs)</p></td>
 <td><p>Decorator to configure specific fields of a function.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#uf.decorators.get_example" title="uf.decorators.get_example"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_example</span></code></a>(func)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.decorators.get_example" title="uf.decorators.get_example"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_example</span></code></a>(func)</p></td>
 <td><p>Get example arguments from a function.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#uf.decorators.get_field_configs" title="uf.decorators.get_field_configs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_field_configs</span></code></a>(func)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.decorators.get_field_configs" title="uf.decorators.get_field_configs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_field_configs</span></code></a>(func)</p></td>
 <td><p>Get field configurations from a function.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#uf.decorators.get_group" title="uf.decorators.get_group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_group</span></code></a>(func)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.decorators.get_group" title="uf.decorators.get_group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_group</span></code></a>(func)</p></td>
 <td><p>Get group name from a function.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#uf.decorators.get_ui_config" title="uf.decorators.get_ui_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ui_config</span></code></a>(func)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.decorators.get_ui_config" title="uf.decorators.get_ui_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ui_config</span></code></a>(func)</p></td>
 <td><p>Get UI configuration from a function.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#uf.decorators.group" title="uf.decorators.group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">group</span></code></a>(group_name)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.decorators.group" title="uf.decorators.group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">group</span></code></a>(group_name)</p></td>
 <td><p>Decorator to assign a function to a group.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#uf.decorators.hidden" title="uf.decorators.hidden"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hidden</span></code></a>(func)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.decorators.hidden" title="uf.decorators.hidden"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hidden</span></code></a>(func)</p></td>
 <td><p>Decorator to hide a function from the UI.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#uf.decorators.is_hidden" title="uf.decorators.is_hidden"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_hidden</span></code></a>(func)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.decorators.is_hidden" title="uf.decorators.is_hidden"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_hidden</span></code></a>(func)</p></td>
 <td><p>Check if a function is hidden from UI.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#uf.decorators.rate_limit" title="uf.decorators.rate_limit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rate_limit</span></code></a>(calls, period)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.decorators.rate_limit" title="uf.decorators.rate_limit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rate_limit</span></code></a>(calls, period)</p></td>
 <td><p>Decorator to mark a function with rate limiting metadata.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#uf.decorators.requires_auth" title="uf.decorators.requires_auth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">requires_auth</span></code></a>(*[, roles, permissions])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.decorators.requires_auth" title="uf.decorators.requires_auth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">requires_auth</span></code></a>(*[, roles, permissions])</p></td>
 <td><p>Decorator to mark a function as requiring authentication.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#uf.decorators.ui_config" title="uf.decorators.ui_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ui_config</span></code></a>(*[, title, description, group, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#uf.decorators.ui_config" title="uf.decorators.ui_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ui_config</span></code></a>(*[, title, description, group, ...])</p></td>
 <td><p>Decorator to add UI configuration to functions.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#uf.decorators.with_example" title="uf.decorators.with_example"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_example</span></code></a>(*example_args, **example_kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#uf.decorators.with_example" title="uf.decorators.with_example"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_example</span></code></a>(*example_args, **example_kwargs)</p></td>
 <td><p>Decorator to attach example arguments to a function.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py function">
+<dt class="sig sig-object py" id="uf.decorators.attr_through_partials">
+<span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">attr_through_partials</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/decorators.html#attr_through_partials"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.attr_through_partials" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">attr</span></code> of <code class="docutils literal notranslate"><span class="pre">func</span></code>, else of the function it wraps, and so on down a chain of
+<code class="docutils literal notranslate"><span class="pre">functools.partial</span></code>: the outermost object that has it wins.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">():</span> <span class="o">...</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="s2">"inner"</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">attr_through_partials</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s2">"tag"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span><span data-line="6"><span class="go">'inner'</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="s2">""</span>  <span class="c1"># set, even if falsy: it wins</span>
+</span><span data-line="8"><span class="gp">&gt;&gt;&gt; </span><span class="n">attr_through_partials</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s2">"tag"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span><span data-line="9"><span class="go">''</span>
+</span></pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="uf.decorators.deprecated">
 <span class="sig-prename descclassname"><span class="pre">uf.decorators.</span></span><span class="sig-name descname"><span class="pre">deprecated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/uf/decorators.html#deprecated"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#uf.decorators.deprecated" title="Link to this definition">#</a></dt>
@@ -561,7 +588,7 @@ customize the generated UI.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=71734efd"></script>
+      <script src="../_static/documentation_options.js?v=9969ed3f"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
