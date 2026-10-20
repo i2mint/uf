@@ -1,6 +1,6 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-20T03:28:29.366032Z
+timestamp,2026-10-20T03:28:47.985169Z
 commit_sha,576123928847e16a47c9d81fedd3800f6f2c3296
 commit_message,"Fix CI after #33: older qh rejects input_trans=None; keep package doctests collected (#34)
 
@@ -8,18 +8,18 @@ commit_message,"Fix CI after #33: older qh rejects input_trans=None; keep packag
 
 * Widen testpaths again; drop None input/output_trans before qh.mk_app; dependency-free pydantic doctest (#5)"
 python_version,3.10
-metrics.umpyre_stats.num_functions,34415
-metrics.umpyre_stats.num_classes,6677
-metrics.umpyre_stats.total_lines,960459
-metrics.umpyre_stats.empty_lines,135816
-metrics.umpyre_stats.comment_lines,44459
-metrics.umpyre_stats.docs_lines,119559
-metrics.umpyre_stats.function_lines,551562
-metrics.umpyre_stats.empty_lines_ratio,0.1414073895918514
-metrics.umpyre_stats.comment_lines_ratio,0.04628932624922043
-metrics.umpyre_stats.function_lines_ratio,0.5742691775494841
-metrics.umpyre_stats.mean_lines_per_function,16.026790643614703
-metrics.umpyre_stats.files_analyzed,2343
+metrics.umpyre_stats.num_functions,33970
+metrics.umpyre_stats.num_classes,6671
+metrics.umpyre_stats.total_lines,949853
+metrics.umpyre_stats.empty_lines,134487
+metrics.umpyre_stats.comment_lines,43204
+metrics.umpyre_stats.docs_lines,118778
+metrics.umpyre_stats.function_lines,543731
+metrics.umpyre_stats.empty_lines_ratio,0.14158717190975867
+metrics.umpyre_stats.comment_lines_ratio,0.04548493293172733
+metrics.umpyre_stats.function_lines_ratio,0.5724369981460289
+metrics.umpyre_stats.mean_lines_per_function,16.006211362967324
+metrics.umpyre_stats.files_analyzed,2354
 metrics.umpyre_stats.pypi_version,0.1.16
 metrics.workflow_status.last_run_status,success
 metrics.workflow_status.last_success_timestamp,2026-10-20T03:27:24Z
@@ -40,4 +40,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,6.150343656539917
+collection_duration_seconds,11.997647047042847
