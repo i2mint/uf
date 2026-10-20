@@ -103,9 +103,9 @@ def create_pydantic_spec(func: Callable) -> Optional[dict]:
         RJSF specification dictionary or None
 
     Example:
-        >>> from pydantic import BaseModel, EmailStr
+        >>> from pydantic import BaseModel
         >>> class UserCreate(BaseModel):
-        ...     email: EmailStr
+        ...     email: str
         ...     age: int
         >>> def create_user(user: UserCreate):
         ...     pass
