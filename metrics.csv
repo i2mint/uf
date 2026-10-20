@@ -1,28 +1,28 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-20T09:54:54.056460Z
-commit_sha,3e92070833fd7c679f4b8ffece09b00159256f87
-commit_message,"decorators getters see through functools.partial (#32) (#36)
+timestamp,2026-10-20T10:44:59.301837Z
+commit_sha,70b315a812fdbfffd0585af60962f4c74c5a4720
+commit_message,"trans doctests: do not depend on mk_rjsf_app's input_trans kwargs (CI's qh differs) (#35)
 
-Co-authored-by: Claude Sonnet 5.5 <noreply@anthropic.com>"
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
 python_version,3.10
-metrics.umpyre_stats.num_functions,33982
+metrics.umpyre_stats.num_functions,33987
 metrics.umpyre_stats.num_classes,6672
-metrics.umpyre_stats.total_lines,950153
-metrics.umpyre_stats.empty_lines,134532
-metrics.umpyre_stats.comment_lines,43207
-metrics.umpyre_stats.docs_lines,118908
-metrics.umpyre_stats.function_lines,544006
-metrics.umpyre_stats.empty_lines_ratio,0.14158982816451665
-metrics.umpyre_stats.comment_lines_ratio,0.04547372896786096
-metrics.umpyre_stats.function_lines_ratio,0.5725456847476144
-metrics.umpyre_stats.mean_lines_per_function,16.008651639103054
-metrics.umpyre_stats.files_analyzed,2354
+metrics.umpyre_stats.total_lines,950370
+metrics.umpyre_stats.empty_lines,134546
+metrics.umpyre_stats.comment_lines,43196
+metrics.umpyre_stats.docs_lines,119060
+metrics.umpyre_stats.function_lines,544163
+metrics.umpyre_stats.empty_lines_ratio,0.14157222976314487
+metrics.umpyre_stats.comment_lines_ratio,0.0454517714153435
+metrics.umpyre_stats.function_lines_ratio,0.5725801529930448
+metrics.umpyre_stats.mean_lines_per_function,16.010915938447052
+metrics.umpyre_stats.files_analyzed,2355
 metrics.umpyre_stats.pypi_version,0.1.17
-metrics.workflow_status.last_run_status,success
-metrics.workflow_status.last_success_timestamp,2026-10-20T09:53:23Z
-metrics.workflow_status.recent_failure_count,4
-metrics.workflow_status.run_url,https://github.com/i2mint/uf/actions/runs/39403799427
+metrics.workflow_status.last_run_status,failure
+metrics.workflow_status.last_success_timestamp,2026-10-20T09:57:00Z
+metrics.workflow_status.recent_failure_count,2
+metrics.workflow_status.run_url,https://github.com/i2mint/uf/actions/runs/39409816797
 metrics.workflow_status.total_runs_analyzed,10
 metrics.wily.cyclomatic_avg,0.0
 metrics.wily.maintainability_index,0.0
@@ -38,4 +38,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,10.670076608657837
+collection_duration_seconds,9.13733172416687
