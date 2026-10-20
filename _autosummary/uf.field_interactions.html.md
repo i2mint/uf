@@ -37,8 +37,8 @@ Provides a fluent interface for defining dependencies between fields.
 
 ```pycon
 >>> builder = DependencyBuilder()
->>> builder.when('reason').equals('other').show('other_reason')
->>> builder.when('age').greater_than(18).enable('alcohol_consent')
+>>> _ = builder.when('reason').equals('other').show('other_reason')
+>>> _ = builder.when('age').greater_than(18).enable('alcohol_consent')
 >>> dependencies = builder.build()
 ```
 
@@ -222,21 +222,36 @@ Define a dependency between form fields.
 
 Name of the field that triggers the dependency
 
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
 #### target_field
 
 Name of the field affected by the dependency
+
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### condition
 
 Function that takes source value and returns bool
 
+* **Type:**
+  [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)[[[`Any`](https://docs.python.org/3/library/typing.html#typing.Any)], [`bool`](https://docs.python.org/3/builtins/functions.html#bool)]
+
 #### action
 
 Action to perform when condition is true
 
+* **Type:**
+  [`DependencyAction`](#uf.field_interactions.DependencyAction)
+
 #### else_action
 
 Optional action when condition is false
+
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`DependencyAction`](#uf.field_interactions.DependencyAction)]
 
 ### Example
 

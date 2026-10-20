@@ -95,7 +95,7 @@ generation with ju’s RJSF form generation to create a complete
 web interface for your functions.
 
 * **Parameters:**
-  * **funcs** (`Union`[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/typing.html#typing.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to expose via web UI – functions, partials,
+  * **funcs** ([`Union`](https://docs.python.org/3/library/typing.html#typing.Union)[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/typing.html#typing.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to expose via web UI – functions, partials,
     callable instances (named by `uf.specs.name_of_func`) – or a mapping
     `{name: callable}` to name them yourself. The name is the route and the
     key of the form spec

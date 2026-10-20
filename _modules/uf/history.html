@@ -7,6 +7,7 @@
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d88b86f9" />
     <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_autodoc_typehints.css?v=057ac668" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -449,9 +450,9 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="275">
 </span><span data-line="276"><span class="sd">    Example:</span>
 </span><span data-line="277"><span class="sd">        &gt;&gt;&gt; presets = PresetManager()</span>
-</span><span data-line="278"><span class="sd">        &gt;&gt;&gt; presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')</span>
+</span><span data-line="278"><span class="sd">        &gt;&gt;&gt; _ = presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')</span>
 </span><span data-line="279"><span class="sd">        &gt;&gt;&gt; preset = presets.get('quick_add', 'add')</span>
-</span><span data-line="280"><span class="sd">        &gt;&gt;&gt; result = my_func(**preset.params)</span>
+</span><span data-line="280"><span class="sd">        &gt;&gt;&gt; result = my_func(**preset.params)  # doctest: +SKIP</span>
 </span><span data-line="281"><span class="sd">    """</span>
 </span><span data-line="282">
 </span><span data-line="283">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -586,7 +587,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="391"><span class="sd">    Example:</span>
 </span><span data-line="392"><span class="sd">        &gt;&gt;&gt; manager = HistoryManager()</span>
 </span><span data-line="393"><span class="sd">        &gt;&gt;&gt; manager.record_call('add', {'x': 10, 'y': 20}, result=30)</span>
-</span><span data-line="394"><span class="sd">        &gt;&gt;&gt; manager.save_preset('quick', 'add', {'x': 10, 'y': 20})</span>
+</span><span data-line="394"><span class="sd">        &gt;&gt;&gt; _ = manager.save_preset('quick', 'add', {'x': 10, 'y': 20})</span>
 </span><span data-line="395"><span class="sd">        &gt;&gt;&gt; recent = manager.get_recent_calls('add')</span>
 </span><span data-line="396"><span class="sd">        &gt;&gt;&gt; presets = manager.get_presets('add')</span>
 </span><span data-line="397"><span class="sd">    """</span>
@@ -819,7 +820,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=d50bcae4"></script>
+      <script src="../../_static/documentation_options.js?v=71734efd"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

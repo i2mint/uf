@@ -1,4 +1,4 @@
-> built 2026-10-13 17:57 UTC from cf171c5 (master) · uf 0.1.16. Details: build_info.json
+> built 2026-10-20 03:29 UTC from bb2db02 (master) · uf 0.1.17. Details: build_info.json
 
 # index.html.md
 
@@ -1235,7 +1235,7 @@ Suitable for development and simple applications.
 
 ```pycon
 >>> backend = DictAuthBackend()
->>> backend.create_user('admin', 'secret', roles=['admin'])
+>>> _ = backend.create_user('admin', 'secret', roles=['admin'])
 >>> user = backend.authenticate('admin', 'secret')
 ```
 
@@ -1381,7 +1381,7 @@ Get session data.
 * **Returns:**
   Session data or None if expired/invalid
 
-### *class* uf.auth.User(username, password_hash, roles=<factory>, permissions=<factory>, metadata=<factory>, created_at=<factory>, is_active=True)
+### *class* uf.auth.User(username, password_hash, roles=list(), permissions=list(), metadata=dict(), created_at=datetime.now(), is_active=True)
 
 Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
@@ -1391,29 +1391,50 @@ User account information.
 
 Unique username
 
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
 #### password_hash
 
 Hashed password
+
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### roles
 
 List of role names
 
+* **Type:**
+  [`list`](https://docs.python.org/3/builtins/stdtypes.html#list)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### permissions
 
 List of permission strings
+
+* **Type:**
+  [`list`](https://docs.python.org/3/builtins/stdtypes.html#list)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
 
 #### metadata
 
 Additional user metadata
 
+* **Type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)
+
 #### created_at
 
 When user was created
 
+* **Type:**
+  [`datetime`](https://docs.python.org/3/library/datetime.html#datetime.datetime)
+
 #### is_active
 
 Whether account is active
+
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
 
 #### has_all_roles(roles)
 
@@ -1607,7 +1628,7 @@ generation with ju’s RJSF form generation to create a complete
 web interface for your functions.
 
 * **Parameters:**
-  * **funcs** (`Union`[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/typing.html#typing.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to expose via web UI – functions, partials,
+  * **funcs** ([`Union`](https://docs.python.org/3/library/typing.html#typing.Union)[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/typing.html#typing.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to expose via web UI – functions, partials,
     callable instances (named by `uf.specs.name_of_func`) – or a mapping
     `{name: callable}` to name them yourself. The name is the route and the
     key of the form spec
@@ -2300,8 +2321,8 @@ Provides a fluent interface for defining dependencies between fields.
 
 ```pycon
 >>> builder = DependencyBuilder()
->>> builder.when('reason').equals('other').show('other_reason')
->>> builder.when('age').greater_than(18).enable('alcohol_consent')
+>>> _ = builder.when('reason').equals('other').show('other_reason')
+>>> _ = builder.when('age').greater_than(18).enable('alcohol_consent')
 >>> dependencies = builder.build()
 ```
 
@@ -2485,21 +2506,36 @@ Define a dependency between form fields.
 
 Name of the field that triggers the dependency
 
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
 #### target_field
 
 Name of the field affected by the dependency
+
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### condition
 
 Function that takes source value and returns bool
 
+* **Type:**
+  [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)[[[`Any`](https://docs.python.org/3/library/typing.html#typing.Any)], [`bool`](https://docs.python.org/3/builtins/functions.html#bool)]
+
 #### action
 
 Action to perform when condition is true
 
+* **Type:**
+  [`DependencyAction`](_autosummary/uf.field_interactions.html.md#uf.field_interactions.DependencyAction)
+
 #### else_action
 
 Optional action when condition is false
+
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`DependencyAction`](_autosummary/uf.field_interactions.html.md#uf.field_interactions.DependencyAction)]
 
 ### Example
 
@@ -2770,7 +2806,7 @@ Provides a unified interface for tracking calls and managing presets.
 ```pycon
 >>> manager = HistoryManager()
 >>> manager.record_call('add', {'x': 10, 'y': 20}, result=30)
->>> manager.save_preset('quick', 'add', {'x': 10, 'y': 20})
+>>> _ = manager.save_preset('quick', 'add', {'x': 10, 'y': 20})
 >>> recent = manager.get_recent_calls('add')
 >>> presets = manager.get_presets('add')
 ```
@@ -2914,7 +2950,7 @@ Manage parameter presets for functions.
 
 ```pycon
 >>> presets = PresetManager()
->>> presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')
+>>> _ = presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')
 >>> preset = presets.get('quick_add', 'add')
 >>> result = my_func(**preset.params)
 ```
@@ -3565,8 +3601,8 @@ Provides a fluent interface for defining dependencies between fields.
 
 ```pycon
 >>> builder = DependencyBuilder()
->>> builder.when('reason').equals('other').show('other_reason')
->>> builder.when('age').greater_than(18).enable('alcohol_consent')
+>>> _ = builder.when('reason').equals('other').show('other_reason')
+>>> _ = builder.when('age').greater_than(18).enable('alcohol_consent')
 >>> dependencies = builder.build()
 ```
 
@@ -3752,7 +3788,7 @@ Suitable for development and simple applications.
 
 ```pycon
 >>> backend = DictAuthBackend()
->>> backend.create_user('admin', 'secret', roles=['admin'])
+>>> _ = backend.create_user('admin', 'secret', roles=['admin'])
 >>> user = backend.authenticate('admin', 'secret')
 ```
 
@@ -3863,21 +3899,36 @@ Define a dependency between form fields.
 
 Name of the field that triggers the dependency
 
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
 #### target_field
 
 Name of the field affected by the dependency
+
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### condition
 
 Function that takes source value and returns bool
 
+* **Type:**
+  [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)[[[`Any`](https://docs.python.org/3/library/typing.html#typing.Any)], [`bool`](https://docs.python.org/3/builtins/functions.html#bool)]
+
 #### action
 
 Action to perform when condition is true
 
+* **Type:**
+  [`DependencyAction`](_autosummary/uf.field_interactions.html.md#uf.field_interactions.DependencyAction)
+
 #### else_action
 
 Optional action when condition is false
+
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`DependencyAction`](_autosummary/uf.field_interactions.html.md#uf.field_interactions.DependencyAction)]
 
 ### Example
 
@@ -4026,7 +4077,7 @@ Convert to dictionary.
 * **Returns:**
   Dictionary representation
 
-### *class* uf.FunctionGroup(name, funcs=<factory>, description='', icon=None, order=0, collapsed=False)
+### *class* uf.FunctionGroup(name, funcs=list(), description='', icon=None, order=0, collapsed=False)
 
 Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
@@ -4036,27 +4087,45 @@ Group of functions with metadata.
 
 Name of the group
 
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
 #### funcs
 
 Functions in this group: callables (partials and callable instances
 are fine; they are named as `uf.specs.name_of_func` does), or a
 `{name: callable}` mapping to name them explicitly
 
+* **Type:**
+  [`Union`](https://docs.python.org/3/library/typing.html#typing.Union)[[`list`](https://docs.python.org/3/builtins/stdtypes.html#list)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]
+
 #### description
 
 Description of the group
+
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### icon
 
 Optional icon identifier for the group
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### order
 
 Display order (lower numbers first)
 
+* **Type:**
+  [`int`](https://docs.python.org/3/builtins/functions.html#int)
+
 #### collapsed
 
 Whether the group starts collapsed in UI
+
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
 
 ### Example
 
@@ -4218,7 +4287,7 @@ A mapping from function names to their RJSF specifications.
 Lazily generates and caches form specs for each function.
 
 * **Parameters:**
-  * **funcs** (`Union`[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to generate specs for (named by `name_of_func`:
+  * **funcs** ([`Union`](https://docs.python.org/3/library/typing.html#typing.Union)[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to generate specs for (named by `name_of_func`:
     `__name__`, the wrapped function’s for a `functools.partial`, the class
     name for a callable instance), or a mapping `{name: callable}` to name
     them explicitly
@@ -4277,7 +4346,7 @@ Provides a unified interface for tracking calls and managing presets.
 ```pycon
 >>> manager = HistoryManager()
 >>> manager.record_call('add', {'x': 10, 'y': 20}, result=30)
->>> manager.save_preset('quick', 'add', {'x': 10, 'y': 20})
+>>> _ = manager.save_preset('quick', 'add', {'x': 10, 'y': 20})
 >>> recent = manager.get_recent_calls('add')
 >>> presets = manager.get_presets('add')
 ```
@@ -4656,7 +4725,7 @@ Manage parameter presets for functions.
 
 ```pycon
 >>> presets = PresetManager()
->>> presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')
+>>> _ = presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')
 >>> preset = presets.get('quick_add', 'add')
 >>> result = my_func(**preset.params)
 ```
@@ -4816,8 +4885,8 @@ fluent interface for configuring fields.
 
 ```pycon
 >>> builder = RjsfConfigBuilder()
->>> builder.field('email', RjsfFieldConfig(format='email'))
->>> builder.field('message', RjsfFieldConfig(widget='textarea'))
+>>> _ = builder.field('email', RjsfFieldConfig(format='email'))
+>>> _ = builder.field('message', RjsfFieldConfig(widget='textarea'))
 >>> spec = builder.build(base_schema)
 ```
 
@@ -4867,7 +4936,7 @@ Set the order of fields in the form.
 * **Returns:**
   Self for method chaining
 
-### *class* uf.RjsfFieldConfig(widget=None, ui_options=<factory>, format=None, enum=None, description=None, placeholder=None, title=None, disabled=False, readonly=False, hidden=False, default=None)
+### *class* uf.RjsfFieldConfig(widget=None, ui_options=dict(), format=None, enum=None, description=None, placeholder=None, title=None, disabled=False, readonly=False, hidden=False, default=None)
 
 Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
@@ -4880,45 +4949,78 @@ rendered in the RJSF interface.
 
 Widget type (e.g., ‘textarea’, ‘select’, ‘radio’, ‘date’)
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### ui_options
 
 Additional UI options for the widget
+
+* **Type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)
 
 #### format
 
 JSON Schema format (e.g., ‘email’, ‘uri’, ‘date-time’)
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### enum
 
 List of allowed values (for dropdowns)
+
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`list`](https://docs.python.org/3/builtins/stdtypes.html#list)]
 
 #### description
 
 Field description/help text
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### placeholder
 
 Placeholder text for the input
+
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
 
 #### title
 
 Custom title for the field
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### disabled
 
 Whether the field is disabled
+
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
 
 #### readonly
 
 Whether the field is read-only
 
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
+
 #### hidden
 
 Whether to hide the field
 
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
+
 #### default
 
 Default value for the field
+
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]
 
 ### Example
 
@@ -5035,9 +5137,15 @@ Current task status
 
 Task result (if completed)
 
+* **Type:**
+  [`Any`](https://docs.python.org/3/library/typing.html#typing.Any)
+
 #### error
 
 Error message (if failed)
+
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
 
 #### created_at
 
@@ -5047,9 +5155,15 @@ When task was created
 
 When task started running
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`datetime`](https://docs.python.org/3/library/datetime.html#datetime.datetime)]
+
 #### completed_at
 
 When task completed
+
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`datetime`](https://docs.python.org/3/library/datetime.html#datetime.datetime)]
 
 #### progress
 
@@ -5200,7 +5314,7 @@ Bases: [`Enum`](https://docs.python.org/3/library/enum.html#enum.Enum)
 
 Status of a background task.
 
-### *class* uf.Theme(name, colors=<factory>, fonts=<factory>, css='')
+### *class* uf.Theme(name, colors=dict(), fonts=dict(), css='')
 
 Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
@@ -5210,17 +5324,29 @@ UI theme configuration.
 
 Theme name
 
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
 #### colors
 
 Color palette
+
+* **Type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
 
 #### fonts
 
 Font configuration
 
+* **Type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### css
 
 Additional custom CSS
+
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### to_css()
 
@@ -5486,7 +5612,7 @@ Validate parameters against function schema.
 * **Returns:**
   Tuple of (is_valid, error_message)
 
-### *class* uf.User(username, password_hash, roles=<factory>, permissions=<factory>, metadata=<factory>, created_at=<factory>, is_active=True)
+### *class* uf.User(username, password_hash, roles=list(), permissions=list(), metadata=dict(), created_at=datetime.now(), is_active=True)
 
 Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
@@ -5496,29 +5622,50 @@ User account information.
 
 Unique username
 
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
 #### password_hash
 
 Hashed password
+
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### roles
 
 List of role names
 
+* **Type:**
+  [`list`](https://docs.python.org/3/builtins/stdtypes.html#list)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### permissions
 
 List of permission strings
+
+* **Type:**
+  [`list`](https://docs.python.org/3/builtins/stdtypes.html#list)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
 
 #### metadata
 
 Additional user metadata
 
+* **Type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)
+
 #### created_at
 
 When user was created
 
+* **Type:**
+  [`datetime`](https://docs.python.org/3/library/datetime.html#datetime.datetime)
+
 #### is_active
 
 Whether account is active
+
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
 
 #### has_all_roles(roles)
 
@@ -5558,7 +5705,7 @@ Client for sending webhooks.
 
 ```pycon
 >>> client = WebhookClient('https://example.com/webhook')
->>> client.send(WebhookEvent('success', 'my_func', {}, result=42))
+>>> _ = client.send(WebhookEvent('success', 'my_func', {}, result=42))
 ```
 
 #### send(event, async_send=True)
@@ -5624,7 +5771,7 @@ Manage webhooks for multiple URLs and events.
 >>> manager = WebhookManager()
 >>> manager.add_webhook('https://example.com/hook1', events=['success'])
 >>> manager.add_webhook('https://example.com/hook2', events=['failure'])
->>> manager.trigger('success', 'my_func', {}, result=42)
+>>> _ = manager.trigger('success', 'my_func', {}, result=42)
 ```
 
 #### add_webhook(url, events=None, headers=None, condition=None)
@@ -6322,7 +6469,7 @@ generation with ju’s RJSF form generation to create a complete
 web interface for your functions.
 
 * **Parameters:**
-  * **funcs** (`Union`[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/typing.html#typing.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to expose via web UI – functions, partials,
+  * **funcs** ([`Union`](https://docs.python.org/3/library/typing.html#typing.Union)[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/typing.html#typing.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to expose via web UI – functions, partials,
     callable instances (named by `uf.specs.name_of_func`) – or a mapping
     `{name: callable}` to name them yourself. The name is the route and the
     key of the form spec
@@ -6693,7 +6840,8 @@ the function, and converts Pydantic outputs back to dicts.
 >>> def create_user(user: User) -> User:
 ...     return user
 >>> wrapped = wrap_pydantic_function(create_user)
->>> result = wrapped({'name': 'Alice'})  # Pass dict, not User
+>>> wrapped(user={'name': 'Alice'})  # Pass a dict, not a User
+{'name': 'Alice'}
 ```
 
 ### Modules
@@ -6864,9 +7012,6 @@ import inside it – is a broken environment and propagates. A *namespace* packa
 package either, so it counts as not installed – which also means a package that is
 *legitimately* a namespace package (`google`) can’t be imported with this.
 
-* **Return type:**
-  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`ModuleType`](https://docs.python.org/3/library/types.html#types.ModuleType)]
-
 ```pycon
 >>> import_optional('json').__name__
 'json'
@@ -6877,6 +7022,9 @@ Traceback (most recent call last):
   ...
 ModuleNotFoundError: No module named 'json.no_such_submodule'
 ```
+
+* **Return type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`ModuleType`](https://docs.python.org/3/library/types.html#types.ModuleType)]
 
 
 # _autosummary/uf.organization.html.md
@@ -6902,7 +7050,7 @@ hierarchies for better navigation in the UI.
 |---------------------------------------------------------------------------------------------------|-------------------------------------------------|
 | [`FunctionOrganizer`](_autosummary/uf.organization.html.md#uf.organization.FunctionOrganizer)()                              | Organize functions into groups and hierarchies. |
 
-### *class* uf.organization.FunctionGroup(name, funcs=<factory>, description='', icon=None, order=0, collapsed=False)
+### *class* uf.organization.FunctionGroup(name, funcs=list(), description='', icon=None, order=0, collapsed=False)
 
 Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
@@ -6912,27 +7060,45 @@ Group of functions with metadata.
 
 Name of the group
 
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
 #### funcs
 
 Functions in this group: callables (partials and callable instances
 are fine; they are named as `uf.specs.name_of_func` does), or a
 `{name: callable}` mapping to name them explicitly
 
+* **Type:**
+  [`Union`](https://docs.python.org/3/library/typing.html#typing.Union)[[`list`](https://docs.python.org/3/builtins/stdtypes.html#list)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]
+
 #### description
 
 Description of the group
+
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### icon
 
 Optional icon identifier for the group
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### order
 
 Display order (lower numbers first)
 
+* **Type:**
+  [`int`](https://docs.python.org/3/builtins/functions.html#int)
+
 #### collapsed
 
 Whether the group starts collapsed in UI
+
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
 
 ### Example
 
@@ -7255,9 +7421,9 @@ Create RJSF spec from function with Pydantic parameters.
 ### Example
 
 ```pycon
->>> from pydantic import BaseModel, EmailStr
+>>> from pydantic import BaseModel
 >>> class UserCreate(BaseModel):
-...     email: EmailStr
+...     email: str
 ...     age: int
 >>> def create_user(user: UserCreate):
 ...     pass
@@ -7397,7 +7563,8 @@ the function, and converts Pydantic outputs back to dicts.
 >>> def create_user(user: User) -> User:
 ...     return user
 >>> wrapped = wrap_pydantic_function(create_user)
->>> result = wrapped({'name': 'Alice'})  # Pass dict, not User
+>>> wrapped(user={'name': 'Alice'})  # Pass a dict, not a User
+{'name': 'Alice'}
 ```
 
 
@@ -7779,8 +7946,8 @@ fluent interface for configuring fields.
 
 ```pycon
 >>> builder = RjsfConfigBuilder()
->>> builder.field('email', RjsfFieldConfig(format='email'))
->>> builder.field('message', RjsfFieldConfig(widget='textarea'))
+>>> _ = builder.field('email', RjsfFieldConfig(format='email'))
+>>> _ = builder.field('message', RjsfFieldConfig(widget='textarea'))
 >>> spec = builder.build(base_schema)
 ```
 
@@ -7830,7 +7997,7 @@ Set the order of fields in the form.
 * **Returns:**
   Self for method chaining
 
-### *class* uf.rjsf_config.RjsfFieldConfig(widget=None, ui_options=<factory>, format=None, enum=None, description=None, placeholder=None, title=None, disabled=False, readonly=False, hidden=False, default=None)
+### *class* uf.rjsf_config.RjsfFieldConfig(widget=None, ui_options=dict(), format=None, enum=None, description=None, placeholder=None, title=None, disabled=False, readonly=False, hidden=False, default=None)
 
 Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
@@ -7843,45 +8010,78 @@ rendered in the RJSF interface.
 
 Widget type (e.g., ‘textarea’, ‘select’, ‘radio’, ‘date’)
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### ui_options
 
 Additional UI options for the widget
+
+* **Type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)
 
 #### format
 
 JSON Schema format (e.g., ‘email’, ‘uri’, ‘date-time’)
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### enum
 
 List of allowed values (for dropdowns)
+
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`list`](https://docs.python.org/3/builtins/stdtypes.html#list)]
 
 #### description
 
 Field description/help text
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### placeholder
 
 Placeholder text for the input
+
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
 
 #### title
 
 Custom title for the field
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### disabled
 
 Whether the field is disabled
+
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
 
 #### readonly
 
 Whether the field is read-only
 
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
+
 #### hidden
 
 Whether to hide the field
 
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
+
 #### default
 
 Default value for the field
+
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]
 
 ### Example
 
@@ -8054,7 +8254,7 @@ A mapping from function names to their RJSF specifications.
 Lazily generates and caches form specs for each function.
 
 * **Parameters:**
-  * **funcs** (`Union`[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to generate specs for (named by `name_of_func`:
+  * **funcs** ([`Union`](https://docs.python.org/3/library/typing.html#typing.Union)[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to generate specs for (named by `name_of_func`:
     `__name__`, the wrapped function’s for a `functools.partial`, the class
     name for a callable instance), or a mapping `{name: callable}` to name
     them explicitly
@@ -8124,9 +8324,6 @@ positional-only parameter).
 The docstring of `func`; for a `functools.partial` (whose own `__doc__` is
 the generic one of `partial`), that of the function it wraps.
 
-* **Return type:**
-  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
-
 ```pycon
 >>> import functools
 >>> def f(x, y):
@@ -8135,14 +8332,14 @@ the generic one of `partial`), that of the function it wraps.
 'Add.'
 ```
 
+* **Return type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 ### uf.specs.name_funcs(funcs)
 
 `{name: callable}` from a mapping of explicit names, or an iterable of
 callables (named by `name_of_func`). Two different callables sharing a name
 raise.
-
-* **Return type:**
-  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)
 
 ```pycon
 >>> import functools
@@ -8152,14 +8349,14 @@ raise.
 {'size': <built-in function len>}
 ```
 
+* **Return type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)
+
 ### uf.specs.name_of_func(func)
 
 The name a function is served under: its `__name__`; failing that, for a
 `functools.partial`, that of the function it wraps; for a callable instance, its
 class name.
-
-* **Return type:**
-  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 ```pycon
 >>> import functools
@@ -8173,12 +8370,12 @@ class name.
 'Doubler'
 ```
 
+* **Return type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
 ### uf.specs.unwrap_partials(func)
 
 The function a (possibly nested) `functools.partial` wraps; anything else as is.
-
-* **Return type:**
-  [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)
 
 ```pycon
 >>> import functools
@@ -8188,6 +8385,9 @@ True
 >>> unwrap_partials(f) is f
 True
 ```
+
+* **Return type:**
+  [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)
 
 
 # _autosummary/uf.templates.html.md
@@ -8570,7 +8770,7 @@ Provides built-in themes, dark mode support, and theme customization.
 |--------------------------------------------------------------------------------------------------|---------------------------------|
 | [`ThemeConfig`](_autosummary/uf.themes.html.md#uf.themes.ThemeConfig)([default_theme, allow_toggle, ...]) | Configuration for theme system. |
 
-### *class* uf.themes.Theme(name, colors=<factory>, fonts=<factory>, css='')
+### *class* uf.themes.Theme(name, colors=dict(), fonts=dict(), css='')
 
 Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
@@ -8580,17 +8780,29 @@ UI theme configuration.
 
 Theme name
 
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
 #### colors
 
 Color palette
+
+* **Type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
 
 #### fonts
 
 Font configuration
 
+* **Type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### css
 
 Additional custom CSS
+
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### to_css()
 
@@ -8913,7 +9125,7 @@ Client for sending webhooks.
 
 ```pycon
 >>> client = WebhookClient('https://example.com/webhook')
->>> client.send(WebhookEvent('success', 'my_func', {}, result=42))
+>>> _ = client.send(WebhookEvent('success', 'my_func', {}, result=42))
 ```
 
 #### send(event, async_send=True)
@@ -8979,7 +9191,7 @@ Manage webhooks for multiple URLs and events.
 >>> manager = WebhookManager()
 >>> manager.add_webhook('https://example.com/hook1', events=['success'])
 >>> manager.add_webhook('https://example.com/hook2', events=['failure'])
->>> manager.trigger('success', 'my_func', {}, result=42)
+>>> _ = manager.trigger('success', 'my_func', {}, result=42)
 ```
 
 #### add_webhook(url, events=None, headers=None, condition=None)
@@ -9070,7 +9282,7 @@ Decorator to add webhooks to a function.
 
 # About this build
 
-This documentation was built on **2026-10-13 17:57 UTC** from commit <a href="https://github.com/i2mint/uf/commit/cf171c58a91094483cc7e084fba9d33768669c29"><code>cf171c5</code></a> on branch <code>master</code>, for **uf 0.1.16** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-20 03:29 UTC** from commit <a href="https://github.com/i2mint/uf/commit/bb2db026dabf3049cf63670142fb4626ca0bdc4d"><code>bb2db02</code></a> on branch <code>master</code>, for **uf 0.1.17** (from <code>pyproject.toml</code>).
 
 #### NOTE
 Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
@@ -9079,9 +9291,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 |                     |                                                                                                                                                  |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Commit              | <a href="https://github.com/i2mint/uf/commit/cf171c58a91094483cc7e084fba9d33768669c29"><code>cf171c58a91094483cc7e084fba9d33768669c29</code></a> |
+| Commit              | <a href="https://github.com/i2mint/uf/commit/bb2db026dabf3049cf63670142fb4626ca0bdc4d"><code>bb2db026dabf3049cf63670142fb4626ca0bdc4d</code></a> |
 | Branch              | <code>master</code>                                                                                                                              |
-| Tags at this commit | <code>0.1.16</code>                                                                                                                              |
+| Tags at this commit | <code>0.1.17</code>                                                                                                                              |
 | Working tree        | clean                                                                                                                                            |
 | Remote              | <code>https://github.com/i2mint/uf</code>                                                                                                        |
 
@@ -9090,16 +9302,16 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 |              |                                                                                            |
 |--------------|--------------------------------------------------------------------------------------------|
 | Repository   | <code>i2mint/uf</code>                                                                     |
-| Run          | <a href="https://github.com/i2mint/uf/actions/runs/38442522056">38442522056</a>            |
+| Run          | <a href="https://github.com/i2mint/uf/actions/runs/39364402279">39364402279</a>            |
 | Ref          | <code>refs/heads/master</code>                                                             |
-| Event commit | <code>f42965f9ed442a3b7e9c14fb158b78599ac97fe2</code> (in the history of the built commit) |
+| Event commit | <code>576123928847e16a47c9d81fedd3800f6f2c3296</code> (in the history of the built commit) |
 
 ## Tools
 
 |          |         |
 |----------|---------|
-| epythet  | 0.2.17  |
-| Sphinx   | 9.1.0   |
+| epythet  | 0.2.18  |
+| Sphinx   | 9.1.1   |
 | docutils | 0.22.4  |
 | Python   | 3.12.15 |
 
@@ -9117,14 +9329,14 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.16/">0.1.16</a>, the same as the documented version.
+Latest release: <a href="https://pypi.org/project/uf/0.1.17/">0.1.17</a>, the same as the documented version.
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout cf171c58a91094483cc7e084fba9d33768669c29
-pip install "epythet==0.2.17"
+git checkout bb2db026dabf3049cf63670142fb4626ca0bdc4d
+pip install "epythet==0.2.18"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```
 

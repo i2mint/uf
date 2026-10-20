@@ -7,6 +7,7 @@
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d88b86f9" />
     <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx_autodoc_typehints.css?v=057ac668" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -168,11 +169,6 @@ import inside it – is a broken environment and propagates. A <em>namespace</em
 (a bare directory of that name on <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>, with no <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>) is not the
 package either, so it counts as not installed – which also means a package that is
 <em>legitimately</em> a namespace package (<code class="docutils literal notranslate"><span class="pre">google</span></code>) can’t be imported with this.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/types.html#types.ModuleType" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleType</span></code></a>]</span></p>
-</dd>
-</dl>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">import_optional</span><span class="p">(</span><span class="s1">'json'</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
 </span><span data-line="2"><span class="go">'json'</span>
 </span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">import_optional</span><span class="p">(</span><span class="s1">'_uf_no_such_package_'</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
@@ -183,6 +179,11 @@ package either, so it counts as not installed – which also means a package tha
 </span><span data-line="8"><span class="gr">ModuleNotFoundError</span>: <span class="n">No module named 'json.no_such_submodule'</span>
 </span></pre></div>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/types.html#types.ModuleType" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleType</span></code></a>]</span></p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -227,7 +228,7 @@ package either, so it counts as not installed – which also means a package tha
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=d50bcae4"></script>
+      <script src="../_static/documentation_options.js?v=71734efd"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

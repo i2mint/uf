@@ -7,6 +7,7 @@
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d88b86f9" />
     <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_autodoc_typehints.css?v=057ac668" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -247,9 +248,9 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="103">
 </span><span data-line="104"><span class="sd">    Example:</span>
 </span><span data-line="105"><span class="sd">        &gt;&gt;&gt; builder = RjsfConfigBuilder()</span>
-</span><span data-line="106"><span class="sd">        &gt;&gt;&gt; builder.field('email', RjsfFieldConfig(format='email'))</span>
-</span><span data-line="107"><span class="sd">        &gt;&gt;&gt; builder.field('message', RjsfFieldConfig(widget='textarea'))</span>
-</span><span data-line="108"><span class="sd">        &gt;&gt;&gt; spec = builder.build(base_schema)</span>
+</span><span data-line="106"><span class="sd">        &gt;&gt;&gt; _ = builder.field('email', RjsfFieldConfig(format='email'))</span>
+</span><span data-line="107"><span class="sd">        &gt;&gt;&gt; _ = builder.field('message', RjsfFieldConfig(widget='textarea'))</span>
+</span><span data-line="108"><span class="sd">        &gt;&gt;&gt; spec = builder.build(base_schema)  # doctest: +SKIP</span>
 </span><span data-line="109"><span class="sd">    """</span>
 </span><span data-line="110">
 </span><span data-line="111">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -439,7 +440,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="277"><span class="sd">        ...     'email': get_field_config('email'),</span>
 </span><span data-line="278"><span class="sd">        ...     'bio': get_field_config('multiline_text'),</span>
 </span><span data-line="279"><span class="sd">        ... }</span>
-</span><span data-line="280"><span class="sd">        &gt;&gt;&gt; schema, ui_schema = apply_field_configs(schema, ui_schema, configs)</span>
+</span><span data-line="280"><span class="sd">        &gt;&gt;&gt; schema, ui_schema = apply_field_configs(schema, ui_schema, configs)  # doctest: +SKIP</span>
 </span><span data-line="281"><span class="sd">    """</span>
 </span><span data-line="282">    <span class="n">builder</span> <span class="o">=</span> <span class="n">RjsfConfigBuilder</span><span class="p">()</span>
 </span><span data-line="283">    <span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">field_configs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -532,7 +533,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=d50bcae4"></script>
+      <script src="../../_static/documentation_options.js?v=71734efd"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

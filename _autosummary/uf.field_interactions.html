@@ -7,6 +7,7 @@
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d88b86f9" />
     <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx_autodoc_typehints.css?v=057ac668" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -225,8 +226,8 @@ conditional display, dynamic validation, and field dependencies.</p>
 <p>Provides a fluent interface for defining dependencies between fields.</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span> <span class="o">=</span> <span class="n">DependencyBuilder</span><span class="p">()</span>
-</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">)</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="s1">'other'</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">'other_reason'</span><span class="p">)</span>
-</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="s1">'age'</span><span class="p">)</span><span class="o">.</span><span class="n">greater_than</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span><span class="o">.</span><span class="n">enable</span><span class="p">(</span><span class="s1">'alcohol_consent'</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">)</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="s1">'other'</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">'other_reason'</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="s1">'age'</span><span class="p">)</span><span class="o">.</span><span class="n">greater_than</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span><span class="o">.</span><span class="n">enable</span><span class="p">(</span><span class="s1">'alcohol_consent'</span><span class="p">)</span>
 </span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="n">dependencies</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
 </span></pre></div>
 </div>
@@ -506,30 +507,55 @@ conditional display, dynamic validation, and field dependencies.</p>
 <dt class="sig sig-object py" id="uf.field_interactions.FieldDependency.source_field">
 <span class="sig-name descname"><span class="pre">source_field</span></span><a class="headerlink" href="#uf.field_interactions.FieldDependency.source_field" title="Link to this definition">#</a></dt>
 <dd><p>Name of the field that triggers the dependency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="uf.field_interactions.FieldDependency.target_field">
 <span class="sig-name descname"><span class="pre">target_field</span></span><a class="headerlink" href="#uf.field_interactions.FieldDependency.target_field" title="Link to this definition">#</a></dt>
 <dd><p>Name of the field affected by the dependency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="uf.field_interactions.FieldDependency.condition">
 <span class="sig-name descname"><span class="pre">condition</span></span><a class="headerlink" href="#uf.field_interactions.FieldDependency.condition" title="Link to this definition">#</a></dt>
 <dd><p>Function that takes source value and returns bool</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>], <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#bool" title="(in Python v3.15)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</span></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="uf.field_interactions.FieldDependency.action">
 <span class="sig-name descname"><span class="pre">action</span></span><a class="headerlink" href="#uf.field_interactions.FieldDependency.action" title="Link to this definition">#</a></dt>
 <dd><p>Action to perform when condition is true</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#uf.field_interactions.DependencyAction" title="uf.field_interactions.DependencyAction"><code class="xref py py-class docutils literal notranslate"><span class="pre">DependencyAction</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="uf.field_interactions.FieldDependency.else_action">
 <span class="sig-name descname"><span class="pre">else_action</span></span><a class="headerlink" href="#uf.field_interactions.FieldDependency.else_action" title="Link to this definition">#</a></dt>
 <dd><p>Optional action when condition is false</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.15)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#uf.field_interactions.DependencyAction" title="uf.field_interactions.DependencyAction"><code class="xref py py-class docutils literal notranslate"><span class="pre">DependencyAction</span></code></a>]</span></p>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Example</p>
@@ -706,7 +732,7 @@ conditional display, dynamic validation, and field dependencies.</p>
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=d50bcae4"></script>
+      <script src="../_static/documentation_options.js?v=71734efd"></script>
       <script src="../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

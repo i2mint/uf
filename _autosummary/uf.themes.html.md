@@ -17,7 +17,7 @@ Provides built-in themes, dark mode support, and theme customization.
 |--------------------------------------------------------------------------------------------------|---------------------------------|
 | [`ThemeConfig`](#uf.themes.ThemeConfig)([default_theme, allow_toggle, ...]) | Configuration for theme system. |
 
-### *class* uf.themes.Theme(name, colors=<factory>, fonts=<factory>, css='')
+### *class* uf.themes.Theme(name, colors=dict(), fonts=dict(), css='')
 
 Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
@@ -27,17 +27,29 @@ UI theme configuration.
 
 Theme name
 
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
 #### colors
 
 Color palette
+
+* **Type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
 
 #### fonts
 
 Font configuration
 
+* **Type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### css
 
 Additional custom CSS
+
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### to_css()
 

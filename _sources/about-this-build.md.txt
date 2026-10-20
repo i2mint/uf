@@ -5,7 +5,7 @@ orphan: true
 
 # About this build
 
-This documentation was built on **2026-10-13 17:57 UTC** from commit <a href="https://github.com/i2mint/uf/commit/cf171c58a91094483cc7e084fba9d33768669c29"><code>cf171c5</code></a> on branch <code>master</code>, for **uf 0.1.16** (from <code>pyproject.toml</code>).
+This documentation was built on **2026-10-20 03:29 UTC** from commit <a href="https://github.com/i2mint/uf/commit/bb2db026dabf3049cf63670142fb4626ca0bdc4d"><code>bb2db02</code></a> on branch <code>master</code>, for **uf 0.1.17** (from <code>pyproject.toml</code>).
 
 :::{note}
 Nothing suggests a mismatch: the tree was clean at the commit above, and the documented version is the one on PyPI.
@@ -15,9 +15,9 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 | | |
 |---|---|
-| Commit | <a href="https://github.com/i2mint/uf/commit/cf171c58a91094483cc7e084fba9d33768669c29"><code>cf171c58a91094483cc7e084fba9d33768669c29</code></a> |
+| Commit | <a href="https://github.com/i2mint/uf/commit/bb2db026dabf3049cf63670142fb4626ca0bdc4d"><code>bb2db026dabf3049cf63670142fb4626ca0bdc4d</code></a> |
 | Branch | <code>master</code> |
-| Tags at this commit | <code>0.1.16</code> |
+| Tags at this commit | <code>0.1.17</code> |
 | Working tree | clean |
 | Remote | <code>https://github.com/i2mint/uf</code> |
 
@@ -26,16 +26,16 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 | | |
 |---|---|
 | Repository | <code>i2mint/uf</code> |
-| Run | <a href="https://github.com/i2mint/uf/actions/runs/38442522056">38442522056</a> |
+| Run | <a href="https://github.com/i2mint/uf/actions/runs/39364402279">39364402279</a> |
 | Ref | <code>refs/heads/master</code> |
-| Event commit | <code>f42965f9ed442a3b7e9c14fb158b78599ac97fe2</code> (in the history of the built commit) |
+| Event commit | <code>576123928847e16a47c9d81fedd3800f6f2c3296</code> (in the history of the built commit) |
 
 ## Tools
 
 | | |
 |---|---|
-| epythet | 0.2.17 |
-| Sphinx | 9.1.0 |
+| epythet | 0.2.18 |
+| Sphinx | 9.1.1 |
 | docutils | 0.22.4 |
 | Python | 3.12.15 |
 
@@ -53,14 +53,14 @@ Nothing suggests a mismatch: the tree was clean at the commit above, and the doc
 
 ## Package on PyPI
 
-Latest release: <a href="https://pypi.org/project/uf/0.1.16/">0.1.16</a>, the same as the documented version.
+Latest release: <a href="https://pypi.org/project/uf/0.1.17/">0.1.17</a>, the same as the documented version.
 
 ## Reproduce
 
 ```bash
 git clone https://github.com/i2mint/uf && cd uf
-git checkout cf171c58a91094483cc7e084fba9d33768669c29
-pip install "epythet==0.2.17"
+git checkout bb2db026dabf3049cf63670142fb4626ca0bdc4d
+pip install "epythet==0.2.18"
 epythet quickstart . --ignore tests/ scrap/ examples/
 ```
 

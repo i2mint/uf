@@ -41,7 +41,7 @@ A mapping from function names to their RJSF specifications.
 Lazily generates and caches form specs for each function.
 
 * **Parameters:**
-  * **funcs** (`Union`[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to generate specs for (named by `name_of_func`:
+  * **funcs** ([`Union`](https://docs.python.org/3/library/typing.html#typing.Union)[[`Iterable`](https://docs.python.org/3/library/typing.html#typing.Iterable)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]) – Iterable of callables to generate specs for (named by `name_of_func`:
     `__name__`, the wrapped function’s for a `functools.partial`, the class
     name for a callable instance), or a mapping `{name: callable}` to name
     them explicitly
@@ -111,9 +111,6 @@ positional-only parameter).
 The docstring of `func`; for a `functools.partial` (whose own `__doc__` is
 the generic one of `partial`), that of the function it wraps.
 
-* **Return type:**
-  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
-
 ```pycon
 >>> import functools
 >>> def f(x, y):
@@ -122,14 +119,14 @@ the generic one of `partial`), that of the function it wraps.
 'Add.'
 ```
 
+* **Return type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 ### uf.specs.name_funcs(funcs)
 
 `{name: callable}` from a mapping of explicit names, or an iterable of
 callables (named by `name_of_func`). Two different callables sharing a name
 raise.
-
-* **Return type:**
-  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)
 
 ```pycon
 >>> import functools
@@ -139,14 +136,14 @@ raise.
 {'size': <built-in function len>}
 ```
 
+* **Return type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)
+
 ### uf.specs.name_of_func(func)
 
 The name a function is served under: its `__name__`; failing that, for a
 `functools.partial`, that of the function it wraps; for a callable instance, its
 class name.
-
-* **Return type:**
-  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 ```pycon
 >>> import functools
@@ -160,12 +157,12 @@ class name.
 'Doubler'
 ```
 
+* **Return type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
 ### uf.specs.unwrap_partials(func)
 
 The function a (possibly nested) `functools.partial` wraps; anything else as is.
-
-* **Return type:**
-  [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)
 
 ```pycon
 >>> import functools
@@ -175,3 +172,6 @@ True
 >>> unwrap_partials(f) is f
 True
 ```
+
+* **Return type:**
+  [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)

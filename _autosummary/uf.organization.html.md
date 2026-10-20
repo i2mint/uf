@@ -19,7 +19,7 @@ hierarchies for better navigation in the UI.
 |---------------------------------------------------------------------------------------------------|-------------------------------------------------|
 | [`FunctionOrganizer`](#uf.organization.FunctionOrganizer)()                              | Organize functions into groups and hierarchies. |
 
-### *class* uf.organization.FunctionGroup(name, funcs=<factory>, description='', icon=None, order=0, collapsed=False)
+### *class* uf.organization.FunctionGroup(name, funcs=list(), description='', icon=None, order=0, collapsed=False)
 
 Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
@@ -29,27 +29,45 @@ Group of functions with metadata.
 
 Name of the group
 
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
 #### funcs
 
 Functions in this group: callables (partials and callable instances
 are fine; they are named as `uf.specs.name_of_func` does), or a
 `{name: callable}` mapping to name them explicitly
 
+* **Type:**
+  [`Union`](https://docs.python.org/3/library/typing.html#typing.Union)[[`list`](https://docs.python.org/3/builtins/stdtypes.html#list)[[`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)], [`Mapping`](https://docs.python.org/3/library/collections.abc.html#collections.abc.Mapping)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str), [`Callable`](https://docs.python.org/3/library/typing.html#typing.Callable)]]
+
 #### description
 
 Description of the group
+
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### icon
 
 Optional icon identifier for the group
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### order
 
 Display order (lower numbers first)
 
+* **Type:**
+  [`int`](https://docs.python.org/3/builtins/functions.html#int)
+
 #### collapsed
 
 Whether the group starts collapsed in UI
+
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
 
 ### Example
 

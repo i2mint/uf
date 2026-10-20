@@ -29,7 +29,7 @@ Client for sending webhooks.
 
 ```pycon
 >>> client = WebhookClient('https://example.com/webhook')
->>> client.send(WebhookEvent('success', 'my_func', {}, result=42))
+>>> _ = client.send(WebhookEvent('success', 'my_func', {}, result=42))
 ```
 
 #### send(event, async_send=True)
@@ -95,7 +95,7 @@ Manage webhooks for multiple URLs and events.
 >>> manager = WebhookManager()
 >>> manager.add_webhook('https://example.com/hook1', events=['success'])
 >>> manager.add_webhook('https://example.com/hook2', events=['failure'])
->>> manager.trigger('success', 'my_func', {}, result=42)
+>>> _ = manager.trigger('success', 'my_func', {}, result=42)
 ```
 
 #### add_webhook(url, events=None, headers=None, condition=None)

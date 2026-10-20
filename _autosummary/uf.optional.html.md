@@ -24,9 +24,6 @@ import inside it – is a broken environment and propagates. A *namespace* packa
 package either, so it counts as not installed – which also means a package that is
 *legitimately* a namespace package (`google`) can’t be imported with this.
 
-* **Return type:**
-  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`ModuleType`](https://docs.python.org/3/library/types.html#types.ModuleType)]
-
 ```pycon
 >>> import_optional('json').__name__
 'json'
@@ -37,3 +34,6 @@ Traceback (most recent call last):
   ...
 ModuleNotFoundError: No module named 'json.no_such_submodule'
 ```
+
+* **Return type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`ModuleType`](https://docs.python.org/3/library/types.html#types.ModuleType)]

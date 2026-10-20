@@ -7,6 +7,7 @@
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d88b86f9" />
     <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_autodoc_typehints.css?v=057ac668" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -324,130 +325,135 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="189">    <span class="n">app</span> <span class="o">=</span> <span class="n">mk_app</span><span class="p">(</span>
 </span><span data-line="190">        <span class="p">[</span><span class="n">_serve_as</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">named_funcs</span><span class="o">.</span><span class="n">items</span><span class="p">()],</span>
 </span><span data-line="191">        <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
-</span><span data-line="192">        <span class="n">input_trans</span><span class="o">=</span><span class="n">input_trans</span><span class="p">,</span>
-</span><span data-line="193">        <span class="n">output_trans</span><span class="o">=</span><span class="n">output_trans</span><span class="p">,</span>
-</span><span data-line="194">        <span class="o">**</span><span class="n">qh_kwargs</span><span class="p">,</span>
-</span><span data-line="195">    <span class="p">)</span>
-</span><span data-line="196">
-</span><span data-line="197">    <span class="c1"># Store function_specs on the app for later access</span>
-</span><span data-line="198">    <span class="n">app</span><span class="o">.</span><span class="n">function_specs</span> <span class="o">=</span> <span class="n">function_specs</span>
-</span><span data-line="199">
-</span><span data-line="200">    <span class="c1"># Add UI routes if requested</span>
-</span><span data-line="201">    <span class="k">if</span> <span class="n">add_ui</span><span class="p">:</span>
-</span><span data-line="202">        <span class="n">add_ui_routes</span><span class="p">(</span>
-</span><span data-line="203">            <span class="n">app</span><span class="p">,</span>
-</span><span data-line="204">            <span class="n">function_specs</span><span class="p">,</span>
-</span><span data-line="205">            <span class="n">page_title</span><span class="o">=</span><span class="n">page_title</span><span class="p">,</span>
-</span><span data-line="206">            <span class="n">custom_css</span><span class="o">=</span><span class="n">custom_css</span><span class="p">,</span>
-</span><span data-line="207">            <span class="n">rjsf_theme</span><span class="o">=</span><span class="n">rjsf_theme</span><span class="p">,</span>
-</span><span data-line="208">        <span class="p">)</span>
-</span><span data-line="209">
-</span><span data-line="210">    <span class="k">return</span> <span class="n">app</span></div>
+</span><span data-line="192">        <span class="c1"># Only pass what was asked for: a qh that predates these would forward them to</span>
+</span><span data-line="193">        <span class="c1"># FastAPI and fail even when both are None.</span>
+</span><span data-line="194">        <span class="o">**</span><span class="p">{</span>
+</span><span data-line="195">            <span class="n">k</span><span class="p">:</span> <span class="n">v</span>
+</span><span data-line="196">            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">input_trans</span><span class="o">=</span><span class="n">input_trans</span><span class="p">,</span> <span class="n">output_trans</span><span class="o">=</span><span class="n">output_trans</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span><span data-line="197">            <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+</span><span data-line="198">        <span class="p">},</span>
+</span><span data-line="199">        <span class="o">**</span><span class="n">qh_kwargs</span><span class="p">,</span>
+</span><span data-line="200">    <span class="p">)</span>
+</span><span data-line="201">
+</span><span data-line="202">    <span class="c1"># Store function_specs on the app for later access</span>
+</span><span data-line="203">    <span class="n">app</span><span class="o">.</span><span class="n">function_specs</span> <span class="o">=</span> <span class="n">function_specs</span>
+</span><span data-line="204">
+</span><span data-line="205">    <span class="c1"># Add UI routes if requested</span>
+</span><span data-line="206">    <span class="k">if</span> <span class="n">add_ui</span><span class="p">:</span>
+</span><span data-line="207">        <span class="n">add_ui_routes</span><span class="p">(</span>
+</span><span data-line="208">            <span class="n">app</span><span class="p">,</span>
+</span><span data-line="209">            <span class="n">function_specs</span><span class="p">,</span>
+</span><span data-line="210">            <span class="n">page_title</span><span class="o">=</span><span class="n">page_title</span><span class="p">,</span>
+</span><span data-line="211">            <span class="n">custom_css</span><span class="o">=</span><span class="n">custom_css</span><span class="p">,</span>
+</span><span data-line="212">            <span class="n">rjsf_theme</span><span class="o">=</span><span class="n">rjsf_theme</span><span class="p">,</span>
+</span><span data-line="213">        <span class="p">)</span>
+</span><span data-line="214">
+</span><span data-line="215">    <span class="k">return</span> <span class="n">app</span></div>
 
-</span><span data-line="211">
-</span><span data-line="212">
+</span><span data-line="216">
+</span><span data-line="217">
 <div class="viewcode-block" id="UfApp">
 <a class="viewcode-back" href="../../_autosummary/uf.base.html#uf.UfApp">[docs]</a>
-</span><span data-line="213"><span class="k">class</span><span class="w"> </span><span class="nc">UfApp</span><span class="p">:</span>
-</span><span data-line="214"><span class="w">    </span><span class="sd">"""Wrapper class for uf applications.</span>
-</span><span data-line="215">
-</span><span data-line="216"><span class="sd">    Provides a higher-level interface with additional conveniences</span>
-</span><span data-line="217"><span class="sd">    beyond the raw qh app.</span>
-</span><span data-line="218">
-</span><span data-line="219"><span class="sd">    Attributes:</span>
-</span><span data-line="220"><span class="sd">        app: The underlying qh/bottle/fastapi app</span>
-</span><span data-line="221"><span class="sd">        function_specs: FunctionSpecStore for function metadata</span>
-</span><span data-line="222"><span class="sd">        funcs: Dictionary mapping function names to callables</span>
-</span><span data-line="223"><span class="sd">    """</span>
-</span><span data-line="224">
-</span><span data-line="225">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
-</span><span data-line="226">        <span class="bp">self</span><span class="p">,</span>
-</span><span data-line="227">        <span class="n">funcs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">MappingType</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]],</span>
-</span><span data-line="228">        <span class="o">**</span><span class="n">mk_rjsf_app_kwargs</span><span class="p">,</span>
-</span><span data-line="229">    <span class="p">):</span>
-</span><span data-line="230"><span class="w">        </span><span class="sd">"""Initialize UfApp.</span>
-</span><span data-line="231">
-</span><span data-line="232"><span class="sd">        Args:</span>
-</span><span data-line="233"><span class="sd">            funcs: Iterable of callables, or a mapping ``{name: callable}`` (see</span>
-</span><span data-line="234"><span class="sd">                ``mk_rjsf_app``)</span>
-</span><span data-line="235"><span class="sd">            **mk_rjsf_app_kwargs: Arguments passed to mk_rjsf_app</span>
-</span><span data-line="236"><span class="sd">        """</span>
-</span><span data-line="237">        <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span> <span class="o">=</span> <span class="n">name_funcs</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
-</span><span data-line="238">        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">,</span> <span class="o">**</span><span class="n">mk_rjsf_app_kwargs</span><span class="p">)</span>
-</span><span data-line="239">        <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">function_specs</span>
-</span><span data-line="240">
+</span><span data-line="218"><span class="k">class</span><span class="w"> </span><span class="nc">UfApp</span><span class="p">:</span>
+</span><span data-line="219"><span class="w">    </span><span class="sd">"""Wrapper class for uf applications.</span>
+</span><span data-line="220">
+</span><span data-line="221"><span class="sd">    Provides a higher-level interface with additional conveniences</span>
+</span><span data-line="222"><span class="sd">    beyond the raw qh app.</span>
+</span><span data-line="223">
+</span><span data-line="224"><span class="sd">    Attributes:</span>
+</span><span data-line="225"><span class="sd">        app: The underlying qh/bottle/fastapi app</span>
+</span><span data-line="226"><span class="sd">        function_specs: FunctionSpecStore for function metadata</span>
+</span><span data-line="227"><span class="sd">        funcs: Dictionary mapping function names to callables</span>
+</span><span data-line="228"><span class="sd">    """</span>
+</span><span data-line="229">
+</span><span data-line="230">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+</span><span data-line="231">        <span class="bp">self</span><span class="p">,</span>
+</span><span data-line="232">        <span class="n">funcs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">MappingType</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]],</span>
+</span><span data-line="233">        <span class="o">**</span><span class="n">mk_rjsf_app_kwargs</span><span class="p">,</span>
+</span><span data-line="234">    <span class="p">):</span>
+</span><span data-line="235"><span class="w">        </span><span class="sd">"""Initialize UfApp.</span>
+</span><span data-line="236">
+</span><span data-line="237"><span class="sd">        Args:</span>
+</span><span data-line="238"><span class="sd">            funcs: Iterable of callables, or a mapping ``{name: callable}`` (see</span>
+</span><span data-line="239"><span class="sd">                ``mk_rjsf_app``)</span>
+</span><span data-line="240"><span class="sd">            **mk_rjsf_app_kwargs: Arguments passed to mk_rjsf_app</span>
+</span><span data-line="241"><span class="sd">        """</span>
+</span><span data-line="242">        <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span> <span class="o">=</span> <span class="n">name_funcs</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
+</span><span data-line="243">        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">mk_rjsf_app</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">,</span> <span class="o">**</span><span class="n">mk_rjsf_app_kwargs</span><span class="p">)</span>
+</span><span data-line="244">        <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">function_specs</span>
+</span><span data-line="245">
 <div class="viewcode-block" id="UfApp.run">
 <a class="viewcode-back" href="../../_autosummary/uf.base.html#uf.UfApp.run">[docs]</a>
-</span><span data-line="241">    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"localhost"</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8080</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span data-line="242"><span class="w">        </span><span class="sd">"""Run the web application.</span>
-</span><span data-line="243">
-</span><span data-line="244"><span class="sd">        Args:</span>
-</span><span data-line="245"><span class="sd">            host: Host to bind to</span>
-</span><span data-line="246"><span class="sd">            port: Port to listen on</span>
-</span><span data-line="247"><span class="sd">            **kwargs: Additional arguments passed to app.run()</span>
-</span><span data-line="248"><span class="sd">        """</span>
-</span><span data-line="249">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="s2">"run"</span><span class="p">):</span>
-</span><span data-line="250">            <span class="c1"># Bottle app</span>
-</span><span data-line="251">            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span data-line="252">        <span class="k">else</span><span class="p">:</span>
-</span><span data-line="253">            <span class="c1"># FastAPI or other - provide guidance</span>
-</span><span data-line="254">            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-</span><span data-line="255">                <span class="s2">"For FastAPI apps, use: uvicorn.run(app.app, host='...', port=...)"</span>
-</span><span data-line="256">            <span class="p">)</span></div>
+</span><span data-line="246">    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"localhost"</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8080</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span data-line="247"><span class="w">        </span><span class="sd">"""Run the web application.</span>
+</span><span data-line="248">
+</span><span data-line="249"><span class="sd">        Args:</span>
+</span><span data-line="250"><span class="sd">            host: Host to bind to</span>
+</span><span data-line="251"><span class="sd">            port: Port to listen on</span>
+</span><span data-line="252"><span class="sd">            **kwargs: Additional arguments passed to app.run()</span>
+</span><span data-line="253"><span class="sd">        """</span>
+</span><span data-line="254">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">,</span> <span class="s2">"run"</span><span class="p">):</span>
+</span><span data-line="255">            <span class="c1"># Bottle app</span>
+</span><span data-line="256">            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span data-line="257">        <span class="k">else</span><span class="p">:</span>
+</span><span data-line="258">            <span class="c1"># FastAPI or other - provide guidance</span>
+</span><span data-line="259">            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+</span><span data-line="260">                <span class="s2">"For FastAPI apps, use: uvicorn.run(app.app, host='...', port=...)"</span>
+</span><span data-line="261">            <span class="p">)</span></div>
 
-</span><span data-line="257">
+</span><span data-line="262">
 <div class="viewcode-block" id="UfApp.call">
 <a class="viewcode-back" href="../../_autosummary/uf.base.html#uf.UfApp.call">[docs]</a>
-</span><span data-line="258">    <span class="k">def</span><span class="w"> </span><span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-</span><span data-line="259"><span class="w">        </span><span class="sd">"""Call a function directly by name.</span>
-</span><span data-line="260">
-</span><span data-line="261"><span class="sd">        Args:</span>
-</span><span data-line="262"><span class="sd">            func_name: Name of the function to call</span>
-</span><span data-line="263"><span class="sd">            **kwargs: Arguments to pass to the function</span>
-</span><span data-line="264">
-</span><span data-line="265"><span class="sd">        Returns:</span>
-</span><span data-line="266"><span class="sd">            Result of the function call</span>
-</span><span data-line="267">
-</span><span data-line="268"><span class="sd">        Raises:</span>
-</span><span data-line="269"><span class="sd">            KeyError: If function name not found</span>
-</span><span data-line="270"><span class="sd">        """</span>
-</span><span data-line="271">        <span class="k">if</span> <span class="n">func_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">:</span>
-</span><span data-line="272">            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Function '</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">' not found"</span><span class="p">)</span>
-</span><span data-line="273">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">[</span><span class="n">func_name</span><span class="p">](</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</span><span data-line="263">    <span class="k">def</span><span class="w"> </span><span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span data-line="264"><span class="w">        </span><span class="sd">"""Call a function directly by name.</span>
+</span><span data-line="265">
+</span><span data-line="266"><span class="sd">        Args:</span>
+</span><span data-line="267"><span class="sd">            func_name: Name of the function to call</span>
+</span><span data-line="268"><span class="sd">            **kwargs: Arguments to pass to the function</span>
+</span><span data-line="269">
+</span><span data-line="270"><span class="sd">        Returns:</span>
+</span><span data-line="271"><span class="sd">            Result of the function call</span>
+</span><span data-line="272">
+</span><span data-line="273"><span class="sd">        Raises:</span>
+</span><span data-line="274"><span class="sd">            KeyError: If function name not found</span>
+</span><span data-line="275"><span class="sd">        """</span>
+</span><span data-line="276">        <span class="k">if</span> <span class="n">func_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">:</span>
+</span><span data-line="277">            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Function '</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">' not found"</span><span class="p">)</span>
+</span><span data-line="278">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="p">[</span><span class="n">func_name</span><span class="p">](</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-</span><span data-line="274">
+</span><span data-line="279">
 <div class="viewcode-block" id="UfApp.get_spec">
 <a class="viewcode-back" href="../../_autosummary/uf.base.html#uf.UfApp.get_spec">[docs]</a>
-</span><span data-line="275">    <span class="k">def</span><span class="w"> </span><span class="nf">get_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span data-line="276"><span class="w">        </span><span class="sd">"""Get RJSF specification for a function.</span>
-</span><span data-line="277">
-</span><span data-line="278"><span class="sd">        Args:</span>
-</span><span data-line="279"><span class="sd">            func_name: Name of the function</span>
-</span><span data-line="280">
-</span><span data-line="281"><span class="sd">        Returns:</span>
-</span><span data-line="282"><span class="sd">            Dictionary with schema and uiSchema</span>
-</span><span data-line="283">
-</span><span data-line="284"><span class="sd">        Raises:</span>
-</span><span data-line="285"><span class="sd">            KeyError: If function name not found</span>
-</span><span data-line="286"><span class="sd">        """</span>
-</span><span data-line="287">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span></div>
-
+</span><span data-line="280">    <span class="k">def</span><span class="w"> </span><span class="nf">get_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span data-line="281"><span class="w">        </span><span class="sd">"""Get RJSF specification for a function.</span>
+</span><span data-line="282">
+</span><span data-line="283"><span class="sd">        Args:</span>
+</span><span data-line="284"><span class="sd">            func_name: Name of the function</span>
+</span><span data-line="285">
+</span><span data-line="286"><span class="sd">        Returns:</span>
+</span><span data-line="287"><span class="sd">            Dictionary with schema and uiSchema</span>
 </span><span data-line="288">
+</span><span data-line="289"><span class="sd">        Raises:</span>
+</span><span data-line="290"><span class="sd">            KeyError: If function name not found</span>
+</span><span data-line="291"><span class="sd">        """</span>
+</span><span data-line="292">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function_specs</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span></div>
+
+</span><span data-line="293">
 <div class="viewcode-block" id="UfApp.list_functions">
 <a class="viewcode-back" href="../../_autosummary/uf.base.html#uf.UfApp.list_functions">[docs]</a>
-</span><span data-line="289">    <span class="k">def</span><span class="w"> </span><span class="nf">list_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-</span><span data-line="290"><span class="w">        </span><span class="sd">"""Get list of all function names.</span>
-</span><span data-line="291">
-</span><span data-line="292"><span class="sd">        Returns:</span>
-</span><span data-line="293"><span class="sd">            List of function name strings</span>
-</span><span data-line="294"><span class="sd">        """</span>
-</span><span data-line="295">        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
-
+</span><span data-line="294">    <span class="k">def</span><span class="w"> </span><span class="nf">list_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="295"><span class="w">        </span><span class="sd">"""Get list of all function names.</span>
 </span><span data-line="296">
-</span><span data-line="297">    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span data-line="298"><span class="w">        </span><span class="sd">"""String representation of UfApp."""</span>
-</span><span data-line="299">        <span class="n">func_names</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list_functions</span><span class="p">())</span>
-</span><span data-line="300">        <span class="k">return</span> <span class="sa">f</span><span class="s2">"UfApp(</span><span class="si">{</span><span class="n">func_names</span><span class="si">}</span><span class="s2">)"</span></div>
+</span><span data-line="297"><span class="sd">        Returns:</span>
+</span><span data-line="298"><span class="sd">            List of function name strings</span>
+</span><span data-line="299"><span class="sd">        """</span>
+</span><span data-line="300">        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">funcs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+</span><span data-line="301">
+</span><span data-line="302">    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="303"><span class="w">        </span><span class="sd">"""String representation of UfApp."""</span>
+</span><span data-line="304">        <span class="n">func_names</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list_functions</span><span class="p">())</span>
+</span><span data-line="305">        <span class="k">return</span> <span class="sa">f</span><span class="s2">"UfApp(</span><span class="si">{</span><span class="n">func_names</span><span class="si">}</span><span class="s2">)"</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">
@@ -476,7 +482,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=d50bcae4"></script>
+      <script src="../../_static/documentation_options.js?v=71734efd"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

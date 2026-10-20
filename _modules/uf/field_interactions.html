@@ -7,6 +7,7 @@
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d88b86f9" />
     <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_autodoc_typehints.css?v=057ac668" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -301,8 +302,8 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="151">
 </span><span data-line="152"><span class="sd">    Example:</span>
 </span><span data-line="153"><span class="sd">        &gt;&gt;&gt; builder = DependencyBuilder()</span>
-</span><span data-line="154"><span class="sd">        &gt;&gt;&gt; builder.when('reason').equals('other').show('other_reason')</span>
-</span><span data-line="155"><span class="sd">        &gt;&gt;&gt; builder.when('age').greater_than(18).enable('alcohol_consent')</span>
+</span><span data-line="154"><span class="sd">        &gt;&gt;&gt; _ = builder.when('reason').equals('other').show('other_reason')</span>
+</span><span data-line="155"><span class="sd">        &gt;&gt;&gt; _ = builder.when('age').greater_than(18).enable('alcohol_consent')</span>
 </span><span data-line="156"><span class="sd">        &gt;&gt;&gt; dependencies = builder.build()</span>
 </span><span data-line="157"><span class="sd">    """</span>
 </span><span data-line="158">
@@ -585,7 +586,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="384"><span class="sd">        ...                    lambda v: v == 'other',</span>
 </span><span data-line="385"><span class="sd">        ...                    DependencyAction.SHOW)</span>
 </span><span data-line="386"><span class="sd">        ... ]</span>
-</span><span data-line="387"><span class="sd">        &gt;&gt;&gt; spec = add_field_dependencies(my_func, deps)</span>
+</span><span data-line="387"><span class="sd">        &gt;&gt;&gt; spec = add_field_dependencies(my_func, deps)  # doctest: +SKIP</span>
 </span><span data-line="388"><span class="sd">    """</span>
 </span><span data-line="389">    <span class="c1"># This would typically be called during spec generation</span>
 </span><span data-line="390">    <span class="c1"># For now, return a structure that can be merged</span>
@@ -687,7 +688,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=d50bcae4"></script>
+      <script src="../../_static/documentation_options.js?v=71734efd"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

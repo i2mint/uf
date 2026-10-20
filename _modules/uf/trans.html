@@ -7,6 +7,7 @@
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d88b86f9" />
     <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_autodoc_typehints.css?v=057ac668" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -194,7 +195,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="57">
 </span><span data-line="58"><span class="sd">        Example:</span>
 </span><span data-line="59"><span class="sd">            &gt;&gt;&gt; from pathlib import Path</span>
-</span><span data-line="60"><span class="sd">            &gt;&gt;&gt; registry.register_type(</span>
+</span><span data-line="60"><span class="sd">            &gt;&gt;&gt; registry.register_type(  # doctest: +SKIP</span>
 </span><span data-line="61"><span class="sd">            ...     Path,</span>
 </span><span data-line="62"><span class="sd">            ...     to_json=str,</span>
 </span><span data-line="63"><span class="sd">            ...     from_json=Path,</span>
@@ -324,8 +325,8 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="172"><span class="sd">            &gt;&gt;&gt; from uf import mk_rjsf_app</span>
 </span><span data-line="173"><span class="sd">            &gt;&gt;&gt; registry = InputTransformRegistry()</span>
 </span><span data-line="174"><span class="sd">            &gt;&gt;&gt; # ... register types ...</span>
-</span><span data-line="175"><span class="sd">            &gt;&gt;&gt; input_trans = registry.mk_input_trans_for_funcs([my_func])</span>
-</span><span data-line="176"><span class="sd">            &gt;&gt;&gt; app = mk_rjsf_app([my_func], input_trans=input_trans)</span>
+</span><span data-line="175"><span class="sd">            &gt;&gt;&gt; input_trans = registry.mk_input_trans_for_funcs([my_func])  # doctest: +SKIP</span>
+</span><span data-line="176"><span class="sd">            &gt;&gt;&gt; app = mk_rjsf_app([my_func], input_trans=input_trans)  # doctest: +SKIP</span>
 </span><span data-line="177"><span class="sd">        """</span>
 </span><span data-line="178">        <span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
 </span><span data-line="179">
@@ -368,8 +369,8 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="213"><span class="sd">            Transformation function for qh output</span>
 </span><span data-line="214">
 </span><span data-line="215"><span class="sd">        Example:</span>
-</span><span data-line="216"><span class="sd">            &gt;&gt;&gt; output_trans = registry.mk_output_trans()</span>
-</span><span data-line="217"><span class="sd">            &gt;&gt;&gt; app = mk_rjsf_app([my_func], output_trans=output_trans)</span>
+</span><span data-line="216"><span class="sd">            &gt;&gt;&gt; output_trans = registry.mk_output_trans()  # doctest: +SKIP</span>
+</span><span data-line="217"><span class="sd">            &gt;&gt;&gt; app = mk_rjsf_app([my_func], output_trans=output_trans)  # doctest: +SKIP</span>
 </span><span data-line="218"><span class="sd">        """</span>
 </span><span data-line="219">
 </span><span data-line="220">        <span class="k">def</span><span class="w"> </span><span class="nf">output_trans</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
@@ -542,7 +543,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=d50bcae4"></script>
+      <script src="../../_static/documentation_options.js?v=71734efd"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

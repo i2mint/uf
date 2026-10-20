@@ -214,7 +214,7 @@ Suitable for development and simple applications.
 
 ```pycon
 >>> backend = DictAuthBackend()
->>> backend.create_user('admin', 'secret', roles=['admin'])
+>>> _ = backend.create_user('admin', 'secret', roles=['admin'])
 >>> user = backend.authenticate('admin', 'secret')
 ```
 
@@ -360,7 +360,7 @@ Get session data.
 * **Returns:**
   Session data or None if expired/invalid
 
-### *class* uf.auth.User(username, password_hash, roles=<factory>, permissions=<factory>, metadata=<factory>, created_at=<factory>, is_active=True)
+### *class* uf.auth.User(username, password_hash, roles=list(), permissions=list(), metadata=dict(), created_at=datetime.now(), is_active=True)
 
 Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
@@ -370,29 +370,50 @@ User account information.
 
 Unique username
 
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
+
 #### password_hash
 
 Hashed password
+
+* **Type:**
+  [`str`](https://docs.python.org/3/builtins/stdtypes.html#str)
 
 #### roles
 
 List of role names
 
+* **Type:**
+  [`list`](https://docs.python.org/3/builtins/stdtypes.html#list)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### permissions
 
 List of permission strings
+
+* **Type:**
+  [`list`](https://docs.python.org/3/builtins/stdtypes.html#list)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
 
 #### metadata
 
 Additional user metadata
 
+* **Type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)
+
 #### created_at
 
 When user was created
 
+* **Type:**
+  [`datetime`](https://docs.python.org/3/library/datetime.html#datetime.datetime)
+
 #### is_active
 
 Whether account is active
+
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
 
 #### has_all_roles(roles)
 

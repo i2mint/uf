@@ -7,6 +7,7 @@
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d88b86f9" />
     <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_autodoc_typehints.css?v=057ac668" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -314,8 +315,8 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="167"><span class="sd">        Configuration dictionary or None if not configured</span>
 </span><span data-line="168">
 </span><span data-line="169"><span class="sd">    Example:</span>
-</span><span data-line="170"><span class="sd">        &gt;&gt;&gt; config = get_ui_config(my_function)</span>
-</span><span data-line="171"><span class="sd">        &gt;&gt;&gt; if config:</span>
+</span><span data-line="170"><span class="sd">        &gt;&gt;&gt; config = get_ui_config(my_function)  # doctest: +SKIP</span>
+</span><span data-line="171"><span class="sd">        &gt;&gt;&gt; if config:  # doctest: +SKIP</span>
 </span><span data-line="172"><span class="sd">        ...     print(config['title'])</span>
 </span><span data-line="173"><span class="sd">    """</span>
 </span><span data-line="174">    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">_UI_CONFIG_ATTR</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
@@ -334,8 +335,8 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="184"><span class="sd">        Group name or None</span>
 </span><span data-line="185">
 </span><span data-line="186"><span class="sd">    Example:</span>
-</span><span data-line="187"><span class="sd">        &gt;&gt;&gt; group = get_group(my_function)</span>
-</span><span data-line="188"><span class="sd">        &gt;&gt;&gt; if group:</span>
+</span><span data-line="187"><span class="sd">        &gt;&gt;&gt; group = get_group(my_function)  # doctest: +SKIP</span>
+</span><span data-line="188"><span class="sd">        &gt;&gt;&gt; if group:  # doctest: +SKIP</span>
 </span><span data-line="189"><span class="sd">        ...     print(f"Function is in group: {group}")</span>
 </span><span data-line="190"><span class="sd">    """</span>
 </span><span data-line="191">    <span class="n">config</span> <span class="o">=</span> <span class="n">get_ui_config</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
@@ -357,8 +358,8 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="204"><span class="sd">        Dictionary mapping parameter names to RjsfFieldConfig</span>
 </span><span data-line="205">
 </span><span data-line="206"><span class="sd">    Example:</span>
-</span><span data-line="207"><span class="sd">        &gt;&gt;&gt; field_configs = get_field_configs(my_function)</span>
-</span><span data-line="208"><span class="sd">        &gt;&gt;&gt; if 'email' in field_configs:</span>
+</span><span data-line="207"><span class="sd">        &gt;&gt;&gt; field_configs = get_field_configs(my_function)  # doctest: +SKIP</span>
+</span><span data-line="208"><span class="sd">        &gt;&gt;&gt; if 'email' in field_configs:  # doctest: +SKIP</span>
 </span><span data-line="209"><span class="sd">        ...     print(field_configs['email'].format)</span>
 </span><span data-line="210"><span class="sd">    """</span>
 </span><span data-line="211">    <span class="n">config</span> <span class="o">=</span> <span class="n">get_ui_config</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
@@ -380,7 +381,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="224"><span class="sd">        True if function is hidden, False otherwise</span>
 </span><span data-line="225">
 </span><span data-line="226"><span class="sd">    Example:</span>
-</span><span data-line="227"><span class="sd">        &gt;&gt;&gt; if not is_hidden(my_function):</span>
+</span><span data-line="227"><span class="sd">        &gt;&gt;&gt; if not is_hidden(my_function):  # doctest: +SKIP</span>
 </span><span data-line="228"><span class="sd">        ...     # Show in UI</span>
 </span><span data-line="229"><span class="sd">        ...     pass</span>
 </span><span data-line="230"><span class="sd">    """</span>
@@ -440,8 +441,8 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="278"><span class="sd">        Tuple of (args, kwargs) or None if no example</span>
 </span><span data-line="279">
 </span><span data-line="280"><span class="sd">    Example:</span>
-</span><span data-line="281"><span class="sd">        &gt;&gt;&gt; example = get_example(my_function)</span>
-</span><span data-line="282"><span class="sd">        &gt;&gt;&gt; if example:</span>
+</span><span data-line="281"><span class="sd">        &gt;&gt;&gt; example = get_example(my_function)  # doctest: +SKIP</span>
+</span><span data-line="282"><span class="sd">        &gt;&gt;&gt; if example:  # doctest: +SKIP</span>
 </span><span data-line="283"><span class="sd">        ...     args, kwargs = example</span>
 </span><span data-line="284"><span class="sd">        ...     result = my_function(*args, **kwargs)</span>
 </span><span data-line="285"><span class="sd">    """</span>
@@ -598,7 +599,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=d50bcae4"></script>
+      <script src="../../_static/documentation_options.js?v=71734efd"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

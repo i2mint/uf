@@ -7,6 +7,7 @@
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d88b86f9" />
     <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_autodoc_typehints.css?v=057ac668" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -250,9 +251,9 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="103"><span class="sd">        RJSF specification dictionary or None</span>
 </span><span data-line="104">
 </span><span data-line="105"><span class="sd">    Example:</span>
-</span><span data-line="106"><span class="sd">        &gt;&gt;&gt; from pydantic import BaseModel, EmailStr</span>
+</span><span data-line="106"><span class="sd">        &gt;&gt;&gt; from pydantic import BaseModel</span>
 </span><span data-line="107"><span class="sd">        &gt;&gt;&gt; class UserCreate(BaseModel):</span>
-</span><span data-line="108"><span class="sd">        ...     email: EmailStr</span>
+</span><span data-line="108"><span class="sd">        ...     email: str</span>
 </span><span data-line="109"><span class="sd">        ...     age: int</span>
 </span><span data-line="110"><span class="sd">        &gt;&gt;&gt; def create_user(user: UserCreate):</span>
 </span><span data-line="111"><span class="sd">        ...     pass</span>
@@ -377,194 +378,195 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="221"><span class="sd">        &gt;&gt;&gt; def create_user(user: User) -&gt; User:</span>
 </span><span data-line="222"><span class="sd">        ...     return user</span>
 </span><span data-line="223"><span class="sd">        &gt;&gt;&gt; wrapped = wrap_pydantic_function(create_user)</span>
-</span><span data-line="224"><span class="sd">        &gt;&gt;&gt; result = wrapped({'name': 'Alice'})  # Pass dict, not User</span>
-</span><span data-line="225"><span class="sd">    """</span>
-</span><span data-line="226">    <span class="n">pydantic_params</span> <span class="o">=</span> <span class="n">extract_pydantic_params</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-</span><span data-line="227">
-</span><span data-line="228">    <span class="k">if</span> <span class="ow">not</span> <span class="n">pydantic_params</span><span class="p">:</span>
-</span><span data-line="229">        <span class="k">return</span> <span class="n">func</span>
-</span><span data-line="230">
-</span><span data-line="231">    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span data-line="232"><span class="w">        </span><span class="sd">"""Wrapper that handles Pydantic conversion."""</span>
-</span><span data-line="233">        <span class="c1"># Convert dict inputs to Pydantic models</span>
-</span><span data-line="234">        <span class="n">converted_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="235">
-</span><span data-line="236">        <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span data-line="237">            <span class="k">if</span> <span class="n">param_name</span> <span class="ow">in</span> <span class="n">pydantic_params</span><span class="p">:</span>
-</span><span data-line="238">                <span class="n">model_class</span> <span class="o">=</span> <span class="n">pydantic_params</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span>
-</span><span data-line="239">                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-</span><span data-line="240">                    <span class="n">converted_kwargs</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">dict_to_pydantic</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">model_class</span><span class="p">)</span>
-</span><span data-line="241">                <span class="k">else</span><span class="p">:</span>
-</span><span data-line="242">                    <span class="n">converted_kwargs</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-</span><span data-line="243">            <span class="k">else</span><span class="p">:</span>
-</span><span data-line="244">                <span class="n">converted_kwargs</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-</span><span data-line="245">
-</span><span data-line="246">        <span class="c1"># Call function</span>
-</span><span data-line="247">        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">converted_kwargs</span><span class="p">)</span>
-</span><span data-line="248">
-</span><span data-line="249">        <span class="c1"># Convert Pydantic output to dict if needed</span>
-</span><span data-line="250">        <span class="k">if</span> <span class="n">is_pydantic_model</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
-</span><span data-line="251">            <span class="k">return</span> <span class="n">pydantic_to_dict</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</span><span data-line="252">
-</span><span data-line="253">        <span class="k">return</span> <span class="n">result</span>
-</span><span data-line="254">
-</span><span data-line="255">    <span class="n">wrapper</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
-</span><span data-line="256">    <span class="n">wrapper</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span>
-</span><span data-line="257">    <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_pydantic_wrapped__</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span data-line="258">    <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_original_function__</span> <span class="o">=</span> <span class="n">func</span>
-</span><span data-line="259">
-</span><span data-line="260">    <span class="k">return</span> <span class="n">wrapper</span></div>
+</span><span data-line="224"><span class="sd">        &gt;&gt;&gt; wrapped(user={'name': 'Alice'})  # Pass a dict, not a User</span>
+</span><span data-line="225"><span class="sd">        {'name': 'Alice'}</span>
+</span><span data-line="226"><span class="sd">    """</span>
+</span><span data-line="227">    <span class="n">pydantic_params</span> <span class="o">=</span> <span class="n">extract_pydantic_params</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+</span><span data-line="228">
+</span><span data-line="229">    <span class="k">if</span> <span class="ow">not</span> <span class="n">pydantic_params</span><span class="p">:</span>
+</span><span data-line="230">        <span class="k">return</span> <span class="n">func</span>
+</span><span data-line="231">
+</span><span data-line="232">    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span data-line="233"><span class="w">        </span><span class="sd">"""Wrapper that handles Pydantic conversion."""</span>
+</span><span data-line="234">        <span class="c1"># Convert dict inputs to Pydantic models</span>
+</span><span data-line="235">        <span class="n">converted_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="236">
+</span><span data-line="237">        <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="238">            <span class="k">if</span> <span class="n">param_name</span> <span class="ow">in</span> <span class="n">pydantic_params</span><span class="p">:</span>
+</span><span data-line="239">                <span class="n">model_class</span> <span class="o">=</span> <span class="n">pydantic_params</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span>
+</span><span data-line="240">                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+</span><span data-line="241">                    <span class="n">converted_kwargs</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">dict_to_pydantic</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">model_class</span><span class="p">)</span>
+</span><span data-line="242">                <span class="k">else</span><span class="p">:</span>
+</span><span data-line="243">                    <span class="n">converted_kwargs</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+</span><span data-line="244">            <span class="k">else</span><span class="p">:</span>
+</span><span data-line="245">                <span class="n">converted_kwargs</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+</span><span data-line="246">
+</span><span data-line="247">        <span class="c1"># Call function</span>
+</span><span data-line="248">        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">converted_kwargs</span><span class="p">)</span>
+</span><span data-line="249">
+</span><span data-line="250">        <span class="c1"># Convert Pydantic output to dict if needed</span>
+</span><span data-line="251">        <span class="k">if</span> <span class="n">is_pydantic_model</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+</span><span data-line="252">            <span class="k">return</span> <span class="n">pydantic_to_dict</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span><span data-line="253">
+</span><span data-line="254">        <span class="k">return</span> <span class="n">result</span>
+</span><span data-line="255">
+</span><span data-line="256">    <span class="n">wrapper</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+</span><span data-line="257">    <span class="n">wrapper</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span>
+</span><span data-line="258">    <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_pydantic_wrapped__</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span data-line="259">    <span class="n">wrapper</span><span class="o">.</span><span class="n">__uf_original_function__</span> <span class="o">=</span> <span class="n">func</span>
+</span><span data-line="260">
+</span><span data-line="261">    <span class="k">return</span> <span class="n">wrapper</span></div>
 
-</span><span data-line="261">
 </span><span data-line="262">
+</span><span data-line="263">
 <div class="viewcode-block" id="extract_field_validators">
 <a class="viewcode-back" href="../../_autosummary/uf.pydantic_support.html#uf.extract_field_validators">[docs]</a>
-</span><span data-line="263"><span class="k">def</span><span class="w"> </span><span class="nf">extract_field_validators</span><span class="p">(</span><span class="n">model_class</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span data-line="264"><span class="w">    </span><span class="sd">"""Extract field validators from Pydantic model.</span>
-</span><span data-line="265">
-</span><span data-line="266"><span class="sd">    Args:</span>
-</span><span data-line="267"><span class="sd">        model_class: Pydantic model class</span>
-</span><span data-line="268">
-</span><span data-line="269"><span class="sd">    Returns:</span>
-</span><span data-line="270"><span class="sd">        Dictionary mapping field names to validator info</span>
-</span><span data-line="271"><span class="sd">    """</span>
-</span><span data-line="272">    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_pydantic_model</span><span class="p">(</span><span class="n">model_class</span><span class="p">):</span>
-</span><span data-line="273">        <span class="k">return</span> <span class="p">{}</span>
-</span><span data-line="274">
-</span><span data-line="275">    <span class="n">validators</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="276">
-</span><span data-line="277">    <span class="k">try</span><span class="p">:</span>
-</span><span data-line="278">        <span class="c1"># Pydantic v2</span>
-</span><span data-line="279">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model_class</span><span class="p">,</span> <span class="s2">"model_fields"</span><span class="p">):</span>
-</span><span data-line="280">            <span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">field_info</span> <span class="ow">in</span> <span class="n">model_class</span><span class="o">.</span><span class="n">model_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span data-line="281">                <span class="n">validator_info</span> <span class="o">=</span> <span class="p">{</span>
-</span><span data-line="282">                    <span class="s2">"required"</span><span class="p">:</span> <span class="n">field_info</span><span class="o">.</span><span class="n">is_required</span><span class="p">(),</span>
-</span><span data-line="283">                    <span class="s2">"default"</span><span class="p">:</span> <span class="n">field_info</span><span class="o">.</span><span class="n">default</span>
-</span><span data-line="284">                    <span class="k">if</span> <span class="n">field_info</span><span class="o">.</span><span class="n">default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-</span><span data-line="285">                    <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
-</span><span data-line="286">                <span class="p">}</span>
-</span><span data-line="287">
-</span><span data-line="288">                <span class="c1"># Extract constraints</span>
-</span><span data-line="289">                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field_info</span><span class="p">,</span> <span class="s2">"constraints"</span><span class="p">):</span>
-</span><span data-line="290">                    <span class="n">constraints</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="291">                    <span class="k">for</span> <span class="n">constraint</span> <span class="ow">in</span> <span class="p">[</span>
-</span><span data-line="292">                        <span class="s2">"gt"</span><span class="p">,</span>
-</span><span data-line="293">                        <span class="s2">"ge"</span><span class="p">,</span>
-</span><span data-line="294">                        <span class="s2">"lt"</span><span class="p">,</span>
-</span><span data-line="295">                        <span class="s2">"le"</span><span class="p">,</span>
-</span><span data-line="296">                        <span class="s2">"min_length"</span><span class="p">,</span>
-</span><span data-line="297">                        <span class="s2">"max_length"</span><span class="p">,</span>
-</span><span data-line="298">                    <span class="p">]:</span>
-</span><span data-line="299">                        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field_info</span><span class="p">,</span> <span class="n">constraint</span><span class="p">):</span>
-</span><span data-line="300">                            <span class="n">val</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">field_info</span><span class="p">,</span> <span class="n">constraint</span><span class="p">)</span>
-</span><span data-line="301">                            <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="302">                                <span class="n">constraints</span><span class="p">[</span><span class="n">constraint</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
-</span><span data-line="303">
-</span><span data-line="304">                    <span class="k">if</span> <span class="n">constraints</span><span class="p">:</span>
-</span><span data-line="305">                        <span class="n">validator_info</span><span class="p">[</span><span class="s2">"constraints"</span><span class="p">]</span> <span class="o">=</span> <span class="n">constraints</span>
-</span><span data-line="306">
-</span><span data-line="307">                <span class="n">validators</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">validator_info</span>
-</span><span data-line="308">    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-</span><span data-line="309">        <span class="c1"># Pydantic v1 or other issues</span>
-</span><span data-line="310">        <span class="k">pass</span>
-</span><span data-line="311">
-</span><span data-line="312">    <span class="k">return</span> <span class="n">validators</span></div>
+</span><span data-line="264"><span class="k">def</span><span class="w"> </span><span class="nf">extract_field_validators</span><span class="p">(</span><span class="n">model_class</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span data-line="265"><span class="w">    </span><span class="sd">"""Extract field validators from Pydantic model.</span>
+</span><span data-line="266">
+</span><span data-line="267"><span class="sd">    Args:</span>
+</span><span data-line="268"><span class="sd">        model_class: Pydantic model class</span>
+</span><span data-line="269">
+</span><span data-line="270"><span class="sd">    Returns:</span>
+</span><span data-line="271"><span class="sd">        Dictionary mapping field names to validator info</span>
+</span><span data-line="272"><span class="sd">    """</span>
+</span><span data-line="273">    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_pydantic_model</span><span class="p">(</span><span class="n">model_class</span><span class="p">):</span>
+</span><span data-line="274">        <span class="k">return</span> <span class="p">{}</span>
+</span><span data-line="275">
+</span><span data-line="276">    <span class="n">validators</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="277">
+</span><span data-line="278">    <span class="k">try</span><span class="p">:</span>
+</span><span data-line="279">        <span class="c1"># Pydantic v2</span>
+</span><span data-line="280">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model_class</span><span class="p">,</span> <span class="s2">"model_fields"</span><span class="p">):</span>
+</span><span data-line="281">            <span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">field_info</span> <span class="ow">in</span> <span class="n">model_class</span><span class="o">.</span><span class="n">model_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="282">                <span class="n">validator_info</span> <span class="o">=</span> <span class="p">{</span>
+</span><span data-line="283">                    <span class="s2">"required"</span><span class="p">:</span> <span class="n">field_info</span><span class="o">.</span><span class="n">is_required</span><span class="p">(),</span>
+</span><span data-line="284">                    <span class="s2">"default"</span><span class="p">:</span> <span class="n">field_info</span><span class="o">.</span><span class="n">default</span>
+</span><span data-line="285">                    <span class="k">if</span> <span class="n">field_info</span><span class="o">.</span><span class="n">default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+</span><span data-line="286">                    <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+</span><span data-line="287">                <span class="p">}</span>
+</span><span data-line="288">
+</span><span data-line="289">                <span class="c1"># Extract constraints</span>
+</span><span data-line="290">                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field_info</span><span class="p">,</span> <span class="s2">"constraints"</span><span class="p">):</span>
+</span><span data-line="291">                    <span class="n">constraints</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="292">                    <span class="k">for</span> <span class="n">constraint</span> <span class="ow">in</span> <span class="p">[</span>
+</span><span data-line="293">                        <span class="s2">"gt"</span><span class="p">,</span>
+</span><span data-line="294">                        <span class="s2">"ge"</span><span class="p">,</span>
+</span><span data-line="295">                        <span class="s2">"lt"</span><span class="p">,</span>
+</span><span data-line="296">                        <span class="s2">"le"</span><span class="p">,</span>
+</span><span data-line="297">                        <span class="s2">"min_length"</span><span class="p">,</span>
+</span><span data-line="298">                        <span class="s2">"max_length"</span><span class="p">,</span>
+</span><span data-line="299">                    <span class="p">]:</span>
+</span><span data-line="300">                        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field_info</span><span class="p">,</span> <span class="n">constraint</span><span class="p">):</span>
+</span><span data-line="301">                            <span class="n">val</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">field_info</span><span class="p">,</span> <span class="n">constraint</span><span class="p">)</span>
+</span><span data-line="302">                            <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="303">                                <span class="n">constraints</span><span class="p">[</span><span class="n">constraint</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+</span><span data-line="304">
+</span><span data-line="305">                    <span class="k">if</span> <span class="n">constraints</span><span class="p">:</span>
+</span><span data-line="306">                        <span class="n">validator_info</span><span class="p">[</span><span class="s2">"constraints"</span><span class="p">]</span> <span class="o">=</span> <span class="n">constraints</span>
+</span><span data-line="307">
+</span><span data-line="308">                <span class="n">validators</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">validator_info</span>
+</span><span data-line="309">    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+</span><span data-line="310">        <span class="c1"># Pydantic v1 or other issues</span>
+</span><span data-line="311">        <span class="k">pass</span>
+</span><span data-line="312">
+</span><span data-line="313">    <span class="k">return</span> <span class="n">validators</span></div>
 
-</span><span data-line="313">
 </span><span data-line="314">
+</span><span data-line="315">
 <div class="viewcode-block" id="pydantic_error_to_user_friendly">
 <a class="viewcode-back" href="../../_autosummary/uf.pydantic_support.html#uf.pydantic_error_to_user_friendly">[docs]</a>
-</span><span data-line="315"><span class="k">def</span><span class="w"> </span><span class="nf">pydantic_error_to_user_friendly</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span data-line="316"><span class="w">    </span><span class="sd">"""Convert Pydantic ValidationError to user-friendly format.</span>
-</span><span data-line="317">
-</span><span data-line="318"><span class="sd">    Args:</span>
-</span><span data-line="319"><span class="sd">        error: Pydantic ValidationError</span>
-</span><span data-line="320">
-</span><span data-line="321"><span class="sd">    Returns:</span>
-</span><span data-line="322"><span class="sd">        Dictionary with field-level errors</span>
-</span><span data-line="323"><span class="sd">    """</span>
-</span><span data-line="324">    <span class="n">pydantic</span> <span class="o">=</span> <span class="n">import_optional</span><span class="p">(</span><span class="s2">"pydantic"</span><span class="p">)</span>
-</span><span data-line="325">    <span class="k">if</span> <span class="n">pydantic</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">):</span>
-</span><span data-line="326">        <span class="k">return</span> <span class="p">{</span><span class="s2">"error"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)}</span>
-</span><span data-line="327">
-</span><span data-line="328">    <span class="n">field_errors</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="329">
-</span><span data-line="330">    <span class="k">for</span> <span class="n">err</span> <span class="ow">in</span> <span class="n">error</span><span class="o">.</span><span class="n">errors</span><span class="p">():</span>
-</span><span data-line="331">        <span class="n">field</span> <span class="o">=</span> <span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span> <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">err</span><span class="p">[</span><span class="s2">"loc"</span><span class="p">])</span>
-</span><span data-line="332">        <span class="n">message</span> <span class="o">=</span> <span class="n">err</span><span class="p">[</span><span class="s2">"msg"</span><span class="p">]</span>
-</span><span data-line="333">        <span class="n">field_errors</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span>
-</span><span data-line="334">
-</span><span data-line="335">    <span class="k">return</span> <span class="p">{</span><span class="s2">"field_errors"</span><span class="p">:</span> <span class="n">field_errors</span><span class="p">}</span></div>
+</span><span data-line="316"><span class="k">def</span><span class="w"> </span><span class="nf">pydantic_error_to_user_friendly</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+</span><span data-line="317"><span class="w">    </span><span class="sd">"""Convert Pydantic ValidationError to user-friendly format.</span>
+</span><span data-line="318">
+</span><span data-line="319"><span class="sd">    Args:</span>
+</span><span data-line="320"><span class="sd">        error: Pydantic ValidationError</span>
+</span><span data-line="321">
+</span><span data-line="322"><span class="sd">    Returns:</span>
+</span><span data-line="323"><span class="sd">        Dictionary with field-level errors</span>
+</span><span data-line="324"><span class="sd">    """</span>
+</span><span data-line="325">    <span class="n">pydantic</span> <span class="o">=</span> <span class="n">import_optional</span><span class="p">(</span><span class="s2">"pydantic"</span><span class="p">)</span>
+</span><span data-line="326">    <span class="k">if</span> <span class="n">pydantic</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">):</span>
+</span><span data-line="327">        <span class="k">return</span> <span class="p">{</span><span class="s2">"error"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)}</span>
+</span><span data-line="328">
+</span><span data-line="329">    <span class="n">field_errors</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="330">
+</span><span data-line="331">    <span class="k">for</span> <span class="n">err</span> <span class="ow">in</span> <span class="n">error</span><span class="o">.</span><span class="n">errors</span><span class="p">():</span>
+</span><span data-line="332">        <span class="n">field</span> <span class="o">=</span> <span class="s2">"."</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span> <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">err</span><span class="p">[</span><span class="s2">"loc"</span><span class="p">])</span>
+</span><span data-line="333">        <span class="n">message</span> <span class="o">=</span> <span class="n">err</span><span class="p">[</span><span class="s2">"msg"</span><span class="p">]</span>
+</span><span data-line="334">        <span class="n">field_errors</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span>
+</span><span data-line="335">
+</span><span data-line="336">    <span class="k">return</span> <span class="p">{</span><span class="s2">"field_errors"</span><span class="p">:</span> <span class="n">field_errors</span><span class="p">}</span></div>
 
-</span><span data-line="336">
 </span><span data-line="337">
+</span><span data-line="338">
 <div class="viewcode-block" id="PydanticRegistry">
 <a class="viewcode-back" href="../../_autosummary/uf.pydantic_support.html#uf.PydanticRegistry">[docs]</a>
-</span><span data-line="338"><span class="k">class</span><span class="w"> </span><span class="nc">PydanticRegistry</span><span class="p">:</span>
-</span><span data-line="339"><span class="w">    </span><span class="sd">"""Registry for Pydantic models used in uf.</span>
-</span><span data-line="340">
-</span><span data-line="341"><span class="sd">    Tracks models and provides utilities for working with them.</span>
-</span><span data-line="342"><span class="sd">    """</span>
-</span><span data-line="343">
-</span><span data-line="344">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span data-line="345"><span class="w">        </span><span class="sd">"""Initialize the registry."""</span>
-</span><span data-line="346">        <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span data-line="347">
+</span><span data-line="339"><span class="k">class</span><span class="w"> </span><span class="nc">PydanticRegistry</span><span class="p">:</span>
+</span><span data-line="340"><span class="w">    </span><span class="sd">"""Registry for Pydantic models used in uf.</span>
+</span><span data-line="341">
+</span><span data-line="342"><span class="sd">    Tracks models and provides utilities for working with them.</span>
+</span><span data-line="343"><span class="sd">    """</span>
+</span><span data-line="344">
+</span><span data-line="345">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="346"><span class="w">        </span><span class="sd">"""Initialize the registry."""</span>
+</span><span data-line="347">        <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="348">
 <div class="viewcode-block" id="PydanticRegistry.register">
 <a class="viewcode-back" href="../../_autosummary/uf.pydantic_support.html#uf.PydanticRegistry.register">[docs]</a>
-</span><span data-line="348">    <span class="k">def</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model_class</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span data-line="349"><span class="w">        </span><span class="sd">"""Register a Pydantic model.</span>
-</span><span data-line="350">
-</span><span data-line="351"><span class="sd">        Args:</span>
-</span><span data-line="352"><span class="sd">            name: Name to register under</span>
-</span><span data-line="353"><span class="sd">            model_class: Pydantic model class</span>
-</span><span data-line="354"><span class="sd">        """</span>
-</span><span data-line="355">        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_pydantic_model</span><span class="p">(</span><span class="n">model_class</span><span class="p">):</span>
-</span><span data-line="356">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">model_class</span><span class="si">}</span><span class="s2"> is not a Pydantic model"</span><span class="p">)</span>
-</span><span data-line="357">
-</span><span data-line="358">        <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_class</span></div>
+</span><span data-line="349">    <span class="k">def</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model_class</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="350"><span class="w">        </span><span class="sd">"""Register a Pydantic model.</span>
+</span><span data-line="351">
+</span><span data-line="352"><span class="sd">        Args:</span>
+</span><span data-line="353"><span class="sd">            name: Name to register under</span>
+</span><span data-line="354"><span class="sd">            model_class: Pydantic model class</span>
+</span><span data-line="355"><span class="sd">        """</span>
+</span><span data-line="356">        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_pydantic_model</span><span class="p">(</span><span class="n">model_class</span><span class="p">):</span>
+</span><span data-line="357">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">model_class</span><span class="si">}</span><span class="s2"> is not a Pydantic model"</span><span class="p">)</span>
+</span><span data-line="358">
+</span><span data-line="359">        <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_class</span></div>
 
-</span><span data-line="359">
+</span><span data-line="360">
 <div class="viewcode-block" id="PydanticRegistry.get">
 <a class="viewcode-back" href="../../_autosummary/uf.pydantic_support.html#uf.PydanticRegistry.get">[docs]</a>
-</span><span data-line="360">    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-</span><span data-line="361"><span class="w">        </span><span class="sd">"""Get a registered model by name.</span>
-</span><span data-line="362">
-</span><span data-line="363"><span class="sd">        Args:</span>
-</span><span data-line="364"><span class="sd">            name: Model name</span>
-</span><span data-line="365">
-</span><span data-line="366"><span class="sd">        Returns:</span>
-</span><span data-line="367"><span class="sd">            Pydantic model class or None</span>
-</span><span data-line="368"><span class="sd">        """</span>
-</span><span data-line="369">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
+</span><span data-line="361">    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+</span><span data-line="362"><span class="w">        </span><span class="sd">"""Get a registered model by name.</span>
+</span><span data-line="363">
+</span><span data-line="364"><span class="sd">        Args:</span>
+</span><span data-line="365"><span class="sd">            name: Model name</span>
+</span><span data-line="366">
+</span><span data-line="367"><span class="sd">        Returns:</span>
+</span><span data-line="368"><span class="sd">            Pydantic model class or None</span>
+</span><span data-line="369"><span class="sd">        """</span>
+</span><span data-line="370">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
 
-</span><span data-line="370">
+</span><span data-line="371">
 <div class="viewcode-block" id="PydanticRegistry.list_models">
 <a class="viewcode-back" href="../../_autosummary/uf.pydantic_support.html#uf.PydanticRegistry.list_models">[docs]</a>
-</span><span data-line="371">    <span class="k">def</span><span class="w"> </span><span class="nf">list_models</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-</span><span data-line="372"><span class="w">        </span><span class="sd">"""List all registered model names.</span>
-</span><span data-line="373">
-</span><span data-line="374"><span class="sd">        Returns:</span>
-</span><span data-line="375"><span class="sd">            List of model name strings</span>
-</span><span data-line="376"><span class="sd">        """</span>
-</span><span data-line="377">        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+</span><span data-line="372">    <span class="k">def</span><span class="w"> </span><span class="nf">list_models</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="373"><span class="w">        </span><span class="sd">"""List all registered model names.</span>
+</span><span data-line="374">
+</span><span data-line="375"><span class="sd">        Returns:</span>
+</span><span data-line="376"><span class="sd">            List of model name strings</span>
+</span><span data-line="377"><span class="sd">        """</span>
+</span><span data-line="378">        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
 </div>
 
-</span><span data-line="378">
 </span><span data-line="379">
-</span><span data-line="380"><span class="c1"># Global registry</span>
-</span><span data-line="381"><span class="n">_global_pydantic_registry</span> <span class="o">=</span> <span class="n">PydanticRegistry</span><span class="p">()</span>
-</span><span data-line="382">
+</span><span data-line="380">
+</span><span data-line="381"><span class="c1"># Global registry</span>
+</span><span data-line="382"><span class="n">_global_pydantic_registry</span> <span class="o">=</span> <span class="n">PydanticRegistry</span><span class="p">()</span>
 </span><span data-line="383">
+</span><span data-line="384">
 <div class="viewcode-block" id="get_pydantic_registry">
 <a class="viewcode-back" href="../../_autosummary/uf.pydantic_support.html#uf.get_pydantic_registry">[docs]</a>
-</span><span data-line="384"><span class="k">def</span><span class="w"> </span><span class="nf">get_pydantic_registry</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">PydanticRegistry</span><span class="p">:</span>
-</span><span data-line="385"><span class="w">    </span><span class="sd">"""Get the global Pydantic registry.</span>
-</span><span data-line="386">
-</span><span data-line="387"><span class="sd">    Returns:</span>
-</span><span data-line="388"><span class="sd">        Global PydanticRegistry instance</span>
-</span><span data-line="389"><span class="sd">    """</span>
-</span><span data-line="390">    <span class="k">return</span> <span class="n">_global_pydantic_registry</span></div>
+</span><span data-line="385"><span class="k">def</span><span class="w"> </span><span class="nf">get_pydantic_registry</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">PydanticRegistry</span><span class="p">:</span>
+</span><span data-line="386"><span class="w">    </span><span class="sd">"""Get the global Pydantic registry.</span>
+</span><span data-line="387">
+</span><span data-line="388"><span class="sd">    Returns:</span>
+</span><span data-line="389"><span class="sd">        Global PydanticRegistry instance</span>
+</span><span data-line="390"><span class="sd">    """</span>
+</span><span data-line="391">    <span class="k">return</span> <span class="n">_global_pydantic_registry</span></div>
 
 </span></pre></div>
         </article><button class="back-to-top" type="button">
@@ -593,7 +595,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=d50bcae4"></script>
+      <script src="../../_static/documentation_options.js?v=71734efd"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

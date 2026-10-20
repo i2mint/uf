@@ -7,6 +7,7 @@
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d88b86f9" />
     <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_autodoc_typehints.css?v=057ac668" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -266,9 +267,9 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="119"><span class="sd">    Example:</span>
 </span><span data-line="120"><span class="sd">        &gt;&gt;&gt; task_queue = TaskQueue(num_workers=2)</span>
 </span><span data-line="121"><span class="sd">        &gt;&gt;&gt; task_queue.start()</span>
-</span><span data-line="122"><span class="sd">        &gt;&gt;&gt; task_id = task_queue.submit(expensive_function, x=10, y=20)</span>
-</span><span data-line="123"><span class="sd">        &gt;&gt;&gt; status = task_queue.get_status(task_id)</span>
-</span><span data-line="124"><span class="sd">        &gt;&gt;&gt; result = task_queue.get_result(task_id)</span>
+</span><span data-line="122"><span class="sd">        &gt;&gt;&gt; task_id = task_queue.submit(expensive_function, x=10, y=20)  # doctest: +SKIP</span>
+</span><span data-line="123"><span class="sd">        &gt;&gt;&gt; status = task_queue.get_status(task_id)  # doctest: +SKIP</span>
+</span><span data-line="124"><span class="sd">        &gt;&gt;&gt; result = task_queue.get_result(task_id)  # doctest: +SKIP</span>
 </span><span data-line="125"><span class="sd">    """</span>
 </span><span data-line="126">
 </span><span data-line="127">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">max_queue_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
@@ -699,7 +700,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=d50bcae4"></script>
+      <script src="../../_static/documentation_options.js?v=71734efd"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>

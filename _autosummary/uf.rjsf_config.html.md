@@ -59,8 +59,8 @@ fluent interface for configuring fields.
 
 ```pycon
 >>> builder = RjsfConfigBuilder()
->>> builder.field('email', RjsfFieldConfig(format='email'))
->>> builder.field('message', RjsfFieldConfig(widget='textarea'))
+>>> _ = builder.field('email', RjsfFieldConfig(format='email'))
+>>> _ = builder.field('message', RjsfFieldConfig(widget='textarea'))
 >>> spec = builder.build(base_schema)
 ```
 
@@ -110,7 +110,7 @@ Set the order of fields in the form.
 * **Returns:**
   Self for method chaining
 
-### *class* uf.rjsf_config.RjsfFieldConfig(widget=None, ui_options=<factory>, format=None, enum=None, description=None, placeholder=None, title=None, disabled=False, readonly=False, hidden=False, default=None)
+### *class* uf.rjsf_config.RjsfFieldConfig(widget=None, ui_options=dict(), format=None, enum=None, description=None, placeholder=None, title=None, disabled=False, readonly=False, hidden=False, default=None)
 
 Bases: [`object`](https://docs.python.org/3/builtins/functions.html#object)
 
@@ -123,45 +123,78 @@ rendered in the RJSF interface.
 
 Widget type (e.g., ‘textarea’, ‘select’, ‘radio’, ‘date’)
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### ui_options
 
 Additional UI options for the widget
+
+* **Type:**
+  [`dict`](https://docs.python.org/3/builtins/stdtypes.html#dict)
 
 #### format
 
 JSON Schema format (e.g., ‘email’, ‘uri’, ‘date-time’)
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### enum
 
 List of allowed values (for dropdowns)
+
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`list`](https://docs.python.org/3/builtins/stdtypes.html#list)]
 
 #### description
 
 Field description/help text
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### placeholder
 
 Placeholder text for the input
+
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
 
 #### title
 
 Custom title for the field
 
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`str`](https://docs.python.org/3/builtins/stdtypes.html#str)]
+
 #### disabled
 
 Whether the field is disabled
+
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
 
 #### readonly
 
 Whether the field is read-only
 
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
+
 #### hidden
 
 Whether to hide the field
 
+* **Type:**
+  [`bool`](https://docs.python.org/3/builtins/functions.html#bool)
+
 #### default
 
 Default value for the field
+
+* **Type:**
+  [`Optional`](https://docs.python.org/3/library/typing.html#typing.Optional)[[`Any`](https://docs.python.org/3/library/typing.html#typing.Any)]
 
 ### Example
 

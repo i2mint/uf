@@ -77,9 +77,9 @@ Create RJSF spec from function with Pydantic parameters.
 ### Example
 
 ```pycon
->>> from pydantic import BaseModel, EmailStr
+>>> from pydantic import BaseModel
 >>> class UserCreate(BaseModel):
-...     email: EmailStr
+...     email: str
 ...     age: int
 >>> def create_user(user: UserCreate):
 ...     pass
@@ -219,5 +219,6 @@ the function, and converts Pydantic outputs back to dicts.
 >>> def create_user(user: User) -> User:
 ...     return user
 >>> wrapped = wrap_pydantic_function(create_user)
->>> result = wrapped({'name': 'Alice'})  # Pass dict, not User
+>>> wrapped(user={'name': 'Alice'})  # Pass a dict, not a User
+{'name': 'Alice'}
 ```

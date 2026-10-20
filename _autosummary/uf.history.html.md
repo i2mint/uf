@@ -164,7 +164,7 @@ Provides a unified interface for tracking calls and managing presets.
 ```pycon
 >>> manager = HistoryManager()
 >>> manager.record_call('add', {'x': 10, 'y': 20}, result=30)
->>> manager.save_preset('quick', 'add', {'x': 10, 'y': 20})
+>>> _ = manager.save_preset('quick', 'add', {'x': 10, 'y': 20})
 >>> recent = manager.get_recent_calls('add')
 >>> presets = manager.get_presets('add')
 ```
@@ -308,7 +308,7 @@ Manage parameter presets for functions.
 
 ```pycon
 >>> presets = PresetManager()
->>> presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')
+>>> _ = presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')
 >>> preset = presets.get('quick_add', 'add')
 >>> result = my_func(**preset.params)
 ```

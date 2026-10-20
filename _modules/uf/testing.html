@@ -7,6 +7,7 @@
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d88b86f9" />
     <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_autodoc_typehints.css?v=057ac668" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -152,10 +153,10 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="17">
 </span><span data-line="18"><span class="sd">    Example:</span>
 </span><span data-line="19"><span class="sd">        &gt;&gt;&gt; from uf import mk_rjsf_app</span>
-</span><span data-line="20"><span class="sd">        &gt;&gt;&gt; app = mk_rjsf_app([my_func])</span>
-</span><span data-line="21"><span class="sd">        &gt;&gt;&gt; client = UfTestClient(app)</span>
-</span><span data-line="22"><span class="sd">        &gt;&gt;&gt; response = client.call_function('my_func', {'x': 10, 'y': 20})</span>
-</span><span data-line="23"><span class="sd">        &gt;&gt;&gt; assert response['success']</span>
+</span><span data-line="20"><span class="sd">        &gt;&gt;&gt; app = mk_rjsf_app([my_func])  # doctest: +SKIP</span>
+</span><span data-line="21"><span class="sd">        &gt;&gt;&gt; client = UfTestClient(app)  # doctest: +SKIP</span>
+</span><span data-line="22"><span class="sd">        &gt;&gt;&gt; response = client.call_function('my_func', {'x': 10, 'y': 20})  # doctest: +SKIP</span>
+</span><span data-line="23"><span class="sd">        &gt;&gt;&gt; assert response['success']  # doctest: +SKIP</span>
 </span><span data-line="24"><span class="sd">    """</span>
 </span><span data-line="25">
 </span><span data-line="26">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
@@ -327,7 +328,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="177"><span class="sd">    Provides a testing context with common utilities and assertions.</span>
 </span><span data-line="178">
 </span><span data-line="179"><span class="sd">    Example:</span>
-</span><span data-line="180"><span class="sd">        &gt;&gt;&gt; with UfAppTester(app) as tester:</span>
+</span><span data-line="180"><span class="sd">        &gt;&gt;&gt; with UfAppTester(app) as tester:  # doctest: +SKIP</span>
 </span><span data-line="181"><span class="sd">        ...     result = tester.submit_form('add', {'x': 10, 'y': 20})</span>
 </span><span data-line="182"><span class="sd">        ...     tester.assert_success(result)</span>
 </span><span data-line="183"><span class="sd">        ...     tester.assert_result_equals(result, 30)</span>
@@ -518,7 +519,7 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="344"><span class="sd">        None</span>
 </span><span data-line="345">
 </span><span data-line="346"><span class="sd">    Example:</span>
-</span><span data-line="347"><span class="sd">        &gt;&gt;&gt; with mock_function_response(app, 'get_user', {'name': 'Test'}):</span>
+</span><span data-line="347"><span class="sd">        &gt;&gt;&gt; with mock_function_response(app, 'get_user', {'name': 'Test'}):  # doctest: +SKIP</span>
 </span><span data-line="348"><span class="sd">        ...     # Calls to get_user will return {'name': 'Test'}</span>
 </span><span data-line="349"><span class="sd">        ...     result = client.call_function('get_user', {'id': 1})</span>
 </span><span data-line="350"><span class="sd">    """</span>
@@ -712,7 +713,7 @@ data-aria-dark="Switch to auto color mode">
     </div>
   </div>
 </footer>
-      <script src="../../_static/documentation_options.js?v=d50bcae4"></script>
+      <script src="../../_static/documentation_options.js?v=71734efd"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
