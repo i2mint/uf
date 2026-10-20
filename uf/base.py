@@ -189,8 +189,13 @@ def mk_rjsf_app(
     app = mk_app(
         [_serve_as(func, name) for name, func in named_funcs.items()],
         config=config,
-        input_trans=input_trans,
-        output_trans=output_trans,
+        # Only pass what was asked for: a qh that predates these would forward them to
+        # FastAPI and fail even when both are None.
+        **{
+            k: v
+            for k, v in dict(input_trans=input_trans, output_trans=output_trans).items()
+            if v is not None
+        },
         **qh_kwargs,
     )
 
