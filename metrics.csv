@@ -1,30 +1,28 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-20T03:28:47.985169Z
-commit_sha,576123928847e16a47c9d81fedd3800f6f2c3296
-commit_message,"Fix CI after #33: older qh rejects input_trans=None; keep package doctests collected (#34)
+timestamp,2026-10-20T09:53:07.009506Z
+commit_sha,b3b958f4440ec3d131aa0f1b0ae8a0645506d709
+commit_message,"decorators getters see through functools.partial (#32)
 
-* Restore testpaths = [tests]: widening it turned CI red (#5)
-
-* Widen testpaths again; drop None input/output_trans before qh.mk_app; dependency-free pydantic doctest (#5)"
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
 python_version,3.10
-metrics.umpyre_stats.num_functions,33970
-metrics.umpyre_stats.num_classes,6671
-metrics.umpyre_stats.total_lines,949853
-metrics.umpyre_stats.empty_lines,134487
-metrics.umpyre_stats.comment_lines,43204
-metrics.umpyre_stats.docs_lines,118778
-metrics.umpyre_stats.function_lines,543731
-metrics.umpyre_stats.empty_lines_ratio,0.14158717190975867
-metrics.umpyre_stats.comment_lines_ratio,0.04548493293172733
-metrics.umpyre_stats.function_lines_ratio,0.5724369981460289
-metrics.umpyre_stats.mean_lines_per_function,16.006211362967324
+metrics.umpyre_stats.num_functions,33982
+metrics.umpyre_stats.num_classes,6672
+metrics.umpyre_stats.total_lines,950153
+metrics.umpyre_stats.empty_lines,134532
+metrics.umpyre_stats.comment_lines,43207
+metrics.umpyre_stats.docs_lines,118908
+metrics.umpyre_stats.function_lines,544006
+metrics.umpyre_stats.empty_lines_ratio,0.14158982816451665
+metrics.umpyre_stats.comment_lines_ratio,0.04547372896786096
+metrics.umpyre_stats.function_lines_ratio,0.5725456847476144
+metrics.umpyre_stats.mean_lines_per_function,16.008651639103054
 metrics.umpyre_stats.files_analyzed,2354
-metrics.umpyre_stats.pypi_version,0.1.16
+metrics.umpyre_stats.pypi_version,0.1.17
 metrics.workflow_status.last_run_status,success
-metrics.workflow_status.last_success_timestamp,2026-10-20T03:27:24Z
+metrics.workflow_status.last_success_timestamp,2026-10-20T03:30:27Z
 metrics.workflow_status.recent_failure_count,5
-metrics.workflow_status.run_url,https://github.com/i2mint/uf/actions/runs/39364271134
+metrics.workflow_status.run_url,https://github.com/i2mint/uf/actions/runs/39364602612
 metrics.workflow_status.total_runs_analyzed,10
 metrics.wily.cyclomatic_avg,0.0
 metrics.wily.maintainability_index,0.0
@@ -40,4 +38,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,11.997647047042847
+collection_duration_seconds,11.10621953010559
