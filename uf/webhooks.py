@@ -68,7 +68,7 @@ class WebhookClient:
 
     Example:
         >>> client = WebhookClient('https://example.com/webhook')
-        >>> client.send(WebhookEvent('success', 'my_func', {}, result=42))
+        >>> _ = client.send(WebhookEvent('success', 'my_func', {}, result=42))
     """
 
     def __init__(
@@ -160,7 +160,7 @@ class WebhookManager:
         >>> manager = WebhookManager()
         >>> manager.add_webhook('https://example.com/hook1', events=['success'])
         >>> manager.add_webhook('https://example.com/hook2', events=['failure'])
-        >>> manager.trigger('success', 'my_func', {}, result=42)
+        >>> _ = manager.trigger('success', 'my_func', {}, result=42)
     """
 
     def __init__(self):

@@ -275,9 +275,9 @@ class PresetManager:
 
     Example:
         >>> presets = PresetManager()
-        >>> presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')
+        >>> _ = presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')
         >>> preset = presets.get('quick_add', 'add')
-        >>> result = my_func(**preset.params)
+        >>> result = my_func(**preset.params)  # doctest: +SKIP
     """
 
     def __init__(self):
@@ -391,7 +391,7 @@ class HistoryManager:
     Example:
         >>> manager = HistoryManager()
         >>> manager.record_call('add', {'x': 10, 'y': 20}, result=30)
-        >>> manager.save_preset('quick', 'add', {'x': 10, 'y': 20})
+        >>> _ = manager.save_preset('quick', 'add', {'x': 10, 'y': 20})
         >>> recent = manager.get_recent_calls('add')
         >>> presets = manager.get_presets('add')
     """

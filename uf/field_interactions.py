@@ -151,8 +151,8 @@ class DependencyBuilder:
 
     Example:
         >>> builder = DependencyBuilder()
-        >>> builder.when('reason').equals('other').show('other_reason')
-        >>> builder.when('age').greater_than(18).enable('alcohol_consent')
+        >>> _ = builder.when('reason').equals('other').show('other_reason')
+        >>> _ = builder.when('age').greater_than(18).enable('alcohol_consent')
         >>> dependencies = builder.build()
     """
 
@@ -384,7 +384,7 @@ def add_field_dependencies(
         ...                    lambda v: v == 'other',
         ...                    DependencyAction.SHOW)
         ... ]
-        >>> spec = add_field_dependencies(my_func, deps)
+        >>> spec = add_field_dependencies(my_func, deps)  # doctest: +SKIP
     """
     # This would typically be called during spec generation
     # For now, return a structure that can be merged

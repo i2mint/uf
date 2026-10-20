@@ -27,7 +27,7 @@ class FunctionGroup:
         collapsed: Whether the group starts collapsed in UI
 
     Example:
-        >>> math_funcs = FunctionGroup(
+        >>> math_funcs = FunctionGroup(  # doctest: +SKIP
         ...     'Math',
         ...     [add, subtract, multiply, divide],
         ...     description='Mathematical operations',
@@ -108,8 +108,8 @@ class FunctionOrganizer:
 
     Example:
         >>> organizer = FunctionOrganizer()
-        >>> organizer.group('Admin', [user_create, user_delete], icon='shield')
-        >>> organizer.group('Reports', [generate_report, export_csv], icon='file')
+        >>> organizer.group('Admin', [user_create, user_delete], icon='shield')  # doctest: +SKIP
+        >>> organizer.group('Reports', [generate_report, export_csv], icon='file')  # doctest: +SKIP
         >>> groups = organizer.get_groups()
     """
 
@@ -142,7 +142,7 @@ class FunctionOrganizer:
             The created FunctionGroup
 
         Example:
-            >>> organizer.group(
+            >>> organizer.group(  # doctest: +SKIP
             ...     'Database',
             ...     [save_record, load_record],
             ...     description='Database operations',
@@ -231,7 +231,7 @@ class FunctionOrganizer:
             Dictionary representation suitable for JSON serialization
 
         Example:
-            >>> org_dict = organizer.to_dict()
+            >>> org_dict = organizer.to_dict()  # doctest: +SKIP
             >>> # Can be used in templates or APIs
         """
         return {
@@ -269,9 +269,9 @@ def mk_grouped_app(
         Configured web application with grouped navigation
 
     Example:
-        >>> admin_group = FunctionGroup('Admin', [user_create, user_delete])
-        >>> reports_group = FunctionGroup('Reports', [generate_report])
-        >>> app = mk_grouped_app([admin_group, reports_group])
+        >>> admin_group = FunctionGroup('Admin', [user_create, user_delete])  # doctest: +SKIP
+        >>> reports_group = FunctionGroup('Reports', [generate_report])  # doctest: +SKIP
+        >>> app = mk_grouped_app([admin_group, reports_group])  # doctest: +SKIP
     """
     from uf.base import mk_rjsf_app
 
@@ -383,8 +383,8 @@ def auto_group_by_prefix(
         FunctionOrganizer with auto-generated groups
 
     Example:
-        >>> funcs = [user_create, user_delete, report_generate, admin_reset]
-        >>> organizer = auto_group_by_prefix(funcs)
+        >>> funcs = [user_create, user_delete, report_generate, admin_reset]  # doctest: +SKIP
+        >>> organizer = auto_group_by_prefix(funcs)  # doctest: +SKIP
         >>> # Creates groups: 'user', 'report', 'admin'
     """
     from collections import defaultdict
@@ -427,9 +427,9 @@ def auto_group_by_module(funcs: Iterable[Callable]) -> FunctionOrganizer:
         module of the function it wraps)
 
     Example:
-        >>> from myapp import user_ops, report_ops
-        >>> funcs = [user_ops.create, user_ops.delete, report_ops.generate]
-        >>> organizer = auto_group_by_module(funcs)
+        >>> from myapp import user_ops, report_ops  # doctest: +SKIP
+        >>> funcs = [user_ops.create, user_ops.delete, report_ops.generate]  # doctest: +SKIP
+        >>> organizer = auto_group_by_module(funcs)  # doctest: +SKIP
     """
     from collections import defaultdict
 
@@ -479,7 +479,7 @@ def auto_group_by_tag(
         ...     pass
         >>> create_user.__uf_group__ = 'Admin'
         >>>
-        >>> organizer = auto_group_by_tag([create_user, other_func])
+        >>> organizer = auto_group_by_tag([create_user, other_func])  # doctest: +SKIP
     """
     from collections import defaultdict
 

@@ -17,10 +17,10 @@ class UfTestClient:
 
     Example:
         >>> from uf import mk_rjsf_app
-        >>> app = mk_rjsf_app([my_func])
-        >>> client = UfTestClient(app)
-        >>> response = client.call_function('my_func', {'x': 10, 'y': 20})
-        >>> assert response['success']
+        >>> app = mk_rjsf_app([my_func])  # doctest: +SKIP
+        >>> client = UfTestClient(app)  # doctest: +SKIP
+        >>> response = client.call_function('my_func', {'x': 10, 'y': 20})  # doctest: +SKIP
+        >>> assert response['success']  # doctest: +SKIP
     """
 
     def __init__(self, app):
@@ -177,7 +177,7 @@ class UfAppTester:
     Provides a testing context with common utilities and assertions.
 
     Example:
-        >>> with UfAppTester(app) as tester:
+        >>> with UfAppTester(app) as tester:  # doctest: +SKIP
         ...     result = tester.submit_form('add', {'x': 10, 'y': 20})
         ...     tester.assert_success(result)
         ...     tester.assert_result_equals(result, 30)
@@ -344,7 +344,7 @@ def mock_function_response(app, func_name: str, mock_result: Any):
         None
 
     Example:
-        >>> with mock_function_response(app, 'get_user', {'name': 'Test'}):
+        >>> with mock_function_response(app, 'get_user', {'name': 'Test'}):  # doctest: +SKIP
         ...     # Calls to get_user will return {'name': 'Test'}
         ...     result = client.call_function('get_user', {'id': 1})
     """

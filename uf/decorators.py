@@ -167,8 +167,8 @@ def get_ui_config(func: Callable) -> Optional[dict]:
         Configuration dictionary or None if not configured
 
     Example:
-        >>> config = get_ui_config(my_function)
-        >>> if config:
+        >>> config = get_ui_config(my_function)  # doctest: +SKIP
+        >>> if config:  # doctest: +SKIP
         ...     print(config['title'])
     """
     return getattr(func, _UI_CONFIG_ATTR, None)
@@ -184,8 +184,8 @@ def get_group(func: Callable) -> Optional[str]:
         Group name or None
 
     Example:
-        >>> group = get_group(my_function)
-        >>> if group:
+        >>> group = get_group(my_function)  # doctest: +SKIP
+        >>> if group:  # doctest: +SKIP
         ...     print(f"Function is in group: {group}")
     """
     config = get_ui_config(func)
@@ -204,8 +204,8 @@ def get_field_configs(func: Callable) -> dict[str, RjsfFieldConfig]:
         Dictionary mapping parameter names to RjsfFieldConfig
 
     Example:
-        >>> field_configs = get_field_configs(my_function)
-        >>> if 'email' in field_configs:
+        >>> field_configs = get_field_configs(my_function)  # doctest: +SKIP
+        >>> if 'email' in field_configs:  # doctest: +SKIP
         ...     print(field_configs['email'].format)
     """
     config = get_ui_config(func)
@@ -224,7 +224,7 @@ def is_hidden(func: Callable) -> bool:
         True if function is hidden, False otherwise
 
     Example:
-        >>> if not is_hidden(my_function):
+        >>> if not is_hidden(my_function):  # doctest: +SKIP
         ...     # Show in UI
         ...     pass
     """
@@ -278,8 +278,8 @@ def get_example(func: Callable) -> Optional[tuple[tuple, dict]]:
         Tuple of (args, kwargs) or None if no example
 
     Example:
-        >>> example = get_example(my_function)
-        >>> if example:
+        >>> example = get_example(my_function)  # doctest: +SKIP
+        >>> if example:  # doctest: +SKIP
         ...     args, kwargs = example
         ...     result = my_function(*args, **kwargs)
     """

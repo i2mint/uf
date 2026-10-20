@@ -57,7 +57,7 @@ class InputTransformRegistry:
 
         Example:
             >>> from pathlib import Path
-            >>> registry.register_type(
+            >>> registry.register_type(  # doctest: +SKIP
             ...     Path,
             ...     to_json=str,
             ...     from_json=Path,
@@ -172,8 +172,8 @@ class InputTransformRegistry:
             >>> from uf import mk_rjsf_app
             >>> registry = InputTransformRegistry()
             >>> # ... register types ...
-            >>> input_trans = registry.mk_input_trans_for_funcs([my_func])
-            >>> app = mk_rjsf_app([my_func], input_trans=input_trans)
+            >>> input_trans = registry.mk_input_trans_for_funcs([my_func])  # doctest: +SKIP
+            >>> app = mk_rjsf_app([my_func], input_trans=input_trans)  # doctest: +SKIP
         """
         import inspect
 
@@ -213,8 +213,8 @@ class InputTransformRegistry:
             Transformation function for qh output
 
         Example:
-            >>> output_trans = registry.mk_output_trans()
-            >>> app = mk_rjsf_app([my_func], output_trans=output_trans)
+            >>> output_trans = registry.mk_output_trans()  # doctest: +SKIP
+            >>> app = mk_rjsf_app([my_func], output_trans=output_trans)  # doctest: +SKIP
         """
 
         def output_trans(result: Any) -> Any:

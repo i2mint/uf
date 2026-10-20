@@ -188,7 +188,7 @@ class DiskCache(CacheBackend):
 
     Example:
         >>> cache = DiskCache(cache_dir='/tmp/uf_cache')
-        >>> cache.set('expensive_result', big_data)
+        >>> cache.set('expensive_result', big_data)  # doctest: +SKIP
     """
 
     def __init__(self, cache_dir: str = ".uf_cache", default_ttl: int = 3600):
@@ -322,8 +322,8 @@ def cached(
         ...     # Only runs once per unique (x, y) combination
         ...     return heavy_computation(x, y)
         >>>
-        >>> result = expensive_calculation(10, 20)  # Computes
-        >>> result2 = expensive_calculation(10, 20)  # From cache
+        >>> result = expensive_calculation(10, 20)  # Computes  # doctest: +SKIP
+        >>> result2 = expensive_calculation(10, 20)  # From cache  # doctest: +SKIP
     """
     if backend is None:
         backend = get_global_cache_backend()
