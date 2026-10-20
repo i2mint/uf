@@ -1,7 +1,7 @@
 {
-  "collection_duration_seconds": 11.336852788925171,
-  "commit_message": "Merge 320865a0478011cd95a103e0c95f06ccd71c20c7 into bd0c02b56799e1fc4b9fdc94c4efaff2108c6c33",
-  "commit_sha": "a4736477d4a103603b0e540c1a3b90432497924b",
+  "collection_duration_seconds": 6.150343656539917,
+  "commit_message": "Fix CI after #33: older qh rejects input_trans=None; keep package doctests collected (#34)\n\n* Restore testpaths = [tests]: widening it turned CI red (#5)\n\n* Widen testpaths again; drop None input/output_trans before qh.mk_app; dependency-free pydantic doctest (#5)",
+  "commit_sha": "576123928847e16a47c9d81fedd3800f6f2c3296",
   "metrics": {
     "coverage": {
       "branch_coverage": 0.0,
@@ -33,15 +33,15 @@
       "total_loc": 0
     },
     "workflow_status": {
-      "last_run_status": "failure",
-      "last_success_timestamp": "2026-10-13T17:58:29Z",
+      "last_run_status": "success",
+      "last_success_timestamp": "2026-10-20T03:27:24Z",
       "recent_failure_count": 5,
-      "run_url": "https://github.com/i2mint/uf/actions/runs/39364068792",
+      "run_url": "https://github.com/i2mint/uf/actions/runs/39364271134",
       "total_runs_analyzed": 10
     }
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-20T03:27:17.764546Z",
+  "timestamp": "2026-10-20T03:28:29.366032Z",
   "workflow_status": {}
 }
