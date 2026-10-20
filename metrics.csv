@@ -1,22 +1,20 @@
 metric,value
 schema_version,1.0
-timestamp,2026-10-20T09:53:09.110021Z
-commit_sha,b3b958f4440ec3d131aa0f1b0ae8a0645506d709
-commit_message,"decorators getters see through functools.partial (#32)
-
-Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>"
+timestamp,2026-10-20T09:53:13.633101Z
+commit_sha,7111fe086223d6bbd22b65835987419acd11464c
+commit_message,Merge b3b958f4440ec3d131aa0f1b0ae8a0645506d709 into bb2db026dabf3049cf63670142fb4626ca0bdc4d
 python_version,3.10
-metrics.umpyre_stats.num_functions,34429
+metrics.umpyre_stats.num_functions,34427
 metrics.umpyre_stats.num_classes,6678
-metrics.umpyre_stats.total_lines,960763
-metrics.umpyre_stats.empty_lines,135862
+metrics.umpyre_stats.total_lines,960759
+metrics.umpyre_stats.empty_lines,135861
 metrics.umpyre_stats.comment_lines,44462
-metrics.umpyre_stats.docs_lines,119681
-metrics.umpyre_stats.function_lines,551844
-metrics.umpyre_stats.empty_lines_ratio,0.14141052476000845
-metrics.umpyre_stats.comment_lines_ratio,0.046277802121855234
-metrics.umpyre_stats.function_lines_ratio,0.5743809867782169
-metrics.umpyre_stats.mean_lines_per_function,16.028464375962123
+metrics.umpyre_stats.docs_lines,119689
+metrics.umpyre_stats.function_lines,551837
+metrics.umpyre_stats.empty_lines_ratio,0.14141007266130215
+metrics.umpyre_stats.comment_lines_ratio,0.04627799479369957
+metrics.umpyre_stats.function_lines_ratio,0.5743760922354098
+metrics.umpyre_stats.mean_lines_per_function,16.029192203793535
 metrics.umpyre_stats.files_analyzed,2343
 metrics.umpyre_stats.pypi_version,0.1.17
 metrics.workflow_status.last_run_status,success
@@ -38,4 +36,4 @@ metrics.coverage.branch_coverage,0.0
 metrics.coverage.statements_covered,0
 metrics.coverage.statements_total,0
 metrics.coverage.error,No coverage file found
-collection_duration_seconds,11.468348741531372
+collection_duration_seconds,11.085715293884277
