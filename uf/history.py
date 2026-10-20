@@ -277,7 +277,9 @@ class PresetManager:
         >>> presets = PresetManager()
         >>> _ = presets.save('quick_add', 'add', {'x': 10, 'y': 20}, 'Quick test')
         >>> preset = presets.get('quick_add', 'add')
-        >>> result = my_func(**preset.params)  # doctest: +SKIP
+        >>> def add(x, y): return x + y
+        >>> add(**preset.params)
+        30
     """
 
     def __init__(self):

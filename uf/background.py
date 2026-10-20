@@ -119,9 +119,15 @@ class TaskQueue:
     Example:
         >>> task_queue = TaskQueue(num_workers=2)
         >>> task_queue.start()
-        >>> task_id = task_queue.submit(expensive_function, x=10, y=20)  # doctest: +SKIP
-        >>> status = task_queue.get_status(task_id)  # doctest: +SKIP
-        >>> result = task_queue.get_result(task_id)  # doctest: +SKIP
+        >>> def expensive_function(x, y):
+        ...     return x + y
+        >>> task_id = task_queue.submit(expensive_function, x=10, y=20)
+        >>> result = task_queue.get_result(task_id, wait=True, timeout=10)
+        >>> result
+        30
+        >>> task_queue.get_status(task_id).value
+        'completed'
+        >>> task_queue.stop()
     """
 
     def __init__(self, num_workers: int = 1, max_queue_size: int = 100):

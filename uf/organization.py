@@ -28,12 +28,18 @@ class FunctionGroup:
         collapsed: Whether the group starts collapsed in UI
 
     Example:
-        >>> math_funcs = FunctionGroup(  # doctest: +SKIP
+        >>> def add(x: int, y: int) -> int:
+        ...     return x + y
+        >>> def subtract(x: int, y: int) -> int:
+        ...     return x - y
+        >>> math_funcs = FunctionGroup(
         ...     'Math',
-        ...     [add, subtract, multiply, divide],
+        ...     [add, subtract],
         ...     description='Mathematical operations',
         ...     icon='calculator'
         ... )
+        >>> list(math_funcs.named_funcs)
+        ['add', 'subtract']
     """
 
     name: str
@@ -108,10 +114,14 @@ class FunctionOrganizer:
     navigation in the UI.
 
     Example:
+        >>> def user_create(name: str): ...
+        >>> def user_delete(name: str): ...
+        >>> def generate_report(): ...
         >>> organizer = FunctionOrganizer()
-        >>> organizer.group('Admin', [user_create, user_delete], icon='shield')  # doctest: +SKIP
-        >>> organizer.group('Reports', [generate_report, export_csv], icon='file')  # doctest: +SKIP
-        >>> groups = organizer.get_groups()
+        >>> g = organizer.group('Admin', [user_create, user_delete], icon='shield')
+        >>> g = organizer.group('Reports', [generate_report], icon='file')
+        >>> [group.name for group in organizer.get_groups()]
+        ['Admin', 'Reports']
     """
 
     def __init__(self):
@@ -143,12 +153,17 @@ class FunctionOrganizer:
             The created FunctionGroup
 
         Example:
-            >>> organizer.group(  # doctest: +SKIP
+            >>> def save_record(record: dict): ...
+            >>> def load_record(key: str): ...
+            >>> organizer = FunctionOrganizer()
+            >>> group = organizer.group(
             ...     'Database',
             ...     [save_record, load_record],
             ...     description='Database operations',
             ...     icon='database'
             ... )
+            >>> group.icon, list(group.named_funcs)
+            ('database', ['save_record', 'load_record'])
         """
         func_group = FunctionGroup(
             name=name,
@@ -232,8 +247,11 @@ class FunctionOrganizer:
             Dictionary representation suitable for JSON serialization
 
         Example:
-            >>> org_dict = organizer.to_dict()  # doctest: +SKIP
-            >>> # Can be used in templates or APIs
+            >>> def ping(): ...
+            >>> organizer = FunctionOrganizer()
+            >>> g = organizer.group('Ops', [ping])
+            >>> organizer.to_dict()['groups'][0]['functions']
+            [{'name': 'ping', 'description': ''}]
         """
         return {
             "groups": [
@@ -270,9 +288,13 @@ def mk_grouped_app(
         Configured web application with grouped navigation
 
     Example:
-        >>> admin_group = FunctionGroup('Admin', [user_create, user_delete])  # doctest: +SKIP
-        >>> reports_group = FunctionGroup('Reports', [generate_report])  # doctest: +SKIP
-        >>> app = mk_grouped_app([admin_group, reports_group])  # doctest: +SKIP
+        >>> def user_create(name: str): ...
+        >>> def generate_report(): ...
+        >>> admin_group = FunctionGroup('Admin', [user_create])
+        >>> reports_group = FunctionGroup('Reports', [generate_report])
+        >>> app = mk_grouped_app([admin_group, reports_group])
+        >>> type(app).__name__
+        'FastAPI'
     """
     from uf.base import mk_rjsf_app
 
@@ -368,9 +390,14 @@ def auto_group_by_prefix(
         FunctionOrganizer with auto-generated groups
 
     Example:
-        >>> funcs = [user_create, user_delete, report_generate, admin_reset]  # doctest: +SKIP
-        >>> organizer = auto_group_by_prefix(funcs)  # doctest: +SKIP
-        >>> # Creates groups: 'user', 'report', 'admin'
+        >>> def user_create(): ...
+        >>> def user_delete(): ...
+        >>> def report_generate(): ...
+        >>> def admin_reset(): ...
+        >>> funcs = [user_create, user_delete, report_generate, admin_reset]
+        >>> organizer = auto_group_by_prefix(funcs)
+        >>> [group.name for group in organizer.get_groups()]
+        ['Admin', 'Report', 'User']
     """
     from collections import defaultdict
 
@@ -412,9 +439,13 @@ def auto_group_by_module(funcs: Iterable[Callable]) -> FunctionOrganizer:
         module of the function it wraps)
 
     Example:
-        >>> from myapp import user_ops, report_ops  # doctest: +SKIP
-        >>> funcs = [user_ops.create, user_ops.delete, report_ops.generate]  # doctest: +SKIP
-        >>> organizer = auto_group_by_module(funcs)  # doctest: +SKIP
+        >>> def create(): ...
+        >>> create.__module__ = 'myapp.user_ops'
+        >>> def generate(): ...
+        >>> generate.__module__ = 'myapp.report_ops'
+        >>> organizer = auto_group_by_module([create, generate])
+        >>> [group.name for group in organizer.get_groups()]
+        ['Report Ops', 'User Ops']
     """
     from collections import defaultdict
 
@@ -464,7 +495,10 @@ def auto_group_by_tag(
         ...     pass
         >>> create_user.__uf_group__ = 'Admin'
         >>>
-        >>> organizer = auto_group_by_tag([create_user, other_func])  # doctest: +SKIP
+        >>> def other_func(): ...
+        >>> organizer = auto_group_by_tag([create_user, other_func])
+        >>> [group.name for group in organizer.get_groups()]
+        ['Admin', 'Other']
     """
     from collections import defaultdict
 

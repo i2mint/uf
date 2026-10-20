@@ -57,7 +57,8 @@ class InputTransformRegistry:
 
         Example:
             >>> from pathlib import Path
-            >>> registry.register_type(  # doctest: +SKIP
+            >>> registry = InputTransformRegistry()
+            >>> registry.register_type(
             ...     Path,
             ...     to_json=str,
             ...     from_json=Path,
@@ -170,10 +171,13 @@ class InputTransformRegistry:
 
         Example:
             >>> from uf import mk_rjsf_app
+            >>> from pathlib import Path
             >>> registry = InputTransformRegistry()
-            >>> # ... register types ...
-            >>> input_trans = registry.mk_input_trans_for_funcs([my_func])  # doctest: +SKIP
-            >>> app = mk_rjsf_app([my_func], input_trans=input_trans)  # doctest: +SKIP
+            >>> registry.register_type(Path, to_json=str, from_json=Path, json_schema_type='string')
+            >>> def my_func(path: Path):
+            ...     return str(path)
+            >>> input_trans = registry.mk_input_trans_for_funcs([my_func])
+            >>> app = mk_rjsf_app([my_func], input_trans=input_trans)
         """
         import inspect
 
@@ -213,8 +217,15 @@ class InputTransformRegistry:
             Transformation function for qh output
 
         Example:
-            >>> output_trans = registry.mk_output_trans()  # doctest: +SKIP
-            >>> app = mk_rjsf_app([my_func], output_trans=output_trans)  # doctest: +SKIP
+            >>> from decimal import Decimal
+            >>> from uf import mk_rjsf_app
+            >>> registry = InputTransformRegistry()
+            >>> registry.register_type(Decimal, to_json=str, from_json=Decimal)
+            >>> def my_func(): return Decimal('1.50')
+            >>> output_trans = registry.mk_output_trans()
+            >>> output_trans(Decimal('1.50'))
+            '1.50'
+            >>> app = mk_rjsf_app([my_func], output_trans=output_trans)
         """
 
         def output_trans(result: Any) -> Any:
