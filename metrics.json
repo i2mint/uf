@@ -1,7 +1,7 @@
 {
-  "collection_duration_seconds": 9.13733172416687,
-  "commit_message": "trans doctests: do not depend on mk_rjsf_app's input_trans kwargs (CI's qh differs) (#35)\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>",
-  "commit_sha": "70b315a812fdbfffd0585af60962f4c74c5a4720",
+  "collection_duration_seconds": 8.899593591690063,
+  "commit_message": "Merge 70b315a812fdbfffd0585af60962f4c74c5a4720 into 20b28767b29b62fbf1dea91652cb0c5c7db70015",
+  "commit_sha": "42f09acfcd438f31aebd45156ff07b7af3153ec9",
   "metrics": {
     "coverage": {
       "branch_coverage": 0.0,
@@ -22,7 +22,7 @@
       "mean_lines_per_function": 16.010915938447052,
       "num_classes": 6672,
       "num_functions": 33987,
-      "pypi_version": "0.1.17",
+      "pypi_version": "0.1.18",
       "total_lines": 950370
     },
     "wily": {
@@ -33,15 +33,15 @@
       "total_loc": 0
     },
     "workflow_status": {
-      "last_run_status": "failure",
-      "last_success_timestamp": "2026-10-20T09:57:00Z",
+      "last_run_status": "success",
+      "last_success_timestamp": "2026-10-20T10:45:06Z",
       "recent_failure_count": 2,
-      "run_url": "https://github.com/i2mint/uf/actions/runs/39409816797",
+      "run_url": "https://github.com/i2mint/uf/actions/runs/39409999384",
       "total_runs_analyzed": 10
     }
   },
   "python_version": "3.10",
   "schema_version": "1.0",
-  "timestamp": "2026-10-20T10:44:59.301837Z",
+  "timestamp": "2026-10-20T10:45:10.378560Z",
   "workflow_status": {}
 }
